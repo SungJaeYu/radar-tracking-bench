@@ -1,0 +1,699 @@
+{
+  "primary_metric": "independent_board_delivery_evidence_rtt_load",
+  "pc_latency_ms": {
+    "count": 14799,
+    "p50": 6.442708079703152,
+    "p95": 7.282458012923598,
+    "p99": 14.727167086675763,
+    "max": 328.516292036511
+  },
+  "actual_measurement_hz": 49.32998397465845,
+  "host_send_gap_ms": {
+    "count": 14798,
+    "min": 0.08333299774676561,
+    "p50": 20.000708987936378,
+    "p99": 26.752042002044618,
+    "max": 427.26420902181417
+  },
+  "host_absolute_period_error_ms": {
+    "p99": 10.850291098468006,
+    "max": 407.26420902181417
+  },
+  "host_skipped_slots": 201,
+  "host_max_send_gap_ms": 427.26420902181417,
+  "host_pacing_is_acceptance_gate": true,
+  "pc_rtt_limits_ms": {
+    "p99": 20.0,
+    "max": 100.0
+  },
+  "pc_rtt_budget_configured": true,
+  "load_elapsed_s": 300.000097458018,
+  "load_measurements": 14799,
+  "valid_measurements_total": 14802,
+  "invalid_measurements": 1,
+  "status_requests": 301,
+  "status_responses": 301,
+  "track_reports": 14807,
+  "performance_summary_count": 62,
+  "last_performance": {
+    "header": {
+      "uptime_ms": 310086,
+      "measurements": 14803,
+      "without_submit": 1,
+      "submit_failed": 0,
+      "invalid_time": 0,
+      "rx_capture_lost": 0
+    },
+    "rx_byte_wait": {
+      "n": 223875,
+      "total_ms": 223909,
+      "p50_bin": 1,
+      "p95_bin": 1,
+      "p99_bin": 1,
+      "max_ms": 2,
+      "over20": 0
+    },
+    "tx_queue_wait": {
+      "n": 15108,
+      "total_ms": 1911,
+      "p50_bin": 0,
+      "p95_bin": 1,
+      "p99_bin": 3,
+      "max_ms": 7,
+      "over20": 0
+    },
+    "tx_poll": {
+      "n": 15108,
+      "total_ms": 46706,
+      "p50_bin": 3,
+      "p95_bin": 4,
+      "p99_bin": 4,
+      "max_ms": 5,
+      "over20": 0
+    },
+    "parsed_to_tx_poll": {
+      "n": 14802,
+      "total_ms": 49590,
+      "p50_bin": 3,
+      "p95_bin": 4,
+      "p99_bin": 4,
+      "max_ms": 10,
+      "over20": 0
+    },
+    "rx_isr": {
+      "n": 223875,
+      "min_ns": 6129,
+      "mean_ns": 17430,
+      "max_ns": 22097
+    },
+    "rx_parser": {
+      "n": 223875,
+      "min_ns": 694,
+      "mean_ns": 1847,
+      "max_ns": 1411162
+    },
+    "queue_wait": {
+      "n": 14803,
+      "total_ms": 759,
+      "p50_bin": 0,
+      "p95_bin": 1,
+      "p99_bin": 1,
+      "max_ms": 1,
+      "over20": 0
+    },
+    "processing": {
+      "n": 14802,
+      "total_ms": 2446,
+      "p50_bin": 0,
+      "p95_bin": 1,
+      "p99_bin": 1,
+      "max_ms": 2,
+      "over20": 0
+    },
+    "rx_to_submit": {
+      "n": 14802,
+      "total_ms": 3205,
+      "p50_bin": 0,
+      "p95_bin": 1,
+      "p99_bin": 1,
+      "max_ms": 2,
+      "over20": 0
+    },
+    "estimator_predict": {
+      "n": 14800,
+      "min_ns": 26652,
+      "mean_ns": 29101,
+      "max_ns": 903097
+    },
+    "estimator_correct": {
+      "n": 14800,
+      "min_ns": 33587,
+      "mean_ns": 34824,
+      "max_ns": 35305
+    },
+    "queue rx": {
+      "accepted": 15108,
+      "rejected": 0,
+      "observed_max_used": 2
+    },
+    "queue tx": {
+      "accepted": 15108,
+      "rejected": 0,
+      "observed_max_used": 2
+    },
+    "tx": {
+      "poll_completed": 15108,
+      "encode_failed": 0
+    },
+    "stack rx": {
+      "unused": 744,
+      "min_unused": 744
+    },
+    "stack handler": {
+      "unused": 1360,
+      "min_unused": 1360
+    },
+    "cpu": {
+      "uptime_ms": 310087,
+      "total_cycles": 66417711078,
+      "busy_cycles": 16053008320,
+      "idle_cycles": 50364702758
+    },
+    "stack main": {
+      "unused": 504,
+      "min_unused": 504
+    },
+    "stack tx": {
+      "unused": 672,
+      "min_unused": 672
+    }
+  },
+  "final_status": {
+    "crc_errors": 0,
+    "length_errors": 0,
+    "frame_timeouts": 0,
+    "queue_drops": 0,
+    "ring_overflow_events": 0,
+    "rx_dropped_bytes": 0,
+    "recovery_discarded_bytes": 0,
+    "stale_measurements": 0
+  },
+  "pc_crc_errors": 0,
+  "pc_length_errors": 0,
+  "recording": {
+    "enqueued": 63091,
+    "written": 63091,
+    "capacity": 1024
+  },
+  "failure": null,
+  "restore_failure": null,
+  "checks": [
+    {
+      "name": "idle performance summary",
+      "passed": true,
+      "category": "evidence"
+    },
+    {
+      "name": "idle timing has no samples",
+      "passed": true,
+      "category": "board_internal"
+    },
+    {
+      "name": "idle stack queries available",
+      "passed": true,
+      "category": "board_internal"
+    },
+    {
+      "name": "INIT reset report received",
+      "passed": true,
+      "category": "delivery"
+    },
+    {
+      "name": "initial STATUS zero",
+      "passed": true,
+      "category": "delivery"
+    },
+    {
+      "name": "load contains measurement RTT samples",
+      "passed": true,
+      "category": "host_rtt"
+    },
+    {
+      "name": "one post-load timeout report",
+      "passed": true,
+      "category": "delivery"
+    },
+    {
+      "name": "tracking recovers after invalid input and RESET",
+      "passed": true,
+      "category": "board_internal"
+    },
+    {
+      "name": "all measurements matched once",
+      "passed": true,
+      "category": "delivery"
+    },
+    {
+      "name": "all STATUS requests answered",
+      "passed": true,
+      "category": "delivery"
+    },
+    {
+      "name": "single firmware boot",
+      "passed": true,
+      "category": "evidence"
+    },
+    {
+      "name": "measurement count reconciles",
+      "passed": true,
+      "category": "board_internal"
+    },
+    {
+      "name": "no submit failures or invalid times",
+      "passed": true,
+      "category": "board_internal"
+    },
+    {
+      "name": "invalid measurement is counted without submission",
+      "passed": true,
+      "category": "board_internal"
+    },
+    {
+      "name": "processing successful sample count",
+      "passed": true,
+      "category": "board_internal"
+    },
+    {
+      "name": "rx_to_submit successful sample count",
+      "passed": true,
+      "category": "board_internal"
+    },
+    {
+      "name": "queue wait count includes invalid input",
+      "passed": true,
+      "category": "board_internal"
+    },
+    {
+      "name": "20ms board latency budget",
+      "passed": true,
+      "category": "board_internal"
+    },
+    {
+      "name": "no queue rejection",
+      "passed": true,
+      "category": "board_internal"
+    },
+    {
+      "name": "RX accepted frame count",
+      "passed": true,
+      "category": "delivery"
+    },
+    {
+      "name": "TX queued and polling counts match received frames",
+      "passed": true,
+      "category": "delivery"
+    },
+    {
+      "name": "no TX encoder failures",
+      "passed": true,
+      "category": "board_internal"
+    },
+    {
+      "name": "all sampled stacks have headroom",
+      "passed": true,
+      "category": "board_internal"
+    },
+    {
+      "name": "performance summaries remain continuous",
+      "passed": true,
+      "category": "evidence"
+    },
+    {
+      "name": "PC RTT p99 <= 20ms",
+      "passed": true,
+      "category": "host_rtt"
+    },
+    {
+      "name": "PC RTT max <= 100ms",
+      "passed": false,
+      "category": "host_rtt"
+    },
+    {
+      "name": "restored normal STATUS zero",
+      "passed": true,
+      "category": "evidence"
+    }
+  ],
+  "run_completed": true,
+  "recording_complete": true,
+  "duration_s": 300,
+  "sent_wire_bytes": 223875,
+  "console_complete": true,
+  "console_incomplete_summaries": 0,
+  "console_boots": 1,
+  "console_faults": [],
+  "verdicts": {
+    "board_internal": {
+      "status": "passed",
+      "reasons": []
+    },
+    "delivery": {
+      "status": "passed",
+      "reasons": []
+    },
+    "evidence": {
+      "status": "passed",
+      "reasons": []
+    },
+    "host_rtt": {
+      "status": "failed",
+      "reasons": [
+        "PC RTT max <= 100ms",
+        "PC RTT max exceeds 100ms or is invalid"
+      ]
+    },
+    "requested_load": {
+      "status": "inconclusive",
+      "reasons": [
+        "requested 50Hz scheduled slots not fully delivered"
+      ]
+    }
+  },
+  "board_qualification": {
+    "status": "passed",
+    "reasons": []
+  },
+  "requested_profile_qualification": {
+    "status": "inconclusive",
+    "reasons": [
+      "requested 50Hz scheduled slots not fully delivered"
+    ]
+  },
+  "passed": false,
+  "full_coverage": false,
+  "coverage_gaps": [
+    "physical RX arrival to ISR entry is unmeasured",
+    "physical TX last stop bit is unmeasured",
+    "true WCET and execution-time acceptance limits are unestablished",
+    "physical CPU utilization and accurate ISR attribution are unmeasured",
+    "hardware fault campaigns are not performed",
+    "sampled stack headroom is not a stack safety certification"
+  ],
+  "cpu_scheduler_windows": [
+    {
+      "uptime_ms": 10002,
+      "interval_ms": 5001,
+      "non_idle_percent": 19.70460879106407
+    },
+    {
+      "uptime_ms": 15004,
+      "interval_ms": 5002,
+      "non_idle_percent": 24.993009324932032
+    },
+    {
+      "uptime_ms": 20005,
+      "interval_ms": 5001,
+      "non_idle_percent": 24.850460677954455
+    },
+    {
+      "uptime_ms": 25007,
+      "interval_ms": 5002,
+      "non_idle_percent": 25.057068706865817
+    },
+    {
+      "uptime_ms": 30008,
+      "interval_ms": 5001,
+      "non_idle_percent": 24.537018515237207
+    },
+    {
+      "uptime_ms": 35009,
+      "interval_ms": 5001,
+      "non_idle_percent": 25.075910181594733
+    },
+    {
+      "uptime_ms": 40011,
+      "interval_ms": 5002,
+      "non_idle_percent": 25.187613356734996
+    },
+    {
+      "uptime_ms": 45012,
+      "interval_ms": 5001,
+      "non_idle_percent": 23.866900150094516
+    },
+    {
+      "uptime_ms": 50014,
+      "interval_ms": 5002,
+      "non_idle_percent": 25.066107911423007
+    },
+    {
+      "uptime_ms": 55015,
+      "interval_ms": 5001,
+      "non_idle_percent": 24.904731935143165
+    },
+    {
+      "uptime_ms": 60016,
+      "interval_ms": 5001,
+      "non_idle_percent": 24.27297517135762
+    },
+    {
+      "uptime_ms": 65018,
+      "interval_ms": 5002,
+      "non_idle_percent": 25.08999279072611
+    },
+    {
+      "uptime_ms": 70019,
+      "interval_ms": 5001,
+      "non_idle_percent": 25.148494720355252
+    },
+    {
+      "uptime_ms": 75021,
+      "interval_ms": 5002,
+      "non_idle_percent": 25.09203409837151
+    },
+    {
+      "uptime_ms": 80022,
+      "interval_ms": 5001,
+      "non_idle_percent": 25.100289389866546
+    },
+    {
+      "uptime_ms": 85023,
+      "interval_ms": 5001,
+      "non_idle_percent": 24.735870209383062
+    },
+    {
+      "uptime_ms": 90025,
+      "interval_ms": 5002,
+      "non_idle_percent": 24.716299075421308
+    },
+    {
+      "uptime_ms": 95026,
+      "interval_ms": 5001,
+      "non_idle_percent": 24.250579192794767
+    },
+    {
+      "uptime_ms": 100028,
+      "interval_ms": 5002,
+      "non_idle_percent": 24.661538673860377
+    },
+    {
+      "uptime_ms": 105029,
+      "interval_ms": 5001,
+      "non_idle_percent": 24.433066604926868
+    },
+    {
+      "uptime_ms": 110030,
+      "interval_ms": 5001,
+      "non_idle_percent": 24.12643068260539
+    },
+    {
+      "uptime_ms": 115032,
+      "interval_ms": 5002,
+      "non_idle_percent": 25.095553477932473
+    },
+    {
+      "uptime_ms": 120033,
+      "interval_ms": 5001,
+      "non_idle_percent": 24.481712721704305
+    },
+    {
+      "uptime_ms": 125035,
+      "interval_ms": 5002,
+      "non_idle_percent": 25.17246782306655
+    },
+    {
+      "uptime_ms": 130036,
+      "interval_ms": 5001,
+      "non_idle_percent": 25.243141593136677
+    },
+    {
+      "uptime_ms": 135037,
+      "interval_ms": 5001,
+      "non_idle_percent": 25.0335128637843
+    },
+    {
+      "uptime_ms": 140039,
+      "interval_ms": 5002,
+      "non_idle_percent": 25.099657981345576
+    },
+    {
+      "uptime_ms": 145040,
+      "interval_ms": 5001,
+      "non_idle_percent": 24.92716068775636
+    },
+    {
+      "uptime_ms": 150042,
+      "interval_ms": 5002,
+      "non_idle_percent": 25.067927805449294
+    },
+    {
+      "uptime_ms": 155043,
+      "interval_ms": 5001,
+      "non_idle_percent": 24.572793966297056
+    },
+    {
+      "uptime_ms": 160044,
+      "interval_ms": 5001,
+      "non_idle_percent": 23.270388342024226
+    },
+    {
+      "uptime_ms": 165046,
+      "interval_ms": 5002,
+      "non_idle_percent": 25.130486562301247
+    },
+    {
+      "uptime_ms": 170047,
+      "interval_ms": 5001,
+      "non_idle_percent": 25.09542541200645
+    },
+    {
+      "uptime_ms": 175049,
+      "interval_ms": 5002,
+      "non_idle_percent": 24.490310345373498
+    },
+    {
+      "uptime_ms": 180050,
+      "interval_ms": 5001,
+      "non_idle_percent": 25.1539183260705
+    },
+    {
+      "uptime_ms": 185052,
+      "interval_ms": 5002,
+      "non_idle_percent": 24.98852455692336
+    },
+    {
+      "uptime_ms": 190053,
+      "interval_ms": 5001,
+      "non_idle_percent": 25.182570824073498
+    },
+    {
+      "uptime_ms": 195054,
+      "interval_ms": 5001,
+      "non_idle_percent": 25.009391267091257
+    },
+    {
+      "uptime_ms": 200056,
+      "interval_ms": 5002,
+      "non_idle_percent": 25.111663556708304
+    },
+    {
+      "uptime_ms": 205057,
+      "interval_ms": 5001,
+      "non_idle_percent": 25.117899456273985
+    },
+    {
+      "uptime_ms": 210059,
+      "interval_ms": 5002,
+      "non_idle_percent": 24.92372034284684
+    },
+    {
+      "uptime_ms": 215060,
+      "interval_ms": 5001,
+      "non_idle_percent": 24.266956581049712
+    },
+    {
+      "uptime_ms": 220061,
+      "interval_ms": 5001,
+      "non_idle_percent": 25.240082819760357
+    },
+    {
+      "uptime_ms": 225063,
+      "interval_ms": 5002,
+      "non_idle_percent": 25.241559473337286
+    },
+    {
+      "uptime_ms": 230064,
+      "interval_ms": 5001,
+      "non_idle_percent": 25.16538044608245
+    },
+    {
+      "uptime_ms": 235066,
+      "interval_ms": 5002,
+      "non_idle_percent": 25.149459540618786
+    },
+    {
+      "uptime_ms": 240067,
+      "interval_ms": 5001,
+      "non_idle_percent": 25.14171498482722
+    },
+    {
+      "uptime_ms": 245069,
+      "interval_ms": 5002,
+      "non_idle_percent": 25.24894576313165
+    },
+    {
+      "uptime_ms": 250070,
+      "interval_ms": 5001,
+      "non_idle_percent": 25.21009726515713
+    },
+    {
+      "uptime_ms": 255071,
+      "interval_ms": 5001,
+      "non_idle_percent": 25.031758041302904
+    },
+    {
+      "uptime_ms": 260073,
+      "interval_ms": 5002,
+      "non_idle_percent": 24.756782674080352
+    },
+    {
+      "uptime_ms": 265074,
+      "interval_ms": 5001,
+      "non_idle_percent": 25.07598729689339
+    },
+    {
+      "uptime_ms": 270076,
+      "interval_ms": 5002,
+      "non_idle_percent": 24.820716998503904
+    },
+    {
+      "uptime_ms": 275077,
+      "interval_ms": 5001,
+      "non_idle_percent": 24.095871031504096
+    },
+    {
+      "uptime_ms": 280078,
+      "interval_ms": 5001,
+      "non_idle_percent": 25.184995011115387
+    },
+    {
+      "uptime_ms": 285080,
+      "interval_ms": 5002,
+      "non_idle_percent": 25.215226568332838
+    },
+    {
+      "uptime_ms": 290081,
+      "interval_ms": 5001,
+      "non_idle_percent": 24.33577910791246
+    },
+    {
+      "uptime_ms": 295083,
+      "interval_ms": 5002,
+      "non_idle_percent": 24.637619859706138
+    },
+    {
+      "uptime_ms": 300084,
+      "interval_ms": 5001,
+      "non_idle_percent": 25.192043344506207
+    },
+    {
+      "uptime_ms": 305085,
+      "interval_ms": 5001,
+      "non_idle_percent": 25.160383906346052
+    },
+    {
+      "uptime_ms": 310087,
+      "interval_ms": 5002,
+      "non_idle_percent": 11.142332962117075
+    }
+  ],
+  "cpu_scheduler_scope": "non-idle runtime accounting; not physical CPU/ISR utilization or WCET",
+  "cpu_scheduler_non_idle_limit_percent": 80,
+  "sampled_stack_minimum_bytes": {
+    "rx": 256,
+    "tx": 256,
+    "handler": 512,
+    "main": 256
+  },
+  "execution_timing_scope": "observed min/mean/max only; no execution WCET limits",
+  "stack_scope": "sampled 25% reserve only; no stack safety certification"
+}

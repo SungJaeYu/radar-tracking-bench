@@ -1,8 +1,11 @@
 #include <zephyr/kernel.h>
 #include <zephyr/logging/log.h>
+#if defined(CONFIG_TIMING_FUNCTIONS)
+#include <zephyr/timing/timing.h>
+#endif
 
 #if defined(CONFIG_RADAR_PERF_MONITOR)
-#include "diagnostics/perf_monitor.h"
+#include "diagnostics/perf_reporter.h"
 #endif
 #include "transport/uart_rx.h"
 #include "transport/uart_tx.h"
@@ -12,7 +15,13 @@ LOG_MODULE_REGISTER(radar_main, CONFIG_RADAR_MAIN_LOG_LEVEL);
 int main(void)
 {
     // Console diagnostics are separate from USART6 protocol frames.
-    LOG_INF("=== FCC learning-rebuild boot ===");
+    LOG_INF("FCC boot: status=starting");
+
+#if defined(CONFIG_TIMING_FUNCTIONS)
+    // Initialize once before enabling UART interrupts or releasing queued work.
+    timing_init();
+    timing_start();
+#endif
 
     // Prepare the transmit path before enabling reception.
     // These init APIs return 0 on success and a negative errno on failure.
@@ -26,13 +35,13 @@ int main(void)
         return ret;
     }
 
-    LOG_INF("FCC ready: USART6 RX/TX initialized");
+    LOG_INF("FCC ready: uart=USART6 rx=ready tx=ready");
 
     // Reuse main for low-rate diagnostics; normal builds keep the idle loop.
     while (1) {
 #if defined(CONFIG_RADAR_PERF_MONITOR)
         k_sleep(K_SECONDS(5));
-        perf_monitor_log_summary();
+        perf_reporter_log_summary();
 #else
         k_sleep(K_SECONDS(1));
 #endif

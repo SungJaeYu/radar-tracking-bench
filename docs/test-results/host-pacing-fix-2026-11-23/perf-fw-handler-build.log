@@ -1,0 +1,4 @@
+[1/4] Building C object CMakeFiles/frame_handler_tests.dir/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/src/tracking/track.c.o
+[2/4] Building C object CMakeFiles/frame_handler_tests.dir/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/src/diagnostics/perf_monitor.c.o
+[3/4] Building C object CMakeFiles/frame_handler_tests.dir/src/main.c.o
+[4/4] Linking C executable frame_handler_tests

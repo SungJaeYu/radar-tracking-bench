@@ -1,0 +1,43 @@
+{
+  "passed": true,
+  "sessions": 5,
+  "samples": 76649,
+  "reports": 76664,
+  "records": [
+    {
+      "path": "perf-load/session",
+      "reports": 75802,
+      "status": 1538,
+      "samples": 75802,
+      "passed": true
+    },
+    {
+      "path": "perf-smoke/session",
+      "reports": 507,
+      "status": 11,
+      "samples": 502,
+      "passed": true
+    },
+    {
+      "path": "evaluate-dropout/20261123-160438-512915f0",
+      "reports": 109,
+      "status": 2,
+      "samples": 105,
+      "passed": true
+    },
+    {
+      "path": "evaluate-noisy/20261123-160423-b7284e3b",
+      "reports": 123,
+      "status": 2,
+      "samples": 120,
+      "passed": true
+    },
+    {
+      "path": "evaluate-normal/20261123-160408-45507350",
+      "reports": 123,
+      "status": 2,
+      "samples": 120,
+      "passed": true
+    }
+  ]
+}

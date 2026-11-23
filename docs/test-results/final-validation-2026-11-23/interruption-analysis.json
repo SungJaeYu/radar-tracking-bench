@@ -1,0 +1,119 @@
+{
+  "original_verdict_preserved": true,
+  "original_failure": "AssertionError('Normal stationary measurement rejected')",
+  "release_complete": false,
+  "load_elapsed_s": 1538.4472296250751,
+  "interpretation": "documented timeout and sensor-gap RESET misclassified as a board rejection by the fixture",
+  "board_defect_established_by_this_failure": false,
+  "continuous_requested_load_verified": false,
+  "host_send_gap_ms": 1159.582250053063,
+  "next_sensor_timestamp_jump_ms": 1140,
+  "gap_measurements": [
+    {
+      "timestamp_ms": "1537180",
+      "truth_range_m": "1000.0",
+      "truth_azimuth_rad": "0.2617993877991494",
+      "measured_range_m": "1000",
+      "measured_azimuth_rad": "0.2617993882867888",
+      "tx_monotonic_s": "596549.987482458",
+      "frame_hex": "7e0a020017749c03e80aaaaaabb9d6"
+    },
+    {
+      "timestamp_ms": "1537200",
+      "truth_range_m": "1000.0",
+      "truth_azimuth_rad": "0.2617993877991494",
+      "measured_range_m": "1000",
+      "measured_azimuth_rad": "0.2617993882867888",
+      "tx_monotonic_s": "596551.147064708",
+      "frame_hex": "7e0a02001774b003e80aaaaaab854b"
+    },
+    {
+      "timestamp_ms": "1538340",
+      "truth_range_m": "1000.0",
+      "truth_azimuth_rad": "0.2617993877991494",
+      "measured_range_m": "1000",
+      "measured_azimuth_rad": "0.2617993882867888",
+      "tx_monotonic_s": "596551.179224791",
+      "frame_hex": "7e0a020017792403e80aaaaaab8e6b"
+    }
+  ],
+  "reset_restart_reset_reports": [
+    {
+      "report_sequence": "75799",
+      "input_timestamp_ms": "0",
+      "estimate_timestamp_ms": "0",
+      "range_m": "0.0",
+      "azimuth_rad": "0.0",
+      "range_rate_mps": "0.0",
+      "azimuth_rate_radps": "0.0",
+      "state": "0",
+      "result": "4",
+      "flags": "0",
+      "rx_monotonic_s": "596551.181298416"
+    },
+    {
+      "report_sequence": "75800",
+      "input_timestamp_ms": "1537200",
+      "estimate_timestamp_ms": "1537200",
+      "range_m": "1000.0",
+      "azimuth_rad": "0.2617993950843811",
+      "range_rate_mps": "0.0",
+      "azimuth_rate_radps": "0.0",
+      "state": "1",
+      "result": "0",
+      "flags": "3",
+      "rx_monotonic_s": "596551.181298416"
+    },
+    {
+      "report_sequence": "75801",
+      "input_timestamp_ms": "1538340",
+      "estimate_timestamp_ms": "0",
+      "range_m": "0.0",
+      "azimuth_rad": "0.0",
+      "range_rate_mps": "0.0",
+      "azimuth_rate_radps": "0.0",
+      "state": "0",
+      "result": "4",
+      "flags": "1",
+      "rx_monotonic_s": "596551.189419416"
+    }
+  ],
+  "sent_measurements": 75802,
+  "input_reports": 75800,
+  "missing_input_timestamps_at_abort": [
+    1538360,
+    1538380
+  ],
+  "status_responses": 1538,
+  "all_observed_status_counters_zero": true,
+  "rx_tail_incomplete": true,
+  "rx_tail_state": "READ_PAYLOAD",
+  "rx_tail_type": 6,
+  "rx_tail_payload_bytes": 22,
+  "rx_tail_expected_payload_bytes": 32,
+  "recording_complete": true,
+  "observed_latency_maxima_ms": {
+    "rx_byte_wait": 2,
+    "tx_queue_wait": 7,
+    "tx_poll": 5,
+    "parsed_to_tx_poll": 10,
+    "queue_wait": 2,
+    "processing": 3,
+    "rx_to_submit": 3
+  },
+  "observed_cpu_window_max_percent": 25.310488965504245,
+  "observed_stack_min_unused_bytes": {
+    "rx": 736,
+    "handler": 1360,
+    "tx": 672,
+    "main": 496
+  },
+  "source_changes_during_validation": [],
+  "limits": [
+    "Host write timestamps are not physical UART line timestamps.",
+    "The exact source of the host pause was not recorded.",
+    "Abort prevents final traffic reconciliation and a full-duration verdict.",
+    "Snapshot maxima are observations, not WCET guarantees.",
+    "Historical CRC failures are not explained by this event."
+  ]
+}

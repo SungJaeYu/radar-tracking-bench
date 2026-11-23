@@ -1,0 +1,462 @@
+{
+  "primary_metric": "observed_board_delivery_evidence",
+  "pc_latency_ms": {
+    "count": 2990,
+    "p50": 6.568791926838458,
+    "p95": 6.916541955433786,
+    "p99": 8.996917051263154,
+    "max": 50.852791988290846
+  },
+  "actual_measurement_hz": 49.833231729136315,
+  "host_send_gap_ms": {
+    "count": 2989,
+    "min": 0.17100002150982618,
+    "p50": 20.003040903247893,
+    "p99": 21.555749932304025,
+    "max": 133.47995793446898
+  },
+  "host_absolute_period_error_ms": {
+    "p99": 4.349000034853816,
+    "max": 113.47995793446898
+  },
+  "host_skipped_slots": 10,
+  "host_max_send_gap_ms": 133.47995793446898,
+  "host_pacing_is_acceptance_gate": false,
+  "host_pacing_is_requested_profile_gate": true,
+  "host_rtt_is_acceptance_gate": false,
+  "pc_rtt_limits_ms": {
+    "p99": 20.0,
+    "max": 100.0
+  },
+  "pc_rtt_budget_configured": true,
+  "load_elapsed_s": 60.00012233306188,
+  "load_measurements": 2990,
+  "valid_measurements_total": 2993,
+  "invalid_measurements": 1,
+  "status_requests": 61,
+  "status_responses": 61,
+  "track_reports": 2998,
+  "performance_summary_count": 14,
+  "last_performance": {
+    "header": {
+      "uptime_ms": 70017,
+      "measurements": 2994,
+      "without_submit": 1,
+      "submit_failed": 0,
+      "invalid_time": 0,
+      "rx_capture_lost": 0
+    },
+    "rx_byte_wait": {
+      "n": 45300,
+      "total_ms": 45310,
+      "p50_bin": 1,
+      "p95_bin": 1,
+      "p99_bin": 1,
+      "max_ms": 2,
+      "over20": 0
+    },
+    "tx_queue_wait": {
+      "n": 3059,
+      "total_ms": 400,
+      "p50_bin": 0,
+      "p95_bin": 1,
+      "p99_bin": 3,
+      "max_ms": 4,
+      "over20": 0
+    },
+    "tx_poll": {
+      "n": 3059,
+      "total_ms": 9455,
+      "p50_bin": 3,
+      "p95_bin": 4,
+      "p99_bin": 4,
+      "max_ms": 4,
+      "over20": 0
+    },
+    "parsed_to_tx_poll": {
+      "n": 2993,
+      "total_ms": 10037,
+      "p50_bin": 3,
+      "p95_bin": 4,
+      "p99_bin": 4,
+      "max_ms": 7,
+      "over20": 0
+    },
+    "rx_isr": {
+      "n": 45300,
+      "min_ns": 6277,
+      "mean_ns": 17643,
+      "max_ns": 22314
+    },
+    "rx_parser": {
+      "n": 45300,
+      "min_ns": 708,
+      "mean_ns": 1865,
+      "max_ns": 15986
+    },
+    "queue_wait": {
+      "n": 2994,
+      "total_ms": 168,
+      "p50_bin": 0,
+      "p95_bin": 1,
+      "p99_bin": 1,
+      "max_ms": 1,
+      "over20": 0
+    },
+    "processing": {
+      "n": 2993,
+      "total_ms": 487,
+      "p50_bin": 0,
+      "p95_bin": 1,
+      "p99_bin": 1,
+      "max_ms": 1,
+      "over20": 0
+    },
+    "rx_to_submit": {
+      "n": 2993,
+      "total_ms": 655,
+      "p50_bin": 0,
+      "p95_bin": 1,
+      "p99_bin": 1,
+      "max_ms": 1,
+      "over20": 0
+    },
+    "estimator_predict": {
+      "n": 2991,
+      "min_ns": 26675,
+      "mean_ns": 28615,
+      "max_ns": 779439
+    },
+    "estimator_correct": {
+      "n": 2991,
+      "min_ns": 33351,
+      "mean_ns": 34578,
+      "max_ns": 34935
+    },
+    "queue rx": {
+      "accepted": 3059,
+      "rejected": 0,
+      "observed_max_used": 1
+    },
+    "queue tx": {
+      "accepted": 3059,
+      "rejected": 0,
+      "observed_max_used": 2
+    },
+    "tx": {
+      "poll_completed": 3059,
+      "encode_failed": 0
+    },
+    "stack rx": {
+      "unused": 736,
+      "min_unused": 736
+    },
+    "stack handler": {
+      "unused": 1360,
+      "min_unused": 1360
+    },
+    "cpu": {
+      "uptime_ms": 70018,
+      "total_cycles": 15010266452,
+      "busy_cycles": 3300735898,
+      "idle_cycles": 11709530554
+    },
+    "stack main": {
+      "unused": 512,
+      "min_unused": 512
+    },
+    "stack tx": {
+      "unused": 672,
+      "min_unused": 672
+    }
+  },
+  "final_status": {
+    "crc_errors": 0,
+    "length_errors": 0,
+    "frame_timeouts": 0,
+    "queue_drops": 0,
+    "ring_overflow_events": 0,
+    "rx_dropped_bytes": 0,
+    "recovery_discarded_bytes": 0,
+    "stale_measurements": 0
+  },
+  "pc_crc_errors": 0,
+  "pc_length_errors": 0,
+  "recording": {
+    "enqueued": 12836,
+    "written": 12836,
+    "capacity": 1024
+  },
+  "failure": null,
+  "restore_failure": null,
+  "checks": [
+    {
+      "name": "idle performance summary",
+      "passed": true,
+      "category": "evidence"
+    },
+    {
+      "name": "idle timing has no samples",
+      "passed": true,
+      "category": "board_internal"
+    },
+    {
+      "name": "idle stack queries available",
+      "passed": true,
+      "category": "board_internal"
+    },
+    {
+      "name": "INIT reset report received",
+      "passed": true,
+      "category": "delivery"
+    },
+    {
+      "name": "initial STATUS zero",
+      "passed": true,
+      "category": "delivery"
+    },
+    {
+      "name": "load contains measurement RTT samples",
+      "passed": true,
+      "category": "host_rtt"
+    },
+    {
+      "name": "one post-load timeout report",
+      "passed": true,
+      "category": "delivery"
+    },
+    {
+      "name": "tracking recovers after invalid input and RESET",
+      "passed": true,
+      "category": "board_internal"
+    },
+    {
+      "name": "all measurements matched once",
+      "passed": true,
+      "category": "delivery"
+    },
+    {
+      "name": "all STATUS requests answered",
+      "passed": true,
+      "category": "delivery"
+    },
+    {
+      "name": "single firmware boot",
+      "passed": true,
+      "category": "evidence"
+    },
+    {
+      "name": "measurement count reconciles",
+      "passed": true,
+      "category": "board_internal"
+    },
+    {
+      "name": "no submit failures or invalid times",
+      "passed": true,
+      "category": "board_internal"
+    },
+    {
+      "name": "invalid measurement is counted without submission",
+      "passed": true,
+      "category": "board_internal"
+    },
+    {
+      "name": "processing successful sample count",
+      "passed": true,
+      "category": "board_internal"
+    },
+    {
+      "name": "rx_to_submit successful sample count",
+      "passed": true,
+      "category": "board_internal"
+    },
+    {
+      "name": "queue wait count includes invalid input",
+      "passed": true,
+      "category": "board_internal"
+    },
+    {
+      "name": "20ms board latency budget",
+      "passed": true,
+      "category": "board_internal"
+    },
+    {
+      "name": "no queue rejection",
+      "passed": true,
+      "category": "board_internal"
+    },
+    {
+      "name": "RX accepted frame count",
+      "passed": true,
+      "category": "delivery"
+    },
+    {
+      "name": "TX queued and polling counts match received frames",
+      "passed": true,
+      "category": "delivery"
+    },
+    {
+      "name": "no TX encoder failures",
+      "passed": true,
+      "category": "board_internal"
+    },
+    {
+      "name": "all sampled stacks have headroom",
+      "passed": true,
+      "category": "board_internal"
+    },
+    {
+      "name": "performance summaries remain continuous",
+      "passed": true,
+      "category": "evidence"
+    },
+    {
+      "name": "PC RTT p99 <= 20ms",
+      "passed": true,
+      "category": "host_rtt"
+    },
+    {
+      "name": "PC RTT max <= 100ms",
+      "passed": true,
+      "category": "host_rtt"
+    },
+    {
+      "name": "restored normal STATUS zero",
+      "passed": true,
+      "category": "evidence"
+    }
+  ],
+  "host_input_interruption": null,
+  "run_completed": true,
+  "recording_complete": true,
+  "duration_s": 60,
+  "sent_wire_bytes": 45300,
+  "console_complete": true,
+  "console_incomplete_summaries": 0,
+  "console_boots": 1,
+  "console_faults": [],
+  "verdicts": {
+    "board_internal": {
+      "status": "passed",
+      "reasons": []
+    },
+    "delivery": {
+      "status": "passed",
+      "reasons": []
+    },
+    "evidence": {
+      "status": "passed",
+      "reasons": []
+    },
+    "host_rtt": {
+      "status": "passed",
+      "reasons": []
+    },
+    "requested_load": {
+      "status": "inconclusive",
+      "reasons": [
+        "requested 50Hz scheduled slots not fully delivered"
+      ]
+    }
+  },
+  "board_qualification": {
+    "status": "passed",
+    "reasons": []
+  },
+  "requested_profile_qualification": {
+    "status": "inconclusive",
+    "reasons": [
+      "requested 50Hz scheduled slots not fully delivered"
+    ]
+  },
+  "passed": true,
+  "passed_scope": "observed_board_delivery_evidence",
+  "requested_profile_passed": false,
+  "acceptance_revision": "2026-11-23-host-input-v3",
+  "full_coverage": false,
+  "coverage_gaps": [
+    "physical RX arrival to ISR entry is unmeasured",
+    "physical TX last stop bit is unmeasured",
+    "true WCET and execution-time acceptance limits are unestablished",
+    "physical CPU utilization and accurate ISR attribution are unmeasured",
+    "hardware fault campaigns are not performed",
+    "sampled stack headroom is not a stack safety certification"
+  ],
+  "cpu_scheduler_windows": [
+    {
+      "uptime_ms": 10002,
+      "interval_ms": 5001,
+      "non_idle_percent": 19.492854678729795
+    },
+    {
+      "uptime_ms": 15004,
+      "interval_ms": 5002,
+      "non_idle_percent": 25.083856667017685
+    },
+    {
+      "uptime_ms": 20005,
+      "interval_ms": 5001,
+      "non_idle_percent": 25.116135733755872
+    },
+    {
+      "uptime_ms": 25006,
+      "interval_ms": 5001,
+      "non_idle_percent": 25.135727241466956
+    },
+    {
+      "uptime_ms": 30007,
+      "interval_ms": 5001,
+      "non_idle_percent": 24.64441914987852
+    },
+    {
+      "uptime_ms": 35009,
+      "interval_ms": 5002,
+      "non_idle_percent": 25.08947015991266
+    },
+    {
+      "uptime_ms": 40010,
+      "interval_ms": 5001,
+      "non_idle_percent": 25.193825551675566
+    },
+    {
+      "uptime_ms": 45011,
+      "interval_ms": 5001,
+      "non_idle_percent": 25.20878524123307
+    },
+    {
+      "uptime_ms": 50013,
+      "interval_ms": 5002,
+      "non_idle_percent": 25.16143682926391
+    },
+    {
+      "uptime_ms": 55014,
+      "interval_ms": 5001,
+      "non_idle_percent": 25.14617179233599
+    },
+    {
+      "uptime_ms": 60015,
+      "interval_ms": 5001,
+      "non_idle_percent": 25.157795515843212
+    },
+    {
+      "uptime_ms": 65017,
+      "interval_ms": 5002,
+      "non_idle_percent": 25.239778296468547
+    },
+    {
+      "uptime_ms": 70018,
+      "interval_ms": 5001,
+      "non_idle_percent": 11.973980286093097
+    }
+  ],
+  "cpu_scheduler_scope": "non-idle runtime accounting; not physical CPU/ISR utilization or WCET",
+  "cpu_scheduler_non_idle_limit_percent": 80,
+  "sampled_stack_minimum_bytes": {
+    "rx": 256,
+    "tx": 256,
+    "handler": 512,
+    "main": 256
+  },
+  "execution_timing_scope": "observed min/mean/max only; no execution WCET limits",
+  "stack_scope": "sampled 25% reserve only; no stack safety certification"
+}

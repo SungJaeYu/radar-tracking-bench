@@ -1,4 +1,4 @@
-"""통합 시뮬레이터의 CLI, wire 출력, 단일 트랙 제약 검증."""
+"""Validate simulator CLI, wire output, and single-track restrictions."""
 import struct
 import subprocess
 import sys
@@ -41,6 +41,19 @@ def test_multitarget_generation_remains_available_without_board():
     assert result.returncode == 0, result.stderr
     assert len(frames(result.stdout)) == 9
     assert frames(result.stdout)[0] == bytes.fromhex("7e 01 01 00 c8 9d")
+
+
+@pytest.mark.parametrize('direct', [False, True])
+def test_segmented_cli_stops_at_scenario_end(direct):
+    result = invoke('--scenario', 'straight_turn_straight', '--duration', '100',
+                    '--dt', '10', '--noise', '0', '--azimuth-noise', '0', direct=direct)
+    assert result.returncode == 0, result.stderr
+    emitted = frames(result.stdout)
+    assert len(emitted) == 9  # INIT and samples at 0..70 s; scenario ends near 75.49 s.
+    values = [struct.unpack('>IHi', frame[3:-2]) for frame in emitted[1:]]
+    assert [value[0] for value in values] == list(range(0, 80000, 10000))
+    assert values[0] == (0, 1000, 0)
+    assert values[1][1] == 2236  # Ten seconds eastbound before the turn.
 
 
 @pytest.mark.parametrize('extra', [

@@ -1,0 +1,2034 @@
+{
+  "threshold_ms": 5,
+  "event_cap": 20000,
+  "summary": {
+    "sleep": {
+      "count": 141514,
+      "max_wall_ms": 300.73449993506074,
+      "over_5ms": 186
+    },
+    "serial_in_waiting:/dev/cu.usbmodem11203": {
+      "count": 141420,
+      "max_wall_ms": 16.549292020499706,
+      "over_5ms": 6
+    },
+    "serial_read:/dev/cu.usbmodem11203": {
+      "count": 141420,
+      "max_wall_ms": 17.640542006120086,
+      "over_5ms": 6
+    },
+    "console_parse": {
+      "count": 1042,
+      "max_wall_ms": 12.210082961246371,
+      "over_5ms": 1
+    },
+    "serial_in_waiting:/dev/cu.usbserial-A5069RR4": {
+      "count": 141420,
+      "max_wall_ms": 11.097208014689386,
+      "over_5ms": 4
+    },
+    "serial_read:/dev/cu.usbserial-A5069RR4": {
+      "count": 141421,
+      "max_wall_ms": 51.28675000742078,
+      "over_5ms": 3
+    },
+    "serial_write:/dev/cu.usbserial-A5069RR4": {
+      "count": 9168,
+      "max_wall_ms": 19.380916957743466,
+      "over_5ms": 4
+    },
+    "record_row:wire": {
+      "count": 18330,
+      "max_wall_ms": 16.006709076464176,
+      "over_5ms": 8
+    },
+    "record_row:reports": {
+      "count": 8987,
+      "max_wall_ms": 6.50837505236268,
+      "over_5ms": 2
+    },
+    "record_row:status": {
+      "count": 181,
+      "max_wall_ms": 0.7754169637337327,
+      "over_5ms": 0
+    },
+    "make_sample": {
+      "count": 8985,
+      "max_wall_ms": 40.5569999711588,
+      "over_5ms": 9
+    },
+    "record_row:samples": {
+      "count": 8985,
+      "max_wall_ms": 24.565708939917386,
+      "over_5ms": 7
+    }
+  },
+  "events": [
+    {
+      "operation": "gc",
+      "generation": 0,
+      "start_s": 588497.54033825,
+      "end_s": 588497.540422416,
+      "wall_ms": 0.08416594937443733,
+      "thread_cpu_ms": 0.08424999999999405
+    },
+    {
+      "operation": "gc",
+      "generation": 0,
+      "start_s": 588497.64151325,
+      "end_s": 588497.641634916,
+      "wall_ms": 0.12166600208729506,
+      "thread_cpu_ms": 0.12287499999999452
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588497.650138333,
+      "end_s": 588497.655149833,
+      "wall_ms": 5.011499975807965,
+      "thread_cpu_ms": 0.013916000000002704,
+      "requested_ms": 4.0
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588497.655187166,
+      "end_s": 588497.6650555,
+      "wall_ms": 9.868334047496319,
+      "thread_cpu_ms": 0.02466700000000599,
+      "requested_ms": 8.0
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588497.66508775,
+      "end_s": 588497.682470125,
+      "wall_ms": 17.382375081069767,
+      "thread_cpu_ms": 0.011707999999999164,
+      "requested_ms": 16.0
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588497.682492791,
+      "end_s": 588497.719380083,
+      "wall_ms": 36.88729205168784,
+      "thread_cpu_ms": 0.02483300000000188,
+      "requested_ms": 32.0
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588497.719415916,
+      "end_s": 588497.774122916,
+      "wall_ms": 54.7070000320673,
+      "thread_cpu_ms": 0.01637499999999903,
+      "requested_ms": 50.0
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588497.774141666,
+      "end_s": 588497.827821125,
+      "wall_ms": 53.67945902980864,
+      "thread_cpu_ms": 0.01229099999999761,
+      "requested_ms": 50.0
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588497.827841291,
+      "end_s": 588497.878282375,
+      "wall_ms": 50.44108408037573,
+      "thread_cpu_ms": 0.014209000000001137,
+      "requested_ms": 50.0
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588497.878312208,
+      "end_s": 588497.928423083,
+      "wall_ms": 50.110875046812,
+      "thread_cpu_ms": 0.01912500000000872,
+      "requested_ms": 50.0
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588497.928460791,
+      "end_s": 588497.978679208,
+      "wall_ms": 50.21841695997864,
+      "thread_cpu_ms": 0.014750000000007812,
+      "requested_ms": 50.0
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588497.978701708,
+      "end_s": 588498.029814333,
+      "wall_ms": 51.11262493301183,
+      "thread_cpu_ms": 0.01554099999999392,
+      "requested_ms": 50.0
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588498.02983875,
+      "end_s": 588498.084288916,
+      "wall_ms": 54.45016594603658,
+      "thread_cpu_ms": 0.01283299999998988,
+      "requested_ms": 50.0
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588498.084309583,
+      "end_s": 588498.138685708,
+      "wall_ms": 54.376125102862716,
+      "thread_cpu_ms": 0.01808300000000207,
+      "requested_ms": 50.0
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588498.138716458,
+      "end_s": 588498.189742583,
+      "wall_ms": 51.026124972850084,
+      "thread_cpu_ms": 0.023707999999997287,
+      "requested_ms": 50.0
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588498.189771208,
+      "end_s": 588498.241676041,
+      "wall_ms": 51.90483306068927,
+      "thread_cpu_ms": 0.02262499999999834,
+      "requested_ms": 50.0
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588498.241742333,
+      "end_s": 588498.2957735,
+      "wall_ms": 54.03116694651544,
+      "thread_cpu_ms": 0.02166699999998911,
+      "requested_ms": 50.0
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588498.295808916,
+      "end_s": 588498.349650541,
+      "wall_ms": 53.84162499103695,
+      "thread_cpu_ms": 0.020833999999997355,
+      "requested_ms": 50.0
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588498.349696083,
+      "end_s": 588498.40378375,
+      "wall_ms": 54.08766702748835,
+      "thread_cpu_ms": 0.02587500000000853,
+      "requested_ms": 50.0
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588498.403814375,
+      "end_s": 588498.455458833,
+      "wall_ms": 51.64445796981454,
+      "thread_cpu_ms": 0.022790999999994233,
+      "requested_ms": 50.0
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588498.455509166,
+      "end_s": 588498.510320083,
+      "wall_ms": 54.810917004942894,
+      "thread_cpu_ms": 0.022333999999998855,
+      "requested_ms": 50.0
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588498.510362166,
+      "end_s": 588498.563201958,
+      "wall_ms": 52.839791984297335,
+      "thread_cpu_ms": 0.02087500000000353,
+      "requested_ms": 50.0
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588498.563245041,
+      "end_s": 588498.618266125,
+      "wall_ms": 55.02108403015882,
+      "thread_cpu_ms": 0.020334000000010732,
+      "requested_ms": 50.0
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588498.61830075,
+      "end_s": 588498.694150583,
+      "wall_ms": 75.84983296692371,
+      "thread_cpu_ms": 0.018415999999993327,
+      "requested_ms": 50.0
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588498.726101083,
+      "end_s": 588498.779014833,
+      "wall_ms": 52.91375005617738,
+      "thread_cpu_ms": 0.04654199999999664,
+      "requested_ms": 50.0
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588498.779285375,
+      "end_s": 588498.831462041,
+      "wall_ms": 52.17666598036885,
+      "thread_cpu_ms": 0.023208000000010665,
+      "requested_ms": 50.0
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588498.831496375,
+      "end_s": 588498.881650375,
+      "wall_ms": 50.15399993862957,
+      "thread_cpu_ms": 0.018417000000006678,
+      "requested_ms": 50.0
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588498.881700083,
+      "end_s": 588498.93639025,
+      "wall_ms": 54.69016695860773,
+      "thread_cpu_ms": 0.018041999999995895,
+      "requested_ms": 50.0
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588498.936416125,
+      "end_s": 588498.986817208,
+      "wall_ms": 50.40108296088874,
+      "thread_cpu_ms": 0.019041999999996895,
+      "requested_ms": 50.0
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588498.986850583,
+      "end_s": 588499.045846791,
+      "wall_ms": 58.996208012104034,
+      "thread_cpu_ms": 0.038666999999992235,
+      "requested_ms": 50.0
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588499.046021416,
+      "end_s": 588499.099951458,
+      "wall_ms": 53.93004207871854,
+      "thread_cpu_ms": 0.02766700000000899,
+      "requested_ms": 50.0
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588499.09999525,
+      "end_s": 588499.152509166,
+      "wall_ms": 52.51391604542732,
+      "thread_cpu_ms": 0.03345899999999957,
+      "requested_ms": 50.0
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588499.152584708,
+      "end_s": 588499.207606791,
+      "wall_ms": 55.02208310645074,
+      "thread_cpu_ms": 0.023166000000005016,
+      "requested_ms": 50.0
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588499.207656666,
+      "end_s": 588499.259491125,
+      "wall_ms": 51.83445895090699,
+      "thread_cpu_ms": 0.024540999999989044,
+      "requested_ms": 50.0
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588499.259537166,
+      "end_s": 588499.3111285,
+      "wall_ms": 51.59133404958993,
+      "thread_cpu_ms": 0.034874999999989775,
+      "requested_ms": 50.0
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588499.311218333,
+      "end_s": 588499.3662545,
+      "wall_ms": 55.03616703208536,
+      "thread_cpu_ms": 0.030333999999992978,
+      "requested_ms": 50.0
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588499.366316125,
+      "end_s": 588499.41768425,
+      "wall_ms": 51.36812501586974,
+      "thread_cpu_ms": 0.029040999999993544,
+      "requested_ms": 50.0
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588499.417731375,
+      "end_s": 588499.469327166,
+      "wall_ms": 51.595791010186076,
+      "thread_cpu_ms": 0.02487500000000753,
+      "requested_ms": 50.0
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588499.469371291,
+      "end_s": 588499.5206855,
+      "wall_ms": 51.31420900579542,
+      "thread_cpu_ms": 0.02866599999999664,
+      "requested_ms": 50.0
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588499.520745958,
+      "end_s": 588499.575785875,
+      "wall_ms": 55.03991700243205,
+      "thread_cpu_ms": 0.04254200000000652,
+      "requested_ms": 50.0
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588499.57586975,
+      "end_s": 588499.627533166,
+      "wall_ms": 51.66341597214341,
+      "thread_cpu_ms": 0.038833000000002005,
+      "requested_ms": 50.0
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588499.627604833,
+      "end_s": 588499.682066375,
+      "wall_ms": 54.461542051285505,
+      "thread_cpu_ms": 0.0180410000000103,
+      "requested_ms": 50.0
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588499.6820915,
+      "end_s": 588499.733059166,
+      "wall_ms": 50.96766597125679,
+      "thread_cpu_ms": 0.03550000000000775,
+      "requested_ms": 50.0
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588499.733126708,
+      "end_s": 588499.788156125,
+      "wall_ms": 55.02941703889519,
+      "thread_cpu_ms": 0.02554100000000392,
+      "requested_ms": 50.0
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588499.788217666,
+      "end_s": 588499.839029208,
+      "wall_ms": 50.8115419652313,
+      "thread_cpu_ms": 0.01883299999999588,
+      "requested_ms": 50.0
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588500.910426333,
+      "end_s": 588500.916397083,
+      "wall_ms": 5.970750004053116,
+      "thread_cpu_ms": 0.026292000000011084,
+      "requested_ms": 1.0
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588500.917000083,
+      "end_s": 588500.922502708,
+      "wall_ms": 5.502625019289553,
+      "thread_cpu_ms": 0.03929100000002461,
+      "requested_ms": 1.0
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588501.040454583,
+      "end_s": 588501.048443916,
+      "wall_ms": 7.989333011209965,
+      "thread_cpu_ms": 0.02529100000001061,
+      "requested_ms": 1.0
+    },
+    {
+      "operation": "serial_read:/dev/cu.usbmodem11203",
+      "start_s": 588501.077505333,
+      "end_s": 588501.090746458,
+      "wall_ms": 13.241125037893653,
+      "thread_cpu_ms": 0.07012500000000421
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588501.136215208,
+      "end_s": 588501.142531875,
+      "wall_ms": 6.316667073406279,
+      "thread_cpu_ms": 0.021250000000000435,
+      "requested_ms": 1.0
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588510.377128833,
+      "end_s": 588510.382181375,
+      "wall_ms": 5.052542081102729,
+      "thread_cpu_ms": 0.029916000000018705,
+      "requested_ms": 1.0
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588510.388021125,
+      "end_s": 588510.393492541,
+      "wall_ms": 5.471416050568223,
+      "thread_cpu_ms": 0.0422909999999721,
+      "requested_ms": 1.0
+    },
+    {
+      "operation": "serial_in_waiting:/dev/cu.usbmodem11203",
+      "start_s": 588510.397841916,
+      "end_s": 588510.406840916,
+      "wall_ms": 8.999000070616603,
+      "thread_cpu_ms": 0.09808399999999828
+    },
+    {
+      "operation": "record_row:reports",
+      "start_s": 588510.426474625,
+      "end_s": 588510.432638125,
+      "wall_ms": 6.16350001655519,
+      "thread_cpu_ms": 0.04479099999998848
+    },
+    {
+      "operation": "gc",
+      "generation": 0,
+      "start_s": 588513.386372291,
+      "end_s": 588513.386944916,
+      "wall_ms": 0.5726249655708671,
+      "thread_cpu_ms": 0.5736659999999727
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588521.374981833,
+      "end_s": 588521.380611416,
+      "wall_ms": 5.629582912661135,
+      "thread_cpu_ms": 0.026499999999929358,
+      "requested_ms": 1.0
+    },
+    {
+      "operation": "gc",
+      "generation": 0,
+      "start_s": 588526.206011125,
+      "end_s": 588526.2062505,
+      "wall_ms": 0.2393750473856926,
+      "thread_cpu_ms": 0.24108300000014182
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588526.246269958,
+      "end_s": 588526.252490958,
+      "wall_ms": 6.220999988727272,
+      "thread_cpu_ms": 0.034958000000084866,
+      "requested_ms": 1.0
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588530.927182125,
+      "end_s": 588530.932343625,
+      "wall_ms": 5.161499953828752,
+      "thread_cpu_ms": 0.027167000000272168,
+      "requested_ms": 1.0
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588530.937433,
+      "end_s": 588530.9430005,
+      "wall_ms": 5.567500018514693,
+      "thread_cpu_ms": 0.0248339999999736,
+      "requested_ms": 1.0
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588530.98617,
+      "end_s": 588530.992497166,
+      "wall_ms": 6.327165989205241,
+      "thread_cpu_ms": 0.014249999999993435,
+      "requested_ms": 1.0
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588533.213316375,
+      "end_s": 588533.221406916,
+      "wall_ms": 8.090540999546647,
+      "thread_cpu_ms": 0.025457999999645153,
+      "requested_ms": 1.0
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588533.287664416,
+      "end_s": 588533.30012475,
+      "wall_ms": 12.460333993658423,
+      "thread_cpu_ms": 0.0237909999998287,
+      "requested_ms": 1.0
+    },
+    {
+      "operation": "make_sample",
+      "start_s": 588533.303567875,
+      "end_s": 588533.3398055,
+      "wall_ms": 36.23762505594641,
+      "thread_cpu_ms": 0.10475000000020884
+    },
+    {
+      "operation": "serial_in_waiting:/dev/cu.usbmodem11203",
+      "start_s": 588533.348733291,
+      "end_s": 588533.365282583,
+      "wall_ms": 16.549292020499706,
+      "thread_cpu_ms": 0.05016599999985161
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588533.464430166,
+      "end_s": 588533.469691208,
+      "wall_ms": 5.261042038910091,
+      "thread_cpu_ms": 0.03270799999999241,
+      "requested_ms": 1.0
+    },
+    {
+      "operation": "serial_in_waiting:/dev/cu.usbserial-A5069RR4",
+      "start_s": 588533.470754916,
+      "end_s": 588533.477535166,
+      "wall_ms": 6.780249997973442,
+      "thread_cpu_ms": 0.07008300000022061
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588533.52645025,
+      "end_s": 588533.540733583,
+      "wall_ms": 14.283333090133965,
+      "thread_cpu_ms": 0.02141700000013458,
+      "requested_ms": 1.0
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588538.427897833,
+      "end_s": 588538.476731125,
+      "wall_ms": 48.83329197764397,
+      "thread_cpu_ms": 0.020042000000053406,
+      "requested_ms": 1.0
+    },
+    {
+      "operation": "serial_in_waiting:/dev/cu.usbmodem11203",
+      "start_s": 588538.516415791,
+      "end_s": 588538.521500708,
+      "wall_ms": 5.084916949272156,
+      "thread_cpu_ms": 0.037874999999854
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588538.580955666,
+      "end_s": 588538.587727,
+      "wall_ms": 6.771333981305361,
+      "thread_cpu_ms": 0.037584000000201456,
+      "requested_ms": 1.0
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588538.5943875,
+      "end_s": 588538.611346291,
+      "wall_ms": 16.958791064098477,
+      "thread_cpu_ms": 0.03604099999998667,
+      "requested_ms": 1.0
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588538.8744115,
+      "end_s": 588538.879643041,
+      "wall_ms": 5.231540999375284,
+      "thread_cpu_ms": 0.04033300000028106,
+      "requested_ms": 1.0
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588538.9662305,
+      "end_s": 588538.973087,
+      "wall_ms": 6.8564999382942915,
+      "thread_cpu_ms": 0.01674999999989879,
+      "requested_ms": 1.0
+    },
+    {
+      "operation": "serial_in_waiting:/dev/cu.usbmodem11203",
+      "start_s": 588538.973621291,
+      "end_s": 588538.987736208,
+      "wall_ms": 14.11491702310741,
+      "thread_cpu_ms": 0.08275000000024235
+    },
+    {
+      "operation": "make_sample",
+      "start_s": 588538.999273958,
+      "end_s": 588539.008243,
+      "wall_ms": 8.969041984528303,
+      "thread_cpu_ms": 0.10433300000034507
+    },
+    {
+      "operation": "serial_write:/dev/cu.usbserial-A5069RR4",
+      "start_s": 588539.031903208,
+      "end_s": 588539.051284125,
+      "wall_ms": 19.380916957743466,
+      "thread_cpu_ms": 0.07916599999990837
+    },
+    {
+      "operation": "gc",
+      "generation": 0,
+      "start_s": 588539.114901333,
+      "end_s": 588539.115099708,
+      "wall_ms": 0.19837496802210808,
+      "thread_cpu_ms": 0.21050000000011337
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588539.125826333,
+      "end_s": 588539.1340045,
+      "wall_ms": 8.178167045116425,
+      "thread_cpu_ms": 0.036458999999933184,
+      "requested_ms": 1.0
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588539.200891,
+      "end_s": 588539.209267083,
+      "wall_ms": 8.376082987524569,
+      "thread_cpu_ms": 0.02908300000026287,
+      "requested_ms": 1.0
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588543.927102291,
+      "end_s": 588543.932217541,
+      "wall_ms": 5.11525000911206,
+      "thread_cpu_ms": 0.03691700000008069,
+      "requested_ms": 1.0
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588545.461644833,
+      "end_s": 588545.467527083,
+      "wall_ms": 5.882250028662384,
+      "thread_cpu_ms": 0.026040999999921155,
+      "requested_ms": 1.0
+    },
+    {
+      "operation": "serial_in_waiting:/dev/cu.usbserial-A5069RR4",
+      "start_s": 588545.934792375,
+      "end_s": 588545.939823458,
+      "wall_ms": 5.031083011999726,
+      "thread_cpu_ms": 0.057416999999837515
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588545.953769625,
+      "end_s": 588545.961425083,
+      "wall_ms": 7.65545794274658,
+      "thread_cpu_ms": 0.045125000000201254,
+      "requested_ms": 1.0
+    },
+    {
+      "operation": "record_row:wire",
+      "start_s": 588549.942146916,
+      "end_s": 588549.958153625,
+      "wall_ms": 16.006709076464176,
+      "thread_cpu_ms": 0.15291600000022498
+    },
+    {
+      "operation": "serial_read:/dev/cu.usbserial-A5069RR4",
+      "start_s": 588549.95906025,
+      "end_s": 588549.972587083,
+      "wall_ms": 13.5268330341205,
+      "thread_cpu_ms": 0.07933300000040333
+    },
+    {
+      "operation": "gc",
+      "generation": 0,
+      "start_s": 588551.76609075,
+      "end_s": 588551.766752375,
+      "wall_ms": 0.6616250611841679,
+      "thread_cpu_ms": 0.4275419999997254
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588553.188439333,
+      "end_s": 588553.19373,
+      "wall_ms": 5.290667060762644,
+      "thread_cpu_ms": 0.028125000000045475,
+      "requested_ms": 1.0
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588553.227980875,
+      "end_s": 588553.233416083,
+      "wall_ms": 5.435208091512322,
+      "thread_cpu_ms": 0.027790999999943722,
+      "requested_ms": 1.0
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588558.413008416,
+      "end_s": 588558.420733291,
+      "wall_ms": 7.724875002168119,
+      "thread_cpu_ms": 0.030124999999436852,
+      "requested_ms": 1.0
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588558.426189125,
+      "end_s": 588558.431865166,
+      "wall_ms": 5.676041007973254,
+      "thread_cpu_ms": 0.029458000000204265,
+      "requested_ms": 1.0
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588558.447689041,
+      "end_s": 588558.455925291,
+      "wall_ms": 8.236250025220215,
+      "thread_cpu_ms": 0.01774999999959448,
+      "requested_ms": 1.0
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588558.467234333,
+      "end_s": 588558.473459583,
+      "wall_ms": 6.2252499628812075,
+      "thread_cpu_ms": 0.02429199999998133,
+      "requested_ms": 1.0
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588558.486081791,
+      "end_s": 588558.5417015,
+      "wall_ms": 55.61970896087587,
+      "thread_cpu_ms": 0.03554199999999952,
+      "requested_ms": 1.0
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588558.54334125,
+      "end_s": 588558.569003833,
+      "wall_ms": 25.662582949735224,
+      "thread_cpu_ms": 0.022333000000429593,
+      "requested_ms": 1.0
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588558.638265541,
+      "end_s": 588558.648580291,
+      "wall_ms": 10.314749903045595,
+      "thread_cpu_ms": 0.026582999999469337,
+      "requested_ms": 1.0
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588558.654166291,
+      "end_s": 588558.662679375,
+      "wall_ms": 8.51308403071016,
+      "thread_cpu_ms": 0.02620800000041612,
+      "requested_ms": 1.0
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588558.916888958,
+      "end_s": 588558.9341635,
+      "wall_ms": 17.274542013183236,
+      "thread_cpu_ms": 0.04562500000027114,
+      "requested_ms": 1.0
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588559.04172225,
+      "end_s": 588559.055393958,
+      "wall_ms": 13.671707944013178,
+      "thread_cpu_ms": 0.021291000000367433,
+      "requested_ms": 1.0
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588559.062920125,
+      "end_s": 588559.071028083,
+      "wall_ms": 8.107958012260497,
+      "thread_cpu_ms": 0.024124999999486363,
+      "requested_ms": 1.0
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588559.071535333,
+      "end_s": 588559.079002125,
+      "wall_ms": 7.466792012564838,
+      "thread_cpu_ms": 0.029458000000204265,
+      "requested_ms": 1.0
+    },
+    {
+      "operation": "record_row:samples",
+      "start_s": 588559.085055958,
+      "end_s": 588559.091891958,
+      "wall_ms": 6.836000015027821,
+      "thread_cpu_ms": 0.09316700000017164
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588559.093453041,
+      "end_s": 588559.0986025,
+      "wall_ms": 5.14945900067687,
+      "thread_cpu_ms": 0.022582999999798403,
+      "requested_ms": 1.0
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588559.124805333,
+      "end_s": 588559.1305555,
+      "wall_ms": 5.7501670671626925,
+      "thread_cpu_ms": 0.026000000000081513,
+      "requested_ms": 1.0
+    },
+    {
+      "operation": "serial_read:/dev/cu.usbmodem11203",
+      "start_s": 588559.132509125,
+      "end_s": 588559.143657333,
+      "wall_ms": 11.14820793736726,
+      "thread_cpu_ms": 0.025000000000829914
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588559.65461525,
+      "end_s": 588559.7166065,
+      "wall_ms": 61.99125002603978,
+      "thread_cpu_ms": 0.02983300000014566,
+      "requested_ms": 1.0
+    },
+    {
+      "operation": "make_sample",
+      "start_s": 588559.716665166,
+      "end_s": 588559.724584916,
+      "wall_ms": 7.919750059954822,
+      "thread_cpu_ms": 0.10641700000046939
+    },
+    {
+      "operation": "record_row:samples",
+      "start_s": 588559.741866083,
+      "end_s": 588559.748507458,
+      "wall_ms": 6.641375017352402,
+      "thread_cpu_ms": 0.05154100000037687
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588560.337984208,
+      "end_s": 588560.357152833,
+      "wall_ms": 19.168625003658235,
+      "thread_cpu_ms": 0.025000000000829914,
+      "requested_ms": 1.0
+    },
+    {
+      "operation": "gc",
+      "generation": 0,
+      "start_s": 588564.506049833,
+      "end_s": 588564.506229125,
+      "wall_ms": 0.17929193563759327,
+      "thread_cpu_ms": 0.18666600000027955
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588568.519253708,
+      "end_s": 588568.525203416,
+      "wall_ms": 5.949708051048219,
+      "thread_cpu_ms": 0.019292000000170617,
+      "requested_ms": 0.43208396527916193
+    },
+    {
+      "operation": "serial_in_waiting:/dev/cu.usbmodem11203",
+      "start_s": 588568.530056041,
+      "end_s": 588568.536929625,
+      "wall_ms": 6.873584003187716,
+      "thread_cpu_ms": 0.06429100000016064
+    },
+    {
+      "operation": "record_row:samples",
+      "start_s": 588568.572460333,
+      "end_s": 588568.581982541,
+      "wall_ms": 9.522208012640476,
+      "thread_cpu_ms": 0.07333400000053558
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588568.596916583,
+      "end_s": 588568.61221975,
+      "wall_ms": 15.303166932426393,
+      "thread_cpu_ms": 0.01650000000008589,
+      "requested_ms": 1.0
+    },
+    {
+      "operation": "gc",
+      "generation": 0,
+      "start_s": 588577.265709,
+      "end_s": 588577.265878208,
+      "wall_ms": 0.16920792404562235,
+      "thread_cpu_ms": 0.1755420000000285
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588583.327735916,
+      "end_s": 588583.33563275,
+      "wall_ms": 7.896833936683834,
+      "thread_cpu_ms": 0.028958000000578465,
+      "requested_ms": 1.0
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588583.367617625,
+      "end_s": 588583.373501875,
+      "wall_ms": 5.8842499274760485,
+      "thread_cpu_ms": 0.023166000000074405,
+      "requested_ms": 1.0
+    },
+    {
+      "operation": "gc",
+      "generation": 0,
+      "start_s": 588590.085937625,
+      "end_s": 588590.086055041,
+      "wall_ms": 0.11741602793335915,
+      "thread_cpu_ms": 0.1335419999994869
+    },
+    {
+      "operation": "serial_in_waiting:/dev/cu.usbserial-A5069RR4",
+      "start_s": 588590.452064333,
+      "end_s": 588590.459403375,
+      "wall_ms": 7.339042029343545,
+      "thread_cpu_ms": 0.05420899999997175
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588592.487916708,
+      "end_s": 588592.496027708,
+      "wall_ms": 8.111000061035156,
+      "thread_cpu_ms": 0.026625000000279897,
+      "requested_ms": 1.0
+    },
+    {
+      "operation": "make_sample",
+      "start_s": 588592.501187041,
+      "end_s": 588592.507087541,
+      "wall_ms": 5.900499993003905,
+      "thread_cpu_ms": 0.10350000000158843
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588593.757002666,
+      "end_s": 588593.7643755,
+      "wall_ms": 7.372834021225572,
+      "thread_cpu_ms": 0.0162499999998289,
+      "requested_ms": 1.0
+    },
+    {
+      "operation": "serial_write:/dev/cu.usbserial-A5069RR4",
+      "start_s": 588593.764459208,
+      "end_s": 588593.770750833,
+      "wall_ms": 6.291624973528087,
+      "thread_cpu_ms": 0.06179200000033802
+    },
+    {
+      "operation": "record_row:samples",
+      "start_s": 588593.770937458,
+      "end_s": 588593.776005,
+      "wall_ms": 5.067541962489486,
+      "thread_cpu_ms": 0.041792000001095175
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588595.891776708,
+      "end_s": 588595.896873083,
+      "wall_ms": 5.09637501090765,
+      "thread_cpu_ms": 0.027875000000676664,
+      "requested_ms": 1.0
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588596.163905333,
+      "end_s": 588596.177815041,
+      "wall_ms": 13.909708010032773,
+      "thread_cpu_ms": 0.021124999999955207,
+      "requested_ms": 1.0
+    },
+    {
+      "operation": "make_sample",
+      "start_s": 588596.181428083,
+      "end_s": 588596.186869875,
+      "wall_ms": 5.441791960038245,
+      "thread_cpu_ms": 0.06612500000002797
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588596.187047791,
+      "end_s": 588596.218084333,
+      "wall_ms": 31.03654203005135,
+      "thread_cpu_ms": 0.01570899999947528,
+      "requested_ms": 1.0
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588597.91456675,
+      "end_s": 588597.921024875,
+      "wall_ms": 6.458124960772693,
+      "thread_cpu_ms": 0.03108299999965425,
+      "requested_ms": 1.0
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588597.958554791,
+      "end_s": 588597.9640765,
+      "wall_ms": 5.521708982996643,
+      "thread_cpu_ms": 0.028207999999807498,
+      "requested_ms": 1.0
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588597.993784625,
+      "end_s": 588598.00069,
+      "wall_ms": 6.905375048518181,
+      "thread_cpu_ms": 0.019584000000349988,
+      "requested_ms": 1.0
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588598.004166916,
+      "end_s": 588598.009504541,
+      "wall_ms": 5.337625043466687,
+      "thread_cpu_ms": 0.026582999998581158,
+      "requested_ms": 1.0
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588598.089417166,
+      "end_s": 588598.095804583,
+      "wall_ms": 6.387417088262737,
+      "thread_cpu_ms": 0.029208999999141838,
+      "requested_ms": 1.0
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588598.095946458,
+      "end_s": 588598.101268041,
+      "wall_ms": 5.321582895703614,
+      "thread_cpu_ms": 0.02625000000122668,
+      "requested_ms": 1.0
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588598.111592541,
+      "end_s": 588598.121536041,
+      "wall_ms": 9.943500044755638,
+      "thread_cpu_ms": 0.018499999999477268,
+      "requested_ms": 1.0
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588598.161321041,
+      "end_s": 588598.167643708,
+      "wall_ms": 6.322666886262596,
+      "thread_cpu_ms": 0.026791999999886684,
+      "requested_ms": 1.0
+    },
+    {
+      "operation": "make_sample",
+      "start_s": 588598.179891916,
+      "end_s": 588598.185167625,
+      "wall_ms": 5.275708972476423,
+      "thread_cpu_ms": 0.08704200000053675
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588598.186171375,
+      "end_s": 588598.194121541,
+      "wall_ms": 7.950166007503867,
+      "thread_cpu_ms": 0.02641699999905711,
+      "requested_ms": 1.0
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588598.200515916,
+      "end_s": 588598.213798875,
+      "wall_ms": 13.282959000207484,
+      "thread_cpu_ms": 0.01966600000002927,
+      "requested_ms": 1.0
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588602.563299125,
+      "end_s": 588602.57202,
+      "wall_ms": 8.720875019207597,
+      "thread_cpu_ms": 0.05812499999890974,
+      "requested_ms": 1.0
+    },
+    {
+      "operation": "serial_read:/dev/cu.usbserial-A5069RR4",
+      "start_s": 588602.595252708,
+      "end_s": 588602.602319791,
+      "wall_ms": 7.067083031870425,
+      "thread_cpu_ms": 0.15274999999981276
+    },
+    {
+      "operation": "record_row:wire",
+      "start_s": 588602.619406958,
+      "end_s": 588602.62517025,
+      "wall_ms": 5.763291963376105,
+      "thread_cpu_ms": 0.11145900000109066
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588602.653444166,
+      "end_s": 588602.671452291,
+      "wall_ms": 18.008125014603138,
+      "thread_cpu_ms": 0.03212499999882823,
+      "requested_ms": 1.0
+    },
+    {
+      "operation": "serial_read:/dev/cu.usbmodem11203",
+      "start_s": 588602.692919583,
+      "end_s": 588602.703259958,
+      "wall_ms": 10.340375010855496,
+      "thread_cpu_ms": 0.028458000000952666
+    },
+    {
+      "operation": "gc",
+      "generation": 0,
+      "start_s": 588602.703840541,
+      "end_s": 588602.715051125,
+      "wall_ms": 11.210584081709385,
+      "thread_cpu_ms": 0.3082089999999482
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588602.72979025,
+      "end_s": 588602.736316333,
+      "wall_ms": 6.5260829869657755,
+      "thread_cpu_ms": 0.03141600000056144,
+      "requested_ms": 1.0
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588602.786263,
+      "end_s": 588602.807407416,
+      "wall_ms": 21.14441606681794,
+      "thread_cpu_ms": 0.0323749999999734,
+      "requested_ms": 1.0
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588604.296442666,
+      "end_s": 588604.304140083,
+      "wall_ms": 7.6974170515313745,
+      "thread_cpu_ms": 0.01962500000018963,
+      "requested_ms": 1.0
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588604.31291225,
+      "end_s": 588604.3205265,
+      "wall_ms": 7.614249945618212,
+      "thread_cpu_ms": 0.028625000000559453,
+      "requested_ms": 1.0
+    },
+    {
+      "operation": "serial_read:/dev/cu.usbmodem11203",
+      "start_s": 588604.337387041,
+      "end_s": 588604.342518833,
+      "wall_ms": 5.131792044267058,
+      "thread_cpu_ms": 0.02650000000059549
+    },
+    {
+      "operation": "record_row:wire",
+      "start_s": 588605.048920333,
+      "end_s": 588605.064396166,
+      "wall_ms": 15.475832973606884,
+      "thread_cpu_ms": 0.15954199999868024
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588605.06499975,
+      "end_s": 588605.071453041,
+      "wall_ms": 6.453291047364473,
+      "thread_cpu_ms": 0.02854200000079743,
+      "requested_ms": 1.0
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588606.20859725,
+      "end_s": 588606.21406875,
+      "wall_ms": 5.47149998601526,
+      "thread_cpu_ms": 0.03108299999965425,
+      "requested_ms": 1.0
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588608.964394583,
+      "end_s": 588608.970118,
+      "wall_ms": 5.723417038097978,
+      "thread_cpu_ms": 0.03191600000107542,
+      "requested_ms": 1.0
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588608.993706958,
+      "end_s": 588609.004927625,
+      "wall_ms": 11.220666929148138,
+      "thread_cpu_ms": 0.020040999999082487,
+      "requested_ms": 1.0
+    },
+    {
+      "operation": "serial_write:/dev/cu.usbserial-A5069RR4",
+      "start_s": 588609.005993166,
+      "end_s": 588609.01258625,
+      "wall_ms": 6.593083962798119,
+      "thread_cpu_ms": 0.09145900000007146
+    },
+    {
+      "operation": "record_row:wire",
+      "start_s": 588609.012902583,
+      "end_s": 588609.019113666,
+      "wall_ms": 6.211083033122122,
+      "thread_cpu_ms": 0.09254199999908508
+    },
+    {
+      "operation": "record_row:wire",
+      "start_s": 588609.027102541,
+      "end_s": 588609.041009541,
+      "wall_ms": 13.907000073231757,
+      "thread_cpu_ms": 0.09583299999960104
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588609.05345325,
+      "end_s": 588609.058851083,
+      "wall_ms": 5.397833068855107,
+      "thread_cpu_ms": 0.018542000001176007,
+      "requested_ms": 1.0
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588611.747932,
+      "end_s": 588611.753363916,
+      "wall_ms": 5.4319159826263785,
+      "thread_cpu_ms": 0.023999999999801958,
+      "requested_ms": 1.0
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588612.60273325,
+      "end_s": 588612.608267125,
+      "wall_ms": 5.533874966204166,
+      "thread_cpu_ms": 0.031333000000799416,
+      "requested_ms": 1.0
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588612.698460791,
+      "end_s": 588612.709582166,
+      "wall_ms": 11.121375020593405,
+      "thread_cpu_ms": 0.028582999998860714,
+      "requested_ms": 1.0
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588612.711398833,
+      "end_s": 588612.720839541,
+      "wall_ms": 9.440708090551198,
+      "thread_cpu_ms": 0.017958000000817265,
+      "requested_ms": 1.0
+    },
+    {
+      "operation": "make_sample",
+      "start_s": 588612.7209795,
+      "end_s": 588612.730892666,
+      "wall_ms": 9.913166053593159,
+      "thread_cpu_ms": 0.09008399999999028
+    },
+    {
+      "operation": "serial_in_waiting:/dev/cu.usbserial-A5069RR4",
+      "start_s": 588612.738358458,
+      "end_s": 588612.749455666,
+      "wall_ms": 11.097208014689386,
+      "thread_cpu_ms": 0.04191700000077958
+    },
+    {
+      "operation": "make_sample",
+      "start_s": 588612.751556291,
+      "end_s": 588612.770833125,
+      "wall_ms": 19.276833976618946,
+      "thread_cpu_ms": 0.11804199999865261
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588612.775746333,
+      "end_s": 588612.781441541,
+      "wall_ms": 5.695208092220128,
+      "thread_cpu_ms": 0.01575000000109128,
+      "requested_ms": 1.0
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588612.822815625,
+      "end_s": 588612.834068541,
+      "wall_ms": 11.25291595235467,
+      "thread_cpu_ms": 0.03266700000104095,
+      "requested_ms": 1.0
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588612.834625916,
+      "end_s": 588612.848980583,
+      "wall_ms": 14.354667044244707,
+      "thread_cpu_ms": 0.03775000000061368,
+      "requested_ms": 1.0
+    },
+    {
+      "operation": "gc",
+      "generation": 0,
+      "start_s": 588615.086309333,
+      "end_s": 588615.0864725,
+      "wall_ms": 0.16316701658070087,
+      "thread_cpu_ms": 0.16895799999971928
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588621.357777708,
+      "end_s": 588621.363716958,
+      "wall_ms": 5.939249997027218,
+      "thread_cpu_ms": 0.025834000000557467,
+      "requested_ms": 1.0
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588622.274997875,
+      "end_s": 588622.280529333,
+      "wall_ms": 5.531458067707717,
+      "thread_cpu_ms": 0.02700000000110947,
+      "requested_ms": 1.0
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588626.444488833,
+      "end_s": 588626.452396916,
+      "wall_ms": 7.9080830328166485,
+      "thread_cpu_ms": 0.027040999999172755,
+      "requested_ms": 1.0
+    },
+    {
+      "operation": "gc",
+      "generation": 1,
+      "start_s": 588628.108931083,
+      "end_s": 588628.115311416,
+      "wall_ms": 6.380332983098924,
+      "thread_cpu_ms": 3.959625000000244
+    },
+    {
+      "operation": "record_row:reports",
+      "start_s": 588628.108921625,
+      "end_s": 588628.11543,
+      "wall_ms": 6.50837505236268,
+      "thread_cpu_ms": 4.084583000000919
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588637.097107166,
+      "end_s": 588637.102680041,
+      "wall_ms": 5.572875030338764,
+      "thread_cpu_ms": 0.034124999999107786,
+      "requested_ms": 1.0
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588637.104425875,
+      "end_s": 588637.120244625,
+      "wall_ms": 15.818750020116568,
+      "thread_cpu_ms": 0.0569590000001341,
+      "requested_ms": 1.0
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588637.167066291,
+      "end_s": 588637.181398583,
+      "wall_ms": 14.33229201938957,
+      "thread_cpu_ms": 0.040374999999315264,
+      "requested_ms": 1.0
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588637.183695916,
+      "end_s": 588637.193401541,
+      "wall_ms": 9.705625008791685,
+      "thread_cpu_ms": 0.03358400000053052,
+      "requested_ms": 1.0
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588637.258145833,
+      "end_s": 588637.263174666,
+      "wall_ms": 5.028832936659455,
+      "thread_cpu_ms": 0.02829100000134588,
+      "requested_ms": 1.0
+    },
+    {
+      "operation": "gc",
+      "generation": 0,
+      "start_s": 588640.885522833,
+      "end_s": 588640.885768708,
+      "wall_ms": 0.24587498046457767,
+      "thread_cpu_ms": 0.2525829999999729
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588648.604732958,
+      "end_s": 588648.609741666,
+      "wall_ms": 5.008707987144589,
+      "thread_cpu_ms": 0.03212500000060459,
+      "requested_ms": 1.0
+    },
+    {
+      "operation": "record_row:samples",
+      "start_s": 588649.861450625,
+      "end_s": 588649.866604625,
+      "wall_ms": 5.154000013135374,
+      "thread_cpu_ms": 0.11558300000125143
+    },
+    {
+      "operation": "serial_read:/dev/cu.usbmodem11203",
+      "start_s": 588649.905019041,
+      "end_s": 588649.922659583,
+      "wall_ms": 17.640542006120086,
+      "thread_cpu_ms": 0.07229100000039068
+    },
+    {
+      "operation": "console_parse",
+      "start_s": 588649.922839708,
+      "end_s": 588649.935049791,
+      "wall_ms": 12.210082961246371,
+      "thread_cpu_ms": 0.31449999999999534
+    },
+    {
+      "operation": "serial_in_waiting:/dev/cu.usbmodem11203",
+      "start_s": 588649.958717708,
+      "end_s": 588649.970130166,
+      "wall_ms": 11.412458028644323,
+      "thread_cpu_ms": 0.07037499999995589
+    },
+    {
+      "operation": "serial_write:/dev/cu.usbserial-A5069RR4",
+      "start_s": 588649.97248025,
+      "end_s": 588649.978902916,
+      "wall_ms": 6.422665901482105,
+      "thread_cpu_ms": 0.11041700000014032
+    },
+    {
+      "operation": "make_sample",
+      "start_s": 588649.985904208,
+      "end_s": 588650.026461208,
+      "wall_ms": 40.5569999711588,
+      "thread_cpu_ms": 0.1045829999988257
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588650.029926958,
+      "end_s": 588650.045578833,
+      "wall_ms": 15.651874942705035,
+      "thread_cpu_ms": 0.021625000000469186,
+      "requested_ms": 1.0
+    },
+    {
+      "operation": "record_row:samples",
+      "start_s": 588650.045781416,
+      "end_s": 588650.070347125,
+      "wall_ms": 24.565708939917386,
+      "thread_cpu_ms": 0.08337500000088482
+    },
+    {
+      "operation": "record_row:wire",
+      "start_s": 588650.080066208,
+      "end_s": 588650.086125875,
+      "wall_ms": 6.059666979126632,
+      "thread_cpu_ms": 0.16875000000027285
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588650.531086,
+      "end_s": 588650.536712791,
+      "wall_ms": 5.62679092399776,
+      "thread_cpu_ms": 0.02437500000063153,
+      "requested_ms": 1.0
+    },
+    {
+      "operation": "gc",
+      "generation": 0,
+      "start_s": 588653.785900791,
+      "end_s": 588653.786141791,
+      "wall_ms": 0.24100008886307478,
+      "thread_cpu_ms": 0.24849999999965178
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588654.694417625,
+      "end_s": 588654.704138041,
+      "wall_ms": 9.720416041091084,
+      "thread_cpu_ms": 0.025666999999174323,
+      "requested_ms": 1.0
+    },
+    {
+      "operation": "serial_read:/dev/cu.usbmodem11203",
+      "start_s": 588654.709837083,
+      "end_s": 588654.725041125,
+      "wall_ms": 15.20404196344316,
+      "thread_cpu_ms": 0.03741600000140011
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588654.738979583,
+      "end_s": 588654.744242375,
+      "wall_ms": 5.262791994027793,
+      "thread_cpu_ms": 0.022249999998891212,
+      "requested_ms": 0.6957920268177986
+    },
+    {
+      "operation": "record_row:wire",
+      "start_s": 588654.744429166,
+      "end_s": 588654.754305708,
+      "wall_ms": 9.876542026177049,
+      "thread_cpu_ms": 0.08374999999993804
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588657.260555291,
+      "end_s": 588657.268132208,
+      "wall_ms": 7.576917065307498,
+      "thread_cpu_ms": 0.027708000001069877,
+      "requested_ms": 1.0
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588659.181563875,
+      "end_s": 588659.187078666,
+      "wall_ms": 5.514790886081755,
+      "thread_cpu_ms": 0.024665999999839983,
+      "requested_ms": 1.0
+    },
+    {
+      "operation": "gc",
+      "generation": 0,
+      "start_s": 588666.5059715,
+      "end_s": 588666.50619625,
+      "wall_ms": 0.22475002333521843,
+      "thread_cpu_ms": 0.15487499999977672
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588670.54286275,
+      "end_s": 588670.549221875,
+      "wall_ms": 6.359125021845102,
+      "thread_cpu_ms": 0.03370900000021493,
+      "requested_ms": 1.0
+    },
+    {
+      "operation": "gc",
+      "generation": 0,
+      "start_s": 588679.586527833,
+      "end_s": 588679.586581416,
+      "wall_ms": 0.053582945838570595,
+      "thread_cpu_ms": 0.06033299999685937
+    },
+    {
+      "operation": "record_row:wire",
+      "start_s": 588685.019968916,
+      "end_s": 588685.030541083,
+      "wall_ms": 10.572166997008026,
+      "thread_cpu_ms": 0.12083299999687824
+    },
+    {
+      "operation": "record_row:samples",
+      "start_s": 588685.030560583,
+      "end_s": 588685.045250583,
+      "wall_ms": 14.68999998178333,
+      "thread_cpu_ms": 0.15020900000095594
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588693.442532041,
+      "end_s": 588693.4475395,
+      "wall_ms": 5.007458967156708,
+      "thread_cpu_ms": 0.009791000000092254,
+      "requested_ms": 4.0
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588693.447565291,
+      "end_s": 588693.457531,
+      "wall_ms": 9.96570906136185,
+      "thread_cpu_ms": 0.012500000000414957,
+      "requested_ms": 8.0
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588693.457548625,
+      "end_s": 588693.477117541,
+      "wall_ms": 19.568916060961783,
+      "thread_cpu_ms": 0.01962500000018963,
+      "requested_ms": 16.0
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588693.477151541,
+      "end_s": 588693.511872125,
+      "wall_ms": 34.72058393526822,
+      "thread_cpu_ms": 0.013374999998205794,
+      "requested_ms": 32.0
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588693.511895375,
+      "end_s": 588693.564346375,
+      "wall_ms": 52.450999966822565,
+      "thread_cpu_ms": 0.010958000000726997,
+      "requested_ms": 50.0
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588693.564364416,
+      "end_s": 588693.61906175,
+      "wall_ms": 54.69733406789601,
+      "thread_cpu_ms": 0.013958000000258153,
+      "requested_ms": 50.0
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588693.619077,
+      "end_s": 588693.671121833,
+      "wall_ms": 52.044833078980446,
+      "thread_cpu_ms": 0.02954200000004903,
+      "requested_ms": 50.0
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588693.671140208,
+      "end_s": 588693.725832458,
+      "wall_ms": 54.69224997796118,
+      "thread_cpu_ms": 0.009750000000252612,
+      "requested_ms": 50.0
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588693.725849083,
+      "end_s": 588693.780470625,
+      "wall_ms": 54.621541989035904,
+      "thread_cpu_ms": 0.010541999998281426,
+      "requested_ms": 50.0
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588693.780485458,
+      "end_s": 588693.831152708,
+      "wall_ms": 50.66725006327033,
+      "thread_cpu_ms": 0.01475000000183968,
+      "requested_ms": 50.0
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588693.83117525,
+      "end_s": 588693.882923375,
+      "wall_ms": 51.74812499899417,
+      "thread_cpu_ms": 0.01808400000058441,
+      "requested_ms": 50.0
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588693.882946916,
+      "end_s": 588693.937816125,
+      "wall_ms": 54.869208950549364,
+      "thread_cpu_ms": 0.016583000000736092,
+      "requested_ms": 50.0
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588693.937841333,
+      "end_s": 588693.992542583,
+      "wall_ms": 54.70125004649162,
+      "thread_cpu_ms": 0.017124999999396096,
+      "requested_ms": 50.0
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588693.992571625,
+      "end_s": 588694.047588416,
+      "wall_ms": 55.016790982335806,
+      "thread_cpu_ms": 0.027458999998231093,
+      "requested_ms": 50.0
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588694.047626625,
+      "end_s": 588694.102192791,
+      "wall_ms": 54.56616589799523,
+      "thread_cpu_ms": 0.023709000000593505,
+      "requested_ms": 50.0
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588694.102223583,
+      "end_s": 588694.154502166,
+      "wall_ms": 52.27858293801546,
+      "thread_cpu_ms": 0.017583999998294075,
+      "requested_ms": 50.0
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588694.154546958,
+      "end_s": 588694.209579416,
+      "wall_ms": 55.03245792351663,
+      "thread_cpu_ms": 0.029459000000287006,
+      "requested_ms": 50.0
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588694.209614,
+      "end_s": 588694.262023958,
+      "wall_ms": 52.40995797794312,
+      "thread_cpu_ms": 0.024207999999248386,
+      "requested_ms": 50.0
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588694.26205325,
+      "end_s": 588694.314048583,
+      "wall_ms": 51.99533305130899,
+      "thread_cpu_ms": 0.021124999999955207,
+      "requested_ms": 50.0
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588694.314095916,
+      "end_s": 588694.365873875,
+      "wall_ms": 51.777958986349404,
+      "thread_cpu_ms": 0.02891699999807429,
+      "requested_ms": 50.0
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588694.365920125,
+      "end_s": 588694.420949708,
+      "wall_ms": 55.02958293072879,
+      "thread_cpu_ms": 0.02866700000225819,
+      "requested_ms": 50.0
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588694.421006833,
+      "end_s": 588694.47603325,
+      "wall_ms": 55.02641701605171,
+      "thread_cpu_ms": 0.026791999999886684,
+      "requested_ms": 50.0
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588694.476082208,
+      "end_s": 588694.531037791,
+      "wall_ms": 54.955583065748215,
+      "thread_cpu_ms": 0.02054199999790285,
+      "requested_ms": 50.0
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588694.531078458,
+      "end_s": 588694.584372,
+      "wall_ms": 53.29354200512171,
+      "thread_cpu_ms": 0.021124999999955207,
+      "requested_ms": 50.0
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588694.584415333,
+      "end_s": 588694.636500166,
+      "wall_ms": 52.084833034314215,
+      "thread_cpu_ms": 0.02295799999885162,
+      "requested_ms": 50.0
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588694.636547791,
+      "end_s": 588694.691153833,
+      "wall_ms": 54.60604198742658,
+      "thread_cpu_ms": 0.021417000002799114,
+      "requested_ms": 50.0
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588694.691199541,
+      "end_s": 588694.746550166,
+      "wall_ms": 55.35062507260591,
+      "thread_cpu_ms": 0.02404199999972434,
+      "requested_ms": 50.0
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588694.746605583,
+      "end_s": 588694.797939541,
+      "wall_ms": 51.333958050236106,
+      "thread_cpu_ms": 0.023667000000671123,
+      "requested_ms": 50.0
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588694.797984666,
+      "end_s": 588694.851051416,
+      "wall_ms": 53.066750057041645,
+      "thread_cpu_ms": 0.022041999997668427,
+      "requested_ms": 50.0
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588694.851112125,
+      "end_s": 588694.9013675,
+      "wall_ms": 50.25537498295307,
+      "thread_cpu_ms": 0.023917000000039934,
+      "requested_ms": 50.0
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588694.901419291,
+      "end_s": 588694.952140625,
+      "wall_ms": 50.72133394423872,
+      "thread_cpu_ms": 0.022082999997508068,
+      "requested_ms": 50.0
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588694.952184041,
+      "end_s": 588695.003890125,
+      "wall_ms": 51.70608393382281,
+      "thread_cpu_ms": 0.04362499999999159,
+      "requested_ms": 50.0
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588695.003981,
+      "end_s": 588695.059003791,
+      "wall_ms": 55.022790911607444,
+      "thread_cpu_ms": 0.027041999999255495,
+      "requested_ms": 50.0
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588695.059048875,
+      "end_s": 588695.112235875,
+      "wall_ms": 53.18699998315424,
+      "thread_cpu_ms": 0.02154200000248352,
+      "requested_ms": 50.0
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588695.11227675,
+      "end_s": 588695.167184541,
+      "wall_ms": 54.90779096726328,
+      "thread_cpu_ms": 0.020416999998218444,
+      "requested_ms": 50.0
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588695.167227333,
+      "end_s": 588695.222246083,
+      "wall_ms": 55.01875001937151,
+      "thread_cpu_ms": 0.020165999998766893,
+      "requested_ms": 50.0
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588695.2222875,
+      "end_s": 588695.27294325,
+      "wall_ms": 50.65574997570366,
+      "thread_cpu_ms": 0.022874999999089596,
+      "requested_ms": 50.0
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588695.272989125,
+      "end_s": 588695.328007208,
+      "wall_ms": 55.01808295957744,
+      "thread_cpu_ms": 0.01937500000082082,
+      "requested_ms": 50.0
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588695.328058833,
+      "end_s": 588695.378387916,
+      "wall_ms": 50.32908299472183,
+      "thread_cpu_ms": 0.06899999999987472,
+      "requested_ms": 50.0
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588695.378500916,
+      "end_s": 588695.433020083,
+      "wall_ms": 54.51916705351323,
+      "thread_cpu_ms": 0.03579199999848015,
+      "requested_ms": 50.0
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588695.433076333,
+      "end_s": 588695.485901083,
+      "wall_ms": 52.82474996056408,
+      "thread_cpu_ms": 0.02754200000154583,
+      "requested_ms": 50.0
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588695.485958916,
+      "end_s": 588695.540542333,
+      "wall_ms": 54.58341701887548,
+      "thread_cpu_ms": 0.025583000002882272,
+      "requested_ms": 50.0
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588695.54059075,
+      "end_s": 588695.59487275,
+      "wall_ms": 54.281999939121306,
+      "thread_cpu_ms": 0.026292000001149063,
+      "requested_ms": 50.0
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588695.594923083,
+      "end_s": 588695.66262875,
+      "wall_ms": 67.70566699560732,
+      "thread_cpu_ms": 0.03087500000020782,
+      "requested_ms": 50.0
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588695.662777083,
+      "end_s": 588695.71419975,
+      "wall_ms": 51.42266699112952,
+      "thread_cpu_ms": 0.021832999998139258,
+      "requested_ms": 50.0
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588695.714232083,
+      "end_s": 588695.769059125,
+      "wall_ms": 54.82704204041511,
+      "thread_cpu_ms": 0.01783300000113286,
+      "requested_ms": 50.0
+    },
+    {
+      "operation": "sleep",
+      "start_s": 588695.769326625,
+      "end_s": 588696.070061125,
+      "wall_ms": 300.73449993506074,
+      "thread_cpu_ms": 0.026416999997280755,
+      "requested_ms": 300.0
+    },
+    {
+      "operation": "serial_read:/dev/cu.usbserial-A5069RR4",
+      "start_s": 588696.112653666,
+      "end_s": 588696.163940416,
+      "wall_ms": 51.28675000742078,
+      "thread_cpu_ms": 0.18000000000029104
+    }
+  ]
+}

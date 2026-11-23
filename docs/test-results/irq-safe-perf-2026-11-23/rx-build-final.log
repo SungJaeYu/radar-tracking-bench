@@ -1,0 +1,4 @@
+[1/4] Building C object CMakeFiles/uart_rx_tests.dir/src/main.c.o
+[2/4] Building C object CMakeFiles/uart_rx_discard_tests.dir/src/main.c.o
+[3/4] Linking C executable uart_rx_tests
+[4/4] Linking C executable uart_rx_discard_tests

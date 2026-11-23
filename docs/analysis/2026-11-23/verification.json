@@ -1,0 +1,38 @@
+{
+  "product_source_hashes_checked": 137,
+  "changed_product_sources": [],
+  "media_input_hashes_checked": 13,
+  "media_tool_hashes_checked": 3,
+  "mp4": {
+    "sha256": "87d56e4bde45bdcedce3dfd5ecd839c4bfe1e21ae86f23e64ddd975626a35b0f",
+    "bytes": 2125427,
+    "full_decode_exit_code": 0,
+    "decoded_frames": 600,
+    "fps": 15.0,
+    "duration_s": 40.0,
+    "size": [
+      1600,
+      1000
+    ],
+    "audio_stream_present": false
+  },
+  "decoded_sample_frames": [
+    "00s.png",
+    "05s.png",
+    "10s.png",
+    "16s.png",
+    "22s.png",
+    "26s.png",
+    "34s.png"
+  ],
+  "visual_review": "All 5 figures and 7 decoded chapter frames inspected; no clipping or text overlap found.",
+  "html_browser_review": "unavailable: browser access host unavailable",
+  "numerical_review": "independent review reproduced counts, RTT, RMSE and source hashes",
+  "local_links": {
+    "markdown_files": 40,
+    "checked": 760,
+    "missing": []
+  },
+  "git_diff_check": "passed",
+  "watch_skill": "Invoked with Python 3.12.14; ffprobe unavailable. Full decode and frame inspection used bundled imageio-ffmpeg instead."
+}

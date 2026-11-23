@@ -10,6 +10,7 @@
 #include <zephyr/sys/atomic.h>
 
 #include "common/ring_buffer.h"
+#include "diagnostics/perf_rx_capture.h"
 #include "transport/rx_frame_processor.h"
 
 LOG_MODULE_REGISTER(uart_rx, CONFIG_RADAR_UART_RX_LOG_LEVEL);
@@ -26,6 +27,21 @@ LOG_MODULE_REGISTER(uart_rx, CONFIG_RADAR_UART_RX_LOG_LEVEL);
 static const struct device *p_uart = DEVICE_DT_GET(DT_NODELABEL(usart6));
 
 static struct ring_buffer rx_ring;
+struct rx_byte_sample {
+    uint8_t byte;
+    uint32_t stored_cycles;
+};
+
+// Caller protects the byte and its timestamp together. No clocks or statistics.
+static bool rx_pop_byte(struct rx_byte_sample *out_sample)
+{
+    const uint8_t slot = rx_ring.tail;
+    const bool available = ring_pop(&rx_ring, &out_sample->byte);
+    if (available) {
+        out_sample->stored_cycles = perf_rx_capture_load_byte(slot);
+    }
+    return available;
+}
 
 // 1 means bytes were lost: the ISR drops new input until the RX thread finishes recovery.
 static atomic_t rx_overflow = ATOMIC_INIT(0);
@@ -57,16 +73,15 @@ K_THREAD_DEFINE(uart_rx_tid, 1024, uart_rx_thread, NULL, NULL, NULL, 5, 0, 0);
 
 int uart_rx_init(void)
 {
-    // Check UART device is ready
-    if (!device_is_ready(p_uart)) {
-        LOG_ERR("USART6 is not ready");
+    const bool device_ready = device_is_ready(p_uart);
+    if (!device_ready) {
+        LOG_ERR("UART init: uart=USART6 status=not_ready");
         return -ENODEV;
     }
 
-    // Set Callback Function
     const int ret = uart_irq_callback_user_data_set(p_uart, uart_callback, NULL);
     if (ret != 0) {
-        LOG_ERR("Failed to set UART callback: %d", ret);
+        LOG_ERR("UART callback: status=failed error=%d", ret);
         return ret;
     }
 
@@ -75,11 +90,10 @@ int uart_rx_init(void)
     // Initialize partial-frame state before enabling the ISR.
     rx_frame_processor_reset();
 
-    // Enable RX Interrupt
+    perf_rx_capture_init();
     uart_irq_rx_enable(p_uart);
 
     // Bytes may already be buffered by the ISR; the initialized ring retains them.
-    // Signal that RX initialization is completed
     k_sem_give(&rx_ready_sem);
 
     return 0;
@@ -100,25 +114,31 @@ void uart_rx_get_stats(struct uart_rx_stats *out_stats)
 static void uart_callback(const struct device *p_dev, void *p_user_data)
 {
     ARG_UNUSED(p_user_data);
+    const uint32_t start = perf_rx_capture_now();
 
     // Refresh interrupt status before querying pending/ready flags.
     uart_irq_update(p_dev);
 
-    // UART Interrupt is pending
     while (uart_irq_is_pending(p_dev)) {
-        // if UART Interrupt Receive Ready
-        if (uart_irq_rx_ready(p_dev)) {
+        const int rx_ready = uart_irq_rx_ready(p_dev);
+        if (rx_ready) {
             uint8_t byte;
-            // UART FIFO Read
             while (uart_fifo_read(p_dev, &byte, 1) == 1) {
+                const uint32_t stored_cycles = perf_rx_capture_now();
                 // Keep draining the hardware FIFO during recovery, but discard new bytes.
                 // Drain recovery requires the buffer to contain only bytes received before the first loss.
-                if (atomic_get(&rx_overflow) != 0) {
+                const atomic_val_t overflow = atomic_get(&rx_overflow);
+                if (overflow != 0) {
                     atomic_inc(&rx_dropped_bytes);
                     continue;
                 }
 
-                if (!ring_push(&rx_ring, byte)) {
+                const uint8_t slot = rx_ring.head;
+                const bool byte_stored = ring_push(&rx_ring, byte);
+                if (byte_stored) {
+                    perf_rx_capture_store_byte(slot, stored_cycles);
+                }
+                if (!byte_stored) {
                     atomic_inc(&ring_overflow_events);
                     atomic_inc(&rx_dropped_bytes);
                     // Drop the byte that could not be stored and mark recovery as required.
@@ -129,6 +149,7 @@ static void uart_callback(const struct device *p_dev, void *p_user_data)
             }
         }
     }
+    perf_rx_capture_isr(start, perf_rx_capture_now());
 }
 
 static void uart_rx_thread(void *p_arg1, void *p_arg2, void *p_arg3)
@@ -147,13 +168,15 @@ static void uart_rx_thread(void *p_arg1, void *p_arg2, void *p_arg3)
         k_sem_take(&rx_sem, K_MSEC(50));
 
         while (1) {
-            uint8_t byte;
+            perf_rx_capture_collect_isr();
+            struct rx_byte_sample sample;
 
             // Protect the overflow check and single-byte ring pop from the UART ISR.
             // Parsing and queue submission run after interrupts are restored.
             const unsigned int key = irq_lock();
 
-            if (atomic_get(&rx_overflow) != 0) {
+            const atomic_val_t overflow = atomic_get(&rx_overflow);
+            if (overflow != 0) {
                 // Allow interrupts during parsing, queue submission, and logging in drain recovery.
                 // The flag remains set, so the ISR still cannot write to the ring buffer.
                 irq_unlock(key);
@@ -163,7 +186,7 @@ static void uart_rx_thread(void *p_arg1, void *p_arg2, void *p_arg3)
                 struct uart_rx_stats stats;
                 uart_rx_get_stats(&stats);
                 // Cumulative values are individually atomic, not one snapshot.
-                LOG_WRN("RX overflow: recovery completed, events=%u, ISR dropped=%u bytes, recovery discarded=%u bytes",
+                LOG_WRN("RX overflow: recovery=completed events=%u isr_dropped_bytes=%u recovery_discarded_bytes=%u",
                         (unsigned int)stats.ring_overflow_events,
                         (unsigned int)stats.rx_dropped_bytes,
                         (unsigned int)stats.recovery_discarded_bytes);
@@ -171,14 +194,16 @@ static void uart_rx_thread(void *p_arg1, void *p_arg2, void *p_arg3)
                 break;
             }
 
-            if (!ring_pop(&rx_ring, &byte)) {
+            const bool byte_available = rx_pop_byte(&sample);
+            if (!byte_available) {
                 irq_unlock(key);
                 break;
             }
 
             irq_unlock(key);
 
-            rx_frame_processor_feed(byte);
+            perf_rx_capture_collect_byte(sample.stored_cycles);
+            rx_frame_processor_feed(sample.byte);
         }
 
         rx_frame_processor_handle_timeout(k_uptime_get());
@@ -193,19 +218,20 @@ static void rx_recover_discard_all(void)
 
 static void rx_recover_drain_buffer(void)
 {
-    uint8_t byte;
+    struct rx_byte_sample sample;
 
     // While overflow is set, the ISR does not store bytes; only this thread accesses the buffer.
     // Preserve parser state to complete frames using bytes received before the loss.
     // New bytes arriving during processing are dropped by the ISR; recovery is not lossless.
-    while (ring_pop(&rx_ring, &byte)) {
-        rx_frame_processor_feed(byte);
+    while (rx_pop_byte(&sample)) {
+        perf_rx_capture_collect_byte(sample.stored_cycles);
+        rx_frame_processor_feed(sample.byte);
     }
 
     // Discard any incomplete frame remaining after the buffer has been drained.
     rx_finish_recovery();
-
 }
+
 static void rx_recover_overflow(void)
 {
     // Call from the RX thread with interrupts enabled and the overflow flag set.
@@ -225,18 +251,20 @@ static void rx_recover_overflow(void)
 
 static void rx_finish_recovery(void)
 {
-    // Protect only the short recovery cleanup; do not log or run tracking here.
+    // Only the RX thread owns parser state; overflow keeps ISR stores disabled.
+    rx_frame_processor_reset();
+    // Protect only shared ring indices and overflow state.
     const unsigned int key = irq_lock();
 
     // Count unread bytes before clearing the ring.
     // Drain recovery normally leaves no unread bytes.
-    const uint32_t discarded_bytes = (rx_ring.head + RING_BUFFER_SIZE - rx_ring.tail) % RING_BUFFER_SIZE;
-    atomic_add(&recovery_discarded_bytes, discarded_bytes);
+    // At most 255 buffered bytes fit in both uint32_t and atomic_val_t.
+    const uint32_t discarded_bytes = (uint32_t)((rx_ring.head + RING_BUFFER_SIZE - rx_ring.tail) % RING_BUFFER_SIZE);
+    atomic_add(&recovery_discarded_bytes, (atomic_val_t)discarded_bytes);
 
     // Clear the software buffer and partial frame, then resume searching for PROTOCOL_STX.
     // This does not flush the hardware FIFO or guarantee alignment with the next frame.
     ring_init(&rx_ring);
-    rx_frame_processor_reset();
 
     // Allow the ISR to store bytes only after all recovery state has been reset.
     atomic_clear(&rx_overflow);

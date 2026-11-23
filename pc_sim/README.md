@@ -71,6 +71,8 @@ python -m pytest
 
 ## 시나리오 실행
 
+Python 코드 작성 규칙은 [Python 코딩 스탠다드](../docs/python-coding-standard.md)를 참고합니다.
+
 ```bash
 # 보드 없이 단일 표적 측정 출력 (실시간 대기 없음)
 python -m pc_sim.run_sim --duration 1 --noise 0 --azimuth-noise 0
@@ -83,6 +85,12 @@ python -m pc_sim.run_sim --scenario two_crossing --clutter 0.5 --duration 1
 
 # 미탐지 모델: 각 표적을 스캔마다 80% 확률로 탐지
 python -m pc_sim.run_sim --pd 0.8 --duration 1
+
+# 일정 선회: TAS 200 m/s, 오른쪽 뱅크 30도, 동쪽으로 출발 (보드 없이 출력)
+python -m pc_sim.run_sim --scenario single_turn --duration 1 --noise 0 --azimuth-noise 0
+
+# 직진 10초 → 오른쪽 90도 선회 → 직진 10초 (약 75.49초에서 자동 종료)
+python -m pc_sim.run_sim --scenario straight_turn_straight --duration 80 --noise 0 --azimuth-noise 0
 ```
 
 - `--port` 생략은 출력 전용이며, 보드 동작을 모사하는 mock 추적기가 아닙니다.
@@ -97,6 +105,21 @@ python -m pc_sim.run_sim --pd 0.8 --duration 1
 - 모델의 앙각·도플러는 PC 내부 물리량이며 현재 10바이트 payload에는 없습니다.
 - 기본 시나리오는 `single_approach`, 탐지확률 1, 클러터 0입니다.
   `--noise`는 거리 표준편차(m), `--azimuth-noise`는 방위각 표준편차(rad)입니다.
+- `single_turn`은 바람 없음·고도 일정·TAS 일정인 협조선회입니다. 초기 위치는
+  동쪽 0 m, 북쪽 1000 m이고 선회율은 `g * tan(bank) / TAS`로 계산합니다.
+  `targets.scenario_single_turn(bank_deg=30.0, tas_mps=200.0)`의 함수 인자로
+  조건을 바꿀 수 있습니다. CLI에서는 기본 조건을 사용하며 bank/TAS 옵션은 없습니다.
+  양수 뱅크각은 시계방향입니다. 추력·항력·진입/종료 구간은 모델링하지 않습니다.
+  이 시나리오는 `run_sim`에 연결되며 GUI와 `evaluate`의 시나리오는 별도입니다.
+- `straight_turn_straight`는 동일한 TAS·뱅크각으로 직진 10초, 오른쪽 90도 선회
+  약 55.49초, 직진 10초를 수행합니다. `MotionSegment`에 구간 시간·선회율을,
+  `SegmentedScenario`에 현재 구간·구간 내 경과 시간을 저장합니다.
+  한 `dt`가 경계를 넘으면 운동 계산만 나누며 측정 간격은 유지합니다.
+  경계 반올림에는 1 ns 허용오차를 사용합니다. 선회율은 경계에서 즉시 바뀌며
+  기체의 roll-in/roll-out을 모사하지 않습니다.
+- 구간 시나리오는 `--duration`과 시나리오 종료 시각 중 이른 시점에 종료합니다.
+  기본 `--duration 60`은 이 시나리오를 중간에 끝내므로 전체 실행에는 80초를 지정합니다.
+  측정은 종료 시각 미만의 기존 주기에서만 생성하며, 끝점 측정을 따로 추가하지 않습니다.
 - 이 두 송신기는 이진 응답을 수집하지 않습니다. TRACK 수집·RMSE에는 아래 평가 CLI를 사용합니다.
 - 두 연속 송신기 모두 실행마다 `7e 01 01 00 c8 9d` INIT을 한 번 보낸 뒤 timestamp를 0부터 시작합니다.
   출력 전용 모드에도 INIT이 먼저 표시됩니다. INIT은 측정 개수(`--count`)에 포함되지 않습니다.
@@ -334,3 +357,5 @@ python -m pc_sim.spike_sweep --port PORT --range-offsets 500 --angle-offsets-deg
 - 응답 대응·순번·시각 검사, 주입 전 정상 추적, 명백한 안/밖 첫 게이트 판정, 회복 기준을 만족해야 해당 실행이 통과합니다. 회복 실패는 기록 후 다음 조건을 계속 시험하고 최종 종료 코드는1입니다. UART 오류는 부분 기록을 보존하고 중단합니다.
 
 **준비·검증 상태:** 실제 C handler/필터의48개 조합을 host에서 실행했고 모사 UART로 주입·기록·재평가·실패 보존을 검증했습니다. 기본49회 STM32 시험도 모두 통과했습니다. [센서 시간축 복귀·경계 판정·원시 기록](../docs/hardware-test-2026-11-19-noise-spike.md). 기본 잡음100회도 별도로 기록했으며 누락100회는 이번 범위에 포함하지 않았습니다.
+
+콘솔 본문은 `항목: key=value` 형식이며 단위는 키에 표시합니다. GUI 콘솔은 원문을 표시하고, 보드 추정값·STATUS는 이진 프레임을 해석하므로 로그 문자열에 의존하지 않습니다. [로그 형식](../docs/logging.md)을 참고하세요.

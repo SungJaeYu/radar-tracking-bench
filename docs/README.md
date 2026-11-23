@@ -1,5 +1,11 @@
 # 문서 안내
 
+최신 상태: [v1.1.0 완료 범위·검증 기록](release-v1.1.0.md). STM32 판정은 관측 부하의 보드·전송·증거 검사이며 PC 미송신·RTT와 분리한다.
+
+[송신 시한 경과 sleep 수정·최종60초 검증](test-results/host-pacing-fix-2026-11-23/README.md)과 [30분 실보드 기록](test-results/host-input-retest-2026-11-23/README.md)을 함께 제공한다. 과거 결과는 당시 판정 그대로 보존한다.
+
+[GUI 무음 영상·분석](analysis/2026-11-23/README.md)은 저장된 실보드 세션의 재생, 그래프와 수치 표를 포함한다. [GitHub 작업 목록](github-project.md)에서 v1.1.1 PC 시험기 개선과 3D 확장을 추적한다.
+
 [English overview](../README.md) · [Architecture in English](../EXPLAINER.en.md)
 
 [한국어 프로젝트 소개](../README.ko.md)에서 전체 구성을 확인한 뒤, 목적에 맞는 문서를 선택하세요.
@@ -25,13 +31,18 @@
 |---|---|
 | UART 규격·요구사항·구현·테스트 연결 | [요구사항 추적표](requirements-traceability.md) |
 | 자동 테스트 실행과 검증 범위 | [테스트 목록](test-cases.md) |
+| ISR·인터럽트 차단 구간 점검 | [인터럽트 경로 점검](interrupt-context-audit.md) |
+| STM32 판정 기준과 미검증 영역 | [성능 검증 범위](stm32-performance-coverage.md) |
 | RTT·보드 지연·큐·스택의 측정 방법 | [성능 계측](performance-monitoring.md) |
-| C/Python 작성 규칙·API 계약 | [코딩 스탠다드](coding-standard.md) |
+| C/Python 작성 규칙·API 계약 | [펌웨어 코딩 스탠다드](coding-standard.md) · [Python 코딩 스탠다드](python-coding-standard.md) |
 
 ## 실보드 검증 결과
 
+현재 기준·수정 파일·실패 분석은 [종합 검토](review-2026-11-23.md)를 먼저 확인하세요.
+
 | 확인할 내용 | 기록 |
 |---|---|
+| v1.1.0 선회·영어 GUI·전체 자동 회귀 | [v1.1.0 검증](hardware-test-2026-11-23-v1.1.0.md) |
 | 전체 검증 현황과 날짜별 이력 | [검증 기록](verification-history.md) |
 | 정상·잡음·누락 추적 평가, GUI·CSV | [고정 시나리오 평가](hardware-test-2026-11-18-evaluation.md) |
 | 잡음100회·이상치49회, 짧은 RTT 회귀 | [확장 추적 평가](hardware-test-2026-11-19-noise-spike.md) |
@@ -50,3 +61,5 @@
 - [코딩 규칙 적용 점검](coding-standard-audit.md) · [주석 점검](comment-audit.md)
 
 현재 후속 작업 후보는 [로드맵](roadmap.md#다음-구현-순서)에서 관리합니다.
+
+- [2026-11-22 로그 형식 통일·GUI/PC·실보드 회귀](hardware-test-2026-11-22-logging.md)

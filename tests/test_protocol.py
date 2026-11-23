@@ -1,4 +1,4 @@
-"""현재 펌웨어 CRC-16 규격과 시나리오 측정 변환 검증."""
+"""Validate firmware CRC-16 framing and scenario measurement conversion."""
 import math
 import struct
 

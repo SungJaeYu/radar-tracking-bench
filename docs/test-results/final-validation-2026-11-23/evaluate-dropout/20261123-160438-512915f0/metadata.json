@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "mode": "board",
+  "settings": {
+    "initial_range_m": 1000.0,
+    "range_rate_mps": -5,
+    "azimuth_deg": 15,
+    "range_noise_std_m": 8,
+    "sample_rate_hz": 10,
+    "duration_s": 12.0,
+    "seed": 42,
+    "azimuth_noise_std_deg": 0
+  },
+  "started_utc": "2026-11-23T07:04:38.326595+00:00",
+  "closed": true,
+  "scenario": "dropout",
+  "dropout_sensor_interval_ms": [
+    4000,
+    5500
+  ]
+}

@@ -9,6 +9,7 @@
 #include <zephyr/kernel.h>
 
 #include "diagnostics/perf_monitor.h"
+#include "diagnostics/perf_reporter.h"
 
 static struct k_thread threads[3] = {{0}, {1}, {2}};
 k_tid_t const uart_rx_tid = &threads[0];
@@ -54,10 +55,10 @@ static void reset_test(void)
 static void test_summary_and_stack_queries(void)
 {
     reset_test();
-    perf_monitor_log_summary();
+    perf_reporter_log_summary();
     assert(strstr(output, "PERF queue_wait: n=0") != NULL);
-    assert(strstr(output, "PERF stack handler: unused=1200 min_unused=1200") != NULL);
-    assert(strstr(output, "PERF uptime_ms=5000") != NULL);
+    assert(strstr(output, "PERF stack handler: unused_bytes=1200 min_unused_bytes=1200") != NULL);
+    assert(strstr(output, "PERF summary: uptime_ms=5000") != NULL);
     // Exactly 100 samples make nearest-rank percentile boundaries explicit.
     for (unsigned int i = 1; i <= 100; ++i) {
         const int64_t delay = i <= 50 ? 1 : (i <= 95 ? 20 : 40);
@@ -68,22 +69,55 @@ static void test_summary_and_stack_queries(void)
     stack_unused[1] = 800;
     stack_result[2] = -ENOTSUP;
     reset_test();
-    perf_monitor_log_summary();
+    perf_reporter_log_summary();
     assert(strstr(output, "PERF queue_wait: n=100") != NULL);
-    assert(strstr(output, "p50_bin=1 p95_bin=20 p99_bin=21 max_ms=40 over20=5") != NULL);
-    assert(strstr(output, "PERF stack handler: unused=800 min_unused=800") != NULL);
-    assert(strstr(output, "PERF stack tx: unavailable=-") != NULL);
-    assert(strstr(output, "PERF stack tx: unused=") == NULL);
+    assert(strstr(output, "p50_bin=1 p95_bin=20 p99_bin=21 max_ms=40 over_budget_count=5") != NULL);
+    assert(strstr(output, "PERF stack handler: unused_bytes=800 min_unused_bytes=800") != NULL);
+    assert(strstr(output, "PERF stack tx: status=unavailable error=-") != NULL);
+    assert(strstr(output, "PERF stack tx: unused_bytes=") == NULL);
     stack_unused[1] = 1000;
     stack_result[2] = 0;
     reset_test();
-    perf_monitor_log_summary();
-    assert(strstr(output, "PERF stack handler: unused=1000 min_unused=800") != NULL);
-    assert(strstr(output, "PERF stack tx: unused=600 min_unused=600") != NULL);
+    perf_reporter_log_summary();
+    assert(strstr(output, "PERF stack handler: unused_bytes=1000 min_unused_bytes=800") != NULL);
+    assert(strstr(output, "PERF stack tx: unused_bytes=600 min_unused_bytes=600") != NULL);
+}
+
+static void test_execution_summary(void)
+{
+    reset_test();
+    perf_reporter_log_summary();
+    assert(strstr(output, "PERF estimator_predict: n=0 status=no_samples") != NULL);
+    assert(strstr(output, "PERF estimator_correct: n=0 status=no_samples") != NULL);
+
+    perf_monitor_record_rx_isr(9);
+    perf_monitor_record_rx_parser(12);
+    perf_monitor_record_rx_byte(0, 20);
+    perf_monitor_record_tx_timing(1, 3, 5, true, 0);
+    perf_monitor_record_predict(0);
+    perf_monitor_record_predict(9);
+    perf_monitor_record_correct(12);
+
+    reset_test();
+    perf_reporter_log_summary();
+    assert(strstr(output, "PERF rx_byte_wait: n=1 total_ms=20") != NULL);
+    assert(strstr(output, "PERF tx_queue_wait: n=1 total_ms=2") != NULL);
+    assert(strstr(output, "PERF tx_poll: n=1 total_ms=2") != NULL);
+    assert(strstr(output, "PERF parsed_to_tx_poll: n=1 total_ms=5") != NULL);
+#if defined(CONFIG_TIMING_FUNCTIONS)
+    assert(strstr(output, "PERF rx_isr: n=1 min_ns=90 mean_ns=90 max_ns=90") != NULL);
+    assert(strstr(output, "PERF rx_parser: n=1 min_ns=120 mean_ns=120 max_ns=120") != NULL);
+    assert(strstr(output, "PERF estimator_predict: n=2 min_ns=0 mean_ns=40 max_ns=90") != NULL);
+    assert(strstr(output, "PERF estimator_correct: n=1 min_ns=120 mean_ns=120 max_ns=120") != NULL);
+#else
+    assert(strstr(output, "PERF estimator_predict: n=2 min_cycles=0 mean_cycles=4 max_cycles=9") != NULL);
+    assert(strstr(output, "PERF estimator_correct: n=1 min_cycles=12 mean_cycles=12 max_cycles=12") != NULL);
+#endif
 }
 
 static const struct test_case cases[] = {
     TEST_CASE(test_summary_and_stack_queries),
+    TEST_CASE(test_execution_summary),
 };
 
 int main(int argc, char **p_argv)

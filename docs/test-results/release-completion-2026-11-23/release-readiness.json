@@ -1,0 +1,16 @@
+{
+  "release_complete": false,
+  "acceptance_revision": "2026-11-23-host-input-v3",
+  "source_files_checked": 137,
+  "changed_sources": [],
+  "product_or_acceptance_changes": false,
+  "preflight_60s_board_qualification": "passed",
+  "preflight_60s_requested_profile": "inconclusive",
+  "preflight_60s_unsent_slots": 5,
+  "new_1800s_run_started": false,
+  "normal_firmware_restored": true,
+  "raw_audit_passed": true,
+  "document_local_links_checked": 46,
+  "git_commit_push_merge_tag_performed": false,
+  "next_step": "Await user choice: reduce current host workload and retest, publish review branch only, or review independent input source."
+}

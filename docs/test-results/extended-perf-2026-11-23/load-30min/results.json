@@ -1,0 +1,387 @@
+{
+  "recording": {
+    "enqueued": 33353,
+    "written": 33353,
+    "capacity": 1024
+  },
+  "failure": "AssertionError(\"Nonzero board error statistics: {'crc_errors': 1, 'length_errors': 0, 'frame_timeouts': 0, 'queue_drops': 0, 'ring_overflow_events': 0, 'rx_dropped_bytes': 0, 'recovery_discarded_bytes': 0, 'stale_measurements': 0}\")",
+  "restore_failure": null,
+  "checks": [
+    {
+      "name": "idle performance summary",
+      "passed": true,
+      "category": "evidence"
+    },
+    {
+      "name": "idle timing has no samples",
+      "passed": true,
+      "category": "board_internal"
+    },
+    {
+      "name": "idle stack queries available",
+      "passed": true,
+      "category": "board_internal"
+    },
+    {
+      "name": "INIT reset report received",
+      "passed": true,
+      "category": "delivery"
+    },
+    {
+      "name": "initial STATUS zero",
+      "passed": true,
+      "category": "delivery"
+    },
+    {
+      "name": "restored normal STATUS zero",
+      "passed": true,
+      "category": "evidence"
+    }
+  ],
+  "run_completed": false,
+  "recording_complete": false,
+  "duration_s": 1800,
+  "sent_wire_bytes": 118806,
+  "console_complete": true,
+  "console_incomplete_summaries": 0,
+  "console_boots": 1,
+  "console_faults": [],
+  "verdicts": {
+    "board_internal": {
+      "status": "inconclusive",
+      "reasons": [
+        "run aborted or final assessment incomplete",
+        "required guard absent: measurement count reconciles",
+        "required guard absent: no submit failures or invalid times",
+        "required guard absent: invalid measurement is counted without submission",
+        "required guard absent: processing successful sample count",
+        "required guard absent: rx_to_submit successful sample count",
+        "required guard absent: queue wait count includes invalid input",
+        "required guard absent: 20ms board latency budget",
+        "required guard absent: no queue rejection",
+        "required guard absent: no TX encoder failures",
+        "required guard absent: all sampled stacks have headroom",
+        "queue_wait: positive sample count missing",
+        "processing: positive sample count missing",
+        "rx_to_submit: positive sample count missing",
+        "rx_byte_wait: positive sample count missing",
+        "tx_queue_wait: positive sample count missing",
+        "tx_poll: positive sample count missing",
+        "parsed_to_tx_poll: positive sample count missing",
+        "rx_isr: positive sample count missing",
+        "rx_parser: positive sample count missing",
+        "estimator_predict: positive sample count missing",
+        "estimator_correct: positive sample count missing",
+        "tx_queue_wait: reconciliation count missing",
+        "tx_poll: reconciliation count missing",
+        "parsed_to_tx_poll: reconciliation count missing"
+      ]
+    },
+    "delivery": {
+      "status": "inconclusive",
+      "reasons": [
+        "run aborted or final assessment incomplete",
+        "required guard absent: all measurements matched once",
+        "required guard absent: all STATUS requests answered",
+        "required guard absent: one post-load timeout report",
+        "required guard absent: RX accepted frame count",
+        "required guard absent: TX queued and polling counts match received frames"
+      ]
+    },
+    "evidence": {
+      "status": "inconclusive",
+      "reasons": [
+        "run aborted or final assessment incomplete",
+        "required guard absent: single firmware boot",
+        "required guard absent: performance summaries remain continuous",
+        "recording did not finish and drain completely",
+        "run failure: AssertionError(\"Nonzero board error statistics: {'crc_errors': 1, 'length_errors': 0, 'frame_timeouts': 0, 'queue_drops': 0, 'ring_overflow_events': 0, 'rx_dropped_bytes': 0, 'recovery_discarded_bytes': 0, 'stale_measurements': 0}\")",
+        "console/performance summaries incomplete"
+      ]
+    },
+    "host_rtt": {
+      "status": "inconclusive",
+      "reasons": [
+        "run aborted or final assessment incomplete",
+        "RTT samples missing",
+        "p99: finite RTT observation missing",
+        "max: finite RTT observation missing"
+      ]
+    },
+    "requested_load": {
+      "status": "inconclusive",
+      "reasons": [
+        "run aborted or final assessment incomplete",
+        "full requested load duration not observed"
+      ]
+    }
+  },
+  "board_qualification": {
+    "status": "inconclusive",
+    "reasons": [
+      "run aborted or final assessment incomplete",
+      "required guard absent: measurement count reconciles",
+      "required guard absent: no submit failures or invalid times",
+      "required guard absent: invalid measurement is counted without submission",
+      "required guard absent: processing successful sample count",
+      "required guard absent: rx_to_submit successful sample count",
+      "required guard absent: queue wait count includes invalid input",
+      "required guard absent: 20ms board latency budget",
+      "required guard absent: no queue rejection",
+      "required guard absent: no TX encoder failures",
+      "required guard absent: all sampled stacks have headroom",
+      "queue_wait: positive sample count missing",
+      "processing: positive sample count missing",
+      "rx_to_submit: positive sample count missing",
+      "rx_byte_wait: positive sample count missing",
+      "tx_queue_wait: positive sample count missing",
+      "tx_poll: positive sample count missing",
+      "parsed_to_tx_poll: positive sample count missing",
+      "rx_isr: positive sample count missing",
+      "rx_parser: positive sample count missing",
+      "estimator_predict: positive sample count missing",
+      "estimator_correct: positive sample count missing",
+      "tx_queue_wait: reconciliation count missing",
+      "tx_poll: reconciliation count missing",
+      "parsed_to_tx_poll: reconciliation count missing",
+      "run aborted or final assessment incomplete",
+      "required guard absent: all measurements matched once",
+      "required guard absent: all STATUS requests answered",
+      "required guard absent: one post-load timeout report",
+      "required guard absent: RX accepted frame count",
+      "required guard absent: TX queued and polling counts match received frames",
+      "run aborted or final assessment incomplete",
+      "required guard absent: single firmware boot",
+      "required guard absent: performance summaries remain continuous",
+      "recording did not finish and drain completely",
+      "run failure: AssertionError(\"Nonzero board error statistics: {'crc_errors': 1, 'length_errors': 0, 'frame_timeouts': 0, 'queue_drops': 0, 'ring_overflow_events': 0, 'rx_dropped_bytes': 0, 'recovery_discarded_bytes': 0, 'stale_measurements': 0}\")",
+      "console/performance summaries incomplete"
+    ]
+  },
+  "requested_profile_qualification": {
+    "status": "inconclusive",
+    "reasons": [
+      "run aborted or final assessment incomplete",
+      "required guard absent: measurement count reconciles",
+      "required guard absent: no submit failures or invalid times",
+      "required guard absent: invalid measurement is counted without submission",
+      "required guard absent: processing successful sample count",
+      "required guard absent: rx_to_submit successful sample count",
+      "required guard absent: queue wait count includes invalid input",
+      "required guard absent: 20ms board latency budget",
+      "required guard absent: no queue rejection",
+      "required guard absent: no TX encoder failures",
+      "required guard absent: all sampled stacks have headroom",
+      "queue_wait: positive sample count missing",
+      "processing: positive sample count missing",
+      "rx_to_submit: positive sample count missing",
+      "rx_byte_wait: positive sample count missing",
+      "tx_queue_wait: positive sample count missing",
+      "tx_poll: positive sample count missing",
+      "parsed_to_tx_poll: positive sample count missing",
+      "rx_isr: positive sample count missing",
+      "rx_parser: positive sample count missing",
+      "estimator_predict: positive sample count missing",
+      "estimator_correct: positive sample count missing",
+      "tx_queue_wait: reconciliation count missing",
+      "tx_poll: reconciliation count missing",
+      "parsed_to_tx_poll: reconciliation count missing",
+      "run aborted or final assessment incomplete",
+      "required guard absent: all measurements matched once",
+      "required guard absent: all STATUS requests answered",
+      "required guard absent: one post-load timeout report",
+      "required guard absent: RX accepted frame count",
+      "required guard absent: TX queued and polling counts match received frames",
+      "run aborted or final assessment incomplete",
+      "required guard absent: single firmware boot",
+      "required guard absent: performance summaries remain continuous",
+      "recording did not finish and drain completely",
+      "run failure: AssertionError(\"Nonzero board error statistics: {'crc_errors': 1, 'length_errors': 0, 'frame_timeouts': 0, 'queue_drops': 0, 'ring_overflow_events': 0, 'rx_dropped_bytes': 0, 'recovery_discarded_bytes': 0, 'stale_measurements': 0}\")",
+      "console/performance summaries incomplete",
+      "run aborted or final assessment incomplete",
+      "full requested load duration not observed"
+    ]
+  },
+  "passed": false,
+  "full_coverage": false,
+  "coverage_gaps": [
+    "physical RX arrival to ISR entry is unmeasured",
+    "physical TX last stop bit is unmeasured",
+    "true WCET and execution-time acceptance limits are unestablished",
+    "physical CPU utilization and accurate ISR attribution are unmeasured",
+    "hardware fault campaigns are not performed",
+    "sampled stack headroom is not a stack safety certification"
+  ],
+  "cpu_scheduler_windows": [
+    {
+      "uptime_ms": 10002,
+      "interval_ms": 5001,
+      "non_idle_percent": 18.36448319481424
+    },
+    {
+      "uptime_ms": 15004,
+      "interval_ms": 5002,
+      "non_idle_percent": 23.47912405751861
+    },
+    {
+      "uptime_ms": 20005,
+      "interval_ms": 5001,
+      "non_idle_percent": 23.49771651585839
+    },
+    {
+      "uptime_ms": 25007,
+      "interval_ms": 5002,
+      "non_idle_percent": 23.26703934579214
+    },
+    {
+      "uptime_ms": 30008,
+      "interval_ms": 5001,
+      "non_idle_percent": 23.499679495634716
+    },
+    {
+      "uptime_ms": 35009,
+      "interval_ms": 5001,
+      "non_idle_percent": 23.427234508233962
+    },
+    {
+      "uptime_ms": 40011,
+      "interval_ms": 5002,
+      "non_idle_percent": 23.567069612629837
+    },
+    {
+      "uptime_ms": 45012,
+      "interval_ms": 5001,
+      "non_idle_percent": 23.51456345614325
+    },
+    {
+      "uptime_ms": 50014,
+      "interval_ms": 5002,
+      "non_idle_percent": 22.987733513514627
+    },
+    {
+      "uptime_ms": 55015,
+      "interval_ms": 5001,
+      "non_idle_percent": 22.6527363503472
+    },
+    {
+      "uptime_ms": 60017,
+      "interval_ms": 5002,
+      "non_idle_percent": 22.910723974909086
+    },
+    {
+      "uptime_ms": 65018,
+      "interval_ms": 5001,
+      "non_idle_percent": 23.453105856042043
+    },
+    {
+      "uptime_ms": 70019,
+      "interval_ms": 5001,
+      "non_idle_percent": 23.46313219585001
+    },
+    {
+      "uptime_ms": 75021,
+      "interval_ms": 5002,
+      "non_idle_percent": 23.536756892236706
+    },
+    {
+      "uptime_ms": 80022,
+      "interval_ms": 5001,
+      "non_idle_percent": 23.433998961805106
+    },
+    {
+      "uptime_ms": 85024,
+      "interval_ms": 5002,
+      "non_idle_percent": 23.549345239667893
+    },
+    {
+      "uptime_ms": 90025,
+      "interval_ms": 5001,
+      "non_idle_percent": 23.53509671601175
+    },
+    {
+      "uptime_ms": 95026,
+      "interval_ms": 5001,
+      "non_idle_percent": 22.746226647201635
+    },
+    {
+      "uptime_ms": 100028,
+      "interval_ms": 5002,
+      "non_idle_percent": 23.46519099686984
+    },
+    {
+      "uptime_ms": 105029,
+      "interval_ms": 5001,
+      "non_idle_percent": 23.513662345675915
+    },
+    {
+      "uptime_ms": 110031,
+      "interval_ms": 5002,
+      "non_idle_percent": 23.543497452931483
+    },
+    {
+      "uptime_ms": 115032,
+      "interval_ms": 5001,
+      "non_idle_percent": 23.54192829105362
+    },
+    {
+      "uptime_ms": 120034,
+      "interval_ms": 5002,
+      "non_idle_percent": 23.549106593947972
+    },
+    {
+      "uptime_ms": 125035,
+      "interval_ms": 5001,
+      "non_idle_percent": 23.612645666568074
+    },
+    {
+      "uptime_ms": 130036,
+      "interval_ms": 5001,
+      "non_idle_percent": 23.54452511996314
+    },
+    {
+      "uptime_ms": 135038,
+      "interval_ms": 5002,
+      "non_idle_percent": 22.83991439316933
+    },
+    {
+      "uptime_ms": 140039,
+      "interval_ms": 5001,
+      "non_idle_percent": 23.234874141612877
+    },
+    {
+      "uptime_ms": 145041,
+      "interval_ms": 5002,
+      "non_idle_percent": 22.13563905720271
+    },
+    {
+      "uptime_ms": 150042,
+      "interval_ms": 5001,
+      "non_idle_percent": 23.506135876275636
+    },
+    {
+      "uptime_ms": 155043,
+      "interval_ms": 5001,
+      "non_idle_percent": 23.31616171679147
+    },
+    {
+      "uptime_ms": 160045,
+      "interval_ms": 5002,
+      "non_idle_percent": 23.39472802712959
+    },
+    {
+      "uptime_ms": 165046,
+      "interval_ms": 5001,
+      "non_idle_percent": 23.157397749117305
+    }
+  ],
+  "cpu_scheduler_scope": "non-idle runtime accounting; not physical CPU/ISR utilization or WCET",
+  "cpu_scheduler_non_idle_limit_percent": 80,
+  "sampled_stack_minimum_bytes": {
+    "rx": 256,
+    "tx": 256,
+    "handler": 512,
+    "main": 256
+  },
+  "execution_timing_scope": "observed min/mean/max only; no execution WCET limits",
+  "stack_scope": "sampled 25% reserve only; no stack safety certification"
+}

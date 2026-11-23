@@ -1,0 +1,176 @@
+{
+  "source": "docs/test-results/release-completion-2026-11-23/preflight-60s",
+  "note": "Apparent lateness is relative to first pre-write timestamp, not the internal deadline origin. Historical records lack per-operation entry/exit timestamps.",
+  "contexts": [
+    {
+      "gap_before_sensor_ms": 1240,
+      "samples": [
+        {
+          "sensor_ms": 1160,
+          "host_elapsed_ms": 1160.0621660472825,
+          "apparent_lateness_ms": 0.062166047282516956,
+          "rtt_ms": 6.626333924941719
+        },
+        {
+          "sensor_ms": 1180,
+          "host_elapsed_ms": 1179.9906250089407,
+          "apparent_lateness_ms": -0.009374991059303284,
+          "rtt_ms": 5.596750066615641
+        },
+        {
+          "sensor_ms": 1200,
+          "host_elapsed_ms": 1201.1590410256758,
+          "apparent_lateness_ms": 1.1590410256758332,
+          "rtt_ms": 5.723166977986693
+        },
+        {
+          "sensor_ms": 1240,
+          "host_elapsed_ms": 1244.5852080127224,
+          "apparent_lateness_ms": 4.585208012722433,
+          "rtt_ms": 9.284375002607703
+        },
+        {
+          "sensor_ms": 1260,
+          "host_elapsed_ms": 1271.2666250299662,
+          "apparent_lateness_ms": 11.266625029966235,
+          "rtt_ms": 8.264582953415811
+        },
+        {
+          "sensor_ms": 1280,
+          "host_elapsed_ms": 1279.9467500299215,
+          "apparent_lateness_ms": -0.05324997007846832,
+          "rtt_ms": 6.7480000434443355
+        }
+      ]
+    },
+    {
+      "gap_before_sensor_ms": 6060,
+      "samples": [
+        {
+          "sensor_ms": 5980,
+          "host_elapsed_ms": 5982.168999966234,
+          "apparent_lateness_ms": 2.1689999662339687,
+          "rtt_ms": 5.818500067107379
+        },
+        {
+          "sensor_ms": 6000,
+          "host_elapsed_ms": 5999.999166000634,
+          "apparent_lateness_ms": -0.000833999365568161,
+          "rtt_ms": 9.174250066280365
+        },
+        {
+          "sensor_ms": 6020,
+          "host_elapsed_ms": 6019.925583037548,
+          "apparent_lateness_ms": -0.07441696245223284,
+          "rtt_ms": 5.954707972705364
+        },
+        {
+          "sensor_ms": 6060,
+          "host_elapsed_ms": 6077.805625041947,
+          "apparent_lateness_ms": 17.80562504194677,
+          "rtt_ms": 12.199749937281013
+        },
+        {
+          "sensor_ms": 6080,
+          "host_elapsed_ms": 6080.629208008759,
+          "apparent_lateness_ms": 0.6292080087587237,
+          "rtt_ms": 9.376166970469058
+        },
+        {
+          "sensor_ms": 6100,
+          "host_elapsed_ms": 6100.356500013731,
+          "apparent_lateness_ms": 0.35650001373142004,
+          "rtt_ms": 5.480124964378774
+        }
+      ]
+    },
+    {
+      "gap_before_sensor_ms": 15920,
+      "samples": [
+        {
+          "sensor_ms": 15820,
+          "host_elapsed_ms": 15820.040249964222,
+          "apparent_lateness_ms": 0.040249964222311974,
+          "rtt_ms": 6.5026660449802876
+        },
+        {
+          "sensor_ms": 15840,
+          "host_elapsed_ms": 15839.971625013277,
+          "apparent_lateness_ms": -0.028374986723065376,
+          "rtt_ms": 6.36854104232043
+        },
+        {
+          "sensor_ms": 15860,
+          "host_elapsed_ms": 15883.24004097376,
+          "apparent_lateness_ms": 23.240040973760188,
+          "rtt_ms": 53.179167094640434
+        },
+        {
+          "sensor_ms": 15920,
+          "host_elapsed_ms": 15936.335999984294,
+          "apparent_lateness_ms": 16.335999984294176,
+          "rtt_ms": 19.34695802628994
+        },
+        {
+          "sensor_ms": 15940,
+          "host_elapsed_ms": 15939.964625053108,
+          "apparent_lateness_ms": -0.035374946892261505,
+          "rtt_ms": 15.718332957476377
+        },
+        {
+          "sensor_ms": 15960,
+          "host_elapsed_ms": 15960.06908302661,
+          "apparent_lateness_ms": 0.06908302661031485,
+          "rtt_ms": 6.612166995182633
+        }
+      ]
+    },
+    {
+      "gap_before_sensor_ms": 31580,
+      "samples": [
+        {
+          "sensor_ms": 31500,
+          "host_elapsed_ms": 31500.007707974873,
+          "apparent_lateness_ms": 0.007707974873483181,
+          "rtt_ms": 6.464167032390833
+        },
+        {
+          "sensor_ms": 31520,
+          "host_elapsed_ms": 31520.15862497501,
+          "apparent_lateness_ms": 0.15862497501075268,
+          "rtt_ms": 6.346458103507757
+        },
+        {
+          "sensor_ms": 31540,
+          "host_elapsed_ms": 31544.458374963142,
+          "apparent_lateness_ms": 4.458374963141978,
+          "rtt_ms": 6.409958004951477
+        },
+        {
+          "sensor_ms": 31580,
+          "host_elapsed_ms": 31597.235916065983,
+          "apparent_lateness_ms": 17.235916065983474,
+          "rtt_ms": 10.343250003643334
+        },
+        {
+          "sensor_ms": 31600,
+          "host_elapsed_ms": 31599.902625079267,
+          "apparent_lateness_ms": -0.09737492073327303,
+          "rtt_ms": 7.676540990360081
+        },
+        {
+          "sensor_ms": 31620,
+          "host_elapsed_ms": 31620.049208053388,
+          "apparent_lateness_ms": 0.04920805338770151,
+          "rtt_ms": 6.447791936807334
+        }
+      ]
+    }
+  ],
+  "source_sha256": {
+    "session/samples.csv": "fc42d06c998f5bf764115fc4af79a8fe93d224a9e92f47d19ddbfb4f160366ab",
+    "session/reports.csv": "5c46d22365777ebd358b58f2dba6a4d0c05a719137f94bf8b4ed6151848cd990",
+    "session/wire.csv": "473302c09a8be6247c20214427d257ae0ef0b25c49ee2f5f605407b6e9fb5b59",
+    "results.json": "6bd61070438a5a9538afaf3bdf909534bf624fd61ed7a8c9fd38133e588144e4"
+  }
+}

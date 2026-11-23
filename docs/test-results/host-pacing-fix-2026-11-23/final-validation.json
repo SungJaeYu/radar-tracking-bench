@@ -1,0 +1,54 @@
+{
+  "source_files_verified": 137,
+  "changed_since_final_board": [],
+  "changed_since_30min_board": [
+    "fcc_app/tests/test_perf_monitor/board_check.py",
+    "tests/test_perf_monitor.py"
+  ],
+  "firmware_builds": {
+    "build": {
+      "elf_sha256": "2a1e0d10a51407b587c66236c00d6e3d8b943243ef89ffa5c3acb4486eeccd4c",
+      "matches_full_regression_image": true,
+      "fresh_build_exit_code": 0,
+      "fresh_build_output": "ninja: no work to do."
+    },
+    "build_perf": {
+      "elf_sha256": "16fd8a30666a53fd5c9f4983c043e2c0101bceeca17535a8bec49040203d0bde",
+      "matches_full_regression_image": true,
+      "fresh_build_exit_code": 0,
+      "fresh_build_output": "ninja: no work to do."
+    },
+    "build_debug": {
+      "elf_sha256": "f849e4a5f7034e2f54eb49f9b3d4932b19de2717bb431dd0be4e738c18ae70ce",
+      "matches_full_regression_image": true,
+      "fresh_build_exit_code": null,
+      "fresh_build_output": "Reused prior build; ELF hash matches."
+    },
+    "build_log_stress": {
+      "elf_sha256": "3e0e4a3577143e41cc4bf6a4555e1a20d4367454fd9d6fd37b3d0085dd4bee5c",
+      "matches_full_regression_image": true,
+      "fresh_build_exit_code": null,
+      "fresh_build_output": "Reused prior build; ELF hash matches."
+    },
+    "build_transport_stress": {
+      "elf_sha256": "8f30469990302a31c32964f90d76403bc2fd2c722f573e1c60f1295c657baca9",
+      "matches_full_regression_image": true,
+      "fresh_build_exit_code": null,
+      "fresh_build_output": "Reused prior build; ELF hash matches."
+    }
+  },
+  "python": {
+    "passed": 928,
+    "subtests_passed": 9,
+    "log": "final-python-tests.log"
+  },
+  "c_host": {
+    "ctest_entries_passed": 204,
+    "internal_executions": 224,
+    "log_manifest": "final-c-tests.json"
+  },
+  "board_evidence": "board-60s/results.json",
+  "board_raw_audit": "board-60s/audit.json",
+  "board_reflashed_in_final_documentation_step": false,
+  "release_scope": "Observed STM32 board/delivery/evidence qualification; PC unsent slots and RTT are not release gates. Requested 50Hz profile remains inconclusive."
+}

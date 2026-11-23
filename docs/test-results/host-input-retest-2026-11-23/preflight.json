@@ -1,0 +1,36 @@
+{
+  "started_utc": "2026-11-23T08:04:02.804234+00:00",
+  "branch": "feat/tracking-benchmark",
+  "commit": "20f069fcd03564a420dab090d6d8d45b317cc34d",
+  "tracked_source_changes_since_previous_validation": [
+    "fcc_app/tests/test_perf_monitor/board_check.py",
+    "pc_sim/perf_acceptance.py",
+    "tests/test_perf_acceptance.py",
+    "tests/test_perf_monitor.py"
+  ],
+  "firmware_unchanged": true,
+  "incremental_builds": {
+    "build": "ninja: no work to do.",
+    "build_perf": "ninja: no work to do."
+  },
+  "builds": {
+    "build": {
+      "zephyr.elf": "2a1e0d10a51407b587c66236c00d6e3d8b943243ef89ffa5c3acb4486eeccd4c",
+      "zephyr.hex": "1cb6669cc8780e54b50b471091a25bc56d998b78bfef9a1af6df75d003125e8d",
+      ".config": "0b7a78e59526e4de7093899f9dd3533bc3c06f78142a55fd4fc7a54d8742cd4a"
+    },
+    "build_perf": {
+      "zephyr.elf": "16fd8a30666a53fd5c9f4983c043e2c0101bceeca17535a8bec49040203d0bde",
+      "zephyr.hex": "4aced34fedee46d1d4492fd9de895f83106920f935d442d1c541e25c9f59d1f6",
+      ".config": "0afe8ed31ff45f6ea7b227675a2267ad4873ed7b1d3a2725e3d6f2636793fd2b"
+    }
+  },
+  "data_port": "/dev/cu.usbserial-A5069RR4",
+  "console_port": "/dev/cu.usbmodem11203",
+  "port_owners_before_run": [],
+  "test_plan": [
+    "10s PERF smoke and recovery",
+    "1800s PERF sustained load if smoke board qualification passes"
+  ],
+  "host_rtt_is_acceptance_gate": false
+}

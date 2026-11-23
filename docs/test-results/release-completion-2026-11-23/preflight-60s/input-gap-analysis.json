@@ -1,0 +1,55 @@
+{
+  "events": [
+    {
+      "previous_sensor_ms": 1200,
+      "next_sensor_ms": 1240,
+      "unsent_slots": 1,
+      "host_write_gap_ms": 43.4261669870466
+    },
+    {
+      "previous_sensor_ms": 6020,
+      "next_sensor_ms": 6060,
+      "unsent_slots": 1,
+      "host_write_gap_ms": 57.880042004399
+    },
+    {
+      "previous_sensor_ms": 15860,
+      "next_sensor_ms": 15920,
+      "unsent_slots": 2,
+      "host_write_gap_ms": 53.09595901053399
+    },
+    {
+      "previous_sensor_ms": 31540,
+      "next_sensor_ms": 31580,
+      "unsent_slots": 1,
+      "host_write_gap_ms": 52.7775411028415
+    }
+  ],
+  "total_missing": 5,
+  "max_host_send_gap_ms": 57.880042004399,
+  "rtt_ms": {
+    "count": 2995,
+    "p50": 6.138665950857103,
+    "p95": 6.902541033923626,
+    "p99": 9.035457973368466,
+    "max": 53.179167094640434
+  },
+  "board_maxima_ms": {
+    "rx_byte_wait": 2,
+    "queue_wait": 1,
+    "processing": 1,
+    "rx_to_submit": 1,
+    "tx_queue_wait": 4,
+    "tx_poll": 4,
+    "parsed_to_tx_poll": 5
+  },
+  "stack_min_unused": {
+    "rx": 768,
+    "handler": 1360,
+    "tx": 672,
+    "main": 512
+  },
+  "cpu_non_idle_peak_percent": 25.24033410386464,
+  "all_checks_passed": true,
+  "check_count": 27
+}

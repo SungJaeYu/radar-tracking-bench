@@ -1,17 +1,52 @@
 # 검증 기록
 
+**최종 v1.1.0 검증:** Python928개+subtest9개, CTest204개(내부224회) 통과. 시한 경과 `sleep(0)` 수정 후60초 보드27/27·유효2,993개 모두 대응·오류0·일반 이미지 복원. PC 미송신은 릴리스 차단이 아닌 v1.1.1 개선 범위다. [완료 기록](release-v1.1.0.md). 아래 수치와 판정은 각 실행 당시 이력이다.
+
+후속 판정 수정: [호스트 입력 중단을 STM32 실패와 분리](test-results/host-input-verdict-2026-11-23/README.md). 저장 기록의 재평가는 미확정이며 새 실보드 실행은 아니다.
+
+**최신 실행:** [판정 수정 후30분 실보드 재검증](test-results/host-input-retest-2026-11-23/README.md). 관측 부하의 보드·전송·증거 검사는 통과했고, 호스트 슬롯943개 누락으로 요청50Hz 전체 부하는 미확정이다. 제어된 호스트 정지의 미확정 처리·정상 복원도 확인했다. 아래 이전 실행의 원본 판정과 구분한다.
+
 [문서 목차](README.md) · [테스트 목록](test-cases.md) · [V1 완료 범위](roadmap.md#v1-acceptance)
 
 날짜별 기록은 당시 소스·설정에 대한 증거입니다. 아래 표에서 필요한 결과로 이동할 수 있습니다. 과거의 미검증 상태나 테스트 개수를 현재 상태로 해석하지 않습니다.
 
 | 확인할 내용 | 결과 |
 |---|---|
-| 최신 잡음·이상치·RTT 회귀 | [149회 추적 평가](hardware-test-2026-11-19-noise-spike.md) |
+| 최신 잡음·이상치·RTT 회귀 | [v1.1.0 검증·최대 RTT 실패](hardware-test-2026-11-23-v1.1.0.md) |
 | 30분 송수신·지연·스택 | [성능 관측과 당시 판정](hardware-test-2026-11-19-performance.md) |
 | 정상·잡음·누락·GUI 왕복 | [고정 시나리오 평가](hardware-test-2026-11-18-evaluation.md) |
 | 오류·포화·제어 후 복귀 | [전송 오류](hardware-test-2026-11-18-transport-stress.md) · [제어·TRACK](hardware-test-2026-11-18-track-controls.md) |
 
 이하 내용은 검증 및 판정 변경 이력입니다. 최신 사용법은 각 도구의 안내를 따릅니다.
+
+## 2026-11-23 — 판정·기록·문서 일관성 종합 검토
+
+RTT를 STM32 합격/CLI 종료 코드에서 제외하고 진단값으로 통일했다. `passed`는 관측 부하의 board_qualification과 같다. 요청 부하 미충족은 별도 requested_profile_qualification에서 미확정으로 남긴다. 중단 시 기록 완료 오표시를 수정했고, 모든 중간 요약의 보드 지연·오류를 판정하도록 보강했다. 과거8개 세션을 독립 CRC 재파싱했고 이전 CRC와 호스트 송신 공백을 구분했다. [전체 수정 내역·최신 시험](review-2026-11-23.md). 아래 항목은 각각 당시 결과와 정책의 이력이다.
+
+## 2026-11-23 — ISR·IRQ 차단 중 계측 작업 제거
+
+ISR 원시 cycle 캡처만 유지하고 집계는 RX 스레드로 이관했다. collector spinlock을 thread-only mutex로 교체하고 복구 파서 초기화를 IRQ 차단 밖으로 옮겼다. Python895개+subtest9개, CTest204개 등록 항목(224회 실행), firmware5구성 검증. 300초 실보드에서 유효 측정14,802개 모두 대응, CRC·보드 오류·계측 유실0, 관측 부하의 내부/전송/증거 통과. RTT 최대328.516ms 실패·50Hz 슬롯201개 누락으로 전체 미통과다. 정상 이미지 복원·STATUS0. 이전 CRC 원인은 확정하지 않았다. [변경 점검](interrupt-context-audit.md) · [증거](test-results/irq-safe-perf-2026-11-23/README.md).
+
+## 2026-11-23 — 확장 STM32 판정 및 계측
+
+보드/전송/증거/RTT/요청 부하를 독립 판정하고, 기존 지연 한계를 유지하며 RX·TX·스케줄러 부하·main 스택 관측을 추가했다. C host200개 등록 항목(220회 실행), firmware5구성 통과. 첫60초는 요청 슬롯7개 누락으로 전체 미확정; 장시간 시험은 보드 CRC 오류1회로 조기 중단됐다. 기존 원시 결과는 보존한다. [조건·추가 결과](test-results/extended-perf-2026-11-23/README.md) · [범위와 미검증 항목](stm32-performance-coverage.md).
+
+## 2026-11-23 — v1.1.0 선회·영어 GUI 검증
+
+PC 선회·구간 시나리오 및 영어 GUI를 추가했다. Python812개+subtest9개, CTest149개 등록 항목(169회 실행), firmware5구성 빌드가 통과했다. 선회 실보드755개 측정 모두 대응·게이트 거부0·상태 유지, wire 재파싱 일치를 확인했다. 잡음100회·이상치49회·포화/로그/오류복구·실제 UART 영어 GUI 검증은 통과했다. 30분 부하는89,592개 모두 대응했으나 최대 PC RTT220.246ms가100ms 기준을 초과해 릴리스 판정은 실패다. 정상 펌웨어 복원 및 STATUS0을 확인했고 main 병합·태그는 보류했다. [조건·완료 상태·원시 증거](hardware-test-2026-11-23-v1.1.0.md).
+
+## 2026-11-22 — 로그 형식 통일 후 실보드 회귀
+
+애플리케이션·bench 로그50개를 key=value 형식으로 통일하고 소비하는 시험기와 이전 PERF 로그 읽기 호환을 갱신했다. Python783개+subtest9개, 영향 범위 CTest128개, 펌웨어5구성 빌드 통과. 실보드 PERF27개·DEBUG11개·producer13개·전송포화95개 판정과 Qt offscreen GUI의 실제 UART/표시/CSV 경로를 확인했다. 마지막에 일반 이미지 복원·STATUS0 확인. 첫 DEBUG 판정기의 구형 문자열 오류는 수정 후 재시험했으며 원래 결과도 보존했다. [조건·원문·한계](hardware-test-2026-11-22-logging.md).
+
+## 2026-11-22 — estimator 실행 시간 집계·출력
+
+`495d70d` 이후 작업본에서 predict/correct cycle 측정·집계와 누적 최소/평균/최대 ns 로그를 연결했다.
+collector/reporter CTest 12개, PERF handler 32개, PERF TX 4개(합계 48개),
+latency guard 및 콘솔 파서 Python 25개가 통과했다. 일반·debug·PERF 펌웨어 빌드가 통과했다.
+PERF 구성 시 기존 devicetree의 중복 unit-address 경고가 출력되었으나 빌드는 성공했다.
+flash·실보드 HIL은 수행하지 않았으며 기존 30분 기록을 새 실행 시간 출력의 증거로 사용하지 않는다.
+[계측 계약](performance-monitoring.md)과 [재현 명령](../fcc_app/tests/test_perf_monitor/README.md)을 따른다.
 
 ## 2026-11-19 — pull 후 RTT·이상치49회·잡음100회 실보드 검증
 
@@ -203,3 +238,5 @@ USART6 TX, 장시간·최대 부하와 폐루프 추적 정확도도 아직 검�
 ## TRACK 포화·제어 순서 후속 검증 — 2026-11-18
 
 실보드112개 확인 항목 통과: RX 큐 포화 시 INIT/RESET 유실, 접수된 제어/측정 FIFO 순서, TRACK TX 포화 후 순번 공백과 정상 추적 복귀를 확인했습니다. 일반 이미지 복원 완료. [결과·원시 증거·계약](hardware-test-2026-11-18-track-controls.md). 제어 우선 보존 정책은 추가하지 않았으며 다음은30분 부하·MCU 내부 지연·큐/스택 계측입니다.
+
+후속60초 재시험도 약19초에 보드 CRC 오류1회로 중단됐다. PC RTT p99 25.616ms·최대101.118ms로 한계를 초과했다. 정상 이미지 복원·STATUS0을 확인했으며 원시 결과와 중단 판정 보완의 재평가를 별도 보존했다.

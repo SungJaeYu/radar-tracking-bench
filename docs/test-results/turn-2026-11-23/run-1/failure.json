@@ -1,0 +1,6 @@
+{
+  "classification": "environment_permission",
+  "board_test_started": false,
+  "error": "UART open blocked by sandbox: Operation not permitted",
+  "retry": "../run-2"
+}

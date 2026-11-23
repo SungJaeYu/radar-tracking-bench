@@ -1,8 +1,8 @@
 """
-targets.py — 등속 표적 운동 모델 + 레이더 센서 모델
+Target motion and radar sensor models.
 
-표적 좌표계: 직교 (x=동, y=북), 단위 m / m/s
-레이더 출력: 극좌표 (range_m, azimuth_rad, elevation_rad, doppler_mps)
+Cartesian target coordinates: x east, y north; units m and m/s.
+Radar output: polar range_m, azimuth_rad, elevation_rad, and doppler_mps.
 """
 
 import math
@@ -10,9 +10,13 @@ import random
 from dataclasses import dataclass
 from typing import List
 
+STANDARD_GRAVITY_MPS2 = 9.80665
+SEGMENT_TIME_TOLERANCE_S = 1e-9  # Boundary roundoff tolerance, far below the 1 ms sensor clock.
+
+
 @dataclass
 class Measurement:
-    """센서 모델의 물리량. 앙각·도플러는 PC 모델에만 남고 wire에는 보내지 않는다."""
+    """Sensor quantities; elevation and Doppler remain PC-only and are not sent on wire."""
     timestamp_ms: int
     range_m: float
     azimuth_rad: float
@@ -20,20 +24,40 @@ class Measurement:
     doppler_mps: float
 
 
-# ── 표적 운동 모델 (등속, CV) ──────────────────────────────────────────────────
+# Target motion: straight flight or constant-rate turns.
 
 @dataclass
 class Target:
-    """단일 표적. 매 스텝 dt초마다 update()로 위치를 전진시킨다."""
+    """Advance a target by dt seconds at constant speed and turn rate per step."""
     target_id: int
-    x_m:       float   # 초기 x (동)
-    y_m:       float   # 초기 y (북)
-    vx_mps:    float   # x 속도
-    vy_mps:    float   # y 속도
+    x_m:       float   # East position
+    y_m:       float   # North position
+    vx_mps:    float   # East velocity
+    vy_mps:    float   # North velocity
+    turn_rate_radps: float = 0.0 # Turn rate [rad/s], clockwise positive
 
     def update(self, dt: float) -> None:
-        self.x_m += self.vx_mps * dt
-        self.y_m += self.vy_mps * dt
+        turn_angle_rad = self.turn_rate_radps * dt
+
+        cos_a = math.cos(turn_angle_rad)
+        sin_a = math.sin(turn_angle_rad)
+
+        old_vx = self.vx_mps
+        old_vy = self.vy_mps
+
+        # Integrate the arc with a constant turn rate over this time step.
+        if self.turn_rate_radps == 0.0:
+            self.x_m += old_vx * dt
+            self.y_m += old_vy * dt
+        else:
+            a = sin_a / self.turn_rate_radps
+            # Equivalent to (1 - cos(theta)) / omega, stable near zero.
+            b = 2.0 * math.sin(turn_angle_rad / 2.0) ** 2 / self.turn_rate_radps
+            self.x_m += old_vx * a + old_vy * b
+            self.y_m += -old_vx * b + old_vy * a
+
+        self.vx_mps = old_vx * cos_a + old_vy * sin_a
+        self.vy_mps = -old_vx * sin_a + old_vy * cos_a
 
     @property
     def range_m(self) -> float:
@@ -41,36 +65,98 @@ class Target:
 
     @property
     def azimuth_rad(self) -> float:
-        """레이더 정면(y축)에서 시계방향 양수 (atan2(x, y))."""
+        """Clockwise azimuth from radar boresight (+y), computed as atan2(x, y)."""
         return math.atan2(self.x_m, self.y_m)
 
     @property
     def elevation_rad(self) -> float:
-        """수평면 기준 앙각. 표적이 동고도(z=0)이면 0."""
+        """Elevation above the horizontal plane; zero for this same-altitude 2D model."""
         return 0.0
 
     def radial_velocity_mps(self) -> float:
-        """시선 방향 속도 (양수=멀어짐, 도플러)."""
+        """Line-of-sight velocity for Doppler; positive means receding."""
         r = self.range_m
         if r < 1e-6:
             return 0.0
         return (self.x_m * self.vx_mps + self.y_m * self.vy_mps) / r
 
 
-# ── 레이더 센서 모델 ────────────────────────────────────────────────────────────
+@dataclass(frozen=True)
+class MotionSegment:
+    """Hold a finite turn rate for a positive duration in seconds."""
+
+    duration_s: float
+    turn_rate_radps: float
+
+    def __post_init__(self) -> None:
+        if not math.isfinite(self.duration_s) or self.duration_s <= 0:
+            raise ValueError('duration_s must be finite and positive')
+        if not math.isfinite(self.turn_rate_radps):
+            raise ValueError('turn_rate_radps must be finite')
+
+
+class SegmentedScenario:
+    """Own one target's motion schedule; discard time beyond the final segment.
+
+    Each update splits at segment boundaries. Measurements remain the caller's
+    responsibility, so internal motion steps do not add sensor samples.
+    """
+
+    def __init__(self, target: Target, segments: list[MotionSegment]) -> None:
+        if not segments:
+            raise ValueError('segments must not be empty')
+        self.target = target
+        self.segments = tuple(segments)
+        self.segment_index = 0
+        self.segment_elapsed_s = 0.0
+        self.target.turn_rate_radps = self.segments[0].turn_rate_radps
+
+    @property
+    def duration_s(self) -> float:
+        return math.fsum(segment.duration_s for segment in self.segments)
+
+    @property
+    def finished(self) -> bool:
+        return self.segment_index == len(self.segments)
+
+    def update(self, dt: float) -> None:
+        """Advance by up to dt seconds; zero or post-completion updates do nothing."""
+        if not math.isfinite(dt) or dt < 0:
+            raise ValueError('dt must be finite and nonnegative')
+
+        remaining_s = dt
+        while remaining_s > 0 and not self.finished:
+            segment = self.segments[self.segment_index]
+            segment_remaining_s = segment.duration_s - self.segment_elapsed_s
+            interval_s = min(remaining_s, segment_remaining_s)
+            self.target.update(interval_s)
+            remaining_s -= interval_s
+
+            at_boundary = math.isclose(interval_s, segment_remaining_s, rel_tol=0.0,
+                                       abs_tol=SEGMENT_TIME_TOLERANCE_S)
+            if at_boundary:
+                self.segment_index += 1
+                self.segment_elapsed_s = 0.0
+                if not self.finished:
+                    self.target.turn_rate_radps = self.segments[self.segment_index].turn_rate_radps
+            else:
+                self.segment_elapsed_s += interval_s
+
+
+# Radar sensor model
 
 @dataclass
 class RadarSensorModel:
     """
-    실제 표적 위치를 받아 노이즈·미탐지·오탐이 섞인 측정값 리스트를 반환한다.
+    Generate noisy measurements with missed detections and clutter.
 
-    파라미터:
-        sigma_range_m      range 측정 표준편차 (m)
-        sigma_azimuth_rad  방위각 측정 표준편차 (rad)
-        sigma_doppler_mps  도플러 측정 표준편차 (m/s)
-        pd                 탐지확률 (0.0 – 1.0)
-        clutter_rate       스캔당 오탐 평균 개수 (Poisson)
-        max_range_m        이 거리 초과 표적은 탐지 안 됨
+    Parameters:
+        sigma_range_m      Range standard deviation (m).
+        sigma_azimuth_rad  Azimuth standard deviation (rad).
+        sigma_doppler_mps  Doppler standard deviation (m/s).
+        pd                 Detection probability (0.0 to 1.0).
+        clutter_rate       Mean false detections per scan (Poisson).
+        max_range_m        Targets beyond this range are not detected.
     """
     sigma_range_m:     float = 10.0
     sigma_azimuth_rad: float = 0.01
@@ -85,8 +171,8 @@ class RadarSensorModel:
                 rng: random.Random = random.Random()
                 ) -> list:
         """
-        Measurement 객체 리스트 반환.
-        순서는 랜덤 셔플 (데이터 연관 알고리즘이 순서에 의존 못하도록).
+        Return Measurement objects in shuffled order.
+        Association algorithms must not rely on target-list ordering.
         """
         measurements = []
 
@@ -94,11 +180,11 @@ class RadarSensorModel:
             if tgt.range_m > self.max_range_m:
                 continue
             if rng.random() > self.pd:
-                continue  # 미탐지
+                continue  # Missed detection
 
             r   = tgt.range_m        + rng.gauss(0, self.sigma_range_m)
             az  = tgt.azimuth_rad    + rng.gauss(0, self.sigma_azimuth_rad)
-            el  = tgt.elevation_rad  # elevation 노이즈는 생략 (2D 시나리오)
+            el  = tgt.elevation_rad  # No elevation noise in the 2D scenario.
             dop = tgt.radial_velocity_mps() + rng.gauss(0, self.sigma_doppler_mps)
 
             measurements.append(Measurement(
@@ -109,7 +195,7 @@ class RadarSensorModel:
                 doppler_mps=dop,
             ))
 
-        # 오탐 (클러터) 주입: Poisson 분포 개수
+        # Inject a Poisson-distributed number of clutter detections.
         n_clutter = _poisson(self.clutter_rate, rng)
         for _ in range(n_clutter):
             r   = rng.uniform(0, self.max_range_m)
@@ -128,7 +214,7 @@ class RadarSensorModel:
 
 
 def _poisson(lam: float, rng: random.Random) -> int:
-    """Knuth 알고리즘으로 Poisson(lambda) 샘플."""
+    """Sample Poisson(lambda) using the Knuth algorithm."""
     if lam <= 0:
         return 0
     L = math.exp(-lam)
@@ -139,23 +225,23 @@ def _poisson(lam: float, rng: random.Random) -> int:
     return k - 1
 
 
-# ── 사전 정의 시나리오 ──────────────────────────────────────────────────────────
+# Predefined scenarios
 
 def scenario_two_crossing() -> List[Target]:
-    """두 표적이 정면에서 교차하는 시나리오."""
+    """Two targets crossing in front of the radar."""
     return [
         Target(target_id=1, x_m=-5000, y_m=20000, vx_mps= 50, vy_mps=-80),
         Target(target_id=2, x_m= 5000, y_m=20000, vx_mps=-50, vy_mps=-80),
     ]
 
 def scenario_single_approach() -> List[Target]:
-    """단일 표적이 레이더 정면으로 접근."""
+    """One target approaching along the radar boresight."""
     return [
         Target(target_id=1, x_m=0, y_m=30000, vx_mps=0, vy_mps=-150),
     ]
 
 def scenario_four_targets() -> List[Target]:
-    """4개 표적 동시 추적 부하 테스트."""
+    """Four-target input load scenario; no multi-target firmware tracking is implied."""
     return [
         Target(target_id=1, x_m=-8000, y_m=25000, vx_mps= 40, vy_mps=-60),
         Target(target_id=2, x_m= 8000, y_m=25000, vx_mps=-40, vy_mps=-60),
@@ -163,8 +249,43 @@ def scenario_four_targets() -> List[Target]:
         Target(target_id=4, x_m= 3000, y_m=10000, vx_mps=-30, vy_mps=-120),
     ]
 
+def scenario_single_turn(bank_deg: float = 30.0, tas_mps: float = 200.0) -> List[Target]:
+    """Constant-altitude coordinated turn, with no wind and constant TAS.
+
+    Start eastbound. Positive bank means a clockwise (right) turn.
+    Bank and TAS are scenario inputs, converted to the Target motion state.
+    """
+    if not math.isfinite(tas_mps) or tas_mps <= 0:
+        raise ValueError('tas_mps must be finite and positive')
+    if not math.isfinite(bank_deg) or not -90.0 < bank_deg < 90.0:
+        raise ValueError('bank_deg must be finite and between -90 and 90 degrees')
+    turn_rate_radps = STANDARD_GRAVITY_MPS2 * math.tan(math.radians(bank_deg)) / tas_mps
+    return [
+        Target(target_id=1, x_m=0, y_m=1000, vx_mps=tas_mps, vy_mps=0,
+               turn_rate_radps=turn_rate_radps),
+    ]
+
+
+def scenario_straight_turn_straight() -> SegmentedScenario:
+    """Fly east for 10 s, turn right by 90 degrees, then fly south for 10 s.
+
+    Reuse the constant-turn scenario's bank/TAS assumptions and initial state.
+    Turn-rate transitions are instantaneous, not aircraft roll dynamics.
+    """
+    target, = scenario_single_turn()
+    turn_rate_radps = target.turn_rate_radps
+    turn_duration_s = math.radians(90.0) / abs(turn_rate_radps)
+    return SegmentedScenario(target, [
+        MotionSegment(10.0, 0.0),
+        MotionSegment(turn_duration_s, turn_rate_radps),
+        MotionSegment(10.0, 0.0),
+    ])
+
+
 SCENARIOS = {
     "two_crossing":    scenario_two_crossing,
     "single_approach": scenario_single_approach,
     "four_targets":    scenario_four_targets,
+    "single_turn":     scenario_single_turn,
+    "straight_turn_straight": scenario_straight_turn_straight,
 }

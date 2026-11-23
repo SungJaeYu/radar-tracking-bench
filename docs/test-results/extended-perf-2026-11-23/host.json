@@ -1,0 +1,47 @@
+[
+  {
+    "target": "tracking",
+    "passed": true,
+    "registered_tests": 21
+  },
+  {
+    "target": "rx",
+    "passed": true,
+    "registered_tests": 45
+  },
+  {
+    "target": "rx-perf",
+    "passed": true,
+    "registered_tests": 47
+  },
+  {
+    "target": "handler",
+    "passed": true,
+    "registered_tests": 31
+  },
+  {
+    "target": "handler-perf",
+    "passed": true,
+    "registered_tests": 32
+  },
+  {
+    "target": "tx",
+    "passed": true,
+    "registered_tests": 4
+  },
+  {
+    "target": "tx-perf",
+    "passed": true,
+    "registered_tests": 4
+  },
+  {
+    "target": "monitor",
+    "passed": true,
+    "registered_tests": 13
+  },
+  {
+    "target": "resources",
+    "passed": true,
+    "registered_tests": 3
+  }
+]

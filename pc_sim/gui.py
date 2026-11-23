@@ -66,7 +66,7 @@ class MainWindow(QMainWindow):
         title = QLabel('RADAR LAB  /  HIL CONSOLE')
         title.setObjectName('title')
         layout.addWidget(title)
-        subtitle = QLabel('단일표적 시뮬레이터  ·  115200 baud / 8N1  ·  PC 합성값 / 보드 추정값 / 진단 로그')
+        subtitle = QLabel('Single-target simulator  ·  115200 baud / 8N1  ·  PC truth / board estimates / diagnostics')
         subtitle.setObjectName('subtitle')
         subtitle.setWordWrap(True)
         layout.addWidget(subtitle)
@@ -75,7 +75,7 @@ class MainWindow(QMainWindow):
         layout.addLayout(body, 1)
         panel = QFrame()
         panel.setObjectName('panel')
-        panel.setFixedWidth(310)
+        panel.setFixedWidth(324)
         panel_layout = QVBoxLayout(panel)
         panel_layout.setContentsMargins(10, 12, 10, 12)
         body.addWidget(panel)
@@ -95,36 +95,36 @@ class MainWindow(QMainWindow):
             self.control_tabs.addTab(scroll, title)
             return scroll, page_layout
 
-        _, controls = tab_page('연결')
+        _, controls = tab_page('Connection')
         self.mode = QComboBox()
-        self.mode.addItems(['미리보기 · 보드 연결 없음', '보드 UART · 실제 송신'])
+        self.mode.addItems(['Preview · no board', 'Board UART · live transmission'])
         controls.addWidget(self.mode)
         self.data_port = QComboBox()
         self.console_port = QComboBox()
-        for label, combo in (('데이터 포트 · USB-UART', self.data_port),
-                             ('콘솔 포트 · ST-Link', self.console_port)):
+        for label, combo in (('Data port · USB-UART', self.data_port),
+                             ('Console port · ST-Link', self.console_port)):
             combo.setSizeAdjustPolicy(QComboBox.SizeAdjustPolicy.AdjustToMinimumContentsLengthWithIcon)
             combo.setMinimumContentsLength(16)
             controls.addWidget(QLabel(label))
             controls.addWidget(combo)
-        self.refresh_button = QPushButton('포트 새로고침')
+        self.refresh_button = QPushButton('Refresh ports')
         self.refresh_button.clicked.connect(self.refresh_ports)
         controls.addWidget(self.refresh_button)
-        self.connect_button = QPushButton('미리보기 연결')
+        self.connect_button = QPushButton('Connect preview')
         self.connect_button.clicked.connect(self.toggle_connection)
         controls.addWidget(self.connect_button)
-        self.connection_label = QLabel('연결되지 않음')
+        self.connection_label = QLabel('Disconnected')
         self.connection_label.setWordWrap(True)
         controls.addWidget(self.connection_label)
         controls.addStretch()
-        self.controls_scroll, controls = tab_page('설정')
-        scope_note = QLabel('단일표적 · 고정 방위각 / 일정 거리 변화율')
+        self.controls_scroll, controls = tab_page('Settings')
+        scope_note = QLabel('Single target · fixed azimuth / constant range rate')
         scope_note.setWordWrap(True)
         controls.addWidget(scope_note)
         self.record_directory = Path.cwd() / 'runs'
-        self.record_checkbox = QCheckBox('CSV 기록 (실행별 새 폴더)')
+        self.record_checkbox = QCheckBox('Record CSV (folder per run)')
         controls.addWidget(self.record_checkbox)
-        self.record_button = QPushButton('저장 폴더 선택')
+        self.record_button = QPushButton('Choose output folder')
         self.record_button.clicked.connect(self.choose_record_directory)
         controls.addWidget(self.record_button)
         self.record_label = QLabel(str(self.record_directory))
@@ -139,12 +139,12 @@ class MainWindow(QMainWindow):
         fields.setSizeConstraint(QLayout.SizeConstraint.SetMinimumSize)
         self.inputs = {}
         definitions = [
-            ('initial_range_m', '초기 거리 (m)', 1, 65535, 1000, 1),
-            ('range_rate_mps', '거리 변화율 (m/s)', -1000, 1000, -20, 1),
-            ('azimuth_deg', '방위각 (°)', -180, 180, 15, 1),
-            ('range_noise_std_m', '거리 잡음 σ (m)', 0, 1000, 5, 1),
-            ('sample_rate_hz', '송신 주기 (Hz)', 1, 50, 10, 0),
-            ('duration_s', '실행 시간 (s)', 1, 3600, 30, 0),
+            ('initial_range_m', 'Initial range (m)', 1, 65535, 1000, 1),
+            ('range_rate_mps', 'Range rate (m/s)', -1000, 1000, -20, 1),
+            ('azimuth_deg', 'Azimuth (°)', -180, 180, 15, 1),
+            ('range_noise_std_m', 'Range noise σ (m)', 0, 1000, 5, 1),
+            ('sample_rate_hz', 'Sample rate (Hz)', 1, 50, 10, 0),
+            ('duration_s', 'Duration (s)', 1, 3600, 30, 0),
         ]
         for key, label, low, high, default, decimals in definitions:
             field = QDoubleSpinBox()
@@ -156,15 +156,15 @@ class MainWindow(QMainWindow):
             self.inputs[key] = field
             fields.addRow(label, field)
         controls.addWidget(self.settings_form)
-        note = QLabel('음수 변화율 = 접근\n방위각: 북쪽 0°, 동쪽 +90°\n시작할 때 INIT을 자동 전송합니다.')
+        note = QLabel('Negative range rate = approaching\nAzimuth: north 0°, east +90°\nINIT is sent automatically on start.')
         note.setWordWrap(True)
         note.setObjectName('subtitle')
         controls.addWidget(note)
         _, status_layout = tab_page('STATUS')
-        self.status_button = QPushButton('STATUS 조회')
+        self.status_button = QPushButton('Query STATUS')
         self.status_button.clicked.connect(self.request_status)
         status_layout.addWidget(self.status_button)
-        self.status_message = QLabel('보드 연결 후 조회할 수 있습니다.')
+        self.status_message = QLabel('Connect a board to query STATUS.')
         self.status_message.setWordWrap(True)
         status_layout.addWidget(self.status_message)
         status_form = QFormLayout()
@@ -175,45 +175,45 @@ class MainWindow(QMainWindow):
             self.status_values[key] = value
             status_form.addRow(label, value)
         status_layout.addLayout(status_form)
-        self.status_updated = QLabel('마지막 성공 조회: —')
+        self.status_updated = QLabel('Last successful query: —')
         self.status_updated.setWordWrap(True)
         status_layout.addWidget(self.status_updated)
-        note = QLabel('보드 RX 누적 통계입니다. BIT 결과가 아니며, 조회 실패 시 이전 값을 유지합니다.')
+        note = QLabel('Cumulative board RX counters, not BIT results. Previous values are retained if a query fails.')
         note.setWordWrap(True)
         status_layout.addWidget(note)
         status_layout.addStretch()
 
         self.track_scroll, track_layout = tab_page('TRACK')
-        self.track_message = QLabel('보드 TRACK 수신 대기')
+        self.track_message = QLabel('Waiting for board TRACK')
         self.track_message.setWordWrap(True)
         track_layout.addWidget(self.track_message)
         track_form = QFormLayout()
         self.track_values = {}
         for key, label in (
-            ('report_sequence', '보고 순번'), ('state', '마지막 보드 상태'),
-            ('result', '처리 결과'), ('input_timestamp_ms', '입력 시각 (ms)'),
-            ('estimate_timestamp_ms', '추정 시각 (ms)'), ('range_m', '거리 (m)'),
-            ('azimuth_rad', '방위각 (rad)'), ('range_rate_mps', '거리 변화율 (m/s)'),
-            ('azimuth_rate_radps', '방위각 변화율 (rad/s)'),
-            ('sequence_gaps', '관측 순번 공백'), ('discontinuities', '순번 역행 / 불연속'),
+            ('report_sequence', 'Report sequence'), ('state', 'Last board state'),
+            ('result', 'Result'), ('input_timestamp_ms', 'Input time (ms)'),
+            ('estimate_timestamp_ms', 'Estimate time (ms)'), ('range_m', 'Range (m)'),
+            ('azimuth_rad', 'Azimuth (rad)'), ('range_rate_mps', 'Range rate (m/s)'),
+            ('azimuth_rate_radps', 'Azimuth rate (rad/s)'),
+            ('sequence_gaps', 'Sequence gaps'), ('discontinuities', 'Discontinuities'),
         ):
             value = QLabel('—')
             value.setTextInteractionFlags(Qt.TextInteractionFlag.TextSelectableByMouse)
             self.track_values[key] = value
             track_form.addRow(label, value)
         track_layout.addLayout(track_form)
-        note = QLabel('STALE: 새 TRACK 수신 없이 2초 경과. 보드 LOST와 다릅니다.\n'
-                      '순번 공백은 유실 위치·원인을 확정하지 않습니다.\n'
-                      '거리 이력은 PC 측정 시각과 일치하는 추정 시각만 표시합니다.')
+        note = QLabel('STALE: no new TRACK for 2 s. This is separate from board LOST.\n'
+                      'Sequence gaps do not identify where or why reports were lost.\n'
+                      'Range history uses estimates whose timestamps match PC measurements.')
         note.setWordWrap(True)
         note.setObjectName('subtitle')
         track_layout.addWidget(note)
         track_layout.addStretch()
 
-        self.start_button = QPushButton('▶  시작')
+        self.start_button = QPushButton('▶  Start')
         self.start_button.setObjectName('primary')
         self.start_button.clicked.connect(self.start_simulation)
-        self.stop_button = QPushButton('■  송신 중지')
+        self.stop_button = QPushButton('■  Stop sending')
         self.stop_button.clicked.connect(self.stop_simulation)
         controls.addStretch()
         panel_layout.addWidget(self.start_button)
@@ -221,7 +221,7 @@ class MainWindow(QMainWindow):
 
         right = QVBoxLayout()
         body.addLayout(right, 1)
-        self.metrics = QLabel('대기  ·  생성/송신 0개  ·  경과 0.0 s')
+        self.metrics = QLabel('Idle  ·  Generated/sent 0  ·  Elapsed 0.0 s')
         self.metrics.setWordWrap(True)
         right.addWidget(self.metrics)
         self.content_split = split = QSplitter(Qt.Orientation.Horizontal)
@@ -230,30 +230,30 @@ class MainWindow(QMainWindow):
         self.plots_split = plots = QSplitter(Qt.Orientation.Vertical)
         plots.setChildrenCollapsible(False)
         split.addWidget(plots)
-        self.map_plot = pg.PlotWidget(title='표적 위치')
-        self.map_plot.setLabel('bottom', '동쪽', units='m')
-        self.map_plot.setLabel('left', '북쪽', units='m')
+        self.map_plot = pg.PlotWidget(title='Target position')
+        self.map_plot.setLabel('bottom', 'East', units='m')
+        self.map_plot.setLabel('left', 'North', units='m')
         self.map_plot.setAspectLocked(True)
         self.map_plot.showGrid(x=True, y=True, alpha=0.2)
         self.map_plot.addLegend(offset=(10, 10))
         self.map_plot.plot([0], [0], pen=None, symbol='t', symbolSize=14,
                            symbolBrush='#ffffff')
         self.truth_point = self.map_plot.plot([], [], pen=None, symbol='o', symbolSize=12,
-                                              symbolBrush='#3ce0b1', name='실제값 (합성)')
+                                              symbolBrush='#3ce0b1', name='Truth (synthetic)')
         self.measured_points = self.map_plot.plot([], [], pen=None, symbol='+', symbolSize=10,
-                                                  symbolPen='#f4bf65', name='측정값 (PC)')
+                                                  symbolPen='#f4bf65', name='Measured (PC)')
         self.estimated_point = self.map_plot.plot([], [], pen=None, symbol='d', symbolSize=12,
-                                                  symbolBrush='#75bfff', name='추정값 (보드)')
+                                                  symbolBrush='#75bfff', name='Estimated (board)')
         plots.addWidget(self.map_plot)
-        self.range_plot = pg.PlotWidget(title='거리 이력 · 센서 시각 기준')
-        self.range_plot.setLabel('bottom', '시간', units='s')
-        self.range_plot.setLabel('left', '거리', units='m')
+        self.range_plot = pg.PlotWidget(title='Range history · sensor time')
+        self.range_plot.setLabel('bottom', 'Time', units='s')
+        self.range_plot.setLabel('left', 'Range', units='m')
         self.range_plot.showGrid(x=True, y=True, alpha=0.2)
         self.range_plot.addLegend(offset=(10, 10))
-        self.truth_curve = self.range_plot.plot(pen=pg.mkPen('#3ce0b1', width=2), name='실제값 (합성)')
-        self.measured_curve = self.range_plot.plot(pen=pg.mkPen('#f4bf65', width=1), name='측정값 (PC)')
+        self.truth_curve = self.range_plot.plot(pen=pg.mkPen('#3ce0b1', width=2), name='Truth (synthetic)')
+        self.measured_curve = self.range_plot.plot(pen=pg.mkPen('#f4bf65', width=1), name='Measured (PC)')
         self.estimated_curve = self.range_plot.plot(pen=pg.mkPen('#75bfff', width=2),
-                                                     connect='finite', name='추정값 (보드)')
+                                                     connect='finite', name='Estimated (board)')
         plots.addWidget(self.range_plot)
         plots.setSizes([360, 300])
         plots.setStretchFactor(0, 1)
@@ -264,13 +264,13 @@ class MainWindow(QMainWindow):
         for widget in (self.console_text, self.event_text):
             widget.setReadOnly(True)
             widget.setMaximumBlockCount(2000)
-        tabs.addTab(self.console_text, '보드 콘솔 · ST-Link')
-        tabs.addTab(self.event_text, '송신 / 실행 로그')
+        tabs.addTab(self.console_text, 'Board console · ST-Link')
+        tabs.addTab(self.event_text, 'TX / run log')
         split.addWidget(tabs)
         split.setSizes([460, 440])
         split.setStretchFactor(0, 1)
         split.setStretchFactor(1, 1)
-        self.board_note = QLabel('보드 TRACK 수신 대기 · 미리보기에서는 보드 추정값을 생성하지 않습니다.')
+        self.board_note = QLabel('Waiting for board TRACK · Preview does not generate board estimates.')
         self.board_note.setWordWrap(True)
         self.board_note.setObjectName('subtitle')
         right.addWidget(self.board_note)
@@ -286,7 +286,7 @@ class MainWindow(QMainWindow):
         for combo in (self.data_port, self.console_port):
             selected = combo.currentData()
             combo.clear()
-            combo.addItem('선택 안 함', None)
+            combo.addItem('None', None)
             for port in ports:
                 combo.addItem(f'{port.device} · {port.description}', port.device)
             index = combo.findData(selected)
@@ -299,7 +299,7 @@ class MainWindow(QMainWindow):
         self.refresh_button.setEnabled(not busy)
         self.data_port.setEnabled(board and not busy)
         self.console_port.setEnabled(board and not busy)
-        self.connect_button.setText('연결 해제' if busy else ('보드 연결' if board else '미리보기 연결'))
+        self.connect_button.setText('Disconnect' if busy else ('Connect board' if board else 'Connect preview'))
         self.connect_button.setEnabled(not busy or self.connected)
         self.start_button.setEnabled(self.connected)
         self.stop_button.setEnabled(False)
@@ -313,10 +313,10 @@ class MainWindow(QMainWindow):
         data = self.data_port.currentData() if board else None
         console = self.console_port.currentData() if board else None
         if board and not data:
-            self.show_error('데이터 포트를 선택하세요.')
+            self.show_error('Select a data port.')
             return
         if data and data == console:
-            self.show_error('데이터와 콘솔에 같은 포트를 사용할 수 없습니다.')
+            self.show_error('Data and console ports must be different.')
             return
         self.worker = SessionWorker(data, console, self)
         self.worker.recording_started.connect(self.on_recording_started)
@@ -330,24 +330,24 @@ class MainWindow(QMainWindow):
         self.worker.error.connect(self.show_error)
         self.worker.running_changed.connect(self.on_running)
         self.worker.finished.connect(self.on_disconnected)
-        self.connection_label.setText('연결 중…')
+        self.connection_label.setText('Connecting…')
         self.update_controls()
         self.worker.start()
 
     def on_connected(self):
         self.connected = True
         board = self.mode.currentIndex() == 1
-        self.connection_label.setText('보드 포트 연결됨' if board else '미리보기 준비됨 · UART 사용 안 함')
+        self.connection_label.setText('Board ports connected' if board else 'Preview ready · UART unused')
         self.event_text.appendPlainText(self.connection_label.text())
         self.status_pending = False
         for value in self.status_values.values():
             value.setText('—')
-        self.status_updated.setText('마지막 성공 조회: —')
-        self.status_message.setText('조회 대기' if board else '미리보기에서는 조회할 수 없습니다.')
+        self.status_updated.setText('Last successful query: —')
+        self.status_message.setText('Ready to query' if board else 'STATUS is unavailable in preview.')
         self.console_text.clear()
         self.reset_track_display()
         if not self.worker.console_port:
-            self.console_text.setPlainText('콘솔 포트가 연결되지 않았습니다.\n진단 로그는 ST-Link 콘솔, 추정 결과는 데이터 포트의 TRACK으로 수신합니다.\n')
+            self.console_text.setPlainText('No console port connected.\nDiagnostics arrive via the ST-Link console; estimates arrive via TRACK on the data port.\n')
         self.update_controls()
 
     def request_status(self):
@@ -356,16 +356,16 @@ class MainWindow(QMainWindow):
         if self.worker.request_status():
             self.status_pending = True
             self.status_button.setEnabled(False)
-            self.status_message.setText('응답 대기 중…')
+            self.status_message.setText('Waiting for response…')
 
     def on_status_received(self, stats):
         if not self.connected:
             return
         self.status_pending = False
         for key, value in self.status_values.items():
-            value.setText(str(stats[key]) if key in stats else "미지원")
-        self.status_updated.setText('마지막 성공 조회: ' + datetime.now().strftime('%H:%M:%S'))
-        self.status_message.setText('조회 성공')
+            value.setText(str(stats[key]) if key in stats else "Unsupported")
+        self.status_updated.setText('Last successful query: ' + datetime.now().strftime('%H:%M:%S'))
+        self.status_message.setText('Query successful')
         self.status_button.setEnabled(True)
 
     def on_status_failed(self, message):
@@ -411,26 +411,26 @@ class MainWindow(QMainWindow):
         self.estimated_curve.setData(times, ranges)
         self.estimated_curve.setOpacity(1.0 if self.connected and not stale else 0.35)
         if report is None:
-            message = ('보드 TRACK 수신 대기' if self.mode.currentIndex() == 1 else
-                       '미리보기 · 보드 추정값 없음')
+            message = ('Waiting for board TRACK' if self.mode.currentIndex() == 1 else
+                       'Preview · no board estimates')
         else:
             age = max(0.0, time.monotonic() - monitor.received_at)
-            freshness = ('연결 해제 · 이전 결과' if not self.connected else
-                         'STALE · 오래된 결과' if stale else '수신 중')
-            validity = '추정 유효' if report.estimate_valid else '추정 무효'
-            message = f'{freshness} · #{report.report_sequence} · {age:.1f}초 전 · {validity}'
+            freshness = ('Disconnected · previous result' if not self.connected else
+                         'STALE · old result' if stale else 'Receiving')
+            validity = 'Estimate valid' if report.estimate_valid else 'Estimate invalid'
+            message = f'{freshness} · #{report.report_sequence} · {age:.1f} s ago · {validity}'
         self.track_message.setText(message)
         self.board_note.setText(message)
 
     def choose_record_directory(self):
-        directory = QFileDialog.getExistingDirectory(self, 'CSV 저장 폴더', str(self.record_directory))
+        directory = QFileDialog.getExistingDirectory(self, 'CSV output folder', str(self.record_directory))
         if directory:
             self.record_directory = Path(directory)
             self.record_label.setText(directory)
 
     def on_recording_started(self, path):
         self.record_label.setText(path)
-        self.event_text.appendPlainText('CSV 기록: ' + path)
+        self.event_text.appendPlainText('CSV recording: ' + path)
 
     def start_simulation(self):
         if not self.connected:
@@ -460,14 +460,14 @@ class MainWindow(QMainWindow):
         self.start_button.setEnabled(self.connected and not running)
         self.stop_button.setEnabled(self.connected and running)
         self.settings_form.setEnabled(not running)
-        self.statusBar().showMessage('실행 중' if running else '송신 대기 / 중지')
+        self.statusBar().showMessage('Running' if running else 'Sending idle / stopped')
 
     def on_sample(self, sample):
         self.samples.append(sample)
         self.sample_count += 1
-        verb = 'UART write' if self.mode.currentIndex() else '미리보기 생성'
-        self.metrics.setText(f'{verb}  {self.sample_count}개  ·  {sample.timestamp_ms / 1000:.1f} s'
-                             f'  ·  실제 {sample.truth_range_m:.1f} m  ·  측정 {sample.measured_range_m} m')
+        verb = 'UART write' if self.mode.currentIndex() else 'Preview generated'
+        self.metrics.setText(f'{verb}  {self.sample_count}  ·  {sample.timestamp_ms / 1000:.1f} s'
+                             f'  ·  Truth {sample.truth_range_m:.1f} m  ·  Measured {sample.measured_range_m} m')
         self.event_text.appendPlainText(f'{sample.timestamp_ms:>7} ms  {verb}  {sample.frame.hex(" ")}')
 
     def draw_samples(self):
@@ -494,8 +494,8 @@ class MainWindow(QMainWindow):
         self.console_text.ensureCursorVisible()
 
     def show_error(self, text):
-        self.event_text.appendPlainText('오류: ' + text)
-        self.statusBar().showMessage('오류: ' + text)
+        self.event_text.appendPlainText('Error: ' + text)
+        self.statusBar().showMessage('Error: ' + text)
 
     def disconnect(self):
         self.connected = False
@@ -504,7 +504,7 @@ class MainWindow(QMainWindow):
         self.start_button.setEnabled(False)
         self.stop_button.setEnabled(False)
         self.status_button.setEnabled(False)
-        self.connection_label.setText('연결 해제 중…')
+        self.connection_label.setText('Disconnecting…')
         self.worker.requestInterruption()
 
     def on_disconnected(self):
@@ -512,8 +512,8 @@ class MainWindow(QMainWindow):
         self.worker = None
         self.connected = False
         self.status_pending = False
-        self.status_message.setText('연결 해제 · 표시된 값은 이전 조회 결과입니다.')
-        self.connection_label.setText('연결되지 않음')
+        self.status_message.setText('Disconnected · values are from the previous query.')
+        self.connection_label.setText('Disconnected')
         self.settings_form.setEnabled(True)
         self.update_controls()
         if self.closing:

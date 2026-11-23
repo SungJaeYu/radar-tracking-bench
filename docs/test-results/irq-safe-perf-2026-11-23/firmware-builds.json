@@ -1,0 +1,22 @@
+[
+  {
+    "build": "build",
+    "exit_code": 0
+  },
+  {
+    "build": "build_perf",
+    "exit_code": 0
+  },
+  {
+    "build": "build_debug",
+    "exit_code": 0
+  },
+  {
+    "build": "build_log_stress",
+    "exit_code": 1
+  },
+  {
+    "build": "build_transport_stress",
+    "exit_code": 1
+  }
+]

@@ -1,0 +1,3409 @@
+{
+  "generated_utc": "2026-11-23T06:32:44.792814+00:00",
+  "base_commit": "20f069fcd03564a420dab090d6d8d45b317cc34d",
+  "branch": "feat/tracking-benchmark",
+  "scope": "Modified tracked and nonignored untracked files; manifest excludes itself. Prior-turn and current-turn changes included.",
+  "file_count": 425,
+  "files": [
+    {
+      "path": "CHANGELOG.md",
+      "tracked": false,
+      "category": "source-docs-assets",
+      "exists": true,
+      "size_bytes": 2760,
+      "sha256": "438c0511696280c940cdce7cb680cce9b2fc81bd2e2d3f2a1560359dbbf937b7"
+    },
+    {
+      "path": "CLAUDE.md",
+      "tracked": true,
+      "category": "source-docs-assets",
+      "exists": true,
+      "size_bytes": 12272,
+      "sha256": "988bd18db48e6be29b6d1eaf9a16ea1e799c2effb568abdf6226c78e828af2de"
+    },
+    {
+      "path": "EXPLAINER.en.md",
+      "tracked": true,
+      "category": "source-docs-assets",
+      "exists": true,
+      "size_bytes": 14993,
+      "sha256": "0cc2d2aae9986d31fe27aab5fe59fb33999a456a58529c0664890dd4f5f15250"
+    },
+    {
+      "path": "EXPLAINER.md",
+      "tracked": true,
+      "category": "source-docs-assets",
+      "exists": true,
+      "size_bytes": 18512,
+      "sha256": "2ae1307329ce5ac772552fee386a868870e4bc1d03625f0e26e376158bef3f96"
+    },
+    {
+      "path": "README.ko.md",
+      "tracked": true,
+      "category": "source-docs-assets",
+      "exists": true,
+      "size_bytes": 8640,
+      "sha256": "5f9ea0d6c2ad3f0dd84e4379354b0ef5377b371643fc9c61921e460fd926e5e0"
+    },
+    {
+      "path": "README.md",
+      "tracked": true,
+      "category": "source-docs-assets",
+      "exists": true,
+      "size_bytes": 11941,
+      "sha256": "17119bf19e44b7dbd5799754e26f9792d4c44f866c32adc597be2ed5133f8104"
+    },
+    {
+      "path": "docs/README.md",
+      "tracked": true,
+      "category": "source-docs-assets",
+      "exists": true,
+      "size_bytes": 3596,
+      "sha256": "a498304d07628ce47245d5d847375a3740ee2d791c71080c25bb56eadb082329"
+    },
+    {
+      "path": "docs/board-bringup.md",
+      "tracked": true,
+      "category": "source-docs-assets",
+      "exists": true,
+      "size_bytes": 10753,
+      "sha256": "147166d0f7bbe86660798a51c629543864d75e51b36109a17b229c30dc39d14a"
+    },
+    {
+      "path": "docs/coding-standard-audit.md",
+      "tracked": true,
+      "category": "source-docs-assets",
+      "exists": true,
+      "size_bytes": 9087,
+      "sha256": "30ea965d133c14dc29cda2469e692120c13ec53ed6e1ea73b053ce806595e0f2"
+    },
+    {
+      "path": "docs/coding-standard.md",
+      "tracked": true,
+      "category": "source-docs-assets",
+      "exists": true,
+      "size_bytes": 25055,
+      "sha256": "8a780f6748a5bda28411adb9cf5e57807ad020befff9ef547b31a28f0d872d85"
+    },
+    {
+      "path": "docs/comment-audit.md",
+      "tracked": true,
+      "category": "source-docs-assets",
+      "exists": true,
+      "size_bytes": 4567,
+      "sha256": "0c9bc85c1a1613052de899b8471d72fd56b9870e099a2194fec55ba9ca66d712"
+    },
+    {
+      "path": "docs/hardware-test-2026-11-23-v1.1.0.md",
+      "tracked": false,
+      "category": "source-docs-assets",
+      "exists": true,
+      "size_bytes": 14723,
+      "sha256": "05016e30d2a5c1619ce5ebec1eb5cb90fd277e6031b7e9fc24c4e144ab390f52"
+    },
+    {
+      "path": "docs/images/radar-gui-board.png",
+      "tracked": true,
+      "category": "source-docs-assets",
+      "exists": true,
+      "size_bytes": 419705,
+      "sha256": "f26a7bf88ec64ef7931575e4adab055c082b4c90a78750372105321442941427"
+    },
+    {
+      "path": "docs/images/radar-gui-preview.png",
+      "tracked": true,
+      "category": "source-docs-assets",
+      "exists": true,
+      "size_bytes": 695232,
+      "sha256": "0c04c1ed344800f4c2c2f73048b33ea0aab353e3b56d6f9c23a85bc2e220bd62"
+    },
+    {
+      "path": "docs/images/radar-gui-track-preview.png",
+      "tracked": true,
+      "category": "source-docs-assets",
+      "exists": true,
+      "size_bytes": 706708,
+      "sha256": "c34560c163cf7c9a78d5e7fea20d94800ea048fea69bd1eb2927bcff6e004aa0"
+    },
+    {
+      "path": "docs/interrupt-context-audit.md",
+      "tracked": false,
+      "category": "source-docs-assets",
+      "exists": true,
+      "size_bytes": 4584,
+      "sha256": "18e61328bbfb428ac6fff562b666e3aea64a214c7ad8f7377e2bdc62e3c970cb"
+    },
+    {
+      "path": "docs/performance-monitoring.md",
+      "tracked": true,
+      "category": "source-docs-assets",
+      "exists": true,
+      "size_bytes": 17257,
+      "sha256": "7c5eefced421b8aaa816b19d67e93084a8da3fe393880370576ff70d231b5146"
+    },
+    {
+      "path": "docs/python-coding-standard.md",
+      "tracked": false,
+      "category": "source-docs-assets",
+      "exists": true,
+      "size_bytes": 7486,
+      "sha256": "c23d5a04374c85281f27bc0d04cafdae20257005ebd19e0dc430bca586766419"
+    },
+    {
+      "path": "docs/requirements-traceability.md",
+      "tracked": true,
+      "category": "source-docs-assets",
+      "exists": true,
+      "size_bytes": 74101,
+      "sha256": "24f93542e3879edcba0cc9a16725faf9d910dddaac7fcc72ee26143c9baf6638"
+    },
+    {
+      "path": "docs/review-2026-11-23.md",
+      "tracked": false,
+      "category": "source-docs-assets",
+      "exists": true,
+      "size_bytes": 11200,
+      "sha256": "3b49268f9d16b00bfaa0a347f27d7cc1da0a726110ff85dfe63d2de5cb117754"
+    },
+    {
+      "path": "docs/roadmap.md",
+      "tracked": true,
+      "category": "source-docs-assets",
+      "exists": true,
+      "size_bytes": 9147,
+      "sha256": "d05c2af6f706fd43dc665da11e669cfa7c08af6b8e3a0a2bbe1ac951dcede4d9"
+    },
+    {
+      "path": "docs/stm32-performance-coverage.md",
+      "tracked": false,
+      "category": "source-docs-assets",
+      "exists": true,
+      "size_bytes": 7985,
+      "sha256": "061dd3648d688b9ed845417bbcb6322a26f050f58ff7f90074393bc1002a17f8"
+    },
+    {
+      "path": "docs/superpowers/plans/2026-11-23-stm32-performance-acceptance.md",
+      "tracked": false,
+      "category": "source-docs-assets",
+      "exists": true,
+      "size_bytes": 3768,
+      "sha256": "5a3b8dee741f2329266b54140ee8dfcee3b23e876d053320b66ed728846c148f"
+    },
+    {
+      "path": "docs/system-roles.md",
+      "tracked": true,
+      "category": "source-docs-assets",
+      "exists": true,
+      "size_bytes": 5588,
+      "sha256": "2f931728aab62b3a55b1133c47207827f9daa3a84574f10e526c3f8ded8fca95"
+    },
+    {
+      "path": "docs/test-cases.md",
+      "tracked": true,
+      "category": "source-docs-assets",
+      "exists": true,
+      "size_bytes": 54736,
+      "sha256": "9bd1fbecf0180bfdc7b4ac73bbfdcc085c975aaaf16f3e1cfbfed24345f58816"
+    },
+    {
+      "path": "docs/test-results/extended-perf-2026-11-23/README.md",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 3272,
+      "sha256": "92fc7273b8022ee5ff429049e108084b8228839c8aad3fbd9f577cee84e6dc4d"
+    },
+    {
+      "path": "docs/test-results/extended-perf-2026-11-23/audit.py",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 4247,
+      "sha256": "2506905eeae23fd9485372d43d14c1ada349fea44a938436c8adb8eea3794d00"
+    },
+    {
+      "path": "docs/test-results/extended-perf-2026-11-23/board_check-snapshot.py",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 24279,
+      "sha256": "61821129df0dc22d10ee59f7d6271f73722df94f571ed5fc51941206819df8da"
+    },
+    {
+      "path": "docs/test-results/extended-perf-2026-11-23/host-handler-perf.log",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 7275,
+      "sha256": "7113947005114691866b22203e4b2e8efc59297d02c1dfb17a226006a8cfb9c2"
+    },
+    {
+      "path": "docs/test-results/extended-perf-2026-11-23/host-handler.log",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 6863,
+      "sha256": "7197a31f314455d9f656cbe58878b56010d9df54f85047c9d9895901f0a31df0"
+    },
+    {
+      "path": "docs/test-results/extended-perf-2026-11-23/host-monitor.log",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 3097,
+      "sha256": "fa5c85de37cba22227f351cf3740523d7136172654f4b3e5a23631ef9fbb7e11"
+    },
+    {
+      "path": "docs/test-results/extended-perf-2026-11-23/host-resources.log",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 1082,
+      "sha256": "e40ce6bd299cf77414d18777122f5f5f81720b0ee7398eb1a16de66f41f3a089"
+    },
+    {
+      "path": "docs/test-results/extended-perf-2026-11-23/host-rx-perf.log",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 9700,
+      "sha256": "0d2297c01fee41e3fd0146e2baccf10340105dc30e6ca6a23a01de19e4b1c828"
+    },
+    {
+      "path": "docs/test-results/extended-perf-2026-11-23/host-rx.log",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 8999,
+      "sha256": "20cd95ad1c3f00cdcc27589e837521ff37dca6ecdbec1f4529f2ec4fcb802dca"
+    },
+    {
+      "path": "docs/test-results/extended-perf-2026-11-23/host-tracking-initial-config-error.log",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 507,
+      "sha256": "7c2c805635a12c71928b13099440ba6dc1fceb8f277904bb6932dfe002cb28b3"
+    },
+    {
+      "path": "docs/test-results/extended-perf-2026-11-23/host-tracking.log",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 5791,
+      "sha256": "f03dd8738cbcd74f58791a618770c307611a64b00672ade24da007cf7724f00d"
+    },
+    {
+      "path": "docs/test-results/extended-perf-2026-11-23/host-tx-perf.log",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 1759,
+      "sha256": "3947e421e38977c43d010629524665235e6a46ed18652e2725356b1719e01abe"
+    },
+    {
+      "path": "docs/test-results/extended-perf-2026-11-23/host-tx.log",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 1491,
+      "sha256": "e6ad3fe16c8698d12c522db07a709bd1ed1ec63a7fea11e24f5da29e54ff3b17"
+    },
+    {
+      "path": "docs/test-results/extended-perf-2026-11-23/host.json",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 727,
+      "sha256": "b27b4607a8a25e48e0a864b0b8956aaa2b6f4f492dab8596a374fdee7036d7c6"
+    },
+    {
+      "path": "docs/test-results/extended-perf-2026-11-23/load-30min.log",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 14465,
+      "sha256": "2964b5cbb4997d6885dab51903676a6ab6c4333e7a0a124350327174fa74f4f8"
+    },
+    {
+      "path": "docs/test-results/extended-perf-2026-11-23/load-30min/abort-audit.json",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 981,
+      "sha256": "e91982cb87cc96dd7a7ca8eaa7be05fa15d9071b766be87e5c1b2f05aacec3fe"
+    },
+    {
+      "path": "docs/test-results/extended-perf-2026-11-23/load-30min/build.config",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 38141,
+      "sha256": "0b7a78e59526e4de7093899f9dd3533bc3c06f78142a55fd4fc7a54d8742cd4a"
+    },
+    {
+      "path": "docs/test-results/extended-perf-2026-11-23/load-30min/build_perf.config",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 38333,
+      "sha256": "0afe8ed31ff45f6ea7b227675a2267ad4873ed7b1d3a2725e3d6f2636793fd2b"
+    },
+    {
+      "path": "docs/test-results/extended-perf-2026-11-23/load-30min/console.log",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 83932,
+      "sha256": "c4c4fa3cfb7ec754001672ea4f6093bf53ff8454df87677a5935f959cade114e"
+    },
+    {
+      "path": "docs/test-results/extended-perf-2026-11-23/load-30min/metadata.json",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 1319,
+      "sha256": "9fe3738b28e5b245d37b98a6beb14eb262e41fd47627016f9970f920f499e7c6"
+    },
+    {
+      "path": "docs/test-results/extended-perf-2026-11-23/load-30min/perf-flash.log",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 1471,
+      "sha256": "9ee2af8ae21e7ee86a4501931a197700df7266a119ae46f8ba2f088dff6794d7"
+    },
+    {
+      "path": "docs/test-results/extended-perf-2026-11-23/load-30min/performance.json",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 81916,
+      "sha256": "b2516f625b5e00029f93976e0bd25ecba07c8963166e6999e9fb3b3af9b5c437"
+    },
+    {
+      "path": "docs/test-results/extended-perf-2026-11-23/load-30min/restore-flash.log",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 1519,
+      "sha256": "290e53c85c41eb02e5d833f23c31f33dfc8a43868e45ff75fe9f9ed4d434bc48"
+    },
+    {
+      "path": "docs/test-results/extended-perf-2026-11-23/load-30min/restored-status.json",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 201,
+      "sha256": "ec670d3003483d76a770c9a91e84032458debb94b591b22f798c88bee649d38b"
+    },
+    {
+      "path": "docs/test-results/extended-perf-2026-11-23/load-30min/results.json",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 13834,
+      "sha256": "0fb310ac0b4d634d830cd8422ec08a5e1359e484634397a5d20bc66df43f654e"
+    },
+    {
+      "path": "docs/test-results/extended-perf-2026-11-23/load-30min/session/metadata.json",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 357,
+      "sha256": "fbffd555db60b9afff0f86a3ad903c1b6607ac4a56e55d17d40cc99e8df4ab6d"
+    },
+    {
+      "path": "docs/test-results/extended-perf-2026-11-23/load-30min/session/reports.csv",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 590480,
+      "sha256": "5f638b779b77fcc7ba25cf9286469e8d4664a9a1d9c9aa411140b4c500eb6416"
+    },
+    {
+      "path": "docs/test-results/extended-perf-2026-11-23/load-30min/session/samples.csv",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 825058,
+      "sha256": "0011cb95ddafbabf91f99193c57b7cf846dae0d2dd06dfe39aad8bef9a6b9f9e"
+    },
+    {
+      "path": "docs/test-results/extended-perf-2026-11-23/load-30min/session/status.csv",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 5559,
+      "sha256": "f0fd45b95576f121d68ea4fd9765eba411e260cbe42351e43df1b83df1af1426"
+    },
+    {
+      "path": "docs/test-results/extended-perf-2026-11-23/load-30min/session/wire.csv",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 1178062,
+      "sha256": "c11c2bd84b5016b0277f930af4f32b612b6e13b98679bf39e62a421645e74077"
+    },
+    {
+      "path": "docs/test-results/extended-perf-2026-11-23/perf_acceptance-snapshot.py",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 11274,
+      "sha256": "51e1e0bfa117384df63d24eb58d46344df6b4fcb3754225ff698d302d57d85c3"
+    },
+    {
+      "path": "docs/test-results/extended-perf-2026-11-23/python-final.log",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 1070,
+      "sha256": "687864415f260b31014a0bb9aec203c05a76a8de51b44eaf1413fc9ca3bbcd1e"
+    },
+    {
+      "path": "docs/test-results/extended-perf-2026-11-23/python.log",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 1070,
+      "sha256": "586ea5f1ba389045116e20fd83f8ce92ded10765b48dd1151b340ea426bff813"
+    },
+    {
+      "path": "docs/test-results/extended-perf-2026-11-23/smoke-1.log",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 10254,
+      "sha256": "4f8314bb34c3433c5a3f6126a6949a18ad1922bea40de832ca4e9544d8e900f3"
+    },
+    {
+      "path": "docs/test-results/extended-perf-2026-11-23/smoke-1/audit.json",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 248,
+      "sha256": "34b5f25f7f3f1f2e301f7e5ca4e70cf317a7348ac1388cd09a613d09ff0408ae"
+    },
+    {
+      "path": "docs/test-results/extended-perf-2026-11-23/smoke-1/build.config",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 38141,
+      "sha256": "0b7a78e59526e4de7093899f9dd3533bc3c06f78142a55fd4fc7a54d8742cd4a"
+    },
+    {
+      "path": "docs/test-results/extended-perf-2026-11-23/smoke-1/build_perf.config",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 38333,
+      "sha256": "0afe8ed31ff45f6ea7b227675a2267ad4873ed7b1d3a2725e3d6f2636793fd2b"
+    },
+    {
+      "path": "docs/test-results/extended-perf-2026-11-23/smoke-1/console.log",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 36459,
+      "sha256": "c8721ac870da3aeb7893cef8fe2946c482cd75c2484e88eb990050aa5600bedf"
+    },
+    {
+      "path": "docs/test-results/extended-perf-2026-11-23/smoke-1/metadata.json",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 1316,
+      "sha256": "e4ae2901cee2f3b80237f2288bacfbe4fdb6808964897eba36283ff614e45175"
+    },
+    {
+      "path": "docs/test-results/extended-perf-2026-11-23/smoke-1/perf-flash.log",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 1471,
+      "sha256": "0cf83f614f4362932498a0baba3a0e3408cec9360af8186da5f555c9b869a7ca"
+    },
+    {
+      "path": "docs/test-results/extended-perf-2026-11-23/smoke-1/performance.json",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 34454,
+      "sha256": "3b67585996e3f4c8ca0a88f62d8b8ad123a70e3e3cb01860749d0203033b383f"
+    },
+    {
+      "path": "docs/test-results/extended-perf-2026-11-23/smoke-1/restore-flash.log",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 1519,
+      "sha256": "7f506cbc9a93ebb2e02ba8208a49889f60bc7dace6566cff9520d60a92901fc9"
+    },
+    {
+      "path": "docs/test-results/extended-perf-2026-11-23/smoke-1/restored-status.json",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 201,
+      "sha256": "ec670d3003483d76a770c9a91e84032458debb94b591b22f798c88bee649d38b"
+    },
+    {
+      "path": "docs/test-results/extended-perf-2026-11-23/smoke-1/results.json",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 10254,
+      "sha256": "4f8314bb34c3433c5a3f6126a6949a18ad1922bea40de832ca4e9544d8e900f3"
+    },
+    {
+      "path": "docs/test-results/extended-perf-2026-11-23/smoke-1/session/metadata.json",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 355,
+      "sha256": "c9f52b6020ae111107c2e08ef3ff1604ba6f92d61b1ecb9c9a60d1f207f43cd1"
+    },
+    {
+      "path": "docs/test-results/extended-perf-2026-11-23/smoke-1/session/reports.csv",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 221998,
+      "sha256": "ee3222681e9b7c904ee21cf1a99dd004e1edcdec3bcad9b88941ca5ef705aa53"
+    },
+    {
+      "path": "docs/test-results/extended-perf-2026-11-23/smoke-1/session/samples.csv",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 313278,
+      "sha256": "b529fc3e60995f3baf7d422807a3e81ad099d0d57470f682447ed80a131b09a6"
+    },
+    {
+      "path": "docs/test-results/extended-perf-2026-11-23/smoke-1/session/status.csv",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 2196,
+      "sha256": "2e377654900c8fa45b09768447daf4b4f2ce14e9a5150ec387bfa128d5a4ba87"
+    },
+    {
+      "path": "docs/test-results/extended-perf-2026-11-23/smoke-1/session/wire.csv",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 450237,
+      "sha256": "c4dba5bb350c2039b768232f12f8e2b791303d61417953d6c50542f17cd034fd"
+    },
+    {
+      "path": "docs/test-results/extended-perf-2026-11-23/smoke-2.log",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 13441,
+      "sha256": "b8603cf07134ee5ad9b24ade3bc800dd711424b662605ab9b386e1de0da47744"
+    },
+    {
+      "path": "docs/test-results/extended-perf-2026-11-23/smoke-2/audit.json",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 245,
+      "sha256": "2bf0539caa6d262c9625523db61a21a5eb45038408fafeb40e36cc4cf748d164"
+    },
+    {
+      "path": "docs/test-results/extended-perf-2026-11-23/smoke-2/build.config",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 38141,
+      "sha256": "0b7a78e59526e4de7093899f9dd3533bc3c06f78142a55fd4fc7a54d8742cd4a"
+    },
+    {
+      "path": "docs/test-results/extended-perf-2026-11-23/smoke-2/build_perf.config",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 38333,
+      "sha256": "0afe8ed31ff45f6ea7b227675a2267ad4873ed7b1d3a2725e3d6f2636793fd2b"
+    },
+    {
+      "path": "docs/test-results/extended-perf-2026-11-23/smoke-2/console.log",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 12990,
+      "sha256": "0b065af48209b67295b9f2df00e9c1821d3c024863e3de0b8e98eb55fa15f4a3"
+    },
+    {
+      "path": "docs/test-results/extended-perf-2026-11-23/smoke-2/metadata.json",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 1316,
+      "sha256": "018644d467e2203c4f562b155d1c3a391bbd9cb00df3c3178d0eb21e72dad736"
+    },
+    {
+      "path": "docs/test-results/extended-perf-2026-11-23/smoke-2/perf-flash.log",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 1471,
+      "sha256": "d7575d5ad7a9b0d3c92bceb34fb917c354b392080f7468541448973ffe67caa8"
+    },
+    {
+      "path": "docs/test-results/extended-perf-2026-11-23/smoke-2/performance.json",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 12038,
+      "sha256": "70e6b091b8599fdb90a988927d63122d22be104947c05987910e2315aa38346b"
+    },
+    {
+      "path": "docs/test-results/extended-perf-2026-11-23/smoke-2/restore-flash.log",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 1519,
+      "sha256": "898c6f1154e6fd815690eb0752726555968835450e2594da77c96e2b80f349a2"
+    },
+    {
+      "path": "docs/test-results/extended-perf-2026-11-23/smoke-2/restored-status.json",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 201,
+      "sha256": "ec670d3003483d76a770c9a91e84032458debb94b591b22f798c88bee649d38b"
+    },
+    {
+      "path": "docs/test-results/extended-perf-2026-11-23/smoke-2/results.json",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 13441,
+      "sha256": "b8603cf07134ee5ad9b24ade3bc800dd711424b662605ab9b386e1de0da47744"
+    },
+    {
+      "path": "docs/test-results/extended-perf-2026-11-23/smoke-2/session/metadata.json",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 355,
+      "sha256": "20aeb144806bc63f39dc2a3d56dd71a1ba7f61cf28e5907c3948c7005c66771c"
+    },
+    {
+      "path": "docs/test-results/extended-perf-2026-11-23/smoke-2/session/reports.csv",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 67525,
+      "sha256": "e7ba96b9d6cdcbdff765f6e46ad07f2ee8215c80b6b7d9801110ae090be06c17"
+    },
+    {
+      "path": "docs/test-results/extended-perf-2026-11-23/smoke-2/session/samples.csv",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 97064,
+      "sha256": "e4c89b90e0c475a69e367ec3936a6d14a7584e9c21c4b79c923dc38db5bdeb4c"
+    },
+    {
+      "path": "docs/test-results/extended-perf-2026-11-23/smoke-2/session/status.csv",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 822,
+      "sha256": "bc44b4d41988c0da55291093dba9648efdf855db7681ffe305746c49f0904891"
+    },
+    {
+      "path": "docs/test-results/extended-perf-2026-11-23/smoke-2/session/wire.csv",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 139622,
+      "sha256": "6bf70735f36aa6746d198b0a705cd3ffd16c1c6af3c095b21437d5eef53d9072"
+    },
+    {
+      "path": "docs/test-results/extended-perf-2026-11-23/smoke-2/verdict-reassessment.json",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 8605,
+      "sha256": "51a7f37cb5dd45e7f3350d07691e3f91bf5e534603dc1b95fbd1f729d3b8358b"
+    },
+    {
+      "path": "docs/test-results/extended-perf-2026-11-23/source-final-sha256.json",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 5491,
+      "sha256": "f4206bd72d8b493fe60e26842b1a9b085d76d33fcec4585f517a79259fc42e4a"
+    },
+    {
+      "path": "docs/test-results/extended-perf-2026-11-23/source-sha256.json",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 5491,
+      "sha256": "0180713ebe0379a602ba88fbd6b9b46a33a0ddff7c081f51e2a05863d01f7811"
+    },
+    {
+      "path": "docs/test-results/irq-safe-perf-2026-11-23/README.md",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 3246,
+      "sha256": "883e956b9670266868e95f50e97ca4b791c2e305f9f68e3d2d6026844f43e357"
+    },
+    {
+      "path": "docs/test-results/irq-safe-perf-2026-11-23/build.log",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 3237,
+      "sha256": "f903ffeb27498711d9cf2c84644a198e6b4d01af33a77082f705d9cb4b05e939"
+    },
+    {
+      "path": "docs/test-results/irq-safe-perf-2026-11-23/build_debug.log",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 3425,
+      "sha256": "ab8fbadc9974cfc9b00ea3726872254ccade54c54afc53908edb572888ae6132"
+    },
+    {
+      "path": "docs/test-results/irq-safe-perf-2026-11-23/build_log_stress-final.log",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 3470,
+      "sha256": "5abdb5fdce235aabeceb5a9c48bf94bf5edb6d2e72f302188955158d416e72d0"
+    },
+    {
+      "path": "docs/test-results/irq-safe-perf-2026-11-23/build_log_stress.log",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 2327,
+      "sha256": "ba8305576e3b7bb61c85a88800baa0934be618873f87b75a3dfcb8190fe7bd3d"
+    },
+    {
+      "path": "docs/test-results/irq-safe-perf-2026-11-23/build_perf-final.log",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 3282,
+      "sha256": "b895e571a5e1efe4d80f6e2b10ed020ae2b37db675ff50b7870ce71179c71276"
+    },
+    {
+      "path": "docs/test-results/irq-safe-perf-2026-11-23/build_perf.log",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 3282,
+      "sha256": "877938975462f986d6f70b23be5d06ddc3722492bcf022139169af7eab8a2e31"
+    },
+    {
+      "path": "docs/test-results/irq-safe-perf-2026-11-23/build_transport_stress-final.log",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 3390,
+      "sha256": "9f436313bbcb1f57997be57b6260890ffab6572800a39307aea394b6efc8d511"
+    },
+    {
+      "path": "docs/test-results/irq-safe-perf-2026-11-23/build_transport_stress.log",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 2369,
+      "sha256": "a7b0782f9d07e2c3eeb3a4de7fcdae4fb8ceb77b8d9bc51e26f6225932be1fe2"
+    },
+    {
+      "path": "docs/test-results/irq-safe-perf-2026-11-23/firmware-builds-final.json",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 186,
+      "sha256": "a88dcc37ddcc4a0005bf60922fdfcb29c6f80498f31fb061e5d604c825746ce4"
+    },
+    {
+      "path": "docs/test-results/irq-safe-perf-2026-11-23/firmware-builds.json",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 292,
+      "sha256": "e7cfd95d5398a5938bebce1a82f8d91c186989248c1bdba3b024982f93afb400"
+    },
+    {
+      "path": "docs/test-results/irq-safe-perf-2026-11-23/firmware-images.json",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 872,
+      "sha256": "49d03da1484baa81035086bcc1ed7b57cbe88c0df31802dc0ca136d9d5ca1b69"
+    },
+    {
+      "path": "docs/test-results/irq-safe-perf-2026-11-23/host-final.json",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 538,
+      "sha256": "af5f9195cda094847be00fd384419dc222c628edee8bd939ff165b2a73a3c866"
+    },
+    {
+      "path": "docs/test-results/irq-safe-perf-2026-11-23/host-handler-perf.log",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 5052,
+      "sha256": "255dfe7a2c5781499e97e145419b22e9527549aed263dd563395e78ddea26992"
+    },
+    {
+      "path": "docs/test-results/irq-safe-perf-2026-11-23/host-handler.log",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 4766,
+      "sha256": "feb5dd04b96be3fef1787274107c274689b372398cc8e43c9a8303a9e542c93c"
+    },
+    {
+      "path": "docs/test-results/irq-safe-perf-2026-11-23/host-monitor.log",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 2593,
+      "sha256": "91e1b711613d03fb1829f5af9dc6bbaec44f1938bbd0673c5d92aa91263ff7c3"
+    },
+    {
+      "path": "docs/test-results/irq-safe-perf-2026-11-23/host-resources.log",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 448,
+      "sha256": "4fdca357664b2ffd0bf9a0ef33019433ca2b4cf83c0b2900788143719794d731"
+    },
+    {
+      "path": "docs/test-results/irq-safe-perf-2026-11-23/host-rx-perf.log",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 9949,
+      "sha256": "34cc1b78da4df5d8ecbdd32c98e3456e09a04547e77932e20ae99d43bf1b6ceb"
+    },
+    {
+      "path": "docs/test-results/irq-safe-perf-2026-11-23/host-rx.log",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 7648,
+      "sha256": "f570b2d793441eaf769d45c8dd7c269f6436ca6a12e701a157341525c2f0f6ba"
+    },
+    {
+      "path": "docs/test-results/irq-safe-perf-2026-11-23/host-tracking.log",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 2582,
+      "sha256": "2d7105c070d2a489ddad5acc705d29683842ea17c69b831b5a41f2b97a7d87a8"
+    },
+    {
+      "path": "docs/test-results/irq-safe-perf-2026-11-23/host-tx-perf-final.log",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 854,
+      "sha256": "a42ed48e7763937cbbddb50d28ed87d2531f69cbdd5729672da6c6946ca8a30e"
+    },
+    {
+      "path": "docs/test-results/irq-safe-perf-2026-11-23/host-tx-perf.log",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 1791,
+      "sha256": "42c1783d57bc50bd1bfad5680350e79267aac507efd85c29f7117775eb07352b"
+    },
+    {
+      "path": "docs/test-results/irq-safe-perf-2026-11-23/host-tx.log",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 710,
+      "sha256": "131f139cc421b596793aff9e66f48e3d511fd096edf97857e9a044ce650eb302"
+    },
+    {
+      "path": "docs/test-results/irq-safe-perf-2026-11-23/host.json",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 479,
+      "sha256": "7fd39725b8d8ab33334f3835f1d4c7541b34d13f55e2c7312f29cf30bafa752e"
+    },
+    {
+      "path": "docs/test-results/irq-safe-perf-2026-11-23/python.log",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 1071,
+      "sha256": "1713842994b509adf19bea7ddb94d3c33f9b359f607948b8bece9a699fe44ba9"
+    },
+    {
+      "path": "docs/test-results/irq-safe-perf-2026-11-23/run-300s.log",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 17061,
+      "sha256": "9eee8b6e2a833e6726e6940e03d92fbcbbb0e52c47e410dbe231e9dab9070792"
+    },
+    {
+      "path": "docs/test-results/irq-safe-perf-2026-11-23/run-300s/audit.json",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 252,
+      "sha256": "26be43931b11bf93d5f054d9c0b706cf56ba142e96b65b8c04f49de11ac30f75"
+    },
+    {
+      "path": "docs/test-results/irq-safe-perf-2026-11-23/run-300s/build.config",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 38141,
+      "sha256": "0b7a78e59526e4de7093899f9dd3533bc3c06f78142a55fd4fc7a54d8742cd4a"
+    },
+    {
+      "path": "docs/test-results/irq-safe-perf-2026-11-23/run-300s/build_perf.config",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 38333,
+      "sha256": "0afe8ed31ff45f6ea7b227675a2267ad4873ed7b1d3a2725e3d6f2636793fd2b"
+    },
+    {
+      "path": "docs/test-results/irq-safe-perf-2026-11-23/run-300s/console.log",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 159971,
+      "sha256": "7577491acd06bd73e31126680b1253fe047f765089d236bf8f4678a97172a8c2"
+    },
+    {
+      "path": "docs/test-results/irq-safe-perf-2026-11-23/run-300s/metadata.json",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 1317,
+      "sha256": "f1713ea651090c3a56ffcb3be0530526bf2594c0d5f44fc8a7d9577275152fb7"
+    },
+    {
+      "path": "docs/test-results/irq-safe-perf-2026-11-23/run-300s/perf-flash.log",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 1471,
+      "sha256": "b4337a9015f26f5392265c85dc12a20e4321c68ff852beba93445690c63a95f9"
+    },
+    {
+      "path": "docs/test-results/irq-safe-perf-2026-11-23/run-300s/performance.json",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 156762,
+      "sha256": "6bda3bcd3eda109f4ab5a32fd758f57b8a5f3d8a8fc8278237fc7fbc0311985b"
+    },
+    {
+      "path": "docs/test-results/irq-safe-perf-2026-11-23/run-300s/restore-flash.log",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 2568,
+      "sha256": "dba51aadf10e41ca0f36010061929542878ca8ce31e9cd4ec7aeebfb77a87332"
+    },
+    {
+      "path": "docs/test-results/irq-safe-perf-2026-11-23/run-300s/restored-status.json",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 201,
+      "sha256": "ec670d3003483d76a770c9a91e84032458debb94b591b22f798c88bee649d38b"
+    },
+    {
+      "path": "docs/test-results/irq-safe-perf-2026-11-23/run-300s/results.json",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 15793,
+      "sha256": "e7fffd986146200a8d0880bd67f2cea80c67d08522c2fb31cbdbb6029602b5f2"
+    },
+    {
+      "path": "docs/test-results/irq-safe-perf-2026-11-23/run-300s/session/metadata.json",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 356,
+      "sha256": "20823eb00c4f643bb5d5b4a4d769f28b5bc59ba8350411c50bce54c0f2e69536"
+    },
+    {
+      "path": "docs/test-results/irq-safe-perf-2026-11-23/run-300s/session/reports.csv",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 1128384,
+      "sha256": "45cb10c17a9e5258a5ad7065d0eee10398ea4185c4d946b90b2cef484bd491d9"
+    },
+    {
+      "path": "docs/test-results/irq-safe-perf-2026-11-23/run-300s/session/samples.csv",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 1559364,
+      "sha256": "49fc0c03d00e51361c136c1e07e0c6c37a0cdb59b1798676389ae9ce672c8b41"
+    },
+    {
+      "path": "docs/test-results/irq-safe-perf-2026-11-23/run-300s/session/status.csv",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 10302,
+      "sha256": "cb3d560a9489f7a249378efe957134e3d6ae040fa580f03cc3f0e137f0834215"
+    },
+    {
+      "path": "docs/test-results/irq-safe-perf-2026-11-23/run-300s/session/wire.csv",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 2220626,
+      "sha256": "35d758ff43a8e1cc3fbdd90af0e801d20a3673edb218b4af28a763677bac1969"
+    },
+    {
+      "path": "docs/test-results/irq-safe-perf-2026-11-23/rx-build-final.log",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 230,
+      "sha256": "dac680b0801ff9146313a0b8018723ee0d8934eedd5aadf592550c127e8cb9ec"
+    },
+    {
+      "path": "docs/test-results/irq-safe-perf-2026-11-23/rx-tests-final.log",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 8150,
+      "sha256": "454c526f87cd45ebc15a298bdfe0cb982640971de010a5f9093083ee2e5a1bfa"
+    },
+    {
+      "path": "docs/test-results/irq-safe-perf-2026-11-23/source-sha256.json",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 5116,
+      "sha256": "168ed484079357e4eb3abe4ca81a086a7a5e82d4988dcfc4b0b6b8511bd76d7d"
+    },
+    {
+      "path": "docs/test-results/irq-safe-perf-2026-11-23/transport.log",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 46,
+      "sha256": "c06e290b70bdbe5b76184e22e1931bed2e17cb27affb221dda2461bd6a6ee730"
+    },
+    {
+      "path": "docs/test-results/irq-safe-perf-2026-11-23/transport/bench-flash.log",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 1553,
+      "sha256": "a0deb09e30bd2d60070964e7ed63b992f94d8eeefc69ea2175f6b5b6d7cbcc34"
+    },
+    {
+      "path": "docs/test-results/irq-safe-perf-2026-11-23/transport/console.log",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 3614,
+      "sha256": "35346f0f7397846a8bb6136c1e11617abed51b42d0cf78748a5423301aa4b8fd"
+    },
+    {
+      "path": "docs/test-results/irq-safe-perf-2026-11-23/transport/reports.json",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 3749,
+      "sha256": "710bc7116b2782d376b30a99aa7066bec69f96f78a01eb86c2fb5482cc28ae6d"
+    },
+    {
+      "path": "docs/test-results/irq-safe-perf-2026-11-23/transport/restore-flash.log",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 1519,
+      "sha256": "0eefa44a07c7d8be2832d5ef84a9ca05ea28f8d25a9bfbedea5a4e7d7cdb61c7"
+    },
+    {
+      "path": "docs/test-results/irq-safe-perf-2026-11-23/transport/results.json",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 7018,
+      "sha256": "63b37bcc6ced363cb5fce1d2bd6ce29c7ceb23943d18f09761e0e7e05cb40e92"
+    },
+    {
+      "path": "docs/test-results/irq-safe-perf-2026-11-23/transport/status.json",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 3148,
+      "sha256": "fcf0efff759c9fda44582dce64b7d4f2b3cb9ba3e48ccc613cd5edb6e24ba458"
+    },
+    {
+      "path": "docs/test-results/irq-safe-perf-2026-11-23/transport/wire.json",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 9485,
+      "sha256": "2e1ec23da392324922feb9fb0fd3bb201d9b1f47cd91058f2144619279ff9d73"
+    },
+    {
+      "path": "docs/test-results/irq-safe-perf-2026-11-23/uart-rx-disassembly.txt",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 17332,
+      "sha256": "11d9b5ca9e30460b360a7db5c8758301b15553ac868a90f79ac043cada9fadf9"
+    },
+    {
+      "path": "docs/test-results/release-v1.1.0-2026-11-23/.gitignore",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 111,
+      "sha256": "8840ba32bf6f5b0c81bd5c19e5a28bb7f2ef7ed3380eb03ee49d540c8ff481b3"
+    },
+    {
+      "path": "docs/test-results/release-v1.1.0-2026-11-23/audit_sessions.py",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 2452,
+      "sha256": "cfa6bc236b8f95b1287063c4185ef130b191279951c1718b839bfb395160c6d2"
+    },
+    {
+      "path": "docs/test-results/release-v1.1.0-2026-11-23/compile-build.log",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 22,
+      "sha256": "8c35b1682f73592d30612d7b0fabdb384fcfff35cb5a076cb48b85b1368aa794"
+    },
+    {
+      "path": "docs/test-results/release-v1.1.0-2026-11-23/compile-build_debug.log",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 22,
+      "sha256": "8c35b1682f73592d30612d7b0fabdb384fcfff35cb5a076cb48b85b1368aa794"
+    },
+    {
+      "path": "docs/test-results/release-v1.1.0-2026-11-23/compile-build_log_stress.log",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 1552,
+      "sha256": "e631d2b15a74d72e5127e9caadcc75636b51d2a596d3cff99f17d3a041a7a44e"
+    },
+    {
+      "path": "docs/test-results/release-v1.1.0-2026-11-23/compile-build_perf.log",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 22,
+      "sha256": "8c35b1682f73592d30612d7b0fabdb384fcfff35cb5a076cb48b85b1368aa794"
+    },
+    {
+      "path": "docs/test-results/release-v1.1.0-2026-11-23/compile-build_transport_stress.log",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 1558,
+      "sha256": "731fd2e5eae6fa2a14d58eb84af673dff8b14ba17d09451c70d840ed40e1b0a4"
+    },
+    {
+      "path": "docs/test-results/release-v1.1.0-2026-11-23/evaluate-dropout.log",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 1354,
+      "sha256": "28608613b32de7db8a813b58599798c600007908c960736896ec552a0c7e82d8"
+    },
+    {
+      "path": "docs/test-results/release-v1.1.0-2026-11-23/evaluate-dropout/20261123-125955-23a43874/evaluation.json",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 1213,
+      "sha256": "2891a71ce834aec480996704865d7825995b3dfb3b43cb775ec3b2eca30cfdd4"
+    },
+    {
+      "path": "docs/test-results/release-v1.1.0-2026-11-23/evaluate-dropout/20261123-125955-23a43874/metadata.json",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 425,
+      "sha256": "ddd5c27746d0a3c963b9273b6242b9f63407763eadfa75439510f1c9faf84630"
+    },
+    {
+      "path": "docs/test-results/release-v1.1.0-2026-11-23/evaluate-dropout/20261123-125955-23a43874/reports.csv",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 10539,
+      "sha256": "50296d6483cf20e6d998be77b03d9a67293e2b46d112444c20fc1316fb47935e"
+    },
+    {
+      "path": "docs/test-results/release-v1.1.0-2026-11-23/evaluate-dropout/20261123-125955-23a43874/samples.csv",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 10812,
+      "sha256": "c36c1d668774aae4797724207f8748ac33dda28b016ede6076939fdef2963a5a"
+    },
+    {
+      "path": "docs/test-results/release-v1.1.0-2026-11-23/evaluate-dropout/20261123-125955-23a43874/status.csv",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 216,
+      "sha256": "90098b3ef76fe1b7d98b675f60010b8653f8614f2ce5fd15b930369f1a4cfa82"
+    },
+    {
+      "path": "docs/test-results/release-v1.1.0-2026-11-23/evaluate-dropout/20261123-125955-23a43874/wire.csv",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 18560,
+      "sha256": "ad30ed4929fce291e9c992e281b5481d165082ed73bd35bce3e660a4c68a9b49"
+    },
+    {
+      "path": "docs/test-results/release-v1.1.0-2026-11-23/evaluate-noisy.log",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 1353,
+      "sha256": "03457248284b7c89d73be52e053a678d4531be764384cea3a6d9e07a1bdf5093"
+    },
+    {
+      "path": "docs/test-results/release-v1.1.0-2026-11-23/evaluate-noisy/20261123-125940-925be0fc/evaluation.json",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 1214,
+      "sha256": "6874a776972a5ad17ae4427b370abdc04d33aa5ebd0ccded08fcc4744f6f5df9"
+    },
+    {
+      "path": "docs/test-results/release-v1.1.0-2026-11-23/evaluate-noisy/20261123-125940-925be0fc/metadata.json",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 403,
+      "sha256": "852807a05b237935b683761ab801eebbfa400ec23d8c6dae19e60333da98b9c1"
+    },
+    {
+      "path": "docs/test-results/release-v1.1.0-2026-11-23/evaluate-noisy/20261123-125940-925be0fc/reports.csv",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 11946,
+      "sha256": "3b6569082e41c29c2d2b9723c7f6325d279ac9e6f0a40c523db8991080c3972f"
+    },
+    {
+      "path": "docs/test-results/release-v1.1.0-2026-11-23/evaluate-noisy/20261123-125940-925be0fc/samples.csv",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 12336,
+      "sha256": "112463b741f8c5f1fc4eb1662eba2a62dc2ef4d055bb167d81029060ff1a6b2a"
+    },
+    {
+      "path": "docs/test-results/release-v1.1.0-2026-11-23/evaluate-noisy/20261123-125940-925be0fc/status.csv",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 217,
+      "sha256": "35ff910f94dbc28f1bcf0042c64d5377f23026af8cdcc7866582844f112ef03b"
+    },
+    {
+      "path": "docs/test-results/release-v1.1.0-2026-11-23/evaluate-noisy/20261123-125940-925be0fc/wire.csv",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 21046,
+      "sha256": "9dc1bc0fe17ad0a92ae278cbf0df681c6c19084cdf875eaf932120b78c736fb1"
+    },
+    {
+      "path": "docs/test-results/release-v1.1.0-2026-11-23/evaluate-normal.log",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 1355,
+      "sha256": "72616d8af009f943088d13ae3c6b61344c0351471a1d3c3e93ecc26af0b315cf"
+    },
+    {
+      "path": "docs/test-results/release-v1.1.0-2026-11-23/evaluate-normal/20261123-125925-552d6e5d/evaluation.json",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 1215,
+      "sha256": "4917765c5ced91f2713e036d58a035b38db903b226cd9a6e2bc94e7cbe6c5f4b"
+    },
+    {
+      "path": "docs/test-results/release-v1.1.0-2026-11-23/evaluate-normal/20261123-125925-552d6e5d/metadata.json",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 404,
+      "sha256": "e19a013c90f7cd8b34c97ffecc82daeb9b10265881e7a2c6b4b67c874421eaa3"
+    },
+    {
+      "path": "docs/test-results/release-v1.1.0-2026-11-23/evaluate-normal/20261123-125925-552d6e5d/reports.csv",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 11818,
+      "sha256": "ca80c59d6aaab4111921955d31ab4a5b26a6844e2ac8ad40abd60016bee39a7b"
+    },
+    {
+      "path": "docs/test-results/release-v1.1.0-2026-11-23/evaluate-normal/20261123-125925-552d6e5d/samples.csv",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 12306,
+      "sha256": "66d70f3299ecc887aaa0792bff41340faeeb845027ee627fb5bbc5813f12e3ca"
+    },
+    {
+      "path": "docs/test-results/release-v1.1.0-2026-11-23/evaluate-normal/20261123-125925-552d6e5d/status.csv",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 218,
+      "sha256": "ebfa9b46c5d7adb8f852872583e5c4809f5d5161592f2e21d59c363f5e6bf31b"
+    },
+    {
+      "path": "docs/test-results/release-v1.1.0-2026-11-23/evaluate-normal/20261123-125925-552d6e5d/wire.csv",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 21036,
+      "sha256": "91d2af66d465ec3c8eaf397d723493699fc29fbe7fd48329b4f0cc41afe3866b"
+    },
+    {
+      "path": "docs/test-results/release-v1.1.0-2026-11-23/final-smoke.log",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 679,
+      "sha256": "f485dc73a3b8518e2ea9e22bc78d6b1e31530433a3513d132770b634be5d08de"
+    },
+    {
+      "path": "docs/test-results/release-v1.1.0-2026-11-23/final-smoke/checks.json",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 3936,
+      "sha256": "9ff7d4358bcbc3f4715faa3fd33bb20bb5f703c25fe9987290d3c185e50e027f"
+    },
+    {
+      "path": "docs/test-results/release-v1.1.0-2026-11-23/final-smoke/console.log",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 319,
+      "sha256": "e82497f1760200ed251c744241637c3df8be21fd390bdfcb1951493d793eed2e"
+    },
+    {
+      "path": "docs/test-results/release-v1.1.0-2026-11-23/final-smoke/reports.json",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 6051,
+      "sha256": "54ff8a23041eb597c7aabfa9611b48f322efe0580ec9d3383f7f7c8d196de90d"
+    },
+    {
+      "path": "docs/test-results/release-v1.1.0-2026-11-23/final_smoke.py",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 3829,
+      "sha256": "a07773cbf1cc908a9db8a3ab77ccc251dbebeb5ef1c7ca579d1ce5208f704ca8"
+    },
+    {
+      "path": "docs/test-results/release-v1.1.0-2026-11-23/gui/console.log",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 315,
+      "sha256": "ce19251c27838f1aeafc3ca6ffea91ef7ca382689f6acb26f9e15b4728190f64"
+    },
+    {
+      "path": "docs/test-results/release-v1.1.0-2026-11-23/gui/gui-settings.png",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 391602,
+      "sha256": "8e3867218a3e3201174643b8aec658c3ec3d2a98591395a8103f4e31ba1c51f8"
+    },
+    {
+      "path": "docs/test-results/release-v1.1.0-2026-11-23/gui/gui-track.png",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 419705,
+      "sha256": "f26a7bf88ec64ef7931575e4adab055c082b4c90a78750372105321442941427"
+    },
+    {
+      "path": "docs/test-results/release-v1.1.0-2026-11-23/gui/result.json",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 446,
+      "sha256": "d2003c757fd4ed9bed6c27f6c87ff5941899db6d51d5113d5c963d88ae5709aa"
+    },
+    {
+      "path": "docs/test-results/release-v1.1.0-2026-11-23/gui/session/20261123-141357-7bc50801/metadata.json",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 353,
+      "sha256": "35b372739fc8408a897b290bfd5d9fa02e900b09636a1e7db4bec50c09a495d3"
+    },
+    {
+      "path": "docs/test-results/release-v1.1.0-2026-11-23/gui/session/20261123-141357-7bc50801/reports.csv",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 13682,
+      "sha256": "66f796b59e0e69e3828a95c8434aab22c39a7ffd32537be3f8ca2250b5450cfc"
+    },
+    {
+      "path": "docs/test-results/release-v1.1.0-2026-11-23/gui/session/20261123-141357-7bc50801/samples.csv",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 14506,
+      "sha256": "d37623c57bbb78e20bd4069fe9c508d5757266182676741f04e30edac15ecf00"
+    },
+    {
+      "path": "docs/test-results/release-v1.1.0-2026-11-23/gui/session/20261123-141357-7bc50801/status.csv",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 184,
+      "sha256": "45a2bc3aa61865f9a5462104089fbf47ddd73f08a1c05d61efff04e147c2aa37"
+    },
+    {
+      "path": "docs/test-results/release-v1.1.0-2026-11-23/gui/session/20261123-141357-7bc50801/wire.csv",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 20774,
+      "sha256": "35361310886a940f4a14e2d463cb51c4909a3cefd48a8bd6370ef4d2e3182fbf"
+    },
+    {
+      "path": "docs/test-results/release-v1.1.0-2026-11-23/gui_check.py",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 3394,
+      "sha256": "ae1044209e4258b950103302a0389f767f4f02cd597630325dd07ce8efbf47d0"
+    },
+    {
+      "path": "docs/test-results/release-v1.1.0-2026-11-23/host-handler-perf.log",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 7267,
+      "sha256": "682118b149b7d14beda677904e074c3f3ba1066afbe2fa8bebde1340ebb36e05"
+    },
+    {
+      "path": "docs/test-results/release-v1.1.0-2026-11-23/host-handler.log",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 6855,
+      "sha256": "c37a1c624104a5dde1107b4145633e69346559ce02c175c51841ed0173cef4d6"
+    },
+    {
+      "path": "docs/test-results/release-v1.1.0-2026-11-23/host-monitor.log",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 2975,
+      "sha256": "0890fb884769ee10811f6fbe5ace85bc2c004d126c9d2b4438b1db60a8b156ed"
+    },
+    {
+      "path": "docs/test-results/release-v1.1.0-2026-11-23/host-rx.log",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 8991,
+      "sha256": "8c16ba4886252d5160c25f4d3d8ee0924c18927c112aebd5c90146bfdcd2485c"
+    },
+    {
+      "path": "docs/test-results/release-v1.1.0-2026-11-23/host-tests.json",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 550,
+      "sha256": "753343399ac2c25cc76998a1624bc1686964568f9e1a3270425866410b772610"
+    },
+    {
+      "path": "docs/test-results/release-v1.1.0-2026-11-23/host-tracking.log",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 5783,
+      "sha256": "c6521526bbed8c001ba20918fe12be6c352b5f7b2967ed62e83d502f0b0945b7"
+    },
+    {
+      "path": "docs/test-results/release-v1.1.0-2026-11-23/host-tx-perf.log",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 1751,
+      "sha256": "aa0803914bbb3091f7042d2d57c0668a46e673b8903f9649d12fa022ec9ee4f8"
+    },
+    {
+      "path": "docs/test-results/release-v1.1.0-2026-11-23/host-tx.log",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 1483,
+      "sha256": "bf4524b0d9271c77667dc3be8fe04947ca198833586acd3e3dc506e8f65ecf86"
+    },
+    {
+      "path": "docs/test-results/release-v1.1.0-2026-11-23/logs-producer.log",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 1036,
+      "sha256": "737c75fa7d125c2df7866bda3d21966b941347829adb62ecbd18f5f0cc4a357b"
+    },
+    {
+      "path": "docs/test-results/release-v1.1.0-2026-11-23/logs-producer/console.log",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 126564,
+      "sha256": "9cccb8c5d90779d44ccdb9961ea5339746be0f19a98311c648dedf03173a9b1d"
+    },
+    {
+      "path": "docs/test-results/release-v1.1.0-2026-11-23/logs-producer/firmware.config",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 38274,
+      "sha256": "9351227a93030c6dedb0a0c90e6a040e321ddbff14080bdf474dae9625019852"
+    },
+    {
+      "path": "docs/test-results/release-v1.1.0-2026-11-23/logs-producer/flash.log",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 1483,
+      "sha256": "1d43ba34c75c2e516bfbd985393a4c3f8bd5dc23ab1a180b77f41dc4616a6741"
+    },
+    {
+      "path": "docs/test-results/release-v1.1.0-2026-11-23/logs-producer/results.json",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 25848,
+      "sha256": "0a86abd2c68cf45c7362433f8a1d57804f536b876ed22f3d2a36e1fb72dc715a"
+    },
+    {
+      "path": "docs/test-results/release-v1.1.0-2026-11-23/logs-producer/traffic.json",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 28185,
+      "sha256": "db4f393fe406f8dd488c20a8a4697f52cefff83a7519afc5721479684d40b0e6"
+    },
+    {
+      "path": "docs/test-results/release-v1.1.0-2026-11-23/logs-traffic.log",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 1202,
+      "sha256": "a99164168f035ce10581045d8f08b51cb573404c61e6a361541d4c0ae02f9317"
+    },
+    {
+      "path": "docs/test-results/release-v1.1.0-2026-11-23/logs-traffic/console.log",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 114514,
+      "sha256": "1093796c68f3ced4a88d0ae8c547d81164b375105ec980d1ce76c1083a99970f"
+    },
+    {
+      "path": "docs/test-results/release-v1.1.0-2026-11-23/logs-traffic/firmware.config",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 38285,
+      "sha256": "6b2b199c7abd612056851edcda9bfae0689849f911a9f0e90924844e0ce9a5aa"
+    },
+    {
+      "path": "docs/test-results/release-v1.1.0-2026-11-23/logs-traffic/flash.log",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 1473,
+      "sha256": "38a47fd2f2c0824db989b58ec0daf17051466643052f8e2a7438177ada064b69"
+    },
+    {
+      "path": "docs/test-results/release-v1.1.0-2026-11-23/logs-traffic/results.json",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 22933,
+      "sha256": "9f78e6ffa1310708c3c016e69a68eaa318520e2258b2ef3c4ae739f1bde52217"
+    },
+    {
+      "path": "docs/test-results/release-v1.1.0-2026-11-23/logs-traffic/traffic.json",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 108774,
+      "sha256": "0a9ff89c2148cf86148a80ffeaf55036a9740f94b9fdc867585a9ea7f981651c"
+    },
+    {
+      "path": "docs/test-results/release-v1.1.0-2026-11-23/manifest.json",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 140421,
+      "sha256": "8a9d0d79c9ce0f4473def94300bb93aae8b85bd36082832d580d9417ed7ee44e"
+    },
+    {
+      "path": "docs/test-results/release-v1.1.0-2026-11-23/noise-summary.json",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 267124,
+      "sha256": "4274d2a87b9e3f3a61812298dbd6b650c01f3438b59fcfa9fa8eb070c5637e4b"
+    },
+    {
+      "path": "docs/test-results/release-v1.1.0-2026-11-23/noise-sweep.log",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 17430,
+      "sha256": "dc1bbaae965ec4a39286b103f01acf8d828dc5b059c3f50ca67c7094e08c6841"
+    },
+    {
+      "path": "docs/test-results/release-v1.1.0-2026-11-23/noise.tar.gz",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 1479407,
+      "sha256": "f9243c18cc82691711a94f8a92a580cbf681336b14e8f9a923d514c541877e6e"
+    },
+    {
+      "path": "docs/test-results/release-v1.1.0-2026-11-23/package_evidence.py",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 1897,
+      "sha256": "39b3db571642cb111539745b3e52c6b59bc9281fda322e37a26fe51aeba6db81"
+    },
+    {
+      "path": "docs/test-results/release-v1.1.0-2026-11-23/perf-load-session.tar.gz",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 5186677,
+      "sha256": "5499222d1401367314c2a1b3ef885fe9263221032f73bcc04a64370f4682c834"
+    },
+    {
+      "path": "docs/test-results/release-v1.1.0-2026-11-23/perf-load.log",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 13974,
+      "sha256": "8189d50b0a449f2ca53120299a76d9a51b157580bfb3614dc688b22bc7622725"
+    },
+    {
+      "path": "docs/test-results/release-v1.1.0-2026-11-23/perf-load/build.config",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 38141,
+      "sha256": "0b7a78e59526e4de7093899f9dd3533bc3c06f78142a55fd4fc7a54d8742cd4a"
+    },
+    {
+      "path": "docs/test-results/release-v1.1.0-2026-11-23/perf-load/build_perf.config",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 38097,
+      "sha256": "a47e845b9a84a7c839a771a240715c64d46de9056f576b04ef0446753cced0a0"
+    },
+    {
+      "path": "docs/test-results/release-v1.1.0-2026-11-23/perf-load/console.log",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 527396,
+      "sha256": "bc1dd16cc8b6ff0996fe4f040112793d409ae6a211a700cfa72f62e84a69d824"
+    },
+    {
+      "path": "docs/test-results/release-v1.1.0-2026-11-23/perf-load/latency-tail.json",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 2607,
+      "sha256": "435b3116bab29af3f88dc060422b4213ed2d923f9a6b6fc78ed7aa48640fdbac"
+    },
+    {
+      "path": "docs/test-results/release-v1.1.0-2026-11-23/perf-load/metadata.json",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 688,
+      "sha256": "9ba22bfc720f0b3758dc35e2b03dd8493cabccd94e0dac876f7d5b006d2f4a5b"
+    },
+    {
+      "path": "docs/test-results/release-v1.1.0-2026-11-23/perf-load/perf-flash.log",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 1529,
+      "sha256": "4c9e14a7941e696819c5a6d218936a550d1db347a2375612c9e84fd624137664"
+    },
+    {
+      "path": "docs/test-results/release-v1.1.0-2026-11-23/perf-load/performance.json",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 506210,
+      "sha256": "b9a806f4c731880a276a61572059640ccfda6ab715fa450baba8ecb75153d662"
+    },
+    {
+      "path": "docs/test-results/release-v1.1.0-2026-11-23/perf-load/restore-flash.log",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 1461,
+      "sha256": "5b1fd106684dcc1534c5a3727f4d50744772aac2ab81c8bc982f8430b724a106"
+    },
+    {
+      "path": "docs/test-results/release-v1.1.0-2026-11-23/perf-load/restored-status.json",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 201,
+      "sha256": "ec670d3003483d76a770c9a91e84032458debb94b591b22f798c88bee649d38b"
+    },
+    {
+      "path": "docs/test-results/release-v1.1.0-2026-11-23/perf-load/results.json",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 4673,
+      "sha256": "be61bc97db9efd4ff0827b9cb62686b72a267fce7a45affbb6df570a8a734b83"
+    },
+    {
+      "path": "docs/test-results/release-v1.1.0-2026-11-23/perf-smoke.log",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 4674,
+      "sha256": "70373755f2e58dbf83c48ae52b66c5771809862757005c599b12f63d8d287351"
+    },
+    {
+      "path": "docs/test-results/release-v1.1.0-2026-11-23/perf-smoke/build.config",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 38141,
+      "sha256": "0b7a78e59526e4de7093899f9dd3533bc3c06f78142a55fd4fc7a54d8742cd4a"
+    },
+    {
+      "path": "docs/test-results/release-v1.1.0-2026-11-23/perf-smoke/build_perf.config",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 38097,
+      "sha256": "a47e845b9a84a7c839a771a240715c64d46de9056f576b04ef0446753cced0a0"
+    },
+    {
+      "path": "docs/test-results/release-v1.1.0-2026-11-23/perf-smoke/console.log",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 6901,
+      "sha256": "1272923e917d400eaf34c56df5a2d083514317b91dca98d21b1acf31c72601ae"
+    },
+    {
+      "path": "docs/test-results/release-v1.1.0-2026-11-23/perf-smoke/metadata.json",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 685,
+      "sha256": "f7d7783fec274629ca66e6d4d734789bc264bb4e366b458d5cbef15dfae5efcf"
+    },
+    {
+      "path": "docs/test-results/release-v1.1.0-2026-11-23/perf-smoke/perf-flash.log",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 1529,
+      "sha256": "5887087dcf7dd1b9c3e011f85b8e2be5dff80c061ceb67e5117b830766f93117"
+    },
+    {
+      "path": "docs/test-results/release-v1.1.0-2026-11-23/perf-smoke/performance.json",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 5332,
+      "sha256": "8959ffcd0201ac973e599436ce96d2bfdece5b0925432b1051ef402e3a609c34"
+    },
+    {
+      "path": "docs/test-results/release-v1.1.0-2026-11-23/perf-smoke/restore-flash.log",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 1461,
+      "sha256": "39b33859ea07d308731eb4536aaa46e199f9361873a1f2fb5becaa07a1cdb084"
+    },
+    {
+      "path": "docs/test-results/release-v1.1.0-2026-11-23/perf-smoke/restored-status.json",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 201,
+      "sha256": "ec670d3003483d76a770c9a91e84032458debb94b591b22f798c88bee649d38b"
+    },
+    {
+      "path": "docs/test-results/release-v1.1.0-2026-11-23/perf-smoke/results.json",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 4674,
+      "sha256": "70373755f2e58dbf83c48ae52b66c5771809862757005c599b12f63d8d287351"
+    },
+    {
+      "path": "docs/test-results/release-v1.1.0-2026-11-23/perf-smoke/session/metadata.json",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 355,
+      "sha256": "35c2c6b682a6a6ed2708f8ba163046fc923f314e90db3acde60db97b92c34ac6"
+    },
+    {
+      "path": "docs/test-results/release-v1.1.0-2026-11-23/perf-smoke/session/reports.csv",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 36235,
+      "sha256": "12ba77f0eacd128f589211196a99760d6e81233433f3ab6b5b8cd7d8da372da8"
+    },
+    {
+      "path": "docs/test-results/release-v1.1.0-2026-11-23/perf-smoke/session/samples.csv",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 52213,
+      "sha256": "71c52a4cb4e76bcb4d8e413016120e6936e052486e3c52afdb3f0369390ce57d"
+    },
+    {
+      "path": "docs/test-results/release-v1.1.0-2026-11-23/perf-smoke/session/status.csv",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 523,
+      "sha256": "ea357dfa929f39cdc44fd0e4b385ec943477f17e9fca5e58a6a318de00f2b984"
+    },
+    {
+      "path": "docs/test-results/release-v1.1.0-2026-11-23/perf-smoke/session/wire.csv",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 76308,
+      "sha256": "382eff7be11a0784ebbbb169a481a1a247c38449fe668c695f8f643af0bd7276"
+    },
+    {
+      "path": "docs/test-results/release-v1.1.0-2026-11-23/protocol-errors/results.json",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 2159,
+      "sha256": "c0035eda19b0bdda7b681de0eb3b684b8e8329a2a7cffc3d08ab7520b5d2da28"
+    },
+    {
+      "path": "docs/test-results/release-v1.1.0-2026-11-23/protocol-errors/wire.json",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 2050,
+      "sha256": "06ddd1be66be27252bed523d8e5f239e51e2471bd8eea4bcf3fb538ea28b2a0c"
+    },
+    {
+      "path": "docs/test-results/release-v1.1.0-2026-11-23/protocol_errors.py",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 3091,
+      "sha256": "e1d341196895d78d1a7e18d9e82bd3c1389857a2188bb76363df93e640bb553d"
+    },
+    {
+      "path": "docs/test-results/release-v1.1.0-2026-11-23/python-tests.json",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 292,
+      "sha256": "cf16dcd37ed04a7163936cb54366d13d9329c4b7f9a06888108976f6f71d9afe"
+    },
+    {
+      "path": "docs/test-results/release-v1.1.0-2026-11-23/restore-before-evaluation.log",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 1461,
+      "sha256": "8557ed4f851b7c12641a0c5a2d8f573b387dd8b700858c057c313d18b4f368f4"
+    },
+    {
+      "path": "docs/test-results/release-v1.1.0-2026-11-23/restore-final.log",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 1461,
+      "sha256": "d7ed0b3a379a3b0c89e37cdf37bf9e5950924d056f58bc4864cf132db3730344"
+    },
+    {
+      "path": "docs/test-results/release-v1.1.0-2026-11-23/run_suite.py",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 4127,
+      "sha256": "b4b0dcbd46967650948fa242d9defd41798aa12eff9233b2bd6109b4a9a7bac8"
+    },
+    {
+      "path": "docs/test-results/release-v1.1.0-2026-11-23/spike-summary.json",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 146326,
+      "sha256": "55eb1954d198ebd726f5177cfe747e7e1875ec74cd8d87928d3b1239efb31a86"
+    },
+    {
+      "path": "docs/test-results/release-v1.1.0-2026-11-23/spike-sweep.log",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 9352,
+      "sha256": "b1258fd1847164ff5cd0ecf4e7e39ce1d299d0fc1ba66c76a1f564ee0086f4d7"
+    },
+    {
+      "path": "docs/test-results/release-v1.1.0-2026-11-23/spike.tar.gz",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 487125,
+      "sha256": "2437b6f03481148b62e6b1f8e880d81033bed65028485b987c90af8925f69c87"
+    },
+    {
+      "path": "docs/test-results/release-v1.1.0-2026-11-23/suite.json",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 10848,
+      "sha256": "c35658a4c94ba8176fc26f2f74e090113e98353734c21f4db7a0292d47469928"
+    },
+    {
+      "path": "docs/test-results/release-v1.1.0-2026-11-23/transport-status.log",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 46,
+      "sha256": "c06e290b70bdbe5b76184e22e1931bed2e17cb27affb221dda2461bd6a6ee730"
+    },
+    {
+      "path": "docs/test-results/release-v1.1.0-2026-11-23/transport-status/bench-flash.log",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 1495,
+      "sha256": "a2f154a393a44a0e2f0eb3a66cd18c4860f4a8d908e923376ebebfbf793a96b5"
+    },
+    {
+      "path": "docs/test-results/release-v1.1.0-2026-11-23/transport-status/console.log",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 3614,
+      "sha256": "ba2deb235e2db7a8a799ca0130b1192b5513e84209f30a2991d6e1267f8b394c"
+    },
+    {
+      "path": "docs/test-results/release-v1.1.0-2026-11-23/transport-status/reports.json",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 3749,
+      "sha256": "710bc7116b2782d376b30a99aa7066bec69f96f78a01eb86c2fb5482cc28ae6d"
+    },
+    {
+      "path": "docs/test-results/release-v1.1.0-2026-11-23/transport-status/restore-flash.log",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 1461,
+      "sha256": "77ece63e118e72c225b8e7e7134b101c311c1ecccd8ea08c640dc058bb69bd44"
+    },
+    {
+      "path": "docs/test-results/release-v1.1.0-2026-11-23/transport-status/results.json",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 7018,
+      "sha256": "e656f4ff56f16e400563566d5ac676afbd4aaf239985755f7061d004d2b16cf3"
+    },
+    {
+      "path": "docs/test-results/release-v1.1.0-2026-11-23/transport-status/status.json",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 3148,
+      "sha256": "fcf0efff759c9fda44582dce64b7d4f2b3cb9ba3e48ccc613cd5edb6e24ba458"
+    },
+    {
+      "path": "docs/test-results/release-v1.1.0-2026-11-23/transport-status/wire.json",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 9478,
+      "sha256": "c8f0b3c3254eccc5a8360c1a9a2ed9ff452ffa7270ada73da884f2374c55d1a4"
+    },
+    {
+      "path": "docs/test-results/release-v1.1.0-2026-11-23/transport-track.log",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 47,
+      "sha256": "80b2504d36a9f1e03912c5dd919bdae0aaff0f4bdaacd4a66a619207c5ee4699"
+    },
+    {
+      "path": "docs/test-results/release-v1.1.0-2026-11-23/transport-track/bench-flash.log",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 1495,
+      "sha256": "4c16e56ceb4b5234c082ccdf2a2bd2eb6bebda91aa4dc999c4a35d0704f7b19c"
+    },
+    {
+      "path": "docs/test-results/release-v1.1.0-2026-11-23/transport-track/console.log",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 4682,
+      "sha256": "0816025ece45f1d58ca19495a68db5dc3f8336dab3ad6b177a90252fd4cd7040"
+    },
+    {
+      "path": "docs/test-results/release-v1.1.0-2026-11-23/transport-track/reports.json",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 7526,
+      "sha256": "7f0fc33e21b4240f07dd79eee564f4cd08fc572fc9b738f3486c05bdbd7ded77"
+    },
+    {
+      "path": "docs/test-results/release-v1.1.0-2026-11-23/transport-track/restore-flash.log",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 1461,
+      "sha256": "7c0352298056114f3e8ca184ae29bf6ef5fb5062bad0590846e594d495891b4a"
+    },
+    {
+      "path": "docs/test-results/release-v1.1.0-2026-11-23/transport-track/results.json",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 8423,
+      "sha256": "7c77dbb193be3f04617ed41fc79cbb5b0b989a4bb983a2acc7175641bff4ad9a"
+    },
+    {
+      "path": "docs/test-results/release-v1.1.0-2026-11-23/transport-track/status.json",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 1123,
+      "sha256": "4e8818b70cb2a2267d387caab413ae60ab2323efe177f33ec089562b0a9c5cc0"
+    },
+    {
+      "path": "docs/test-results/release-v1.1.0-2026-11-23/transport-track/wire.json",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 11195,
+      "sha256": "ba498b9a438b42bc0f2265744ef29dd69757866f3489c75f653e005a39d40f07"
+    },
+    {
+      "path": "docs/test-results/release-v1.1.0-2026-11-23/wire-audit.json",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 26320,
+      "sha256": "e5f45df77a8faeb2297a73cd7e65ad3d07098752bc775260c34e03c914916484"
+    },
+    {
+      "path": "docs/test-results/review-2026-11-23/README.md",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 1498,
+      "sha256": "92162f480627602171b421c57795fb13000c66bd03a34199784641c9e1216d74"
+    },
+    {
+      "path": "docs/test-results/review-2026-11-23/acceptance-before.py",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 11627,
+      "sha256": "e153bf43a28f60bc765548b735d72f2ec1fc166bfdd2749be7bfabba7110a2ac"
+    },
+    {
+      "path": "docs/test-results/review-2026-11-23/analyze_failures.py",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 11676,
+      "sha256": "9ec7f4df5b15a3daba9613b75edaa9027ca4b466b155293df17cd9c94591098c"
+    },
+    {
+      "path": "docs/test-results/review-2026-11-23/before-sha256.json",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 321,
+      "sha256": "58da2a989a7f6c219182d226bf817fa46ffefcf06c3e8a10276a4a4b40c95bca"
+    },
+    {
+      "path": "docs/test-results/review-2026-11-23/board-60s.log",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 10618,
+      "sha256": "e79e8ad4dff25d629a0342cfd4e877123e9bebe97b755c9f8dd4dc24f3cbf49e"
+    },
+    {
+      "path": "docs/test-results/review-2026-11-23/board-60s/acceptance-snapshot.py",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 12724,
+      "sha256": "7fc02296037fbe179fc24a3ba9f72e49743720fb97af00c04d722a1818c0db10"
+    },
+    {
+      "path": "docs/test-results/review-2026-11-23/board-60s/audit.json",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 247,
+      "sha256": "f58ae9095c20350dc0024252393a73c83e01f67a5b492145265146e1f229c678"
+    },
+    {
+      "path": "docs/test-results/review-2026-11-23/board-60s/build.config",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 38141,
+      "sha256": "0b7a78e59526e4de7093899f9dd3533bc3c06f78142a55fd4fc7a54d8742cd4a"
+    },
+    {
+      "path": "docs/test-results/review-2026-11-23/board-60s/build_perf.config",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 38333,
+      "sha256": "0afe8ed31ff45f6ea7b227675a2267ad4873ed7b1d3a2725e3d6f2636793fd2b"
+    },
+    {
+      "path": "docs/test-results/review-2026-11-23/board-60s/console.log",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 36733,
+      "sha256": "b14ce595cdd0145b0e86aa309e726f8c29dbf21a599bd2b786d7f57520926a78"
+    },
+    {
+      "path": "docs/test-results/review-2026-11-23/board-60s/metadata.json",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 1409,
+      "sha256": "c4db5333c9331ecb1ba1c3a114879a2a54c8f1cf19e3d01fec13365a4719e59e"
+    },
+    {
+      "path": "docs/test-results/review-2026-11-23/board-60s/perf-flash.log",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 1471,
+      "sha256": "23ed28f3e7123d8ebea2ad8237320e9f1b4528e99795c052444dd08ff53c7bfc"
+    },
+    {
+      "path": "docs/test-results/review-2026-11-23/board-60s/performance.json",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 34868,
+      "sha256": "40ab4bd04a903a00ccef0cb66cd712e5472a3113b624c7deffa214b01568a3ba"
+    },
+    {
+      "path": "docs/test-results/review-2026-11-23/board-60s/restore-flash.log",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 1519,
+      "sha256": "955b8422c5adde39791f670d78ccdf3101489264ca40f895fa5ce3a91e440c5a"
+    },
+    {
+      "path": "docs/test-results/review-2026-11-23/board-60s/restored-status.json",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 201,
+      "sha256": "ec670d3003483d76a770c9a91e84032458debb94b591b22f798c88bee649d38b"
+    },
+    {
+      "path": "docs/test-results/review-2026-11-23/board-60s/results.json",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 10618,
+      "sha256": "e79e8ad4dff25d629a0342cfd4e877123e9bebe97b755c9f8dd4dc24f3cbf49e"
+    },
+    {
+      "path": "docs/test-results/review-2026-11-23/board-60s/runner-snapshot.py",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 26423,
+      "sha256": "42c2867a2427eea6993319d460d17c4e93bfdf69d7b113ada7aaf7097b45c303"
+    },
+    {
+      "path": "docs/test-results/review-2026-11-23/board-60s/session/metadata.json",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 355,
+      "sha256": "275a032afbc322cdf43077a44253a7e2fa0e851586c58ddd92d55161eef1845b"
+    },
+    {
+      "path": "docs/test-results/review-2026-11-23/board-60s/session/reports.csv",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 220854,
+      "sha256": "2ac0418eb811543b76e70a08ad913dac58ec1a31bf0de03ba2c29878b99d5c2a"
+    },
+    {
+      "path": "docs/test-results/review-2026-11-23/board-60s/session/samples.csv",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 311701,
+      "sha256": "1e6d0fd64a1a01f250cb0b29b9e606caa1abba7905370eeb8e8742cfeea3bc28"
+    },
+    {
+      "path": "docs/test-results/review-2026-11-23/board-60s/session/status.csv",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 2202,
+      "sha256": "7201a8a1feb095180e6b73549c489486d38e1b96b39f63a834b1869c02f599f9"
+    },
+    {
+      "path": "docs/test-results/review-2026-11-23/board-60s/session/wire.csv",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 447898,
+      "sha256": "047f98eec9702f8abd4aeb0ac52621c4187d9c9856dd32b62326be3ae239eedf"
+    },
+    {
+      "path": "docs/test-results/review-2026-11-23/failure-analysis.json",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 86136,
+      "sha256": "11d549ba288be823d3529ad111dcdd40b34c73792c3bbf146430f47c1015c174"
+    },
+    {
+      "path": "docs/test-results/review-2026-11-23/irq-300s-reassessment.json",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 8883,
+      "sha256": "f759f36190f86e19532f0406050e91f5af8c23b91537dd1847c72188074d1011"
+    },
+    {
+      "path": "docs/test-results/review-2026-11-23/link-check.json",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 368,
+      "sha256": "7877931d79e991e1b06a71bc87f8da81cf74f6be7643706a761086a34d5467a4"
+    },
+    {
+      "path": "docs/test-results/review-2026-11-23/manifest.py",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 1571,
+      "sha256": "a7c681530a1bc64c772ebec2240f937ac0fd860c03b903d510971ed17d510ec5"
+    },
+    {
+      "path": "docs/test-results/review-2026-11-23/python.log",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 1070,
+      "sha256": "a3dfb2363b8cc7990b2360ab19b681c6d92d7a20eeb8278475853708d95294cb"
+    },
+    {
+      "path": "docs/test-results/review-2026-11-23/regression-before.log",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 9082,
+      "sha256": "9ab746aae9b25aec4734ee314df7f2566a6e5f3a1b4300b354a67ebc207894bf"
+    },
+    {
+      "path": "docs/test-results/review-2026-11-23/runner-final.log",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 99,
+      "sha256": "4e11d41c9c3b9fe5d0f9547a777cf79f1775e08983d86df9201018d98d3c5594"
+    },
+    {
+      "path": "docs/test-results/rtt-investigation-2026-11-23/README.md",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 8255,
+      "sha256": "5d1c1a7051ad7cca9bb8f3cbbb1b7f8fdb2b9399def69a44110ff447330fe2ea"
+    },
+    {
+      "path": "docs/test-results/rtt-investigation-2026-11-23/original-tail.json",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 3281,
+      "sha256": "27e51f88fd9e6135719e4bc983ce2e58d1514733e36db8c00fd1901d9cde481b"
+    },
+    {
+      "path": "docs/test-results/rtt-investigation-2026-11-23/probe.py",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 3442,
+      "sha256": "bc5a2ca7152becdc0888c4e7573b9f3cf9c0b59540c2623fa71c2b84261e4d4c"
+    },
+    {
+      "path": "docs/test-results/rtt-investigation-2026-11-23/run-1.log",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 5239,
+      "sha256": "5310a1444e8fb5d941ad267d41ab11a1c093417854ebf669123461d1bef4fdd3"
+    },
+    {
+      "path": "docs/test-results/rtt-investigation-2026-11-23/run-1/build.config",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 38141,
+      "sha256": "0b7a78e59526e4de7093899f9dd3533bc3c06f78142a55fd4fc7a54d8742cd4a"
+    },
+    {
+      "path": "docs/test-results/rtt-investigation-2026-11-23/run-1/build_perf.config",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 38097,
+      "sha256": "a47e845b9a84a7c839a771a240715c64d46de9056f576b04ef0446753cced0a0"
+    },
+    {
+      "path": "docs/test-results/rtt-investigation-2026-11-23/run-1/console.log",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 55330,
+      "sha256": "ea5e112beb4c695bda1e756b5559b84670eef44044fae573bb972fde78a0b758"
+    },
+    {
+      "path": "docs/test-results/rtt-investigation-2026-11-23/run-1/correlated-tail.json",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 3466,
+      "sha256": "174840d4c92e057f38b0a37817a2dfa185c5f1771fded23754ef4c689ae7854a"
+    },
+    {
+      "path": "docs/test-results/rtt-investigation-2026-11-23/run-1/host-timing.json",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 55422,
+      "sha256": "dfe0a7e7c7e57f2937101a83730d97effad3da08339560d74e1ef6857239667c"
+    },
+    {
+      "path": "docs/test-results/rtt-investigation-2026-11-23/run-1/metadata.json",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 687,
+      "sha256": "727567a726a346cd82b04fdc114c707152047a41de7df3bf8eac14bbe56c4620"
+    },
+    {
+      "path": "docs/test-results/rtt-investigation-2026-11-23/run-1/perf-flash.log",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 1529,
+      "sha256": "0d5d73340a321bcddc41f226c0b5af53158e00f55ab8436080e8dc0a317a7195"
+    },
+    {
+      "path": "docs/test-results/rtt-investigation-2026-11-23/run-1/performance.json",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 52475,
+      "sha256": "913cf41ddd6867b29cc657d842cddc423ce17d39772b9b4b39d7c2a1dc2704d7"
+    },
+    {
+      "path": "docs/test-results/rtt-investigation-2026-11-23/run-1/restore-flash.log",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 1461,
+      "sha256": "a4f8947072ed1f73ed4337a55b12ee4fcd3a9cda9c71169c09c4057939f3686f"
+    },
+    {
+      "path": "docs/test-results/rtt-investigation-2026-11-23/run-1/restored-status.json",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 201,
+      "sha256": "ec670d3003483d76a770c9a91e84032458debb94b591b22f798c88bee649d38b"
+    },
+    {
+      "path": "docs/test-results/rtt-investigation-2026-11-23/run-1/results.json",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 4609,
+      "sha256": "64b09357a8922ec55da518c3660764f45d804e1ae4ea477b4161c75c7b4013c0"
+    },
+    {
+      "path": "docs/test-results/rtt-investigation-2026-11-23/run-1/session/metadata.json",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 356,
+      "sha256": "921db6fa07a7e614d61a4f18bc436315373149a259055e3a46b56dc98f23f57e"
+    },
+    {
+      "path": "docs/test-results/rtt-investigation-2026-11-23/run-1/session/reports.csv",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 677180,
+      "sha256": "8be2c1fccf2386aef8b0b29d2df30c943ce80683ff52e8d10c884ae218c1b609"
+    },
+    {
+      "path": "docs/test-results/rtt-investigation-2026-11-23/run-1/session/samples.csv",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 944231,
+      "sha256": "487b094dcc65716d850f0bdd8f10cd0d5c0c34d41674712a043b886d9184ca97"
+    },
+    {
+      "path": "docs/test-results/rtt-investigation-2026-11-23/run-1/session/status.csv",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 6236,
+      "sha256": "48638c3447726fefe4518dd48213ed921c00cc58a16c87f2d0284a4514951ff8"
+    },
+    {
+      "path": "docs/test-results/rtt-investigation-2026-11-23/run-1/session/wire.csv",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 1347848,
+      "sha256": "c4803fb5a3c0bb6f3479ecf00cc015caf604a5d82efab217f399151d30aebad8"
+    },
+    {
+      "path": "docs/test-results/rtt-investigation-2026-11-23/threaded-audit.json",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 876,
+      "sha256": "e12a9dbacb39e86b8a6b339a2417520d182f204f4f12d2b1bfcaf2c7f99119fb"
+    },
+    {
+      "path": "docs/test-results/rtt-investigation-2026-11-23/threaded-probe.log",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 4694,
+      "sha256": "d2a455dd8f795454931f92e3947b47f0ad1334f5bbe9758a4d1f076833344874"
+    },
+    {
+      "path": "docs/test-results/rtt-investigation-2026-11-23/threaded-probe/build.config",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 38141,
+      "sha256": "0b7a78e59526e4de7093899f9dd3533bc3c06f78142a55fd4fc7a54d8742cd4a"
+    },
+    {
+      "path": "docs/test-results/rtt-investigation-2026-11-23/threaded-probe/build_perf.config",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 38097,
+      "sha256": "a47e845b9a84a7c839a771a240715c64d46de9056f576b04ef0446753cced0a0"
+    },
+    {
+      "path": "docs/test-results/rtt-investigation-2026-11-23/threaded-probe/console.log",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 20689,
+      "sha256": "302ef8b61419c2289dc2d0c1dc7a966b75861d05774a1835b47821e18727cb1f"
+    },
+    {
+      "path": "docs/test-results/rtt-investigation-2026-11-23/threaded-probe/host-timing.json",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 32473,
+      "sha256": "11692e934553d19babe13d2b47f1be7ec6a7966020f576d05e45558780b7d1b5"
+    },
+    {
+      "path": "docs/test-results/rtt-investigation-2026-11-23/threaded-probe/metadata.json",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 850,
+      "sha256": "ce215a42bbca13e7692f9f6732ff92d2934dfd18024c970c21f93803706d2a9a"
+    },
+    {
+      "path": "docs/test-results/rtt-investigation-2026-11-23/threaded-probe/perf-flash.log",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 1529,
+      "sha256": "31728eefd5e7ea640a999d388e0d3c0c683de4784df5141b7f0ecb31a7209548"
+    },
+    {
+      "path": "docs/test-results/rtt-investigation-2026-11-23/threaded-probe/performance.json",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 19178,
+      "sha256": "c3785a12c6475c08225c0530670b75e28e9282656c062c27a8e98770126605e4"
+    },
+    {
+      "path": "docs/test-results/rtt-investigation-2026-11-23/threaded-probe/restore-flash.log",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 1461,
+      "sha256": "7f13895aeea2548a3c85316d38be327d2f5b92118ac351af2710283cce49e21f"
+    },
+    {
+      "path": "docs/test-results/rtt-investigation-2026-11-23/threaded-probe/restored-status.json",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 201,
+      "sha256": "ec670d3003483d76a770c9a91e84032458debb94b591b22f798c88bee649d38b"
+    },
+    {
+      "path": "docs/test-results/rtt-investigation-2026-11-23/threaded-probe/results.json",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 4694,
+      "sha256": "d2a455dd8f795454931f92e3947b47f0ad1334f5bbe9758a4d1f076833344874"
+    },
+    {
+      "path": "docs/test-results/rtt-investigation-2026-11-23/threaded-probe/session/metadata.json",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 355,
+      "sha256": "77311578be0472832a1fe859d5df5f994b52229b9985d57bd49ee1e272b161ef"
+    },
+    {
+      "path": "docs/test-results/rtt-investigation-2026-11-23/threaded-probe/session/reports.csv",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 221279,
+      "sha256": "675cb4fd9eab8d02d81d9a4a8064083e54833659164d5461950ce18c74e631c7"
+    },
+    {
+      "path": "docs/test-results/rtt-investigation-2026-11-23/threaded-probe/session/samples.csv",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 312469,
+      "sha256": "e5e830339f80fc3443c2e4d8b227bd3f41811eac917ddb818a64ac49a7ab187b"
+    },
+    {
+      "path": "docs/test-results/rtt-investigation-2026-11-23/threaded-probe/session/status.csv",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 2201,
+      "sha256": "e1402aee4e43cb84bcd6a197d7e30558b1e2e91cf44dd5720a0b4cfaf54091f8"
+    },
+    {
+      "path": "docs/test-results/rtt-investigation-2026-11-23/threaded-probe/session/wire.csv",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 448551,
+      "sha256": "7effd3a072a0a3886f6fa41ee7c61ee1f385b3460dc8b2dba64308deb0bcd768"
+    },
+    {
+      "path": "docs/test-results/rtt-investigation-2026-11-23/threaded-smoke.log",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 4817,
+      "sha256": "63c2609c785df57458069798321b24da492b4c1ed56ba27aa7e74c6b8025c9ac"
+    },
+    {
+      "path": "docs/test-results/rtt-investigation-2026-11-23/threaded-smoke/build.config",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 38141,
+      "sha256": "0b7a78e59526e4de7093899f9dd3533bc3c06f78142a55fd4fc7a54d8742cd4a"
+    },
+    {
+      "path": "docs/test-results/rtt-investigation-2026-11-23/threaded-smoke/build_perf.config",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 38097,
+      "sha256": "a47e845b9a84a7c839a771a240715c64d46de9056f576b04ef0446753cced0a0"
+    },
+    {
+      "path": "docs/test-results/rtt-investigation-2026-11-23/threaded-smoke/console.log",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 21307,
+      "sha256": "55137bc86b13aff10c1f6f4b425fc777376a0fdb97b522b4d0f3a8f7b15d5ce0"
+    },
+    {
+      "path": "docs/test-results/rtt-investigation-2026-11-23/threaded-smoke/metadata.json",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 849,
+      "sha256": "f3dbb43205771459f0371e4bab72378fe756a34240765e701f997641929ce391"
+    },
+    {
+      "path": "docs/test-results/rtt-investigation-2026-11-23/threaded-smoke/perf-flash.log",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 1529,
+      "sha256": "6c212a1abd651a968e03094e4026c40431faeba1b8e72b963ba6df1df5dfdda6"
+    },
+    {
+      "path": "docs/test-results/rtt-investigation-2026-11-23/threaded-smoke/performance.json",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 19178,
+      "sha256": "e21bd77b0a3288a7f1f086a39943eb93fa3dd3e8c061e22aa6485864af14862b"
+    },
+    {
+      "path": "docs/test-results/rtt-investigation-2026-11-23/threaded-smoke/restore-flash.log",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 1461,
+      "sha256": "034efea8df8bb6f396660192a7d689e7fc18df1b61d218f82d97990c05478175"
+    },
+    {
+      "path": "docs/test-results/rtt-investigation-2026-11-23/threaded-smoke/restored-status.json",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 201,
+      "sha256": "ec670d3003483d76a770c9a91e84032458debb94b591b22f798c88bee649d38b"
+    },
+    {
+      "path": "docs/test-results/rtt-investigation-2026-11-23/threaded-smoke/results.json",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 4817,
+      "sha256": "63c2609c785df57458069798321b24da492b4c1ed56ba27aa7e74c6b8025c9ac"
+    },
+    {
+      "path": "docs/test-results/rtt-investigation-2026-11-23/threaded-smoke/session/metadata.json",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 355,
+      "sha256": "10e06ab9a5993292940768b6adc7a8a9ee6416ea82c7a16d440701ac36a92ec2"
+    },
+    {
+      "path": "docs/test-results/rtt-investigation-2026-11-23/threaded-smoke/session/reports.csv",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 221563,
+      "sha256": "420855e3d616805dcdb587d1997ebe459ad0b35155a1a09fc9350c6217afef9d"
+    },
+    {
+      "path": "docs/test-results/rtt-investigation-2026-11-23/threaded-smoke/session/samples.csv",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 312703,
+      "sha256": "d04f8f23dbe47f39818a7d34aed9aaa8e194f3247a72ddfdf3f01c58ce5993ad"
+    },
+    {
+      "path": "docs/test-results/rtt-investigation-2026-11-23/threaded-smoke/session/status.csv",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 2202,
+      "sha256": "49b5791aeb3b3f04cd23968b958e3195f5f4d7b0bda50bac7d93d6ad07029d1e"
+    },
+    {
+      "path": "docs/test-results/rtt-investigation-2026-11-23/threaded-smoke/session/wire.csv",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 449342,
+      "sha256": "5510155fe62c338f7cf63ab5f8ebc45f07481244b3d66e49050e46334a5bbbf1"
+    },
+    {
+      "path": "docs/test-results/rtt-investigation-2026-11-23/timer-control.json",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 3725,
+      "sha256": "9be4cf9d7ac261f1c9fbd3c9c4f6b463a15e40ce911e32b5a34da3726a34004d"
+    },
+    {
+      "path": "docs/test-results/rtt-investigation-2026-11-23/timer_control.py",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 903,
+      "sha256": "5eb393fe465a87d37d0d88366daf90489940f0bcb594b8063db74f4c28f79d7d"
+    },
+    {
+      "path": "docs/test-results/turn-2026-11-23/analyze.py",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 4523,
+      "sha256": "daaf010185439c0addf4bea8b5aee079e54c4937c35e21278db82ce084047372"
+    },
+    {
+      "path": "docs/test-results/turn-2026-11-23/board_check.py",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 8839,
+      "sha256": "6edca6d357f1c6ffe461a01b5504531fae72f6368a568c11f803662ca3fab5f9"
+    },
+    {
+      "path": "docs/test-results/turn-2026-11-23/run-1/console.log",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/test-results/turn-2026-11-23/run-1/failure.json",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 171,
+      "sha256": "b221d10fca33e0e22671b1782a76437696a7b91d7394ea5d8e13632d509b1cda"
+    },
+    {
+      "path": "docs/test-results/turn-2026-11-23/run-1/metadata.json",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 901,
+      "sha256": "1cb42de8334d246ff9b9ced50d1855ca765bae29f593a6992a522724ccacd51c"
+    },
+    {
+      "path": "docs/test-results/turn-2026-11-23/run-1/wire.jsonl",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/test-results/turn-2026-11-23/run-2/aligned.csv",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 107749,
+      "sha256": "af0b78d85d47974a4a920e55370ec58d764bafee8a2ae682d8e3ab4977f55b31"
+    },
+    {
+      "path": "docs/test-results/turn-2026-11-23/run-2/audit.json",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 197,
+      "sha256": "cba7032fa4fede01264a8493e1c897fc5314b147a1807e59d8928432b6263c6e"
+    },
+    {
+      "path": "docs/test-results/turn-2026-11-23/run-2/board_check-snapshot.py",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 8800,
+      "sha256": "ee79f59462487e39ec00b2c28c49a48bcf33a3012064a7492b6b87759fcc1cf8"
+    },
+    {
+      "path": "docs/test-results/turn-2026-11-23/run-2/console.log",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 319,
+      "sha256": "db9ae291914d1c886a41425340d8c61b428d61d984a9fea9de07433d7fbb31f4"
+    },
+    {
+      "path": "docs/test-results/turn-2026-11-23/run-2/metadata.json",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 901,
+      "sha256": "0a453a062536256b5de98540fa9e0fc94fdbcc9768a7fe91b46b4445e568ac8e"
+    },
+    {
+      "path": "docs/test-results/turn-2026-11-23/run-2/reports.json",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 267279,
+      "sha256": "c1415685ac18c141edc0d75bf2774a6e5ad3517b0393720cf07d092706978b6d"
+    },
+    {
+      "path": "docs/test-results/turn-2026-11-23/run-2/results.json",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 2187,
+      "sha256": "565ebe72c2fc806e731db96b68c5ebf0f5f650c2f8a9a3fda5bdf08db8192bae"
+    },
+    {
+      "path": "docs/test-results/turn-2026-11-23/run-2/samples.json",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 275002,
+      "sha256": "ab561601692a9936cf4de21c3ec96f7fd80bcc6033b49f401386a4fc2ccc8f33"
+    },
+    {
+      "path": "docs/test-results/turn-2026-11-23/run-2/status.json",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 447,
+      "sha256": "c62a8c8c51829f8c60cfdee654c68dc20a99e115b643a68437a7bc0cd32cc081"
+    },
+    {
+      "path": "docs/test-results/turn-2026-11-23/run-2/trajectory-errors.png",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 120166,
+      "sha256": "c8e6ca307144d7c116c1b4338abe851e7baf895948b2c40e05b9319e8997c423"
+    },
+    {
+      "path": "docs/test-results/turn-2026-11-23/run-2/wire.jsonl",
+      "tracked": false,
+      "category": "test-evidence",
+      "exists": true,
+      "size_bytes": 207319,
+      "sha256": "85e8cba1d7c80f1f738bc7b01688d558f70a5933b51fe683c62197fcb1e44998"
+    },
+    {
+      "path": "docs/verification-history.md",
+      "tracked": true,
+      "category": "source-docs-assets",
+      "exists": true,
+      "size_bytes": 25910,
+      "sha256": "b071b394a312c429763390570fbf834bacefe7bed354b9aaf0c9b4f099acff8f"
+    },
+    {
+      "path": "fcc_app/CMakeLists.txt",
+      "tracked": true,
+      "category": "source-docs-assets",
+      "exists": true,
+      "size_bytes": 1542,
+      "sha256": "bddb97068dca9503ce47f10bd67006349377bb0f8b5b05bc71cc87e6e668c097"
+    },
+    {
+      "path": "fcc_app/Kconfig",
+      "tracked": true,
+      "category": "source-docs-assets",
+      "exists": true,
+      "size_bytes": 4373,
+      "sha256": "6f58b18a77b8bb93cd2bd2c617522422dfc27866590c78783934f92a33fe7caa"
+    },
+    {
+      "path": "fcc_app/perf.conf",
+      "tracked": true,
+      "category": "source-docs-assets",
+      "exists": true,
+      "size_bytes": 952,
+      "sha256": "33ee6772d64a0e6fbec385dd39643bcd7fb581426aafef2172d33b01a6d6a2c7"
+    },
+    {
+      "path": "fcc_app/src/application/frame_handler.c",
+      "tracked": true,
+      "category": "source-docs-assets",
+      "exists": true,
+      "size_bytes": 5747,
+      "sha256": "2c31fb3329233a828fb56cc8adfb420a8ae2c6364c73eca0c861030cb474a3ee"
+    },
+    {
+      "path": "fcc_app/src/application/report_sender.c",
+      "tracked": true,
+      "category": "source-docs-assets",
+      "exists": true,
+      "size_bytes": 4239,
+      "sha256": "1fec21dd9cecfb2546da0dfc760257acbdefc1a24488d33cb5fd0ed330830a38"
+    },
+    {
+      "path": "fcc_app/src/diagnostics/perf_monitor.c",
+      "tracked": true,
+      "category": "source-docs-assets",
+      "exists": true,
+      "size_bytes": 7494,
+      "sha256": "d52e64ac9394603a3289f1a84a112cb1480c861a2defe0735a3b988a2e1b8c92"
+    },
+    {
+      "path": "fcc_app/src/diagnostics/perf_monitor.h",
+      "tracked": true,
+      "category": "source-docs-assets",
+      "exists": true,
+      "size_bytes": 3639,
+      "sha256": "a585295f194066cf45bb38eda01d234e3758c12adc1722e5e6d7286946f5ad59"
+    },
+    {
+      "path": "fcc_app/src/diagnostics/perf_reporter.c",
+      "tracked": true,
+      "category": "source-docs-assets",
+      "exists": true,
+      "size_bytes": 5867,
+      "sha256": "525a336663d6e9368fadb937159ecd2abaa0d640e6fa4db5b4894f686bdcaa6e"
+    },
+    {
+      "path": "fcc_app/src/diagnostics/perf_resources.c",
+      "tracked": false,
+      "category": "source-docs-assets",
+      "exists": true,
+      "size_bytes": 1366,
+      "sha256": "ea2dbd4dffbfb57a49da41770ad2160a9009b45e4acabd4bbf51beb236236703"
+    },
+    {
+      "path": "fcc_app/src/diagnostics/perf_resources.h",
+      "tracked": false,
+      "category": "source-docs-assets",
+      "exists": true,
+      "size_bytes": 257,
+      "sha256": "a0b9ce680989e17351eef4d83578cdd5f076d419d17be9daac93ec9cb0da5329"
+    },
+    {
+      "path": "fcc_app/src/main.c",
+      "tracked": true,
+      "category": "source-docs-assets",
+      "exists": true,
+      "size_bytes": 1255,
+      "sha256": "509b2fb86ee038775056fc594c015883aa6f19fd84922d5390d7c9ef7c002d00"
+    },
+    {
+      "path": "fcc_app/src/transport/rx_frame_processor.c",
+      "tracked": true,
+      "category": "source-docs-assets",
+      "exists": true,
+      "size_bytes": 4257,
+      "sha256": "4068b8dd8c1bc332084aa6e7c0695b2aa12a268fa38c246e199b9e56cd02a138"
+    },
+    {
+      "path": "fcc_app/src/transport/uart_rx.c",
+      "tracked": true,
+      "category": "source-docs-assets",
+      "exists": true,
+      "size_bytes": 13181,
+      "sha256": "6dcdc63cc65dce3594343fada3f68b4b50ed55213c3b37d203462b1e5a090ca6"
+    },
+    {
+      "path": "fcc_app/src/transport/uart_tx.c",
+      "tracked": true,
+      "category": "source-docs-assets",
+      "exists": true,
+      "size_bytes": 3300,
+      "sha256": "efa1b9927f4bfb0c695a766899f77cd3af8501f45c5a9d9ea9457cdb0d63df92"
+    },
+    {
+      "path": "fcc_app/src/transport/uart_tx.h",
+      "tracked": true,
+      "category": "source-docs-assets",
+      "exists": true,
+      "size_bytes": 1069,
+      "sha256": "4b5ed228d4aa7e70abe33a1f56b9203d8e2c5de8c1641e05317c82f5d124b138"
+    },
+    {
+      "path": "fcc_app/tests/log_stress/README.md",
+      "tracked": true,
+      "category": "source-docs-assets",
+      "exists": true,
+      "size_bytes": 4550,
+      "sha256": "d6f7dbbe0132702a08195cc83adf07a552f7b763d387c37291012ce6ef1d830c"
+    },
+    {
+      "path": "fcc_app/tests/test_frame_handler/include/zephyr/kernel.h",
+      "tracked": true,
+      "category": "source-docs-assets",
+      "exists": true,
+      "size_bytes": 996,
+      "sha256": "8cd8921bb7ddd4c583ab32ac121404567cf54474a0ec044291cbff9d601ea268"
+    },
+    {
+      "path": "fcc_app/tests/test_frame_handler/src/main.c",
+      "tracked": true,
+      "category": "source-docs-assets",
+      "exists": true,
+      "size_bytes": 44301,
+      "sha256": "0a56d67557e449aa36291a2eddf0e962af32dd393c89a7fe21d314d446175640"
+    },
+    {
+      "path": "fcc_app/tests/test_perf_monitor/CMakeLists.txt",
+      "tracked": true,
+      "category": "source-docs-assets",
+      "exists": true,
+      "size_bytes": 2139,
+      "sha256": "8074874f21802d40383eafd3283158ee32380f3e6f53f07244f45dc06e142944"
+    },
+    {
+      "path": "fcc_app/tests/test_perf_monitor/README.md",
+      "tracked": true,
+      "category": "source-docs-assets",
+      "exists": true,
+      "size_bytes": 9274,
+      "sha256": "cbe3cc2c8bcd02f7fde075a11a024be080c39cc0c6971778ca65b52670ea7a77"
+    },
+    {
+      "path": "fcc_app/tests/test_perf_monitor/board_check.py",
+      "tracked": true,
+      "category": "source-docs-assets",
+      "exists": true,
+      "size_bytes": 26423,
+      "sha256": "42c2867a2427eea6993319d460d17c4e93bfdf69d7b113ada7aaf7097b45c303"
+    },
+    {
+      "path": "fcc_app/tests/test_perf_monitor/include/test_perf_mutex.h",
+      "tracked": false,
+      "category": "source-docs-assets",
+      "exists": true,
+      "size_bytes": 826,
+      "sha256": "4111c9f7135ba1037994edcfa07c94860df2af3fc8d2a9511ad03b24a15f6312"
+    },
+    {
+      "path": "fcc_app/tests/test_perf_monitor/include/zephyr/kernel.h",
+      "tracked": true,
+      "category": "source-docs-assets",
+      "exists": true,
+      "size_bytes": 397,
+      "sha256": "913eabc7eb956d49b71c76f9aae67f3ce2690c39f1a9376f37ebabfd0164a884"
+    },
+    {
+      "path": "fcc_app/tests/test_perf_monitor/include/zephyr/timing/timing.h",
+      "tracked": true,
+      "category": "source-docs-assets",
+      "exists": true,
+      "size_bytes": 637,
+      "sha256": "0d83685391c919e54a0b58d40a469f3a2d602c734a3a9a9b116fc6d8eab80f7d"
+    },
+    {
+      "path": "fcc_app/tests/test_perf_monitor/src/main.c",
+      "tracked": true,
+      "category": "source-docs-assets",
+      "exists": true,
+      "size_bytes": 9746,
+      "sha256": "1746291f8bd9766a9973729680a5bbb5cb8ef271b13148620d44d1ae94a2d9d1"
+    },
+    {
+      "path": "fcc_app/tests/test_perf_monitor/src/reporter.c",
+      "tracked": true,
+      "category": "source-docs-assets",
+      "exists": true,
+      "size_bytes": 4587,
+      "sha256": "1e558afc207b43caec80adb0237be20fbb828d650e230fb854235addde6cb62e"
+    },
+    {
+      "path": "fcc_app/tests/test_perf_resources/CMakeLists.txt",
+      "tracked": false,
+      "category": "source-docs-assets",
+      "exists": true,
+      "size_bytes": 580,
+      "sha256": "e24853f1c7923a498f32fcf33386b61879653d9aa40230a542b5f86414befcbd"
+    },
+    {
+      "path": "fcc_app/tests/test_perf_resources/include/zephyr/kernel.h",
+      "tracked": false,
+      "category": "source-docs-assets",
+      "exists": true,
+      "size_bytes": 518,
+      "sha256": "ad75924a53f2dc05c61c292ac7f59cb10606a16a8b4e89edaf450c66cf3ee1d7"
+    },
+    {
+      "path": "fcc_app/tests/test_perf_resources/include/zephyr/sys/printk.h",
+      "tracked": false,
+      "category": "source-docs-assets",
+      "exists": true,
+      "size_bytes": 108,
+      "sha256": "b825a23f268821988ab86bed3300309c82a92a5da440938cb35fa59a722c9177"
+    },
+    {
+      "path": "fcc_app/tests/test_perf_resources/src/main.c",
+      "tracked": false,
+      "category": "source-docs-assets",
+      "exists": true,
+      "size_bytes": 2604,
+      "sha256": "5cd1878add158f4251890110852558a315bf1373c7028a10cbfb1db1f18d6f1d"
+    },
+    {
+      "path": "fcc_app/tests/test_uart_rx/CMakeLists.txt",
+      "tracked": true,
+      "category": "source-docs-assets",
+      "exists": true,
+      "size_bytes": 3748,
+      "sha256": "0d316223c98565628b44b8324e85729813ad5e9dd5786846012907f6e54a6f4f"
+    },
+    {
+      "path": "fcc_app/tests/test_uart_rx/include/test_zephyr.h",
+      "tracked": true,
+      "category": "source-docs-assets",
+      "exists": true,
+      "size_bytes": 3963,
+      "sha256": "207ab4431072ee5eff4400d18183c49f1f8f7bd6682e4602cf88694262ae8088"
+    },
+    {
+      "path": "fcc_app/tests/test_uart_rx/src/main.c",
+      "tracked": true,
+      "category": "source-docs-assets",
+      "exists": true,
+      "size_bytes": 25657,
+      "sha256": "983625a31a2810524c44c4c14a4efd68be580074052e38a6a5330521937bd6f0"
+    },
+    {
+      "path": "fcc_app/tests/test_uart_tx/include/test_zephyr.h",
+      "tracked": true,
+      "category": "source-docs-assets",
+      "exists": true,
+      "size_bytes": 3167,
+      "sha256": "1df50d19e887c8a293ee2c403c9c098a91647db1f640b07ced24d8f23c2b3c22"
+    },
+    {
+      "path": "fcc_app/tests/test_uart_tx/src/main.c",
+      "tracked": true,
+      "category": "source-docs-assets",
+      "exists": true,
+      "size_bytes": 5970,
+      "sha256": "05ffbc955216c68a15ce1ab903e15da2536fb9fd5fe87806e4d69efca57df001"
+    },
+    {
+      "path": "pc_sim/GUI.md",
+      "tracked": true,
+      "category": "source-docs-assets",
+      "exists": true,
+      "size_bytes": 14607,
+      "sha256": "c9e99f4c921f2fd7626d08f333be27f03ebc919976573b6fc2a282fe2fe61a54"
+    },
+    {
+      "path": "pc_sim/README.md",
+      "tracked": true,
+      "category": "source-docs-assets",
+      "exists": true,
+      "size_bytes": 30134,
+      "sha256": "57b5a906c92e5dab3c79110d3e826de0ba288679bc89dc252692b0acfb39d8cd"
+    },
+    {
+      "path": "pc_sim/__init__.py",
+      "tracked": true,
+      "category": "source-docs-assets",
+      "exists": true,
+      "size_bytes": 79,
+      "sha256": "551bd3567a3466e91ef87e8f0d7e9a90af9b83cf66c29c2c63d379d59fbaa73c"
+    },
+    {
+      "path": "pc_sim/async_recording.py",
+      "tracked": false,
+      "category": "source-docs-assets",
+      "exists": true,
+      "size_bytes": 4793,
+      "sha256": "2774918e31d7775d1a0fb2bcbf3e1ee844443d80a29308f6c77b540fd6ee1837"
+    },
+    {
+      "path": "pc_sim/gui.py",
+      "tracked": true,
+      "category": "source-docs-assets",
+      "exists": true,
+      "size_bytes": 25914,
+      "sha256": "92f01ba50c3f8c4affd538f3fc213ca6e785aa739fcf1c5b2ee74af3475e2edc"
+    },
+    {
+      "path": "pc_sim/gui_model.py",
+      "tracked": true,
+      "category": "source-docs-assets",
+      "exists": true,
+      "size_bytes": 4570,
+      "sha256": "872d631555bcbf65615f929aa24192011b7c265d8319363ed537f221523e1b48"
+    },
+    {
+      "path": "pc_sim/gui_worker.py",
+      "tracked": true,
+      "category": "source-docs-assets",
+      "exists": true,
+      "size_bytes": 8423,
+      "sha256": "6a7b35391b7da9f43689c0eeb63d17407426f193fa439797d4a589fb245e6259"
+    },
+    {
+      "path": "pc_sim/perf_acceptance.py",
+      "tracked": false,
+      "category": "source-docs-assets",
+      "exists": true,
+      "size_bytes": 12724,
+      "sha256": "7fc02296037fbe179fc24a3ba9f72e49743720fb97af00c04d722a1818c0db10"
+    },
+    {
+      "path": "pc_sim/protocol.py",
+      "tracked": true,
+      "category": "source-docs-assets",
+      "exists": true,
+      "size_bytes": 6240,
+      "sha256": "dd5d87c1c09bd0f62567de8f7bd8ef37bf2527c42021a18c17de13ccace34d54"
+    },
+    {
+      "path": "pc_sim/radar_sender.py",
+      "tracked": true,
+      "category": "source-docs-assets",
+      "exists": true,
+      "size_bytes": 2986,
+      "sha256": "a6c8ed1d75720e346085c226ea6d8a718c55381539de08af8c81f09ff115de33"
+    },
+    {
+      "path": "pc_sim/run_sim.py",
+      "tracked": true,
+      "category": "source-docs-assets",
+      "exists": true,
+      "size_bytes": 5004,
+      "sha256": "be289fbfcb938d0f813ae53382fbe863eb8ac7bc284196a701fb72c5f5016aba"
+    },
+    {
+      "path": "pc_sim/targets.py",
+      "tracked": true,
+      "category": "source-docs-assets",
+      "exists": true,
+      "size_bytes": 10358,
+      "sha256": "894941c6a9cea8fb5ccbd1b413fe3e390b88eef4e3591c67988de3a260f60e8e"
+    },
+    {
+      "path": "tests/test_async_recording.py",
+      "tracked": false,
+      "category": "source-docs-assets",
+      "exists": true,
+      "size_bytes": 5744,
+      "sha256": "f656bb8bea7c720d9e1ea67a6596ce080e4ddcde9096c0701629c2b358a9f186"
+    },
+    {
+      "path": "tests/test_gui.py",
+      "tracked": true,
+      "category": "source-docs-assets",
+      "exists": true,
+      "size_bytes": 19209,
+      "sha256": "9178ca44b75a3838fd4a0ad8cce7dc7b517b3f0f2bb46a3cc4133e4c35a654e1"
+    },
+    {
+      "path": "tests/test_perf_acceptance.py",
+      "tracked": false,
+      "category": "source-docs-assets",
+      "exists": true,
+      "size_bytes": 12239,
+      "sha256": "7a36cf06befc1acd4af917746fcf34a6a9ea8f82838acb4a4dc0760d4ad792e0"
+    },
+    {
+      "path": "tests/test_perf_monitor.py",
+      "tracked": true,
+      "category": "source-docs-assets",
+      "exists": true,
+      "size_bytes": 9451,
+      "sha256": "5c2e915cf4b8f6fe53be12825f591203194b49a7a1a6d52ede48549900d4e2f2"
+    },
+    {
+      "path": "tests/test_protocol.py",
+      "tracked": true,
+      "category": "source-docs-assets",
+      "exists": true,
+      "size_bytes": 5910,
+      "sha256": "68c344257f589f17adba62d45e8e40708e55aed2b4289d54a4fde537b3e0da9c"
+    },
+    {
+      "path": "tests/test_scenarios.py",
+      "tracked": true,
+      "category": "source-docs-assets",
+      "exists": true,
+      "size_bytes": 5827,
+      "sha256": "1a823b41ff5d7669acc0de5c98bfbe197a55687123e1517cd09a55e04ab31fbb"
+    },
+    {
+      "path": "tests/test_target_motion.py",
+      "tracked": false,
+      "category": "source-docs-assets",
+      "exists": true,
+      "size_bytes": 5174,
+      "sha256": "96fddf1222642fbd50c9bb1690123a137ef9ebd1e40df1e7ae27fad2856f7202"
+    },
+    {
+      "path": "tools/docs/README.md",
+      "tracked": true,
+      "category": "source-docs-assets",
+      "exists": true,
+      "size_bytes": 2341,
+      "sha256": "8af9ba23e39ed29f881d02da93d367a4662fa1b9dbe16bd7ce4585bad720df5f"
+    }
+  ]
+}

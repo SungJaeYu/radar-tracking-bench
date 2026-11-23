@@ -1,0 +1,347 @@
+{
+  "started_utc": "2026-11-23T03:56:43.876828+00:00",
+  "complete": false,
+  "stages": [
+    {
+      "name": "compile-build",
+      "command": [
+        "/Users/yuseungjae/zephyrproject/.venv/bin/west",
+        "build",
+        "-d",
+        "/Users/yuseungjae/Desktop/radar-track-fcc-hil/build"
+      ],
+      "started_utc": "2026-11-23T03:56:43.877383+00:00",
+      "status": "passed",
+      "returncode": 0,
+      "elapsed_s": 0.5641618749359623
+    },
+    {
+      "name": "compile-build_debug",
+      "command": [
+        "/Users/yuseungjae/zephyrproject/.venv/bin/west",
+        "build",
+        "-d",
+        "/Users/yuseungjae/Desktop/radar-track-fcc-hil/build_debug"
+      ],
+      "started_utc": "2026-11-23T03:56:44.442631+00:00",
+      "status": "passed",
+      "returncode": 0,
+      "elapsed_s": 0.4927081670612097
+    },
+    {
+      "name": "compile-build_perf",
+      "command": [
+        "/Users/yuseungjae/zephyrproject/.venv/bin/west",
+        "build",
+        "-d",
+        "/Users/yuseungjae/Desktop/radar-track-fcc-hil/build_perf"
+      ],
+      "started_utc": "2026-11-23T03:56:44.937628+00:00",
+      "status": "passed",
+      "returncode": 0,
+      "elapsed_s": 0.5015300000086427
+    },
+    {
+      "name": "compile-build_log_stress",
+      "command": [
+        "/Users/yuseungjae/zephyrproject/.venv/bin/west",
+        "build",
+        "-d",
+        "/Users/yuseungjae/Desktop/radar-track-fcc-hil/build_log_stress"
+      ],
+      "started_utc": "2026-11-23T03:56:45.440168+00:00",
+      "status": "passed",
+      "returncode": 0,
+      "elapsed_s": 3.008739917073399
+    },
+    {
+      "name": "compile-build_transport_stress",
+      "command": [
+        "/Users/yuseungjae/zephyrproject/.venv/bin/west",
+        "build",
+        "-d",
+        "/Users/yuseungjae/Desktop/radar-track-fcc-hil/build_transport_stress"
+      ],
+      "started_utc": "2026-11-23T03:56:48.450448+00:00",
+      "status": "passed",
+      "returncode": 0,
+      "elapsed_s": 2.3059741250472143
+    },
+    {
+      "name": "perf-smoke",
+      "command": [
+        "/Users/yuseungjae/zephyrproject/.venv/bin/python",
+        "fcc_app/tests/test_perf_monitor/board_check.py",
+        "--data-port",
+        "/dev/cu.usbserial-A5069RR4",
+        "--console-port",
+        "/dev/cu.usbmodem11203",
+        "--output",
+        "/Users/yuseungjae/Desktop/radar-track-fcc-hil/docs/test-results/release-v1.1.0-2026-11-23/perf-smoke",
+        "--workspace",
+        "/Users/yuseungjae/zephyrproject",
+        "--west",
+        "/Users/yuseungjae/zephyrproject/.venv/bin/west",
+        "--git",
+        "/usr/bin/git",
+        "--duration",
+        "10",
+        "--smoke"
+      ],
+      "started_utc": "2026-11-23T03:56:50.758584+00:00",
+      "status": "passed",
+      "returncode": 0,
+      "elapsed_s": 29.15961570898071
+    },
+    {
+      "name": "transport-status",
+      "command": [
+        "/Users/yuseungjae/zephyrproject/.venv/bin/python",
+        "fcc_app/tests/transport_stress/board_check.py",
+        "--data-port",
+        "/dev/cu.usbserial-A5069RR4",
+        "--console-port",
+        "/dev/cu.usbmodem11203",
+        "--output",
+        "/Users/yuseungjae/Desktop/radar-track-fcc-hil/docs/test-results/release-v1.1.0-2026-11-23/transport-status",
+        "--workspace",
+        "/Users/yuseungjae/zephyrproject",
+        "--west",
+        "/Users/yuseungjae/zephyrproject/.venv/bin/west"
+      ],
+      "started_utc": "2026-11-23T03:57:19.919055+00:00",
+      "status": "passed",
+      "returncode": 0,
+      "elapsed_s": 37.51409287506249
+    },
+    {
+      "name": "transport-track",
+      "command": [
+        "/Users/yuseungjae/zephyrproject/.venv/bin/python",
+        "fcc_app/tests/transport_stress/board_check.py",
+        "--data-port",
+        "/dev/cu.usbserial-A5069RR4",
+        "--console-port",
+        "/dev/cu.usbmodem11203",
+        "--output",
+        "/Users/yuseungjae/Desktop/radar-track-fcc-hil/docs/test-results/release-v1.1.0-2026-11-23/transport-track",
+        "--workspace",
+        "/Users/yuseungjae/zephyrproject",
+        "--west",
+        "/Users/yuseungjae/zephyrproject/.venv/bin/west",
+        "--track-controls"
+      ],
+      "started_utc": "2026-11-23T03:57:57.434026+00:00",
+      "status": "passed",
+      "returncode": 0,
+      "elapsed_s": 37.72109962499235
+    },
+    {
+      "name": "logs-traffic",
+      "command": [
+        "/Users/yuseungjae/zephyrproject/.venv/bin/python",
+        "fcc_app/tests/log_stress/board_check.py",
+        "--mode",
+        "traffic",
+        "--build-dir",
+        "build_debug",
+        "--output-dir",
+        "/Users/yuseungjae/Desktop/radar-track-fcc-hil/docs/test-results/release-v1.1.0-2026-11-23/logs-traffic",
+        "--data-port",
+        "/dev/cu.usbserial-A5069RR4",
+        "--console-port",
+        "/dev/cu.usbmodem11203",
+        "--west",
+        "/Users/yuseungjae/zephyrproject/.venv/bin/west",
+        "--zephyr-workspace",
+        "/Users/yuseungjae/zephyrproject"
+      ],
+      "started_utc": "2026-11-23T03:58:35.156026+00:00",
+      "status": "passed",
+      "returncode": 0,
+      "elapsed_s": 22.39083445793949
+    },
+    {
+      "name": "logs-producer",
+      "command": [
+        "/Users/yuseungjae/zephyrproject/.venv/bin/python",
+        "fcc_app/tests/log_stress/board_check.py",
+        "--mode",
+        "producer",
+        "--build-dir",
+        "build_log_stress",
+        "--output-dir",
+        "/Users/yuseungjae/Desktop/radar-track-fcc-hil/docs/test-results/release-v1.1.0-2026-11-23/logs-producer",
+        "--data-port",
+        "/dev/cu.usbserial-A5069RR4",
+        "--console-port",
+        "/dev/cu.usbmodem11203",
+        "--west",
+        "/Users/yuseungjae/zephyrproject/.venv/bin/west",
+        "--zephyr-workspace",
+        "/Users/yuseungjae/zephyrproject"
+      ],
+      "started_utc": "2026-11-23T03:58:57.547879+00:00",
+      "status": "passed",
+      "returncode": 0,
+      "elapsed_s": 25.337116417009383
+    },
+    {
+      "name": "restore-before-evaluation",
+      "command": [
+        "/Users/yuseungjae/zephyrproject/.venv/bin/west",
+        "flash",
+        "-d",
+        "/Users/yuseungjae/Desktop/radar-track-fcc-hil/build",
+        "--runner",
+        "openocd"
+      ],
+      "started_utc": "2026-11-23T03:59:22.886493+00:00",
+      "status": "passed",
+      "returncode": 0,
+      "elapsed_s": 2.3172076670452952
+    },
+    {
+      "name": "evaluate-normal",
+      "command": [
+        "/Users/yuseungjae/zephyrproject/.venv/bin/python",
+        "-m",
+        "pc_sim.evaluate",
+        "run",
+        "--port",
+        "/dev/cu.usbserial-A5069RR4",
+        "--scenario",
+        "normal",
+        "--output",
+        "/Users/yuseungjae/Desktop/radar-track-fcc-hil/docs/test-results/release-v1.1.0-2026-11-23/evaluate-normal"
+      ],
+      "started_utc": "2026-11-23T03:59:25.205046+00:00",
+      "status": "passed",
+      "returncode": 0,
+      "elapsed_s": 15.157340207952075
+    },
+    {
+      "name": "evaluate-noisy",
+      "command": [
+        "/Users/yuseungjae/zephyrproject/.venv/bin/python",
+        "-m",
+        "pc_sim.evaluate",
+        "run",
+        "--port",
+        "/dev/cu.usbserial-A5069RR4",
+        "--scenario",
+        "noisy",
+        "--output",
+        "/Users/yuseungjae/Desktop/radar-track-fcc-hil/docs/test-results/release-v1.1.0-2026-11-23/evaluate-noisy"
+      ],
+      "started_utc": "2026-11-23T03:59:40.364345+00:00",
+      "status": "passed",
+      "returncode": 0,
+      "elapsed_s": 14.930020125000738
+    },
+    {
+      "name": "evaluate-dropout",
+      "command": [
+        "/Users/yuseungjae/zephyrproject/.venv/bin/python",
+        "-m",
+        "pc_sim.evaluate",
+        "run",
+        "--port",
+        "/dev/cu.usbserial-A5069RR4",
+        "--scenario",
+        "dropout",
+        "--output",
+        "/Users/yuseungjae/Desktop/radar-track-fcc-hil/docs/test-results/release-v1.1.0-2026-11-23/evaluate-dropout"
+      ],
+      "started_utc": "2026-11-23T03:59:55.296201+00:00",
+      "status": "passed",
+      "returncode": 0,
+      "elapsed_s": 15.217811416951008
+    },
+    {
+      "name": "noise-sweep",
+      "command": [
+        "/Users/yuseungjae/zephyrproject/.venv/bin/python",
+        "-m",
+        "pc_sim.noise_sweep",
+        "--port",
+        "/dev/cu.usbserial-A5069RR4",
+        "--output",
+        "/Users/yuseungjae/Desktop/radar-track-fcc-hil/docs/test-results/release-v1.1.0-2026-11-23/noise"
+      ],
+      "started_utc": "2026-11-23T04:00:10.517989+00:00",
+      "status": "passed",
+      "returncode": 0,
+      "elapsed_s": 1472.1008533330169
+    },
+    {
+      "name": "spike-sweep",
+      "command": [
+        "/Users/yuseungjae/zephyrproject/.venv/bin/python",
+        "-m",
+        "pc_sim.spike_sweep",
+        "--port",
+        "/dev/cu.usbserial-A5069RR4",
+        "--output",
+        "/Users/yuseungjae/Desktop/radar-track-fcc-hil/docs/test-results/release-v1.1.0-2026-11-23/spike"
+      ],
+      "started_utc": "2026-11-23T04:24:42.747612+00:00",
+      "status": "passed",
+      "returncode": 0,
+      "elapsed_s": 719.9158342080191
+    },
+    {
+      "name": "perf-load",
+      "command": [
+        "/Users/yuseungjae/zephyrproject/.venv/bin/python",
+        "fcc_app/tests/test_perf_monitor/board_check.py",
+        "--data-port",
+        "/dev/cu.usbserial-A5069RR4",
+        "--console-port",
+        "/dev/cu.usbmodem11203",
+        "--output",
+        "/Users/yuseungjae/Desktop/radar-track-fcc-hil/docs/test-results/release-v1.1.0-2026-11-23/perf-load",
+        "--workspace",
+        "/Users/yuseungjae/zephyrproject",
+        "--west",
+        "/Users/yuseungjae/zephyrproject/.venv/bin/west",
+        "--git",
+        "/usr/bin/git",
+        "--duration",
+        "1800"
+      ],
+      "started_utc": "2026-11-23T04:36:42.681808+00:00",
+      "status": "failed",
+      "returncode": 1,
+      "elapsed_s": 1819.144320708001
+    },
+    {
+      "name": "restore-final",
+      "command": [
+        "/Users/yuseungjae/zephyrproject/.venv/bin/west",
+        "flash",
+        "-d",
+        "/Users/yuseungjae/Desktop/radar-track-fcc-hil/build",
+        "--runner",
+        "openocd"
+      ],
+      "started_utc": "2026-11-23T05:07:01.912763+00:00",
+      "status": "passed",
+      "returncode": 0,
+      "elapsed_s": 2.0992360829841346
+    },
+    {
+      "name": "final-smoke",
+      "command": [
+        "/Users/yuseungjae/zephyrproject/.venv/bin/python",
+        "/Users/yuseungjae/Desktop/radar-track-fcc-hil/docs/test-results/release-v1.1.0-2026-11-23/final_smoke.py"
+      ],
+      "started_utc": "2026-11-23T05:07:04.013312+00:00",
+      "status": "passed",
+      "returncode": 0,
+      "elapsed_s": 2.5029263750184327
+    }
+  ],
+  "failure": "RuntimeError('perf-load failed; inspect /Users/yuseungjae/Desktop/radar-track-fcc-hil/docs/test-results/release-v1.1.0-2026-11-23/perf-load.log')",
+  "passed": false
+}

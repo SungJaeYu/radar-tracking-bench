@@ -16,6 +16,14 @@ The GUI worker owns the data port and uses the same protocol implementation as t
 
 The CLI senders `radar_sender` and `run_sim` send measurements only. The GUI and `pc_sim.evaluate` also collect results. Preview mode opens no serial port and produces no simulated board estimates. PC multi-target/clutter generation is available for output-only scenarios; the current board path accepts a single target.
 
+## PC turn and segmented motion (v1.1.0)
+
+`Target.turn_rate_radps` is clockwise-positive in rad/s. The target integrates an exact constant-turn horizontal arc and rotates velocity; zero retains straight motion. `scenario_single_turn(bank_deg=30, tas_mps=200)` computes the turn rate as `g × tan(bank) / TAS`.
+
+`MotionSegment` and `SegmentedScenario` define successive durations and turn rates for one target. Steps crossing a boundary are split across the segments. `straight_turn_straight` travels east for 10 s, turns right 90° for about 55.49 s, then travels south for 10 s. Use `python -m pc_sim.run_sim --scenario straight_turn_straight --duration 80` for the full approximately 75.49 s path; the default 60 s truncates it.
+
+The change adds PC truth and measurement inputs. Firmware range/azimuth CV filters and the wire payload remain unchanged. `run_sim` does not collect board reports. The GUI and `pc_sim.evaluate` retain fixed-azimuth, constant-range-rate generation. The GUI controls are now English. [Separate STM32 turn evidence](docs/hardware-test-2026-11-23-v1.1.0.md) records this input against the existing estimator, not a CT estimator implementation.
+
 ## Execution contexts and state ownership
 
 ![Firmware flow through ISR, ring buffer, RX parser, handler queue, tracking owner, TX queue, and TX worker](docs/images/firmware-flow.en.png)
@@ -142,3 +150,9 @@ Python tests cover protocol/scenario/evaluation code and, with GUI dependencies,
 | [fcc_app/tests](fcc_app/tests) / [tests](tests) | Host C / Python verification |
 
 V1 is complete. Multi-target tracking, alternative estimators, additional hardware-error handling and latency optimization are separate follow-up work. [Scope and roadmap — Korean](docs/roadmap.md).
+
+## Estimator execution timing (2026-11-22)
+
+The `perf.conf` build aggregates predict/correct timer cycles separately and reports sample count and minimum/mean/maximum nanoseconds every five seconds. Aggregates are cumulative since boot; empty aggregates report `status=no_samples`. Host tests, firmware builds, and a 10-second STM32 smoke run validate the output path; these are not WCET or long-duration performance guarantees. See the [measurement contract](docs/performance-monitoring.md) for boundaries and limitations.
+
+The [2026-11-22 log-format regression](docs/hardware-test-2026-11-22-logging.md) covers structured console logs and GUI/PC compatibility.

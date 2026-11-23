@@ -1,0 +1,17 @@
+{
+  "started_utc": "2026-11-23T10:45:22.062000+00:00",
+  "source_hashes_checked": 137,
+  "changed_sources": [],
+  "ports": {
+    "data": "/dev/cu.usbserial-A5069RR4",
+    "console": "/dev/cu.usbmodem11203"
+  },
+  "port_owners": [],
+  "acceptance_revision": "2026-11-23-host-input-v3",
+  "threshold_changes": false,
+  "plan": [
+    "60s current-host input readiness and recovery",
+    "1800s requested50Hz qualification if 60s profile complete",
+    "release integration only if all qualifications pass"
+  ]
+}

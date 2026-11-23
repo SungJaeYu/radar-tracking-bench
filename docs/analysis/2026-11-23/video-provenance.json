@@ -1,0 +1,35 @@
+{
+  "kind": "rendered replay of recorded board CSV, not a live screen capture",
+  "source_session": "docs/test-results/release-v1.1.0-2026-11-23/gui/session/20261123-141357-7bc50801",
+  "source_started_utc": "2026-11-23T05:13:57.980041+00:00",
+  "source_duration_s": 14.970234791981056,
+  "source_events_rendered": {
+    "sample": 139,
+    "report": 140,
+    "status": 1
+  },
+  "fps": 15,
+  "duration_s": 40,
+  "frames": 600,
+  "size": [
+    1600,
+    1000
+  ],
+  "audio": false,
+  "preview_only": false,
+  "chapters": {
+    "0-3": "source introduction",
+    "3-19": "recorded events at 1x; then paused",
+    "19-24": "paused TRACK",
+    "24-28": "paused STATUS",
+    "28-40": "scope and source"
+  },
+  "input_sha256": {
+    "docs/test-results/release-v1.1.0-2026-11-23/gui/session/20261123-141357-7bc50801/metadata.json": "35b372739fc8408a897b290bfd5d9fa02e900b09636a1e7db4bec50c09a495d3",
+    "docs/test-results/release-v1.1.0-2026-11-23/gui/session/20261123-141357-7bc50801/samples.csv": "d37623c57bbb78e20bd4069fe9c508d5757266182676741f04e30edac15ecf00",
+    "docs/test-results/release-v1.1.0-2026-11-23/gui/session/20261123-141357-7bc50801/reports.csv": "66f796b59e0e69e3828a95c8434aab22c39a7ffd32537be3f8ca2250b5450cfc",
+    "docs/test-results/release-v1.1.0-2026-11-23/gui/session/20261123-141357-7bc50801/status.csv": "45a2bc3aa61865f9a5462104089fbf47ddd73f08a1c05d61efff04e147c2aa37"
+  },
+  "gui_source_sha256": "92f01ba50c3f8c4affd538f3fc213ca6e785aa739fcf1c5b2ee74af3475e2edc",
+  "renderer_sha256": "9a8f0fbdb9acdb4bea19f7e754624e14145a7aef9fb90f204a1f82f71d7ac956"
+}

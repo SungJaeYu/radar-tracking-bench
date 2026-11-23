@@ -1,0 +1,19 @@
+{
+  "release_complete": false,
+  "current_branch": "feat/tracking-benchmark",
+  "production_or_acceptance_code_changed_this_turn": false,
+  "thresholds_changed": false,
+  "functional_recovery_checks_passed": true,
+  "full_requested_load_verified": false,
+  "full_load_stopped_after_s": 1538.4472296250751,
+  "original_failure_preserved": true,
+  "failure_classification_issue": "documented RESET after host input gap was classified as board_internal failure",
+  "normal_firmware_restored": true,
+  "final_smoke_checks_passed": 48,
+  "git_commit_push_merge_tag_performed": false,
+  "remaining": [
+    "Review fixture handling of host input discontinuities",
+    "Complete requested 30-minute load verification without relaxing board criteria",
+    "Complete release commit/push/main merge/v1.1.0 tag after verification"
+  ]
+}

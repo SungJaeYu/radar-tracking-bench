@@ -13,6 +13,7 @@ target_sources(app PRIVATE
     src/application/report_sender.c
     src/protocol/measurement_message.c
     src/tracking/kalman_cv.c
+    src/tracking/estimator.c
     src/tracking/gating.c
     src/tracking/angle_utils.c
     src/tracking/track.c
@@ -30,8 +31,13 @@ target_include_directories(app PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/src)
 # Optional bench diagnostics; no collector or reporter is linked into normal firmware.
 target_sources_ifdef(CONFIG_RADAR_PERF_MONITOR app PRIVATE
     src/diagnostics/perf_monitor.c
+    src/diagnostics/perf_rx_capture.c
     src/diagnostics/perf_reporter.c
 )
+
+if(CONFIG_RADAR_PERF_MONITOR AND CONFIG_SCHED_THREAD_USAGE_ALL)
+    target_sources(app PRIVATE src/diagnostics/perf_resources.c)
+endif()
 
 # Bench-only producer; excluded from normal and ordinary debug firmware.
 target_sources_ifdef(CONFIG_RADAR_LOG_STRESS_TEST app PRIVATE tests/log_stress/log_stress.c)

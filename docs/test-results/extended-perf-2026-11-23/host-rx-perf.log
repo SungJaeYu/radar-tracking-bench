@@ -1,0 +1,125 @@
+-- The C compiler identification is AppleClang 21.0.0.21000401
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+-- Found Threads: TRUE
+-- Configuring done (1.7s)
+-- Generating done (0.0s)
+-- Build files have been written to: /tmp/radar-extended-host/rx-perf
+[1/14] Building C object CMakeFiles/uart_rx_tests.dir/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/src/common/crc16.c.o
+[2/14] Building C object CMakeFiles/uart_rx_tests.dir/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/src/protocol/protocol_frame.c.o
+[3/14] Building C object CMakeFiles/uart_rx_discard_tests.dir/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/src/protocol/protocol_frame.c.o
+[4/14] Building C object CMakeFiles/uart_rx_discard_tests.dir/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/src/common/crc16.c.o
+[5/14] Building C object CMakeFiles/uart_rx_tests.dir/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/src/protocol/frame_parser.c.o
+[6/14] Building C object CMakeFiles/uart_rx_tests.dir/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/src/common/ring_buffer.c.o
+[7/14] Building C object CMakeFiles/uart_rx_discard_tests.dir/src/main.c.o
+[8/14] Building C object CMakeFiles/uart_rx_tests.dir/src/main.c.o
+[9/14] Building C object CMakeFiles/uart_rx_discard_tests.dir/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/src/common/ring_buffer.c.o
+[10/14] Building C object CMakeFiles/uart_rx_tests.dir/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/src/diagnostics/perf_monitor.c.o
+[11/14] Building C object CMakeFiles/uart_rx_discard_tests.dir/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/src/protocol/frame_parser.c.o
+[12/14] Building C object CMakeFiles/uart_rx_discard_tests.dir/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/src/diagnostics/perf_monitor.c.o
+[13/14] Linking C executable uart_rx_tests
+[14/14] Linking C executable uart_rx_discard_tests
+Test project /tmp/radar-extended-host/rx-perf
+      Start  1: test_uart_stats_normal_receive
+ 1/47 Test  #1: test_uart_stats_normal_receive ..................................   Passed    0.21 sec
+      Start  2: test_uart_stats_overflow_and_recovery
+ 2/47 Test  #2: test_uart_stats_overflow_and_recovery ...........................   Passed    0.00 sec
+      Start  3: test_uart_stats_wrapped_ring_recovery
+ 3/47 Test  #3: test_uart_stats_wrapped_ring_recovery ...........................   Passed    0.00 sec
+      Start  4: test_rx_init_errors
+ 4/47 Test  #4: test_rx_init_errors .............................................   Passed    0.00 sec
+      Start  5: test_stats_snapshot_and_reset
+ 5/47 Test  #5: test_stats_snapshot_and_reset ...................................   Passed    0.00 sec
+      Start  6: test_timeout_boundary_for_every_partial_frame
+ 6/47 Test  #6: test_timeout_boundary_for_every_partial_frame ...................   Passed    0.00 sec
+      Start  7: test_timeout_ignores_idle_and_complete_frames
+ 7/47 Test  #7: test_timeout_ignores_idle_and_complete_frames ...................   Passed    0.00 sec
+      Start  8: test_timeout_recovers_next_valid_frame
+ 8/47 Test  #8: test_timeout_recovers_next_valid_frame ..........................   Passed    0.00 sec
+      Start  9: test_timeout_preserves_split_frames
+ 9/47 Test  #9: test_timeout_preserves_split_frames .............................   Passed    0.00 sec
+      Start 10: test_timeout_refreshes_on_each_byte
+10/47 Test #10: test_timeout_refreshes_on_each_byte .............................   Passed    0.00 sec
+      Start 11: test_explicit_reset_cancels_partial_timeout
+11/47 Test #11: test_explicit_reset_cancels_partial_timeout .....................   Passed    0.00 sec
+      Start 12: test_processor_copies_frame_and_reset_preserves_drops
+12/47 Test #12: test_processor_copies_frame_and_reset_preserves_drops ...........   Passed    0.00 sec
+      Start 13: test_nonready_results_do_not_submit
+13/47 Test #13: test_nonready_results_do_not_submit .............................   Passed    0.00 sec
+      Start 14: test_queue_full_counts_drop_and_recovers
+14/47 Test #14: test_queue_full_counts_drop_and_recovers ........................   Passed    0.00 sec
+      Start 15: test_discards_incomplete_frame
+15/47 Test #15: test_discards_incomplete_frame ..................................   Passed    0.00 sec
+      Start 16: test_receives_after_recovery
+16/47 Test #16: test_receives_after_recovery ....................................   Passed    0.00 sec
+      Start 17: test_empty_recovery
+17/47 Test #17: test_empty_recovery .............................................   Passed    0.00 sec
+      Start 18: test_ring_overflow_preserves_buffer
+18/47 Test #18: test_ring_overflow_preserves_buffer .............................   Passed    0.00 sec
+      Start 19: test_ring_wraparound
+19/47 Test #19: test_ring_wraparound ............................................   Passed    0.00 sec
+      Start 20: test_dispatch_drains_complete_frame
+20/47 Test #20: test_dispatch_drains_complete_frame .............................   Passed    0.00 sec
+      Start 21: test_preserves_partial_parser_and_drops_new_input
+21/47 Test #21: test_preserves_partial_parser_and_drops_new_input ...............   Passed    0.00 sec
+      Start 22: test_rejects_bad_crc
+22/47 Test #22: test_rejects_bad_crc ............................................   Passed    0.00 sec
+      Start 23: test_drain_rejects_bad_length_then_handles_valid_frame
+23/47 Test #23: test_drain_rejects_bad_length_then_handles_valid_frame ..........   Passed    0.00 sec
+      Start 24: test_drain_queue_full_still_finishes_recovery
+24/47 Test #24: test_drain_queue_full_still_finishes_recovery ...................   Passed    0.00 sec
+      Start 25: discard_test_uart_stats_normal_receive
+25/47 Test #25: discard_test_uart_stats_normal_receive ..........................   Passed    0.19 sec
+      Start 26: discard_test_uart_stats_overflow_and_recovery
+26/47 Test #26: discard_test_uart_stats_overflow_and_recovery ...................   Passed    0.00 sec
+      Start 27: discard_test_uart_stats_wrapped_ring_recovery
+27/47 Test #27: discard_test_uart_stats_wrapped_ring_recovery ...................   Passed    0.00 sec
+      Start 28: discard_test_rx_init_errors
+28/47 Test #28: discard_test_rx_init_errors .....................................   Passed    0.00 sec
+      Start 29: discard_test_stats_snapshot_and_reset
+29/47 Test #29: discard_test_stats_snapshot_and_reset ...........................   Passed    0.00 sec
+      Start 30: discard_test_timeout_boundary_for_every_partial_frame
+30/47 Test #30: discard_test_timeout_boundary_for_every_partial_frame ...........   Passed    0.00 sec
+      Start 31: discard_test_timeout_ignores_idle_and_complete_frames
+31/47 Test #31: discard_test_timeout_ignores_idle_and_complete_frames ...........   Passed    0.00 sec
+      Start 32: discard_test_timeout_recovers_next_valid_frame
+32/47 Test #32: discard_test_timeout_recovers_next_valid_frame ..................   Passed    0.00 sec
+      Start 33: discard_test_timeout_preserves_split_frames
+33/47 Test #33: discard_test_timeout_preserves_split_frames .....................   Passed    0.00 sec
+      Start 34: discard_test_timeout_refreshes_on_each_byte
+34/47 Test #34: discard_test_timeout_refreshes_on_each_byte .....................   Passed    0.00 sec
+      Start 35: discard_test_explicit_reset_cancels_partial_timeout
+35/47 Test #35: discard_test_explicit_reset_cancels_partial_timeout .............   Passed    0.00 sec
+      Start 36: discard_test_processor_copies_frame_and_reset_preserves_drops
+36/47 Test #36: discard_test_processor_copies_frame_and_reset_preserves_drops ...   Passed    0.00 sec
+      Start 37: discard_test_nonready_results_do_not_submit
+37/47 Test #37: discard_test_nonready_results_do_not_submit .....................   Passed    0.00 sec
+      Start 38: discard_test_queue_full_counts_drop_and_recovers
+38/47 Test #38: discard_test_queue_full_counts_drop_and_recovers ................   Passed    0.00 sec
+      Start 39: discard_test_discards_incomplete_frame
+39/47 Test #39: discard_test_discards_incomplete_frame ..........................   Passed    0.00 sec
+      Start 40: discard_test_receives_after_recovery
+40/47 Test #40: discard_test_receives_after_recovery ............................   Passed    0.00 sec
+      Start 41: discard_test_empty_recovery
+41/47 Test #41: discard_test_empty_recovery .....................................   Passed    0.00 sec
+      Start 42: discard_test_ring_overflow_preserves_buffer
+42/47 Test #42: discard_test_ring_overflow_preserves_buffer .....................   Passed    0.00 sec
+      Start 43: discard_test_ring_wraparound
+43/47 Test #43: discard_test_ring_wraparound ....................................   Passed    0.00 sec
+      Start 44: test_discard_drops_complete_frame_and_recovers
+44/47 Test #44: test_discard_drops_complete_frame_and_recovers ..................   Passed    0.00 sec
+      Start 45: test_discard_drops_completable_partial_frame
+45/47 Test #45: test_discard_drops_completable_partial_frame ....................   Passed    0.00 sec
+      Start 46: perf_drain_alignment
+46/47 Test #46: perf_drain_alignment ............................................   Passed    0.00 sec
+      Start 47: perf_discard_alignment
+47/47 Test #47: perf_discard_alignment ..........................................   Passed    0.00 sec
+
+100% tests passed, 0 tests failed out of 47
+
+Total Test time (real) =   0.52 sec

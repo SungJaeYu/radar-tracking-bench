@@ -1,0 +1,9 @@
+{
+  "command": "QT_QPA_PLATFORM=offscreen /Users/yuseungjae/zephyrproject/.venv/bin/python -m pytest -q",
+  "passed": 812,
+  "subtests_passed": 9,
+  "failed": 0,
+  "skipped": 0,
+  "elapsed_s": 13.37,
+  "scope": "Current working tree after English GUI translation; host tests, not hardware"
+}

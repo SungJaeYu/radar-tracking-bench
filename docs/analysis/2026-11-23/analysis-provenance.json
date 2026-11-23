@@ -1,0 +1,25 @@
+{
+  "inputs_sha256": {
+    "docs/test-results/host-input-retest-2026-11-23/perf-load/results.json": "72d97ccab3caab85acacac109337a3491583f6d585ba8580a02656579a15e9dd",
+    "docs/test-results/host-input-retest-2026-11-23/perf-load/performance.json": "85a1755328bbdb58639db9e9ae84be8686f707a0602c3b04df61fb71f63b0371",
+    "docs/test-results/host-input-retest-2026-11-23/perf-load/metadata.json": "4ce760052438ad4ba81de7acadd56f7bc3d69a1aca8fda42776a7782416da0ca",
+    "docs/test-results/host-input-retest-2026-11-23/perf-load/session/samples.csv": "cccb01af57e260b0432f04ca63bd53de00de0ecce036cdd041654a7f0b63b65d",
+    "docs/test-results/host-input-retest-2026-11-23/perf-load/session/reports.csv": "979611d85490fd2918abb60b81e0ada691d5281082e222e12c5dd67ffbcf4f75",
+    "docs/test-results/host-input-retest-2026-11-23/perf-load/session/status.csv": "c93c46a4725526321cf4328ffd5852ca3ae64399c98d785b7926f2f309433305",
+    "docs/test-results/final-validation-2026-11-23/turn/aligned.csv": "af0b78d85d47974a4a920e55370ec58d764bafee8a2ae682d8e3ab4977f55b31",
+    "docs/test-results/final-validation-2026-11-23/turn/results.json": "84a47db8299a992bd5589a1eb477e92c4f4fd3c89e36dd0c23e8fb37153a29f6",
+    "docs/test-results/final-validation-2026-11-23/turn/metadata.json": "9650f92b7d4599f69abd48ca2488a221259efadeb76725c157153d822cdc93cf"
+  },
+  "tool_sha256": "393dd70622dae6e206e87e5a0e28264eb248e60f611373576f431e146713e6e4",
+  "checks": [
+    "unique input/reply timestamp bijection",
+    "RTT count and nearest-rank percentiles match original",
+    "scheduled = sent + unsent",
+    "all recorded STATUS counters zero",
+    "turn RMSE matches original"
+  ],
+  "libraries": {
+    "matplotlib": "3.11.2",
+    "numpy": "2.5.5"
+  }
+}

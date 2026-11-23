@@ -1,0 +1,32 @@
+[0/1] Re-running CMake...
+-- Configuring done (0.0s)
+-- Generating done (0.0s)
+-- Build files have been written to: /Users/yuseungjae/Desktop/radar-track-fcc-hil/build_tracking
+[1/29] Building C object CMakeFiles/track_tests.dir/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/src/tracking/estimator.c.o
+[2/29] Building C object CMakeFiles/track_tests.dir/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/src/tracking/gating.c.o
+[3/29] Building C object CMakeFiles/gating_default.dir/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/src/tracking/gating.c.o
+[4/29] Building C object CMakeFiles/track_tests.dir/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/src/tracking/angle_utils.c.o
+[5/29] Building C object CMakeFiles/track_tests.dir/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/src/tracking/track.c.o
+[6/29] Building C object CMakeFiles/gating_default.dir/src/gating_cases.c.o
+[7/29] Building C object CMakeFiles/gating_default.dir/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/src/tracking/angle_utils.c.o
+[8/29] Building C object CMakeFiles/track_tests.dir/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/src/protocol/measurement_message.c.o
+[9/29] Building C object CMakeFiles/track_tests.dir/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/src/tracking/kalman_cv.c.o
+[10/29] Building C object CMakeFiles/gating_minimum.dir/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/src/tracking/gating.c.o
+[11/29] Building C object CMakeFiles/gating_narrow.dir/src/gating_cases.c.o
+[12/29] Building C object CMakeFiles/gating_narrow.dir/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/src/tracking/gating.c.o
+[13/29] Building C object CMakeFiles/gating_minimum.dir/src/gating_cases.c.o
+[14/29] Building C object CMakeFiles/gating_narrow.dir/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/src/tracking/angle_utils.c.o
+[15/29] Building C object CMakeFiles/gating_minimum.dir/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/src/tracking/angle_utils.c.o
+[16/29] Building C object CMakeFiles/gating_wide.dir/src/gating_cases.c.o
+[17/29] Building C object CMakeFiles/gating_wide.dir/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/src/tracking/gating.c.o
+[18/29] Building C object CMakeFiles/gating_wide.dir/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/src/tracking/angle_utils.c.o
+[19/29] Building C object CMakeFiles/track_tests.dir/src/main.c.o
+[20/29] Building C object CMakeFiles/gating_maximum.dir/src/gating_cases.c.o
+[21/29] Building C object CMakeFiles/gating_maximum.dir/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/src/tracking/angle_utils.c.o
+[22/29] Building C object CMakeFiles/gating_maximum.dir/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/src/tracking/gating.c.o
+[23/29] Linking C executable gating_narrow
+[24/29] Linking C executable gating_minimum
+[25/29] Linking C executable gating_default
+[26/29] Linking C executable gating_wide
+[27/29] Linking C executable track_tests
+[28/29] Linking C executable gating_maximum

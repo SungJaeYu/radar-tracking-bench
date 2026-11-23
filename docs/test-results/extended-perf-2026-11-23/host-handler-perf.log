@@ -1,0 +1,96 @@
+-- The C compiler identification is AppleClang 21.0.0.21000401
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+-- Found Threads: TRUE
+-- Configuring done (1.7s)
+-- Generating done (0.0s)
+-- Build files have been written to: /tmp/radar-extended-host/handler-perf
+[1/15] Building C object CMakeFiles/frame_handler_tests.dir/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/src/protocol/measurement_message.c.o
+[2/15] Building C object CMakeFiles/frame_handler_tests.dir/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/src/tracking/estimator.c.o
+[3/15] Building C object CMakeFiles/frame_handler_tests.dir/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/src/tracking/gating.c.o
+[4/15] Building C object CMakeFiles/frame_handler_tests.dir/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/src/protocol/protocol_frame.c.o
+[5/15] Building C object CMakeFiles/frame_handler_tests.dir/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/src/tracking/angle_utils.c.o
+[6/15] Building C object CMakeFiles/frame_handler_tests.dir/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/src/tracking/track.c.o
+[7/15] Building C object CMakeFiles/frame_handler_tests.dir/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/src/common/crc16.c.o
+[8/15] Building C object CMakeFiles/frame_handler_tests.dir/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/src/application/radar_processor.c.o
+[9/15] Building C object CMakeFiles/frame_handler_tests.dir/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/src/tracking/kalman_cv.c.o
+[10/15] Building C object CMakeFiles/frame_handler_tests.dir/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/src/protocol/status_message.c.o
+[11/15] Building C object CMakeFiles/frame_handler_tests.dir/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/src/protocol/track_message.c.o
+[12/15] Building C object CMakeFiles/frame_handler_tests.dir/src/main.c.o
+[13/15] Building C object CMakeFiles/frame_handler_tests.dir/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/src/protocol/frame_parser.c.o
+[14/15] Building C object CMakeFiles/frame_handler_tests.dir/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/src/diagnostics/perf_monitor.c.o
+[15/15] Linking C executable frame_handler_tests
+Test project /tmp/radar-extended-host/handler-perf
+      Start  1: test_stale_measurement_boundary_and_stats
+ 1/32 Test  #1: test_stale_measurement_boundary_and_stats ............   Passed    0.23 sec
+      Start  2: test_processor_invalid_input_preserves_output
+ 2/32 Test  #2: test_processor_invalid_input_preserves_output ........   Passed    0.00 sec
+      Start  3: test_processor_timeout_query_preserves_state
+ 3/32 Test  #3: test_processor_timeout_query_preserves_state .........   Passed    0.00 sec
+      Start  4: test_track_encode_wire
+ 4/32 Test  #4: test_track_encode_wire ...............................   Passed    0.00 sec
+      Start  5: test_track_encode_invalid_arguments
+ 5/32 Test  #5: test_track_encode_invalid_arguments ..................   Passed    0.00 sec
+      Start  6: test_track_started_updated_and_confirmed
+ 6/32 Test  #6: test_track_started_updated_and_confirmed .............   Passed    0.00 sec
+      Start  7: test_track_timestamp_rejection_report
+ 7/32 Test  #7: test_track_timestamp_rejection_report ................   Passed    0.00 sec
+      Start  8: test_track_gate_rejection_empty_and_lost
+ 8/32 Test  #8: test_track_gate_rejection_empty_and_lost .............   Passed    0.00 sec
+      Start  9: test_track_spike_recovery_matrix
+ 9/32 Test  #9: test_track_spike_recovery_matrix .....................   Passed    0.01 sec
+      Start 10: test_track_gap_reset_and_recovery
+10/32 Test #10: test_track_gap_reset_and_recovery ....................   Passed    0.00 sec
+      Start 11: test_track_sequence_wrap_and_timeout_preservation
+11/32 Test #11: test_track_sequence_wrap_and_timeout_preservation ....   Passed    0.00 sec
+      Start 12: test_track_submit_failure_and_recovery
+12/32 Test #12: test_track_submit_failure_and_recovery ...............   Passed    0.00 sec
+      Start 13: test_track_encode_failure_and_recovery
+13/32 Test #13: test_track_encode_failure_and_recovery ...............   Passed    0.00 sec
+      Start 14: test_incoming_track_report_is_ignored
+14/32 Test #14: test_incoming_track_report_is_ignored ................   Passed    0.00 sec
+      Start 15: test_init_command_resets_tracking
+15/32 Test #15: test_init_command_resets_tracking ....................   Passed    0.00 sec
+      Start 16: test_reset_command_resets_tracking
+16/32 Test #16: test_reset_command_resets_tracking ...................   Passed    0.00 sec
+      Start 17: test_valid_measurements_arm_refresh_and_expire
+17/32 Test #17: test_valid_measurements_arm_refresh_and_expire .......   Passed    0.00 sec
+      Start 18: test_invalid_measurements_do_not_arm_timeout
+18/32 Test #18: test_invalid_measurements_do_not_arm_timeout .........   Passed    0.00 sec
+      Start 19: test_invalid_measurements_do_not_refresh_timeout
+19/32 Test #19: test_invalid_measurements_do_not_refresh_timeout .....   Passed    0.00 sec
+      Start 20: test_gate_rejection_refreshes_receive_timeout
+20/32 Test #20: test_gate_rejection_refreshes_receive_timeout ........   Passed    0.00 sec
+      Start 21: test_timestamp_rejection_refreshes_receive_timeout
+21/32 Test #21: test_timestamp_rejection_refreshes_receive_timeout ...   Passed    0.00 sec
+      Start 22: test_status_zero
+22/32 Test #22: test_status_zero .....................................   Passed    0.00 sec
+      Start 23: test_status_snapshot
+23/32 Test #23: test_status_snapshot .................................   Passed    0.00 sec
+      Start 24: test_status_preserves_track
+24/32 Test #24: test_status_preserves_track ..........................   Passed    0.00 sec
+      Start 25: test_status_does_not_arm_timeout
+25/32 Test #25: test_status_does_not_arm_timeout .....................   Passed    0.00 sec
+      Start 26: test_status_does_not_refresh_timeout
+26/32 Test #26: test_status_does_not_refresh_timeout .................   Passed    0.00 sec
+      Start 27: test_status_encode_wire
+27/32 Test #27: test_status_encode_wire ..............................   Passed    0.00 sec
+      Start 28: test_status_encode_invalid_arguments
+28/32 Test #28: test_status_encode_invalid_arguments .................   Passed    0.00 sec
+      Start 29: test_status_submit_failure_and_recovery
+29/32 Test #29: test_status_submit_failure_and_recovery ..............   Passed    0.00 sec
+      Start 30: test_status_encode_failure_does_not_submit
+30/32 Test #30: test_status_encode_failure_does_not_submit ...........   Passed    0.00 sec
+      Start 31: test_incoming_status_report_is_ignored
+31/32 Test #31: test_incoming_status_report_is_ignored ...............   Passed    0.00 sec
+      Start 32: test_perf_measurement_paths
+32/32 Test #32: test_perf_measurement_paths ..........................   Passed    0.00 sec
+
+100% tests passed, 0 tests failed out of 32
+
+Total Test time (real) =   0.32 sec

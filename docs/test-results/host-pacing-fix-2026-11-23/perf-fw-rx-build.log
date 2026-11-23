@@ -1,0 +1,18 @@
+[0/1] Re-running CMake...
+-- Configuring done (0.1s)
+-- Generating done (0.0s)
+-- Build files have been written to: /tmp/perf-fw-rx
+[1/15] Building C object CMakeFiles/uart_rx_tests.dir/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/src/common/crc16.c.o
+[2/15] Building C object CMakeFiles/uart_rx_tests.dir/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/src/common/ring_buffer.c.o
+[3/15] Building C object CMakeFiles/uart_rx_tests.dir/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/src/protocol/frame_parser.c.o
+[4/15] Building C object CMakeFiles/uart_rx_discard_tests.dir/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/src/common/ring_buffer.c.o
+[5/15] Building C object CMakeFiles/uart_rx_discard_tests.dir/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/src/common/crc16.c.o
+[6/15] Building C object CMakeFiles/uart_rx_tests.dir/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/src/protocol/protocol_frame.c.o
+[7/15] Building C object CMakeFiles/uart_rx_tests.dir/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/src/diagnostics/perf_monitor.c.o
+[8/15] Building C object CMakeFiles/uart_rx_discard_tests.dir/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/src/protocol/protocol_frame.c.o
+[9/15] Building C object CMakeFiles/uart_rx_tests.dir/src/main.c.o
+[10/15] Building C object CMakeFiles/uart_rx_discard_tests.dir/src/main.c.o
+[11/15] Building C object CMakeFiles/uart_rx_discard_tests.dir/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/src/protocol/frame_parser.c.o
+[12/15] Building C object CMakeFiles/uart_rx_discard_tests.dir/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/src/diagnostics/perf_monitor.c.o
+[13/15] Linking C executable uart_rx_tests
+[14/15] Linking C executable uart_rx_discard_tests

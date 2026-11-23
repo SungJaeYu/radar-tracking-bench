@@ -12,6 +12,7 @@ static void reset_test(void)
     tx_ready_sem.count = 0;
     tx_queue.head = tx_queue.count = 0;
     put_calls = 0;
+    test_uptime_ms = 0;
     sent_count = 0;
     memset(log_output, 0, sizeof(log_output));
 }
@@ -29,7 +30,7 @@ static void test_tx_init(void)
     reset_test();
     ready = false;
     assert(uart_tx_init() == -ENODEV && tx_ready_sem.count == 0);
-    assert(strstr(log_output, "not ready") != NULL);
+    assert(strstr(log_output, "status=not_ready") != NULL);
     ready = true;
     assert(uart_tx_init() == 0 && tx_ready_sem.count == 1);
 }
@@ -48,8 +49,8 @@ static void test_tx_invalid_submit(void)
 #if defined(CONFIG_RADAR_PERF_MONITOR)
     struct perf_stats stats;
     assert(perf_monitor_get_stats(&stats) == 0);
-    assert(stats.queues[PERF_QUEUE_TX].accepted == 0);
-    assert(stats.queues[PERF_QUEUE_TX].rejected == 0);
+    assert(stats.queues[PERF_QUEUE_TX].accepted_count == 0);
+    assert(stats.queues[PERF_QUEUE_TX].rejected_count == 0);
 #endif
 }
 
@@ -64,12 +65,18 @@ static void test_tx_queue_copy_fifo_full_and_recovery(void)
     struct tx_frame request = {
         .frame = {.type = FRAME_TYPE_STATUS_REQUEST, .payload_length = 1},
     };
+#if defined(CONFIG_RADAR_PERF_MONITOR)
+    request.measurement_origin_valid = true;
+    request.parsed_uptime_ms = 0;
+    request.queued_uptime_ms = -999; // submit must replace caller's enqueue time.
+#endif
     for (unsigned i = 0; i < 8; ++i) {
         request.frame.payload[0] = (uint8_t)i;
         assert(uart_tx_submit(&request) == 0);
     }
     assert(uart_tx_submit(&request) == -ENOMSG);
     memset(&request, 0xff, sizeof(request));
+    test_uptime_ms = 7;
     run_worker();
     assert(sent_count == 8 * 6 && tx_queue.count == 0);
     struct frame_parser parser;
@@ -89,9 +96,14 @@ static void test_tx_queue_copy_fifo_full_and_recovery(void)
 #if defined(CONFIG_RADAR_PERF_MONITOR)
     struct perf_stats stats;
     assert(perf_monitor_get_stats(&stats) == 0);
-    assert(stats.queues[PERF_QUEUE_TX].accepted - before.queues[PERF_QUEUE_TX].accepted == 8);
-    assert(stats.queues[PERF_QUEUE_TX].rejected - before.queues[PERF_QUEUE_TX].rejected == 1);
-    assert(stats.queues[PERF_QUEUE_TX].observed_max_used == 8);
+    assert(stats.queues[PERF_QUEUE_TX].accepted_count - before.queues[PERF_QUEUE_TX].accepted_count == 8);
+    assert(stats.queues[PERF_QUEUE_TX].rejected_count - before.queues[PERF_QUEUE_TX].rejected_count == 1);
+    assert(stats.queues[PERF_QUEUE_TX].max_observed_depth == 8);
+    assert(stats.tx_queue_wait.sample_count - before.tx_queue_wait.sample_count == 8);
+    assert(stats.tx_queue_wait.total_ms - before.tx_queue_wait.total_ms == 56);
+    assert(stats.tx_poll.sample_count - before.tx_poll.sample_count == 8);
+    assert(stats.parsed_to_tx_poll.sample_count - before.parsed_to_tx_poll.sample_count == 8);
+    assert(stats.parsed_to_tx_poll.total_ms - before.parsed_to_tx_poll.total_ms == 56);
     assert(stats.tx_poll_completed - before.tx_poll_completed == 8 &&
            stats.tx_encode_failed == before.tx_encode_failed);
 #endif
@@ -122,6 +134,9 @@ static void test_tx_encode_error_continues(void)
 #if defined(CONFIG_RADAR_PERF_MONITOR)
     struct perf_stats stats;
     assert(perf_monitor_get_stats(&stats) == 0);
+    assert(stats.tx_queue_wait.sample_count - before.tx_queue_wait.sample_count == 1);
+    assert(stats.tx_poll.sample_count - before.tx_poll.sample_count == 1);
+    assert(stats.parsed_to_tx_poll.sample_count == before.parsed_to_tx_poll.sample_count);
     assert(stats.tx_poll_completed - before.tx_poll_completed == 1 &&
            stats.tx_encode_failed - before.tx_encode_failed == 1);
 #endif

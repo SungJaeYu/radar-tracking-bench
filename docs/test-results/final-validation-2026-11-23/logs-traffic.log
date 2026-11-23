@@ -1,0 +1,54 @@
+{
+  "mode": "traffic",
+  "phases": [
+    {
+      "name": "baseline",
+      "target_hz": 10,
+      "sent": 29,
+      "duration_s": 3.00041116704233
+    },
+    {
+      "name": "50Hz",
+      "target_hz": 50,
+      "sent": 111,
+      "duration_s": 3.0070559999439865
+    },
+    {
+      "name": "100Hz",
+      "target_hz": 100,
+      "sent": 222,
+      "duration_s": 3.000380166922696
+    },
+    {
+      "name": "200Hz",
+      "target_hz": 200,
+      "sent": 454,
+      "duration_s": 3.0004866669187322
+    },
+    {
+      "name": "recovery",
+      "target_hz": 10,
+      "sent": 30,
+      "duration_s": 3.000068874913268
+    }
+  ],
+  "errors": [],
+  "hex_sha256": "75df3b1543608a83d95bc8da4b0b6aca1d871d04e284ce5e9cb14c9a48eb9f66",
+  "last_measurement_ms": 15150,
+  "log_dropped_notice_total": 2671,
+  "producer_sequences_received": 0,
+  "checks": {
+    "no_io_errors": true,
+    "wire_responses_valid": true,
+    "log_loss_observed": true,
+    "status_counters_zero": true,
+    "status_each_phase": true,
+    "status_after_stop": true,
+    "no_fatal_or_assert": true,
+    "single_boot": true,
+    "confirmed": true,
+    "recovery_measurement_logged": true,
+    "timeout_once": true
+  },
+  "passed": true
+}

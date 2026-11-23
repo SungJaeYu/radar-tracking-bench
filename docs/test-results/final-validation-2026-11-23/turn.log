@@ -1,0 +1,103 @@
+sent=1/755 segment=0
+sent=101/755 segment=1
+sent=201/755 segment=1
+sent=301/755 segment=1
+sent=401/755 segment=1
+sent=501/755 segment=1
+sent=601/755 segment=1
+sent=701/755 segment=2
+{
+  "checks": {
+    "initial_status_zero": true,
+    "initial_reset": true,
+    "final_reset": true,
+    "final_status_zero": true,
+    "one_report_per_measurement": true,
+    "valid_estimates": true,
+    "accepted_measurements": true,
+    "confirmed_after_warmup": true,
+    "aligned_estimate_time": true,
+    "contiguous_reports": true,
+    "parser_clean": true,
+    "console_no_fatal": true
+  },
+  "passed": true,
+  "sent": 755,
+  "reports": 757,
+  "states": {
+    "1": 2,
+    "2": 753
+  },
+  "results": {
+    "0": 1,
+    "1": 754
+  },
+  "metrics": {
+    "all": {
+      "count": 735,
+      "range_m": {
+        "rmse": 2.954451886868524,
+        "max_abs": 14.42292291437252
+      },
+      "azimuth_deg": {
+        "rmse": 0.12977663193774575,
+        "max_abs": 0.5456022874104985
+      },
+      "position_m": {
+        "rmse": 4.513412932915052,
+        "max_abs": 18.074202673326905
+      }
+    },
+    "straight_before": {
+      "count": 80,
+      "range_m": {
+        "rmse": 8.704892247544624,
+        "max_abs": 14.42292291437252
+      },
+      "azimuth_deg": {
+        "rmse": 0.3872978322169947,
+        "max_abs": 0.5456022874104985
+      },
+      "position_m": {
+        "rmse": 13.071845238156284,
+        "max_abs": 18.074202673326905
+      }
+    },
+    "turn": {
+      "count": 555,
+      "range_m": {
+        "rmse": 0.6897447179315193,
+        "max_abs": 2.0967860935397766
+      },
+      "azimuth_deg": {
+        "rmse": 0.026016021617609186,
+        "max_abs": 0.159979482393745
+      },
+      "position_m": {
+        "rmse": 1.3959833986191779,
+        "max_abs": 6.583385452128316
+      }
+    },
+    "straight_after": {
+      "count": 100,
+      "range_m": {
+        "rmse": 0.9466030617260601,
+        "max_abs": 1.3937615434551844
+      },
+      "azimuth_deg": {
+        "rmse": 0.005691784715894374,
+        "max_abs": 0.006516001007156239
+      },
+      "position_m": {
+        "rmse": 1.4872477700993258,
+        "max_abs": 1.8667947822117854
+      }
+    }
+  },
+  "pc_roundtrip_ms": {
+    "p50": 5.462208064273,
+    "p99": 14.239666983485222,
+    "max": 93.60941697377712
+  },
+  "accuracy_verdict": "observational; no accuracy acceptance threshold defined"
+}

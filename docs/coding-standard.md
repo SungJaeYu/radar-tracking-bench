@@ -1,5 +1,7 @@
 # 펌웨어 코딩 스탠다드
 
+PC 도구·테스트의 Python 규칙은 [Python 코딩 스탠다드](python-coding-standard.md)를 따릅니다.
+
 2026-11-08 합의를 바탕으로 유지하는 프로젝트 규칙입니다. 적용 결과와 후속 과제는
 [코딩 규칙 점검표](coding-standard-audit.md)를 따릅니다. 서식 리팩터링에서는 동작·프로토콜 값을 보존합니다.
 
@@ -24,15 +26,54 @@
 
 새 공개 C 함수는 `모듈_동작` 순서를 권장합니다(`frame_parser_feed`, `measurement_message_decode`).
 외부 센서 시각과 보드 uptime, 측정과 추정, 프레임과 payload를 이름에서 구분합니다.
-시간에는 단위뿐 아니라 기준 시점도 드러냅니다(`estimate_timestamp_ms`, `received_at_ms`).
+시간에는 단위뿐 아니라 기준 시점도 드러냅니다(`estimate_sensor_ms`, `received_uptime_ms`).
 자동 테스트는 `test_...`, 수동 송신 도구는 `..._sender.py`처럼 역할을 표시합니다.
 기존 예외와 변경 영향은 [구조·이름 점검](naming-review.md)에 있으며 이 권장 규칙을 적었다고 기존 코드를 변경한 것은 아닙니다.
+
+## 시간 이름
+
+- `sensor_time_ms`: 측정 구조체의 센서/PC 시각. 구조체 이름과 중복되는 `measurement_`는 생략합니다.
+- `*_sensor_ms`: 센서/PC 시뮬레이터가 제공하는 uint32 시각. 보드 부팅 시각과 기준이 다릅니다.
+- `*_uptime_ms`: `k_uptime_get()` 기준의 int64 보드 부팅 후 시각.
+- `*_interval_ms`, `*_interval_s`, `interval_s`: 두 시각의 차이인 경과 시간.
+- `_ms`, `_s`는 단위입니다. 서로 다른 시간축의 시각끼리는 차감하지 않습니다.
+
+| 이름 | 의미 |
+|---|---|
+| `sensor_time_ms` | 입력 측정의 센서 시각 |
+| `estimate_sensor_ms` | 현재 필터 추정값의 센서 시각; 게이트 거절 후에도 예측 시각으로 갱신 |
+| `target_sensor_ms` | 다음 상태를 예측할 목표 센서 시각 |
+| `input_sensor_ms` | 처리 결과/보고에 연결된 입력 측정의 센서 시각 |
+| `previous_estimate_sensor_ms` | 이번 처리 전 추정값의 센서 시각 |
+| `received_uptime_ms` | RX 파서가 프레임을 완성·제출한 보드 시각; ISR 바이트 도착 시각이 아님 |
+| `last_valid_rx_uptime_ms` | 마지막 decode·validate 성공 측정의 RX 완료 보드 시각 |
+| `now_uptime_ms` | timeout을 검사하는 현재 보드 시각 |
+| `last_byte_processed_uptime_ms` | RX 파서가 마지막 바이트를 처리한 보드 시각 |
+| `handler_start_uptime_ms`, `submit_uptime_ms` | 측정 처리 시작·TRACK 큐 제출 호출 종료 시각; 실제 송신 완료 시각이 아님 |
+| `prediction_interval_ms`, `prediction_interval_s` | 목표 센서 시각과 이전 추정 시각의 차이 |
+
+예측 간격은 `target_sensor_ms - estimate_sensor_ms`, 무수신 경과 시간은
+`now_uptime_ms - last_valid_rx_uptime_ms`로 계산합니다. uint32 센서 시각의 순환과
+반주기 거절 경계는 유지합니다.
+
+펌웨어 C 이름과 PC/CSV API 이름은 구분합니다. C의 `sensor_time_ms`,
+`input_sensor_ms`, `estimate_sensor_ms`는 PC의 `timestamp_ms`, `input_timestamp_ms`,
+`estimate_timestamp_ms`와 대응합니다. wire 필드 순서·폭·단위는 동일합니다.
+
+함수 선언·정의·호출에서 인자가 한두 개이면 한 줄에 작성합니다.
+상태 변경 함수는 `apply`, `reset`, `start` 등 동작을 드러내고,
+조회 함수는 `get`/`is`, 원본을 보존하는 다음 상태 계산은 `*_next`로 구분합니다.
 
 ## 중괄호와 공백
 
 함수의 여는 중괄호는 다음 줄에 둡니다. 제어문의 여는 중괄호는 같은 줄에 둡니다.
 `if`, `for`, `while`, `switch`와 여는 괄호 사이에는 공백 한 칸을 둡니다.
 들여쓰기는 공백 4칸이며, 줄 끝 공백을 제거하고 파일 끝에 개행을 둡니다.
+
+입력 검증·계산·상태 갱신·결과 반환 등 동작 단위가 바뀌는 곳에는 빈 줄 한 줄을 둡니다.
+서로 밀접한 문장들은 묶고, 모든 문장 사이에 빈 줄을 넣지는 않습니다.
+lock 획득·보호할 처리·unlock 사이는 빈 줄로 구분하며, 표시만을 위한 중괄호나 추가 들여쓰기는 넣지 않습니다.
+이 규칙은 짧은 함수 선언·정의·호출을 여러 줄로 나누라는 의미가 아닙니다.
 
 ```c
 int example(const struct protocol_frame *p_frame, uint8_t *out_buffer)
@@ -84,10 +125,13 @@ Zephyr API에서 받은 오류는 의미가 맞으면 원래 음수 errno를 그
 - 구현은 사용하는 함수의 헤더를 직접 포함합니다. 예: `memcpy`는 `<string.h>`.
 - STX·프레임 추가 길이 등 공유 규격은 공통 헤더 한 곳에 정의합니다.
 - 펌웨어 주석은 영어로 작성합니다. 작성자 선호에 따라 일반 주석은 `//`를 기본으로 사용합니다.
+- 함수명·변수명·코드의 동작으로 알 수 있는 내용은 주석으로 반복하지 않습니다.
+- 주석은 코드만으로 드러나지 않는 설계 이유·제약이나 이해하기 어려운 로직에 필요한 경우에만 작성합니다.
+  복잡한 설명이 필요하다면 먼저 이름과 코드 구조를 개선할 수 있는지 검토합니다.
 - 함수/API 설명과 여러 줄 설명도 각 줄에 `//`를 붙입니다. `.h` 파일의 함수 설명도 같은 규칙을 따릅니다.
 - 예외로 파일 맨 위의 파일 헤더 주석(파일 역할·저작권·라이선스 등)은 `/* ... */` 형식을 허용합니다.
   파일 헤더에도 `//`를 사용할 수 있으며, 블록 주석을 반드시 사용할 필요는 없습니다.
-- 공개 함수에는 입력 유효성 전제·버퍼 용량·반환값·데이터 복사/소유권을 설명합니다.
+- 공개 함수에는 선언만으로 알 수 없는 입력 유효성 전제·버퍼 용량·반환값·데이터 복사/소유권 계약만 설명합니다.
 - 주석은 실제 IRQ 보호 범위와 스레드 책임에 맞춥니다.
 
 ## 모듈 경계와 상태 소유권
@@ -122,7 +166,11 @@ Zephyr API에서 받은 오류는 의미가 맞으면 원래 음수 errno를 그
   범위에 맞는 타입을 사용합니다. 일반 버퍼 크기는 `size_t`, 오류 반환은 `int`를 사용합니다.
 - `uint8_t` 링 인덱스처럼 의도적으로 작은 타입을 사용하면 최대 버퍼 크기 제약을
   문서화하고 정적 검증으로 지킵니다. 버퍼 크기 변경 시 인덱스 범위도 함께 확인합니다.
-- 축소 변환·부호 변환은 범위를 확인한 뒤 수행합니다. 명시적 cast만으로 검증을 대신하지 않습니다.
+- 대입·함수 인자·반환값·혼합 타입 연산에서 암시적 형변환에 의존하지 않습니다.
+  타입을 일치시키고, 다른 타입으로 변환해야 한다면 변환 지점에 명시적 cast를 사용합니다.
+  C 언어 자체의 정수 승격까지 없애기 위한 불필요한 cast는 추가하지 않습니다.
+- 축소 변환·부호 변환·실수에서 정수로의 변환은 대상 타입의 표현 범위와 값 손실을 확인한 뒤 수행합니다.
+  명시적 cast만으로 검증을 대신하거나 컴파일러 경고를 숨기지 않습니다.
 - enum·구조체 메모리를 그대로 전송하지 않습니다. 각 wire 필드의 폭·바이트 순서·길이를
   명시하여 인코딩하고, CRC 범위와 CRC 바이트 순서도 프로토콜 규격 한 곳에서 정의합니다.
 - 물리량과 시각은 `_ms`, `_s`, `_m`, `_rad` 등 단위를 이름에 표시합니다.
@@ -183,6 +231,15 @@ _Static_assert(RING_BUFFER_SIZE >= 2 && RING_BUFFER_SIZE <= 256,
 
 ## 분기·로그·테스트
 
+- 함수 반환값으로 분기할 때는 **함수를 먼저 호출해 반환값을 지역변수에 저장하고,
+  다음 `if`에서 검사합니다.** `if (function(...))`, `if (!function(...))`,
+  `if (function(...) != 0)`처럼 조건식 안에서 직접 호출하지 않습니다.
+  출력 객체를 변경하는 함수와 읽기 전용 판정 함수 모두 같은 규칙을 적용합니다.
+- 반환값 변수는 역할을 드러내는 이름을 사용합니다(`payload_decoded`, `measurement_valid`).
+  재대입하지 않는 결과는 `const`로 선언하고, 오류 코드는 원래 정수 타입으로 보존합니다.
+- 호출을 분리할 때 기존 실행 순서와 `&&`·`||`의 단락 평가를 유지합니다.
+  선행 검사 실패 시 실행하지 않던 함수를 미리 호출하지 않습니다. 디코딩 실패 시에는
+  초기화되지 않은 측정값을 검증하거나 읽지 않습니다.
 - `if`·`for`·`while` 본문은 한 문장이더라도 중괄호를 사용합니다.
   `switch`의 case는 switch와 같은 들여쓰기에 두고, 지역변수가 필요한 case는 `{ ... }`로 감쌉니다.
 - 의도적인 case fallthrough에는 `// Intentional fallthrough.` 주석이나
@@ -197,6 +254,18 @@ _Static_assert(RING_BUFFER_SIZE >= 2 && RING_BUFFER_SIZE <= 256,
   잘못된 입력·CRC 손상·오류 후 복귀를 실제 변경 범위에 맞게 시험합니다.
 - host 테스트·펌웨어 빌드·flash·실보드 결과를 구분해서 기록합니다.
   모사 큐·atomic·UART 테스트를 실제 동시성이나 물리 전송 성공의 증거로 사용하지 않습니다.
+
+```c
+const bool payload_decoded = measurement_message_decode(p_frame->payload, p_frame->payload_length, &measurement);
+if (!payload_decoded) {
+    return false;
+}
+
+const bool measurement_valid = measurement_message_validate(&measurement);
+if (!measurement_valid) {
+    return false;
+}
+```
 
 ## 적용 상태
 
@@ -240,3 +309,21 @@ _Static_assert(RING_BUFFER_SIZE >= 2 && RING_BUFFER_SIZE <= 256,
 `write_u32_be()`처럼 작고 상태가 없는 공통 연산을 헤더에 정의할 때는 C의 `static inline`을 사용합니다.
 표준 타입만으로 충분하면 Zephyr나 transport 헤더에 의존하지 않습니다. 출력 용량 등 호출 전제를 주석으로 명시합니다.
 `inline`은 실제 호출 제거를 보장하지 않으며, 큰 함수·스레드·상태 처리 함수를 일괄 inline화하지 않습니다.
+
+## 로그 형식
+
+- 본문은 `항목: key=value key=value`로 작성하고 필드는 공백으로 구분합니다.
+- 값 안의 공백·쉼표·문장형 설명 대신 `status=no_samples`, `reason=queue_full`처럼 표현합니다.
+- 물리량 단위는 키에 표시합니다. 예: `range_m`, `azimuth_rad`, `range_rate_mps`, `unused_bytes`.
+- 오류 코드는 `error`, 사유는 `reason`, 상태 전이는 `previous`/`current`로 표시합니다.
+- 로그 형식을 변경하면 소비하는 parser·보드 시험기·테스트·문서를 함께 확인합니다.
+  기존 검증 원문은 보존하며 필요한 읽기 호환성은 parser에서 처리합니다.
+
+### Performance instrumentation in interrupt paths
+
+- ISR and application IRQ-masked sections must not aggregate statistics, convert timing units, scan stacks, copy full snapshots or log. Capture only the minimum raw values needed for deferred processing.
+- Run PERF collectors in thread context with interrupts enabled; use a thread mutex for shared aggregates. Kernel APIs may still have internal short critical sections, which must not be confused with masking the entire aggregation.
+- Bounded deferred capture must expose overflow as missing evidence/failure. Never silently overwrite unread timing samples or remove failed samples to obtain a pass.
+- Validate source context, host guards and target object code, then measure actual board behavior. Software timing and a clean short run do not prove interrupt WCET or establish the cause of earlier CRC failures.
+
+See [interrupt-context audit](interrupt-context-audit.md).

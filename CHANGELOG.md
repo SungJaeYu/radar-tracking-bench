@@ -1,0 +1,65 @@
+# Changelog
+
+## v1.1.0 — 2026-11-23
+
+### Added
+
+- Constant-turn target motion with exact arc integration and stable small-angle displacement.
+- Bank-angle/TAS conversion for a no-wind, constant-altitude, constant-speed scenario.
+- Timed motion segments and a straight/right-90-degree-turn/straight CLI scenario.
+- Predict/correct execution-time aggregation and periodic diagnostics in PERF firmware.
+- RX residence/ISR/parser and TX queue/polling timing, scheduler non-idle observations,
+  main-stack sampling, and explicit board/delivery/evidence/requested-load verdicts.
+- Python coding standard adapted from the firmware's naming, units, ownership and validation rules.
+
+### Changed
+
+- The PERF fixture returns immediately when receive work reaches its deadline, avoiding an unnecessary `sleep(0)`. Four boundary cases cover this correction.
+- Release scope follows observed STM32 board/delivery/evidence qualification. Host input completeness remains separately reported; sender improvements are planned for v1.1.1.
+- Added a 40-second silent recorded GUI replay, five analysis figures, source tables and provenance.
+
+- Host input gaps reaching the configured receive timeout, or forward sensor-time
+  jumps exceeding the prediction limit, now stop the PERF fixture as inconclusive.
+  Known board violations remain failures; stored raw verdicts are preserved.
+  [Correction and replay](docs/test-results/host-input-verdict-2026-11-23/README.md).
+
+- GUI controls, plot labels, status and error messages are in English.
+- Python source comments/docstrings are in English; current GUI captures are refreshed.
+- Tracking diagnostics interfaces and structured log messages are clarified.
+- Project naming and English/Korean overview and architecture documentation are aligned.
+- UART ISR timing capture is bounded; aggregation runs in the RX thread. Collector
+  updates and snapshots use a thread-only mutex instead of an IRQ-masking spinlock.
+- Performance recording uses a bounded asynchronous writer with explicit loss/error checks.
+- `passed` reflects `board_qualification` for the observed load. Requested 50 Hz/full-duration
+  qualification is separate; PC RTT is diagnostic only and never a STM32 or release gate.
+
+### Compatibility and validation
+
+- Final Python regression: 928 tests plus 9 subtests; C host: 204 CTest entries (224 internal executions). Final 60-second board check: 27/27 checks, all 2,993 valid measurements matched, zero board errors; raw evidence audited and normal firmware restored. [Final record](docs/release-v1.1.0.md).
+
+- A new 30-minute PERF run passed board/delivery/evidence checks for all 89,057
+  measurements. The host skipped 943 slots, leaving the complete requested 50 Hz
+  profile inconclusive. A controlled 1.2-second host pause verified inconclusive
+  handling and normal-image restoration. [Latest evidence](docs/test-results/host-input-retest-2026-11-23/README.md).
+- The earlier hook-cleanup regression passed functional/recovery checks; its load
+  attempt stopped after 25 min 38 s on the documented RESET misclassification.
+  [Original capture](docs/test-results/final-validation-2026-11-23/README.md) remains unchanged.
+
+- Measurement and TRACK/STATUS wire layouts are unchanged.
+- Existing CLI scenarios retain their behavior. New turn scenarios are selected in `run_sim`;
+  the GUI and standard evaluator still use fixed azimuth and constant range rate.
+- The turn test recorded 755 matched measurements on STM32. Accuracy is observational,
+  without a new accuracy acceptance threshold.
+- The [dated v1.1.0 report](docs/hardware-test-2026-11-23-v1.1.0.md) preserves the original
+  30-minute result and its then-current RTT-based verdict. Current policy does not use RTT
+  to block release; its diagnostic limits remain p99 ≤20 ms and maximum ≤100 ms.
+- The subsequent 300 s run matched all 14,802 valid measurements with zero board CRC errors
+  and passed observed-load board/delivery/evidence checks. Skipped host slots leave requested
+  50 Hz qualification inconclusive; earlier CRC events have not recurred after instrumentation corrections; resolution is suspected, but their causal mechanism remains unconfirmed.
+  [Current review, validation and limits](docs/review-2026-11-23.md).
+
+## v1.0.0 — 2026-11-19
+
+Single-target measurement/result round trips, quantitative evaluation, major error recovery,
+30-minute load observations and reproducible documentation established the V1 baseline.
+See [the completed scope and acceptance limits](docs/roadmap.md#v1-acceptance).

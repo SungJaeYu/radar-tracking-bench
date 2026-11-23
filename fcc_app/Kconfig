@@ -93,12 +93,13 @@ config RADAR_PERF_MONITOR
     depends on LOG
     select INIT_STACKS
     select THREAD_STACK_INFO
+    select TIMING_FUNCTIONS
     default n
     help
-        Collect measurement queue wait, processing and RX-to-TX-submit
-        timing, queue submission counts and sampled occupancy, and TX
-        polling completion counts. Main prints cumulative summaries and
-        sampled RX/handler/TX stack headroom every five seconds.
+        Collect RX byte residence, ISR/parser execution, measurement
+        processing, TX queue/polling and parsed-RX-to-polling timing.
+        Main prints cumulative summaries and sampled stack headroom every
+        five seconds. perf.conf also enables scheduler runtime accounting.
         Enable with perf.conf in a separate build. Instrumentation and
         logging add overhead; this does not prove physical transmission
         completion, peer receipt, or worst-case execution time.

@@ -1,0 +1,12 @@
+{
+  "audit_passed": true,
+  "original_passed": true,
+  "samples": 89057,
+  "reports": 89059,
+  "statuses": 1801,
+  "sent_wire_bytes": 1346667,
+  "summaries": 362,
+  "wire_matches_csv": true,
+  "console_matches_json": true,
+  "verdict_reproduced": true
+}

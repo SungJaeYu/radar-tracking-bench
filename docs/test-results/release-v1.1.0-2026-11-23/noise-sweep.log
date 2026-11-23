@@ -1,0 +1,693 @@
+Sweep: /Users/yuseungjae/Desktop/radar-track-fcc-hil/docs/test-results/release-v1.1.0-2026-11-23/noise/20261123-130012-c6dd6b1b
+[
+  {
+    "range_noise_std_m": 0,
+    "azimuth_noise_std_deg": 0,
+    "runs": 10,
+    "recorded_runs": 10,
+    "failed_runs": 0,
+    "metrics": {
+      "range_measurement_rmse_m": {
+        "count": 10,
+        "mean": 0.3535533905932738,
+        "min": 0.3535533905932738,
+        "max": 0.3535533905932738
+      },
+      "range_estimate_rmse_m": {
+        "count": 10,
+        "mean": 0.04796523081268134,
+        "min": 0.04796523081268134,
+        "max": 0.04796523081268134
+      },
+      "azimuth_measurement_rmse_rad": {
+        "count": 10,
+        "mean": 4.876392623032189e-10,
+        "min": 4.876392623032189e-10,
+        "max": 4.876392623032189e-10
+      },
+      "azimuth_estimate_rmse_rad": {
+        "count": 10,
+        "mean": 7.285231529152725e-09,
+        "min": 7.285231529152725e-09,
+        "max": 7.285231529152725e-09
+      },
+      "range_estimate_max_abs_error_m": {
+        "count": 10,
+        "mean": 0.06512451171875,
+        "min": 0.06512451171875,
+        "max": 0.06512451171875
+      },
+      "azimuth_estimate_max_abs_error_rad": {
+        "count": 10,
+        "mean": 7.285231529152725e-09,
+        "min": 7.285231529152725e-09,
+        "max": 7.285231529152725e-09
+      },
+      "estimate_coverage": {
+        "count": 10,
+        "mean": 0.8333333333333334,
+        "min": 0.8333333333333334,
+        "max": 0.8333333333333334
+      },
+      "gate_rejection_fraction": {
+        "count": 10,
+        "mean": 0.0,
+        "min": 0.0,
+        "max": 0.0
+      },
+      "track_starts": {
+        "count": 10,
+        "mean": 1,
+        "min": 1,
+        "max": 1
+      },
+      "lost_transitions": {
+        "count": 10,
+        "mean": 0,
+        "min": 0,
+        "max": 0
+      }
+    }
+  },
+  {
+    "range_noise_std_m": 2,
+    "azimuth_noise_std_deg": 0,
+    "runs": 10,
+    "recorded_runs": 10,
+    "failed_runs": 0,
+    "metrics": {
+      "range_measurement_rmse_m": {
+        "count": 10,
+        "mean": 2.0787732852428054,
+        "min": 1.9170289512680814,
+        "max": 2.2327113561766105
+      },
+      "range_estimate_rmse_m": {
+        "count": 10,
+        "mean": 0.7718835779083213,
+        "min": 0.5716506214266175,
+        "max": 1.0984552657032358
+      },
+      "azimuth_measurement_rmse_rad": {
+        "count": 10,
+        "mean": 4.876392623032189e-10,
+        "min": 4.876392623032189e-10,
+        "max": 4.876392623032189e-10
+      },
+      "azimuth_estimate_rmse_rad": {
+        "count": 10,
+        "mean": 7.285231529152725e-09,
+        "min": 7.285231529152725e-09,
+        "max": 7.285231529152725e-09
+      },
+      "range_estimate_max_abs_error_m": {
+        "count": 10,
+        "mean": 2.01251220703125,
+        "min": 1.53118896484375,
+        "max": 2.46478271484375
+      },
+      "azimuth_estimate_max_abs_error_rad": {
+        "count": 10,
+        "mean": 7.285231529152725e-09,
+        "min": 7.285231529152725e-09,
+        "max": 7.285231529152725e-09
+      },
+      "estimate_coverage": {
+        "count": 10,
+        "mean": 0.8333333333333334,
+        "min": 0.8333333333333334,
+        "max": 0.8333333333333334
+      },
+      "gate_rejection_fraction": {
+        "count": 10,
+        "mean": 0.0,
+        "min": 0.0,
+        "max": 0.0
+      },
+      "track_starts": {
+        "count": 10,
+        "mean": 1,
+        "min": 1,
+        "max": 1
+      },
+      "lost_transitions": {
+        "count": 10,
+        "mean": 0,
+        "min": 0,
+        "max": 0
+      }
+    }
+  },
+  {
+    "range_noise_std_m": 5,
+    "azimuth_noise_std_deg": 0,
+    "runs": 10,
+    "recorded_runs": 10,
+    "failed_runs": 0,
+    "metrics": {
+      "range_measurement_rmse_m": {
+        "count": 10,
+        "mean": 5.158345629908843,
+        "min": 4.7302219821061255,
+        "max": 5.660830327787612
+      },
+      "range_estimate_rmse_m": {
+        "count": 10,
+        "mean": 1.9307027817925209,
+        "min": 1.4268335358475226,
+        "max": 2.679740066040544
+      },
+      "azimuth_measurement_rmse_rad": {
+        "count": 10,
+        "mean": 4.876392623032189e-10,
+        "min": 4.876392623032189e-10,
+        "max": 4.876392623032189e-10
+      },
+      "azimuth_estimate_rmse_rad": {
+        "count": 10,
+        "mean": 7.285231529152725e-09,
+        "min": 7.285231529152725e-09,
+        "max": 7.285231529152725e-09
+      },
+      "range_estimate_max_abs_error_m": {
+        "count": 10,
+        "mean": 5.078314208984375,
+        "min": 3.94757080078125,
+        "max": 6.60931396484375
+      },
+      "azimuth_estimate_max_abs_error_rad": {
+        "count": 10,
+        "mean": 7.285231529152725e-09,
+        "min": 7.285231529152725e-09,
+        "max": 7.285231529152725e-09
+      },
+      "estimate_coverage": {
+        "count": 10,
+        "mean": 0.8333333333333334,
+        "min": 0.8333333333333334,
+        "max": 0.8333333333333334
+      },
+      "gate_rejection_fraction": {
+        "count": 10,
+        "mean": 0.0,
+        "min": 0.0,
+        "max": 0.0
+      },
+      "track_starts": {
+        "count": 10,
+        "mean": 1,
+        "min": 1,
+        "max": 1
+      },
+      "lost_transitions": {
+        "count": 10,
+        "mean": 0,
+        "min": 0,
+        "max": 0
+      }
+    }
+  },
+  {
+    "range_noise_std_m": 8,
+    "azimuth_noise_std_deg": 0,
+    "runs": 10,
+    "recorded_runs": 10,
+    "failed_runs": 0,
+    "metrics": {
+      "range_measurement_rmse_m": {
+        "count": 10,
+        "mean": 8.252762486411276,
+        "min": 7.605590049430748,
+        "max": 9.061732726140184
+      },
+      "range_estimate_rmse_m": {
+        "count": 10,
+        "mean": 3.0805101946945883,
+        "min": 2.283663660875554,
+        "max": 4.315526196949522
+      },
+      "azimuth_measurement_rmse_rad": {
+        "count": 10,
+        "mean": 4.876392623032189e-10,
+        "min": 4.876392623032189e-10,
+        "max": 4.876392623032189e-10
+      },
+      "azimuth_estimate_rmse_rad": {
+        "count": 10,
+        "mean": 7.285231529152725e-09,
+        "min": 7.285231529152725e-09,
+        "max": 7.285231529152725e-09
+      },
+      "range_estimate_max_abs_error_m": {
+        "count": 10,
+        "mean": 8.0390869140625,
+        "min": 6.27001953125,
+        "max": 10.33953857421875
+      },
+      "azimuth_estimate_max_abs_error_rad": {
+        "count": 10,
+        "mean": 7.285231529152725e-09,
+        "min": 7.285231529152725e-09,
+        "max": 7.285231529152725e-09
+      },
+      "estimate_coverage": {
+        "count": 10,
+        "mean": 0.8333333333333334,
+        "min": 0.8333333333333334,
+        "max": 0.8333333333333334
+      },
+      "gate_rejection_fraction": {
+        "count": 10,
+        "mean": 0.0,
+        "min": 0.0,
+        "max": 0.0
+      },
+      "track_starts": {
+        "count": 10,
+        "mean": 1,
+        "min": 1,
+        "max": 1
+      },
+      "lost_transitions": {
+        "count": 10,
+        "mean": 0,
+        "min": 0,
+        "max": 0
+      }
+    }
+  },
+  {
+    "range_noise_std_m": 15,
+    "azimuth_noise_std_deg": 0,
+    "runs": 10,
+    "recorded_runs": 10,
+    "failed_runs": 0,
+    "metrics": {
+      "range_measurement_rmse_m": {
+        "count": 10,
+        "mean": 15.447301324979712,
+        "min": 14.16033191701381,
+        "max": 16.872018255087326
+      },
+      "range_estimate_rmse_m": {
+        "count": 10,
+        "mean": 5.768045707480077,
+        "min": 4.244548086732963,
+        "max": 8.07086332298204
+      },
+      "azimuth_measurement_rmse_rad": {
+        "count": 10,
+        "mean": 4.876392623032189e-10,
+        "min": 4.876392623032189e-10,
+        "max": 4.876392623032189e-10
+      },
+      "azimuth_estimate_rmse_rad": {
+        "count": 10,
+        "mean": 7.285231529152725e-09,
+        "min": 7.285231529152725e-09,
+        "max": 7.285231529152725e-09
+      },
+      "range_estimate_max_abs_error_m": {
+        "count": 10,
+        "mean": 15.085302734375,
+        "min": 11.8890380859375,
+        "max": 19.5238037109375
+      },
+      "azimuth_estimate_max_abs_error_rad": {
+        "count": 10,
+        "mean": 7.285231529152725e-09,
+        "min": 7.285231529152725e-09,
+        "max": 7.285231529152725e-09
+      },
+      "estimate_coverage": {
+        "count": 10,
+        "mean": 0.8333333333333334,
+        "min": 0.8333333333333334,
+        "max": 0.8333333333333334
+      },
+      "gate_rejection_fraction": {
+        "count": 10,
+        "mean": 0.0,
+        "min": 0.0,
+        "max": 0.0
+      },
+      "track_starts": {
+        "count": 10,
+        "mean": 1,
+        "min": 1,
+        "max": 1
+      },
+      "lost_transitions": {
+        "count": 10,
+        "mean": 0,
+        "min": 0,
+        "max": 0
+      }
+    }
+  },
+  {
+    "range_noise_std_m": 30,
+    "azimuth_noise_std_deg": 0,
+    "runs": 10,
+    "recorded_runs": 10,
+    "failed_runs": 0,
+    "metrics": {
+      "range_measurement_rmse_m": {
+        "count": 10,
+        "mean": 30.875226600953713,
+        "min": 28.289132188881297,
+        "max": 33.80155321875017
+      },
+      "range_estimate_rmse_m": {
+        "count": 10,
+        "mean": 11.434042087709209,
+        "min": 8.437979179175654,
+        "max": 15.560047341711758
+      },
+      "azimuth_measurement_rmse_rad": {
+        "count": 10,
+        "mean": 4.876392623032189e-10,
+        "min": 4.876392623032189e-10,
+        "max": 4.876392623032189e-10
+      },
+      "azimuth_estimate_rmse_rad": {
+        "count": 10,
+        "mean": 7.285231529152725e-09,
+        "min": 7.285231529152725e-09,
+        "max": 7.285231529152725e-09
+      },
+      "range_estimate_max_abs_error_m": {
+        "count": 10,
+        "mean": 30.196612548828124,
+        "min": 23.35711669921875,
+        "max": 39.1949462890625
+      },
+      "azimuth_estimate_max_abs_error_rad": {
+        "count": 10,
+        "mean": 7.285231529152725e-09,
+        "min": 7.285231529152725e-09,
+        "max": 7.285231529152725e-09
+      },
+      "estimate_coverage": {
+        "count": 10,
+        "mean": 0.8333333333333334,
+        "min": 0.8333333333333334,
+        "max": 0.8333333333333334
+      },
+      "gate_rejection_fraction": {
+        "count": 10,
+        "mean": 0.003333333333333333,
+        "min": 0.0,
+        "max": 0.008333333333333333
+      },
+      "track_starts": {
+        "count": 10,
+        "mean": 1,
+        "min": 1,
+        "max": 1
+      },
+      "lost_transitions": {
+        "count": 10,
+        "mean": 0,
+        "min": 0,
+        "max": 0
+      }
+    }
+  },
+  {
+    "range_noise_std_m": 0,
+    "azimuth_noise_std_deg": 0.1,
+    "runs": 10,
+    "recorded_runs": 10,
+    "failed_runs": 0,
+    "metrics": {
+      "range_measurement_rmse_m": {
+        "count": 10,
+        "mean": 0.3535533905932738,
+        "min": 0.3535533905932738,
+        "max": 0.3535533905932738
+      },
+      "range_estimate_rmse_m": {
+        "count": 10,
+        "mean": 0.04796523081268134,
+        "min": 0.04796523081268134,
+        "max": 0.04796523081268134
+      },
+      "azimuth_measurement_rmse_rad": {
+        "count": 10,
+        "mean": 0.0017702151681671218,
+        "min": 0.0015822070976889422,
+        "max": 0.001986826195070184
+      },
+      "azimuth_estimate_rmse_rad": {
+        "count": 10,
+        "mean": 0.0006869186374038362,
+        "min": 0.0005291303463179051,
+        "max": 0.0008250168931477445
+      },
+      "range_estimate_max_abs_error_m": {
+        "count": 10,
+        "mean": 0.06512451171875,
+        "min": 0.06512451171875,
+        "max": 0.06512451171875
+      },
+      "azimuth_estimate_max_abs_error_rad": {
+        "count": 10,
+        "mean": 0.001725883814979756,
+        "min": 0.0011000408068837508,
+        "max": 0.0020995961293039933
+      },
+      "estimate_coverage": {
+        "count": 10,
+        "mean": 0.8333333333333334,
+        "min": 0.8333333333333334,
+        "max": 0.8333333333333334
+      },
+      "gate_rejection_fraction": {
+        "count": 10,
+        "mean": 0.0,
+        "min": 0.0,
+        "max": 0.0
+      },
+      "track_starts": {
+        "count": 10,
+        "mean": 1,
+        "min": 1,
+        "max": 1
+      },
+      "lost_transitions": {
+        "count": 10,
+        "mean": 0,
+        "min": 0,
+        "max": 0
+      }
+    }
+  },
+  {
+    "range_noise_std_m": 0,
+    "azimuth_noise_std_deg": 0.5,
+    "runs": 10,
+    "recorded_runs": 10,
+    "failed_runs": 0,
+    "metrics": {
+      "range_measurement_rmse_m": {
+        "count": 10,
+        "mean": 0.3535533905932738,
+        "min": 0.3535533905932738,
+        "max": 0.3535533905932738
+      },
+      "range_estimate_rmse_m": {
+        "count": 10,
+        "mean": 0.04796523081268134,
+        "min": 0.04796523081268134,
+        "max": 0.04796523081268134
+      },
+      "azimuth_measurement_rmse_rad": {
+        "count": 10,
+        "mean": 0.008851075937728641,
+        "min": 0.00791103576434007,
+        "max": 0.00993413136814651
+      },
+      "azimuth_estimate_rmse_rad": {
+        "count": 10,
+        "mean": 0.0034345963019461988,
+        "min": 0.00264564816480784,
+        "max": 0.004125026426115605
+      },
+      "range_estimate_max_abs_error_m": {
+        "count": 10,
+        "mean": 0.06512451171875,
+        "min": 0.06512451171875,
+        "max": 0.06512451171875
+      },
+      "azimuth_estimate_max_abs_error_rad": {
+        "count": 10,
+        "mean": 0.008629430863548481,
+        "min": 0.005500234498137413,
+        "max": 0.01049792038047892
+      },
+      "estimate_coverage": {
+        "count": 10,
+        "mean": 0.8333333333333334,
+        "min": 0.8333333333333334,
+        "max": 0.8333333333333334
+      },
+      "gate_rejection_fraction": {
+        "count": 10,
+        "mean": 0.0,
+        "min": 0.0,
+        "max": 0.0
+      },
+      "track_starts": {
+        "count": 10,
+        "mean": 1,
+        "min": 1,
+        "max": 1
+      },
+      "lost_transitions": {
+        "count": 10,
+        "mean": 0,
+        "min": 0,
+        "max": 0
+      }
+    }
+  },
+  {
+    "range_noise_std_m": 0,
+    "azimuth_noise_std_deg": 1,
+    "runs": 10,
+    "recorded_runs": 10,
+    "failed_runs": 0,
+    "metrics": {
+      "range_measurement_rmse_m": {
+        "count": 10,
+        "mean": 0.3535533905932738,
+        "min": 0.3535533905932738,
+        "max": 0.3535533905932738
+      },
+      "range_estimate_rmse_m": {
+        "count": 10,
+        "mean": 0.04796523081268134,
+        "min": 0.04796523081268134,
+        "max": 0.04796523081268134
+      },
+      "azimuth_measurement_rmse_rad": {
+        "count": 10,
+        "mean": 0.01770215185962758,
+        "min": 0.01582207153667721,
+        "max": 0.019868262722798687
+      },
+      "azimuth_estimate_rmse_rad": {
+        "count": 10,
+        "mean": 0.006869192864921445,
+        "min": 0.005291292846355196,
+        "max": 0.008250044895884675
+      },
+      "range_estimate_max_abs_error_m": {
+        "count": 10,
+        "mean": 0.06512451171875,
+        "min": 0.06512451171875,
+        "max": 0.06512451171875
+      },
+      "azimuth_estimate_max_abs_error_rad": {
+        "count": 10,
+        "mean": 0.017258846792865955,
+        "min": 0.011000491513365684,
+        "max": 0.020995833145028175
+      },
+      "estimate_coverage": {
+        "count": 10,
+        "mean": 0.8333333333333334,
+        "min": 0.8333333333333334,
+        "max": 0.8333333333333334
+      },
+      "gate_rejection_fraction": {
+        "count": 10,
+        "mean": 0.0,
+        "min": 0.0,
+        "max": 0.0
+      },
+      "track_starts": {
+        "count": 10,
+        "mean": 1,
+        "min": 1,
+        "max": 1
+      },
+      "lost_transitions": {
+        "count": 10,
+        "mean": 0,
+        "min": 0,
+        "max": 0
+      }
+    }
+  },
+  {
+    "range_noise_std_m": 0,
+    "azimuth_noise_std_deg": 3,
+    "runs": 10,
+    "recorded_runs": 10,
+    "failed_runs": 0,
+    "metrics": {
+      "range_measurement_rmse_m": {
+        "count": 10,
+        "mean": 0.3535533905932738,
+        "min": 0.3535533905932738,
+        "max": 0.3535533905932738
+      },
+      "range_estimate_rmse_m": {
+        "count": 10,
+        "mean": 0.048775737288741745,
+        "min": 0.04796523081268134,
+        "max": 0.05189557473221488
+      },
+      "azimuth_measurement_rmse_rad": {
+        "count": 10,
+        "mean": 0.05310645554902939,
+        "min": 0.04746621459414755,
+        "max": 0.059604788183276865
+      },
+      "azimuth_estimate_rmse_rad": {
+        "count": 10,
+        "mean": 0.02081343042450618,
+        "min": 0.016858888752972406,
+        "max": 0.024278523880133927
+      },
+      "range_estimate_max_abs_error_m": {
+        "count": 10,
+        "mean": 0.0798095703125,
+        "min": 0.06512451171875,
+        "max": 0.13922119140625
+      },
+      "azimuth_estimate_max_abs_error_rad": {
+        "count": 10,
+        "mean": 0.052629572186161246,
+        "min": 0.0410778002604304,
+        "max": 0.06298752890670878
+      },
+      "estimate_coverage": {
+        "count": 10,
+        "mean": 0.8333333333333334,
+        "min": 0.8333333333333334,
+        "max": 0.8333333333333334
+      },
+      "gate_rejection_fraction": {
+        "count": 10,
+        "mean": 0.005,
+        "min": 0.0,
+        "max": 0.016666666666666666
+      },
+      "track_starts": {
+        "count": 10,
+        "mean": 1,
+        "min": 1,
+        "max": 1
+      },
+      "lost_transitions": {
+        "count": 10,
+        "mean": 0,
+        "min": 0,
+        "max": 0
+      }
+    }
+  }
+]

@@ -1,0 +1,11 @@
+qt.qpa.fonts: Populating font family aliases took 104 ms. Replace uses of missing font family "Sans Serif" with one that exists to avoid this cost. 
+{
+  "passed": true,
+  "tx_measurements": 755,
+  "rx_tracks": 757,
+  "rx_status": 2,
+  "aligned_samples": 755,
+  "wire_replay_matches_saved_records": true,
+  "crc_errors": 0,
+  "length_errors": 0
+}

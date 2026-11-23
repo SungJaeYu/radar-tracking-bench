@@ -1,0 +1,84 @@
+-- The C compiler identification is AppleClang 21.0.0.21000401
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Configuring done (1.7s)
+-- Generating done (0.0s)
+-- Build files have been written to: /tmp/radar-extended-host/tracking
+[1/28] Building C object CMakeFiles/track_tests.dir/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/src/tracking/estimator.c.o
+[2/28] Building C object CMakeFiles/track_tests.dir/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/src/protocol/measurement_message.c.o
+[3/28] Building C object CMakeFiles/gating_default.dir/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/src/tracking/gating.c.o
+[4/28] Building C object CMakeFiles/gating_default.dir/src/gating_cases.c.o
+[5/28] Building C object CMakeFiles/track_tests.dir/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/src/tracking/track.c.o
+[6/28] Building C object CMakeFiles/track_tests.dir/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/src/tracking/gating.c.o
+[7/28] Building C object CMakeFiles/track_tests.dir/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/src/tracking/kalman_cv.c.o
+[8/28] Building C object CMakeFiles/gating_default.dir/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/src/tracking/angle_utils.c.o
+[9/28] Building C object CMakeFiles/track_tests.dir/src/main.c.o
+[10/28] Building C object CMakeFiles/gating_minimum.dir/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/src/tracking/gating.c.o
+[11/28] Building C object CMakeFiles/gating_narrow.dir/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/src/tracking/angle_utils.c.o
+[12/28] Building C object CMakeFiles/gating_minimum.dir/src/gating_cases.c.o
+[13/28] Building C object CMakeFiles/gating_narrow.dir/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/src/tracking/gating.c.o
+[14/28] Building C object CMakeFiles/gating_wide.dir/src/gating_cases.c.o
+[15/28] Building C object CMakeFiles/track_tests.dir/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/src/tracking/angle_utils.c.o
+[16/28] Building C object CMakeFiles/gating_wide.dir/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/src/tracking/gating.c.o
+[17/28] Building C object CMakeFiles/gating_wide.dir/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/src/tracking/angle_utils.c.o
+[18/28] Building C object CMakeFiles/gating_minimum.dir/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/src/tracking/angle_utils.c.o
+[19/28] Building C object CMakeFiles/gating_narrow.dir/src/gating_cases.c.o
+[20/28] Building C object CMakeFiles/gating_maximum.dir/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/src/tracking/gating.c.o
+[21/28] Building C object CMakeFiles/gating_maximum.dir/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/src/tracking/angle_utils.c.o
+[22/28] Building C object CMakeFiles/gating_maximum.dir/src/gating_cases.c.o
+[23/28] Linking C executable gating_default
+[24/28] Linking C executable track_tests
+[25/28] Linking C executable gating_wide
+[26/28] Linking C executable gating_narrow
+[27/28] Linking C executable gating_minimum
+[28/28] Linking C executable gating_maximum
+Test project /tmp/radar-extended-host/tracking
+      Start  1: tracking
+ 1/21 Test  #1: tracking .........................   Passed    0.45 sec
+      Start  2: gating_default_range_boundary
+ 2/21 Test  #2: gating_default_range_boundary ....   Passed    0.39 sec
+      Start  3: gating_default_angle_boundary
+ 3/21 Test  #3: gating_default_angle_boundary ....   Passed    0.00 sec
+      Start  4: gating_default_both_required
+ 4/21 Test  #4: gating_default_both_required .....   Passed    0.00 sec
+      Start  5: gating_default_wrapped_error
+ 5/21 Test  #5: gating_default_wrapped_error .....   Passed    0.01 sec
+      Start  6: gating_minimum_range_boundary
+ 6/21 Test  #6: gating_minimum_range_boundary ....   Passed    0.39 sec
+      Start  7: gating_minimum_angle_boundary
+ 7/21 Test  #7: gating_minimum_angle_boundary ....   Passed    0.08 sec
+      Start  8: gating_minimum_both_required
+ 8/21 Test  #8: gating_minimum_both_required .....   Passed    0.00 sec
+      Start  9: gating_minimum_wrapped_error
+ 9/21 Test  #9: gating_minimum_wrapped_error .....   Passed    0.00 sec
+      Start 10: gating_narrow_range_boundary
+10/21 Test #10: gating_narrow_range_boundary .....   Passed    0.38 sec
+      Start 11: gating_narrow_angle_boundary
+11/21 Test #11: gating_narrow_angle_boundary .....   Passed    0.00 sec
+      Start 12: gating_narrow_both_required
+12/21 Test #12: gating_narrow_both_required ......   Passed    0.00 sec
+      Start 13: gating_narrow_wrapped_error
+13/21 Test #13: gating_narrow_wrapped_error ......   Passed    0.00 sec
+      Start 14: gating_wide_range_boundary
+14/21 Test #14: gating_wide_range_boundary .......   Passed    0.39 sec
+      Start 15: gating_wide_angle_boundary
+15/21 Test #15: gating_wide_angle_boundary .......   Passed    0.00 sec
+      Start 16: gating_wide_both_required
+16/21 Test #16: gating_wide_both_required ........   Passed    0.00 sec
+      Start 17: gating_wide_wrapped_error
+17/21 Test #17: gating_wide_wrapped_error ........   Passed    0.00 sec
+      Start 18: gating_maximum_range_boundary
+18/21 Test #18: gating_maximum_range_boundary ....   Passed    0.37 sec
+      Start 19: gating_maximum_angle_boundary
+19/21 Test #19: gating_maximum_angle_boundary ....   Passed    0.00 sec
+      Start 20: gating_maximum_both_required
+20/21 Test #20: gating_maximum_both_required .....   Passed    0.00 sec
+      Start 21: gating_maximum_wrapped_error
+21/21 Test #21: gating_maximum_wrapped_error .....   Passed    0.00 sec
+
+100% tests passed, 0 tests failed out of 21
+
+Total Test time (real) =   2.51 sec

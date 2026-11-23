@@ -1,0 +1,666 @@
+*** Booting Zephyr OS build 4.2.0 ***
+[00:00:00.000,000] [0m<inf> radar_main: FCC boot: status=starting[0m
+[00:00:00.000,000] [0m<inf> radar_main: FCC ready: uart=USART6 rx=ready tx=ready[0m
+[00:00:05.000,000] [0m<inf> radar_perf: PERF summary: uptime_ms=5000 measurements=0 without_submit=0 submit_failed=0 invalid_time=0[0m
+[00:00:05.000,000] [0m<inf> radar_perf: PERF rx_byte_wait: n=0 total_ms=0 p50_bin=0 p95_bin=0 p99_bin=0 max_ms=0 over_budget_count=0 status=no_samples[0m
+[00:00:05.000,000] [0m<inf> radar_perf: PERF tx_queue_wait: n=0 total_ms=0 p50_bin=0 p95_bin=0 p99_bin=0 max_ms=0 over_budget_count=0 status=no_samples[0m
+[00:00:05.000,000] [0m<inf> radar_perf: PERF tx_poll: n=0 total_ms=0 p50_bin=0 p95_bin=0 p99_bin=0 max_ms=0 over_budget_count=0 status=no_samples[0m
+[00:00:05.000,000] [0m<inf> radar_perf: PERF parsed_to_tx_poll: n=0 total_ms=0 p50_bin=0 p95_bin=0 p99_bin=0 max_ms=0 over_budget_count=0 status=no_samples[0m
+[00:00:05.000,000] [0m<inf> radar_perf: PERF rx_isr: n=0 status=no_samples[0m
+[00:00:05.000,000] [0m<inf> radar_perf: PERF rx_parser: n=0 status=no_samples[0m
+[00:00:05.000,000] [0m<inf> radar_perf: PERF queue_wait: n=0 total_ms=0 p50_bin=0 p95_bin=0 p99_bin=0 max_ms=0 over_budget_count=0 status=no_samples[0m
+[00:00:05.000,000] [0m<inf> radar_perf: PERF processing: n=0 total_ms=0 p50_bin=0 p95_bin=0 p99_bin=0 max_ms=0 over_budget_count=0 status=no_samples[0m
+[00:00:05.000,000] [0m<inf> radar_perf: PERF rx_to_submit: n=0 total_ms=0 p50_bin=0 p95_bin=0 p99_bin=0 max_ms=0 over_budget_count=0 status=no_samples[0m
+[00:00:05.000,000] [0m<inf> radar_perf: PERF estimator_predict: n=0 status=no_samples[0m
+[00:00:05.000,000] [0m<inf> radar_perf: PERF estimator_correct: n=0 status=no_samples[0m
+[00:00:05.000,000] [0m<inf> radar_perf: PERF queue rx: accepted=0 rejected=0 observed_max_used=0[0m
+[00:00:05.000,000] [0m<inf> radar_perf: PERF queue tx: accepted=0 rejected=0 observed_max_used=0[0m
+[00:00:05.000,000] [0m<inf> radar_perf: PERF tx: poll_completed=0 encode_failed=0[0m
+[00:00:05.001,000] [0m<inf> radar_perf: PERF stack rx: unused_bytes=808 min_unused_bytes=808[0m
+[00:00:05.001,000] [0m<inf> radar_perf: PERF stack handler: unused_bytes=1704 min_unused_bytes=1704[0m
+[00:00:05.001,000] [0m<inf> radar_resources: PERF cpu: uptime_ms=5001 total_cycles=1079938621 busy_cycles=4885326 idle_cycles=1075053295[0m
+[00:00:05.001,000] [0m<inf> radar_resources: PERF stack main: unused_bytes=536 min_unused_bytes=536[0m
+[00:00:05.001,000] [0m<inf> radar_perf: PERF stack tx: unused_bytes=672 min_unused_bytes=672[0m
+[00:00:06.254,000] [0m<inf> frame_handler: INIT: track=reset measurement_monitor=reset[0m
+[00:00:06.505,000] [0m<inf> frame_handler: Track started: state=TENTATIVE sensor_ms=0 range_m=1000.00 azimuth_rad=0.2618[0m
+[00:00:06.546,000] [0m<inf> frame_handler: Track state: previous=TENTATIVE current=CONFIRMED[0m
+[00:00:10.001,000] [0m<inf> radar_perf: PERF summary: uptime_ms=10001 measurements=175 without_submit=0 submit_failed=0 invalid_time=0[0m
+[00:00:10.001,000] [0m<inf> radar_perf: PERF rx_byte_wait: n=2655 total_ms=67 p50_bin=0 p95_bin=0 p99_bin=1 max_ms=1 over_budget_count=0 status=ok[0m
+[00:00:10.001,000] [0m<inf> radar_perf: PERF tx_queue_wait: n=180 total_ms=17 p50_bin=0 p95_bin=0 p99_bin=3 max_ms=3 over_budget_count=0 status=ok[0m
+[00:00:10.001,000] [0m<inf> radar_perf: PERF tx_poll: n=180 total_ms=553 p50_bin=3 p95_bin=4 p99_bin=4 max_ms=4 over_budget_count=0 status=ok[0m
+[00:00:10.002,000] [0m<inf> radar_perf: PERF parsed_to_tx_poll: n=175 total_ms=576 p50_bin=3 p95_bin=4 p99_bin=4 max_ms=4 over_budget_count=0 status=ok[0m
+[00:00:10.002,000] [0m<inf> radar_perf: PERF rx_isr: n=2655 min_ns=13703 mean_ns=20819 max_ns=25356[0m
+[00:00:10.002,000] [0m<inf> radar_perf: PERF rx_parser: n=2655 min_ns=722 mean_ns=1203 max_ns=6861[0m
+[00:00:10.002,000] [0m<inf> radar_perf: PERF queue_wait: n=175 total_ms=13 p50_bin=0 p95_bin=1 p99_bin=1 max_ms=1 over_budget_count=0 status=ok[0m
+[00:00:10.002,000] [0m<inf> radar_perf: PERF processing: n=175 total_ms=23 p50_bin=0 p95_bin=1 p99_bin=1 max_ms=1 over_budget_count=0 status=ok[0m
+[00:00:10.002,000] [0m<inf> radar_perf: PERF rx_to_submit: n=175 total_ms=36 p50_bin=0 p95_bin=1 p99_bin=1 max_ms=1 over_budget_count=0 status=ok[0m
+[00:00:10.002,000] [0m<inf> radar_perf: PERF estimator_predict: n=174 min_ns=26981 mean_ns=30981 max_ns=259523[0m
+[00:00:10.002,000] [0m<inf> radar_perf: PERF estimator_correct: n=174 min_ns=33648 mean_ns=34324 max_ns=35185[0m
+[00:00:10.002,000] [0m<inf> radar_perf: PERF queue rx: accepted=180 rejected=0 observed_max_used=1[0m
+[00:00:10.002,000] [0m<inf> radar_perf: PERF queue tx: accepted=180 rejected=0 observed_max_used=1[0m
+[00:00:10.002,000] [0m<inf> radar_perf: PERF tx: poll_completed=180 encode_failed=0[0m
+[00:00:10.002,000] [0m<inf> radar_perf: PERF stack rx: unused_bytes=768 min_unused_bytes=768[0m
+[00:00:10.002,000] [0m<inf> radar_perf: PERF stack handler: unused_bytes=1360 min_unused_bytes=1360[0m
+[00:00:10.002,000] [0m<inf> radar_resources: PERF cpu: uptime_ms=10002 total_cycles=2153826810 busy_cycles=202099342 idle_cycles=1951727468[0m
+[00:00:10.002,000] [0m<inf> radar_resources: PERF stack main: unused_bytes=528 min_unused_bytes=528[0m
+[00:00:10.003,000] [0m<inf> radar_perf: PERF stack tx: unused_bytes=672 min_unused_bytes=672[0m
+[00:00:15.003,000] [0m<inf> radar_perf: PERF summary: uptime_ms=15003 measurements=425 without_submit=0 submit_failed=0 invalid_time=0[0m
+[00:00:15.003,000] [0m<inf> radar_perf: PERF rx_byte_wait: n=6435 total_ms=174 p50_bin=0 p95_bin=0 p99_bin=1 max_ms=1 over_budget_count=0 status=ok[0m
+[00:00:15.003,000] [0m<inf> radar_perf: PERF tx_queue_wait: n=434 total_ms=43 p50_bin=0 p95_bin=1 p99_bin=3 max_ms=4 over_budget_count=0 status=ok[0m
+[00:00:15.003,000] [0m<inf> radar_perf: PERF tx_poll: n=434 total_ms=1336 p50_bin=3 p95_bin=4 p99_bin=4 max_ms=4 over_budget_count=0 status=ok[0m
+[00:00:15.003,000] [0m<inf> radar_perf: PERF parsed_to_tx_poll: n=424 total_ms=1394 p50_bin=3 p95_bin=4 p99_bin=4 max_ms=4 over_budget_count=0 status=ok[0m
+[00:00:15.003,000] [0m<inf> radar_perf: PERF rx_isr: n=6435 min_ns=9847 mean_ns=20925 max_ns=25388[0m
+[00:00:15.003,000] [0m<inf> radar_perf: PERF rx_parser: n=6435 min_ns=722 mean_ns=1203 max_ns=6861[0m
+[00:00:15.003,000] [0m<inf> radar_perf: PERF queue_wait: n=425 total_ms=27 p50_bin=0 p95_bin=1 p99_bin=1 max_ms=1 over_budget_count=0 status=ok[0m
+[00:00:15.003,000] [0m<inf> radar_perf: PERF processing: n=425 total_ms=51 p50_bin=0 p95_bin=1 p99_bin=1 max_ms=1 over_budget_count=0 status=ok[0m
+[00:00:15.003,000] [0m<inf> radar_perf: PERF rx_to_submit: n=425 total_ms=78 p50_bin=0 p95_bin=1 p99_bin=1 max_ms=1 over_budget_count=0 status=ok[0m
+[00:00:15.003,000] [0m<inf> radar_perf: PERF estimator_predict: n=424 min_ns=26981 mean_ns=32138 max_ns=261078[0m
+[00:00:15.003,000] [0m<inf> radar_perf: PERF estimator_correct: n=424 min_ns=33648 mean_ns=34620 max_ns=35185[0m
+[00:00:15.003,000] [0m<inf> radar_perf: PERF queue rx: accepted=435 rejected=0 observed_max_used=1[0m
+[00:00:15.003,000] [0m<inf> radar_perf: PERF queue tx: accepted=435 rejected=0 observed_max_used=1[0m
+[00:00:15.003,000] [0m<inf> radar_perf: PERF tx: poll_completed=434 encode_failed=0[0m
+[00:00:15.004,000] [0m<inf> radar_perf: PERF stack rx: unused_bytes=768 min_unused_bytes=768[0m
+[00:00:15.004,000] [0m<inf> radar_perf: PERF stack handler: unused_bytes=1360 min_unused_bytes=1360[0m
+[00:00:15.004,000] [0m<inf> radar_resources: PERF cpu: uptime_ms=15004 total_cycles=3225140669 busy_cycles=453634452 idle_cycles=2771506217[0m
+[00:00:15.004,000] [0m<inf> radar_resources: PERF stack main: unused_bytes=528 min_unused_bytes=528[0m
+[00:00:15.004,000] [0m<inf> radar_perf: PERF stack tx: unused_bytes=672 min_unused_bytes=672[0m
+[00:00:20.004,000] [0m<inf> radar_perf: PERF summary: uptime_ms=20004 measurements=675 without_submit=0 submit_failed=0 invalid_time=0[0m
+[00:00:20.004,000] [0m<inf> radar_perf: PERF rx_byte_wait: n=10215 total_ms=278 p50_bin=0 p95_bin=0 p99_bin=1 max_ms=1 over_budget_count=0 status=ok[0m
+[00:00:20.004,000] [0m<inf> radar_perf: PERF tx_queue_wait: n=690 total_ms=70 p50_bin=0 p95_bin=1 p99_bin=3 max_ms=4 over_budget_count=0 status=ok[0m
+[00:00:20.004,000] [0m<inf> radar_perf: PERF tx_poll: n=690 total_ms=2128 p50_bin=3 p95_bin=4 p99_bin=4 max_ms=4 over_budget_count=0 status=ok[0m
+[00:00:20.004,000] [0m<inf> radar_perf: PERF parsed_to_tx_poll: n=675 total_ms=2230 p50_bin=3 p95_bin=4 p99_bin=4 max_ms=4 over_budget_count=0 status=ok[0m
+[00:00:20.004,000] [0m<inf> radar_perf: PERF rx_isr: n=10215 min_ns=9847 mean_ns=20967 max_ns=25393[0m
+[00:00:20.004,000] [0m<inf> radar_perf: PERF rx_parser: n=10215 min_ns=722 mean_ns=1203 max_ns=6861[0m
+[00:00:20.005,000] [0m<inf> radar_perf: PERF queue_wait: n=675 total_ms=38 p50_bin=0 p95_bin=1 p99_bin=1 max_ms=1 over_budget_count=0 status=ok[0m
+[00:00:20.005,000] [0m<inf> radar_perf: PERF processing: n=675 total_ms=93 p50_bin=0 p95_bin=1 p99_bin=1 max_ms=1 over_budget_count=0 status=ok[0m
+[00:00:20.005,000] [0m<inf> radar_perf: PERF rx_to_submit: n=675 total_ms=131 p50_bin=0 p95_bin=1 p99_bin=1 max_ms=1 over_budget_count=0 status=ok[0m
+[00:00:20.005,000] [0m<inf> radar_perf: PERF estimator_predict: n=674 min_ns=26981 mean_ns=32495 max_ns=261226[0m
+[00:00:20.005,000] [0m<inf> radar_perf: PERF estimator_correct: n=674 min_ns=33648 mean_ns=34740 max_ns=35185[0m
+[00:00:20.005,000] [0m<inf> radar_perf: PERF queue rx: accepted=690 rejected=0 observed_max_used=1[0m
+[00:00:20.005,000] [0m<inf> radar_perf: PERF queue tx: accepted=690 rejected=0 observed_max_used=1[0m
+[00:00:20.005,000] [0m<inf> radar_perf: PERF tx: poll_completed=690 encode_failed=0[0m
+[00:00:20.005,000] [0m<inf> radar_perf: PERF stack rx: unused_bytes=768 min_unused_bytes=768[0m
+[00:00:20.005,000] [0m<inf> radar_perf: PERF stack handler: unused_bytes=1360 min_unused_bytes=1360[0m
+[00:00:20.005,000] [0m<inf> radar_resources: PERF cpu: uptime_ms=20005 total_cycles=4296430570 busy_cycles=705363116 idle_cycles=3591067454[0m
+[00:00:20.005,000] [0m<inf> radar_resources: PERF stack main: unused_bytes=528 min_unused_bytes=528[0m
+[00:00:20.005,000] [0m<inf> radar_perf: PERF stack tx: unused_bytes=672 min_unused_bytes=672[0m
+[00:00:25.006,000] [0m<inf> radar_perf: PERF summary: uptime_ms=25006 measurements=922 without_submit=0 submit_failed=0 invalid_time=0[0m
+[00:00:25.006,000] [0m<inf> radar_perf: PERF rx_byte_wait: n=13950 total_ms=386 p50_bin=0 p95_bin=0 p99_bin=1 max_ms=1 over_budget_count=0 status=ok[0m
+[00:00:25.006,000] [0m<inf> radar_perf: PERF tx_queue_wait: n=942 total_ms=97 p50_bin=0 p95_bin=1 p99_bin=3 max_ms=4 over_budget_count=0 status=ok[0m
+[00:00:25.006,000] [0m<inf> radar_perf: PERF tx_poll: n=942 total_ms=2896 p50_bin=3 p95_bin=4 p99_bin=4 max_ms=4 over_budget_count=0 status=ok[0m
+[00:00:25.006,000] [0m<inf> radar_perf: PERF parsed_to_tx_poll: n=922 total_ms=3045 p50_bin=3 p95_bin=4 p99_bin=4 max_ms=4 over_budget_count=0 status=ok[0m
+[00:00:25.006,000] [0m<inf> radar_perf: PERF rx_isr: n=13950 min_ns=9847 mean_ns=20986 max_ns=25393[0m
+[00:00:25.006,000] [0m<inf> radar_perf: PERF rx_parser: n=13950 min_ns=722 mean_ns=1203 max_ns=6861[0m
+[00:00:25.006,000] [0m<inf> radar_perf: PERF queue_wait: n=922 total_ms=47 p50_bin=0 p95_bin=1 p99_bin=1 max_ms=1 over_budget_count=0 status=ok[0m
+[00:00:25.006,000] [0m<inf> radar_perf: PERF processing: n=922 total_ms=137 p50_bin=0 p95_bin=1 p99_bin=1 max_ms=1 over_budget_count=0 status=ok[0m
+[00:00:25.006,000] [0m<inf> radar_perf: PERF rx_to_submit: n=922 total_ms=184 p50_bin=0 p95_bin=1 p99_bin=1 max_ms=1 over_budget_count=0 status=ok[0m
+[00:00:25.006,000] [0m<inf> radar_perf: PERF estimator_predict: n=921 min_ns=26981 mean_ns=32625 max_ns=261226[0m
+[00:00:25.006,000] [0m<inf> radar_perf: PERF estimator_correct: n=921 min_ns=33648 mean_ns=34717 max_ns=35185[0m
+[00:00:25.006,000] [0m<inf> radar_perf: PERF queue rx: accepted=942 rejected=0 observed_max_used=1[0m
+[00:00:25.006,000] [0m<inf> radar_perf: PERF queue tx: accepted=942 rejected=0 observed_max_used=1[0m
+[00:00:25.006,000] [0m<inf> radar_perf: PERF tx: poll_completed=942 encode_failed=0[0m
+[00:00:25.006,000] [0m<inf> radar_perf: PERF stack rx: unused_bytes=768 min_unused_bytes=768[0m
+[00:00:25.007,000] [0m<inf> radar_perf: PERF stack handler: unused_bytes=1360 min_unused_bytes=1360[0m
+[00:00:25.007,000] [0m<inf> radar_resources: PERF cpu: uptime_ms=25007 total_cycles=5367820691 busy_cycles=954643877 idle_cycles=4413176814[0m
+[00:00:25.007,000] [0m<inf> radar_resources: PERF stack main: unused_bytes=528 min_unused_bytes=528[0m
+[00:00:25.007,000] [0m<inf> radar_perf: PERF stack tx: unused_bytes=672 min_unused_bytes=672[0m
+[00:00:30.007,000] [0m<inf> radar_perf: PERF summary: uptime_ms=30007 measurements=1172 without_submit=0 submit_failed=0 invalid_time=0[0m
+[00:00:30.007,000] [0m<inf> radar_perf: PERF rx_byte_wait: n=17730 total_ms=492 p50_bin=0 p95_bin=0 p99_bin=1 max_ms=1 over_budget_count=0 status=ok[0m
+[00:00:30.007,000] [0m<inf> radar_perf: PERF tx_queue_wait: n=1197 total_ms=129 p50_bin=0 p95_bin=1 p99_bin=3 max_ms=4 over_budget_count=0 status=ok[0m
+[00:00:30.007,000] [0m<inf> radar_perf: PERF tx_poll: n=1197 total_ms=3679 p50_bin=3 p95_bin=4 p99_bin=4 max_ms=4 over_budget_count=0 status=ok[0m
+[00:00:30.007,000] [0m<inf> radar_perf: PERF parsed_to_tx_poll: n=1172 total_ms=3877 p50_bin=3 p95_bin=4 p99_bin=4 max_ms=4 over_budget_count=0 status=ok[0m
+[00:00:30.007,000] [0m<inf> radar_perf: PERF rx_isr: n=17730 min_ns=9847 mean_ns=21000 max_ns=25393[0m
+[00:00:30.007,000] [0m<inf> radar_perf: PERF rx_parser: n=17730 min_ns=722 mean_ns=1203 max_ns=6861[0m
+[00:00:30.007,000] [0m<inf> radar_perf: PERF queue_wait: n=1172 total_ms=58 p50_bin=0 p95_bin=0 p99_bin=1 max_ms=1 over_budget_count=0 status=ok[0m
+[00:00:30.007,000] [0m<inf> radar_perf: PERF processing: n=1172 total_ms=177 p50_bin=0 p95_bin=1 p99_bin=1 max_ms=1 over_budget_count=0 status=ok[0m
+[00:00:30.007,000] [0m<inf> radar_perf: PERF rx_to_submit: n=1172 total_ms=235 p50_bin=0 p95_bin=1 p99_bin=1 max_ms=1 over_budget_count=0 status=ok[0m
+[00:00:30.008,000] [0m<inf> radar_perf: PERF estimator_predict: n=1171 min_ns=26981 mean_ns=32731 max_ns=261226[0m
+[00:00:30.008,000] [0m<inf> radar_perf: PERF estimator_correct: n=1171 min_ns=33648 mean_ns=34763 max_ns=35185[0m
+[00:00:30.008,000] [0m<inf> radar_perf: PERF queue rx: accepted=1197 rejected=0 observed_max_used=1[0m
+[00:00:30.008,000] [0m<inf> radar_perf: PERF queue tx: accepted=1197 rejected=0 observed_max_used=1[0m
+[00:00:30.008,000] [0m<inf> radar_perf: PERF tx: poll_completed=1197 encode_failed=0[0m
+[00:00:30.008,000] [0m<inf> radar_perf: PERF stack rx: unused_bytes=768 min_unused_bytes=768[0m
+[00:00:30.008,000] [0m<inf> radar_perf: PERF stack handler: unused_bytes=1360 min_unused_bytes=1360[0m
+[00:00:30.008,000] [0m<inf> radar_resources: PERF cpu: uptime_ms=30008 total_cycles=6439111872 busy_cycles=1206393871 idle_cycles=5232718001[0m
+[00:00:30.008,000] [0m<inf> radar_resources: PERF stack main: unused_bytes=528 min_unused_bytes=528[0m
+[00:00:30.008,000] [0m<inf> radar_perf: PERF stack tx: unused_bytes=672 min_unused_bytes=672[0m
+[00:00:35.008,000] [0m<inf> radar_perf: PERF summary: uptime_ms=35008 measurements=1421 without_submit=0 submit_failed=0 invalid_time=0[0m
+[00:00:35.008,000] [0m<inf> radar_perf: PERF rx_byte_wait: n=21495 total_ms=606 p50_bin=0 p95_bin=0 p99_bin=1 max_ms=1 over_budget_count=0 status=ok[0m
+[00:00:35.008,000] [0m<inf> radar_perf: PERF tx_queue_wait: n=1450 total_ms=159 p50_bin=0 p95_bin=1 p99_bin=3 max_ms=4 over_budget_count=0 status=ok[0m
+[00:00:35.009,000] [0m<inf> radar_perf: PERF tx_poll: n=1450 total_ms=4465 p50_bin=3 p95_bin=4 p99_bin=4 max_ms=4 over_budget_count=0 status=ok[0m
+[00:00:35.009,000] [0m<inf> radar_perf: PERF parsed_to_tx_poll: n=1420 total_ms=4706 p50_bin=3 p95_bin=4 p99_bin=4 max_ms=6 over_budget_count=0 status=ok[0m
+[00:00:35.009,000] [0m<inf> radar_perf: PERF rx_isr: n=21495 min_ns=9847 mean_ns=21000 max_ns=25393[0m
+[00:00:35.009,000] [0m<inf> radar_perf: PERF rx_parser: n=21495 min_ns=722 mean_ns=1203 max_ns=6861[0m
+[00:00:35.009,000] [0m<inf> radar_perf: PERF queue_wait: n=1421 total_ms=67 p50_bin=0 p95_bin=0 p99_bin=1 max_ms=1 over_budget_count=0 status=ok[0m
+[00:00:35.009,000] [0m<inf> radar_perf: PERF processing: n=1421 total_ms=219 p50_bin=0 p95_bin=1 p99_bin=1 max_ms=1 over_budget_count=0 status=ok[0m
+[00:00:35.009,000] [0m<inf> radar_perf: PERF rx_to_submit: n=1421 total_ms=286 p50_bin=0 p95_bin=1 p99_bin=1 max_ms=1 over_budget_count=0 status=ok[0m
+[00:00:35.009,000] [0m<inf> radar_perf: PERF estimator_predict: n=1420 min_ns=26981 mean_ns=32935 max_ns=275629[0m
+[00:00:35.009,000] [0m<inf> radar_perf: PERF estimator_correct: n=1420 min_ns=33648 mean_ns=34976 max_ns=344004[0m
+[00:00:35.009,000] [0m<inf> radar_perf: PERF queue rx: accepted=1451 rejected=0 observed_max_used=1[0m
+[00:00:35.009,000] [0m<inf> radar_perf: PERF queue tx: accepted=1451 rejected=0 observed_max_used=1[0m
+[00:00:35.009,000] [0m<inf> radar_perf: PERF tx: poll_completed=1450 encode_failed=0[0m
+[00:00:35.009,000] [0m<inf> radar_perf: PERF stack rx: unused_bytes=768 min_unused_bytes=768[0m
+[00:00:35.009,000] [0m<inf> radar_perf: PERF stack handler: unused_bytes=1360 min_unused_bytes=1360[0m
+[00:00:35.009,000] [0m<inf> radar_resources: PERF cpu: uptime_ms=35009 total_cycles=7510425624 busy_cycles=1457373056 idle_cycles=6053052568[0m
+[00:00:35.009,000] [0m<inf> radar_resources: PERF stack main: unused_bytes=528 min_unused_bytes=528[0m
+[00:00:35.010,000] [0m<inf> radar_perf: PERF stack tx: unused_bytes=672 min_unused_bytes=672[0m
+[00:00:40.010,000] [0m<inf> radar_perf: PERF summary: uptime_ms=40010 measurements=1671 without_submit=0 submit_failed=0 invalid_time=0[0m
+[00:00:40.010,000] [0m<inf> radar_perf: PERF rx_byte_wait: n=25275 total_ms=716 p50_bin=0 p95_bin=0 p99_bin=1 max_ms=1 over_budget_count=0 status=ok[0m
+[00:00:40.010,000] [0m<inf> radar_perf: PERF tx_queue_wait: n=1706 total_ms=188 p50_bin=0 p95_bin=1 p99_bin=3 max_ms=4 over_budget_count=0 status=ok[0m
+[00:00:40.010,000] [0m<inf> radar_perf: PERF tx_poll: n=1706 total_ms=5253 p50_bin=3 p95_bin=4 p99_bin=4 max_ms=5 over_budget_count=0 status=ok[0m
+[00:00:40.010,000] [0m<inf> radar_perf: PERF parsed_to_tx_poll: n=1671 total_ms=5533 p50_bin=3 p95_bin=4 p99_bin=4 max_ms=6 over_budget_count=0 status=ok[0m
+[00:00:40.010,000] [0m<inf> radar_perf: PERF rx_isr: n=25275 min_ns=9847 mean_ns=21009 max_ns=25393[0m
+[00:00:40.010,000] [0m<inf> radar_perf: PERF rx_parser: n=25275 min_ns=722 mean_ns=1203 max_ns=6861[0m
+[00:00:40.010,000] [0m<inf> radar_perf: PERF queue_wait: n=1671 total_ms=77 p50_bin=0 p95_bin=0 p99_bin=1 max_ms=1 over_budget_count=0 status=ok[0m
+[00:00:40.010,000] [0m<inf> radar_perf: PERF processing: n=1671 total_ms=257 p50_bin=0 p95_bin=1 p99_bin=1 max_ms=1 over_budget_count=0 status=ok[0m
+[00:00:40.010,000] [0m<inf> radar_perf: PERF rx_to_submit: n=1671 total_ms=334 p50_bin=0 p95_bin=1 p99_bin=1 max_ms=1 over_budget_count=0 status=ok[0m
+[00:00:40.010,000] [0m<inf> radar_perf: PERF estimator_predict: n=1670 min_ns=26981 mean_ns=33032 max_ns=353027[0m
+[00:00:40.010,000] [0m<inf> radar_perf: PERF estimator_correct: n=1670 min_ns=33648 mean_ns=34972 max_ns=344004[0m
+[00:00:40.010,000] [0m<inf> radar_perf: PERF queue rx: accepted=1706 rejected=0 observed_max_used=1[0m
+[00:00:40.010,000] [0m<inf> radar_perf: PERF queue tx: accepted=1706 rejected=0 observed_max_used=1[0m
+[00:00:40.010,000] [0m<inf> radar_perf: PERF tx: poll_completed=1706 encode_failed=0[0m
+[00:00:40.011,000] [0m<inf> radar_perf: PERF stack rx: unused_bytes=768 min_unused_bytes=768[0m
+[00:00:40.011,000] [0m<inf> radar_perf: PERF stack handler: unused_bytes=1360 min_unused_bytes=1360[0m
+[00:00:40.011,000] [0m<inf> radar_resources: PERF cpu: uptime_ms=40011 total_cycles=8581701112 busy_cycles=1709841296 idle_cycles=6871859816[0m
+[00:00:40.011,000] [0m<inf> radar_resources: PERF stack main: unused_bytes=528 min_unused_bytes=528[0m
+[00:00:40.011,000] [0m<inf> radar_perf: PERF stack tx: unused_bytes=672 min_unused_bytes=672[0m
+[00:00:45.011,000] [0m<inf> radar_perf: PERF summary: uptime_ms=45011 measurements=1921 without_submit=0 submit_failed=0 invalid_time=0[0m
+[00:00:45.011,000] [0m<inf> radar_perf: PERF rx_byte_wait: n=29055 total_ms=811 p50_bin=0 p95_bin=0 p99_bin=1 max_ms=1 over_budget_count=0 status=ok[0m
+[00:00:45.011,000] [0m<inf> radar_perf: PERF tx_queue_wait: n=1961 total_ms=211 p50_bin=0 p95_bin=1 p99_bin=3 max_ms=4 over_budget_count=0 status=ok[0m
+[00:00:45.011,000] [0m<inf> radar_perf: PERF tx_poll: n=1961 total_ms=6037 p50_bin=3 p95_bin=4 p99_bin=4 max_ms=5 over_budget_count=0 status=ok[0m
+[00:00:45.011,000] [0m<inf> radar_perf: PERF parsed_to_tx_poll: n=1921 total_ms=6360 p50_bin=3 p95_bin=4 p99_bin=4 max_ms=6 over_budget_count=0 status=ok[0m
+[00:00:45.011,000] [0m<inf> radar_perf: PERF rx_isr: n=29055 min_ns=9847 mean_ns=21013 max_ns=25393[0m
+[00:00:45.011,000] [0m<inf> radar_perf: PERF rx_parser: n=29055 min_ns=722 mean_ns=1203 max_ns=6861[0m
+[00:00:45.012,000] [0m<inf> radar_perf: PERF queue_wait: n=1921 total_ms=89 p50_bin=0 p95_bin=0 p99_bin=1 max_ms=1 over_budget_count=0 status=ok[0m
+[00:00:45.012,000] [0m<inf> radar_perf: PERF processing: n=1921 total_ms=298 p50_bin=0 p95_bin=1 p99_bin=1 max_ms=1 over_budget_count=0 status=ok[0m
+[00:00:45.012,000] [0m<inf> radar_perf: PERF rx_to_submit: n=1921 total_ms=387 p50_bin=0 p95_bin=1 p99_bin=1 max_ms=1 over_budget_count=0 status=ok[0m
+[00:00:45.012,000] [0m<inf> radar_perf: PERF estimator_predict: n=1920 min_ns=26981 mean_ns=33097 max_ns=353027[0m
+[00:00:45.012,000] [0m<inf> radar_perf: PERF estimator_correct: n=1920 min_ns=33648 mean_ns=34967 max_ns=344004[0m
+[00:00:45.012,000] [0m<inf> radar_perf: PERF queue rx: accepted=1961 rejected=0 observed_max_used=1[0m
+[00:00:45.012,000] [0m<inf> radar_perf: PERF queue tx: accepted=1961 rejected=0 observed_max_used=1[0m
+[00:00:45.012,000] [0m<inf> radar_perf: PERF tx: poll_completed=1961 encode_failed=0[0m
+[00:00:45.012,000] [0m<inf> radar_perf: PERF stack rx: unused_bytes=768 min_unused_bytes=768[0m
+[00:00:45.012,000] [0m<inf> radar_perf: PERF stack handler: unused_bytes=1360 min_unused_bytes=1360[0m
+[00:00:45.012,000] [0m<inf> radar_resources: PERF cpu: uptime_ms=45012 total_cycles=9652992078 busy_cycles=1961750690 idle_cycles=7691241388[0m
+[00:00:45.012,000] [0m<inf> radar_resources: PERF stack main: unused_bytes=528 min_unused_bytes=528[0m
+[00:00:45.012,000] [0m<inf> radar_perf: PERF stack tx: unused_bytes=672 min_unused_bytes=672[0m
+[00:00:50.013,000] [0m<inf> radar_perf: PERF summary: uptime_ms=50013 measurements=2164 without_submit=0 submit_failed=0 invalid_time=0[0m
+[00:00:50.013,000] [0m<inf> radar_perf: PERF rx_byte_wait: n=32730 total_ms=910 p50_bin=0 p95_bin=0 p99_bin=1 max_ms=1 over_budget_count=0 status=ok[0m
+[00:00:50.013,000] [0m<inf> radar_perf: PERF tx_queue_wait: n=2209 total_ms=246 p50_bin=0 p95_bin=1 p99_bin=3 max_ms=6 over_budget_count=0 status=ok[0m
+[00:00:50.013,000] [0m<inf> radar_perf: PERF tx_poll: n=2209 total_ms=6794 p50_bin=3 p95_bin=4 p99_bin=4 max_ms=5 over_budget_count=0 status=ok[0m
+[00:00:50.013,000] [0m<inf> radar_perf: PERF parsed_to_tx_poll: n=2164 total_ms=7156 p50_bin=3 p95_bin=4 p99_bin=4 max_ms=9 over_budget_count=0 status=ok[0m
+[00:00:50.013,000] [0m<inf> radar_perf: PERF rx_isr: n=32730 min_ns=9847 mean_ns=21023 max_ns=25402[0m
+[00:00:50.013,000] [0m<inf> radar_perf: PERF rx_parser: n=32730 min_ns=722 mean_ns=1203 max_ns=6861[0m
+[00:00:50.013,000] [0m<inf> radar_perf: PERF queue_wait: n=2164 total_ms=96 p50_bin=0 p95_bin=0 p99_bin=1 max_ms=1 over_budget_count=0 status=ok[0m
+[00:00:50.013,000] [0m<inf> radar_perf: PERF processing: n=2164 total_ms=329 p50_bin=0 p95_bin=1 p99_bin=1 max_ms=1 over_budget_count=0 status=ok[0m
+[00:00:50.013,000] [0m<inf> radar_perf: PERF rx_to_submit: n=2164 total_ms=425 p50_bin=0 p95_bin=1 p99_bin=1 max_ms=1 over_budget_count=0 status=ok[0m
+[00:00:50.013,000] [0m<inf> radar_perf: PERF estimator_predict: n=2163 min_ns=26981 mean_ns=33125 max_ns=353027[0m
+[00:00:50.013,000] [0m<inf> radar_perf: PERF estimator_correct: n=2163 min_ns=33648 mean_ns=35060 max_ns=344004[0m
+[00:00:50.013,000] [0m<inf> radar_perf: PERF queue rx: accepted=2209 rejected=0 observed_max_used=1[0m
+[00:00:50.013,000] [0m<inf> radar_perf: PERF queue tx: accepted=2209 rejected=0 observed_max_used=2[0m
+[00:00:50.013,000] [0m<inf> radar_perf: PERF tx: poll_completed=2209 encode_failed=0[0m
+[00:00:50.013,000] [0m<inf> radar_perf: PERF stack rx: unused_bytes=768 min_unused_bytes=768[0m
+[00:00:50.014,000] [0m<inf> radar_perf: PERF stack handler: unused_bytes=1360 min_unused_bytes=1360[0m
+[00:00:50.014,000] [0m<inf> radar_resources: PERF cpu: uptime_ms=50014 total_cycles=10724511377 busy_cycles=2208068691 idle_cycles=8516442686[0m
+[00:00:50.014,000] [0m<inf> radar_resources: PERF stack main: unused_bytes=528 min_unused_bytes=528[0m
+[00:00:50.014,000] [0m<inf> radar_perf: PERF stack tx: unused_bytes=672 min_unused_bytes=672[0m
+[00:00:55.014,000] [0m<inf> radar_perf: PERF summary: uptime_ms=55014 measurements=2403 without_submit=0 submit_failed=0 invalid_time=0[0m
+[00:00:55.014,000] [0m<inf> radar_perf: PERF rx_byte_wait: n=36353 total_ms=1018 p50_bin=0 p95_bin=0 p99_bin=1 max_ms=1 over_budget_count=0 status=ok[0m
+[00:00:55.014,000] [0m<inf> radar_perf: PERF tx_queue_wait: n=2453 total_ms=273 p50_bin=0 p95_bin=1 p99_bin=3 max_ms=6 over_budget_count=0 status=ok[0m
+[00:00:55.014,000] [0m<inf> radar_perf: PERF tx_poll: n=2453 total_ms=7540 p50_bin=3 p95_bin=4 p99_bin=4 max_ms=5 over_budget_count=0 status=ok[0m
+[00:00:55.014,000] [0m<inf> radar_perf: PERF parsed_to_tx_poll: n=2403 total_ms=7923 p50_bin=3 p95_bin=4 p99_bin=4 max_ms=9 over_budget_count=0 status=ok[0m
+[00:00:55.014,000] [0m<inf> radar_perf: PERF rx_isr: n=36354 min_ns=9842 mean_ns=21023 max_ns=25402[0m
+[00:00:55.014,000] [0m<inf> radar_perf: PERF rx_parser: n=36353 min_ns=722 mean_ns=1203 max_ns=6861[0m
+[00:00:55.015,000] [0m<inf> radar_perf: PERF queue_wait: n=2403 total_ms=103 p50_bin=0 p95_bin=0 p99_bin=1 max_ms=1 over_budget_count=0 status=ok[0m
+[00:00:55.015,000] [0m<inf> radar_perf: PERF processing: n=2403 total_ms=351 p50_bin=0 p95_bin=1 p99_bin=1 max_ms=1 over_budget_count=0 status=ok[0m
+[00:00:55.015,000] [0m<inf> radar_perf: PERF rx_to_submit: n=2403 total_ms=454 p50_bin=0 p95_bin=1 p99_bin=1 max_ms=1 over_budget_count=0 status=ok[0m
+[00:00:55.015,000] [0m<inf> radar_perf: PERF estimator_predict: n=2402 min_ns=26981 mean_ns=33078 max_ns=353027[0m
+[00:00:55.015,000] [0m<inf> radar_perf: PERF estimator_correct: n=2402 min_ns=33648 mean_ns=34949 max_ns=344004[0m
+[00:00:55.015,000] [0m<inf> radar_perf: PERF queue rx: accepted=2453 rejected=0 observed_max_used=1[0m
+[00:00:55.015,000] [0m<inf> radar_perf: PERF queue tx: accepted=2453 rejected=0 observed_max_used=2[0m
+[00:00:55.015,000] [0m<inf> radar_perf: PERF tx: poll_completed=2453 encode_failed=0[0m
+[00:00:55.015,000] [0m<inf> radar_perf: PERF stack rx: unused_bytes=768 min_unused_bytes=768[0m
+[00:00:55.015,000] [0m<inf> radar_perf: PERF stack handler: unused_bytes=1360 min_unused_bytes=1360[0m
+[00:00:55.015,000] [0m<inf> radar_resources: PERF cpu: uptime_ms=55015 total_cycles=11796197977 busy_cycles=2450835031 idle_cycles=9345362946[0m
+[00:00:55.015,000] [0m<inf> radar_resources: PERF stack main: unused_bytes=520 min_unused_bytes=520[0m
+[00:00:55.015,000] [0m<inf> radar_perf: PERF stack tx: unused_bytes=672 min_unused_bytes=672[0m
+[00:01:00.016,000] [0m<inf> radar_perf: PERF summary: uptime_ms=60016 measurements=2645 without_submit=0 submit_failed=0 invalid_time=0[0m
+[00:01:00.016,000] [0m<inf> radar_perf: PERF rx_byte_wait: n=40005 total_ms=1115 p50_bin=0 p95_bin=0 p99_bin=1 max_ms=1 over_budget_count=0 status=ok[0m
+[00:01:00.016,000] [0m<inf> radar_perf: PERF tx_queue_wait: n=2700 total_ms=309 p50_bin=0 p95_bin=1 p99_bin=3 max_ms=6 over_budget_count=0 status=ok[0m
+[00:01:00.016,000] [0m<inf> radar_perf: PERF tx_poll: n=2700 total_ms=8292 p50_bin=3 p95_bin=4 p99_bin=4 max_ms=5 over_budget_count=0 status=ok[0m
+[00:01:00.016,000] [0m<inf> radar_perf: PERF parsed_to_tx_poll: n=2645 total_ms=8735 p50_bin=3 p95_bin=4 p99_bin=4 max_ms=9 over_budget_count=0 status=ok[0m
+[00:01:00.016,000] [0m<inf> radar_perf: PERF rx_isr: n=40005 min_ns=9842 mean_ns=21023 max_ns=25412[0m
+[00:01:00.016,000] [0m<inf> radar_perf: PERF rx_parser: n=40005 min_ns=722 mean_ns=1203 max_ns=6875[0m
+[00:01:00.016,000] [0m<inf> radar_perf: PERF queue_wait: n=2645 total_ms=114 p50_bin=0 p95_bin=0 p99_bin=1 max_ms=1 over_budget_count=0 status=ok[0m
+[00:01:00.016,000] [0m<inf> radar_perf: PERF processing: n=2645 total_ms=400 p50_bin=0 p95_bin=1 p99_bin=1 max_ms=1 over_budget_count=0 status=ok[0m
+[00:01:00.016,000] [0m<inf> radar_perf: PERF rx_to_submit: n=2645 total_ms=514 p50_bin=0 p95_bin=1 p99_bin=1 max_ms=1 over_budget_count=0 status=ok[0m
+[00:01:00.016,000] [0m<inf> radar_perf: PERF estimator_predict: n=2644 min_ns=26981 mean_ns=33092 max_ns=353027[0m
+[00:01:00.016,000] [0m<inf> radar_perf: PERF estimator_correct: n=2644 min_ns=33648 mean_ns=34990 max_ns=344004[0m
+[00:01:00.016,000] [0m<inf> radar_perf: PERF queue rx: accepted=2700 rejected=0 observed_max_used=1[0m
+[00:01:00.016,000] [0m<inf> radar_perf: PERF queue tx: accepted=2700 rejected=0 observed_max_used=2[0m
+[00:01:00.016,000] [0m<inf> radar_perf: PERF tx: poll_completed=2700 encode_failed=0[0m
+[00:01:00.016,000] [0m<inf> radar_perf: PERF stack rx: unused_bytes=768 min_unused_bytes=768[0m
+[00:01:00.017,000] [0m<inf> radar_perf: PERF stack handler: unused_bytes=1360 min_unused_bytes=1360[0m
+[00:01:00.017,000] [0m<inf> radar_resources: PERF cpu: uptime_ms=60017 total_cycles=12867791150 busy_cycles=2696344785 idle_cycles=10171446365[0m
+[00:01:00.017,000] [0m<inf> radar_resources: PERF stack main: unused_bytes=520 min_unused_bytes=520[0m
+[00:01:00.017,000] [0m<inf> radar_perf: PERF stack tx: unused_bytes=672 min_unused_bytes=672[0m
+[00:01:05.017,000] [0m<inf> radar_perf: PERF summary: uptime_ms=65017 measurements=2894 without_submit=0 submit_failed=0 invalid_time=0[0m
+[00:01:05.017,000] [0m<inf> radar_perf: PERF rx_byte_wait: n=43770 total_ms=1210 p50_bin=0 p95_bin=0 p99_bin=1 max_ms=1 over_budget_count=0 status=ok[0m
+[00:01:05.017,000] [0m<inf> radar_perf: PERF tx_queue_wait: n=2954 total_ms=337 p50_bin=0 p95_bin=1 p99_bin=3 max_ms=6 over_budget_count=0 status=ok[0m
+[00:01:05.017,000] [0m<inf> radar_perf: PERF tx_poll: n=2954 total_ms=9071 p50_bin=3 p95_bin=4 p99_bin=4 max_ms=5 over_budget_count=0 status=ok[0m
+[00:01:05.017,000] [0m<inf> radar_perf: PERF parsed_to_tx_poll: n=2894 total_ms=9550 p50_bin=3 p95_bin=4 p99_bin=4 max_ms=9 over_budget_count=0 status=ok[0m
+[00:01:05.017,000] [0m<inf> radar_perf: PERF rx_isr: n=43770 min_ns=9842 mean_ns=21027 max_ns=25412[0m
+[00:01:05.017,000] [0m<inf> radar_perf: PERF rx_parser: n=43770 min_ns=722 mean_ns=1203 max_ns=6875[0m
+[00:01:05.017,000] [0m<inf> radar_perf: PERF queue_wait: n=2894 total_ms=124 p50_bin=0 p95_bin=0 p99_bin=1 max_ms=1 over_budget_count=0 status=ok[0m
+[00:01:05.017,000] [0m<inf> radar_perf: PERF processing: n=2894 total_ms=433 p50_bin=0 p95_bin=1 p99_bin=1 max_ms=1 over_budget_count=0 status=ok[0m
+[00:01:05.017,000] [0m<inf> radar_perf: PERF rx_to_submit: n=2894 total_ms=557 p50_bin=0 p95_bin=1 p99_bin=1 max_ms=1 over_budget_count=0 status=ok[0m
+[00:01:05.018,000] [0m<inf> radar_perf: PERF estimator_predict: n=2893 min_ns=26981 mean_ns=33064 max_ns=353027[0m
+[00:01:05.018,000] [0m<inf> radar_perf: PERF estimator_correct: n=2893 min_ns=33648 mean_ns=34958 max_ns=344004[0m
+[00:01:05.018,000] [0m<inf> radar_perf: PERF queue rx: accepted=2954 rejected=0 observed_max_used=1[0m
+[00:01:05.018,000] [0m<inf> radar_perf: PERF queue tx: accepted=2954 rejected=0 observed_max_used=2[0m
+[00:01:05.018,000] [0m<inf> radar_perf: PERF tx: poll_completed=2954 encode_failed=0[0m
+[00:01:05.018,000] [0m<inf> radar_perf: PERF stack rx: unused_bytes=768 min_unused_bytes=768[0m
+[00:01:05.018,000] [0m<inf> radar_perf: PERF stack handler: unused_bytes=1360 min_unused_bytes=1360[0m
+[00:01:05.018,000] [0m<inf> radar_resources: PERF cpu: uptime_ms=65018 total_cycles=13939117253 busy_cycles=2947604030 idle_cycles=10991513223[0m
+[00:01:05.018,000] [0m<inf> radar_resources: PERF stack main: unused_bytes=520 min_unused_bytes=520[0m
+[00:01:05.018,000] [0m<inf> radar_perf: PERF stack tx: unused_bytes=672 min_unused_bytes=672[0m
+[00:01:10.018,000] [0m<inf> radar_perf: PERF summary: uptime_ms=70018 measurements=3143 without_submit=0 submit_failed=0 invalid_time=0[0m
+[00:01:10.018,000] [0m<inf> radar_perf: PERF rx_byte_wait: n=47535 total_ms=1326 p50_bin=0 p95_bin=0 p99_bin=1 max_ms=1 over_budget_count=0 status=ok[0m
+[00:01:10.018,000] [0m<inf> radar_perf: PERF tx_queue_wait: n=3208 total_ms=376 p50_bin=0 p95_bin=1 p99_bin=3 max_ms=6 over_budget_count=0 status=ok[0m
+[00:01:10.019,000] [0m<inf> radar_perf: PERF tx_poll: n=3208 total_ms=9850 p50_bin=3 p95_bin=4 p99_bin=4 max_ms=5 over_budget_count=0 status=ok[0m
+[00:01:10.019,000] [0m<inf> radar_perf: PERF parsed_to_tx_poll: n=3143 total_ms=10379 p50_bin=3 p95_bin=4 p99_bin=4 max_ms=9 over_budget_count=0 status=ok[0m
+[00:01:10.019,000] [0m<inf> radar_perf: PERF rx_isr: n=47535 min_ns=9842 mean_ns=21027 max_ns=25412[0m
+[00:01:10.019,000] [0m<inf> radar_perf: PERF rx_parser: n=47535 min_ns=722 mean_ns=1203 max_ns=6875[0m
+[00:01:10.019,000] [0m<inf> radar_perf: PERF queue_wait: n=3143 total_ms=139 p50_bin=0 p95_bin=0 p99_bin=1 max_ms=1 over_budget_count=0 status=ok[0m
+[00:01:10.019,000] [0m<inf> radar_perf: PERF processing: n=3143 total_ms=470 p50_bin=0 p95_bin=1 p99_bin=1 max_ms=1 over_budget_count=0 status=ok[0m
+[00:01:10.019,000] [0m<inf> radar_perf: PERF rx_to_submit: n=3143 total_ms=609 p50_bin=0 p95_bin=1 p99_bin=1 max_ms=1 over_budget_count=0 status=ok[0m
+[00:01:10.019,000] [0m<inf> radar_perf: PERF estimator_predict: n=3142 min_ns=26981 mean_ns=33125 max_ns=353027[0m
+[00:01:10.019,000] [0m<inf> radar_perf: PERF estimator_correct: n=3142 min_ns=33648 mean_ns=35046 max_ns=344472[0m
+[00:01:10.019,000] [0m<inf> radar_perf: PERF queue rx: accepted=3208 rejected=0 observed_max_used=1[0m
+[00:01:10.019,000] [0m<inf> radar_perf: PERF queue tx: accepted=3208 rejected=0 observed_max_used=2[0m
+[00:01:10.019,000] [0m<inf> radar_perf: PERF tx: poll_completed=3208 encode_failed=0[0m
+[00:01:10.019,000] [0m<inf> radar_perf: PERF stack rx: unused_bytes=768 min_unused_bytes=768[0m
+[00:01:10.019,000] [0m<inf> radar_perf: PERF stack handler: unused_bytes=1360 min_unused_bytes=1360[0m
+[00:01:10.019,000] [0m<inf> radar_resources: PERF cpu: uptime_ms=70019 total_cycles=15010440740 busy_cycles=3198970076 idle_cycles=11811470664[0m
+[00:01:10.019,000] [0m<inf> radar_resources: PERF stack main: unused_bytes=520 min_unused_bytes=520[0m
+[00:01:10.020,000] [0m<inf> radar_perf: PERF stack tx: unused_bytes=672 min_unused_bytes=672[0m
+[00:01:15.020,000] [0m<inf> radar_perf: PERF summary: uptime_ms=75020 measurements=3393 without_submit=0 submit_failed=0 invalid_time=0[0m
+[00:01:15.020,000] [0m<inf> radar_perf: PERF rx_byte_wait: n=51315 total_ms=1427 p50_bin=0 p95_bin=0 p99_bin=1 max_ms=1 over_budget_count=0 status=ok[0m
+[00:01:15.020,000] [0m<inf> radar_perf: PERF tx_queue_wait: n=3463 total_ms=405 p50_bin=0 p95_bin=1 p99_bin=3 max_ms=6 over_budget_count=0 status=ok[0m
+[00:01:15.020,000] [0m<inf> radar_perf: PERF tx_poll: n=3463 total_ms=10639 p50_bin=3 p95_bin=4 p99_bin=4 max_ms=5 over_budget_count=0 status=ok[0m
+[00:01:15.020,000] [0m<inf> radar_perf: PERF parsed_to_tx_poll: n=3393 total_ms=11208 p50_bin=3 p95_bin=4 p99_bin=4 max_ms=9 over_budget_count=0 status=ok[0m
+[00:01:15.020,000] [0m<inf> radar_perf: PERF rx_isr: n=51315 min_ns=9842 mean_ns=21027 max_ns=25412[0m
+[00:01:15.020,000] [0m<inf> radar_perf: PERF rx_parser: n=51315 min_ns=722 mean_ns=1203 max_ns=6875[0m
+[00:01:15.020,000] [0m<inf> radar_perf: PERF queue_wait: n=3393 total_ms=147 p50_bin=0 p95_bin=0 p99_bin=1 max_ms=1 over_budget_count=0 status=ok[0m
+[00:01:15.020,000] [0m<inf> radar_perf: PERF processing: n=3393 total_ms=509 p50_bin=0 p95_bin=1 p99_bin=1 max_ms=1 over_budget_count=0 status=ok[0m
+[00:01:15.020,000] [0m<inf> radar_perf: PERF rx_to_submit: n=3393 total_ms=656 p50_bin=0 p95_bin=1 p99_bin=1 max_ms=1 over_budget_count=0 status=ok[0m
+[00:01:15.020,000] [0m<inf> radar_perf: PERF estimator_predict: n=3392 min_ns=26981 mean_ns=33129 max_ns=353027[0m
+[00:01:15.020,000] [0m<inf> radar_perf: PERF estimator_correct: n=3392 min_ns=33648 mean_ns=35041 max_ns=344472[0m
+[00:01:15.020,000] [0m<inf> radar_perf: PERF queue rx: accepted=3463 rejected=0 observed_max_used=1[0m
+[00:01:15.020,000] [0m<inf> radar_perf: PERF queue tx: accepted=3463 rejected=0 observed_max_used=2[0m
+[00:01:15.020,000] [0m<inf> radar_perf: PERF tx: poll_completed=3463 encode_failed=0[0m
+[00:01:15.021,000] [0m<inf> radar_perf: PERF stack rx: unused_bytes=768 min_unused_bytes=768[0m
+[00:01:15.021,000] [0m<inf> radar_perf: PERF stack handler: unused_bytes=1360 min_unused_bytes=1360[0m
+[00:01:15.021,000] [0m<inf> radar_resources: PERF cpu: uptime_ms=75021 total_cycles=16081747170 busy_cycles=3451120866 idle_cycles=12630626304[0m
+[00:01:15.021,000] [0m<inf> radar_resources: PERF stack main: unused_bytes=520 min_unused_bytes=520[0m
+[00:01:15.021,000] [0m<inf> radar_perf: PERF stack tx: unused_bytes=672 min_unused_bytes=672[0m
+[00:01:20.021,000] [0m<inf> radar_perf: PERF summary: uptime_ms=80021 measurements=3642 without_submit=0 submit_failed=0 invalid_time=0[0m
+[00:01:20.021,000] [0m<inf> radar_perf: PERF rx_byte_wait: n=55080 total_ms=1536 p50_bin=0 p95_bin=0 p99_bin=1 max_ms=1 over_budget_count=0 status=ok[0m
+[00:01:20.021,000] [0m<inf> radar_perf: PERF tx_queue_wait: n=3716 total_ms=431 p50_bin=0 p95_bin=1 p99_bin=3 max_ms=6 over_budget_count=0 status=ok[0m
+[00:01:20.021,000] [0m<inf> radar_perf: PERF tx_poll: n=3716 total_ms=11408 p50_bin=3 p95_bin=4 p99_bin=4 max_ms=5 over_budget_count=0 status=ok[0m
+[00:01:20.022,000] [0m<inf> radar_perf: PERF parsed_to_tx_poll: n=3641 total_ms=12018 p50_bin=3 p95_bin=4 p99_bin=4 max_ms=9 over_budget_count=0 status=ok[0m
+[00:01:20.022,000] [0m<inf> radar_perf: PERF rx_isr: n=55080 min_ns=9837 mean_ns=21023 max_ns=25412[0m
+[00:01:20.022,000] [0m<inf> radar_perf: PERF rx_parser: n=55080 min_ns=722 mean_ns=1203 max_ns=6875[0m
+[00:01:20.022,000] [0m<inf> radar_perf: PERF queue_wait: n=3642 total_ms=157 p50_bin=0 p95_bin=0 p99_bin=1 max_ms=1 over_budget_count=0 status=ok[0m
+[00:01:20.022,000] [0m<inf> radar_perf: PERF processing: n=3642 total_ms=549 p50_bin=0 p95_bin=1 p99_bin=1 max_ms=1 over_budget_count=0 status=ok[0m
+[00:01:20.022,000] [0m<inf> radar_perf: PERF rx_to_submit: n=3642 total_ms=706 p50_bin=0 p95_bin=1 p99_bin=1 max_ms=1 over_budget_count=0 status=ok[0m
+[00:01:20.022,000] [0m<inf> radar_perf: PERF estimator_predict: n=3641 min_ns=26981 mean_ns=33129 max_ns=353027[0m
+[00:01:20.022,000] [0m<inf> radar_perf: PERF estimator_correct: n=3641 min_ns=33648 mean_ns=35023 max_ns=344472[0m
+[00:01:20.022,000] [0m<inf> radar_perf: PERF queue rx: accepted=3717 rejected=0 observed_max_used=1[0m
+[00:01:20.022,000] [0m<inf> radar_perf: PERF queue tx: accepted=3717 rejected=0 observed_max_used=2[0m
+[00:01:20.022,000] [0m<inf> radar_perf: PERF tx: poll_completed=3716 encode_failed=0[0m
+[00:01:20.022,000] [0m<inf> radar_perf: PERF stack rx: unused_bytes=768 min_unused_bytes=768[0m
+[00:01:20.022,000] [0m<inf> radar_perf: PERF stack handler: unused_bytes=1360 min_unused_bytes=1360[0m
+[00:01:20.022,000] [0m<inf> radar_resources: PERF cpu: uptime_ms=80022 total_cycles=17153093219 busy_cycles=3702180088 idle_cycles=13450913131[0m
+[00:01:20.022,000] [0m<inf> radar_resources: PERF stack main: unused_bytes=520 min_unused_bytes=520[0m
+[00:01:20.022,000] [0m<inf> radar_perf: PERF stack tx: unused_bytes=672 min_unused_bytes=672[0m
+[00:01:25.023,000] [0m<inf> radar_perf: PERF summary: uptime_ms=85023 measurements=3892 without_submit=0 submit_failed=0 invalid_time=0[0m
+[00:01:25.023,000] [0m<inf> radar_perf: PERF rx_byte_wait: n=58860 total_ms=1660 p50_bin=0 p95_bin=0 p99_bin=1 max_ms=1 over_budget_count=0 status=ok[0m
+[00:01:25.023,000] [0m<inf> radar_perf: PERF tx_queue_wait: n=3972 total_ms=457 p50_bin=0 p95_bin=1 p99_bin=3 max_ms=6 over_budget_count=0 status=ok[0m
+[00:01:25.023,000] [0m<inf> radar_perf: PERF tx_poll: n=3972 total_ms=12192 p50_bin=3 p95_bin=4 p99_bin=4 max_ms=5 over_budget_count=0 status=ok[0m
+[00:01:25.023,000] [0m<inf> radar_perf: PERF parsed_to_tx_poll: n=3892 total_ms=12843 p50_bin=3 p95_bin=4 p99_bin=4 max_ms=9 over_budget_count=0 status=ok[0m
+[00:01:25.023,000] [0m<inf> radar_perf: PERF rx_isr: n=58860 min_ns=9837 mean_ns=21027 max_ns=25412[0m
+[00:01:25.023,000] [0m<inf> radar_perf: PERF rx_parser: n=58860 min_ns=722 mean_ns=1203 max_ns=6875[0m
+[00:01:25.023,000] [0m<inf> radar_perf: PERF queue_wait: n=3892 total_ms=169 p50_bin=0 p95_bin=0 p99_bin=1 max_ms=1 over_budget_count=0 status=ok[0m
+[00:01:25.023,000] [0m<inf> radar_perf: PERF processing: n=3892 total_ms=588 p50_bin=0 p95_bin=1 p99_bin=1 max_ms=1 over_budget_count=0 status=ok[0m
+[00:01:25.023,000] [0m<inf> radar_perf: PERF rx_to_submit: n=3892 total_ms=757 p50_bin=0 p95_bin=1 p99_bin=1 max_ms=1 over_budget_count=0 status=ok[0m
+[00:01:25.023,000] [0m<inf> radar_perf: PERF estimator_predict: n=3891 min_ns=26981 mean_ns=33148 max_ns=353069[0m
+[00:01:25.023,000] [0m<inf> radar_perf: PERF estimator_correct: n=3891 min_ns=33648 mean_ns=35009 max_ns=344472[0m
+[00:01:25.023,000] [0m<inf> radar_perf: PERF queue rx: accepted=3972 rejected=0 observed_max_used=1[0m
+[00:01:25.023,000] [0m<inf> radar_perf: PERF queue tx: accepted=3972 rejected=0 observed_max_used=2[0m
+[00:01:25.023,000] [0m<inf> radar_perf: PERF tx: poll_completed=3972 encode_failed=0[0m
+[00:01:25.023,000] [0m<inf> radar_perf: PERF stack rx: unused_bytes=768 min_unused_bytes=768[0m
+[00:01:25.024,000] [0m<inf> radar_perf: PERF stack handler: unused_bytes=1360 min_unused_bytes=1360[0m
+[00:01:25.024,000] [0m<inf> radar_resources: PERF cpu: uptime_ms=85024 total_cycles=18224378643 busy_cycles=3954460791 idle_cycles=14269917852[0m
+[00:01:25.024,000] [0m<inf> radar_resources: PERF stack main: unused_bytes=520 min_unused_bytes=520[0m
+[00:01:25.024,000] [0m<inf> radar_perf: PERF stack tx: unused_bytes=672 min_unused_bytes=672[0m
+[00:01:30.024,000] [0m<inf> radar_perf: PERF summary: uptime_ms=90024 measurements=4142 without_submit=0 submit_failed=0 invalid_time=0[0m
+[00:01:30.024,000] [0m<inf> radar_perf: PERF rx_byte_wait: n=62640 total_ms=1760 p50_bin=0 p95_bin=0 p99_bin=1 max_ms=1 over_budget_count=0 status=ok[0m
+[00:01:30.024,000] [0m<inf> radar_perf: PERF tx_queue_wait: n=4227 total_ms=490 p50_bin=0 p95_bin=1 p99_bin=3 max_ms=6 over_budget_count=0 status=ok[0m
+[00:01:30.024,000] [0m<inf> radar_perf: PERF tx_poll: n=4227 total_ms=12966 p50_bin=3 p95_bin=4 p99_bin=4 max_ms=5 over_budget_count=0 status=ok[0m
+[00:01:30.024,000] [0m<inf> radar_perf: PERF parsed_to_tx_poll: n=4142 total_ms=13672 p50_bin=3 p95_bin=4 p99_bin=4 max_ms=9 over_budget_count=0 status=ok[0m
+[00:01:30.024,000] [0m<inf> radar_perf: PERF rx_isr: n=62640 min_ns=9837 mean_ns=21027 max_ns=25412[0m
+[00:01:30.024,000] [0m<inf> radar_perf: PERF rx_parser: n=62640 min_ns=722 mean_ns=1203 max_ns=6875[0m
+[00:01:30.024,000] [0m<inf> radar_perf: PERF queue_wait: n=4142 total_ms=182 p50_bin=0 p95_bin=0 p99_bin=1 max_ms=1 over_budget_count=0 status=ok[0m
+[00:01:30.025,000] [0m<inf> radar_perf: PERF processing: n=4142 total_ms=635 p50_bin=0 p95_bin=1 p99_bin=1 max_ms=1 over_budget_count=0 status=ok[0m
+[00:01:30.025,000] [0m<inf> radar_perf: PERF rx_to_submit: n=4142 total_ms=817 p50_bin=0 p95_bin=1 p99_bin=1 max_ms=1 over_budget_count=0 status=ok[0m
+[00:01:30.025,000] [0m<inf> radar_perf: PERF estimator_predict: n=4141 min_ns=26981 mean_ns=33157 max_ns=353069[0m
+[00:01:30.025,000] [0m<inf> radar_perf: PERF estimator_correct: n=4141 min_ns=33648 mean_ns=35004 max_ns=344472[0m
+[00:01:30.025,000] [0m<inf> radar_perf: PERF queue rx: accepted=4227 rejected=0 observed_max_used=1[0m
+[00:01:30.025,000] [0m<inf> radar_perf: PERF queue tx: accepted=4227 rejected=0 observed_max_used=2[0m
+[00:01:30.025,000] [0m<inf> radar_perf: PERF tx: poll_completed=4227 encode_failed=0[0m
+[00:01:30.025,000] [0m<inf> radar_perf: PERF stack rx: unused_bytes=768 min_unused_bytes=768[0m
+[00:01:30.025,000] [0m<inf> radar_perf: PERF stack handler: unused_bytes=1360 min_unused_bytes=1360[0m
+[00:01:30.025,000] [0m<inf> radar_resources: PERF cpu: uptime_ms=90025 total_cycles=19295654827 busy_cycles=4206586677 idle_cycles=15089068150[0m
+[00:01:30.025,000] [0m<inf> radar_resources: PERF stack main: unused_bytes=520 min_unused_bytes=520[0m
+[00:01:30.025,000] [0m<inf> radar_perf: PERF stack tx: unused_bytes=672 min_unused_bytes=672[0m
+[00:01:35.025,000] [0m<inf> radar_perf: PERF summary: uptime_ms=95025 measurements=4381 without_submit=0 submit_failed=0 invalid_time=0[0m
+[00:01:35.026,000] [0m<inf> radar_perf: PERF rx_byte_wait: n=66255 total_ms=1870 p50_bin=0 p95_bin=0 p99_bin=1 max_ms=1 over_budget_count=0 status=ok[0m
+[00:01:35.026,000] [0m<inf> radar_perf: PERF tx_queue_wait: n=4471 total_ms=522 p50_bin=0 p95_bin=1 p99_bin=3 max_ms=6 over_budget_count=0 status=ok[0m
+[00:01:35.026,000] [0m<inf> radar_perf: PERF tx_poll: n=4471 total_ms=13716 p50_bin=3 p95_bin=4 p99_bin=4 max_ms=5 over_budget_count=0 status=ok[0m
+[00:01:35.026,000] [0m<inf> radar_perf: PERF parsed_to_tx_poll: n=4381 total_ms=14477 p50_bin=3 p95_bin=4 p99_bin=4 max_ms=9 over_budget_count=0 status=ok[0m
+[00:01:35.026,000] [0m<inf> radar_perf: PERF rx_isr: n=66255 min_ns=9837 mean_ns=21018 max_ns=25412[0m
+[00:01:35.026,000] [0m<inf> radar_perf: PERF rx_parser: n=66255 min_ns=722 mean_ns=1203 max_ns=6875[0m
+[00:01:35.026,000] [0m<inf> radar_perf: PERF queue_wait: n=4381 total_ms=195 p50_bin=0 p95_bin=0 p99_bin=1 max_ms=1 over_budget_count=0 status=ok[0m
+[00:01:35.026,000] [0m<inf> radar_perf: PERF processing: n=4381 total_ms=681 p50_bin=0 p95_bin=1 p99_bin=1 max_ms=1 over_budget_count=0 status=ok[0m
+[00:01:35.026,000] [0m<inf> radar_perf: PERF rx_to_submit: n=4381 total_ms=876 p50_bin=0 p95_bin=1 p99_bin=1 max_ms=1 over_budget_count=0 status=ok[0m
+[00:01:35.026,000] [0m<inf> radar_perf: PERF estimator_predict: n=4380 min_ns=26981 mean_ns=33189 max_ns=353069[0m
+[00:01:35.026,000] [0m<inf> radar_perf: PERF estimator_correct: n=4380 min_ns=33578 mean_ns=35027 max_ns=344472[0m
+[00:01:35.026,000] [0m<inf> radar_perf: PERF queue rx: accepted=4471 rejected=0 observed_max_used=1[0m
+[00:01:35.026,000] [0m<inf> radar_perf: PERF queue tx: accepted=4471 rejected=0 observed_max_used=2[0m
+[00:01:35.026,000] [0m<inf> radar_perf: PERF tx: poll_completed=4471 encode_failed=0[0m
+[00:01:35.026,000] [0m<inf> radar_perf: PERF stack rx: unused_bytes=768 min_unused_bytes=768[0m
+[00:01:35.026,000] [0m<inf> radar_perf: PERF stack handler: unused_bytes=1360 min_unused_bytes=1360[0m
+[00:01:35.026,000] [0m<inf> radar_resources: PERF cpu: uptime_ms=95026 total_cycles=20367316812 busy_cycles=4450349341 idle_cycles=15916967471[0m
+[00:01:35.027,000] [0m<inf> radar_resources: PERF stack main: unused_bytes=520 min_unused_bytes=520[0m
+[00:01:35.027,000] [0m<inf> radar_perf: PERF stack tx: unused_bytes=672 min_unused_bytes=672[0m
+[00:01:40.027,000] [0m<inf> radar_perf: PERF summary: uptime_ms=100027 measurements=4631 without_submit=0 submit_failed=0 invalid_time=0[0m
+[00:01:40.027,000] [0m<inf> radar_perf: PERF rx_byte_wait: n=70035 total_ms=1970 p50_bin=0 p95_bin=0 p99_bin=1 max_ms=1 over_budget_count=0 status=ok[0m
+[00:01:40.027,000] [0m<inf> radar_perf: PERF tx_queue_wait: n=4725 total_ms=558 p50_bin=0 p95_bin=1 p99_bin=3 max_ms=6 over_budget_count=0 status=ok[0m
+[00:01:40.027,000] [0m<inf> radar_perf: PERF tx_poll: n=4725 total_ms=14493 p50_bin=3 p95_bin=4 p99_bin=4 max_ms=5 over_budget_count=0 status=ok[0m
+[00:01:40.027,000] [0m<inf> radar_perf: PERF parsed_to_tx_poll: n=4630 total_ms=15300 p50_bin=3 p95_bin=4 p99_bin=4 max_ms=9 over_budget_count=0 status=ok[0m
+[00:01:40.027,000] [0m<inf> radar_perf: PERF rx_isr: n=70035 min_ns=9837 mean_ns=21018 max_ns=25412[0m
+[00:01:40.027,000] [0m<inf> radar_perf: PERF rx_parser: n=70035 min_ns=722 mean_ns=1203 max_ns=6875[0m
+[00:01:40.027,000] [0m<inf> radar_perf: PERF queue_wait: n=4631 total_ms=207 p50_bin=0 p95_bin=0 p99_bin=1 max_ms=1 over_budget_count=0 status=ok[0m
+[00:01:40.027,000] [0m<inf> radar_perf: PERF processing: n=4631 total_ms=716 p50_bin=0 p95_bin=1 p99_bin=1 max_ms=1 over_budget_count=0 status=ok[0m
+[00:01:40.027,000] [0m<inf> radar_perf: PERF rx_to_submit: n=4631 total_ms=923 p50_bin=0 p95_bin=1 p99_bin=1 max_ms=1 over_budget_count=0 status=ok[0m
+[00:01:40.027,000] [0m<inf> radar_perf: PERF estimator_predict: n=4630 min_ns=26981 mean_ns=33194 max_ns=353069[0m
+[00:01:40.027,000] [0m<inf> radar_perf: PERF estimator_correct: n=4630 min_ns=33578 mean_ns=35018 max_ns=344472[0m
+[00:01:40.027,000] [0m<inf> radar_perf: PERF queue rx: accepted=4726 rejected=0 observed_max_used=1[0m
+[00:01:40.028,000] [0m<inf> radar_perf: PERF queue tx: accepted=4726 rejected=0 observed_max_used=2[0m
+[00:01:40.028,000] [0m<inf> radar_perf: PERF tx: poll_completed=4725 encode_failed=0[0m
+[00:01:40.028,000] [0m<inf> radar_perf: PERF stack rx: unused_bytes=768 min_unused_bytes=768[0m
+[00:01:40.028,000] [0m<inf> radar_perf: PERF stack handler: unused_bytes=1360 min_unused_bytes=1360[0m
+[00:01:40.028,000] [0m<inf> radar_resources: PERF cpu: uptime_ms=100028 total_cycles=21438593871 busy_cycles=4701726549 idle_cycles=16736867322[0m
+[00:01:40.028,000] [0m<inf> radar_resources: PERF stack main: unused_bytes=520 min_unused_bytes=520[0m
+[00:01:40.028,000] [0m<inf> radar_perf: PERF stack tx: unused_bytes=672 min_unused_bytes=672[0m
+[00:01:45.028,000] [0m<inf> radar_perf: PERF summary: uptime_ms=105028 measurements=4880 without_submit=0 submit_failed=0 invalid_time=0[0m
+[00:01:45.028,000] [0m<inf> radar_perf: PERF rx_byte_wait: n=73800 total_ms=2083 p50_bin=0 p95_bin=0 p99_bin=1 max_ms=1 over_budget_count=0 status=ok[0m
+[00:01:45.028,000] [0m<inf> radar_perf: PERF tx_queue_wait: n=4980 total_ms=584 p50_bin=0 p95_bin=1 p99_bin=3 max_ms=6 over_budget_count=0 status=ok[0m
+[00:01:45.028,000] [0m<inf> radar_perf: PERF tx_poll: n=4980 total_ms=15277 p50_bin=3 p95_bin=4 p99_bin=4 max_ms=5 over_budget_count=0 status=ok[0m
+[00:01:45.029,000] [0m<inf> radar_perf: PERF parsed_to_tx_poll: n=4880 total_ms=16122 p50_bin=3 p95_bin=4 p99_bin=4 max_ms=9 over_budget_count=0 status=ok[0m
+[00:01:45.029,000] [0m<inf> radar_perf: PERF rx_isr: n=73800 min_ns=9837 mean_ns=21018 max_ns=25412[0m
+[00:01:45.029,000] [0m<inf> radar_perf: PERF rx_parser: n=73800 min_ns=722 mean_ns=1203 max_ns=6875[0m
+[00:01:45.029,000] [0m<inf> radar_perf: PERF queue_wait: n=4880 total_ms=219 p50_bin=0 p95_bin=0 p99_bin=1 max_ms=1 over_budget_count=0 status=ok[0m
+[00:01:45.029,000] [0m<inf> radar_perf: PERF processing: n=4880 total_ms=751 p50_bin=0 p95_bin=1 p99_bin=1 max_ms=1 over_budget_count=0 status=ok[0m
+[00:01:45.029,000] [0m<inf> radar_perf: PERF rx_to_submit: n=4880 total_ms=970 p50_bin=0 p95_bin=1 p99_bin=1 max_ms=1 over_budget_count=0 status=ok[0m
+[00:01:45.029,000] [0m<inf> radar_perf: PERF estimator_predict: n=4879 min_ns=26981 mean_ns=33166 max_ns=353069[0m
+[00:01:45.029,000] [0m<inf> radar_perf: PERF estimator_correct: n=4879 min_ns=33578 mean_ns=35009 max_ns=344472[0m
+[00:01:45.029,000] [0m<inf> radar_perf: PERF queue rx: accepted=4980 rejected=0 observed_max_used=1[0m
+[00:01:45.029,000] [0m<inf> radar_perf: PERF queue tx: accepted=4980 rejected=0 observed_max_used=2[0m
+[00:01:45.029,000] [0m<inf> radar_perf: PERF tx: poll_completed=4980 encode_failed=0[0m
+[00:01:45.029,000] [0m<inf> radar_perf: PERF stack rx: unused_bytes=768 min_unused_bytes=768[0m
+[00:01:45.029,000] [0m<inf> radar_perf: PERF stack handler: unused_bytes=1360 min_unused_bytes=1360[0m
+[00:01:45.029,000] [0m<inf> radar_resources: PERF cpu: uptime_ms=105029 total_cycles=22509918543 busy_cycles=4953634215 idle_cycles=17556284328[0m
+[00:01:45.029,000] [0m<inf> radar_resources: PERF stack main: unused_bytes=520 min_unused_bytes=520[0m
+[00:01:45.029,000] [0m<inf> radar_perf: PERF stack tx: unused_bytes=672 min_unused_bytes=672[0m
+[00:01:50.030,000] [0m<inf> radar_perf: PERF summary: uptime_ms=110030 measurements=5130 without_submit=0 submit_failed=0 invalid_time=0[0m
+[00:01:50.030,000] [0m<inf> radar_perf: PERF rx_byte_wait: n=77580 total_ms=2190 p50_bin=0 p95_bin=0 p99_bin=1 max_ms=1 over_budget_count=0 status=ok[0m
+[00:01:50.030,000] [0m<inf> radar_perf: PERF tx_queue_wait: n=5235 total_ms=615 p50_bin=0 p95_bin=1 p99_bin=3 max_ms=6 over_budget_count=0 status=ok[0m
+[00:01:50.030,000] [0m<inf> radar_perf: PERF tx_poll: n=5235 total_ms=16058 p50_bin=3 p95_bin=4 p99_bin=4 max_ms=5 over_budget_count=0 status=ok[0m
+[00:01:50.030,000] [0m<inf> radar_perf: PERF parsed_to_tx_poll: n=5130 total_ms=16944 p50_bin=3 p95_bin=4 p99_bin=4 max_ms=9 over_budget_count=0 status=ok[0m
+[00:01:50.030,000] [0m<inf> radar_perf: PERF rx_isr: n=77580 min_ns=9837 mean_ns=21023 max_ns=25412[0m
+[00:01:50.030,000] [0m<inf> radar_perf: PERF rx_parser: n=77580 min_ns=722 mean_ns=1203 max_ns=6875[0m
+[00:01:50.030,000] [0m<inf> radar_perf: PERF queue_wait: n=5130 total_ms=230 p50_bin=0 p95_bin=0 p99_bin=1 max_ms=1 over_budget_count=0 status=ok[0m
+[00:01:50.030,000] [0m<inf> radar_perf: PERF processing: n=5130 total_ms=788 p50_bin=0 p95_bin=1 p99_bin=1 max_ms=1 over_budget_count=0 status=ok[0m
+[00:01:50.030,000] [0m<inf> radar_perf: PERF rx_to_submit: n=5130 total_ms=1018 p50_bin=0 p95_bin=1 p99_bin=1 max_ms=1 over_budget_count=0 status=ok[0m
+[00:01:50.030,000] [0m<inf> radar_perf: PERF estimator_predict: n=5129 min_ns=26981 mean_ns=33171 max_ns=353069[0m
+[00:01:50.030,000] [0m<inf> radar_perf: PERF estimator_correct: n=5129 min_ns=33578 mean_ns=35004 max_ns=344472[0m
+[00:01:50.030,000] [0m<inf> radar_perf: PERF queue rx: accepted=5235 rejected=0 observed_max_used=1[0m
+[00:01:50.030,000] [0m<inf> radar_perf: PERF queue tx: accepted=5235 rejected=0 observed_max_used=2[0m
+[00:01:50.030,000] [0m<inf> radar_perf: PERF tx: poll_completed=5235 encode_failed=0[0m
+[00:01:50.030,000] [0m<inf> radar_perf: PERF stack rx: unused_bytes=768 min_unused_bytes=768[0m
+[00:01:50.031,000] [0m<inf> radar_perf: PERF stack handler: unused_bytes=1360 min_unused_bytes=1360[0m
+[00:01:50.031,000] [0m<inf> radar_resources: PERF cpu: uptime_ms=110031 total_cycles=23581209512 busy_cycles=5205853577 idle_cycles=18375355935[0m
+[00:01:50.031,000] [0m<inf> radar_resources: PERF stack main: unused_bytes=520 min_unused_bytes=520[0m
+[00:01:50.031,000] [0m<inf> radar_perf: PERF stack tx: unused_bytes=672 min_unused_bytes=672[0m
+[00:01:55.031,000] [0m<inf> radar_perf: PERF summary: uptime_ms=115031 measurements=5380 without_submit=0 submit_failed=0 invalid_time=0[0m
+[00:01:55.031,000] [0m<inf> radar_perf: PERF rx_byte_wait: n=81360 total_ms=2314 p50_bin=0 p95_bin=0 p99_bin=1 max_ms=1 over_budget_count=0 status=ok[0m
+[00:01:55.031,000] [0m<inf> radar_perf: PERF tx_queue_wait: n=5490 total_ms=648 p50_bin=0 p95_bin=1 p99_bin=3 max_ms=6 over_budget_count=0 status=ok[0m
+[00:01:55.031,000] [0m<inf> radar_perf: PERF tx_poll: n=5490 total_ms=16837 p50_bin=3 p95_bin=4 p99_bin=4 max_ms=5 over_budget_count=0 status=ok[0m
+[00:01:55.031,000] [0m<inf> radar_perf: PERF parsed_to_tx_poll: n=5380 total_ms=17762 p50_bin=3 p95_bin=4 p99_bin=4 max_ms=9 over_budget_count=0 status=ok[0m
+[00:01:55.031,000] [0m<inf> radar_perf: PERF rx_isr: n=81360 min_ns=9837 mean_ns=21023 max_ns=25412[0m
+[00:01:55.031,000] [0m<inf> radar_perf: PERF rx_parser: n=81360 min_ns=722 mean_ns=1203 max_ns=6875[0m
+[00:01:55.031,000] [0m<inf> radar_perf: PERF queue_wait: n=5380 total_ms=237 p50_bin=0 p95_bin=0 p99_bin=1 max_ms=1 over_budget_count=0 status=ok[0m
+[00:01:55.032,000] [0m<inf> radar_perf: PERF processing: n=5380 total_ms=825 p50_bin=0 p95_bin=1 p99_bin=1 max_ms=1 over_budget_count=0 status=ok[0m
+[00:01:55.032,000] [0m<inf> radar_perf: PERF rx_to_submit: n=5380 total_ms=1062 p50_bin=0 p95_bin=1 p99_bin=1 max_ms=1 over_budget_count=0 status=ok[0m
+[00:01:55.032,000] [0m<inf> radar_perf: PERF estimator_predict: n=5379 min_ns=26981 mean_ns=33171 max_ns=353069[0m
+[00:01:55.032,000] [0m<inf> radar_perf: PERF estimator_correct: n=5379 min_ns=33578 mean_ns=35000 max_ns=344472[0m
+[00:01:55.032,000] [0m<inf> radar_perf: PERF queue rx: accepted=5490 rejected=0 observed_max_used=1[0m
+[00:01:55.032,000] [0m<inf> radar_perf: PERF queue tx: accepted=5490 rejected=0 observed_max_used=2[0m
+[00:01:55.032,000] [0m<inf> radar_perf: PERF tx: poll_completed=5490 encode_failed=0[0m
+[00:01:55.032,000] [0m<inf> radar_perf: PERF stack rx: unused_bytes=768 min_unused_bytes=768[0m
+[00:01:55.032,000] [0m<inf> radar_perf: PERF stack handler: unused_bytes=1360 min_unused_bytes=1360[0m
+[00:01:55.032,000] [0m<inf> radar_resources: PERF cpu: uptime_ms=115032 total_cycles=24652500444 busy_cycles=5458056120 idle_cycles=19194444324[0m
+[00:01:55.032,000] [0m<inf> radar_resources: PERF stack main: unused_bytes=520 min_unused_bytes=520[0m
+[00:01:55.032,000] [0m<inf> radar_perf: PERF stack tx: unused_bytes=672 min_unused_bytes=672[0m
+[00:02:00.032,000] [0m<inf> radar_perf: PERF summary: uptime_ms=120032 measurements=5630 without_submit=0 submit_failed=0 invalid_time=0[0m
+[00:02:00.033,000] [0m<inf> radar_perf: PERF rx_byte_wait: n=85142 total_ms=2419 p50_bin=0 p95_bin=0 p99_bin=1 max_ms=1 over_budget_count=0 status=ok[0m
+[00:02:00.033,000] [0m<inf> radar_perf: PERF tx_queue_wait: n=5745 total_ms=677 p50_bin=0 p95_bin=1 p99_bin=3 max_ms=6 over_budget_count=0 status=ok[0m
+[00:02:00.033,000] [0m<inf> radar_perf: PERF tx_poll: n=5745 total_ms=17617 p50_bin=3 p95_bin=4 p99_bin=4 max_ms=5 over_budget_count=0 status=ok[0m
+[00:02:00.033,000] [0m<inf> radar_perf: PERF parsed_to_tx_poll: n=5630 total_ms=18589 p50_bin=3 p95_bin=4 p99_bin=4 max_ms=9 over_budget_count=0 status=ok[0m
+[00:02:00.033,000] [0m<inf> radar_perf: PERF rx_isr: n=85143 min_ns=9837 mean_ns=21023 max_ns=25412[0m
+[00:02:00.033,000] [0m<inf> radar_perf: PERF rx_parser: n=85142 min_ns=722 mean_ns=1203 max_ns=6875[0m
+[00:02:00.033,000] [0m<inf> radar_perf: PERF queue_wait: n=5630 total_ms=246 p50_bin=0 p95_bin=0 p99_bin=1 max_ms=1 over_budget_count=0 status=ok[0m
+[00:02:00.033,000] [0m<inf> radar_perf: PERF processing: n=5630 total_ms=868 p50_bin=0 p95_bin=1 p99_bin=1 max_ms=1 over_budget_count=0 status=ok[0m
+[00:02:00.033,000] [0m<inf> radar_perf: PERF rx_to_submit: n=5630 total_ms=1114 p50_bin=0 p95_bin=1 p99_bin=1 max_ms=1 over_budget_count=0 status=ok[0m
+[00:02:00.033,000] [0m<inf> radar_perf: PERF estimator_predict: n=5629 min_ns=26981 mean_ns=33175 max_ns=353069[0m
+[00:02:00.033,000] [0m<inf> radar_perf: PERF estimator_correct: n=5629 min_ns=33578 mean_ns=35000 max_ns=344472[0m
+[00:02:00.033,000] [0m<inf> radar_perf: PERF queue rx: accepted=5745 rejected=0 observed_max_used=1[0m
+[00:02:00.033,000] [0m<inf> radar_perf: PERF queue tx: accepted=5745 rejected=0 observed_max_used=2[0m
+[00:02:00.033,000] [0m<inf> radar_perf: PERF tx: poll_completed=5745 encode_failed=0[0m
+[00:02:00.033,000] [0m<inf> radar_perf: PERF stack rx: unused_bytes=768 min_unused_bytes=768[0m
+[00:02:00.034,000] [0m<inf> radar_perf: PERF stack handler: unused_bytes=1360 min_unused_bytes=1360[0m
+[00:02:00.034,000] [0m<inf> radar_resources: PERF cpu: uptime_ms=120034 total_cycles=25723821651 busy_cycles=5710342693 idle_cycles=20013478958[0m
+[00:02:00.034,000] [0m<inf> radar_resources: PERF stack main: unused_bytes=520 min_unused_bytes=520[0m
+[00:02:00.034,000] [0m<inf> radar_perf: PERF stack tx: unused_bytes=672 min_unused_bytes=672[0m
+[00:02:05.034,000] [0m<inf> radar_perf: PERF summary: uptime_ms=125034 measurements=5881 without_submit=0 submit_failed=0 invalid_time=0[0m
+[00:02:05.034,000] [0m<inf> radar_perf: PERF rx_byte_wait: n=88935 total_ms=2536 p50_bin=0 p95_bin=0 p99_bin=1 max_ms=2 over_budget_count=0 status=ok[0m
+[00:02:05.034,000] [0m<inf> radar_perf: PERF tx_queue_wait: n=6001 total_ms=708 p50_bin=0 p95_bin=1 p99_bin=3 max_ms=6 over_budget_count=0 status=ok[0m
+[00:02:05.034,000] [0m<inf> radar_perf: PERF tx_poll: n=6001 total_ms=18408 p50_bin=3 p95_bin=4 p99_bin=4 max_ms=5 over_budget_count=0 status=ok[0m
+[00:02:05.034,000] [0m<inf> radar_perf: PERF parsed_to_tx_poll: n=5881 total_ms=19423 p50_bin=3 p95_bin=4 p99_bin=4 max_ms=9 over_budget_count=0 status=ok[0m
+[00:02:05.034,000] [0m<inf> radar_perf: PERF rx_isr: n=88935 min_ns=9837 mean_ns=21023 max_ns=25412[0m
+[00:02:05.034,000] [0m<inf> radar_perf: PERF rx_parser: n=88935 min_ns=722 mean_ns=1203 max_ns=6875[0m
+[00:02:05.034,000] [0m<inf> radar_perf: PERF queue_wait: n=5881 total_ms=254 p50_bin=0 p95_bin=0 p99_bin=1 max_ms=1 over_budget_count=0 status=ok[0m
+[00:02:05.035,000] [0m<inf> radar_perf: PERF processing: n=5881 total_ms=908 p50_bin=0 p95_bin=1 p99_bin=1 max_ms=1 over_budget_count=0 status=ok[0m
+[00:02:05.035,000] [0m<inf> radar_perf: PERF rx_to_submit: n=5881 total_ms=1162 p50_bin=0 p95_bin=1 p99_bin=1 max_ms=1 over_budget_count=0 status=ok[0m
+[00:02:05.035,000] [0m<inf> radar_perf: PERF estimator_predict: n=5880 min_ns=26981 mean_ns=33194 max_ns=353069[0m
+[00:02:05.035,000] [0m<inf> radar_perf: PERF estimator_correct: n=5880 min_ns=33578 mean_ns=34995 max_ns=344472[0m
+[00:02:05.035,000] [0m<inf> radar_perf: PERF queue rx: accepted=6001 rejected=0 observed_max_used=1[0m
+[00:02:05.035,000] [0m<inf> radar_perf: PERF queue tx: accepted=6001 rejected=0 observed_max_used=2[0m
+[00:02:05.035,000] [0m<inf> radar_perf: PERF tx: poll_completed=6001 encode_failed=0[0m
+[00:02:05.035,000] [0m<inf> radar_perf: PERF stack rx: unused_bytes=768 min_unused_bytes=768[0m
+[00:02:05.035,000] [0m<inf> radar_perf: PERF stack handler: unused_bytes=1360 min_unused_bytes=1360[0m
+[00:02:05.035,000] [0m<inf> radar_resources: PERF cpu: uptime_ms=125035 total_cycles=26795103669 busy_cycles=5963300720 idle_cycles=20831802949[0m
+[00:02:05.035,000] [0m<inf> radar_resources: PERF stack main: unused_bytes=520 min_unused_bytes=520[0m
+[00:02:05.035,000] [0m<inf> radar_perf: PERF stack tx: unused_bytes=672 min_unused_bytes=672[0m
+[00:02:10.035,000] [0m<inf> radar_perf: PERF summary: uptime_ms=130035 measurements=6131 without_submit=0 submit_failed=0 invalid_time=0[0m
+[00:02:10.036,000] [0m<inf> radar_perf: PERF rx_byte_wait: n=92715 total_ms=2655 p50_bin=0 p95_bin=0 p99_bin=1 max_ms=2 over_budget_count=0 status=ok[0m
+[00:02:10.036,000] [0m<inf> radar_perf: PERF tx_queue_wait: n=6256 total_ms=739 p50_bin=0 p95_bin=1 p99_bin=3 max_ms=6 over_budget_count=0 status=ok[0m
+[00:02:10.036,000] [0m<inf> radar_perf: PERF tx_poll: n=6256 total_ms=19195 p50_bin=3 p95_bin=4 p99_bin=4 max_ms=5 over_budget_count=0 status=ok[0m
+[00:02:10.036,000] [0m<inf> radar_perf: PERF parsed_to_tx_poll: n=6131 total_ms=20260 p50_bin=3 p95_bin=4 p99_bin=4 max_ms=9 over_budget_count=0 status=ok[0m
+[00:02:10.036,000] [0m<inf> radar_perf: PERF rx_isr: n=92715 min_ns=9837 mean_ns=21023 max_ns=25412[0m
+[00:02:10.036,000] [0m<inf> radar_perf: PERF rx_parser: n=92715 min_ns=722 mean_ns=1203 max_ns=6875[0m
+[00:02:10.036,000] [0m<inf> radar_perf: PERF queue_wait: n=6131 total_ms=268 p50_bin=0 p95_bin=0 p99_bin=1 max_ms=1 over_budget_count=0 status=ok[0m
+[00:02:10.036,000] [0m<inf> radar_perf: PERF processing: n=6131 total_ms=949 p50_bin=0 p95_bin=1 p99_bin=1 max_ms=1 over_budget_count=0 status=ok[0m
+[00:02:10.036,000] [0m<inf> radar_perf: PERF rx_to_submit: n=6131 total_ms=1217 p50_bin=0 p95_bin=1 p99_bin=1 max_ms=1 over_budget_count=0 status=ok[0m
+[00:02:10.036,000] [0m<inf> radar_perf: PERF estimator_predict: n=6130 min_ns=26981 mean_ns=33203 max_ns=353069[0m
+[00:02:10.036,000] [0m<inf> radar_perf: PERF estimator_correct: n=6130 min_ns=33578 mean_ns=34995 max_ns=344472[0m
+[00:02:10.036,000] [0m<inf> radar_perf: PERF queue rx: accepted=6256 rejected=0 observed_max_used=1[0m
+[00:02:10.036,000] [0m<inf> radar_perf: PERF queue tx: accepted=6256 rejected=0 observed_max_used=2[0m
+[00:02:10.036,000] [0m<inf> radar_perf: PERF tx: poll_completed=6256 encode_failed=0[0m
+[00:02:10.036,000] [0m<inf> radar_perf: PERF stack rx: unused_bytes=768 min_unused_bytes=768[0m
+[00:02:10.036,000] [0m<inf> radar_perf: PERF stack handler: unused_bytes=1360 min_unused_bytes=1360[0m
+[00:02:10.036,000] [0m<inf> radar_resources: PERF cpu: uptime_ms=130036 total_cycles=27866391069 busy_cycles=6215530251 idle_cycles=21650860818[0m
+[00:02:10.037,000] [0m<inf> radar_resources: PERF stack main: unused_bytes=520 min_unused_bytes=520[0m
+[00:02:10.037,000] [0m<inf> radar_perf: PERF stack tx: unused_bytes=672 min_unused_bytes=672[0m
+[00:02:15.037,000] [0m<inf> radar_perf: PERF summary: uptime_ms=135037 measurements=6370 without_submit=0 submit_failed=0 invalid_time=0[0m
+[00:02:15.037,000] [0m<inf> radar_perf: PERF rx_byte_wait: n=96330 total_ms=2757 p50_bin=0 p95_bin=0 p99_bin=1 max_ms=2 over_budget_count=0 status=ok[0m
+[00:02:15.037,000] [0m<inf> radar_perf: PERF tx_queue_wait: n=6500 total_ms=781 p50_bin=0 p95_bin=1 p99_bin=3 max_ms=6 over_budget_count=0 status=ok[0m
+[00:02:15.037,000] [0m<inf> radar_perf: PERF tx_poll: n=6500 total_ms=19945 p50_bin=3 p95_bin=4 p99_bin=4 max_ms=5 over_budget_count=0 status=ok[0m
+[00:02:15.037,000] [0m<inf> radar_perf: PERF parsed_to_tx_poll: n=6370 total_ms=21069 p50_bin=3 p95_bin=4 p99_bin=4 max_ms=9 over_budget_count=0 status=ok[0m
+[00:02:15.037,000] [0m<inf> radar_perf: PERF rx_isr: n=96330 min_ns=9837 mean_ns=21018 max_ns=25412[0m
+[00:02:15.037,000] [0m<inf> radar_perf: PERF rx_parser: n=96330 min_ns=722 mean_ns=1203 max_ns=6875[0m
+[00:02:15.037,000] [0m<inf> radar_perf: PERF queue_wait: n=6370 total_ms=279 p50_bin=0 p95_bin=0 p99_bin=1 max_ms=1 over_budget_count=0 status=ok[0m
+[00:02:15.037,000] [0m<inf> radar_perf: PERF processing: n=6370 total_ms=987 p50_bin=0 p95_bin=1 p99_bin=1 max_ms=2 over_budget_count=0 status=ok[0m
+[00:02:15.037,000] [0m<inf> radar_perf: PERF rx_to_submit: n=6370 total_ms=1266 p50_bin=0 p95_bin=1 p99_bin=1 max_ms=2 over_budget_count=0 status=ok[0m
+[00:02:15.037,000] [0m<inf> radar_perf: PERF estimator_predict: n=6369 min_ns=26981 mean_ns=33273 max_ns=353069[0m
+[00:02:15.037,000] [0m<inf> radar_perf: PERF estimator_correct: n=6369 min_ns=33578 mean_ns=35111 max_ns=345060[0m
+[00:02:15.037,000] [0m<inf> radar_perf: PERF queue rx: accepted=6500 rejected=0 observed_max_used=1[0m
+[00:02:15.038,000] [0m<inf> radar_perf: PERF queue tx: accepted=6500 rejected=0 observed_max_used=2[0m
+[00:02:15.038,000] [0m<inf> radar_perf: PERF tx: poll_completed=6500 encode_failed=0[0m
+[00:02:15.038,000] [0m<inf> radar_perf: PERF stack rx: unused_bytes=768 min_unused_bytes=768[0m
+[00:02:15.038,000] [0m<inf> radar_perf: PERF stack handler: unused_bytes=1360 min_unused_bytes=1360[0m
+[00:02:15.038,000] [0m<inf> radar_resources: PERF cpu: uptime_ms=135038 total_cycles=28938046675 busy_cycles=6460295474 idle_cycles=22477751201[0m
+[00:02:15.038,000] [0m<inf> radar_resources: PERF stack main: unused_bytes=520 min_unused_bytes=520[0m
+[00:02:15.038,000] [0m<inf> radar_perf: PERF stack tx: unused_bytes=672 min_unused_bytes=672[0m
+[00:02:20.038,000] [0m<inf> radar_perf: PERF summary: uptime_ms=140038 measurements=6616 without_submit=0 submit_failed=0 invalid_time=0[0m
+[00:02:20.038,000] [0m<inf> radar_perf: PERF rx_byte_wait: n=100050 total_ms=2862 p50_bin=0 p95_bin=0 p99_bin=1 max_ms=2 over_budget_count=0 status=ok[0m
+[00:02:20.038,000] [0m<inf> radar_perf: PERF tx_queue_wait: n=6751 total_ms=823 p50_bin=0 p95_bin=1 p99_bin=3 max_ms=6 over_budget_count=0 status=ok[0m
+[00:02:20.038,000] [0m<inf> radar_perf: PERF tx_poll: n=6751 total_ms=20716 p50_bin=3 p95_bin=4 p99_bin=4 max_ms=5 over_budget_count=0 status=ok[0m
+[00:02:20.039,000] [0m<inf> radar_perf: PERF parsed_to_tx_poll: n=6616 total_ms=21885 p50_bin=3 p95_bin=4 p99_bin=4 max_ms=9 over_budget_count=0 status=ok[0m
+[00:02:20.039,000] [0m<inf> radar_perf: PERF rx_isr: n=100050 min_ns=9837 mean_ns=21023 max_ns=25412[0m
+[00:02:20.039,000] [0m<inf> radar_perf: PERF rx_parser: n=100050 min_ns=722 mean_ns=1203 max_ns=6875[0m
+[00:02:20.039,000] [0m<inf> radar_perf: PERF queue_wait: n=6616 total_ms=287 p50_bin=0 p95_bin=0 p99_bin=1 max_ms=1 over_budget_count=0 status=ok[0m
+[00:02:20.039,000] [0m<inf> radar_perf: PERF processing: n=6616 total_ms=1018 p50_bin=0 p95_bin=1 p99_bin=1 max_ms=2 over_budget_count=0 status=ok[0m
+[00:02:20.039,000] [0m<inf> radar_perf: PERF rx_to_submit: n=6616 total_ms=1305 p50_bin=0 p95_bin=1 p99_bin=1 max_ms=2 over_budget_count=0 status=ok[0m
+[00:02:20.039,000] [0m<inf> radar_perf: PERF estimator_predict: n=6615 min_ns=26981 mean_ns=33319 max_ns=353069[0m
+[00:02:20.039,000] [0m<inf> radar_perf: PERF estimator_correct: n=6615 min_ns=33578 mean_ns=35217 max_ns=345060[0m
+[00:02:20.039,000] [0m<inf> radar_perf: PERF queue rx: accepted=6751 rejected=0 observed_max_used=1[0m
+[00:02:20.039,000] [0m<inf> radar_perf: PERF queue tx: accepted=6751 rejected=0 observed_max_used=2[0m
+[00:02:20.039,000] [0m<inf> radar_perf: PERF tx: poll_completed=6751 encode_failed=0[0m
+[00:02:20.039,000] [0m<inf> radar_perf: PERF stack rx: unused_bytes=768 min_unused_bytes=768[0m
+[00:02:20.039,000] [0m<inf> radar_perf: PERF stack handler: unused_bytes=1360 min_unused_bytes=1360[0m
+[00:02:20.039,000] [0m<inf> radar_resources: PERF cpu: uptime_ms=140039 total_cycles=30009476860 busy_cycles=6709240929 idle_cycles=23300235931[0m
+[00:02:20.039,000] [0m<inf> radar_resources: PERF stack main: unused_bytes=520 min_unused_bytes=520[0m
+[00:02:20.039,000] [0m<inf> radar_perf: PERF stack tx: unused_bytes=672 min_unused_bytes=672[0m
+[00:02:25.040,000] [0m<inf> radar_perf: PERF summary: uptime_ms=145040 measurements=6848 without_submit=0 submit_failed=0 invalid_time=0[0m
+[00:02:25.040,000] [0m<inf> radar_perf: PERF rx_byte_wait: n=103560 total_ms=2955 p50_bin=0 p95_bin=0 p99_bin=1 max_ms=2 over_budget_count=0 status=ok[0m
+[00:02:25.040,000] [0m<inf> radar_perf: PERF tx_queue_wait: n=6987 total_ms=851 p50_bin=0 p95_bin=1 p99_bin=3 max_ms=6 over_budget_count=0 status=ok[0m
+[00:02:25.040,000] [0m<inf> radar_perf: PERF tx_poll: n=6987 total_ms=21443 p50_bin=3 p95_bin=4 p99_bin=4 max_ms=5 over_budget_count=0 status=ok[0m
+[00:02:25.040,000] [0m<inf> radar_perf: PERF parsed_to_tx_poll: n=6847 total_ms=22659 p50_bin=3 p95_bin=4 p99_bin=4 max_ms=9 over_budget_count=0 status=ok[0m
+[00:02:25.040,000] [0m<inf> radar_perf: PERF rx_isr: n=103560 min_ns=9837 mean_ns=21018 max_ns=25412[0m
+[00:02:25.040,000] [0m<inf> radar_perf: PERF rx_parser: n=103560 min_ns=722 mean_ns=1203 max_ns=6875[0m
+[00:02:25.040,000] [0m<inf> radar_perf: PERF queue_wait: n=6848 total_ms=302 p50_bin=0 p95_bin=0 p99_bin=1 max_ms=1 over_budget_count=0 status=ok[0m
+[00:02:25.040,000] [0m<inf> radar_perf: PERF processing: n=6848 total_ms=1056 p50_bin=0 p95_bin=1 p99_bin=1 max_ms=2 over_budget_count=0 status=ok[0m
+[00:02:25.040,000] [0m<inf> radar_perf: PERF rx_to_submit: n=6848 total_ms=1358 p50_bin=0 p95_bin=1 p99_bin=1 max_ms=2 over_budget_count=0 status=ok[0m
+[00:02:25.040,000] [0m<inf> radar_perf: PERF estimator_predict: n=6847 min_ns=26981 mean_ns=33268 max_ns=353069[0m
+[00:02:25.040,000] [0m<inf> radar_perf: PERF estimator_correct: n=6847 min_ns=33439 mean_ns=35175 max_ns=345060[0m
+[00:02:25.040,000] [0m<inf> radar_perf: PERF queue rx: accepted=6988 rejected=0 observed_max_used=1[0m
+[00:02:25.040,000] [0m<inf> radar_perf: PERF queue tx: accepted=6988 rejected=0 observed_max_used=2[0m
+[00:02:25.040,000] [0m<inf> radar_perf: PERF tx: poll_completed=6987 encode_failed=0[0m
+[00:02:25.040,000] [0m<inf> radar_perf: PERF stack rx: unused_bytes=768 min_unused_bytes=768[0m
+[00:02:25.041,000] [0m<inf> radar_perf: PERF stack handler: unused_bytes=1360 min_unused_bytes=1360[0m
+[00:02:25.041,000] [0m<inf> radar_resources: PERF cpu: uptime_ms=145041 total_cycles=31081382954 busy_cycles=6946514193 idle_cycles=24134868761[0m
+[00:02:25.041,000] [0m<inf> radar_resources: PERF stack main: unused_bytes=520 min_unused_bytes=520[0m
+[00:02:25.041,000] [0m<inf> radar_perf: PERF stack tx: unused_bytes=672 min_unused_bytes=672[0m
+[00:02:30.041,000] [0m<inf> radar_perf: PERF summary: uptime_ms=150041 measurements=7097 without_submit=0 submit_failed=0 invalid_time=0[0m
+[00:02:30.041,000] [0m<inf> radar_perf: PERF rx_byte_wait: n=107325 total_ms=3065 p50_bin=0 p95_bin=0 p99_bin=1 max_ms=2 over_budget_count=0 status=ok[0m
+[00:02:30.041,000] [0m<inf> radar_perf: PERF tx_queue_wait: n=7242 total_ms=879 p50_bin=0 p95_bin=1 p99_bin=3 max_ms=6 over_budget_count=0 status=ok[0m
+[00:02:30.041,000] [0m<inf> radar_perf: PERF tx_poll: n=7242 total_ms=22232 p50_bin=3 p95_bin=4 p99_bin=4 max_ms=5 over_budget_count=0 status=ok[0m
+[00:02:30.041,000] [0m<inf> radar_perf: PERF parsed_to_tx_poll: n=7097 total_ms=23487 p50_bin=3 p95_bin=4 p99_bin=4 max_ms=9 over_budget_count=0 status=ok[0m
+[00:02:30.041,000] [0m<inf> radar_perf: PERF rx_isr: n=107325 min_ns=9837 mean_ns=21018 max_ns=25412[0m
+[00:02:30.041,000] [0m<inf> radar_perf: PERF rx_parser: n=107325 min_ns=722 mean_ns=1203 max_ns=6875[0m
+[00:02:30.041,000] [0m<inf> radar_perf: PERF queue_wait: n=7097 total_ms=313 p50_bin=0 p95_bin=0 p99_bin=1 max_ms=1 over_budget_count=0 status=ok[0m
+[00:02:30.042,000] [0m<inf> radar_perf: PERF processing: n=7097 total_ms=1090 p50_bin=0 p95_bin=1 p99_bin=1 max_ms=2 over_budget_count=0 status=ok[0m
+[00:02:30.042,000] [0m<inf> radar_perf: PERF rx_to_submit: n=7097 total_ms=1403 p50_bin=0 p95_bin=1 p99_bin=1 max_ms=2 over_budget_count=0 status=ok[0m
+[00:02:30.042,000] [0m<inf> radar_perf: PERF estimator_predict: n=7096 min_ns=26981 mean_ns=33250 max_ns=353069[0m
+[00:02:30.042,000] [0m<inf> radar_perf: PERF estimator_correct: n=7096 min_ns=33439 mean_ns=35162 max_ns=345060[0m
+[00:02:30.042,000] [0m<inf> radar_perf: PERF queue rx: accepted=7242 rejected=0 observed_max_used=1[0m
+[00:02:30.042,000] [0m<inf> radar_perf: PERF queue tx: accepted=7242 rejected=0 observed_max_used=2[0m
+[00:02:30.042,000] [0m<inf> radar_perf: PERF tx: poll_completed=7242 encode_failed=0[0m
+[00:02:30.042,000] [0m<inf> radar_perf: PERF stack rx: unused_bytes=768 min_unused_bytes=768[0m
+[00:02:30.042,000] [0m<inf> radar_perf: PERF stack handler: unused_bytes=1360 min_unused_bytes=1360[0m
+[00:02:30.042,000] [0m<inf> radar_resources: PERF cpu: uptime_ms=150042 total_cycles=32152707196 busy_cycles=7198341125 idle_cycles=24954366071[0m
+[00:02:30.042,000] [0m<inf> radar_resources: PERF stack main: unused_bytes=520 min_unused_bytes=520[0m
+[00:02:30.042,000] [0m<inf> radar_perf: PERF stack tx: unused_bytes=672 min_unused_bytes=672[0m
+[00:02:35.042,000] [0m<inf> radar_perf: PERF summary: uptime_ms=155042 measurements=7344 without_submit=0 submit_failed=0 invalid_time=0[0m
+[00:02:35.043,000] [0m<inf> radar_perf: PERF rx_byte_wait: n=111060 total_ms=3188 p50_bin=0 p95_bin=0 p99_bin=1 max_ms=2 over_budget_count=0 status=ok[0m
+[00:02:35.043,000] [0m<inf> radar_perf: PERF tx_queue_wait: n=7494 total_ms=914 p50_bin=0 p95_bin=1 p99_bin=3 max_ms=6 over_budget_count=0 status=ok[0m
+[00:02:35.043,000] [0m<inf> radar_perf: PERF tx_poll: n=7494 total_ms=23000 p50_bin=3 p95_bin=4 p99_bin=4 max_ms=5 over_budget_count=0 status=ok[0m
+[00:02:35.043,000] [0m<inf> radar_perf: PERF parsed_to_tx_poll: n=7344 total_ms=24301 p50_bin=3 p95_bin=4 p99_bin=4 max_ms=9 over_budget_count=0 status=ok[0m
+[00:02:35.043,000] [0m<inf> radar_perf: PERF rx_isr: n=111060 min_ns=9837 mean_ns=21018 max_ns=25412[0m
+[00:02:35.043,000] [0m<inf> radar_perf: PERF rx_parser: n=111060 min_ns=722 mean_ns=1203 max_ns=6875[0m
+[00:02:35.043,000] [0m<inf> radar_perf: PERF queue_wait: n=7344 total_ms=324 p50_bin=0 p95_bin=0 p99_bin=1 max_ms=1 over_budget_count=0 status=ok[0m
+[00:02:35.043,000] [0m<inf> radar_perf: PERF processing: n=7344 total_ms=1133 p50_bin=0 p95_bin=1 p99_bin=1 max_ms=2 over_budget_count=0 status=ok[0m
+[00:02:35.043,000] [0m<inf> radar_perf: PERF rx_to_submit: n=7344 total_ms=1457 p50_bin=0 p95_bin=1 p99_bin=1 max_ms=2 over_budget_count=0 status=ok[0m
+[00:02:35.043,000] [0m<inf> radar_perf: PERF estimator_predict: n=7343 min_ns=26981 mean_ns=33240 max_ns=353069[0m
+[00:02:35.043,000] [0m<inf> radar_perf: PERF estimator_correct: n=7343 min_ns=33439 mean_ns=35143 max_ns=345060[0m
+[00:02:35.043,000] [0m<inf> radar_perf: PERF queue rx: accepted=7494 rejected=0 observed_max_used=1[0m
+[00:02:35.043,000] [0m<inf> radar_perf: PERF queue tx: accepted=7494 rejected=0 observed_max_used=2[0m
+[00:02:35.043,000] [0m<inf> radar_perf: PERF tx: poll_completed=7494 encode_failed=0[0m
+[00:02:35.043,000] [0m<inf> radar_perf: PERF stack rx: unused_bytes=768 min_unused_bytes=768[0m
+[00:02:35.043,000] [0m<inf> radar_perf: PERF stack handler: unused_bytes=1360 min_unused_bytes=1360[0m
+[00:02:35.043,000] [0m<inf> radar_resources: PERF cpu: uptime_ms=155043 total_cycles=33224100404 busy_cycles=7448148898 idle_cycles=25775951506[0m
+[00:02:35.044,000] [0m<inf> radar_resources: PERF stack main: unused_bytes=520 min_unused_bytes=520[0m
+[00:02:35.044,000] [0m<inf> radar_perf: PERF stack tx: unused_bytes=672 min_unused_bytes=672[0m
+[00:02:40.044,000] [0m<inf> radar_perf: PERF summary: uptime_ms=160044 measurements=7592 without_submit=0 submit_failed=0 invalid_time=0[0m
+[00:02:40.044,000] [0m<inf> radar_perf: PERF rx_byte_wait: n=114810 total_ms=3302 p50_bin=0 p95_bin=0 p99_bin=1 max_ms=2 over_budget_count=0 status=ok[0m
+[00:02:40.044,000] [0m<inf> radar_perf: PERF tx_queue_wait: n=7747 total_ms=940 p50_bin=0 p95_bin=1 p99_bin=3 max_ms=6 over_budget_count=0 status=ok[0m
+[00:02:40.044,000] [0m<inf> radar_perf: PERF tx_poll: n=7747 total_ms=23772 p50_bin=3 p95_bin=4 p99_bin=4 max_ms=5 over_budget_count=0 status=ok[0m
+[00:02:40.044,000] [0m<inf> radar_perf: PERF parsed_to_tx_poll: n=7592 total_ms=25118 p50_bin=3 p95_bin=4 p99_bin=4 max_ms=9 over_budget_count=0 status=ok[0m
+[00:02:40.044,000] [0m<inf> radar_perf: PERF rx_isr: n=114810 min_ns=9837 mean_ns=21018 max_ns=25412[0m
+[00:02:40.044,000] [0m<inf> radar_perf: PERF rx_parser: n=114810 min_ns=722 mean_ns=1203 max_ns=6875[0m
+[00:02:40.044,000] [0m<inf> radar_perf: PERF queue_wait: n=7592 total_ms=334 p50_bin=0 p95_bin=0 p99_bin=1 max_ms=1 over_budget_count=0 status=ok[0m
+[00:02:40.044,000] [0m<inf> radar_perf: PERF processing: n=7592 total_ms=1176 p50_bin=0 p95_bin=1 p99_bin=1 max_ms=2 over_budget_count=0 status=ok[0m
+[00:02:40.044,000] [0m<inf> radar_perf: PERF rx_to_submit: n=7592 total_ms=1510 p50_bin=0 p95_bin=1 p99_bin=1 max_ms=2 over_budget_count=0 status=ok[0m
+[00:02:40.044,000] [0m<inf> radar_perf: PERF estimator_predict: n=7591 min_ns=26981 mean_ns=33231 max_ns=353069[0m
+[00:02:40.044,000] [0m<inf> radar_perf: PERF estimator_correct: n=7591 min_ns=33439 mean_ns=35129 max_ns=345060[0m
+[00:02:40.044,000] [0m<inf> radar_perf: PERF queue rx: accepted=7747 rejected=0 observed_max_used=1[0m
+[00:02:40.045,000] [0m<inf> radar_perf: PERF queue tx: accepted=7747 rejected=0 observed_max_used=2[0m
+[00:02:40.045,000] [0m<inf> radar_perf: PERF tx: poll_completed=7747 encode_failed=0[0m
+[00:02:40.045,000] [0m<inf> radar_perf: PERF stack rx: unused_bytes=768 min_unused_bytes=768[0m
+[00:02:40.045,000] [0m<inf> radar_perf: PERF stack handler: unused_bytes=1360 min_unused_bytes=1360[0m
+[00:02:40.045,000] [0m<inf> radar_resources: PERF cpu: uptime_ms=160045 total_cycles=34295453034 busy_cycles=7698788932 idle_cycles=26596664102[0m
+[00:02:40.045,000] [0m<inf> radar_resources: PERF stack main: unused_bytes=520 min_unused_bytes=520[0m
+[00:02:40.045,000] [0m<inf> radar_perf: PERF stack tx: unused_bytes=672 min_unused_bytes=672[0m
+[00:02:45.045,000] [0m<inf> radar_perf: PERF summary: uptime_ms=165045 measurements=7837 without_submit=0 submit_failed=0 invalid_time=0[0m
+[00:02:45.045,000] [0m<inf> radar_perf: PERF rx_byte_wait: n=118521 total_ms=3412 p50_bin=0 p95_bin=0 p99_bin=1 max_ms=2 over_budget_count=0 status=ok[0m
+[00:02:45.045,000] [0m<inf> radar_perf: PERF tx_queue_wait: n=7997 total_ms=963 p50_bin=0 p95_bin=1 p99_bin=3 max_ms=6 over_budget_count=0 status=ok[0m
+[00:02:45.046,000] [0m<inf> radar_perf: PERF tx_poll: n=7997 total_ms=24542 p50_bin=3 p95_bin=4 p99_bin=4 max_ms=5 over_budget_count=0 status=ok[0m
+[00:02:45.046,000] [0m<inf> radar_perf: PERF parsed_to_tx_poll: n=7837 total_ms=25924 p50_bin=3 p95_bin=4 p99_bin=4 max_ms=9 over_budget_count=0 status=ok[0m
+[00:02:45.046,000] [0m<inf> radar_perf: PERF rx_isr: n=118521 min_ns=9837 mean_ns=21018 max_ns=25412[0m
+[00:02:45.046,000] [0m<inf> radar_perf: PERF rx_parser: n=118521 min_ns=722 mean_ns=1203 max_ns=6875[0m
+[00:02:45.046,000] [0m<inf> radar_perf: PERF queue_wait: n=7837 total_ms=347 p50_bin=0 p95_bin=0 p99_bin=1 max_ms=1 over_budget_count=0 status=ok[0m
+[00:02:45.046,000] [0m<inf> radar_perf: PERF processing: n=7837 total_ms=1209 p50_bin=0 p95_bin=1 p99_bin=1 max_ms=2 over_budget_count=0 status=ok[0m
+[00:02:45.046,000] [0m<inf> radar_perf: PERF rx_to_submit: n=7837 total_ms=1556 p50_bin=0 p95_bin=1 p99_bin=1 max_ms=2 over_budget_count=0 status=ok[0m
+[00:02:45.046,000] [0m<inf> radar_perf: PERF estimator_predict: n=7836 min_ns=26981 mean_ns=33222 max_ns=353069[0m
+[00:02:45.046,000] [0m<inf> radar_perf: PERF estimator_correct: n=7836 min_ns=33439 mean_ns=35106 max_ns=345060[0m
+[00:02:45.046,000] [0m<inf> radar_perf: PERF queue rx: accepted=7997 rejected=0 observed_max_used=1[0m
+[00:02:45.046,000] [0m<inf> radar_perf: PERF queue tx: accepted=7997 rejected=0 observed_max_used=2[0m
+[00:02:45.046,000] [0m<inf> radar_perf: PERF tx: poll_completed=7997 encode_failed=0[0m
+[00:02:45.046,000] [0m<inf> radar_perf: PERF stack rx: unused_bytes=768 min_unused_bytes=768[0m
+[00:02:45.046,000] [0m<inf> radar_perf: PERF stack handler: unused_bytes=1360 min_unused_bytes=1360[0m
+[00:02:45.046,000] [0m<inf> radar_resources: PERF cpu: uptime_ms=165046 total_cycles=35366920777 busy_cycles=7946912979 idle_cycles=27420007798[0m
+[00:02:45.046,000] [0m<inf> radar_resources: PERF stack main: unused_bytes=512 min_unused_bytes=512[0m
+[00:02:45.047,000] [0m<inf> radar_perf: PERF stack tx: unused_bytes=672 min_unused_bytes=672[0m

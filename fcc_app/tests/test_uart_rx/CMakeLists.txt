@@ -20,7 +20,18 @@ function(add_rx_target target policy)
         CONFIG_RADAR_FRAME_RX_TIMEOUT_MS=${RADAR_FRAME_RX_TIMEOUT_MS})
     # Keep assertions active in Release builds too.
     target_compile_options(${target} PRIVATE -Wall -Wextra -Werror -UNDEBUG)
+    if(PERF_TEST_ENABLED)
+        target_sources(${target} PRIVATE ../../src/diagnostics/perf_monitor.c)
+        target_include_directories(${target} PRIVATE ../test_perf_monitor/include)
+        target_compile_definitions(${target} PRIVATE CONFIG_RADAR_PERF_MONITOR=1 TEST_RX_TIMING=1)
+        target_link_libraries(${target} PRIVATE Threads::Threads)
+    endif()
 endfunction()
+
+option(PERF_TEST_ENABLED "Exercise optional performance hooks" OFF)
+if(PERF_TEST_ENABLED)
+    find_package(Threads REQUIRED)
+endif()
 
 # Keep the existing drain executable name for scripts and editor tasks.
 add_rx_target(uart_rx_tests CONFIG_RADAR_RX_OVERFLOW_DRAIN)
@@ -64,3 +75,12 @@ foreach(test_name IN ITEMS test_discard_drops_complete_frame_and_recovers
                            test_discard_drops_completable_partial_frame)
     add_test(NAME ${test_name} COMMAND uart_rx_discard_tests ${test_name})
 endforeach()
+
+if(PERF_TEST_ENABLED)
+    foreach(policy IN ITEMS uart_rx_tests uart_rx_discard_tests)
+        add_test(NAME ${policy}_capture_deferred COMMAND ${policy} test_perf_capture_deferred_and_loss_visible)
+        add_test(NAME ${policy}_cycle_wrap COMMAND ${policy} test_perf_cycle_wrap_and_service_gap)
+    endforeach()
+    add_test(NAME perf_drain_alignment COMMAND uart_rx_tests test_perf_residence_overflow_alignment)
+    add_test(NAME perf_discard_alignment COMMAND uart_rx_discard_tests test_perf_residence_overflow_alignment)
+endif()

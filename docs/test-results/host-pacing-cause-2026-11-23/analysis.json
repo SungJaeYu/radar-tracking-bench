@@ -1,0 +1,157 @@
+{
+  "cause_scope": "Host pacing delay and deadline skipping reproduced; original five historical omissions lack stage-level timing.",
+  "original_run_unsent": 5,
+  "instrumented_run": {
+    "duration_s": 120,
+    "sent": 5999,
+    "unsent": 1,
+    "board_qualification": {
+      "status": "passed",
+      "reasons": []
+    },
+    "requested_profile_qualification": {
+      "status": "inconclusive",
+      "reasons": [
+        "requested 50Hz scheduled slots not fully delivered"
+      ]
+    },
+    "skipped_event_details": [
+      {
+        "previous_sensor_ms": 16320,
+        "next_sensor_ms": 16360,
+        "missing": 1,
+        "gap_ms": 46.94891604594886,
+        "slow_calls_overlapping": [
+          {
+            "name": "sleep",
+            "start_s": 610896.151497083,
+            "end_s": 610896.154409625,
+            "wall_ms": 2.912542,
+            "thread_cpu_ms": 0.02125,
+            "process_cpu_ms": 0.274,
+            "thread_id": 8307941760,
+            "detail": 0.001
+          },
+          {
+            "name": "sleep",
+            "start_s": 610896.1545585,
+            "end_s": 610896.157856416,
+            "wall_ms": 3.297916,
+            "thread_cpu_ms": 0.029083,
+            "process_cpu_ms": 0.032,
+            "thread_id": 8307941760,
+            "detail": 0.001
+          },
+          {
+            "name": "data.in_waiting",
+            "start_s": 610896.17114075,
+            "end_s": 610896.185097958,
+            "wall_ms": 13.957208,
+            "thread_cpu_ms": 0.080458,
+            "process_cpu_ms": 0.077,
+            "thread_id": 8307941760,
+            "detail": null
+          },
+          {
+            "name": "sleep",
+            "start_s": 610896.189032958,
+            "end_s": 610896.1979435,
+            "wall_ms": 8.910542,
+            "thread_cpu_ms": 0.019917,
+            "process_cpu_ms": 0.022,
+            "thread_id": 8307941760,
+            "detail": 0
+          }
+        ]
+      }
+    ],
+    "max_load_sleep_ms": 21.606334,
+    "max_serial_write_ms": 4.147541,
+    "observer_noop_mean_us": 1.4959292
+  },
+  "host_only_control": {
+    "duration_s": 60,
+    "sent_slots": 2997,
+    "unsent": 3,
+    "maximum_sleep": {
+      "start_s": 616323.657448375,
+      "end_s": 616323.702356208,
+      "requested_ms": 1.0,
+      "wall_ms": 44.907832983881235,
+      "thread_cpu_ms": 0.035167
+    },
+    "skip_events": [
+      {
+        "previous_sensor_ms": 32960,
+        "next_sensor_ms": 33000,
+        "missing": 1,
+        "sleep_calls": [
+          {
+            "start_s": 616323.657448375,
+            "end_s": 616323.702356208,
+            "requested_ms": 1.0,
+            "wall_ms": 44.907832983881235,
+            "thread_cpu_ms": 0.035167
+          }
+        ]
+      },
+      {
+        "previous_sensor_ms": 38160,
+        "next_sensor_ms": 38200,
+        "missing": 1,
+        "sleep_calls": [
+          {
+            "start_s": 616328.85602775,
+            "end_s": 616328.858647458,
+            "requested_ms": 1.0,
+            "wall_ms": 2.619708073325455,
+            "thread_cpu_ms": 0.020917
+          },
+          {
+            "start_s": 616328.861241291,
+            "end_s": 616328.864762833,
+            "requested_ms": 1.0,
+            "wall_ms": 3.52154194843024,
+            "thread_cpu_ms": 0.031542
+          },
+          {
+            "start_s": 616328.864786833,
+            "end_s": 616328.894698583,
+            "requested_ms": 1.0,
+            "wall_ms": 29.91175011266023,
+            "thread_cpu_ms": 0.026417
+          }
+        ]
+      },
+      {
+        "previous_sensor_ms": 55720,
+        "next_sensor_ms": 55760,
+        "missing": 1,
+        "sleep_calls": [
+          {
+            "start_s": 616346.427510041,
+            "end_s": 616346.434408333,
+            "requested_ms": 1.0,
+            "wall_ms": 6.898291991092265,
+            "thread_cpu_ms": 0.031834
+          },
+          {
+            "start_s": 616346.434432458,
+            "end_s": 616346.462466708,
+            "requested_ms": 0.08879101369529963,
+            "wall_ms": 28.03425001911819,
+            "thread_cpu_ms": 0.031583
+          }
+        ]
+      }
+    ]
+  },
+  "unchanged_source_hash_count": 137,
+  "changed_sources": [],
+  "normal_firmware_restored": true,
+  "limits": [
+    "Wall/CPU timing cannot name the responsible application or distinguish every kernel/driver/GIL scheduling wait.",
+    "Probe overhead exists; sequential trials do not establish a miss-rate improvement or regression.",
+    "No change to production code, original fixture, acceptance limits or release qualification."
+  ]
+}
