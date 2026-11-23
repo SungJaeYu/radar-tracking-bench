@@ -1,5 +1,7 @@
 # 펌웨어 코딩 스탠다드
 
+PC 도구·테스트의 Python 규칙은 [Python 코딩 스탠다드](python-coding-standard.md)를 따릅니다.
+
 2026-11-08 합의를 바탕으로 유지하는 프로젝트 규칙입니다. 적용 결과와 후속 과제는
 [코딩 규칙 점검표](coding-standard-audit.md)를 따릅니다. 서식 리팩터링에서는 동작·프로토콜 값을 보존합니다.
 
@@ -316,3 +318,12 @@ if (!measurement_valid) {
 - 오류 코드는 `error`, 사유는 `reason`, 상태 전이는 `previous`/`current`로 표시합니다.
 - 로그 형식을 변경하면 소비하는 parser·보드 시험기·테스트·문서를 함께 확인합니다.
   기존 검증 원문은 보존하며 필요한 읽기 호환성은 parser에서 처리합니다.
+
+### Performance instrumentation in interrupt paths
+
+- ISR and application IRQ-masked sections must not aggregate statistics, convert timing units, scan stacks, copy full snapshots or log. Capture only the minimum raw values needed for deferred processing.
+- Run PERF collectors in thread context with interrupts enabled; use a thread mutex for shared aggregates. Kernel APIs may still have internal short critical sections, which must not be confused with masking the entire aggregation.
+- Bounded deferred capture must expose overflow as missing evidence/failure. Never silently overwrite unread timing samples or remove failed samples to obtain a pass.
+- Validate source context, host guards and target object code, then measure actual board behavior. Software timing and a clean short run do not prove interrupt WCET or establish the cause of earlier CRC failures.
+
+See [interrupt-context audit](interrupt-context-audit.md).

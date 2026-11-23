@@ -35,7 +35,7 @@ def encode_frame(frame_type, payload):
 
 
 def build_init_frame():
-    """새 측정 시퀀스 시작. 현재 파서는 빈 payload를 거부하므로 1바이트를 넣는다."""
+    """Start a measurement sequence; include one byte because empty payloads are rejected."""
     return encode_frame(FRAME_TYPE_INIT, b"\x00")
 
 
@@ -52,13 +52,13 @@ def build_measurement_frame(timestamp_ms, range_m, azimuth_sc):
 
 
 def build_measurement_frame_from_radians(timestamp_ms, range_m, azimuth_rad):
-    """시나리오의 실수 거리·라디안을 현재 wire 단위로 변환한다."""
+    """Convert floating-point scenario range and radians to wire units."""
     if not math.isfinite(range_m) or not math.isfinite(azimuth_rad):
         raise ValueError("range and azimuth must be finite")
     distance = round(range_m)
     if not 1 <= distance <= 65535:
         raise ValueError("rounded range must be 1..65535 metres")
-    # +pi는 -pi와 같은 방향이다. 반올림 후에도 signed int32로 감싼다.
+    # +pi and -pi denote the same direction; wrap to signed int32 after rounding.
     wrapped = (azimuth_rad + math.pi) % (2 * math.pi) - math.pi
     semicircle = round(wrapped * (2**31 / math.pi))
     semicircle = (semicircle + 2**31) % 2**32 - 2**31
@@ -67,14 +67,14 @@ def build_measurement_frame_from_radians(timestamp_ms, range_m, azimuth_rad):
 
 # Wire order, CLI label, GUI label. All fields are unsigned 32-bit counters.
 STATUS_FIELDS = (
-    ("crc_errors", "CRC errors", "CRC 오류"),
-    ("length_errors", "Length errors", "길이 오류"),
-    ("frame_timeouts", "Frame timeouts", "부분 프레임 timeout"),
-    ("queue_drops", "Queue drops", "RX 큐 드롭"),
-    ("ring_overflow_events", "Ring overflows", "링 overflow 횟수"),
-    ("rx_dropped_bytes", "ISR dropped bytes", "ISR 폐기 바이트"),
-    ("recovery_discarded_bytes", "Recovery discarded bytes", "복구 중 버퍼 폐기 바이트"),
-    ("stale_measurements", "Stale measurements", "오래된 측정 폐기"),
+    ("crc_errors", "CRC errors", "CRC errors"),
+    ("length_errors", "Length errors", "Length errors"),
+    ("frame_timeouts", "Frame timeouts", "Frame timeouts"),
+    ("queue_drops", "Queue drops", "RX queue drops"),
+    ("ring_overflow_events", "Ring overflows", "Ring overflows"),
+    ("rx_dropped_bytes", "ISR dropped bytes", "ISR dropped bytes"),
+    ("recovery_discarded_bytes", "Recovery discarded bytes", "Recovery discarded bytes"),
+    ("stale_measurements", "Stale measurements", "Stale measurements"),
 )
 STATUS_PAYLOAD = struct.Struct(">" + "I" * len(STATUS_FIELDS))
 # Earlier four/seven-counter layouts remain readable; absent fields stay absent.

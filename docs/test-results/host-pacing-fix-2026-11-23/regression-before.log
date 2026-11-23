@@ -1,0 +1,100 @@
+FF..                                                                     [100%]
+=================================== FAILURES ===================================
+__ test_pump_does_not_sleep_after_io_reaches_deadline[0.02-expected_sleeps0] ___
+
+io_finished_s = 0.02, expected_sleeps = []
+
+    @pytest.mark.parametrize('io_finished_s,expected_sleeps', [
+        (.020, []), (.021, []), (.0195, [.0005]), (.005, [.001]),
+    ])
+    def test_pump_does_not_sleep_after_io_reaches_deadline(io_finished_s, expected_sleeps):
+        """Exercise the real nested pump when receive work consumes its time budget."""
+        from types import CellType, CodeType, FunctionType, SimpleNamespace
+        from unittest.mock import Mock
+    
+        clock = SimpleNamespace(now=0., sleeps=[])
+        clock.monotonic = lambda: clock.now
+    
+        def sleep(seconds):
+            clock.sleeps.append(seconds)
+            clock.now = .020
+    
+        def read(size):
+            clock.now = io_finished_s
+            return b''
+    
+        clock.sleep = sleep
+        console = Mock(in_waiting=0)
+        console.read.return_value = b''
+        data = Mock(in_waiting=0)
+        data.read.side_effect = read
+        decoder = Mock(crc_errors=0, length_errors=0)
+        decoder.feed.return_value = []
+        environment = dict(console=console, data=data, decoder=decoder, recorder=Mock(),
+                           sequence=None, received_measurements=0, checks=[], reports=[],
+                           statuses=[], sent_at={}, latencies=[],
+                           snapshot_parser=SimpleNamespace(faults=[], boots=1))
+        # Bind the actual fixture code to test doubles without opening ports or flashing.
+        code = next(value for value in board_check.run.__code__.co_consts
+                    if isinstance(value, CodeType) and value.co_name == 'pump_until')
+        pump = FunctionType(code, {**board_check.__dict__, 'time': clock},
+                            closure=tuple(CellType(environment[name]) for name in code.co_freevars))
+        pump(.020)
+>       assert clock.sleeps == pytest.approx(expected_sleeps)
+E       assert [0] == approx([])
+E         
+E         Impossible to compare lists with different sizes.
+E         Lengths: 0 and 1
+
+tests/test_perf_monitor.py:294: AssertionError
+__ test_pump_does_not_sleep_after_io_reaches_deadline[0.021-expected_sleeps1] __
+
+io_finished_s = 0.021, expected_sleeps = []
+
+    @pytest.mark.parametrize('io_finished_s,expected_sleeps', [
+        (.020, []), (.021, []), (.0195, [.0005]), (.005, [.001]),
+    ])
+    def test_pump_does_not_sleep_after_io_reaches_deadline(io_finished_s, expected_sleeps):
+        """Exercise the real nested pump when receive work consumes its time budget."""
+        from types import CellType, CodeType, FunctionType, SimpleNamespace
+        from unittest.mock import Mock
+    
+        clock = SimpleNamespace(now=0., sleeps=[])
+        clock.monotonic = lambda: clock.now
+    
+        def sleep(seconds):
+            clock.sleeps.append(seconds)
+            clock.now = .020
+    
+        def read(size):
+            clock.now = io_finished_s
+            return b''
+    
+        clock.sleep = sleep
+        console = Mock(in_waiting=0)
+        console.read.return_value = b''
+        data = Mock(in_waiting=0)
+        data.read.side_effect = read
+        decoder = Mock(crc_errors=0, length_errors=0)
+        decoder.feed.return_value = []
+        environment = dict(console=console, data=data, decoder=decoder, recorder=Mock(),
+                           sequence=None, received_measurements=0, checks=[], reports=[],
+                           statuses=[], sent_at={}, latencies=[],
+                           snapshot_parser=SimpleNamespace(faults=[], boots=1))
+        # Bind the actual fixture code to test doubles without opening ports or flashing.
+        code = next(value for value in board_check.run.__code__.co_consts
+                    if isinstance(value, CodeType) and value.co_name == 'pump_until')
+        pump = FunctionType(code, {**board_check.__dict__, 'time': clock},
+                            closure=tuple(CellType(environment[name]) for name in code.co_freevars))
+        pump(.020)
+>       assert clock.sleeps == pytest.approx(expected_sleeps)
+E       assert [0] == approx([])
+E         
+E         Impossible to compare lists with different sizes.
+E         Lengths: 0 and 1
+
+tests/test_perf_monitor.py:294: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_perf_monitor.py::test_pump_does_not_sleep_after_io_reaches_deadline[0.02-expected_sleeps0]
+FAILED tests/test_perf_monitor.py::test_pump_does_not_sleep_after_io_reaches_deadline[0.021-expected_sleeps1]
+2 failed, 2 passed, 35 deselected in 0.22s

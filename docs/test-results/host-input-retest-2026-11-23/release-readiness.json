@@ -1,0 +1,38 @@
+{
+  "release_complete": false,
+  "source_files_checked": 137,
+  "source_files_changed_during_retest": [],
+  "acceptance_revision": "2026-11-23-host-input-v3",
+  "firmware_changed_this_turn": false,
+  "thresholds_changed": false,
+  "real_board_smoke_passed": true,
+  "real_board_1800s_observed_load_passed": true,
+  "real_board_host_interruption_handling_verified": true,
+  "audits": {
+    "perf-smoke-board": true,
+    "perf-load": true,
+    "controlled-host-gap": true
+  },
+  "load_elapsed_s": 1800.000210541999,
+  "load_measurements": 89057,
+  "requested_profile_qualification": {
+    "status": "inconclusive",
+    "reasons": [
+      "requested 50Hz scheduled slots not fully delivered"
+    ]
+  },
+  "host_skipped_slots": 943,
+  "normal_firmware_restored": true,
+  "prior_functional_regression": "../final-validation-2026-11-23/README.md; same firmware sources, not rerun this turn",
+  "prior_python_regression": "../host-input-verdict-2026-11-23/python-tests.log; same source hashes, 924 + 9 subtests, not rerun this turn",
+  "git_commit_push_merge_tag_performed": false,
+  "remaining": [
+    "Provide and verify the complete requested 50Hz profile; 943 scheduled inputs were not sent in this run",
+    "Complete release commit/push/main merge/v1.1.0 tag after the requested profile is verified"
+  ],
+  "limits": [
+    "Observed software timings, not physical UART arrival/last-stop-bit or WCET proof",
+    "A controlled host pause validates fixture classification, not a completed load pass",
+    "Earlier two board CRC errors remain unexplained"
+  ]
+}

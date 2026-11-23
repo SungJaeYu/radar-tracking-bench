@@ -6,6 +6,11 @@
 // Queue-owned copy of a frame to encode and transmit; no caller buffer is retained.
 struct tx_frame {
     struct protocol_frame frame;
+#if defined(CONFIG_RADAR_PERF_MONITOR)
+    int64_t queued_uptime_ms;
+    int64_t parsed_uptime_ms;
+    bool measurement_origin_valid;
+#endif
 };
 
 // Check the UART device and release the TX thread; UART configuration is provided elsewhere.

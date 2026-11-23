@@ -3,12 +3,18 @@
 #include <errno.h>
 #include <stddef.h>
 
-#include <zephyr/spinlock.h>
+#include <zephyr/kernel.h>
 #include <zephyr/sys/__assert.h>
 
-// One short lock protects updates and snapshots across RX, handler, TX, and main.
-// No clocks, stack scans, queue operations, or logging run while this lock is held.
-static struct k_spinlock stats_lock;
+// Thread-only serialization: aggregation and snapshot copies do not mask IRQs.
+// Zephyr may briefly mask IRQs internally while acquiring/releasing the mutex.
+K_MUTEX_DEFINE(stats_lock);
+
+static void lock_stats(void)
+{
+    __ASSERT(!k_is_in_isr(), "Performance aggregation requires thread context");
+    (void)k_mutex_lock(&stats_lock, K_FOREVER);
+}
 static struct perf_stats stats;
 
 // Only the handler starts/ends a context. The lock also makes snapshots coherent.
@@ -86,25 +92,25 @@ static void record_execution(struct perf_execution_stats *p_stats, uint64_t elap
 
 void perf_monitor_record_predict(uint64_t elapsed_cycles)
 {
-    const k_spinlock_key_t key = k_spin_lock(&stats_lock);
+    lock_stats();
 
     record_execution(&stats.estimator_predict, elapsed_cycles);
 
-    k_spin_unlock(&stats_lock, key);
+    k_mutex_unlock(&stats_lock);
 }
 
 void perf_monitor_record_correct(uint64_t elapsed_cycles)
 {
-    const k_spinlock_key_t key = k_spin_lock(&stats_lock);
+    lock_stats();
 
     record_execution(&stats.estimator_correct, elapsed_cycles);
 
-    k_spin_unlock(&stats_lock, key);
+    k_mutex_unlock(&stats_lock);
 }
 
 void perf_monitor_begin_measurement(int64_t received_uptime_ms, int64_t handler_start_uptime_ms)
 {
-    const k_spinlock_key_t key = k_spin_lock(&stats_lock);
+    lock_stats();
 
     measurement.active = true;
     measurement.submitted = false;
@@ -120,12 +126,12 @@ void perf_monitor_begin_measurement(int64_t received_uptime_ms, int64_t handler_
         increment(&stats.invalid_timestamps);
     }
 
-    k_spin_unlock(&stats_lock, key);
+    k_mutex_unlock(&stats_lock);
 }
 
 void perf_monitor_record_track_submit(int64_t submit_uptime_ms, int result)
 {
-    const k_spinlock_key_t key = k_spin_lock(&stats_lock);
+    lock_stats();
 
     // Ignore controls, late calls, and duplicate completions of the same input.
     if (measurement.active && !measurement.submitted) {
@@ -143,12 +149,12 @@ void perf_monitor_record_track_submit(int64_t submit_uptime_ms, int result)
         }
     }
 
-    k_spin_unlock(&stats_lock, key);
+    k_mutex_unlock(&stats_lock);
 }
 
 void perf_monitor_end_measurement(void)
 {
-    const k_spinlock_key_t key = k_spin_lock(&stats_lock);
+    lock_stats();
 
     if (measurement.active && !measurement.submitted) {
         increment(&stats.without_submit);
@@ -156,7 +162,7 @@ void perf_monitor_end_measurement(void)
 
     measurement.active = false;
 
-    k_spin_unlock(&stats_lock, key);
+    k_mutex_unlock(&stats_lock);
 }
 
 void perf_monitor_record_queue(PerfQueue queue, int result, uint32_t used)
@@ -165,7 +171,7 @@ void perf_monitor_record_queue(PerfQueue queue, int result, uint32_t used)
         return;
     }
 
-    const k_spinlock_key_t key = k_spin_lock(&stats_lock);
+    lock_stats();
 
     struct perf_queue_stats *p_queue = &stats.queues[queue];
 
@@ -175,16 +181,16 @@ void perf_monitor_record_queue(PerfQueue queue, int result, uint32_t used)
         p_queue->max_observed_depth = used;
     }
 
-    k_spin_unlock(&stats_lock, key);
+    k_mutex_unlock(&stats_lock);
 }
 
 void perf_monitor_record_tx(bool completed)
 {
-    const k_spinlock_key_t key = k_spin_lock(&stats_lock);
+    lock_stats();
 
     increment(completed ? &stats.tx_poll_completed : &stats.tx_encode_failed);
 
-    k_spin_unlock(&stats_lock, key);
+    k_mutex_unlock(&stats_lock);
 }
 
 int perf_monitor_get_stats(struct perf_stats *out_stats)
@@ -193,11 +199,75 @@ int perf_monitor_get_stats(struct perf_stats *out_stats)
         return -EINVAL;
     }
 
-    const k_spinlock_key_t key = k_spin_lock(&stats_lock);
+    lock_stats();
 
     *out_stats = stats;
 
-    k_spin_unlock(&stats_lock, key);
+    k_mutex_unlock(&stats_lock);
 
     return 0;
+}
+
+// Validate ordering before subtracting to avoid signed overflow on invalid inputs.
+static void record_interval(struct perf_latency_stats *p_stats, int64_t start_ms, int64_t end_ms)
+{
+    if (start_ms < 0 || end_ms < start_ms) {
+        increment(&stats.invalid_timestamps);
+        return;
+    }
+    record_latency(p_stats, end_ms - start_ms);
+}
+
+bool perf_monitor_get_measurement_origin(int64_t *out_parsed_ms)
+{
+    if (out_parsed_ms == NULL) {
+        return false;
+    }
+    lock_stats();
+    const bool valid = measurement.active && measurement.valid_time;
+    if (valid) {
+        *out_parsed_ms = measurement.received_uptime_ms;
+    }
+    k_mutex_unlock(&stats_lock);
+    return valid;
+}
+
+void perf_monitor_record_rx_byte(int64_t stored_ms, int64_t removed_ms)
+{
+    lock_stats();
+    record_interval(&stats.rx_byte_wait, stored_ms, removed_ms);
+    k_mutex_unlock(&stats_lock);
+}
+
+void perf_monitor_record_tx_timing(int64_t queued_ms, int64_t dequeued_ms,
+                                   int64_t completed_ms, bool origin_valid, int64_t parsed_ms)
+{
+    lock_stats();
+    record_interval(&stats.tx_queue_wait, queued_ms, dequeued_ms);
+    record_interval(&stats.tx_poll, dequeued_ms, completed_ms);
+    if (origin_valid) {
+        record_interval(&stats.parsed_to_tx_poll, parsed_ms, completed_ms);
+    }
+    k_mutex_unlock(&stats_lock);
+}
+
+void perf_monitor_record_rx_isr(uint64_t elapsed_cycles)
+{
+    lock_stats();
+    record_execution(&stats.rx_isr, elapsed_cycles);
+    k_mutex_unlock(&stats_lock);
+}
+
+void perf_monitor_record_rx_parser(uint64_t elapsed_cycles)
+{
+    lock_stats();
+    record_execution(&stats.rx_parser, elapsed_cycles);
+    k_mutex_unlock(&stats_lock);
+}
+
+void perf_monitor_record_rx_capture_lost(void)
+{
+    lock_stats();
+    stats.rx_capture_lost = 1U;
+    k_mutex_unlock(&stats_lock);
 }

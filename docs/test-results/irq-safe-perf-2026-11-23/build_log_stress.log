@@ -1,0 +1,28 @@
+-- west build: generating a build system
+Loading Zephyr default modules (Zephyr base (cached)).
+-- Application: /Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app
+-- CMake version: 4.3.3
+-- Cache files will be written to: /Users/yuseungjae/Library/Caches/zephyr
+-- Zephyr version: 4.2.0 (/Users/yuseungjae/zephyrproject/zephyr)
+-- Found west (found suitable version "1.5.0", minimum required is "0.14.0")
+-- Board: stm32f746g_disco, qualifiers: stm32f746xx
+-- Found host-tools: zephyr 0.17.2 (/Users/yuseungjae/zephyr-sdk-0.17.2)
+-- Found toolchain: zephyr 0.17.2 (/Users/yuseungjae/zephyr-sdk-0.17.2)
+-- Found BOARD.dts: /Users/yuseungjae/zephyrproject/zephyr/boards/st/stm32f746g_disco/stm32f746g_disco.dts
+-- Found devicetree overlay: /Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/boards/stm32f746g_disco.overlay
+-- Generated zephyr.dts: /Users/yuseungjae/Desktop/radar-track-fcc-hil/build_log_stress/zephyr/zephyr.dts
+-- Generated pickled edt: /Users/yuseungjae/Desktop/radar-track-fcc-hil/build_log_stress/zephyr/edt.pickle
+-- Generated devicetree_generated.h: /Users/yuseungjae/Desktop/radar-track-fcc-hil/build_log_stress/zephyr/include/generated/zephyr/devicetree_generated.h
+/Users/yuseungjae/Desktop/radar-track-fcc-hil/build_log_stress/zephyr/zephyr.dts:1946.46-1952.4: Warning (unique_unit_address_if_enabled): /memory-placeholder@90000000: duplicate unit-address (also used in node /memory@90000000)
+CMake Error at /Users/yuseungjae/zephyrproject/zephyr/cmake/modules/kconfig.cmake:308 (message):
+  File not found:
+  /Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/log_stress.conf
+Call Stack (most recent call first):
+  /Users/yuseungjae/zephyrproject/zephyr/cmake/modules/zephyr_default.cmake:131 (include)
+  /Users/yuseungjae/zephyrproject/zephyr/share/zephyr-package/cmake/ZephyrConfig.cmake:66 (include)
+  /Users/yuseungjae/zephyrproject/zephyr/share/zephyr-package/cmake/ZephyrConfig.cmake:97 (include_boilerplate)
+  CMakeLists.txt:3 (find_package)
+
+
+-- Configuring incomplete, errors occurred!
+FATAL ERROR: command exited with status 1: /opt/homebrew/bin/cmake -DWEST_PYTHON=/Users/yuseungjae/zephyrproject/.venv/bin/python3.12 -B/Users/yuseungjae/Desktop/radar-track-fcc-hil/build_log_stress -GNinja -DEXTRA_CONF_FILE=log_stress.conf -S/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app

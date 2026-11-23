@@ -1,0 +1,14 @@
+-- west flash: rebuilding
+ninja: no work to do.
+-- west flash: using runner openocd
+-- runners.openocd: Flashing file: /Users/yuseungjae/Desktop/radar-track-fcc-hil/build/zephyr/zephyr.hex
+Open On-Chip Debugger 0.12.0
+Licensed under GNU GPL v2
+For bug reports, read
+	http://openocd.org/doc/doxygen/bugs.html
+Info : The selected transport took over low-level target control. The results might differ compared to plain JTAG/SWD
+Info : clock speed 2000 kHz
+Error: open failed
+
+
+FATAL ERROR: command exited with status 1: /opt/homebrew/bin/openocd -s /Users/yuseungjae/zephyrproject/zephyr/boards/st/stm32f746g_disco/support -s /Users/yuseungjae/zephyr-sdk-0.17.2/sysroots/arm64-pokysdk-linux/usr/share/openocd/scripts -f /Users/yuseungjae/zephyrproject/zephyr/boards/st/stm32f746g_disco/support/openocd.cfg '-c init' '-c targets' -c 'reset init' -c 'flash write_image erase /Users/yuseungjae/Desktop/radar-track-fcc-hil/build/zephyr/zephyr.hex' -c 'reset run' -c shutdown

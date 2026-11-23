@@ -4,13 +4,8 @@
 
 #include <zephyr/kernel.h>
 #include <zephyr/logging/log.h>
-#if defined(CONFIG_TIMING_FUNCTIONS)
-#include <zephyr/timing/timing.h>
-#endif
 
-#if defined(CONFIG_RADAR_PERF_MONITOR)
-#include "diagnostics/perf_monitor.h"
-#endif
+#include "diagnostics/perf_hooks.h"
 
 static void frame_handler_thread(void *p_arg1, void *p_arg2, void *p_arg3);
 
@@ -36,12 +31,6 @@ static void frame_handler_thread(void *p_arg1, void *p_arg2, void *p_arg3)
     // Preserve the report sequence across initialization and reset.
     struct frame_handler handler = {0};
     struct rx_frame frame;
-
-#if defined(CONFIG_TIMING_FUNCTIONS)
-    // Start timing once in the owner thread, before processing any track updates.
-    timing_init();
-    timing_start();
-#endif
 
     frame_handler_init(&handler);
 
@@ -79,12 +68,10 @@ void frame_handler_handle_timeout(struct frame_handler *p_handler, int64_t now_u
 
 void frame_handler_process(struct frame_handler *p_handler, const struct rx_frame *p_frame)
 {
-#if defined(CONFIG_RADAR_PERF_MONITOR)
     if (p_frame->frame.type == FRAME_TYPE_MEAS_REPORT) {
         // Use board RX completion time, including time spent waiting in the queue.
-        perf_monitor_begin_measurement(p_frame->received_uptime_ms, k_uptime_get());
+        perf_hook_measurement_begin(p_frame->received_uptime_ms);
     }
-#endif
 
     switch (p_frame->frame.type) {
     case FRAME_TYPE_INIT:
@@ -139,12 +126,10 @@ void frame_handler_process(struct frame_handler *p_handler, const struct rx_fram
         LOG_WRN("Frame ignored: reason=unsupported_type type=0x%02X", p_frame->frame.type);
         break;
     }
-#if defined(CONFIG_RADAR_PERF_MONITOR)
     if (p_frame->frame.type == FRAME_TYPE_MEAS_REPORT) {
         // Clear context even when stale/invalid input or encode failure produced no submission.
-        perf_monitor_end_measurement();
+        perf_hook_measurement_end();
     }
-#endif
 }
 
 int frame_handler_submit(const struct rx_frame *p_frame)
@@ -159,8 +144,6 @@ int frame_handler_submit(const struct rx_frame *p_frame)
     }
 
     const int ret = k_msgq_put(&frame_queue, p_frame, K_NO_WAIT);
-#if defined(CONFIG_RADAR_PERF_MONITOR)
-    perf_monitor_record_queue(PERF_QUEUE_RX, ret, k_msgq_num_used_get(&frame_queue));
-#endif
+    perf_hook_queue_submit(PERF_QUEUE_RX, ret, &frame_queue);
     return ret;
 }

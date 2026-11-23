@@ -1,0 +1,27 @@
+{
+  "passed": true,
+  "checks": 48,
+  "measurements": 21,
+  "track_reports": 24,
+  "initial_status": {
+    "crc_errors": 0,
+    "length_errors": 0,
+    "frame_timeouts": 0,
+    "queue_drops": 0,
+    "ring_overflow_events": 0,
+    "rx_dropped_bytes": 0,
+    "recovery_discarded_bytes": 0,
+    "stale_measurements": 0
+  },
+  "final_status": {
+    "crc_errors": 0,
+    "length_errors": 0,
+    "frame_timeouts": 0,
+    "queue_drops": 0,
+    "ring_overflow_events": 0,
+    "rx_dropped_bytes": 0,
+    "recovery_discarded_bytes": 0,
+    "stale_measurements": 0
+  },
+  "evidence": "/Users/yuseungjae/Desktop/radar-track-fcc-hil/docs/test-results/final-validation-2026-11-23/final-smoke"
+}

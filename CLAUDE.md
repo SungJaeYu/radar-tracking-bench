@@ -17,7 +17,8 @@ V1은 2026-11-19 프로젝트 소유자의 완료 확인을 반영해 종료했�
 ## 현재 구조와 규격
 
 - PC 도구는 `pc_sim/` 하나. 모든 송신기가 `pc_sim/protocol.py`를 공유합니다.
-- `radar_sender.py`: 거리 변화율 기반 송신. `run_sim.py`: 표적·센서 시나리오.
+- `radar_sender.py`: 거리 변화율 기반 송신. `run_sim.py`: 표적·센서 시나리오. v1.1.0은 `Target.turn_rate_radps`(시계 방향 양수) 원호 운동, `MotionSegment`/`SegmentedScenario`, `straight_turn_straight`를 추가합니다. 동쪽10초·우90°선회 약55.49초·남쪽10초이며 전체 실행은 `--duration 80`을 사용합니다. 기본60초는 중간에서 끝납니다.
+- 선회 확장은 PC 입력 모델이며 펌웨어 CV 추정기를 바꾸지 않습니다. GUI와 `pc_sim.evaluate`는 고정 방위각·일정 거리 변화율 모델을 유지합니다. `run_sim`은 TRACK을 수집하지 않습니다. GUI의 사용자 표시·제어 문구는 영어입니다.
 - `frame_sender.py`: 수동 INIT 등 단일 프레임 송신.
 - `python -m pc_sim.gui`: PySide6/pyqtgraph 단일표적 GUI. 설정·측정 생성·시리얼 작업은 `gui_model.py`·`gui_worker.py`로 분리합니다.
 - GUI는 PC 합성 실제값·측정값과 수신한 보드 추정값을 구분합니다. 미리보기에서는 보드 값을 만들지 않습니다. 생성/송신 횟수는 수신 ACK가 아닙니다.
@@ -38,14 +39,14 @@ V1은 2026-11-19 프로젝트 소유자의 완료 확인을 반영해 종료했�
 
 ## 선택적 성능 계측
 
-`perf.conf`는 `diagnostics/perf_monitor.c/.h`의 지연·큐·송신·predict/correct 실행 cycle 집계와 `perf_reporter.c`의 5초 요약·스택 조회를 켭니다. 일반/debug 빌드에는 제외됩니다. [측정 계약](docs/performance-monitoring.md)을 따릅니다. [11월 19일 종료한 30분 기록](docs/hardware-test-2026-11-19-performance.md)은 측정89,990건 모두 대응, PC RTT p99 8.049ms·최대34.894ms, 보드 RX→TX 제출 최대1ms입니다. PC RTT는 USB·UART·호스트 대기도 포함합니다. 기존 호스트 간격137.581ms에 따른 원시 실패 판정은 당시 이력으로 유지하며 현재 RTT 기준과 구분합니다. 추가 RTT 개선은 후속 선택입니다.
+`perf.conf`는 `diagnostics/perf_monitor.c/.h`의 지연·큐·송신·predict/correct 실행 cycle 집계와 `perf_reporter.c`의 5초 요약·스택 조회를 켭니다. 일반/debug 빌드에는 제외됩니다. [측정 계약](docs/performance-monitoring.md)을 따릅니다. [11월 19일 종료한 30분 기록](docs/hardware-test-2026-11-19-performance.md)은 측정89,990건 모두 대응, PC RTT p99 8.049ms·최대34.894ms, 보드 RX→TX 제출 최대1ms입니다. PC RTT는 USB·UART·호스트 대기도 포함합니다. 기존 호스트 간격137.581ms에 따른 원시 실패 판정은 당시 이력으로 유지하며 현재 보드 판정과 구분합니다. RTT는 진단값이며 STM32 합격이나 릴리스 차단 조건이 아닙니다. `passed`는 관측 부하의 board_qualification과 같고, 요청50Hz 전체 충족 여부는 requested_profile_qualification으로 별도 판정합니다. [최신 종합 검토](docs/review-2026-11-23.md)를 따릅니다.
 
 새 predict/correct 실행 시간 출력은 host/빌드와 2026-11-22 STM32 10초 smoke에서 확인했습니다. 기존 30분 기록과 구분하며 [로그 형식 회귀](docs/hardware-test-2026-11-22-logging.md)를 따릅니다.
 
 ## 검증
 
 - [성능 계측 host 테스트](fcc_app/tests/test_perf_monitor/README.md): collector/reporter 12 + 계측 활성화 handler 32/TX 4회. 이번 계측 관련 검증은 총 48개 CTest입니다.
-- `python -m pytest`: GUI 의존성 설치 시 765개 + subtest 9개. 미설치 시 Qt 테스트는 skip됩니다. 실제 보드와 별도입니다.
+- `python -m pytest`: GUI 의존성 설치 시 928개 검증 + 별도 subtest 9개. 미설치 시 Qt 테스트는 skip됩니다. 실제 보드와 별도입니다.
 - [UART host 테스트](fcc_app/tests/test_uart_rx/README.md): drain 24·discard 21, 총 45회 실행으로 링버퍼·부분 프레임 timeout·통계·init 오류를 검증합니다. 모사 IRQ는 실제 동시성을 검증하지 않습니다.
 - [handler host 테스트](fcc_app/tests/test_frame_handler/README.md): STATUS·TRACK·실패 복귀·INIT/RESET·측정 timeout·processor·stale·이상치 복귀 계약 31개 사례. 통계는 모사 snapshot이며 실제 RX 카운터 통합은 별도입니다.
 - [TX host 테스트](fcc_app/tests/test_uart_tx/README.md): 초기화·요청 검증·복사 큐·송신 순서·실패 후 복귀 4개 사례.
@@ -84,3 +85,7 @@ V1은 2026-11-19 프로젝트 소유자의 완료 확인을 반영해 종료했�
 - 과거 `docs/test-results/` 스크립트는 당시 revision용입니다. 현재 API로 재사용할 때 호환성을 확인하며 원시 증거를 덮어쓰지 않습니다.
 
 2026-11-18: stale 큐 측정은 MCU 나이가 측정 timeout 이상이면 폐기하고 handler 포화 통계에 집계합니다. CSV·고정 시나리오 실보드 RMSE·실제 UART GUI 확인 범위는 [최신 결과](docs/hardware-test-2026-11-18-evaluation.md)를 따릅니다. 이후 30분 재시험과 판정 변경·V1 완료는 [검증 이력](docs/verification-history.md)을 따릅니다.
+
+## v1.1.0 검증 기록 (2026-11-23)
+
+선회 실보드 run-2는 측정755개·보고757개(RESET2개 포함), 거부·소실 없이 대응했습니다. 첫2초 제외 위치 RMSE는 전체4.5134m·선회1.3960m이며 정확도 합격 기준은 별도 정의하지 않았습니다. [최신 보고서](docs/hardware-test-2026-11-23-v1.1.0.md)를 참고합니다. Python 코딩 규칙·영어 주석은 [Python 표준](docs/python-coding-standard.md)을 따릅니다.

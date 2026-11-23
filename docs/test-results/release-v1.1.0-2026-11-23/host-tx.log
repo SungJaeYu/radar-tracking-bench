@@ -1,0 +1,27 @@
+-- The C compiler identification is AppleClang 21.0.0.21000401
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Configuring done (2.0s)
+-- Generating done (0.0s)
+-- Build files have been written to: /tmp/radar-v1.1-host/tx
+[1/5] Building C object CMakeFiles/uart_tx_tests.dir/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/src/common/crc16.c.o
+[2/5] Building C object CMakeFiles/uart_tx_tests.dir/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/src/protocol/protocol_frame.c.o
+[3/5] Building C object CMakeFiles/uart_tx_tests.dir/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/src/protocol/frame_parser.c.o
+[4/5] Building C object CMakeFiles/uart_tx_tests.dir/src/main.c.o
+[5/5] Linking C executable uart_tx_tests
+Test project /tmp/radar-v1.1-host/tx
+    Start 1: test_tx_init
+1/4 Test #1: test_tx_init ................................   Passed    0.47 sec
+    Start 2: test_tx_invalid_submit
+2/4 Test #2: test_tx_invalid_submit ......................   Passed    0.00 sec
+    Start 3: test_tx_queue_copy_fifo_full_and_recovery
+3/4 Test #3: test_tx_queue_copy_fifo_full_and_recovery ...   Passed    0.00 sec
+    Start 4: test_tx_encode_error_continues
+4/4 Test #4: test_tx_encode_error_continues ..............   Passed    0.00 sec
+
+100% tests passed, 0 tests failed out of 4
+
+Total Test time (real) =   0.49 sec

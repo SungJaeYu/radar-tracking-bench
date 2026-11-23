@@ -1,0 +1,38 @@
+{
+  "started_utc": "2026-11-23T05:55:08.140897+00:00",
+  "duration_s": 1800,
+  "measurement_hz": 50,
+  "status_hz": 1,
+  "baud": 115200,
+  "smoke": false,
+  "acceptance_revision": "2026-11-23-extended-stm32",
+  "board_latency_limit_ms": 20,
+  "cpu_scheduler_non_idle_limit_percent": 80,
+  "sampled_stack_minimum_bytes": {
+    "rx": 256,
+    "tx": 256,
+    "handler": 512,
+    "main": 256
+  },
+  "stack_allocated_bytes": {
+    "rx": 1024,
+    "tx": 1024,
+    "handler": 2048,
+    "main": 1024
+  },
+  "requested_load_policy": "all 50Hz scheduled slots, no skips, full duration",
+  "acceptance_sha256": "51e1e0bfa117384df63d24eb58d46344df6b4fcb3754225ff698d302d57d85c3",
+  "pc_rtt_limits_ms": {
+    "p99": 20.0,
+    "max": 100.0
+  },
+  "source_commit": "20f069fcd03564a420dab090d6d8d45b317cc34d",
+  "script_sha256": "61821129df0dc22d10ee59f7d6271f73722df94f571ed5fc51941206819df8da",
+  "recording_mode": "bounded-worker",
+  "recording_queue_capacity": 1024,
+  "recording_sha256": "4e3f6d6de5245bf930e05996a302616ff53e52cad7625d1c845b9e4fa3c88131",
+  "data_port": "/dev/cu.usbserial-A5069RR4",
+  "console_port": "/dev/cu.usbmodem11203",
+  "build_perf_elf_sha256": "4d6b5343f7772cfe4edd53f16dee264dac7c1d79cde5c1a0ebc397310eb47ec0",
+  "build_elf_sha256": "3ec5d2d49921b7c75e5c98ec7d9d83c797347817717dd591ab4cf575ebd695b3"
+}

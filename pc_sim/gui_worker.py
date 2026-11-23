@@ -57,9 +57,9 @@ class SessionWorker(QThread):
     def run(self):
         try:
             if self.console_port and not self.data_port:
-                raise ValueError('콘솔 연결은 보드 모드에서만 가능합니다.')
+                raise ValueError('Console connections require board mode.')
             if self.data_port and self.data_port == self.console_port:
-                raise ValueError('데이터와 콘솔은 서로 다른 포트를 선택하세요.')
+                raise ValueError('Select different data and console ports.')
             with ExitStack() as stack:
                 data = (stack.enter_context(self.serial_factory(
                     self.data_port, 115200, timeout=0, write_timeout=0.5))
@@ -79,14 +79,14 @@ class SessionWorker(QThread):
                     self.error.emit(f'CSV close failed: {error}')
             if self.status_pending.is_set():
                 self.status_pending.clear()
-                self.status_failed.emit('연결 종료로 STATUS 조회가 취소되었습니다.')
+                self.status_failed.emit('STATUS query cancelled because the connection closed.')
             self.running_changed.emit(False)
 
     def _write(self, data, frame):
         sent_at = time.monotonic()
         # A successful write is not an acknowledgement from the board.
         if data is not None and data.write(frame) != len(frame):
-            raise OSError('UART 프레임을 모두 쓰지 못했습니다.')
+            raise OSError('Could not write the complete UART frame.')
         if self.recorder is not None:
             self.recorder.record_wire('tx', frame, sent_at)
         return sent_at
@@ -108,7 +108,7 @@ class SessionWorker(QThread):
             elif command == 'stop':
                 settings = None
                 self.running_changed.emit(False)
-                self.event.emit('송신 중지 · 콘솔 모니터는 유지됩니다.')
+                self.event.emit('Sending stopped · console monitoring remains active.')
             elif command == 'start':
                 value, recording_path = value
                 value.validate()
@@ -119,7 +119,7 @@ class SessionWorker(QThread):
                     self.recorder = SessionRecorder(recording_path, value, 'board' if data else 'preview')
                     self.recording_started.emit(str(self.recorder.path))
                 self._write(data, build_init_frame())
-                self.event.emit('INIT 전송' if data else 'INIT 생성 (미리보기)')
+                self.event.emit('INIT sent' if data else 'INIT generated (preview)')
                 settings = value
                 rng = random.Random(settings.seed)
                 started = next_sample = time.monotonic()
@@ -134,13 +134,13 @@ class SessionWorker(QThread):
                 if status_deadline is not None and time.monotonic() >= status_deadline:
                     status_deadline = None
                     self.status_pending.clear()
-                    self.status_failed.emit('STATUS 응답 시간 초과')
+                    self.status_failed.emit('STATUS response timed out')
                 for frame in parser.feed(raw):
                     if frame.frame_type == FRAME_TYPE_TRACK_REPORT:
                         try:
                             report = decode_track_payload(frame.payload)
                         except ValueError as error:
-                            self.event.emit(f'TRACK 폐기: {error}')
+                            self.event.emit(f'TRACK discarded: {error}')
                         else:
                             if self.recorder is not None:
                                 self.recorder.record_report(report, received_at)
@@ -169,7 +169,7 @@ class SessionWorker(QThread):
                 if elapsed >= settings.duration_s:
                     settings = None
                     self.running_changed.emit(False)
-                    self.event.emit('설정한 실행 시간 완료 · 콘솔 모니터는 유지됩니다.')
+                    self.event.emit('Run duration complete · console monitoring remains active.')
                 else:
                     try:
                         sample = make_sample(settings, round(elapsed * 1000), rng)

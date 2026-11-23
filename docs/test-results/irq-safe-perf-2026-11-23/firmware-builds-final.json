@@ -1,0 +1,14 @@
+[
+  {
+    "build": "build_perf",
+    "exit_code": 0
+  },
+  {
+    "build": "build_log_stress",
+    "exit_code": 0
+  },
+  {
+    "build": "build_transport_stress",
+    "exit_code": 0
+  }
+]

@@ -24,15 +24,15 @@ class Settings:
                   self.range_noise_std_m, self.sample_rate_hz, self.duration_s,
                   self.azimuth_noise_std_deg)
         if not all(math.isfinite(v) for v in values):
-            raise ValueError('설정값은 유한한 숫자여야 합니다.')
+            raise ValueError('Settings must be finite numbers.')
         if not 1 <= self.initial_range_m <= 65535 or self.range_noise_std_m < 0 or self.azimuth_noise_std_deg < 0:
-            raise ValueError('거리는 1..65535 m, 잡음은 0 이상이어야 합니다.')
+            raise ValueError('Range must be 1..65535 m and noise must be nonnegative.')
         if not 1 <= self.sample_rate_hz <= 50 or not 0 < self.duration_s <= 3600:
-            raise ValueError('송신 주기는 1..50 Hz, 실행 시간은 0..3600초입니다.')
+            raise ValueError('Sample rate must be 1..50 Hz and duration must be 0..3600 s.')
         if type(self.seed) is not int:
             raise ValueError('seed must be an integer')
         if not -180 <= self.azimuth_deg <= 180:
-            raise ValueError('방위각은 -180..180도입니다.')
+            raise ValueError('Azimuth must be -180..180 degrees.')
 
 
 @dataclass(frozen=True)
@@ -47,7 +47,7 @@ class Sample:
 def make_sample(settings, timestamp_ms, rng: random.Random):
     truth = settings.initial_range_m + settings.range_rate_mps * timestamp_ms / 1000
     if not 1 <= truth <= 65535:
-        raise ValueError('실제 거리가 1..65535 m 범위를 벗어나 송신을 중지했습니다.')
+        raise ValueError('Sending stopped: true range is outside 1..65535 m.')
     measured_range = truth + rng.gauss(0, settings.range_noise_std_m)
     # Preserve the legacy range-noise sequence when angular noise is disabled.
     angle = settings.azimuth_deg

@@ -1,0 +1,11 @@
+[1/3] Building C object CMakeFiles/uart_tx_tests.dir/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/src/diagnostics/perf_monitor.c.o
+FAILED: [code=1] CMakeFiles/uart_tx_tests.dir/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/src/diagnostics/perf_monitor.c.o 
+/usr/bin/cc -DCONFIG_RADAR_PERF_MONITOR=1 -I/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/tests/test_uart_tx/include -I/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/tests/test_uart_tx/../common/include -I/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/tests/test_uart_tx/../../src -I/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/tests/test_uart_tx/../test_perf_monitor/include -Wall -Wextra -Werror -UNDEBUG -MD -MT CMakeFiles/uart_tx_tests.dir/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/src/diagnostics/perf_monitor.c.o -MF CMakeFiles/uart_tx_tests.dir/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/src/diagnostics/perf_monitor.c.o.d -o CMakeFiles/uart_tx_tests.dir/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/src/diagnostics/perf_monitor.c.o -c /Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/src/diagnostics/perf_monitor.c
+In file included from /Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/src/diagnostics/perf_monitor.c:6:
+In file included from /Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/tests/test_uart_tx/include/zephyr/kernel.h:1:
+/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/tests/test_uart_tx/include/test_zephyr.h:96:16: error: unused function 'k_uptime_get' [-Werror,-Wunused-function]
+   96 | static int64_t k_uptime_get(void) { return test_uptime_ms; }
+      |                ^~~~~~~~~~~~
+1 error generated.
+[2/3] Building C object CMakeFiles/uart_tx_tests.dir/src/main.c.o
+ninja: build stopped: subcommand failed.

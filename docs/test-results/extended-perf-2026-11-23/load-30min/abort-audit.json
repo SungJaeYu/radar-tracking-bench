@@ -1,0 +1,40 @@
+{
+  "tx": {
+    "bytes": 118806,
+    "frame_counts": {
+      "1": 1,
+      "3": 160,
+      "2": 7856
+    },
+    "crc_errors": 0,
+    "length_errors": 0
+  },
+  "rx": {
+    "bytes": 296555,
+    "frame_counts": {
+      "7": 7855,
+      "6": 160
+    },
+    "crc_errors": 0,
+    "length_errors": 0
+  },
+  "samples": 7856,
+  "unanswered_sensor_timestamps_ms": [
+    158640,
+    158660
+  ],
+  "last_status": {
+    "rx_monotonic_s": "590905.166222458",
+    "crc_errors": "1",
+    "length_errors": "0",
+    "frame_timeouts": "0",
+    "queue_drops": "0",
+    "ring_overflow_events": "0",
+    "rx_dropped_bytes": "0",
+    "recovery_discarded_bytes": "0",
+    "stale_measurements": "0"
+  },
+  "recording_closed": true,
+  "interpretation": "Observed board RX CRC failure; host-side wire bytes are valid. Physical link versus MCU receive cause remains unresolved. Unanswered entries may include in-flight traffic at abort; do not assign all to CRC loss.",
+  "original_results_unchanged": true
+}

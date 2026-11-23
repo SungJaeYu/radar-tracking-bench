@@ -43,7 +43,7 @@ def main():
     true_range = args.range
 
     with connection as ser:
-        # timestamp를 0부터 다시 보내기 전에 수신 트랙을 한 번 초기화한다.
+        # Reset the receiver track before restarting timestamps at zero.
         init_frame = build_init_frame()
         if ser is not None:
             ser.write(init_frame)

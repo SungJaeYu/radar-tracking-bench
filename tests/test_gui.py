@@ -216,23 +216,23 @@ def test_gui_status_success_timeout_and_retry_during_measurements(app, monkeypat
         window.request_status()
         window.request_status()
         assert not window.status_button.isEnabled()
-        wait_for(app, lambda: window.status_message.text() == '조회 성공')
+        wait_for(app, lambda: window.status_message.text() == 'Query successful')
         assert window.status_values['crc_errors'].text() == '305419896'
         assert window.status_values['queue_drops'].text() == '4294967295'
-        assert window.status_updated.text() != '마지막 성공 조회: —'
+        assert window.status_updated.text() != 'Last successful query: —'
         assert sum(frame[2] == 3 for frame in port.writes) == 1
         assert window.stop_button.isEnabled()
 
         port.reply = False
         count = window.sample_count
         window.request_status()
-        wait_for(app, lambda: '시간 초과' in window.status_message.text())
+        wait_for(app, lambda: 'timed out' in window.status_message.text())
         wait_for(app, lambda: window.sample_count > count)
         assert window.status_values['crc_errors'].text() == '305419896'
         assert window.status_button.isEnabled()
         port.reply = True
         window.request_status()
-        wait_for(app, lambda: window.status_message.text() == '조회 성공')
+        wait_for(app, lambda: window.status_message.text() == 'Query successful')
         assert sum(frame[2] == 3 for frame in port.writes) == 3
     finally:
         window.close()
@@ -313,7 +313,7 @@ def test_gui_extended_and_legacy_status_fields(app):
         # Legacy replies must replace old extended values with unsupported, not zero.
         window.on_status_received(decode_status_payload(bytes(16)))
         for key in ('ring_overflow_events', 'rx_dropped_bytes', 'recovery_discarded_bytes', 'stale_measurements'):
-            assert window.status_values[key].text() == '미지원'
+            assert window.status_values[key].text() == 'Unsupported'
         assert window.status_values['crc_errors'].text() == '0'
     finally:
         window.connected = False
@@ -430,7 +430,7 @@ def test_gui_board_track_graph_status_and_stale_display(app, monkeypatch):
         assert len(window.estimated_curve.getData()[0]) >= 1
         assert len(window.estimated_point.getData()[0]) == 1
         window.request_status()
-        wait_for(app, lambda: window.status_message.text() == '조회 성공')
+        wait_for(app, lambda: window.status_message.text() == 'Query successful')
         window.stop_button.click()
         wait_for(app, lambda: window.start_button.isEnabled() and not port.buffer)
         # UI freshness uses the worker's monotonic receive time, not simulation time.

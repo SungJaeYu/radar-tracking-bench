@@ -1,4 +1,4 @@
-"""표적 시나리오를 현재 STM32 CRC-16 규격으로 출력하거나 UART로 송신한다."""
+"""Print scenario frames or send them over UART using the STM32 CRC-16 protocol."""
 import argparse
 from contextlib import nullcontext
 import math
@@ -7,19 +7,24 @@ import time
 
 if __package__:
     from .protocol import build_init_frame, build_measurement_frame_from_radians
-    from .targets import RadarSensorModel, SCENARIOS
+    from .targets import RadarSensorModel, SCENARIOS, SegmentedScenario
 else:
     from protocol import build_init_frame, build_measurement_frame_from_radians
-    from targets import RadarSensorModel, SCENARIOS
+    from targets import RadarSensorModel, SCENARIOS, SegmentedScenario
 
 
 def run(ser, scenario_name, dt, duration, pd, clutter_rate, seed,
         noise=10.0, azimuth_noise=0.01):
-    targets = SCENARIOS[scenario_name]()
+    scenario = SCENARIOS[scenario_name]()
+    if isinstance(scenario, SegmentedScenario):
+        targets = [scenario.target]
+        duration = min(duration, scenario.duration_s)
+    else:
+        targets = scenario
     sensor = RadarSensorModel(pd=pd, clutter_rate=clutter_rate,
                               sigma_range_m=noise, sigma_azimuth_rad=azimuth_noise)
     rng = random.Random(seed)
-    # 미탐지 여부와 무관하게 시퀀스 시작 시 한 번만 INIT을 보낸다.
+    # Send INIT once at sequence start, regardless of missed detections.
     init_frame = build_init_frame()
     if ser is not None:
         ser.write(init_frame)
@@ -29,7 +34,7 @@ def run(ser, scenario_name, dt, duration, pd, clutter_rate, seed,
     step = 0
     start = time.monotonic()
     while step * dt < duration:
-        # 첫 측정은 초기 위치와 t=0을 일치시키고, 다음 스텝 전에 전진한다.
+        # Measure the initial position at t=0, then advance before the next sample.
         timestamp_ms = round(step * dt * 1000)
         measurements = sensor.measure(targets, timestamp_ms, rng)
         print(f"step={step} t={timestamp_ms} ms measurements={len(measurements)}")
@@ -38,7 +43,7 @@ def run(ser, scenario_name, dt, duration, pd, clutter_rate, seed,
                 frame = build_measurement_frame_from_radians(
                     meas.timestamp_ms, meas.range_m, meas.azimuth_rad)
             except ValueError as error:
-                # wire에 표현할 수 없는 측정을 조용히 잘라내거나 보정하지 않는다.
+                # Report unrepresentable measurements rather than silently clipping them.
                 print(f"measurement skipped: {error}")
                 continue
             if ser is not None:
@@ -47,9 +52,12 @@ def run(ser, scenario_name, dt, duration, pd, clutter_rate, seed,
             print(f"range={meas.range_m:.2f} azimuth_rad={meas.azimuth_rad:.6f} "
                   f"frame={frame.hex(' ')}")
         step += 1
-        for target in targets:
-            target.update(dt)
-        # 미탐지 스텝도 시간은 진행한다. 출력 전용 모드에서는 기다리지 않는다.
+        if isinstance(scenario, SegmentedScenario):
+            scenario.update(min(dt, duration - (step - 1) * dt))
+        else:
+            for target in targets:
+                target.update(dt)
+        # Advance time even on missed detections; output-only mode does not wait.
         if ser is not None and step * dt < duration:
             time.sleep(max(0.0, start + step * dt - time.monotonic()))
 
@@ -77,9 +85,12 @@ def main():
         parser.error('pd must be 0..1; clutter and noise must be nonnegative')
     if args.baud <= 0:
         parser.error('baud must be positive')
-    # 현재 펌웨어는 스캔별 다중 측정 연관 기능이 없는 단일 트랙이다.
-    if args.port and (len(SCENARIOS[args.scenario]()) != 1 or args.clutter != 0):
-        parser.error('firmware requires a single target and zero clutter; omit --port for preview')
+    # Firmware has one track and does not associate multiple measurements per scan.
+    if args.port:
+        scenario = SCENARIOS[args.scenario]()
+        target_count = 1 if isinstance(scenario, SegmentedScenario) else len(scenario)
+        if target_count != 1 or args.clutter != 0:
+            parser.error('firmware requires a single target and zero clutter; omit --port for preview')
     connection = nullcontext(None)
     if args.port:
         import serial

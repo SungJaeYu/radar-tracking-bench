@@ -199,7 +199,37 @@ static void test_execution_aggregation(void)
     assert(stats.estimator_predict.max_cycles == 9);
 }
 
+static void test_extended_path_timing(void)
+{
+    reset_test();
+    int64_t origin = -1;
+    assert(!perf_monitor_get_measurement_origin(&origin));
+    perf_monitor_begin_measurement(0, 0);
+    assert(perf_monitor_get_measurement_origin(&origin) && origin == 0);
+    perf_monitor_end_measurement();
+    assert(!perf_monitor_get_measurement_origin(&origin));
+    perf_monitor_record_rx_byte(0, 20);
+    perf_monitor_record_rx_byte(1, 22);
+    perf_monitor_record_rx_byte(-1, 22);
+    perf_monitor_record_tx_timing(1, 3, 5, true, 0);
+    perf_monitor_record_tx_timing(5, 4, 3, true, 4);
+    perf_monitor_record_tx_timing(0, 0, 0, false, -1);
+    perf_monitor_record_rx_isr(9);
+    perf_monitor_record_rx_parser(12);
+    assert(stats.rx_byte_wait.sample_count == 2 && stats.rx_byte_wait.over_budget_count == 1);
+    assert(stats.tx_queue_wait.sample_count == 2 && stats.tx_queue_wait.total_ms == 2);
+    assert(stats.tx_poll.sample_count == 2 && stats.tx_poll.total_ms == 2);
+    assert(stats.parsed_to_tx_poll.sample_count == 1 && stats.parsed_to_tx_poll.total_ms == 5);
+    assert(stats.invalid_timestamps == 4);
+    assert(stats.rx_isr.sample_count == 1 && stats.rx_isr.total_cycles == 9);
+    assert(stats.rx_parser.sample_count == 1 && stats.rx_parser.total_cycles == 12);
+    stats.rx_byte_wait.sample_count = UINT32_MAX;
+    perf_monitor_record_rx_byte(0, 10);
+    assert(stats.rx_byte_wait.total_ms == 41);
+}
+
 static const struct test_case cases[] = {
+    TEST_CASE(test_extended_path_timing),
     TEST_CASE(test_counter_saturation),
     TEST_CASE(test_execution_aggregation),
     TEST_CASE(test_timing_boundaries),

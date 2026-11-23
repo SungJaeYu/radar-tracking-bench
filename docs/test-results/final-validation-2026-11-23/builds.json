@@ -1,0 +1,32 @@
+{
+  "build": {
+    "build_passed": true,
+    "flash_bytes": 43148,
+    "ram_bytes": 15696,
+    "elf_sha256": "2a1e0d10a51407b587c66236c00d6e3d8b943243ef89ffa5c3acb4486eeccd4c"
+  },
+  "build_perf": {
+    "build_passed": true,
+    "flash_bytes": 48504,
+    "ram_bytes": 21184,
+    "elf_sha256": "16fd8a30666a53fd5c9f4983c043e2c0101bceeca17535a8bec49040203d0bde"
+  },
+  "build_debug": {
+    "build_passed": true,
+    "flash_bytes": 59976,
+    "ram_bytes": 16976,
+    "elf_sha256": "f849e4a5f7034e2f54eb49f9b3d4932b19de2717bb431dd0be4e738c18ae70ce"
+  },
+  "build_log_stress": {
+    "build_passed": true,
+    "flash_bytes": 60428,
+    "ram_bytes": 18192,
+    "elf_sha256": "3e0e4a3577143e41cc4bf6a4555e1a20d4367454fd9d6fd37b3d0085dd4bee5c"
+  },
+  "build_transport_stress": {
+    "build_passed": true,
+    "flash_bytes": 43880,
+    "ram_bytes": 16912,
+    "elf_sha256": "8f30469990302a31c32964f90d76403bc2fd2c722f573e1c60f1295c657baca9"
+  }
+}

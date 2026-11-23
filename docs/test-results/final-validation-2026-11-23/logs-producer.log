@@ -1,0 +1,44 @@
+{
+  "mode": "producer",
+  "phases": [
+    {
+      "name": "baseline",
+      "target_hz": 10,
+      "sent": 29,
+      "duration_s": 3.0001213749637827
+    },
+    {
+      "name": "loaded",
+      "target_hz": 10,
+      "sent": 116,
+      "duration_s": 12.000596542027779
+    },
+    {
+      "name": "recovery",
+      "target_hz": 10,
+      "sent": 30,
+      "duration_s": 3.0000415830872953
+    }
+  ],
+  "errors": [],
+  "hex_sha256": "783bdcc9a780209f6e231fe9c549d234c873969d754354373c480f476ae3214a",
+  "last_measurement_ms": 18024,
+  "log_dropped_notice_total": 19876,
+  "producer_sequences_received": 149,
+  "checks": {
+    "no_io_errors": true,
+    "wire_responses_valid": true,
+    "log_loss_observed": true,
+    "status_counters_zero": true,
+    "status_each_phase": true,
+    "status_after_stop": true,
+    "no_fatal_or_assert": true,
+    "single_boot": true,
+    "confirmed": true,
+    "recovery_measurement_logged": true,
+    "timeout_once": true,
+    "producer_completed": true,
+    "producer_started": true
+  },
+  "passed": true
+}

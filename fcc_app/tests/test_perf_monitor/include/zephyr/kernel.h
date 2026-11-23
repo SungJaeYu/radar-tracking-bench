@@ -13,3 +13,5 @@ int64_t k_uptime_get(void);
 int k_thread_stack_space_get(const struct k_thread *p_thread, size_t *out_unused);
 
 #endif
+
+#include <test_perf_mutex.h>

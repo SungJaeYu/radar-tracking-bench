@@ -38,12 +38,19 @@ struct perf_execution_stats {
 };
 
 struct perf_stats {
+    struct perf_latency_stats rx_byte_wait;
+    struct perf_latency_stats tx_queue_wait;
+    struct perf_latency_stats tx_poll;
+    struct perf_latency_stats parsed_to_tx_poll;
+    struct perf_execution_stats rx_isr;
+    struct perf_execution_stats rx_parser;
     struct perf_latency_stats queue_wait;
     struct perf_latency_stats processing;
     struct perf_latency_stats rx_to_submit;
     struct perf_queue_stats queues[PERF_QUEUE_COUNT];
     struct perf_execution_stats estimator_predict;
     struct perf_execution_stats estimator_correct;
+    uint32_t rx_capture_lost;
     uint32_t measurements;
     uint32_t without_submit;
     uint32_t track_submit_failed;
@@ -52,6 +59,7 @@ struct perf_stats {
     uint32_t invalid_timestamps;
 };
 
+// All APIs require thread context with interrupts enabled.
 // All time arguments use board uptime in milliseconds, not sensor timestamps.
 // Begin/end and track submission run only in the handler thread, without nesting.
 // End every measurement, including stale/invalid input and encode failure paths.
@@ -63,6 +71,14 @@ void perf_monitor_end_measurement(void);
 void perf_monitor_record_queue(PerfQueue queue, int result, uint32_t used);
 // True means all uart_poll_out calls returned, not peer reception or wire idle.
 void perf_monitor_record_tx(bool completed);
+// Validity is independent of timestamp value: boot time zero is a valid origin.
+bool perf_monitor_get_measurement_origin(int64_t *out_parsed_ms);
+void perf_monitor_record_rx_byte(int64_t stored_ms, int64_t removed_ms);
+void perf_monitor_record_tx_timing(int64_t queued_ms, int64_t dequeued_ms,
+                                   int64_t completed_ms, bool origin_valid, int64_t parsed_ms);
+void perf_monitor_record_rx_isr(uint64_t elapsed_cycles);
+void perf_monitor_record_rx_capture_lost(void);
+void perf_monitor_record_rx_parser(uint64_t elapsed_cycles);
 
 // Samples that would overflow the count or total are excluded without changing the aggregate.
 void perf_monitor_record_predict(uint64_t elapsed_cycles);

@@ -6,12 +6,16 @@
 
 이전 이름: `radar-track-fcc-hil`.
 
-**STM32 · Zephyr 기반 단일표적 레이더 추적 HIL 프로젝트 — V1 완료 (`v1.0.0`)**
+**STM32 · Zephyr 기반 단일표적 레이더 추적 HIL 프로젝트 — `v1.1.0`**
+
+**릴리스 검증:** 30분 실보드에서 실제 전달한 측정89,057개 모두 응답했고 보드·전송·증거 검사를 통과했습니다. 최종 송신기 수정 후60초 검사도 유효 입력2,993개 모두 대응·보드 오류0입니다. PC 미송신과 RTT는 STM32 릴리스 차단 조건이 아닙니다. 요청50Hz 전체 입력의 검증 한계는 별도로 남깁니다. [완료 범위·검증 근거](docs/release-v1.1.0.md) · [v1.1.1 PC 송신기 개선](https://github.com/SungJaeYu/radar-tracking-bench/issues/8).
 
 PC에서 합성 레이더 측정을 보내고, STM32에서 표적을 추적한 뒤 결과를 PC로 반환합니다.
 정답·측정값·추정값을 비교하고, 통신 오류와 입력 이상치 이후의 복귀를 실보드에서 검증합니다.
 
 [시작하기](#시작하기) · [구현 구조](EXPLAINER.md) · [검증 결과](#검증-결과) · [문서 목차](docs/README.md)
+
+[프로젝트 보드](https://github.com/users/SungJaeYu/projects/1) · [할 일 이슈](https://github.com/SungJaeYu/radar-tracking-bench/issues) · [GUI 무음 시연·분석](docs/analysis/2026-11-23/README.md)
 
 ## 시스템 구성
 
@@ -31,8 +35,10 @@ ISR·큐·스레드의 연결과 데이터 소유권은 [구현 흐름](EXPLAINE
 
 ![현재 GUI의 설정 탭·표적 위치·거리 이력·실행 로그](docs/images/radar-gui-preview.png)
 
-현재 코드의 **보드 없는 미리보기 모드**입니다. 합성 정답과 측정값을 표시하며 보드 추정값은 생성하지 않습니다.
-[GUI 사용법·TRACK 화면](pc_sim/GUI.md) · [실보드 추정값 캡처와 시험 기록](docs/hardware-test-2026-11-18-evaluation.md)
+영어 UI의 **보드 없는 미리보기 모드**입니다. 합성 정답과 측정값을 표시하며 보드 추정값은 생성하지 않습니다.
+[GUI 사용법·TRACK 화면](pc_sim/GUI.md) · [최신 실보드 추정값 캡처와 시험 기록](docs/hardware-test-2026-11-23-v1.1.0.md)
+
+![영어 GUI에서 표시한 STM32 실제 TRACK 추정값](docs/images/radar-gui-board.png)
 
 ## 검증 결과
 
@@ -46,7 +52,19 @@ ISR·큐·스레드의 연결과 데이터 소유권은 [구현 흐름](EXPLAINE
 | 잡음·정확도 | **100회** 잡음/seed 평가, 측정·추정 RMSE와 게이트 거부율 기록 | [조건별 결과](docs/hardware-test-2026-11-19-noise-spike.md#잡음100회) |
 | 오류 복구 | CRC·부분 프레임, 데이터 선 단절·복원, 링버퍼·큐 포화 후 복귀 | [검증 이력](docs/verification-history.md) |
 
-PC RTT는 USB·UART·보드·호스트 대기를 포함합니다. 30분 기록의 관측값은 현재 RTT 예산 이내이지만, 당시 호스트 송신 간격 기준에 따른 실패 판정은 이력에 보존했습니다. 조건·판정 변경과 적용 범위는 [완료 기준](docs/roadmap.md#v1-acceptance)을 따릅니다.
+PC RTT는 USB·UART·보드·호스트 대기를 포함하는 진단값입니다. p99≤20ms·최대≤100ms 한도는 유지하며 초과만으로 STM32 불합격이나 릴리스 차단을 판정하지 않습니다. 현재 `passed`는 관측 부하의 보드 내부·전송·증거 합격을 뜻하며, 전 기간·슬롯 누락 없는50Hz 요청 부하 검증은 별도입니다. 당시 호스트 송신 간격 기준에 따른 실패 판정은 이력에 보존했습니다. 조건·판정 변경과 적용 범위는 [완료 기준](docs/roadmap.md#v1-acceptance)을 따릅니다.
+
+## v1.1.0 추가 기능
+
+PC 표적 운동에 일정 선회율의 원호 운동과 `straight_turn_straight` 구간 시나리오를 추가했습니다. 동쪽 직진10초 → 속도200m/s·뱅크30°의 우90° 선회 약55.49초 → 남쪽 직진10초이며 기존 시나리오도 유지합니다. 펌웨어는 기존 거리·방위각 CV 필터를 사용하며 CT 추정기를 추가한 것은 아닙니다.
+
+```bash
+python -m pc_sim.run_sim --scenario straight_turn_straight --duration 80
+```
+
+`--port`를 생략하면 프레임만 출력합니다. 총 길이는 약75.49초이므로 기본60초로 실행하면 마지막 구간까지 진행하지 않습니다. `run_sim`은 측정 송신만 담당합니다. GUI와 `pc_sim.evaluate`는 고정 방위각·일정 거리 변화율 모델을 유지하며 선회 시나리오 선택을 지원하지 않습니다.
+
+11월23일 STM32 선회 시험은 측정 **755개 모두 대응**, 초기·최종 RESET을 포함한 **보고757개**, 측정 거부·트랙 소실0회를 확인했습니다. 첫2초를 제외한 위치 RMSE는 **전체4.5134m · 선회1.3960m**입니다. 정확도 합격 기준을 별도로 정한 결과는 아니며 이 조건의 관측값입니다. [시험 조건·원시 기록](docs/hardware-test-2026-11-23-v1.1.0.md).
 
 ## 시작하기
 

@@ -1,0 +1,173 @@
+[
+  {
+    "directory": "/private/tmp/perf-fw-rx-normal",
+    "commands": [
+      [
+        "cmake",
+        "--build",
+        "/private/tmp/perf-fw-rx-normal"
+      ],
+      [
+        "ctest",
+        "--test-dir",
+        "/private/tmp/perf-fw-rx-normal",
+        "--output-on-failure"
+      ]
+    ],
+    "build_exit_code": 0,
+    "test_exit_code": 0,
+    "ctest_entries": 45
+  },
+  {
+    "directory": "/private/tmp/perf-fw-handler-normal",
+    "commands": [
+      [
+        "cmake",
+        "--build",
+        "/private/tmp/perf-fw-handler-normal"
+      ],
+      [
+        "ctest",
+        "--test-dir",
+        "/private/tmp/perf-fw-handler-normal",
+        "--output-on-failure"
+      ]
+    ],
+    "build_exit_code": 0,
+    "test_exit_code": 0,
+    "ctest_entries": 31
+  },
+  {
+    "directory": "/private/tmp/perf-fw-tx-normal",
+    "commands": [
+      [
+        "cmake",
+        "--build",
+        "/private/tmp/perf-fw-tx-normal"
+      ],
+      [
+        "ctest",
+        "--test-dir",
+        "/private/tmp/perf-fw-tx-normal",
+        "--output-on-failure"
+      ]
+    ],
+    "build_exit_code": 0,
+    "test_exit_code": 0,
+    "ctest_entries": 4
+  },
+  {
+    "directory": "build_tracking",
+    "commands": [
+      [
+        "cmake",
+        "--build",
+        "build_tracking"
+      ],
+      [
+        "ctest",
+        "--test-dir",
+        "build_tracking",
+        "--output-on-failure"
+      ]
+    ],
+    "build_exit_code": 0,
+    "test_exit_code": 0,
+    "ctest_entries": 21
+  },
+  {
+    "directory": "/private/tmp/perf-fw-monitor",
+    "commands": [
+      [
+        "cmake",
+        "--build",
+        "/private/tmp/perf-fw-monitor"
+      ],
+      [
+        "ctest",
+        "--test-dir",
+        "/private/tmp/perf-fw-monitor",
+        "--output-on-failure"
+      ]
+    ],
+    "build_exit_code": 0,
+    "test_exit_code": 0,
+    "ctest_entries": 13
+  },
+  {
+    "directory": "/private/tmp/perf-fw-rx",
+    "commands": [
+      [
+        "cmake",
+        "--build",
+        "/private/tmp/perf-fw-rx"
+      ],
+      [
+        "ctest",
+        "--test-dir",
+        "/private/tmp/perf-fw-rx",
+        "--output-on-failure"
+      ]
+    ],
+    "build_exit_code": 0,
+    "test_exit_code": 0,
+    "ctest_entries": 51
+  },
+  {
+    "directory": "/private/tmp/perf-fw-handler",
+    "commands": [
+      [
+        "cmake",
+        "--build",
+        "/private/tmp/perf-fw-handler"
+      ],
+      [
+        "ctest",
+        "--test-dir",
+        "/private/tmp/perf-fw-handler",
+        "--output-on-failure"
+      ]
+    ],
+    "build_exit_code": 0,
+    "test_exit_code": 0,
+    "ctest_entries": 32
+  },
+  {
+    "directory": "/private/tmp/perf-fw-tx",
+    "commands": [
+      [
+        "cmake",
+        "--build",
+        "/private/tmp/perf-fw-tx"
+      ],
+      [
+        "ctest",
+        "--test-dir",
+        "/private/tmp/perf-fw-tx",
+        "--output-on-failure"
+      ]
+    ],
+    "build_exit_code": 0,
+    "test_exit_code": 0,
+    "ctest_entries": 4
+  },
+  {
+    "directory": "/private/tmp/radar-perf-resources",
+    "commands": [
+      [
+        "cmake",
+        "--build",
+        "/private/tmp/radar-perf-resources"
+      ],
+      [
+        "ctest",
+        "--test-dir",
+        "/private/tmp/radar-perf-resources",
+        "--output-on-failure"
+      ]
+    ],
+    "build_exit_code": 0,
+    "test_exit_code": 0,
+    "ctest_entries": 3
+  }
+]

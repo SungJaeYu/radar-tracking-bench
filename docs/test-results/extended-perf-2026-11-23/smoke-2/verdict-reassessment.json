@@ -1,0 +1,169 @@
+{
+  "reason": "Do not compare partial snapshot counts as fully drained final traffic. Known observed failures remain failed.",
+  "original_results_unchanged": true,
+  "acceptance_sha256": "295a73e498e2c312609531a14074a23dea400cfc96b1ca70a2e8d0e633169a35",
+  "verdicts": {
+    "board_internal": {
+      "status": "inconclusive",
+      "reasons": [
+        "run aborted or final assessment incomplete",
+        "required guard absent: measurement count reconciles",
+        "required guard absent: no submit failures or invalid times",
+        "required guard absent: invalid measurement is counted without submission",
+        "required guard absent: processing successful sample count",
+        "required guard absent: rx_to_submit successful sample count",
+        "required guard absent: queue wait count includes invalid input",
+        "required guard absent: 20ms board latency budget",
+        "required guard absent: no queue rejection",
+        "required guard absent: no TX encoder failures",
+        "required guard absent: all sampled stacks have headroom",
+        "rx_byte_wait: partial snapshot cannot reconcile final traffic",
+        "rx_parser: partial snapshot cannot reconcile final traffic",
+        "parsed_to_tx_poll: partial snapshot cannot reconcile final traffic"
+      ]
+    },
+    "delivery": {
+      "status": "failed",
+      "reasons": [
+        "run aborted or final assessment incomplete",
+        "Nonzero board error statistics: {'crc_errors': 1, 'length_errors': 0, 'frame_timeouts': 0, 'queue_drops': 0, 'ring_overflow_events': 0, 'rx_dropped_bytes': 0, 'recovery_discarded_bytes': 0, 'stale_measurements': 0}",
+        "required guard absent: all measurements matched once",
+        "required guard absent: all STATUS requests answered",
+        "required guard absent: one post-load timeout report",
+        "required guard absent: RX accepted frame count",
+        "required guard absent: TX queued and polling counts match received frames"
+      ]
+    },
+    "evidence": {
+      "status": "inconclusive",
+      "reasons": [
+        "run aborted or final assessment incomplete",
+        "required guard absent: single firmware boot",
+        "required guard absent: performance summaries remain continuous",
+        "recording did not finish and drain completely",
+        "run failure: AssertionError(\"Nonzero board error statistics: {'crc_errors': 1, 'length_errors': 0, 'frame_timeouts': 0, 'queue_drops': 0, 'ring_overflow_events': 0, 'rx_dropped_bytes': 0, 'recovery_discarded_bytes': 0, 'stale_measurements': 0}\")"
+      ]
+    },
+    "host_rtt": {
+      "status": "failed",
+      "reasons": [
+        "run aborted or final assessment incomplete",
+        "PC RTT p99 exceeds 20ms or is invalid",
+        "PC RTT max exceeds 100ms or is invalid"
+      ]
+    },
+    "requested_load": {
+      "status": "inconclusive",
+      "reasons": [
+        "run aborted or final assessment incomplete",
+        "full requested load duration not observed"
+      ]
+    }
+  },
+  "board_qualification": {
+    "status": "failed",
+    "reasons": [
+      "run aborted or final assessment incomplete",
+      "required guard absent: measurement count reconciles",
+      "required guard absent: no submit failures or invalid times",
+      "required guard absent: invalid measurement is counted without submission",
+      "required guard absent: processing successful sample count",
+      "required guard absent: rx_to_submit successful sample count",
+      "required guard absent: queue wait count includes invalid input",
+      "required guard absent: 20ms board latency budget",
+      "required guard absent: no queue rejection",
+      "required guard absent: no TX encoder failures",
+      "required guard absent: all sampled stacks have headroom",
+      "rx_byte_wait: partial snapshot cannot reconcile final traffic",
+      "rx_parser: partial snapshot cannot reconcile final traffic",
+      "parsed_to_tx_poll: partial snapshot cannot reconcile final traffic",
+      "run aborted or final assessment incomplete",
+      "Nonzero board error statistics: {'crc_errors': 1, 'length_errors': 0, 'frame_timeouts': 0, 'queue_drops': 0, 'ring_overflow_events': 0, 'rx_dropped_bytes': 0, 'recovery_discarded_bytes': 0, 'stale_measurements': 0}",
+      "required guard absent: all measurements matched once",
+      "required guard absent: all STATUS requests answered",
+      "required guard absent: one post-load timeout report",
+      "required guard absent: RX accepted frame count",
+      "required guard absent: TX queued and polling counts match received frames",
+      "run aborted or final assessment incomplete",
+      "required guard absent: single firmware boot",
+      "required guard absent: performance summaries remain continuous",
+      "recording did not finish and drain completely",
+      "run failure: AssertionError(\"Nonzero board error statistics: {'crc_errors': 1, 'length_errors': 0, 'frame_timeouts': 0, 'queue_drops': 0, 'ring_overflow_events': 0, 'rx_dropped_bytes': 0, 'recovery_discarded_bytes': 0, 'stale_measurements': 0}\")"
+    ]
+  },
+  "requested_profile_qualification": {
+    "status": "failed",
+    "reasons": [
+      "run aborted or final assessment incomplete",
+      "required guard absent: measurement count reconciles",
+      "required guard absent: no submit failures or invalid times",
+      "required guard absent: invalid measurement is counted without submission",
+      "required guard absent: processing successful sample count",
+      "required guard absent: rx_to_submit successful sample count",
+      "required guard absent: queue wait count includes invalid input",
+      "required guard absent: 20ms board latency budget",
+      "required guard absent: no queue rejection",
+      "required guard absent: no TX encoder failures",
+      "required guard absent: all sampled stacks have headroom",
+      "rx_byte_wait: partial snapshot cannot reconcile final traffic",
+      "rx_parser: partial snapshot cannot reconcile final traffic",
+      "parsed_to_tx_poll: partial snapshot cannot reconcile final traffic",
+      "run aborted or final assessment incomplete",
+      "Nonzero board error statistics: {'crc_errors': 1, 'length_errors': 0, 'frame_timeouts': 0, 'queue_drops': 0, 'ring_overflow_events': 0, 'rx_dropped_bytes': 0, 'recovery_discarded_bytes': 0, 'stale_measurements': 0}",
+      "required guard absent: all measurements matched once",
+      "required guard absent: all STATUS requests answered",
+      "required guard absent: one post-load timeout report",
+      "required guard absent: RX accepted frame count",
+      "required guard absent: TX queued and polling counts match received frames",
+      "run aborted or final assessment incomplete",
+      "required guard absent: single firmware boot",
+      "required guard absent: performance summaries remain continuous",
+      "recording did not finish and drain completely",
+      "run failure: AssertionError(\"Nonzero board error statistics: {'crc_errors': 1, 'length_errors': 0, 'frame_timeouts': 0, 'queue_drops': 0, 'ring_overflow_events': 0, 'rx_dropped_bytes': 0, 'recovery_discarded_bytes': 0, 'stale_measurements': 0}\")",
+      "run aborted or final assessment incomplete",
+      "full requested load duration not observed"
+    ]
+  },
+  "passed": false,
+  "full_coverage": false,
+  "coverage_gaps": [
+    "physical RX arrival to ISR entry is unmeasured",
+    "physical TX last stop bit is unmeasured",
+    "true WCET and execution-time acceptance limits are unestablished",
+    "physical CPU utilization and accurate ISR attribution are unmeasured",
+    "hardware fault campaigns are not performed",
+    "sampled stack headroom is not a stack safety certification"
+  ],
+  "cpu_scheduler_windows": [
+    {
+      "uptime_ms": 10002,
+      "interval_ms": 5001,
+      "non_idle_percent": 17.387126941903368
+    },
+    {
+      "uptime_ms": 15004,
+      "interval_ms": 5002,
+      "non_idle_percent": 23.598942702598197
+    },
+    {
+      "uptime_ms": 20005,
+      "interval_ms": 5001,
+      "non_idle_percent": 22.70239636036249
+    },
+    {
+      "uptime_ms": 25007,
+      "interval_ms": 5002,
+      "non_idle_percent": 23.501966201621624
+    }
+  ],
+  "cpu_scheduler_scope": "non-idle runtime accounting; not physical CPU/ISR utilization or WCET",
+  "cpu_scheduler_non_idle_limit_percent": 80,
+  "sampled_stack_minimum_bytes": {
+    "rx": 256,
+    "tx": 256,
+    "handler": 512,
+    "main": 256
+  },
+  "execution_timing_scope": "observed min/mean/max only; no execution WCET limits",
+  "stack_scope": "sampled 25% reserve only; no stack safety certification"
+}

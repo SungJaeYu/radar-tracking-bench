@@ -1,0 +1,3 @@
+[00:02:45.224,000] [0m<inf> frame_handler: INIT: track=reset measurement_monitor=reset[0m
+[00:02:45.226,000] [0m<inf> frame_handler: Track started: state=TENTATIVE sensor_ms=0 range_m=999.00 azimuth_rad=0.2618[0m
+[00:02:45.447,000] [0m<inf> frame_handler: Track state: previous=TENTATIVE current=CONFIRMED[0m

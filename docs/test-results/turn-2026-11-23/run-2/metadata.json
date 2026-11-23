@@ -1,0 +1,18 @@
+{
+  "started_utc": "2026-11-23T03:38:01.584785+00:00",
+  "head": "20f069fcd03564a420dab090d6d8d45b317cc34d",
+  "port": "/dev/cu.usbserial-A5069RR4",
+  "console": "/dev/cu.usbmodem11203",
+  "hz": 10,
+  "noise": 0,
+  "warmup_ms": 2000,
+  "scenario_duration_s": 75.48681856396072,
+  "sha256": {
+    "pc_sim/targets.py": "894941c6a9cea8fb5ccbd1b413fe3e390b88eef4e3591c67988de3a260f60e8e",
+    "pc_sim/protocol.py": "f19619eb4acf9b419dd2f09ee1280f3a5f95f966fb5459bc1507e98293398ebc",
+    "pc_sim/frame_parser.py": "3fd1bfab75891821bb5b2848e05e2a243b831b7a4a8ae32c2890f1b4357187c8",
+    "build/zephyr/zephyr.elf": "da7e9cd716f9469f23dd5ea08a74f2a34364af02892113b9abbd1354456803a4",
+    "build/zephyr/.config": "0b7a78e59526e4de7093899f9dd3533bc3c06f78142a55fd4fc7a54d8742cd4a",
+    "docs/test-results/turn-2026-11-23/board_check.py": "ee79f59462487e39ec00b2c28c49a48bcf33a3012064a7492b6b87759fcc1cf8"
+  }
+}

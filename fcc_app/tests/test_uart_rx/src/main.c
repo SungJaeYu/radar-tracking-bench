@@ -7,11 +7,19 @@
 // Do not compile uart_rx.c separately into this test executable.
 #include "transport/uart_rx.c"
 #include "transport/rx_frame_processor.c"
+#if defined(CONFIG_RADAR_PERF_MONITOR)
+// Keep the existing private-state fixtures without adding a production reset API.
+#include "diagnostics/perf_rx_capture.c"
+#endif
 
 // Reserve one slot to distinguish a full ring from an empty ring.
 #define RX_CAPACITY (RING_BUFFER_SIZE - 1U)
 _Static_assert(RING_BUFFER_SIZE >= 9, "Overflow fixtures require at least eight usable slots");
 _Static_assert(RING_BUFFER_SIZE <= UINT8_MAX + 1U, "Ring indices must represent every slot");
+
+unsigned int irq_locked;
+bool test_in_isr;
+uint64_t test_timing_cycles;
 
 static unsigned int submitted;
 static struct rx_frame last_frame;
@@ -28,7 +36,9 @@ static void receive(const uint8_t *p_bytes, size_t size)
     p_fifo_bytes = p_bytes;
     fifo_size = size;
     fifo_position = 0;
+    test_in_isr = true;
     uart_callback(&test_device, NULL);
+    test_in_isr = false;
     assert(fifo_position == size);
 }
 
@@ -65,6 +75,13 @@ int frame_handler_submit(const struct rx_frame *p_frame)
 static void reset_test(void)
 {
     irq_locked = 0;
+    test_in_isr = false;
+#if defined(CONFIG_RADAR_PERF_MONITOR)
+    atomic_store(&capture_head, 0);
+    atomic_store(&capture_tail, 0);
+    atomic_store(&capture_lost, 0);
+    last_capture_service_ms = 100;
+#endif
     atomic_set(&rx_overflow, 0);
     atomic_set(&ring_overflow_events, 0);
     atomic_set(&rx_dropped_bytes, 0);
@@ -564,7 +581,102 @@ static void test_uart_stats_wrapped_ring_recovery(void)
                       before.recovery_discarded_bytes);
 }
 
+#if defined(CONFIG_RADAR_PERF_MONITOR)
+static void test_perf_capture_deferred_and_loss_visible(void)
+{
+    reset_test();
+    struct perf_stats before, after;
+    assert(perf_monitor_get_stats(&before) == 0);
+    const uint8_t byte = 0;
+    receive(&byte, 1);
+    assert(perf_monitor_get_stats(&after) == 0);
+    assert(after.rx_isr.sample_count == before.rx_isr.sample_count);
+    struct rx_byte_sample sample;
+    const unsigned int key = irq_lock();
+    assert(rx_pop_byte(&sample));
+    irq_unlock(key);
+    perf_rx_capture_collect_byte(sample.stored_cycles);
+    perf_rx_capture_collect_isr();
+    assert(perf_monitor_get_stats(&after) == 0);
+    assert(after.rx_isr.sample_count == before.rx_isr.sample_count + 1);
+    // Even callbacks without bytes must preserve capture loss as a sticky failure.
+    for (unsigned int i = 0; i < RX_ISR_CAPTURE_COUNT; ++i) {
+        receive(&byte, 0);
+    }
+    assert(atomic_load(&capture_lost) == 1U);
+    perf_rx_capture_collect_isr();
+    assert(perf_monitor_get_stats(&after) == 0);
+    assert(after.rx_capture_lost == 1U);
+}
+
+static void test_perf_cycle_wrap_and_service_gap(void)
+{
+    reset_test();
+    struct perf_stats before, after;
+    assert(perf_monitor_get_stats(&before) == 0);
+    const uint8_t byte = 0;
+    test_timing_cycles = UINT32_MAX - 99U;
+    receive(&byte, 1);
+    test_timing_cycles = 200000U - 100U;
+    struct rx_byte_sample sample;
+    assert(rx_pop_byte(&sample));
+    perf_rx_capture_collect_byte(sample.stored_cycles);
+    assert(perf_monitor_get_stats(&after) == 0);
+    assert(after.rx_byte_wait.total_ms == before.rx_byte_wait.total_ms + 2);
+    test_uptime_ms += 1000;
+    perf_rx_capture_collect_isr();
+    assert(perf_monitor_get_stats(&after) == 0);
+    assert(after.rx_capture_lost == 1U);
+}
+
+static void test_perf_residence_overflow_alignment(void)
+{
+    reset_test();
+    struct perf_stats before, after;
+    assert(perf_monitor_get_stats(&before) == 0);
+    // Exercise wrap, boot-time zero, failed pushes, drain and reuse after reset.
+    rx_ring.head = rx_ring.tail = 250;
+    test_uptime_ms = 0;
+    test_timing_cycles = 0;
+    last_capture_service_ms = 0;
+    receive_overflow(init_frame, sizeof(init_frame), 0);
+    test_uptime_ms = 9;
+    test_timing_cycles = 900000;
+    perf_rx_capture_collect_isr();
+    rx_recover_overflow();
+    assert(perf_monitor_get_stats(&after) == 0);
+    assert(after.rx_isr.sample_count - before.rx_isr.sample_count == 1);
+#if defined(CONFIG_RADAR_RX_OVERFLOW_DRAIN)
+    assert(after.rx_byte_wait.sample_count - before.rx_byte_wait.sample_count == RX_CAPACITY);
+    assert(after.rx_byte_wait.total_ms - before.rx_byte_wait.total_ms == RX_CAPACITY * 9);
+    assert(after.rx_parser.sample_count - before.rx_parser.sample_count == RX_CAPACITY);
+#else
+    assert(after.rx_byte_wait.sample_count == before.rx_byte_wait.sample_count);
+#endif
+    before = after;
+    test_uptime_ms = 20;
+    test_timing_cycles = 2000000;
+    receive(init_frame, sizeof(init_frame));
+    test_uptime_ms = 23;
+    test_timing_cycles = 2300000;
+    struct rx_byte_sample sample;
+    while (rx_pop_byte(&sample)) {
+        perf_rx_capture_collect_byte(sample.stored_cycles);
+        rx_frame_processor_feed(sample.byte);
+    }
+    assert(perf_monitor_get_stats(&after) == 0);
+    assert(after.rx_byte_wait.sample_count - before.rx_byte_wait.sample_count == sizeof(init_frame));
+    assert(after.rx_byte_wait.total_ms - before.rx_byte_wait.total_ms == sizeof(init_frame) * 3);
+    assert(after.invalid_timestamps == before.invalid_timestamps);
+}
+#endif
+
 static const struct test_case cases[] = {
+#if defined(CONFIG_RADAR_PERF_MONITOR)
+    TEST_CASE(test_perf_residence_overflow_alignment),
+    TEST_CASE(test_perf_capture_deferred_and_loss_visible),
+    TEST_CASE(test_perf_cycle_wrap_and_service_gap),
+#endif
     TEST_CASE(test_uart_stats_normal_receive),
     TEST_CASE(test_uart_stats_overflow_and_recovery),
     TEST_CASE(test_uart_stats_wrapped_ring_recovery),

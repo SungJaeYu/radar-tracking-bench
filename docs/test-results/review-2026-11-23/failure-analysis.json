@@ -1,0 +1,2938 @@
+{
+  "scope": "Offline review only; no new board run, no mutation of prior evidence.",
+  "timing_limit": "PC times include host scheduling, writes, device/transport, reads. Correlation does not identify an exclusive cause.",
+  "script_sha256": "9ec7f4df5b15a3daba9613b75edaa9027ca4b466b155293df17cd9c94591098c",
+  "protocol_decoder_sha256": "dd5d87c1c09bd0f62567de8f7bd8ef37bf2527c42021a18c17de13ccace34d54",
+  "session_text_hash_scope": "UTF-8 text after Python universal-newline normalization; hashes validate this replay input, not byte-identical archive membership.",
+  "runs": [
+    {
+      "run": "release-v1.1.0-2026-11-23/perf-load",
+      "raw_validation_passed": true,
+      "independent_crc_method": "binascii.crc_hqx(init=0xffff)",
+      "wire": {
+        "tx": {
+          "bytes": 1354692,
+          "frame_types": {
+            "1": 1,
+            "3": 1801,
+            "2": 89592
+          },
+          "crc_errors": 0,
+          "length_errors": 0,
+          "nonframe_bytes": 0,
+          "trailing_partial_bytes": 0
+        },
+        "rx": {
+          "bytes": 3381615,
+          "frame_types": {
+            "7": 89594,
+            "6": 1801
+          },
+          "crc_errors": 0,
+          "length_errors": 0,
+          "nonframe_bytes": 0,
+          "trailing_partial_bytes": 0
+        }
+      },
+      "samples": 89592,
+      "reports": 89594,
+      "statuses": 1801,
+      "sample_and_decoded_csv_matches_raw": true,
+      "load_samples": 89592,
+      "rtt_ms": {
+        "count": 89592,
+        "p99": 9.079916984774172,
+        "max": 220.24637507274747
+      },
+      "rtt_over_100ms": [
+        {
+          "index": 25634,
+          "sensor_ms": 513920,
+          "tx_s": 586554.66114925,
+          "rx_s": 586554.79609575,
+          "rtt_ms": 134.9464999511838,
+          "next_tx_gap_ms": 92.03537495341152,
+          "rx_after_next_tx_ms": 42.911124997772276,
+          "max_overlapping_send_gap_ms": 92.03537495341152
+        },
+        {
+          "index": 26608,
+          "sensor_ms": 533900,
+          "tx_s": 586574.667535625,
+          "rx_s": 586574.787415958,
+          "rtt_ms": 119.88033296074718,
+          "next_tx_gap_ms": 20.685540977865458,
+          "rx_after_next_tx_ms": 99.19479198288172,
+          "max_overlapping_send_gap_ms": 53.807000047527254
+        },
+        {
+          "index": 43761,
+          "sensor_ms": 877940,
+          "tx_s": 586918.68683125,
+          "rx_s": 586918.890781958,
+          "rtt_ms": 203.950708033517,
+          "next_tx_gap_ms": 125.13875006698072,
+          "rx_after_next_tx_ms": 78.81195796653628,
+          "max_overlapping_send_gap_ms": 125.13875006698072
+        },
+        {
+          "index": 53304,
+          "sensor_ms": 1069440,
+          "tx_s": 587110.178413875,
+          "rx_s": 587110.300134625,
+          "rtt_ms": 121.72075000125915,
+          "next_tx_gap_ms": 77.12529099080712,
+          "rx_after_next_tx_ms": 44.59545901045203,
+          "max_overlapping_send_gap_ms": 77.12529099080712
+        },
+        {
+          "index": 60620,
+          "sensor_ms": 1216080,
+          "tx_s": 587256.821799583,
+          "rx_s": 587256.981561583,
+          "rtt_ms": 159.7619999665767,
+          "next_tx_gap_ms": 159.3878329731524,
+          "rx_after_next_tx_ms": 0.3741669934242964,
+          "max_overlapping_send_gap_ms": 159.3878329731524
+        },
+        {
+          "index": 61273,
+          "sensor_ms": 1229460,
+          "tx_s": 587270.202119666,
+          "rx_s": 587270.306303083,
+          "rtt_ms": 104.1834169300273,
+          "next_tx_gap_ms": 37.717416998930275,
+          "rx_after_next_tx_ms": 66.46599993109703,
+          "max_overlapping_send_gap_ms": 65.80204202327877
+        },
+        {
+          "index": 62636,
+          "sensor_ms": 1257340,
+          "tx_s": 587298.080583375,
+          "rx_s": 587298.18441825,
+          "rtt_ms": 103.83487504441291,
+          "next_tx_gap_ms": 103.01091603469104,
+          "rx_after_next_tx_ms": 0.8239590097218752,
+          "max_overlapping_send_gap_ms": 103.01091603469104
+        },
+        {
+          "index": 62838,
+          "sensor_ms": 1261440,
+          "tx_s": 587302.194659333,
+          "rx_s": 587302.304540208,
+          "rtt_ms": 109.88087498117238,
+          "next_tx_gap_ms": 110.45008304063231,
+          "rx_after_next_tx_ms": -0.5692080594599247,
+          "max_overlapping_send_gap_ms": 110.45008304063231
+        },
+        {
+          "index": 63353,
+          "sensor_ms": 1271900,
+          "tx_s": 587312.653142666,
+          "rx_s": 587312.757192041,
+          "rtt_ms": 104.04937504790723,
+          "next_tx_gap_ms": 103.48304198123515,
+          "rx_after_next_tx_ms": 0.5663330666720867,
+          "max_overlapping_send_gap_ms": 103.48304198123515
+        },
+        {
+          "index": 64267,
+          "sensor_ms": 1290480,
+          "tx_s": 587331.218400833,
+          "rx_s": 587331.438647208,
+          "rtt_ms": 220.24637507274747,
+          "next_tx_gap_ms": 219.4194580661133,
+          "rx_after_next_tx_ms": 0.8269170066341758,
+          "max_overlapping_send_gap_ms": 219.4194580661133
+        },
+        {
+          "index": 77109,
+          "sensor_ms": 1548660,
+          "tx_s": 587589.404849041,
+          "rx_s": 587589.534380583,
+          "rtt_ms": 129.5315419556573,
+          "next_tx_gap_ms": 129.15616703685373,
+          "rx_after_next_tx_ms": 0.37537491880357265,
+          "max_overlapping_send_gap_ms": 129.15616703685373
+        },
+        {
+          "index": 77169,
+          "sensor_ms": 1550100,
+          "tx_s": 587590.844461083,
+          "rx_s": 587590.966975958,
+          "rtt_ms": 122.51487502362579,
+          "next_tx_gap_ms": 19.150667008943856,
+          "rx_after_next_tx_ms": 103.36420801468194,
+          "max_overlapping_send_gap_ms": 76.53058297000825
+        },
+        {
+          "index": 77170,
+          "sensor_ms": 1550120,
+          "tx_s": 587590.86361175,
+          "rx_s": 587590.966975958,
+          "rtt_ms": 103.36420801468194,
+          "next_tx_gap_ms": 26.563083054497838,
+          "rx_after_next_tx_ms": 76.8011249601841,
+          "max_overlapping_send_gap_ms": 76.53058297000825
+        },
+        {
+          "index": 77234,
+          "sensor_ms": 1551460,
+          "tx_s": 587592.215121,
+          "rx_s": 587592.346235333,
+          "rtt_ms": 131.11433305311948,
+          "next_tx_gap_ms": 11.282041086815298,
+          "rx_after_next_tx_ms": 119.83229196630418,
+          "max_overlapping_send_gap_ms": 101.88183397985995
+        },
+        {
+          "index": 77235,
+          "sensor_ms": 1551480,
+          "tx_s": 587592.226403041,
+          "rx_s": 587592.346235333,
+          "rtt_ms": 119.83229196630418,
+          "next_tx_gap_ms": 101.88183397985995,
+          "rx_after_next_tx_ms": 17.950457986444235,
+          "max_overlapping_send_gap_ms": 101.88183397985995
+        },
+        {
+          "index": 77303,
+          "sensor_ms": 1552940,
+          "tx_s": 587593.703477041,
+          "rx_s": 587593.804455666,
+          "rtt_ms": 100.97862500697374,
+          "next_tx_gap_ms": 0.37083402276039124,
+          "rx_after_next_tx_ms": 100.60779098421335,
+          "max_overlapping_send_gap_ms": 90.06254095584154
+        },
+        {
+          "index": 77304,
+          "sensor_ms": 1552960,
+          "tx_s": 587593.703847875,
+          "rx_s": 587593.804455666,
+          "rtt_ms": 100.60779098421335,
+          "next_tx_gap_ms": 90.06254095584154,
+          "rx_after_next_tx_ms": 10.545250028371811,
+          "max_overlapping_send_gap_ms": 90.06254095584154
+        },
+        {
+          "index": 77636,
+          "sensor_ms": 1559840,
+          "tx_s": 587600.580153041,
+          "rx_s": 587600.689260833,
+          "rtt_ms": 109.10779191181064,
+          "next_tx_gap_ms": 109.62970892433077,
+          "rx_after_next_tx_ms": -0.5219170125201344,
+          "max_overlapping_send_gap_ms": 109.62970892433077
+        },
+        {
+          "index": 78068,
+          "sensor_ms": 1568660,
+          "tx_s": 587609.403992416,
+          "rx_s": 587609.570705833,
+          "rtt_ms": 166.71341704204679,
+          "next_tx_gap_ms": 165.44195904862136,
+          "rx_after_next_tx_ms": 1.2714579934254289,
+          "max_overlapping_send_gap_ms": 165.44195904862136
+        },
+        {
+          "index": 80520,
+          "sensor_ms": 1618060,
+          "tx_s": 587658.812010291,
+          "rx_s": 587658.951170791,
+          "rtt_ms": 139.16050002444535,
+          "next_tx_gap_ms": 33.42991694808006,
+          "rx_after_next_tx_ms": 105.73058307636529,
+          "max_overlapping_send_gap_ms": 73.19870800711215
+        },
+        {
+          "index": 80521,
+          "sensor_ms": 1618100,
+          "tx_s": 587658.845440208,
+          "rx_s": 587658.951170791,
+          "rtt_ms": 105.73058307636529,
+          "next_tx_gap_ms": 73.19870800711215,
+          "rx_after_next_tx_ms": 32.53187506925315,
+          "max_overlapping_send_gap_ms": 73.19870800711215
+        }
+      ],
+      "send_gaps_ms": {
+        "count": 89591,
+        "p99": 21.924249944277108,
+        "max": 219.4194580661133
+      },
+      "crc_window": null,
+      "unmatched_samples": [],
+      "session_metadata_closed": true,
+      "result_recording_complete": null,
+      "recording": null,
+      "historical_passed": false,
+      "historical_verdicts": null,
+      "original_acceptance_replay": {
+        "recorded_sha256": null,
+        "matching_source": null
+      },
+      "input_sha256": {
+        "samples.csv": "bd18c8a2d0b4e32ca62a231a1286bcdb927032c00ae8a319d52c91aaa42c68a9",
+        "reports.csv": "d42c72eaa99b975ab58cacbc7aefc259d0a9fa8c23f72f74d02455dc95fe6da4",
+        "status.csv": "55afff6cd9b63e8d5627de2a07d886d278ae7e701616dbb39606780d6bf637e9",
+        "wire.csv": "027583745f0925a5c64382e37103f84934ca0a2578f94165dd1d5208403bccde",
+        "metadata.json": "af47d03371271f885452409be64fff756cafd7c73820a6d5e81d28dfea948e90"
+      },
+      "final_two_performance_snapshots": [
+        {
+          "header": {
+            "uptime_ms": 1805325,
+            "measurements": 89592,
+            "without_submit": 0,
+            "submit_failed": 0,
+            "invalid_time": 0
+          },
+          "queue_wait": {
+            "n": 89592,
+            "total_ms": 3484,
+            "p50_bin": 0,
+            "p95_bin": 0,
+            "p99_bin": 1,
+            "max_ms": 1,
+            "over20": 0
+          },
+          "processing": {
+            "n": 89592,
+            "total_ms": 10507,
+            "p50_bin": 0,
+            "p95_bin": 1,
+            "p99_bin": 1,
+            "max_ms": 1,
+            "over20": 0
+          },
+          "rx_to_submit": {
+            "n": 89592,
+            "total_ms": 13991,
+            "p50_bin": 0,
+            "p95_bin": 1,
+            "p99_bin": 1,
+            "max_ms": 1,
+            "over20": 0
+          },
+          "estimator_predict": {
+            "n": 89591,
+            "min_ns": 27018,
+            "mean_ns": 29504,
+            "max_ns": 840083
+          },
+          "estimator_correct": {
+            "n": 89591,
+            "min_ns": 33361,
+            "mean_ns": 35666,
+            "max_ns": 153523
+          },
+          "queue rx": {
+            "accepted": 91393,
+            "rejected": 0,
+            "observed_max_used": 1
+          },
+          "queue tx": {
+            "accepted": 91393,
+            "rejected": 0,
+            "observed_max_used": 3
+          },
+          "tx": {
+            "poll_completed": 91393,
+            "encode_failed": 0
+          },
+          "stack rx": {
+            "unused": 784,
+            "min_unused": 784
+          },
+          "stack handler": {
+            "unused": 1360,
+            "min_unused": 1360
+          },
+          "stack tx": {
+            "unused": 736,
+            "min_unused": 736
+          }
+        },
+        {
+          "header": {
+            "uptime_ms": 1810325,
+            "measurements": 89592,
+            "without_submit": 0,
+            "submit_failed": 0,
+            "invalid_time": 0
+          },
+          "queue_wait": {
+            "n": 89592,
+            "total_ms": 3484,
+            "p50_bin": 0,
+            "p95_bin": 0,
+            "p99_bin": 1,
+            "max_ms": 1,
+            "over20": 0
+          },
+          "processing": {
+            "n": 89592,
+            "total_ms": 10507,
+            "p50_bin": 0,
+            "p95_bin": 1,
+            "p99_bin": 1,
+            "max_ms": 1,
+            "over20": 0
+          },
+          "rx_to_submit": {
+            "n": 89592,
+            "total_ms": 13991,
+            "p50_bin": 0,
+            "p95_bin": 1,
+            "p99_bin": 1,
+            "max_ms": 1,
+            "over20": 0
+          },
+          "estimator_predict": {
+            "n": 89591,
+            "min_ns": 27018,
+            "mean_ns": 29504,
+            "max_ns": 840083
+          },
+          "estimator_correct": {
+            "n": 89591,
+            "min_ns": 33361,
+            "mean_ns": 35666,
+            "max_ns": 153523
+          },
+          "queue rx": {
+            "accepted": 91394,
+            "rejected": 0,
+            "observed_max_used": 1
+          },
+          "queue tx": {
+            "accepted": 91395,
+            "rejected": 0,
+            "observed_max_used": 3
+          },
+          "tx": {
+            "poll_completed": 91395,
+            "encode_failed": 0
+          },
+          "stack rx": {
+            "unused": 784,
+            "min_unused": 784
+          },
+          "stack handler": {
+            "unused": 1360,
+            "min_unused": 1360
+          },
+          "stack tx": {
+            "unused": 736,
+            "min_unused": 736
+          }
+        }
+      ]
+    },
+    {
+      "run": "rtt-investigation-2026-11-23/run-1",
+      "raw_validation_passed": true,
+      "independent_crc_method": "binascii.crc_hqx(init=0xffff)",
+      "wire": {
+        "tx": {
+          "bytes": 135867,
+          "frame_types": {
+            "1": 1,
+            "3": 181,
+            "2": 8985
+          },
+          "crc_errors": 0,
+          "length_errors": 0,
+          "nonframe_bytes": 0,
+          "trailing_partial_bytes": 0
+        },
+        "rx": {
+          "bytes": 339216,
+          "frame_types": {
+            "7": 8987,
+            "6": 181
+          },
+          "crc_errors": 0,
+          "length_errors": 0,
+          "nonframe_bytes": 0,
+          "trailing_partial_bytes": 0
+        }
+      },
+      "samples": 8985,
+      "reports": 8987,
+      "statuses": 181,
+      "sample_and_decoded_csv_matches_raw": true,
+      "load_samples": 8985,
+      "rtt_ms": {
+        "count": 8985,
+        "p99": 8.73624999076128,
+        "max": 83.700375049375
+      },
+      "rtt_over_100ms": [],
+      "send_gaps_ms": {
+        "count": 8984,
+        "p99": 21.661499980837107,
+        "max": 83.91758298967034
+      },
+      "crc_window": null,
+      "unmatched_samples": [],
+      "session_metadata_closed": true,
+      "result_recording_complete": null,
+      "recording": null,
+      "historical_passed": true,
+      "historical_verdicts": null,
+      "original_acceptance_replay": {
+        "recorded_sha256": null,
+        "matching_source": null
+      },
+      "input_sha256": {
+        "samples.csv": "0fd63485dccef1eefa289506d8238e5b1f1e4444ecddb8274d395bc066cea7b5",
+        "reports.csv": "6bf80a90a0a351ee18c3591e68cf39f90e343d7dd50c5b6ac00cc7ec324ca584",
+        "status.csv": "b2f1f53cf16130ee65ab90b906ff5f503fb169193a8bbca2d3356224fd28eb92",
+        "wire.csv": "1725c2f011fb068de4a0db3a57c55956c9f19685c912556cdd4d72028dda910c",
+        "metadata.json": "921db6fa07a7e614d61a4f18bc436315373149a259055e3a46b56dc98f23f57e"
+      },
+      "final_two_performance_snapshots": [
+        {
+          "header": {
+            "uptime_ms": 185032,
+            "measurements": 8921,
+            "without_submit": 0,
+            "submit_failed": 0,
+            "invalid_time": 0
+          },
+          "queue_wait": {
+            "n": 8921,
+            "total_ms": 327,
+            "p50_bin": 0,
+            "p95_bin": 0,
+            "p99_bin": 1,
+            "max_ms": 1,
+            "over20": 0
+          },
+          "processing": {
+            "n": 8921,
+            "total_ms": 1081,
+            "p50_bin": 0,
+            "p95_bin": 1,
+            "p99_bin": 1,
+            "max_ms": 1,
+            "over20": 0
+          },
+          "rx_to_submit": {
+            "n": 8921,
+            "total_ms": 1408,
+            "p50_bin": 0,
+            "p95_bin": 1,
+            "p99_bin": 1,
+            "max_ms": 1,
+            "over20": 0
+          },
+          "estimator_predict": {
+            "n": 8920,
+            "min_ns": 27018,
+            "mean_ns": 29560,
+            "max_ns": 87662
+          },
+          "estimator_correct": {
+            "n": 8920,
+            "min_ns": 33361,
+            "mean_ns": 35731,
+            "max_ns": 153425
+          },
+          "queue rx": {
+            "accepted": 9101,
+            "rejected": 0,
+            "observed_max_used": 0
+          },
+          "queue tx": {
+            "accepted": 9101,
+            "rejected": 0,
+            "observed_max_used": 1
+          },
+          "tx": {
+            "poll_completed": 9101,
+            "encode_failed": 0
+          },
+          "stack rx": {
+            "unused": 784,
+            "min_unused": 784
+          },
+          "stack handler": {
+            "unused": 1360,
+            "min_unused": 1360
+          },
+          "stack tx": {
+            "unused": 736,
+            "min_unused": 736
+          }
+        },
+        {
+          "header": {
+            "uptime_ms": 190033,
+            "measurements": 8985,
+            "without_submit": 0,
+            "submit_failed": 0,
+            "invalid_time": 0
+          },
+          "queue_wait": {
+            "n": 8985,
+            "total_ms": 331,
+            "p50_bin": 0,
+            "p95_bin": 0,
+            "p99_bin": 1,
+            "max_ms": 1,
+            "over20": 0
+          },
+          "processing": {
+            "n": 8985,
+            "total_ms": 1090,
+            "p50_bin": 0,
+            "p95_bin": 1,
+            "p99_bin": 1,
+            "max_ms": 1,
+            "over20": 0
+          },
+          "rx_to_submit": {
+            "n": 8985,
+            "total_ms": 1421,
+            "p50_bin": 0,
+            "p95_bin": 1,
+            "p99_bin": 1,
+            "max_ms": 1,
+            "over20": 0
+          },
+          "estimator_predict": {
+            "n": 8984,
+            "min_ns": 27018,
+            "mean_ns": 29560,
+            "max_ns": 87662
+          },
+          "estimator_correct": {
+            "n": 8984,
+            "min_ns": 33361,
+            "mean_ns": 35726,
+            "max_ns": 153425
+          },
+          "queue rx": {
+            "accepted": 9167,
+            "rejected": 0,
+            "observed_max_used": 0
+          },
+          "queue tx": {
+            "accepted": 9168,
+            "rejected": 0,
+            "observed_max_used": 1
+          },
+          "tx": {
+            "poll_completed": 9168,
+            "encode_failed": 0
+          },
+          "stack rx": {
+            "unused": 784,
+            "min_unused": 784
+          },
+          "stack handler": {
+            "unused": 1360,
+            "min_unused": 1360
+          },
+          "stack tx": {
+            "unused": 736,
+            "min_unused": 736
+          }
+        }
+      ]
+    },
+    {
+      "run": "rtt-investigation-2026-11-23/threaded-smoke",
+      "raw_validation_passed": true,
+      "independent_crc_method": "binascii.crc_hqx(init=0xffff)",
+      "wire": {
+        "tx": {
+          "bytes": 45270,
+          "frame_types": {
+            "1": 2,
+            "3": 61,
+            "2": 2992,
+            "5": 2
+          },
+          "crc_errors": 0,
+          "length_errors": 0,
+          "nonframe_bytes": 0,
+          "trailing_partial_bytes": 0
+        },
+        "rx": {
+          "bytes": 113109,
+          "frame_types": {
+            "7": 2996,
+            "6": 61
+          },
+          "crc_errors": 0,
+          "length_errors": 0,
+          "nonframe_bytes": 0,
+          "trailing_partial_bytes": 0
+        }
+      },
+      "samples": 2991,
+      "reports": 2996,
+      "statuses": 61,
+      "sample_and_decoded_csv_matches_raw": true,
+      "load_samples": 2988,
+      "rtt_ms": {
+        "count": 2988,
+        "p99": 8.737083058804274,
+        "max": 158.1084169447422
+      },
+      "rtt_over_100ms": [
+        {
+          "index": 2450,
+          "sensor_ms": 49120,
+          "tx_s": 589126.406320916,
+          "rx_s": 589126.564429333,
+          "rtt_ms": 158.1084169447422,
+          "next_tx_gap_ms": 76.62970898672938,
+          "rx_after_next_tx_ms": 81.47870795801282,
+          "max_overlapping_send_gap_ms": 81.14254102110863
+        }
+      ],
+      "send_gaps_ms": {
+        "count": 2987,
+        "p99": 21.89245808403939,
+        "max": 81.14254102110863
+      },
+      "crc_window": null,
+      "unmatched_samples": [],
+      "session_metadata_closed": true,
+      "result_recording_complete": null,
+      "recording": {
+        "enqueued": 12547,
+        "written": 12547,
+        "capacity": 1024
+      },
+      "historical_passed": false,
+      "historical_verdicts": null,
+      "original_acceptance_replay": {
+        "recorded_sha256": null,
+        "matching_source": null
+      },
+      "input_sha256": {
+        "samples.csv": "efb33d85e93b9e4736fb476b94a5ae946185f94671c7d95d55bdba69d2425fc5",
+        "reports.csv": "277280ed938fcf30879860ccdf0589604983d7f2a95e1425ef523dda6cfb8ca4",
+        "status.csv": "8816cd900cc3ca62ff64936a1ed5291319e5f6e45c53ee9f7ba5ddb9be792d17",
+        "wire.csv": "7f438ea735b61c17ea998e15a922265ac3f086a1ef53ec24591d9d855a787d95",
+        "metadata.json": "10e06ab9a5993292940768b6adc7a8a9ee6416ea82c7a16d440701ac36a92ec2"
+      },
+      "final_two_performance_snapshots": [
+        {
+          "header": {
+            "uptime_ms": 65011,
+            "measurements": 2918,
+            "without_submit": 0,
+            "submit_failed": 0,
+            "invalid_time": 0
+          },
+          "queue_wait": {
+            "n": 2918,
+            "total_ms": 100,
+            "p50_bin": 0,
+            "p95_bin": 0,
+            "p99_bin": 1,
+            "max_ms": 1,
+            "over20": 0
+          },
+          "processing": {
+            "n": 2918,
+            "total_ms": 361,
+            "p50_bin": 0,
+            "p95_bin": 1,
+            "p99_bin": 1,
+            "max_ms": 1,
+            "over20": 0
+          },
+          "rx_to_submit": {
+            "n": 2918,
+            "total_ms": 461,
+            "p50_bin": 0,
+            "p95_bin": 1,
+            "p99_bin": 1,
+            "max_ms": 1,
+            "over20": 0
+          },
+          "estimator_predict": {
+            "n": 2917,
+            "min_ns": 27018,
+            "mean_ns": 29430,
+            "max_ns": 87615
+          },
+          "estimator_correct": {
+            "n": 2917,
+            "min_ns": 33361,
+            "mean_ns": 35615,
+            "max_ns": 152138
+          },
+          "queue rx": {
+            "accepted": 2978,
+            "rejected": 0,
+            "observed_max_used": 0
+          },
+          "queue tx": {
+            "accepted": 2978,
+            "rejected": 0,
+            "observed_max_used": 1
+          },
+          "tx": {
+            "poll_completed": 2978,
+            "encode_failed": 0
+          },
+          "stack rx": {
+            "unused": 784,
+            "min_unused": 784
+          },
+          "stack handler": {
+            "unused": 1360,
+            "min_unused": 1360
+          },
+          "stack tx": {
+            "unused": 736,
+            "min_unused": 736
+          }
+        },
+        {
+          "header": {
+            "uptime_ms": 70011,
+            "measurements": 2992,
+            "without_submit": 1,
+            "submit_failed": 0,
+            "invalid_time": 0
+          },
+          "queue_wait": {
+            "n": 2992,
+            "total_ms": 101,
+            "p50_bin": 0,
+            "p95_bin": 0,
+            "p99_bin": 1,
+            "max_ms": 1,
+            "over20": 0
+          },
+          "processing": {
+            "n": 2991,
+            "total_ms": 368,
+            "p50_bin": 0,
+            "p95_bin": 1,
+            "p99_bin": 1,
+            "max_ms": 1,
+            "over20": 0
+          },
+          "rx_to_submit": {
+            "n": 2991,
+            "total_ms": 469,
+            "p50_bin": 0,
+            "p95_bin": 1,
+            "p99_bin": 1,
+            "max_ms": 1,
+            "over20": 0
+          },
+          "estimator_predict": {
+            "n": 2989,
+            "min_ns": 27018,
+            "mean_ns": 29402,
+            "max_ns": 87615
+          },
+          "estimator_correct": {
+            "n": 2989,
+            "min_ns": 33361,
+            "mean_ns": 35592,
+            "max_ns": 152138
+          },
+          "queue rx": {
+            "accepted": 3057,
+            "rejected": 0,
+            "observed_max_used": 0
+          },
+          "queue tx": {
+            "accepted": 3057,
+            "rejected": 0,
+            "observed_max_used": 1
+          },
+          "tx": {
+            "poll_completed": 3057,
+            "encode_failed": 0
+          },
+          "stack rx": {
+            "unused": 784,
+            "min_unused": 784
+          },
+          "stack handler": {
+            "unused": 1360,
+            "min_unused": 1360
+          },
+          "stack tx": {
+            "unused": 736,
+            "min_unused": 736
+          }
+        }
+      ]
+    },
+    {
+      "run": "rtt-investigation-2026-11-23/threaded-probe",
+      "raw_validation_passed": true,
+      "independent_crc_method": "binascii.crc_hqx(init=0xffff)",
+      "wire": {
+        "tx": {
+          "bytes": 45207,
+          "frame_types": {
+            "1": 1,
+            "3": 61,
+            "2": 2989
+          },
+          "crc_errors": 0,
+          "length_errors": 0,
+          "nonframe_bytes": 0,
+          "trailing_partial_bytes": 0
+        },
+        "rx": {
+          "bytes": 112924,
+          "frame_types": {
+            "7": 2991,
+            "6": 61
+          },
+          "crc_errors": 0,
+          "length_errors": 0,
+          "nonframe_bytes": 0,
+          "trailing_partial_bytes": 0
+        }
+      },
+      "samples": 2989,
+      "reports": 2991,
+      "statuses": 61,
+      "sample_and_decoded_csv_matches_raw": true,
+      "load_samples": 2989,
+      "rtt_ms": {
+        "count": 2989,
+        "p99": 8.381874999031425,
+        "max": 83.28208408784121
+      },
+      "rtt_over_100ms": [],
+      "send_gaps_ms": {
+        "count": 2988,
+        "p99": 21.50399994570762,
+        "max": 95.04795796237886
+      },
+      "crc_window": null,
+      "unmatched_samples": [],
+      "session_metadata_closed": true,
+      "result_recording_complete": null,
+      "recording": {
+        "enqueued": 12510,
+        "written": 12510,
+        "capacity": 1024
+      },
+      "historical_passed": true,
+      "historical_verdicts": null,
+      "original_acceptance_replay": {
+        "recorded_sha256": null,
+        "matching_source": null
+      },
+      "input_sha256": {
+        "samples.csv": "cc08c7593fa3d374df098da56780c1bcc84a7c4f827109741ff50b6a4be65738",
+        "reports.csv": "18d5f1b36aa287aa12ce6056fdda3d364cf980ef914030e37bfaafe8cc547728",
+        "status.csv": "7904e71266b4700a6dc3bb1c7f519e46a82703982c0d37fe8208c4ebe2e6a064",
+        "wire.csv": "3f7b3bacde1a5b3eecc04a3cda5929b50a5e60cb63ae5df6203b4f13ded96dea",
+        "metadata.json": "77311578be0472832a1fe859d5df5f994b52229b9985d57bd49ee1e272b161ef"
+      },
+      "final_two_performance_snapshots": [
+        {
+          "header": {
+            "uptime_ms": 65011,
+            "measurements": 2918,
+            "without_submit": 0,
+            "submit_failed": 0,
+            "invalid_time": 0
+          },
+          "queue_wait": {
+            "n": 2918,
+            "total_ms": 102,
+            "p50_bin": 0,
+            "p95_bin": 0,
+            "p99_bin": 1,
+            "max_ms": 1,
+            "over20": 0
+          },
+          "processing": {
+            "n": 2918,
+            "total_ms": 349,
+            "p50_bin": 0,
+            "p95_bin": 1,
+            "p99_bin": 1,
+            "max_ms": 1,
+            "over20": 0
+          },
+          "rx_to_submit": {
+            "n": 2918,
+            "total_ms": 451,
+            "p50_bin": 0,
+            "p95_bin": 1,
+            "p99_bin": 1,
+            "max_ms": 1,
+            "over20": 0
+          },
+          "estimator_predict": {
+            "n": 2917,
+            "min_ns": 27018,
+            "mean_ns": 29495,
+            "max_ns": 87888
+          },
+          "estimator_correct": {
+            "n": 2917,
+            "min_ns": 33361,
+            "mean_ns": 35675,
+            "max_ns": 152143
+          },
+          "queue rx": {
+            "accepted": 2978,
+            "rejected": 0,
+            "observed_max_used": 0
+          },
+          "queue tx": {
+            "accepted": 2978,
+            "rejected": 0,
+            "observed_max_used": 1
+          },
+          "tx": {
+            "poll_completed": 2978,
+            "encode_failed": 0
+          },
+          "stack rx": {
+            "unused": 784,
+            "min_unused": 784
+          },
+          "stack handler": {
+            "unused": 1360,
+            "min_unused": 1360
+          },
+          "stack tx": {
+            "unused": 736,
+            "min_unused": 736
+          }
+        },
+        {
+          "header": {
+            "uptime_ms": 70012,
+            "measurements": 2989,
+            "without_submit": 0,
+            "submit_failed": 0,
+            "invalid_time": 0
+          },
+          "queue_wait": {
+            "n": 2989,
+            "total_ms": 104,
+            "p50_bin": 0,
+            "p95_bin": 0,
+            "p99_bin": 1,
+            "max_ms": 1,
+            "over20": 0
+          },
+          "processing": {
+            "n": 2989,
+            "total_ms": 356,
+            "p50_bin": 0,
+            "p95_bin": 1,
+            "p99_bin": 1,
+            "max_ms": 1,
+            "over20": 0
+          },
+          "rx_to_submit": {
+            "n": 2989,
+            "total_ms": 460,
+            "p50_bin": 0,
+            "p95_bin": 1,
+            "p99_bin": 1,
+            "max_ms": 1,
+            "over20": 0
+          },
+          "estimator_predict": {
+            "n": 2988,
+            "min_ns": 27018,
+            "mean_ns": 29490,
+            "max_ns": 87888
+          },
+          "estimator_correct": {
+            "n": 2988,
+            "min_ns": 33361,
+            "mean_ns": 35689,
+            "max_ns": 153152
+          },
+          "queue rx": {
+            "accepted": 3051,
+            "rejected": 0,
+            "observed_max_used": 0
+          },
+          "queue tx": {
+            "accepted": 3052,
+            "rejected": 0,
+            "observed_max_used": 1
+          },
+          "tx": {
+            "poll_completed": 3052,
+            "encode_failed": 0
+          },
+          "stack rx": {
+            "unused": 784,
+            "min_unused": 784
+          },
+          "stack handler": {
+            "unused": 1360,
+            "min_unused": 1360
+          },
+          "stack tx": {
+            "unused": 736,
+            "min_unused": 736
+          }
+        }
+      ]
+    },
+    {
+      "run": "extended-perf-2026-11-23/smoke-1",
+      "raw_validation_passed": true,
+      "independent_crc_method": "binascii.crc_hqx(init=0xffff)",
+      "wire": {
+        "tx": {
+          "bytes": 45345,
+          "frame_types": {
+            "1": 2,
+            "3": 61,
+            "2": 2997,
+            "5": 2
+          },
+          "crc_errors": 0,
+          "length_errors": 0,
+          "nonframe_bytes": 0,
+          "trailing_partial_bytes": 0
+        },
+        "rx": {
+          "bytes": 113294,
+          "frame_types": {
+            "7": 3001,
+            "6": 61
+          },
+          "crc_errors": 0,
+          "length_errors": 0,
+          "nonframe_bytes": 0,
+          "trailing_partial_bytes": 0
+        }
+      },
+      "samples": 2996,
+      "reports": 3001,
+      "statuses": 61,
+      "sample_and_decoded_csv_matches_raw": true,
+      "load_samples": 2993,
+      "rtt_ms": {
+        "count": 2993,
+        "p99": 8.671000017784536,
+        "max": 77.92750000953674
+      },
+      "rtt_over_100ms": [],
+      "send_gaps_ms": {
+        "count": 2992,
+        "p99": 21.904375054873526,
+        "max": 77.4727500975132
+      },
+      "crc_window": null,
+      "unmatched_samples": [],
+      "session_metadata_closed": true,
+      "result_recording_complete": true,
+      "recording": {
+        "enqueued": 12841,
+        "written": 12841,
+        "capacity": 1024
+      },
+      "historical_passed": false,
+      "historical_verdicts": {
+        "board_internal": {
+          "status": "passed",
+          "reasons": []
+        },
+        "delivery": {
+          "status": "passed",
+          "reasons": []
+        },
+        "evidence": {
+          "status": "passed",
+          "reasons": []
+        },
+        "host_rtt": {
+          "status": "passed",
+          "reasons": []
+        },
+        "requested_load": {
+          "status": "inconclusive",
+          "reasons": [
+            "requested 50Hz scheduled slots not fully delivered"
+          ]
+        }
+      },
+      "original_acceptance_replay": {
+        "recorded_sha256": "51e1e0bfa117384df63d24eb58d46344df6b4fcb3754225ff698d302d57d85c3",
+        "matching_source": "docs/test-results/extended-perf-2026-11-23/perf_acceptance-snapshot.py",
+        "differing_fields": [],
+        "original_verdict_reproduced": true
+      },
+      "input_sha256": {
+        "samples.csv": "884edc18f80289d75f32af025d80818abcbf7afa74150427ab50a41f57872957",
+        "reports.csv": "52120d333eb7b0af63ac7c6af1ae1302ca7978465ed6ec36e40bf2a6466f13a8",
+        "status.csv": "49f14a4517a109f954a03953753218d783d7bbca1c4844ba69a28591288b8545",
+        "wire.csv": "cf49ccf7a13211ad09f1fdc03e0fdb830bc56f6539de7bdbbc00bd2b50ae4b2c",
+        "metadata.json": "c9f52b6020ae111107c2e08ef3ff1604ba6f92d61b1ecb9c9a60d1f207f43cd1"
+      },
+      "final_two_performance_snapshots": [
+        {
+          "header": {
+            "uptime_ms": 65017,
+            "measurements": 2923,
+            "without_submit": 0,
+            "submit_failed": 0,
+            "invalid_time": 0
+          },
+          "rx_byte_wait": {
+            "n": 44205,
+            "total_ms": 1290,
+            "p50_bin": 0,
+            "p95_bin": 0,
+            "p99_bin": 1,
+            "max_ms": 1,
+            "over20": 0
+          },
+          "tx_queue_wait": {
+            "n": 2983,
+            "total_ms": 336,
+            "p50_bin": 0,
+            "p95_bin": 1,
+            "p99_bin": 3,
+            "max_ms": 4,
+            "over20": 0
+          },
+          "tx_poll": {
+            "n": 2983,
+            "total_ms": 9133,
+            "p50_bin": 3,
+            "p95_bin": 4,
+            "p99_bin": 4,
+            "max_ms": 5,
+            "over20": 0
+          },
+          "parsed_to_tx_poll": {
+            "n": 2923,
+            "total_ms": 9623,
+            "p50_bin": 3,
+            "p95_bin": 4,
+            "p99_bin": 4,
+            "max_ms": 6,
+            "over20": 0
+          },
+          "rx_isr": {
+            "n": 44205,
+            "min_ns": 9884,
+            "mean_ns": 21023,
+            "max_ns": 25546
+          },
+          "rx_parser": {
+            "n": 44205,
+            "min_ns": 722,
+            "mean_ns": 1203,
+            "max_ns": 6875
+          },
+          "queue_wait": {
+            "n": 2923,
+            "total_ms": 139,
+            "p50_bin": 0,
+            "p95_bin": 0,
+            "p99_bin": 1,
+            "max_ms": 1,
+            "over20": 0
+          },
+          "processing": {
+            "n": 2923,
+            "total_ms": 427,
+            "p50_bin": 0,
+            "p95_bin": 1,
+            "p99_bin": 1,
+            "max_ms": 1,
+            "over20": 0
+          },
+          "rx_to_submit": {
+            "n": 2923,
+            "total_ms": 566,
+            "p50_bin": 0,
+            "p95_bin": 1,
+            "p99_bin": 1,
+            "max_ms": 2,
+            "over20": 0
+          },
+          "estimator_predict": {
+            "n": 2922,
+            "min_ns": 26981,
+            "mean_ns": 33490,
+            "max_ns": 353037
+          },
+          "estimator_correct": {
+            "n": 2922,
+            "min_ns": 33648,
+            "mean_ns": 34962,
+            "max_ns": 345087
+          },
+          "queue rx": {
+            "accepted": 2983,
+            "rejected": 0,
+            "observed_max_used": 1
+          },
+          "queue tx": {
+            "accepted": 2983,
+            "rejected": 0,
+            "observed_max_used": 1
+          },
+          "tx": {
+            "poll_completed": 2983,
+            "encode_failed": 0
+          },
+          "stack rx": {
+            "unused": 768,
+            "min_unused": 768
+          },
+          "stack handler": {
+            "unused": 1360,
+            "min_unused": 1360
+          },
+          "cpu": {
+            "uptime_ms": 65018,
+            "total_cycles": 13938074224,
+            "busy_cycles": 2972116088,
+            "idle_cycles": 10965958136
+          },
+          "stack main": {
+            "unused": 536,
+            "min_unused": 536
+          },
+          "stack tx": {
+            "unused": 672,
+            "min_unused": 672
+          }
+        },
+        {
+          "header": {
+            "uptime_ms": 70018,
+            "measurements": 2997,
+            "without_submit": 1,
+            "submit_failed": 0,
+            "invalid_time": 0
+          },
+          "rx_byte_wait": {
+            "n": 45345,
+            "total_ms": 1327,
+            "p50_bin": 0,
+            "p95_bin": 0,
+            "p99_bin": 1,
+            "max_ms": 1,
+            "over20": 0
+          },
+          "tx_queue_wait": {
+            "n": 3062,
+            "total_ms": 345,
+            "p50_bin": 0,
+            "p95_bin": 1,
+            "p99_bin": 3,
+            "max_ms": 4,
+            "over20": 0
+          },
+          "tx_poll": {
+            "n": 3062,
+            "total_ms": 9374,
+            "p50_bin": 3,
+            "p95_bin": 4,
+            "p99_bin": 4,
+            "max_ms": 5,
+            "over20": 0
+          },
+          "parsed_to_tx_poll": {
+            "n": 2996,
+            "total_ms": 9857,
+            "p50_bin": 3,
+            "p95_bin": 4,
+            "p99_bin": 4,
+            "max_ms": 6,
+            "over20": 0
+          },
+          "rx_isr": {
+            "n": 45345,
+            "min_ns": 9884,
+            "mean_ns": 21037,
+            "max_ns": 25546
+          },
+          "rx_parser": {
+            "n": 45345,
+            "min_ns": 722,
+            "mean_ns": 1203,
+            "max_ns": 6875
+          },
+          "queue_wait": {
+            "n": 2997,
+            "total_ms": 139,
+            "p50_bin": 0,
+            "p95_bin": 0,
+            "p99_bin": 1,
+            "max_ms": 1,
+            "over20": 0
+          },
+          "processing": {
+            "n": 2996,
+            "total_ms": 435,
+            "p50_bin": 0,
+            "p95_bin": 1,
+            "p99_bin": 1,
+            "max_ms": 1,
+            "over20": 0
+          },
+          "rx_to_submit": {
+            "n": 2996,
+            "total_ms": 574,
+            "p50_bin": 0,
+            "p95_bin": 1,
+            "p99_bin": 1,
+            "max_ms": 2,
+            "over20": 0
+          },
+          "estimator_predict": {
+            "n": 2994,
+            "min_ns": 26981,
+            "mean_ns": 33449,
+            "max_ns": 353037
+          },
+          "estimator_correct": {
+            "n": 2994,
+            "min_ns": 33648,
+            "mean_ns": 34962,
+            "max_ns": 345087
+          },
+          "queue rx": {
+            "accepted": 3062,
+            "rejected": 0,
+            "observed_max_used": 1
+          },
+          "queue tx": {
+            "accepted": 3062,
+            "rejected": 0,
+            "observed_max_used": 1
+          },
+          "tx": {
+            "poll_completed": 3062,
+            "encode_failed": 0
+          },
+          "stack rx": {
+            "unused": 768,
+            "min_unused": 768
+          },
+          "stack handler": {
+            "unused": 1360,
+            "min_unused": 1360
+          },
+          "cpu": {
+            "uptime_ms": 70019,
+            "total_cycles": 15015344330,
+            "busy_cycles": 3095260265,
+            "idle_cycles": 11920084065
+          },
+          "stack main": {
+            "unused": 536,
+            "min_unused": 536
+          },
+          "stack tx": {
+            "unused": 672,
+            "min_unused": 672
+          }
+        }
+      ]
+    },
+    {
+      "run": "extended-perf-2026-11-23/load-30min",
+      "raw_validation_passed": true,
+      "independent_crc_method": "binascii.crc_hqx(init=0xffff)",
+      "wire": {
+        "tx": {
+          "bytes": 118806,
+          "frame_types": {
+            "1": 1,
+            "3": 160,
+            "2": 7856
+          },
+          "crc_errors": 0,
+          "length_errors": 0,
+          "nonframe_bytes": 0,
+          "trailing_partial_bytes": 0
+        },
+        "rx": {
+          "bytes": 296555,
+          "frame_types": {
+            "7": 7855,
+            "6": 160
+          },
+          "crc_errors": 0,
+          "length_errors": 0,
+          "nonframe_bytes": 0,
+          "trailing_partial_bytes": 0
+        }
+      },
+      "samples": 7856,
+      "reports": 7855,
+      "statuses": 160,
+      "sample_and_decoded_csv_matches_raw": true,
+      "load_samples": 7856,
+      "rtt_ms": {
+        "count": 7854,
+        "p99": 19.583084038458765,
+        "max": 135.64554206095636
+      },
+      "rtt_over_100ms": [
+        {
+          "index": 2163,
+          "sensor_ms": 43400,
+          "tx_s": 590789.558838791,
+          "rx_s": 590789.694484333,
+          "rtt_ms": 135.64554206095636,
+          "next_tx_gap_ms": 135.26841707061976,
+          "rx_after_next_tx_ms": 0.37712499033659697,
+          "max_overlapping_send_gap_ms": 135.26841707061976
+        },
+        {
+          "index": 2473,
+          "sensor_ms": 49960,
+          "tx_s": 590796.117446916,
+          "rx_s": 590796.222011375,
+          "rtt_ms": 104.56445906311274,
+          "next_tx_gap_ms": 104.00404210668057,
+          "rx_after_next_tx_ms": 0.5604169564321637,
+          "max_overlapping_send_gap_ms": 104.00404210668057
+        },
+        {
+          "index": 2610,
+          "sensor_ms": 52780,
+          "tx_s": 590798.943220875,
+          "rx_s": 590799.070192416,
+          "rtt_ms": 126.97154097259045,
+          "next_tx_gap_ms": 118.52074996568263,
+          "rx_after_next_tx_ms": 8.45079100690782,
+          "max_overlapping_send_gap_ms": 118.52074996568263
+        },
+        {
+          "index": 6628,
+          "sensor_ms": 133940,
+          "tx_s": 590880.10947475,
+          "rx_s": 590880.228557125,
+          "rtt_ms": 119.08237496390939,
+          "next_tx_gap_ms": 118.78100002650172,
+          "rx_after_next_tx_ms": 0.3013749374076724,
+          "max_overlapping_send_gap_ms": 118.78100002650172
+        }
+      ],
+      "send_gaps_ms": {
+        "count": 7855,
+        "p99": 30.436333967372775,
+        "max": 185.92145899310708
+      },
+      "crc_window": {
+        "last_zero_status": {
+          "crc_errors": 0,
+          "length_errors": 0,
+          "frame_timeouts": 0,
+          "queue_drops": 0,
+          "ring_overflow_events": 0,
+          "rx_dropped_bytes": 0,
+          "recovery_discarded_bytes": 0,
+          "stale_measurements": 0,
+          "rx_monotonic_s": 590904.167223125
+        },
+        "first_nonzero_status": {
+          "crc_errors": 1,
+          "length_errors": 0,
+          "frame_timeouts": 0,
+          "queue_drops": 0,
+          "ring_overflow_events": 0,
+          "rx_dropped_bytes": 0,
+          "recovery_discarded_bytes": 0,
+          "stale_measurements": 0,
+          "rx_monotonic_s": 590905.166222458
+        },
+        "host_observation_interval_s": 0.9989993330091238,
+        "first_nonzero_status_after_first_load_tx_s": 159.00941604201216,
+        "send_gaps_overlapping_status_observation_interval_ms": {
+          "count": 50,
+          "p99": 21.056790952570736,
+          "max": 21.056790952570736
+        },
+        "unmatched_samples": [
+          {
+            "index": 7837,
+            "timestamp_ms": 158640,
+            "tx_monotonic_s": 590904.796907833,
+            "frame_hex": "7e0a0200026bb003e80aaaaaab450f",
+            "seconds_before_first_error_status": 0.3693146250443533,
+            "later_inputs_already_matched": 17
+          },
+          {
+            "index": 7838,
+            "timestamp_ms": 158660,
+            "tx_monotonic_s": 590904.816753125,
+            "frame_hex": "7e0a0200026bc403e80aaaaaab00a8",
+            "seconds_before_first_error_status": 0.34946933295577765,
+            "later_inputs_already_matched": 17
+          }
+        ],
+        "attribution_limit": "STATUS timestamps bound host observations, not the physical fault instant; later inputs were answered while these replies remained absent, but CRC-to-input mapping is unmeasured.",
+        "last_summary_measurement_count": 7837,
+        "first_unmatched_index_equals_last_summary_count": true,
+        "summary_correlation_limit": "Count adjacency only; console has no host capture timestamps and neither UART-error registers nor physical waveforms were captured. This does not prove a summary-triggered fault."
+      },
+      "unmatched_samples": [
+        {
+          "index": 7837,
+          "timestamp_ms": 158640,
+          "tx_monotonic_s": 590904.796907833,
+          "frame_hex": "7e0a0200026bb003e80aaaaaab450f"
+        },
+        {
+          "index": 7838,
+          "timestamp_ms": 158660,
+          "tx_monotonic_s": 590904.816753125,
+          "frame_hex": "7e0a0200026bc403e80aaaaaab00a8"
+        }
+      ],
+      "session_metadata_closed": true,
+      "result_recording_complete": false,
+      "recording": {
+        "enqueued": 33353,
+        "written": 33353,
+        "capacity": 1024
+      },
+      "historical_passed": false,
+      "historical_verdicts": {
+        "board_internal": {
+          "status": "inconclusive",
+          "reasons": [
+            "run aborted or final assessment incomplete",
+            "required guard absent: measurement count reconciles",
+            "required guard absent: no submit failures or invalid times",
+            "required guard absent: invalid measurement is counted without submission",
+            "required guard absent: processing successful sample count",
+            "required guard absent: rx_to_submit successful sample count",
+            "required guard absent: queue wait count includes invalid input",
+            "required guard absent: 20ms board latency budget",
+            "required guard absent: no queue rejection",
+            "required guard absent: no TX encoder failures",
+            "required guard absent: all sampled stacks have headroom",
+            "queue_wait: positive sample count missing",
+            "processing: positive sample count missing",
+            "rx_to_submit: positive sample count missing",
+            "rx_byte_wait: positive sample count missing",
+            "tx_queue_wait: positive sample count missing",
+            "tx_poll: positive sample count missing",
+            "parsed_to_tx_poll: positive sample count missing",
+            "rx_isr: positive sample count missing",
+            "rx_parser: positive sample count missing",
+            "estimator_predict: positive sample count missing",
+            "estimator_correct: positive sample count missing",
+            "tx_queue_wait: reconciliation count missing",
+            "tx_poll: reconciliation count missing",
+            "parsed_to_tx_poll: reconciliation count missing"
+          ]
+        },
+        "delivery": {
+          "status": "inconclusive",
+          "reasons": [
+            "run aborted or final assessment incomplete",
+            "required guard absent: all measurements matched once",
+            "required guard absent: all STATUS requests answered",
+            "required guard absent: one post-load timeout report",
+            "required guard absent: RX accepted frame count",
+            "required guard absent: TX queued and polling counts match received frames"
+          ]
+        },
+        "evidence": {
+          "status": "inconclusive",
+          "reasons": [
+            "run aborted or final assessment incomplete",
+            "required guard absent: single firmware boot",
+            "required guard absent: performance summaries remain continuous",
+            "recording did not finish and drain completely",
+            "run failure: AssertionError(\"Nonzero board error statistics: {'crc_errors': 1, 'length_errors': 0, 'frame_timeouts': 0, 'queue_drops': 0, 'ring_overflow_events': 0, 'rx_dropped_bytes': 0, 'recovery_discarded_bytes': 0, 'stale_measurements': 0}\")",
+            "console/performance summaries incomplete"
+          ]
+        },
+        "host_rtt": {
+          "status": "inconclusive",
+          "reasons": [
+            "run aborted or final assessment incomplete",
+            "RTT samples missing",
+            "p99: finite RTT observation missing",
+            "max: finite RTT observation missing"
+          ]
+        },
+        "requested_load": {
+          "status": "inconclusive",
+          "reasons": [
+            "run aborted or final assessment incomplete",
+            "full requested load duration not observed"
+          ]
+        }
+      },
+      "original_acceptance_replay": {
+        "recorded_sha256": "51e1e0bfa117384df63d24eb58d46344df6b4fcb3754225ff698d302d57d85c3",
+        "matching_source": "docs/test-results/extended-perf-2026-11-23/perf_acceptance-snapshot.py",
+        "differing_fields": [],
+        "original_verdict_reproduced": true
+      },
+      "input_sha256": {
+        "samples.csv": "95a9f9c7bca7afe97cd7768e391fa75a5e4b2cc7d89a94023315d3907ce476d6",
+        "reports.csv": "2812572eeb1a65e01f03670d6284af4aad1c8fc76b4d3166e89005054314aa2e",
+        "status.csv": "75d3144f89d05c81e100209fc4e47d6af62861569940e14cd34e7a131e311638",
+        "wire.csv": "5455bab9a1d845a1ebaec47ec17d95f8c71a80702bb0fcc1aa0b19ab4c16eb0a",
+        "metadata.json": "fbffd555db60b9afff0f86a3ad903c1b6607ac4a56e55d17d40cc99e8df4ab6d"
+      },
+      "final_two_performance_snapshots": [
+        {
+          "header": {
+            "uptime_ms": 160044,
+            "measurements": 7592,
+            "without_submit": 0,
+            "submit_failed": 0,
+            "invalid_time": 0
+          },
+          "rx_byte_wait": {
+            "n": 114810,
+            "total_ms": 3302,
+            "p50_bin": 0,
+            "p95_bin": 0,
+            "p99_bin": 1,
+            "max_ms": 2,
+            "over20": 0
+          },
+          "tx_queue_wait": {
+            "n": 7747,
+            "total_ms": 940,
+            "p50_bin": 0,
+            "p95_bin": 1,
+            "p99_bin": 3,
+            "max_ms": 6,
+            "over20": 0
+          },
+          "tx_poll": {
+            "n": 7747,
+            "total_ms": 23772,
+            "p50_bin": 3,
+            "p95_bin": 4,
+            "p99_bin": 4,
+            "max_ms": 5,
+            "over20": 0
+          },
+          "parsed_to_tx_poll": {
+            "n": 7592,
+            "total_ms": 25118,
+            "p50_bin": 3,
+            "p95_bin": 4,
+            "p99_bin": 4,
+            "max_ms": 9,
+            "over20": 0
+          },
+          "rx_isr": {
+            "n": 114810,
+            "min_ns": 9837,
+            "mean_ns": 21018,
+            "max_ns": 25412
+          },
+          "rx_parser": {
+            "n": 114810,
+            "min_ns": 722,
+            "mean_ns": 1203,
+            "max_ns": 6875
+          },
+          "queue_wait": {
+            "n": 7592,
+            "total_ms": 334,
+            "p50_bin": 0,
+            "p95_bin": 0,
+            "p99_bin": 1,
+            "max_ms": 1,
+            "over20": 0
+          },
+          "processing": {
+            "n": 7592,
+            "total_ms": 1176,
+            "p50_bin": 0,
+            "p95_bin": 1,
+            "p99_bin": 1,
+            "max_ms": 2,
+            "over20": 0
+          },
+          "rx_to_submit": {
+            "n": 7592,
+            "total_ms": 1510,
+            "p50_bin": 0,
+            "p95_bin": 1,
+            "p99_bin": 1,
+            "max_ms": 2,
+            "over20": 0
+          },
+          "estimator_predict": {
+            "n": 7591,
+            "min_ns": 26981,
+            "mean_ns": 33231,
+            "max_ns": 353069
+          },
+          "estimator_correct": {
+            "n": 7591,
+            "min_ns": 33439,
+            "mean_ns": 35129,
+            "max_ns": 345060
+          },
+          "queue rx": {
+            "accepted": 7747,
+            "rejected": 0,
+            "observed_max_used": 1
+          },
+          "queue tx": {
+            "accepted": 7747,
+            "rejected": 0,
+            "observed_max_used": 2
+          },
+          "tx": {
+            "poll_completed": 7747,
+            "encode_failed": 0
+          },
+          "stack rx": {
+            "unused": 768,
+            "min_unused": 768
+          },
+          "stack handler": {
+            "unused": 1360,
+            "min_unused": 1360
+          },
+          "cpu": {
+            "uptime_ms": 160045,
+            "total_cycles": 34295453034,
+            "busy_cycles": 7698788932,
+            "idle_cycles": 26596664102
+          },
+          "stack main": {
+            "unused": 520,
+            "min_unused": 520
+          },
+          "stack tx": {
+            "unused": 672,
+            "min_unused": 672
+          }
+        },
+        {
+          "header": {
+            "uptime_ms": 165045,
+            "measurements": 7837,
+            "without_submit": 0,
+            "submit_failed": 0,
+            "invalid_time": 0
+          },
+          "rx_byte_wait": {
+            "n": 118521,
+            "total_ms": 3412,
+            "p50_bin": 0,
+            "p95_bin": 0,
+            "p99_bin": 1,
+            "max_ms": 2,
+            "over20": 0
+          },
+          "tx_queue_wait": {
+            "n": 7997,
+            "total_ms": 963,
+            "p50_bin": 0,
+            "p95_bin": 1,
+            "p99_bin": 3,
+            "max_ms": 6,
+            "over20": 0
+          },
+          "tx_poll": {
+            "n": 7997,
+            "total_ms": 24542,
+            "p50_bin": 3,
+            "p95_bin": 4,
+            "p99_bin": 4,
+            "max_ms": 5,
+            "over20": 0
+          },
+          "parsed_to_tx_poll": {
+            "n": 7837,
+            "total_ms": 25924,
+            "p50_bin": 3,
+            "p95_bin": 4,
+            "p99_bin": 4,
+            "max_ms": 9,
+            "over20": 0
+          },
+          "rx_isr": {
+            "n": 118521,
+            "min_ns": 9837,
+            "mean_ns": 21018,
+            "max_ns": 25412
+          },
+          "rx_parser": {
+            "n": 118521,
+            "min_ns": 722,
+            "mean_ns": 1203,
+            "max_ns": 6875
+          },
+          "queue_wait": {
+            "n": 7837,
+            "total_ms": 347,
+            "p50_bin": 0,
+            "p95_bin": 0,
+            "p99_bin": 1,
+            "max_ms": 1,
+            "over20": 0
+          },
+          "processing": {
+            "n": 7837,
+            "total_ms": 1209,
+            "p50_bin": 0,
+            "p95_bin": 1,
+            "p99_bin": 1,
+            "max_ms": 2,
+            "over20": 0
+          },
+          "rx_to_submit": {
+            "n": 7837,
+            "total_ms": 1556,
+            "p50_bin": 0,
+            "p95_bin": 1,
+            "p99_bin": 1,
+            "max_ms": 2,
+            "over20": 0
+          },
+          "estimator_predict": {
+            "n": 7836,
+            "min_ns": 26981,
+            "mean_ns": 33222,
+            "max_ns": 353069
+          },
+          "estimator_correct": {
+            "n": 7836,
+            "min_ns": 33439,
+            "mean_ns": 35106,
+            "max_ns": 345060
+          },
+          "queue rx": {
+            "accepted": 7997,
+            "rejected": 0,
+            "observed_max_used": 1
+          },
+          "queue tx": {
+            "accepted": 7997,
+            "rejected": 0,
+            "observed_max_used": 2
+          },
+          "tx": {
+            "poll_completed": 7997,
+            "encode_failed": 0
+          },
+          "stack rx": {
+            "unused": 768,
+            "min_unused": 768
+          },
+          "stack handler": {
+            "unused": 1360,
+            "min_unused": 1360
+          },
+          "cpu": {
+            "uptime_ms": 165046,
+            "total_cycles": 35366920777,
+            "busy_cycles": 7946912979,
+            "idle_cycles": 27420007798
+          },
+          "stack main": {
+            "unused": 512,
+            "min_unused": 512
+          },
+          "stack tx": {
+            "unused": 672,
+            "min_unused": 672
+          }
+        }
+      ]
+    },
+    {
+      "run": "extended-perf-2026-11-23/smoke-2",
+      "raw_validation_passed": true,
+      "independent_crc_method": "binascii.crc_hqx(init=0xffff)",
+      "wire": {
+        "tx": {
+          "bytes": 14091,
+          "frame_types": {
+            "1": 1,
+            "3": 20,
+            "2": 931
+          },
+          "crc_errors": 0,
+          "length_errors": 0,
+          "nonframe_bytes": 0,
+          "trailing_partial_bytes": 0
+        },
+        "rx": {
+          "bytes": 35187,
+          "frame_types": {
+            "7": 931,
+            "6": 20
+          },
+          "crc_errors": 0,
+          "length_errors": 0,
+          "nonframe_bytes": 0,
+          "trailing_partial_bytes": 0
+        }
+      },
+      "samples": 931,
+      "reports": 931,
+      "statuses": 20,
+      "sample_and_decoded_csv_matches_raw": true,
+      "load_samples": 931,
+      "rtt_ms": {
+        "count": 930,
+        "p99": 25.616041966713965,
+        "max": 101.11837508156896
+      },
+      "rtt_over_100ms": [
+        {
+          "index": 421,
+          "sensor_ms": 8620,
+          "tx_s": 590995.539743166,
+          "rx_s": 590995.640861541,
+          "rtt_ms": 101.11837508156896,
+          "next_tx_gap_ms": 100.53258400876075,
+          "rx_after_next_tx_ms": 0.5857910728082061,
+          "max_overlapping_send_gap_ms": 100.53258400876075
+        }
+      ],
+      "send_gaps_ms": {
+        "count": 930,
+        "p99": 44.89279200788587,
+        "max": 103.51037501823157
+      },
+      "crc_window": {
+        "last_zero_status": {
+          "crc_errors": 0,
+          "length_errors": 0,
+          "frame_timeouts": 0,
+          "queue_drops": 0,
+          "ring_overflow_events": 0,
+          "rx_dropped_bytes": 0,
+          "recovery_discarded_bytes": 0,
+          "stale_measurements": 0,
+          "rx_monotonic_s": 591004.926606291
+        },
+        "first_nonzero_status": {
+          "crc_errors": 1,
+          "length_errors": 0,
+          "frame_timeouts": 0,
+          "queue_drops": 0,
+          "ring_overflow_events": 0,
+          "rx_dropped_bytes": 0,
+          "recovery_discarded_bytes": 0,
+          "stale_measurements": 0,
+          "rx_monotonic_s": 591005.926669833
+        },
+        "host_observation_interval_s": 1.0000635420437902,
+        "first_nonzero_status_after_first_load_tx_s": 19.009537916979752,
+        "send_gaps_overlapping_status_observation_interval_ms": {
+          "count": 50,
+          "p99": 26.768291019834578,
+          "max": 26.768291019834578
+        },
+        "unmatched_samples": [
+          {
+            "index": 902,
+            "timestamp_ms": 18440,
+            "tx_monotonic_s": 591005.357046,
+            "frame_hex": "7e0a020000480803e80aaaaaab51ac",
+            "seconds_before_first_error_status": 0.5696238330565393,
+            "later_inputs_already_matched": 28
+          }
+        ],
+        "attribution_limit": "STATUS timestamps bound host observations, not the physical fault instant; later inputs were answered while these replies remained absent, but CRC-to-input mapping is unmeasured.",
+        "last_summary_measurement_count": 902,
+        "first_unmatched_index_equals_last_summary_count": true,
+        "summary_correlation_limit": "Count adjacency only; console has no host capture timestamps and neither UART-error registers nor physical waveforms were captured. This does not prove a summary-triggered fault."
+      },
+      "unmatched_samples": [
+        {
+          "index": 902,
+          "timestamp_ms": 18440,
+          "tx_monotonic_s": 591005.357046,
+          "frame_hex": "7e0a020000480803e80aaaaaab51ac"
+        }
+      ],
+      "session_metadata_closed": true,
+      "result_recording_complete": false,
+      "recording": {
+        "enqueued": 3968,
+        "written": 3968,
+        "capacity": 1024
+      },
+      "historical_passed": false,
+      "historical_verdicts": {
+        "board_internal": {
+          "status": "failed",
+          "reasons": [
+            "run aborted or final assessment incomplete",
+            "required guard absent: measurement count reconciles",
+            "required guard absent: no submit failures or invalid times",
+            "required guard absent: invalid measurement is counted without submission",
+            "required guard absent: processing successful sample count",
+            "required guard absent: rx_to_submit successful sample count",
+            "required guard absent: queue wait count includes invalid input",
+            "required guard absent: 20ms board latency budget",
+            "required guard absent: no queue rejection",
+            "required guard absent: no TX encoder failures",
+            "required guard absent: all sampled stacks have headroom",
+            "rx_byte_wait: sample count does not reconcile",
+            "rx_parser: sample count does not reconcile",
+            "parsed_to_tx_poll: sample count does not reconcile"
+          ]
+        },
+        "delivery": {
+          "status": "failed",
+          "reasons": [
+            "run aborted or final assessment incomplete",
+            "Nonzero board error statistics: {'crc_errors': 1, 'length_errors': 0, 'frame_timeouts': 0, 'queue_drops': 0, 'ring_overflow_events': 0, 'rx_dropped_bytes': 0, 'recovery_discarded_bytes': 0, 'stale_measurements': 0}",
+            "required guard absent: all measurements matched once",
+            "required guard absent: all STATUS requests answered",
+            "required guard absent: one post-load timeout report",
+            "required guard absent: RX accepted frame count",
+            "required guard absent: TX queued and polling counts match received frames"
+          ]
+        },
+        "evidence": {
+          "status": "inconclusive",
+          "reasons": [
+            "run aborted or final assessment incomplete",
+            "required guard absent: single firmware boot",
+            "required guard absent: performance summaries remain continuous",
+            "recording did not finish and drain completely",
+            "run failure: AssertionError(\"Nonzero board error statistics: {'crc_errors': 1, 'length_errors': 0, 'frame_timeouts': 0, 'queue_drops': 0, 'ring_overflow_events': 0, 'rx_dropped_bytes': 0, 'recovery_discarded_bytes': 0, 'stale_measurements': 0}\")"
+          ]
+        },
+        "host_rtt": {
+          "status": "failed",
+          "reasons": [
+            "run aborted or final assessment incomplete",
+            "PC RTT p99 exceeds 20ms or is invalid",
+            "PC RTT max exceeds 100ms or is invalid"
+          ]
+        },
+        "requested_load": {
+          "status": "inconclusive",
+          "reasons": [
+            "run aborted or final assessment incomplete",
+            "full requested load duration not observed"
+          ]
+        }
+      },
+      "original_acceptance_replay": {
+        "recorded_sha256": "51e1e0bfa117384df63d24eb58d46344df6b4fcb3754225ff698d302d57d85c3",
+        "matching_source": "docs/test-results/extended-perf-2026-11-23/perf_acceptance-snapshot.py",
+        "differing_fields": [],
+        "original_verdict_reproduced": true
+      },
+      "input_sha256": {
+        "samples.csv": "0a1c4631f20497f492810d7fe6ba88e41ffbba0c12d5db8dfb47f44ae0d135cc",
+        "reports.csv": "914b52bc5a26ac4b2549717ee7b4ec7aa0ff4893a30dced7e14341d83ce68de4",
+        "status.csv": "0bcc9a631699389f836598d9fc50dcbe9d066952a4093dbaf018701de7100e11",
+        "wire.csv": "468ab54c0b36b6cccbdd144a96deb23015732cd323b289011ece0d57618ac331",
+        "metadata.json": "20aeb144806bc63f39dc2a3d56dd71a1ba7f61cf28e5907c3948c7005c66771c"
+      },
+      "final_two_performance_snapshots": [
+        {
+          "header": {
+            "uptime_ms": 20004,
+            "measurements": 652,
+            "without_submit": 0,
+            "submit_failed": 0,
+            "invalid_time": 0
+          },
+          "rx_byte_wait": {
+            "n": 9870,
+            "total_ms": 283,
+            "p50_bin": 0,
+            "p95_bin": 0,
+            "p99_bin": 1,
+            "max_ms": 1,
+            "over20": 0
+          },
+          "tx_queue_wait": {
+            "n": 667,
+            "total_ms": 103,
+            "p50_bin": 0,
+            "p95_bin": 1,
+            "p99_bin": 3,
+            "max_ms": 7,
+            "over20": 0
+          },
+          "tx_poll": {
+            "n": 667,
+            "total_ms": 2060,
+            "p50_bin": 3,
+            "p95_bin": 4,
+            "p99_bin": 4,
+            "max_ms": 4,
+            "over20": 0
+          },
+          "parsed_to_tx_poll": {
+            "n": 652,
+            "total_ms": 2180,
+            "p50_bin": 3,
+            "p95_bin": 4,
+            "p99_bin": 5,
+            "max_ms": 10,
+            "over20": 0
+          },
+          "rx_isr": {
+            "n": 9870,
+            "min_ns": 13611,
+            "mean_ns": 20953,
+            "max_ns": 25412
+          },
+          "rx_parser": {
+            "n": 9870,
+            "min_ns": 722,
+            "mean_ns": 1203,
+            "max_ns": 6861
+          },
+          "queue_wait": {
+            "n": 652,
+            "total_ms": 22,
+            "p50_bin": 0,
+            "p95_bin": 0,
+            "p99_bin": 1,
+            "max_ms": 1,
+            "over20": 0
+          },
+          "processing": {
+            "n": 652,
+            "total_ms": 96,
+            "p50_bin": 0,
+            "p95_bin": 1,
+            "p99_bin": 1,
+            "max_ms": 2,
+            "over20": 0
+          },
+          "rx_to_submit": {
+            "n": 652,
+            "total_ms": 118,
+            "p50_bin": 0,
+            "p95_bin": 1,
+            "p99_bin": 1,
+            "max_ms": 2,
+            "over20": 0
+          },
+          "estimator_predict": {
+            "n": 651,
+            "min_ns": 26981,
+            "mean_ns": 34060,
+            "max_ns": 336157
+          },
+          "estimator_correct": {
+            "n": 651,
+            "min_ns": 33648,
+            "mean_ns": 36703,
+            "max_ns": 343800
+          },
+          "queue rx": {
+            "accepted": 667,
+            "rejected": 0,
+            "observed_max_used": 1
+          },
+          "queue tx": {
+            "accepted": 667,
+            "rejected": 0,
+            "observed_max_used": 2
+          },
+          "tx": {
+            "poll_completed": 667,
+            "encode_failed": 0
+          },
+          "stack rx": {
+            "unused": 768,
+            "min_unused": 768
+          },
+          "stack handler": {
+            "unused": 1360,
+            "min_unused": 1360
+          },
+          "cpu": {
+            "uptime_ms": 20005,
+            "total_cycles": 4297167014,
+            "busy_cycles": 687775111,
+            "idle_cycles": 3609391903
+          },
+          "stack main": {
+            "unused": 536,
+            "min_unused": 536
+          },
+          "stack tx": {
+            "unused": 672,
+            "min_unused": 672
+          }
+        },
+        {
+          "header": {
+            "uptime_ms": 25005,
+            "measurements": 902,
+            "without_submit": 0,
+            "submit_failed": 0,
+            "invalid_time": 0
+          },
+          "rx_byte_wait": {
+            "n": 13650,
+            "total_ms": 395,
+            "p50_bin": 0,
+            "p95_bin": 0,
+            "p99_bin": 1,
+            "max_ms": 1,
+            "over20": 0
+          },
+          "tx_queue_wait": {
+            "n": 922,
+            "total_ms": 131,
+            "p50_bin": 0,
+            "p95_bin": 1,
+            "p99_bin": 3,
+            "max_ms": 7,
+            "over20": 0
+          },
+          "tx_poll": {
+            "n": 922,
+            "total_ms": 2838,
+            "p50_bin": 3,
+            "p95_bin": 4,
+            "p99_bin": 4,
+            "max_ms": 4,
+            "over20": 0
+          },
+          "parsed_to_tx_poll": {
+            "n": 902,
+            "total_ms": 3008,
+            "p50_bin": 3,
+            "p95_bin": 4,
+            "p99_bin": 4,
+            "max_ms": 10,
+            "over20": 0
+          },
+          "rx_isr": {
+            "n": 13650,
+            "min_ns": 13611,
+            "mean_ns": 20976,
+            "max_ns": 25412
+          },
+          "rx_parser": {
+            "n": 13650,
+            "min_ns": 722,
+            "mean_ns": 1203,
+            "max_ns": 6861
+          },
+          "queue_wait": {
+            "n": 902,
+            "total_ms": 33,
+            "p50_bin": 0,
+            "p95_bin": 0,
+            "p99_bin": 1,
+            "max_ms": 1,
+            "over20": 0
+          },
+          "processing": {
+            "n": 902,
+            "total_ms": 143,
+            "p50_bin": 0,
+            "p95_bin": 1,
+            "p99_bin": 1,
+            "max_ms": 2,
+            "over20": 0
+          },
+          "rx_to_submit": {
+            "n": 902,
+            "total_ms": 176,
+            "p50_bin": 0,
+            "p95_bin": 1,
+            "p99_bin": 1,
+            "max_ms": 2,
+            "over20": 0
+          },
+          "estimator_predict": {
+            "n": 901,
+            "min_ns": 26981,
+            "mean_ns": 33828,
+            "max_ns": 336157
+          },
+          "estimator_correct": {
+            "n": 901,
+            "min_ns": 33648,
+            "mean_ns": 36212,
+            "max_ns": 343800
+          },
+          "queue rx": {
+            "accepted": 922,
+            "rejected": 0,
+            "observed_max_used": 1
+          },
+          "queue tx": {
+            "accepted": 922,
+            "rejected": 0,
+            "observed_max_used": 2
+          },
+          "tx": {
+            "poll_completed": 922,
+            "encode_failed": 0
+          },
+          "stack rx": {
+            "unused": 768,
+            "min_unused": 768
+          },
+          "stack handler": {
+            "unused": 1360,
+            "min_unused": 1360
+          },
+          "cpu": {
+            "uptime_ms": 25007,
+            "total_cycles": 5368498650,
+            "busy_cycles": 939559110,
+            "idle_cycles": 4428939540
+          },
+          "stack main": {
+            "unused": 520,
+            "min_unused": 520
+          },
+          "stack tx": {
+            "unused": 672,
+            "min_unused": 672
+          }
+        }
+      ]
+    },
+    {
+      "run": "irq-safe-perf-2026-11-23/run-300s",
+      "raw_validation_passed": true,
+      "independent_crc_method": "binascii.crc_hqx(init=0xffff)",
+      "wire": {
+        "tx": {
+          "bytes": 223875,
+          "frame_types": {
+            "1": 2,
+            "3": 301,
+            "2": 14803,
+            "5": 2
+          },
+          "crc_errors": 0,
+          "length_errors": 0,
+          "nonframe_bytes": 0,
+          "trailing_partial_bytes": 0
+        },
+        "rx": {
+          "bytes": 558996,
+          "frame_types": {
+            "7": 14807,
+            "6": 301
+          },
+          "crc_errors": 0,
+          "length_errors": 0,
+          "nonframe_bytes": 0,
+          "trailing_partial_bytes": 0
+        }
+      },
+      "samples": 14802,
+      "reports": 14807,
+      "statuses": 301,
+      "sample_and_decoded_csv_matches_raw": true,
+      "load_samples": 14799,
+      "rtt_ms": {
+        "count": 14799,
+        "p99": 14.727167086675763,
+        "max": 328.516292036511
+      },
+      "rtt_over_100ms": [
+        {
+          "index": 1852,
+          "sensor_ms": 37280,
+          "tx_s": 591602.481794458,
+          "rx_s": 591602.81031075,
+          "rtt_ms": 328.516292036511,
+          "next_tx_gap_ms": 327.317374991253,
+          "rx_after_next_tx_ms": 1.1989170452579856,
+          "max_overlapping_send_gap_ms": 327.317374991253
+        },
+        {
+          "index": 3659,
+          "sensor_ms": 74020,
+          "tx_s": 591639.229283666,
+          "rx_s": 591639.367263041,
+          "rtt_ms": 137.97937496565282,
+          "next_tx_gap_ms": 21.490958984941244,
+          "rx_after_next_tx_ms": 116.48841598071158,
+          "max_overlapping_send_gap_ms": 115.37854105699807
+        },
+        {
+          "index": 3660,
+          "sensor_ms": 74040,
+          "tx_s": 591639.250774625,
+          "rx_s": 591639.367263041,
+          "rtt_ms": 116.48841598071158,
+          "next_tx_gap_ms": 115.37854105699807,
+          "rx_after_next_tx_ms": 1.1098749237135053,
+          "max_overlapping_send_gap_ms": 115.37854105699807
+        },
+        {
+          "index": 4140,
+          "sensor_ms": 83840,
+          "tx_s": 591649.076321375,
+          "rx_s": 591649.2123485,
+          "rtt_ms": 136.027125059627,
+          "next_tx_gap_ms": 120.49237499013543,
+          "rx_after_next_tx_ms": 15.534750069491565,
+          "max_overlapping_send_gap_ms": 120.49237499013543
+        },
+        {
+          "index": 4406,
+          "sensor_ms": 89380,
+          "tx_s": 591654.590405708,
+          "rx_s": 591654.694660625,
+          "rtt_ms": 104.2549170088023,
+          "next_tx_gap_ms": 34.13300006650388,
+          "rx_after_next_tx_ms": 70.12191694229841,
+          "max_overlapping_send_gap_ms": 39.45687506347895
+        },
+        {
+          "index": 4795,
+          "sensor_ms": 97280,
+          "tx_s": 591662.481756166,
+          "rx_s": 591662.714188708,
+          "rtt_ms": 232.43254201952368,
+          "next_tx_gap_ms": 94.4271250627935,
+          "rx_after_next_tx_ms": 138.0054169567302,
+          "max_overlapping_send_gap_ms": 137.19104195479304
+        },
+        {
+          "index": 4796,
+          "sensor_ms": 97320,
+          "tx_s": 591662.576183291,
+          "rx_s": 591662.714188708,
+          "rtt_ms": 138.0054169567302,
+          "next_tx_gap_ms": 137.19104195479304,
+          "rx_after_next_tx_ms": 0.814375001937151,
+          "max_overlapping_send_gap_ms": 137.19104195479304
+        },
+        {
+          "index": 4991,
+          "sensor_ms": 101480,
+          "tx_s": 591666.683947541,
+          "rx_s": 591666.792861208,
+          "rtt_ms": 108.91366691794246,
+          "next_tx_gap_ms": 159.03858398087323,
+          "rx_after_next_tx_ms": -50.12491706293076,
+          "max_overlapping_send_gap_ms": 159.03858398087323
+        },
+        {
+          "index": 7081,
+          "sensor_ms": 143640,
+          "tx_s": 591708.843045541,
+          "rx_s": 591709.048814125,
+          "rtt_ms": 205.7685840409249,
+          "next_tx_gap_ms": 206.20895898900926,
+          "rx_after_next_tx_ms": -0.4403749480843544,
+          "max_overlapping_send_gap_ms": 206.20895898900926
+        },
+        {
+          "index": 8234,
+          "sensor_ms": 167420,
+          "tx_s": 591732.635806583,
+          "rx_s": 591732.755491875,
+          "rtt_ms": 119.68529201112688,
+          "next_tx_gap_ms": 119.2492920672521,
+          "rx_after_next_tx_ms": 0.43599994387477636,
+          "max_overlapping_send_gap_ms": 119.2492920672521
+        },
+        {
+          "index": 12333,
+          "sensor_ms": 249900,
+          "tx_s": 591815.102554916,
+          "rx_s": 591815.244504833,
+          "rtt_ms": 141.94991695694625,
+          "next_tx_gap_ms": 141.79620891809464,
+          "rx_after_next_tx_ms": 0.15370803885161877,
+          "max_overlapping_send_gap_ms": 141.79620891809464
+        },
+        {
+          "index": 12833,
+          "sensor_ms": 260020,
+          "tx_s": 591825.222572916,
+          "rx_s": 591825.369634625,
+          "rtt_ms": 147.0617090817541,
+          "next_tx_gap_ms": 50.337334047071636,
+          "rx_after_next_tx_ms": 96.72437503468245,
+          "max_overlapping_send_gap_ms": 58.935125009156764
+        },
+        {
+          "index": 13044,
+          "sensor_ms": 264320,
+          "tx_s": 591829.524134791,
+          "rx_s": 591829.685037,
+          "rtt_ms": 160.902208997868,
+          "next_tx_gap_ms": 45.04195903427899,
+          "rx_after_next_tx_ms": 115.86024996358901,
+          "max_overlapping_send_gap_ms": 116.23691592831165
+        },
+        {
+          "index": 13045,
+          "sensor_ms": 264360,
+          "tx_s": 591829.56917675,
+          "rx_s": 591829.68615675,
+          "rtt_ms": 116.97999993339181,
+          "next_tx_gap_ms": 116.23691592831165,
+          "rx_after_next_tx_ms": 0.7430840050801635,
+          "max_overlapping_send_gap_ms": 116.23691592831165
+        },
+        {
+          "index": 13208,
+          "sensor_ms": 267720,
+          "tx_s": 591832.922607666,
+          "rx_s": 591833.073355291,
+          "rtt_ms": 150.74762504082173,
+          "next_tx_gap_ms": 151.38058399315923,
+          "rx_after_next_tx_ms": -0.6329589523375034,
+          "max_overlapping_send_gap_ms": 151.38058399315923
+        }
+      ],
+      "send_gaps_ms": {
+        "count": 14798,
+        "p99": 26.752042002044618,
+        "max": 427.26420902181417
+      },
+      "crc_window": null,
+      "unmatched_samples": [],
+      "session_metadata_closed": true,
+      "result_recording_complete": true,
+      "recording": {
+        "enqueued": 63091,
+        "written": 63091,
+        "capacity": 1024
+      },
+      "historical_passed": false,
+      "historical_verdicts": {
+        "board_internal": {
+          "status": "passed",
+          "reasons": []
+        },
+        "delivery": {
+          "status": "passed",
+          "reasons": []
+        },
+        "evidence": {
+          "status": "passed",
+          "reasons": []
+        },
+        "host_rtt": {
+          "status": "failed",
+          "reasons": [
+            "PC RTT max <= 100ms",
+            "PC RTT max exceeds 100ms or is invalid"
+          ]
+        },
+        "requested_load": {
+          "status": "inconclusive",
+          "reasons": [
+            "requested 50Hz scheduled slots not fully delivered"
+          ]
+        }
+      },
+      "original_acceptance_replay": {
+        "recorded_sha256": "e153bf43a28f60bc765548b735d72f2ec1fc166bfdd2749be7bfabba7110a2ac",
+        "matching_source": "docs/test-results/review-2026-11-23/acceptance-before.py",
+        "differing_fields": [],
+        "original_verdict_reproduced": true
+      },
+      "input_sha256": {
+        "samples.csv": "2547b3855dc5cbd1f9e8afe415810c70c3cd64842b8ce74859f92dfde119df50",
+        "reports.csv": "7daa58ddfb538afacd9c0423f7eb6fa5f16b921095cd63f6a38d22052dd71528",
+        "status.csv": "3ebdad14d8cc4e2cdb292449f07d73829f7a6fbf3185f314790a4a309f6a7475",
+        "wire.csv": "e64932794bdc0cae7f36c3c419a9dede4c974edfeb24509d2de397a2b8e40874",
+        "metadata.json": "20823eb00c4f643bb5d5b4a4d769f28b5bc59ba8350411c50bce54c0f2e69536"
+      },
+      "final_two_performance_snapshots": [
+        {
+          "header": {
+            "uptime_ms": 305084,
+            "measurements": 14740,
+            "without_submit": 0,
+            "submit_failed": 0,
+            "invalid_time": 0,
+            "rx_capture_lost": 0
+          },
+          "rx_byte_wait": {
+            "n": 222900,
+            "total_ms": 222934,
+            "p50_bin": 1,
+            "p95_bin": 1,
+            "p99_bin": 1,
+            "max_ms": 2,
+            "over20": 0
+          },
+          "tx_queue_wait": {
+            "n": 15040,
+            "total_ms": 1907,
+            "p50_bin": 0,
+            "p95_bin": 1,
+            "p99_bin": 3,
+            "max_ms": 7,
+            "over20": 0
+          },
+          "tx_poll": {
+            "n": 15040,
+            "total_ms": 46497,
+            "p50_bin": 3,
+            "p95_bin": 4,
+            "p99_bin": 4,
+            "max_ms": 5,
+            "over20": 0
+          },
+          "parsed_to_tx_poll": {
+            "n": 14740,
+            "total_ms": 49390,
+            "p50_bin": 3,
+            "p95_bin": 4,
+            "p99_bin": 4,
+            "max_ms": 10,
+            "over20": 0
+          },
+          "rx_isr": {
+            "n": 222900,
+            "min_ns": 6129,
+            "mean_ns": 17430,
+            "max_ns": 22097
+          },
+          "rx_parser": {
+            "n": 222900,
+            "min_ns": 694,
+            "mean_ns": 1847,
+            "max_ns": 1411162
+          },
+          "queue_wait": {
+            "n": 14740,
+            "total_ms": 756,
+            "p50_bin": 0,
+            "p95_bin": 1,
+            "p99_bin": 1,
+            "max_ms": 1,
+            "over20": 0
+          },
+          "processing": {
+            "n": 14740,
+            "total_ms": 2439,
+            "p50_bin": 0,
+            "p95_bin": 1,
+            "p99_bin": 1,
+            "max_ms": 2,
+            "over20": 0
+          },
+          "rx_to_submit": {
+            "n": 14740,
+            "total_ms": 3195,
+            "p50_bin": 0,
+            "p95_bin": 1,
+            "p99_bin": 1,
+            "max_ms": 2,
+            "over20": 0
+          },
+          "estimator_predict": {
+            "n": 14739,
+            "min_ns": 26652,
+            "mean_ns": 29101,
+            "max_ns": 903097
+          },
+          "estimator_correct": {
+            "n": 14739,
+            "min_ns": 33587,
+            "mean_ns": 34824,
+            "max_ns": 35305
+          },
+          "queue rx": {
+            "accepted": 15040,
+            "rejected": 0,
+            "observed_max_used": 2
+          },
+          "queue tx": {
+            "accepted": 15040,
+            "rejected": 0,
+            "observed_max_used": 2
+          },
+          "tx": {
+            "poll_completed": 15040,
+            "encode_failed": 0
+          },
+          "stack rx": {
+            "unused": 744,
+            "min_unused": 744
+          },
+          "stack handler": {
+            "unused": 1360,
+            "min_unused": 1360
+          },
+          "cpu": {
+            "uptime_ms": 305085,
+            "total_cycles": 65340660550,
+            "busy_cycles": 15932999764,
+            "idle_cycles": 49407660786
+          },
+          "stack main": {
+            "unused": 504,
+            "min_unused": 504
+          },
+          "stack tx": {
+            "unused": 672,
+            "min_unused": 672
+          }
+        },
+        {
+          "header": {
+            "uptime_ms": 310086,
+            "measurements": 14803,
+            "without_submit": 1,
+            "submit_failed": 0,
+            "invalid_time": 0,
+            "rx_capture_lost": 0
+          },
+          "rx_byte_wait": {
+            "n": 223875,
+            "total_ms": 223909,
+            "p50_bin": 1,
+            "p95_bin": 1,
+            "p99_bin": 1,
+            "max_ms": 2,
+            "over20": 0
+          },
+          "tx_queue_wait": {
+            "n": 15108,
+            "total_ms": 1911,
+            "p50_bin": 0,
+            "p95_bin": 1,
+            "p99_bin": 3,
+            "max_ms": 7,
+            "over20": 0
+          },
+          "tx_poll": {
+            "n": 15108,
+            "total_ms": 46706,
+            "p50_bin": 3,
+            "p95_bin": 4,
+            "p99_bin": 4,
+            "max_ms": 5,
+            "over20": 0
+          },
+          "parsed_to_tx_poll": {
+            "n": 14802,
+            "total_ms": 49590,
+            "p50_bin": 3,
+            "p95_bin": 4,
+            "p99_bin": 4,
+            "max_ms": 10,
+            "over20": 0
+          },
+          "rx_isr": {
+            "n": 223875,
+            "min_ns": 6129,
+            "mean_ns": 17430,
+            "max_ns": 22097
+          },
+          "rx_parser": {
+            "n": 223875,
+            "min_ns": 694,
+            "mean_ns": 1847,
+            "max_ns": 1411162
+          },
+          "queue_wait": {
+            "n": 14803,
+            "total_ms": 759,
+            "p50_bin": 0,
+            "p95_bin": 1,
+            "p99_bin": 1,
+            "max_ms": 1,
+            "over20": 0
+          },
+          "processing": {
+            "n": 14802,
+            "total_ms": 2446,
+            "p50_bin": 0,
+            "p95_bin": 1,
+            "p99_bin": 1,
+            "max_ms": 2,
+            "over20": 0
+          },
+          "rx_to_submit": {
+            "n": 14802,
+            "total_ms": 3205,
+            "p50_bin": 0,
+            "p95_bin": 1,
+            "p99_bin": 1,
+            "max_ms": 2,
+            "over20": 0
+          },
+          "estimator_predict": {
+            "n": 14800,
+            "min_ns": 26652,
+            "mean_ns": 29101,
+            "max_ns": 903097
+          },
+          "estimator_correct": {
+            "n": 14800,
+            "min_ns": 33587,
+            "mean_ns": 34824,
+            "max_ns": 35305
+          },
+          "queue rx": {
+            "accepted": 15108,
+            "rejected": 0,
+            "observed_max_used": 2
+          },
+          "queue tx": {
+            "accepted": 15108,
+            "rejected": 0,
+            "observed_max_used": 2
+          },
+          "tx": {
+            "poll_completed": 15108,
+            "encode_failed": 0
+          },
+          "stack rx": {
+            "unused": 744,
+            "min_unused": 744
+          },
+          "stack handler": {
+            "unused": 1360,
+            "min_unused": 1360
+          },
+          "cpu": {
+            "uptime_ms": 310087,
+            "total_cycles": 66417711078,
+            "busy_cycles": 16053008320,
+            "idle_cycles": 50364702758
+          },
+          "stack main": {
+            "unused": 504,
+            "min_unused": 504
+          },
+          "stack tx": {
+            "unused": 672,
+            "min_unused": 672
+          }
+        }
+      ]
+    }
+  ]
+}

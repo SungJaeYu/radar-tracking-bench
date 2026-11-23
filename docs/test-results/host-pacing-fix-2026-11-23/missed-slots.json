@@ -1,0 +1,67 @@
+{
+  "source": "board-60s/session/samples.csv",
+  "source_sha256": "9dd6f400fb35de940c6480954084ed3122181e8b6b639971ddc1de384c47c61c",
+  "load_measurements": 2990,
+  "skipped_slots": 10,
+  "events": [
+    {
+      "previous_sensor_ms": 1360,
+      "next_sensor_ms": 1420,
+      "missing_sensor_ms": [
+        1380,
+        1400
+      ],
+      "missing_count": 2,
+      "host_write_gap_ms": 51.092875
+    },
+    {
+      "previous_sensor_ms": 11880,
+      "next_sensor_ms": 11920,
+      "missing_sensor_ms": [
+        11900
+      ],
+      "missing_count": 1,
+      "host_write_gap_ms": 35.149833
+    },
+    {
+      "previous_sensor_ms": 18760,
+      "next_sensor_ms": 18820,
+      "missing_sensor_ms": [
+        18780,
+        18800
+      ],
+      "missing_count": 2,
+      "host_write_gap_ms": 133.479958
+    },
+    {
+      "previous_sensor_ms": 18820,
+      "next_sensor_ms": 18880,
+      "missing_sensor_ms": [
+        18840,
+        18860
+      ],
+      "missing_count": 2,
+      "host_write_gap_ms": 0.171
+    },
+    {
+      "previous_sensor_ms": 19140,
+      "next_sensor_ms": 19200,
+      "missing_sensor_ms": [
+        19160,
+        19180
+      ],
+      "missing_count": 2,
+      "host_write_gap_ms": 66.668958
+    },
+    {
+      "previous_sensor_ms": 26540,
+      "next_sensor_ms": 26580,
+      "missing_sensor_ms": [
+        26560
+      ],
+      "missing_count": 1,
+      "host_write_gap_ms": 41.969625
+    }
+  ],
+  "limit": "Post-fix run contains send times but no per-call host stage timings; individual delays cannot be attributed to sleep/ioctl."
+}

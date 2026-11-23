@@ -896,6 +896,7 @@ static void test_perf_measurement_paths(void)
     frame_handler_process(&handler, &frame);
     struct perf_stats stats;
     assert(perf_monitor_get_stats(&stats) == 0);
+    assert(submitted_frame.measurement_origin_valid && submitted_frame.parsed_uptime_ms == 5000);
     assert(stats.measurements == 1 && stats.queue_wait.total_ms == 7);
     assert(stats.rx_to_submit.sample_count == 1 && stats.rx_to_submit.total_ms == 7);
 
@@ -923,6 +924,7 @@ static void test_perf_measurement_paths(void)
     frame.frame.type = FRAME_TYPE_STATUS_REQUEST;
     frame_handler_process(&handler, &frame);
     assert(perf_monitor_get_stats(&stats) == 0);
+    assert(!submitted_frame.measurement_origin_valid);
     assert(stats.measurements == 6 && stats.without_submit == 3);
     assert(stats.track_submit_failed == 1 && stats.rx_to_submit.sample_count == 2);
     assert(stats.invalid_timestamps == 0);
@@ -932,6 +934,15 @@ static void test_perf_measurement_paths(void)
     assert(perf_monitor_get_stats(&stats) == 0);
     assert(stats.queues[PERF_QUEUE_RX].rejected_count == 1);
     assert(stats.queues[PERF_QUEUE_RX].max_observed_depth == 8);
+    // Sensor zero and parsed board uptime zero both remain correlated.
+    reset_test(&handler);
+    frame = measurement(0, 1000, 0);
+    test_uptime_ms = 0;
+    frame_handler_process(&handler, &frame);
+    assert(submitted_frame.measurement_origin_valid && submitted_frame.parsed_uptime_ms == 0);
+    frame_handler_handle_timeout(&handler, CONFIG_RADAR_MEASUREMENT_TIMEOUT_MS);
+    assert(!submitted_frame.measurement_origin_valid);
+
 }
 #endif
 

@@ -1,0 +1,194 @@
+[
+  {
+    "name": "initial STATUS: eight zero counters",
+    "passed": true
+  },
+  {
+    "name": "INIT returns EMPTY RESET",
+    "passed": true
+  },
+  {
+    "name": "measurement 0: matching timestamp and estimate",
+    "passed": true
+  },
+  {
+    "name": "measurement 0: state and result",
+    "passed": true
+  },
+  {
+    "name": "measurement 1: matching timestamp and estimate",
+    "passed": true
+  },
+  {
+    "name": "measurement 1: state and result",
+    "passed": true
+  },
+  {
+    "name": "measurement 2: matching timestamp and estimate",
+    "passed": true
+  },
+  {
+    "name": "measurement 2: state and result",
+    "passed": true
+  },
+  {
+    "name": "measurement 3: matching timestamp and estimate",
+    "passed": true
+  },
+  {
+    "name": "measurement 3: state and result",
+    "passed": true
+  },
+  {
+    "name": "measurement 4: matching timestamp and estimate",
+    "passed": true
+  },
+  {
+    "name": "measurement 4: state and result",
+    "passed": true
+  },
+  {
+    "name": "measurement 5: matching timestamp and estimate",
+    "passed": true
+  },
+  {
+    "name": "measurement 5: state and result",
+    "passed": true
+  },
+  {
+    "name": "measurement 6: matching timestamp and estimate",
+    "passed": true
+  },
+  {
+    "name": "measurement 6: state and result",
+    "passed": true
+  },
+  {
+    "name": "measurement 7: matching timestamp and estimate",
+    "passed": true
+  },
+  {
+    "name": "measurement 7: state and result",
+    "passed": true
+  },
+  {
+    "name": "measurement 8: matching timestamp and estimate",
+    "passed": true
+  },
+  {
+    "name": "measurement 8: state and result",
+    "passed": true
+  },
+  {
+    "name": "measurement 9: matching timestamp and estimate",
+    "passed": true
+  },
+  {
+    "name": "measurement 9: state and result",
+    "passed": true
+  },
+  {
+    "name": "measurement 10: matching timestamp and estimate",
+    "passed": true
+  },
+  {
+    "name": "measurement 10: state and result",
+    "passed": true
+  },
+  {
+    "name": "measurement 11: matching timestamp and estimate",
+    "passed": true
+  },
+  {
+    "name": "measurement 11: state and result",
+    "passed": true
+  },
+  {
+    "name": "measurement 12: matching timestamp and estimate",
+    "passed": true
+  },
+  {
+    "name": "measurement 12: state and result",
+    "passed": true
+  },
+  {
+    "name": "measurement 13: matching timestamp and estimate",
+    "passed": true
+  },
+  {
+    "name": "measurement 13: state and result",
+    "passed": true
+  },
+  {
+    "name": "measurement 14: matching timestamp and estimate",
+    "passed": true
+  },
+  {
+    "name": "measurement 14: state and result",
+    "passed": true
+  },
+  {
+    "name": "measurement 15: matching timestamp and estimate",
+    "passed": true
+  },
+  {
+    "name": "measurement 15: state and result",
+    "passed": true
+  },
+  {
+    "name": "measurement 16: matching timestamp and estimate",
+    "passed": true
+  },
+  {
+    "name": "measurement 16: state and result",
+    "passed": true
+  },
+  {
+    "name": "measurement 17: matching timestamp and estimate",
+    "passed": true
+  },
+  {
+    "name": "measurement 17: state and result",
+    "passed": true
+  },
+  {
+    "name": "measurement 18: matching timestamp and estimate",
+    "passed": true
+  },
+  {
+    "name": "measurement 18: state and result",
+    "passed": true
+  },
+  {
+    "name": "measurement 19: matching timestamp and estimate",
+    "passed": true
+  },
+  {
+    "name": "measurement 19: state and result",
+    "passed": true
+  },
+  {
+    "name": "no-reception timeout returns EMPTY RESET",
+    "passed": true
+  },
+  {
+    "name": "measurement restarts after timeout",
+    "passed": true
+  },
+  {
+    "name": "final INIT leaves EMPTY",
+    "passed": true
+  },
+  {
+    "name": "final STATUS: eight zero counters",
+    "passed": true
+  },
+  {
+    "name": "PC parser has no CRC or length errors",
+    "passed": true
+  },
+  {
+    "name": "console has no assertion/fatal fault",
+    "passed": true
+  }
+]

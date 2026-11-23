@@ -1,0 +1,37 @@
+[
+  {
+    "name": "tracking",
+    "passed": true,
+    "registered_tests": 21
+  },
+  {
+    "name": "rx",
+    "passed": true,
+    "registered_tests": 45
+  },
+  {
+    "name": "handler",
+    "passed": true,
+    "registered_tests": 31
+  },
+  {
+    "name": "tx",
+    "passed": true,
+    "registered_tests": 4
+  },
+  {
+    "name": "monitor",
+    "passed": true,
+    "registered_tests": 12
+  },
+  {
+    "name": "handler-perf",
+    "passed": true,
+    "registered_tests": 32
+  },
+  {
+    "name": "tx-perf",
+    "passed": true,
+    "registered_tests": 4
+  }
+]

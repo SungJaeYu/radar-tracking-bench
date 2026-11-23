@@ -1,0 +1,38 @@
+{
+  "kind": "controlled host process pause on a real board",
+  "started_utc": "2026-11-23T08:56:19.883014+00:00",
+  "command": [
+    "/Users/yuseungjae/zephyrproject/.venv/bin/python",
+    "fcc_app/tests/test_perf_monitor/board_check.py",
+    "--data-port",
+    "/dev/cu.usbserial-A5069RR4",
+    "--console-port",
+    "/dev/cu.usbmodem11203",
+    "--workspace",
+    "/Users/yuseungjae/zephyrproject",
+    "--west",
+    "/Users/yuseungjae/zephyrproject/.venv/bin/west",
+    "--git",
+    "/usr/bin/git",
+    "--output",
+    "/Users/yuseungjae/Desktop/radar-track-fcc-hil/docs/test-results/host-input-retest-2026-11-23/controlled-host-gap",
+    "--duration",
+    "30"
+  ],
+  "requested_pause_s": 1.2,
+  "passed": true,
+  "child_pid": 78962,
+  "stop_monotonic_s": 601621.495691208,
+  "continue_monotonic_s": 601622.69740075,
+  "signal_interval_s": 1.2017095419578254,
+  "returncode": 1,
+  "checks": {
+    "bench_returns_nonzero": true,
+    "interruption_recorded": true,
+    "no_runtime_board_failure": true,
+    "normal_image_restored": true,
+    "board_inconclusive": true,
+    "requested_profile_inconclusive": true,
+    "load_not_completed_or_passed": true
+  }
+}

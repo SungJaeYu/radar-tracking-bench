@@ -1,0 +1,165 @@
+........................FFFFFFFFF....................................... [ 60%]
+......................................FF.......                          [100%]
+=================================== FAILURES ===================================
+____________ test_load_input_continuity_boundaries[0.999-999-False] ____________
+
+sent_s = 0.999, sensor_ms = 999, interrupted = False
+
+    @pytest.mark.parametrize('sent_s,sensor_ms,interrupted', [
+        (.999, 999, False), (1., 1000, True),
+        (.02, 1000, False), (.02, 1001, True),
+    ])
+    def test_load_input_continuity_boundaries(sent_s, sensor_ms, interrupted):
+        args = (0, 0., sensor_ms, sent_s, 1000)
+        if interrupted:
+            with pytest.raises(board_check.HostInputInterrupted):
+                board_check.check_input_continuity(*args)
+        else:
+>           board_check.check_input_continuity(*args)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           AttributeError: module 'perf_board_check' has no attribute 'check_input_continuity'
+
+tests/test_perf_monitor.py:208: AttributeError
+_____________ test_load_input_continuity_boundaries[1.0-1000-True] _____________
+
+sent_s = 1.0, sensor_ms = 1000, interrupted = True
+
+    @pytest.mark.parametrize('sent_s,sensor_ms,interrupted', [
+        (.999, 999, False), (1., 1000, True),
+        (.02, 1000, False), (.02, 1001, True),
+    ])
+    def test_load_input_continuity_boundaries(sent_s, sensor_ms, interrupted):
+        args = (0, 0., sensor_ms, sent_s, 1000)
+        if interrupted:
+>           with pytest.raises(board_check.HostInputInterrupted):
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           AttributeError: module 'perf_board_check' has no attribute 'HostInputInterrupted'
+
+tests/test_perf_monitor.py:205: AttributeError
+____________ test_load_input_continuity_boundaries[0.02-1000-False] ____________
+
+sent_s = 0.02, sensor_ms = 1000, interrupted = False
+
+    @pytest.mark.parametrize('sent_s,sensor_ms,interrupted', [
+        (.999, 999, False), (1., 1000, True),
+        (.02, 1000, False), (.02, 1001, True),
+    ])
+    def test_load_input_continuity_boundaries(sent_s, sensor_ms, interrupted):
+        args = (0, 0., sensor_ms, sent_s, 1000)
+        if interrupted:
+            with pytest.raises(board_check.HostInputInterrupted):
+                board_check.check_input_continuity(*args)
+        else:
+>           board_check.check_input_continuity(*args)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           AttributeError: module 'perf_board_check' has no attribute 'check_input_continuity'
+
+tests/test_perf_monitor.py:208: AttributeError
+____________ test_load_input_continuity_boundaries[0.02-1001-True] _____________
+
+sent_s = 0.02, sensor_ms = 1001, interrupted = True
+
+    @pytest.mark.parametrize('sent_s,sensor_ms,interrupted', [
+        (.999, 999, False), (1., 1000, True),
+        (.02, 1000, False), (.02, 1001, True),
+    ])
+    def test_load_input_continuity_boundaries(sent_s, sensor_ms, interrupted):
+        args = (0, 0., sensor_ms, sent_s, 1000)
+        if interrupted:
+>           with pytest.raises(board_check.HostInputInterrupted):
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           AttributeError: module 'perf_board_check' has no attribute 'HostInputInterrupted'
+
+tests/test_perf_monitor.py:205: AttributeError
+____________ test_load_input_guard_uses_configured_receive_timeout _____________
+
+    def test_load_input_guard_uses_configured_receive_timeout():
+>       with pytest.raises(board_check.HostInputInterrupted) as error:
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AttributeError: module 'perf_board_check' has no attribute 'HostInputInterrupted'
+
+tests/test_perf_monitor.py:212: AttributeError
+_____ test_captured_host_gap_is_detected_before_the_false_board_rejection ______
+
+    def test_captured_host_gap_is_detected_before_the_false_board_rejection():
+        # Actual pre-write timestamps from final-validation-2026-11-23.
+>       with pytest.raises(board_check.HostInputInterrupted) as error:
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AttributeError: module 'perf_board_check' has no attribute 'HostInputInterrupted'
+
+tests/test_perf_monitor.py:220: AttributeError
+________ test_first_input_and_normal_sensor_wrap_do_not_interrupt_load _________
+
+    def test_first_input_and_normal_sensor_wrap_do_not_interrupt_load():
+>       board_check.check_input_continuity(None, None, 0, 500., 1000)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AttributeError: module 'perf_board_check' has no attribute 'check_input_continuity'
+
+tests/test_perf_monitor.py:233: AttributeError
+_____________ test_input_guard_does_not_exempt_backward_timestamps _____________
+
+    def test_input_guard_does_not_exempt_backward_timestamps():
+        # Backward/duplicate input still reaches the existing strict response checks.
+>       board_check.check_input_continuity(20, 0., 0, .02, 1000)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AttributeError: module 'perf_board_check' has no attribute 'check_input_continuity'
+
+tests/test_perf_monitor.py:239: AttributeError
+_____________ test_sensor_interval_limit_matches_firmware_contract _____________
+
+    def test_sensor_interval_limit_matches_firmware_contract():
+        source = SCRIPT.parents[3] / 'fcc_app/src/application/radar_processor.c'
+>       assert f'#define TRACK_MAX_PREDICTION_INTERVAL_MS {board_check.MAX_SENSOR_INTERVAL_MS}U' in source.read_text()
+                                                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AttributeError: module 'perf_board_check' has no attribute 'MAX_SENSOR_INTERVAL_MS'
+
+tests/test_perf_monitor.py:245: AttributeError
+____ test_host_input_interruption_is_inconclusive_not_board_failure[False] _____
+
+run_completed = False
+
+    @pytest.mark.parametrize('run_completed', [False, True])
+    def test_host_input_interruption_is_inconclusive_not_board_failure(run_completed):
+        result = evidence()
+        result.update(run_completed=run_completed,
+                      host_input_interruption={'host_gap_ms': 1159.582, 'sensor_interval_ms': 20})
+        verdict = evaluate_acceptance(result)
+        assert verdict['verdicts']['board_internal']['status'] == 'inconclusive'
+        assert verdict['verdicts']['requested_load']['status'] == 'inconclusive'
+        assert verdict['board_qualification']['status'] == 'inconclusive'
+        assert not verdict['passed'] and not verdict['requested_profile_passed']
+>       assert any('host input' in reason for reason in verdict['verdicts']['requested_load']['reasons'])
+E       assert False
+E        +  where False = any(<generator object test_host_input_interruption_is_inconclusive_not_board_failure.<locals>.<genexpr> at 0x10aa3dff0>)
+
+tests/test_perf_acceptance.py:278: AssertionError
+_____ test_host_input_interruption_is_inconclusive_not_board_failure[True] _____
+
+run_completed = True
+
+    @pytest.mark.parametrize('run_completed', [False, True])
+    def test_host_input_interruption_is_inconclusive_not_board_failure(run_completed):
+        result = evidence()
+        result.update(run_completed=run_completed,
+                      host_input_interruption={'host_gap_ms': 1159.582, 'sensor_interval_ms': 20})
+        verdict = evaluate_acceptance(result)
+>       assert verdict['verdicts']['board_internal']['status'] == 'inconclusive'
+E       AssertionError: assert 'passed' == 'inconclusive'
+E         
+E         - inconclusive
+E         + passed
+
+tests/test_perf_acceptance.py:274: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_perf_monitor.py::test_load_input_continuity_boundaries[0.999-999-False]
+FAILED tests/test_perf_monitor.py::test_load_input_continuity_boundaries[1.0-1000-True]
+FAILED tests/test_perf_monitor.py::test_load_input_continuity_boundaries[0.02-1000-False]
+FAILED tests/test_perf_monitor.py::test_load_input_continuity_boundaries[0.02-1001-True]
+FAILED tests/test_perf_monitor.py::test_load_input_guard_uses_configured_receive_timeout
+FAILED tests/test_perf_monitor.py::test_captured_host_gap_is_detected_before_the_false_board_rejection
+FAILED tests/test_perf_monitor.py::test_first_input_and_normal_sensor_wrap_do_not_interrupt_load
+FAILED tests/test_perf_monitor.py::test_input_guard_does_not_exempt_backward_timestamps
+FAILED tests/test_perf_monitor.py::test_sensor_interval_limit_matches_firmware_contract
+FAILED tests/test_perf_acceptance.py::test_host_input_interruption_is_inconclusive_not_board_failure[False]
+FAILED tests/test_perf_acceptance.py::test_host_input_interruption_is_inconclusive_not_board_failure[True]
+11 failed, 108 passed in 0.50s

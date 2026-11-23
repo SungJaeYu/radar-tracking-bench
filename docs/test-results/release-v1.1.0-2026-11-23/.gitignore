@@ -1,0 +1,4 @@
+# Raw files remain locally; verified lossless archives are committed instead.
+noise/
+spike/
+perf-load/session/

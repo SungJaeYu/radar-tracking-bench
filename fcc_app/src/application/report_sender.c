@@ -2,14 +2,9 @@
 
 #include <errno.h>
 
-#if defined(CONFIG_RADAR_PERF_MONITOR)
-#include <zephyr/kernel.h>
-#endif
 #include <zephyr/logging/log.h>
 
-#if defined(CONFIG_RADAR_PERF_MONITOR)
-#include "diagnostics/perf_monitor.h"
-#endif
+#include "diagnostics/perf_hooks.h"
 #include "protocol/status_message.h"
 #include "transport/rx_frame_processor.h"
 #include "transport/uart_rx.h"
@@ -23,7 +18,7 @@ void report_sender_submit_status(uint32_t stale_measurements)
     struct rx_frame_processor_stats stats;
     rx_frame_processor_get_stats(&stats);
 
-    struct tx_frame request;
+    struct tx_frame request = {0};
     struct uart_rx_stats uart_stats;
     uart_rx_get_stats(&uart_stats);
     // Each owner supplies cumulative counters; this is not a simultaneous snapshot.
@@ -58,7 +53,7 @@ void report_sender_submit_status(uint32_t stale_measurements)
 void report_sender_submit_track(struct report_sender *p_sender, const struct track *p_track,
                                 uint32_t input_sensor_ms, bool input_present, TrackReportResult result)
 {
-    struct tx_frame request;
+    struct tx_frame request = {0};
 
     const bool estimate_valid =
         p_track->state == TRACK_STATE_TENTATIVE ||
@@ -91,13 +86,14 @@ void report_sender_submit_track(struct report_sender *p_sender, const struct tra
         LOG_ERR("TRACK encode failed: error=%d", ret);
         return;
     }
+    if (input_present) {
+        perf_hook_track_origin(&request);
+    }
     ret = uart_tx_submit(&request);
-#if defined(CONFIG_RADAR_PERF_MONITOR)
     if (input_present) {
         // Capture before diagnostic logging; failure is excluded from success latency.
-        perf_monitor_record_track_submit(k_uptime_get(), ret);
+        perf_hook_track_submit(ret);
     }
-#endif
     if (ret == -ENOMSG) {
         LOG_WRN("TRACK submit failed: error=%d reason=queue_full", ret);
         return;

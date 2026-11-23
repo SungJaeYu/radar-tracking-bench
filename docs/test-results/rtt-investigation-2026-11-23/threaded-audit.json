@@ -1,0 +1,33 @@
+{
+  "runs": [
+    {
+      "run": "threaded-smoke",
+      "wire_audit_passed": true,
+      "samples": 2991,
+      "reports": 2996,
+      "statuses": 61,
+      "recording": {
+        "enqueued": 12547,
+        "written": 12547,
+        "capacity": 1024
+      }
+    },
+    {
+      "run": "threaded-probe",
+      "wire_audit_passed": true,
+      "samples": 2989,
+      "reports": 2991,
+      "statuses": 61,
+      "recording": {
+        "enqueued": 12510,
+        "written": 12510,
+        "capacity": 1024
+      }
+    }
+  ],
+  "source_sha256": {
+    "pc_sim/async_recording.py": "4e3f6d6de5245bf930e05996a302616ff53e52cad7625d1c845b9e4fa3c88131",
+    "fcc_app/tests/test_perf_monitor/board_check.py": "17bd5016d0c49329095dde864dfb7c275a5d0faf27a6110cce897915853efaa1",
+    "tests/test_async_recording.py": "89c462fb8825544567c007e1cc36769e0f69916af1dda53729c364a2a05f65cd"
+  }
+}

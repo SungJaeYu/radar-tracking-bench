@@ -1,0 +1,38 @@
+Input #0, mov,mp4,m4a,3gp,3g2,mj2, from '/Users/yuseungjae/Desktop/radar-track-fcc-hil/docs/analysis/2026-11-23/gui-recorded-replay.mp4':
+  Metadata:
+    major_brand     : isom
+    minor_version   : 512
+    compatible_brands: isomiso2avc1mp41
+    encoder         : Lavf63.1.100
+  Duration: 00:00:40.00, start: 0.000000, bitrate: 425 kb/s
+  Stream #0:0[0x1](und): Video: h264 (High) (avc1 / 0x31637661), yuv420p(progressive), 1600x1000, 423 kb/s, 15 fps, 15 tbr, 15360 tbn (default)
+    Metadata:
+      handler_name    : VideoHandler
+      encoder         : Lavc63.1.100 libx264
+Stream mapping:
+  Stream #0:0 -> #0:0 (h264 (native) -> wrapped_avframe (native))
+Output #0, null, to 'pipe:':
+  Metadata:
+    major_brand     : isom
+    minor_version   : 512
+    compatible_brands: isomiso2avc1mp41
+    encoder         : Lavf63.1.100
+  Stream #0:0(und): Video: wrapped_avframe, yuv420p(progressive), 1600x1000, q=2-31, 200 kb/s, 15 fps, 15 tbn (default)
+    Metadata:
+      encoder         : Lavc63.1.100 wrapped_avframe
+      handler_name    : VideoHandler
+[out#0/null @ 0x15b805660] video:248KiB audio:0KiB subtitle:0KiB other streams:0KiB global headers:0KiB muxing overhead: unknown
+frame=  600 fps=0.0 q=-0.0 Lsize=N/A time=00:00:40.00 bitrate=N/A speed=95.1x elapsed=0:00:00.42    
+
+frame=600
+fps=0.00
+stream_0_0_q=-0.0
+bitrate=N/A
+total_size=N/A
+out_time_us=40000000
+out_time_ms=40000000
+out_time=00:00:40.000000
+dup_frames=0
+drop_frames=0
+speed=95.1x
+progress=end

@@ -1,0 +1,121 @@
+{
+  "source_run": "docs/test-results/host-input-retest-2026-11-23/perf-load",
+  "board_qualification": "passed",
+  "requested_profile_qualification": "inconclusive",
+  "duration_s": 1800.000210541999,
+  "matched_measurements": 89057,
+  "missing_responses": 0,
+  "unsent_slots": 943,
+  "actual_hz": 49.47610532400105,
+  "rtt_p99_ms": 11.279209051281214,
+  "rtt_max_ms": 659.3109589302912,
+  "host_gap_max_ms": 604.0722499601543,
+  "cpu_peak_percent": 25.323018776082936,
+  "latencies": [
+    {
+      "stage": "RX byte residence",
+      "samples": 1346667,
+      "mean_ms": 1.000108,
+      "p50_bin_ms": 1,
+      "p95_bin_ms": 1,
+      "p99_bin_ms": 1,
+      "max_ms": 2,
+      "over_20ms": 0
+    },
+    {
+      "stage": "Handler queue",
+      "samples": 89057,
+      "mean_ms": 0.053651,
+      "p50_bin_ms": 0,
+      "p95_bin_ms": 1,
+      "p99_bin_ms": 1,
+      "max_ms": 2,
+      "over_20ms": 0
+    },
+    {
+      "stage": "Handler processing",
+      "samples": 89057,
+      "mean_ms": 0.1633,
+      "p50_bin_ms": 0,
+      "p95_bin_ms": 1,
+      "p99_bin_ms": 1,
+      "max_ms": 4,
+      "over_20ms": 0
+    },
+    {
+      "stage": "Parsed \u2192 TX submit",
+      "samples": 89057,
+      "mean_ms": 0.216951,
+      "p50_bin_ms": 0,
+      "p95_bin_ms": 1,
+      "p99_bin_ms": 1,
+      "max_ms": 4,
+      "over_20ms": 0
+    },
+    {
+      "stage": "TX queue",
+      "samples": 90860,
+      "mean_ms": 0.125963,
+      "p50_bin_ms": 0,
+      "p95_bin_ms": 1,
+      "p99_bin_ms": 3,
+      "max_ms": 9,
+      "over_20ms": 0
+    },
+    {
+      "stage": "TX polling",
+      "samples": 90860,
+      "mean_ms": 3.093727,
+      "p50_bin_ms": 3,
+      "p95_bin_ms": 4,
+      "p99_bin_ms": 4,
+      "max_ms": 5,
+      "over_20ms": 0
+    },
+    {
+      "stage": "Parsed \u2192 TX polling",
+      "samples": 89057,
+      "mean_ms": 3.354312,
+      "p50_bin_ms": 3,
+      "p95_bin_ms": 4,
+      "p99_bin_ms": 4,
+      "max_ms": 14,
+      "over_20ms": 0
+    }
+  ],
+  "turn": [
+    {
+      "segment": "all after 2 s",
+      "samples": 735,
+      "position_rmse_m": 4.513412932915052,
+      "max_position_error_m": 18.074202673326905
+    },
+    {
+      "segment": "straight before",
+      "samples": 80,
+      "position_rmse_m": 13.071845238156284,
+      "max_position_error_m": 18.074202673326905
+    },
+    {
+      "segment": "turn",
+      "samples": 555,
+      "position_rmse_m": 1.395983398619178,
+      "max_position_error_m": 6.583385452128316
+    },
+    {
+      "segment": "straight after",
+      "samples": 100,
+      "position_rmse_m": 1.4872477700993258,
+      "max_position_error_m": 1.8667947822117854
+    }
+  ],
+  "percentile_method": "nearest rank",
+  "board_latency_distribution_available": false,
+  "observations": {
+    "unsent_percent": 1.047777777777778,
+    "unsent_in_first_12_sensor_minutes": 732,
+    "rtt_above_100ms_count": 54,
+    "slow_rtt_overlapping_send_gap_above_100ms": 43,
+    "straight_before_share_of_post_warmup_squared_error_percent": 91.29905972172095
+  }
+}

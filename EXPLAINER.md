@@ -4,7 +4,7 @@
 
 [문서 목차](docs/README.md) · [프로젝트 소개](README.ko.md)
 
-이 문서는 V1 단일 트랙 구현을 설명합니다. 실행 명령은 [pc_sim 안내](pc_sim/README.md),
+이 문서는 V1 단일 트랙 구현과 v1.1.0의 PC 선회 입력 확장을 설명합니다. 실행 명령은 [pc_sim 안내](pc_sim/README.md),
 배선은 [배선·보드 검증](docs/board-bringup.md)를 참고하세요.
 
 ## 입출력과 시스템 연결
@@ -41,9 +41,17 @@ RX/handler는 입력이 없어도 주기적으로 깨어 timeout을 확인합니
 다중표적·클러터 생성은 PC 출력에서 가능하지만 현재 보드 전송에는 단일 표적만 허용합니다.
 `--port` 생략은 프레임 출력이며 보드 추적기의 모사가 아닙니다.
 
+### PC 선회·구간 운동 (v1.1.0)
+
+`Target.turn_rate_radps`는 시계 방향을 양수로 하는 rad/s 단위 선회율입니다. 수평 위치는 일정 선회율의 원호를 적분하고 속도 방향도 함께 회전하며, 0이면 기존 직선 운동입니다. `scenario_single_turn(bank_deg=30, tas_mps=200)`은 `g × tan(bank) / TAS`로 선회율을 정합니다.
+
+`MotionSegment`와 `SegmentedScenario`는 한 표적의 구간별 선회율·시간을 관리하며 시간 간격이 경계를 넘으면 구간별로 나누어 적분합니다. `straight_turn_straight`는 동쪽10초·우90°선회 약55.49초·남쪽10초로 총 약75.49초입니다. 전체 경로는 `python -m pc_sim.run_sim --scenario straight_turn_straight --duration 80`으로 출력합니다. 기본60초는 경로를 잘라서 실행합니다.
+
+이 확장은 PC 합성 정답과 측정 입력에만 적용됩니다. 펌웨어 CV 필터·wire payload는 유지하며, GUI와 `pc_sim.evaluate`는 고정 방위각·일정 거리 변화율 모델입니다. `run_sim`은 보고 수집기가 아닙니다. 선회 실보드 기록은 [별도 시험과 원시 결과](docs/hardware-test-2026-11-23-v1.1.0.md)에 정리합니다.
+
 ### 데스크톱 GUI
 
-`python -m pc_sim.gui`는 기존 CLI와 함께 사용하는 PySide6/pyqtgraph 앱입니다.
+`python -m pc_sim.gui`는 영어 UI의 PySide6/pyqtgraph 앱입니다. `Connection` → `Preview · no board` → `Connect preview` → `Start`로 미리보기를 시작합니다.
 `gui_model.py`는 단일표적 설정·측정 생성, `gui_worker.py`는 작업 스레드에서 포트 소유·송신·STATUS 수신·콘솔 읽기를 담당합니다.
 `gui.py`는 signal로 전달된 데이터를 화면에 표시합니다. 미리보기는 시리얼 포트를 열지 않습니다.
 송신을 중지해도 콘솔 연결은 유지하며, 재시작할 때 INIT을 먼저 보냅니다.

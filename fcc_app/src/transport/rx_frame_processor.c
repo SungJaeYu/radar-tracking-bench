@@ -7,6 +7,7 @@
 #include <zephyr/sys/atomic.h>
 
 #include "application/frame_handler.h"
+#include "diagnostics/perf_hooks.h"
 #include "protocol/frame_parser.h"
 
 LOG_MODULE_REGISTER(rx_frame_processor, CONFIG_RADAR_RX_PROCESSOR_LOG_LEVEL);
@@ -35,7 +36,9 @@ void rx_frame_processor_feed(uint8_t byte)
 {
     last_byte_processed_uptime_ms = k_uptime_get();
 
+    const uint64_t start = perf_hook_parser_start();
     const ParserResult result = frame_parser_feed(&parser, byte);
+    perf_hook_parser_end(start);
 
     process_parser_result(result);
 }

@@ -11,6 +11,9 @@
 #endif
 
 #include "diagnostics/perf_monitor.h"
+#if defined(CONFIG_SCHED_THREAD_USAGE_ALL)
+#include "diagnostics/perf_resources.h"
+#endif
 
 // Bench-only summaries have a fixed INFO level, independent of per-frame DEBUG logs.
 LOG_MODULE_REGISTER(radar_perf, LOG_LEVEL_INF);
@@ -74,11 +77,17 @@ void perf_reporter_log_summary(void)
 {
     (void)perf_monitor_get_stats(&snapshot);
     // Fields below share a snapshot; subsequent stack scans are independent samples.
-    LOG_INF("PERF summary: uptime_ms=%lld measurements=%u without_submit=%u submit_failed=%u invalid_time=%u",
+    LOG_INF("PERF summary: uptime_ms=%lld measurements=%u without_submit=%u submit_failed=%u invalid_time=%u rx_capture_lost=%u",
             (long long)k_uptime_get(), (unsigned int)snapshot.measurements,
             (unsigned int)snapshot.without_submit, (unsigned int)snapshot.track_submit_failed,
-            (unsigned int)snapshot.invalid_timestamps);
+            (unsigned int)snapshot.invalid_timestamps, (unsigned int)snapshot.rx_capture_lost);
 
+    log_latency("rx_byte_wait", &snapshot.rx_byte_wait);
+    log_latency("tx_queue_wait", &snapshot.tx_queue_wait);
+    log_latency("tx_poll", &snapshot.tx_poll);
+    log_latency("parsed_to_tx_poll", &snapshot.parsed_to_tx_poll);
+    log_execution("rx_isr", &snapshot.rx_isr);
+    log_execution("rx_parser", &snapshot.rx_parser);
     log_latency("queue_wait", &snapshot.queue_wait);
     log_latency("processing", &snapshot.processing);
     log_latency("rx_to_submit", &snapshot.rx_to_submit);
@@ -98,6 +107,9 @@ void perf_reporter_log_summary(void)
 
     log_stack("rx", uart_rx_tid, 0);
     log_stack("handler", frame_handler_tid, 1);
+#if defined(CONFIG_SCHED_THREAD_USAGE_ALL)
+    perf_resources_log_summary();
+#endif
     log_stack("tx", uart_tx_tid, 2);
 }
 

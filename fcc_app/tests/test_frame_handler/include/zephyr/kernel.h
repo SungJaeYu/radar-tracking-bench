@@ -6,16 +6,17 @@
 #include <errno.h>
 #define ARG_UNUSED(x) (void)(x)
 #define K_THREAD_DEFINE(...)
-#define K_MSGQ_DEFINE(name, size, count, align) int name
+struct k_msgq { int unused; };
+#define K_MSGQ_DEFINE(name, size, count, align) struct k_msgq name
 #define K_MSEC(x) (x)
 #define K_NO_WAIT 0
 static int64_t test_uptime_ms;
-static int64_t k_uptime_get(void)
+static inline int64_t k_uptime_get(void)
 {
     return test_uptime_ms;
 }
 
-static int k_msgq_get(int *p_queue, void *p_data, int timeout)
+static inline int k_msgq_get(struct k_msgq *p_queue, void *p_data, int timeout)
 {
     (void)p_queue;
     (void)p_data;
@@ -23,7 +24,7 @@ static int k_msgq_get(int *p_queue, void *p_data, int timeout)
     return -ENOMSG;
 }
 
-static int k_msgq_put(int *p_queue, const void *p_data, int timeout)
+static inline int k_msgq_put(struct k_msgq *p_queue, const void *p_data, int timeout)
 {
     (void)p_queue;
     (void)p_data;
@@ -32,11 +33,15 @@ static int k_msgq_put(int *p_queue, const void *p_data, int timeout)
 }
 
 #if defined(CONFIG_RADAR_PERF_MONITOR)
-static inline uint32_t k_msgq_num_used_get(int *p_queue)
+static inline uint32_t k_msgq_num_used_get(struct k_msgq *p_queue)
 {
     (void)p_queue;
     return 8;
 }
 #endif
 
+#endif
+
+#if defined(CONFIG_RADAR_PERF_MONITOR)
+#include <test_perf_mutex.h>
 #endif

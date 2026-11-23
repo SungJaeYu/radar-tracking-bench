@@ -73,6 +73,8 @@ python -m pc_sim.run_sim --port /dev/ttyUSB0 --duration 10 --noise 0 --azimuth-n
 재실행 시 INIT이 자동 전송되므로 보드를 재부팅하거나 별도로 수동 INIT을 보낼 필요가 없습니다.
 이진 응답 수집·RMSE는 `python -m pc_sim.evaluate run --port /dev/ttyUSB0 --scenario noisy`를 사용합니다. run_sim은 송신 전용입니다.
 
+선회 입력은 `python -m pc_sim.run_sim --port /dev/ttyUSB0 --scenario straight_turn_straight --duration 80`으로 송신합니다. 약75.49초의 동쪽 직진·우90°선회·남쪽 직진 경로이며 기본60초로는 전체를 실행하지 못합니다. GUI와 `evaluate`는 이 선회 시나리오를 지원하지 않습니다. 영어 GUI의 연결·시작은 `Connection`, `Connect board`, `Start`를 사용합니다. [v1.1.0 선회·GUI 실보드 기록](hardware-test-2026-11-23-v1.1.0.md)은 별도 조건과 결과를 따릅니다.
+
 ## 5. Overflow 복구 재현
 
 기본 DRAIN의 강제 overflow와 정상 복귀는 [전송 오류 시험](hardware-test-2026-11-18-transport-stress.md)에서 확인했습니다. 아래는 재현 시 확인할 항목입니다.

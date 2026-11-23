@@ -90,13 +90,23 @@ static void test_execution_summary(void)
     assert(strstr(output, "PERF estimator_predict: n=0 status=no_samples") != NULL);
     assert(strstr(output, "PERF estimator_correct: n=0 status=no_samples") != NULL);
 
+    perf_monitor_record_rx_isr(9);
+    perf_monitor_record_rx_parser(12);
+    perf_monitor_record_rx_byte(0, 20);
+    perf_monitor_record_tx_timing(1, 3, 5, true, 0);
     perf_monitor_record_predict(0);
     perf_monitor_record_predict(9);
     perf_monitor_record_correct(12);
 
     reset_test();
     perf_reporter_log_summary();
+    assert(strstr(output, "PERF rx_byte_wait: n=1 total_ms=20") != NULL);
+    assert(strstr(output, "PERF tx_queue_wait: n=1 total_ms=2") != NULL);
+    assert(strstr(output, "PERF tx_poll: n=1 total_ms=2") != NULL);
+    assert(strstr(output, "PERF parsed_to_tx_poll: n=1 total_ms=5") != NULL);
 #if defined(CONFIG_TIMING_FUNCTIONS)
+    assert(strstr(output, "PERF rx_isr: n=1 min_ns=90 mean_ns=90 max_ns=90") != NULL);
+    assert(strstr(output, "PERF rx_parser: n=1 min_ns=120 mean_ns=120 max_ns=120") != NULL);
     assert(strstr(output, "PERF estimator_predict: n=2 min_ns=0 mean_ns=40 max_ns=90") != NULL);
     assert(strstr(output, "PERF estimator_correct: n=1 min_ns=120 mean_ns=120 max_ns=120") != NULL);
 #else

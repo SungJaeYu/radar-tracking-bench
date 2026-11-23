@@ -1,0 +1,184 @@
+F.....................F.........F....................................FFF [ 83%]
+FFFFF........F                                                           [100%]
+=================================== FAILURES ===================================
+__________________ test_rtt_only_failure_does_not_fail_board ___________________
+
+    def test_rtt_only_failure_does_not_fail_board():
+        result = evidence()
+        result['pc_latency_ms']['max'] = 100.001
+        verdict = evaluate_acceptance(result)
+        assert verdict['verdicts']['host_rtt']['status'] == 'failed'
+        assert verdict['board_qualification']['status'] == 'passed'
+>       assert verdict['passed']
+E       assert False
+
+tests/test_perf_acceptance.py:40: AssertionError
+__________ test_incomplete_evidence_prevents_qualification[updates3] ___________
+
+updates = {'load_measurements': 499, 'host_skipped_slots': 1}
+
+    @pytest.mark.parametrize('updates', [dict(run_completed=False, failure='abort'),
+        dict(recording_complete=False), dict(restore_failure='flash failed'),
+        dict(load_measurements=499, host_skipped_slots=1), dict(console_complete=False),
+        dict(performance_summary_count=0)])
+    def test_incomplete_evidence_prevents_qualification(updates):
+        result = evidence()
+        result.update(updates)
+        assert evaluate_acceptance(result)['requested_profile_qualification']['status'] != 'passed'
+>       assert evaluate_acceptance(result)['passed'] == (updates == dict(load_measurements=499, host_skipped_slots=1))
+E       AssertionError: assert False == ({'load_measur...ped_slots': 1} == {'load_measur...ped_slots': 1}
+E         
+E         Omitting 2 identical items, use -vv to show
+E         Use -v to get more diff)
+
+tests/test_perf_acceptance.py:78: AssertionError
+_______________ test_requested_load_separate_from_observed_board _______________
+
+    def test_requested_load_separate_from_observed_board():
+        result = evidence()
+        result.update(host_skipped_slots=1, load_measurements=499)
+        verdict = evaluate_acceptance(result)
+        assert verdict['board_qualification']['status'] == 'passed'
+        assert verdict['verdicts']['requested_load']['status'] == 'inconclusive'
+>       assert verdict['passed']
+E       assert False
+
+tests/test_perf_acceptance.py:101: AssertionError
+_ test_earlier_latency_violation_cannot_be_hidden_by_final_summary[rx_byte_wait] _
+
+metric = 'rx_byte_wait'
+
+    @pytest.mark.parametrize('metric', ['rx_byte_wait', 'tx_poll', 'parsed_to_tx_poll'])
+    def test_earlier_latency_violation_cannot_be_hidden_by_final_summary(metric):
+        result = evidence()
+        result['performance_snapshots'][0][metric]['max_ms'] = 21
+>       assert evaluate_acceptance(result)['verdicts']['board_internal']['status'] == 'failed'
+E       AssertionError: assert 'passed' == 'failed'
+E         
+E         - failed
+E         + passed
+
+tests/test_perf_acceptance.py:244: AssertionError
+__ test_earlier_latency_violation_cannot_be_hidden_by_final_summary[tx_poll] ___
+
+metric = 'tx_poll'
+
+    @pytest.mark.parametrize('metric', ['rx_byte_wait', 'tx_poll', 'parsed_to_tx_poll'])
+    def test_earlier_latency_violation_cannot_be_hidden_by_final_summary(metric):
+        result = evidence()
+        result['performance_snapshots'][0][metric]['max_ms'] = 21
+>       assert evaluate_acceptance(result)['verdicts']['board_internal']['status'] == 'failed'
+E       AssertionError: assert 'passed' == 'failed'
+E         
+E         - failed
+E         + passed
+
+tests/test_perf_acceptance.py:244: AssertionError
+_ test_earlier_latency_violation_cannot_be_hidden_by_final_summary[parsed_to_tx_poll] _
+
+metric = 'parsed_to_tx_poll'
+
+    @pytest.mark.parametrize('metric', ['rx_byte_wait', 'tx_poll', 'parsed_to_tx_poll'])
+    def test_earlier_latency_violation_cannot_be_hidden_by_final_summary(metric):
+        result = evidence()
+        result['performance_snapshots'][0][metric]['max_ms'] = 21
+>       assert evaluate_acceptance(result)['verdicts']['board_internal']['status'] == 'failed'
+E       AssertionError: assert 'passed' == 'failed'
+E         
+E         - failed
+E         + passed
+
+tests/test_perf_acceptance.py:244: AssertionError
+__ test_earlier_error_cannot_be_hidden_by_final_summary[header-invalid_time] ___
+
+metric = 'header', field = 'invalid_time'
+
+    @pytest.mark.parametrize('metric,field', [('header','invalid_time'), ('queue rx','rejected'), ('tx','encode_failed')])
+    def test_earlier_error_cannot_be_hidden_by_final_summary(metric, field):
+        result = evidence()
+        result['performance_snapshots'][0][metric][field] = 1
+>       assert evaluate_acceptance(result)['verdicts']['board_internal']['status'] == 'failed'
+E       AssertionError: assert 'passed' == 'failed'
+E         
+E         - failed
+E         + passed
+
+tests/test_perf_acceptance.py:250: AssertionError
+___ test_earlier_error_cannot_be_hidden_by_final_summary[queue rx-rejected] ____
+
+metric = 'queue rx', field = 'rejected'
+
+    @pytest.mark.parametrize('metric,field', [('header','invalid_time'), ('queue rx','rejected'), ('tx','encode_failed')])
+    def test_earlier_error_cannot_be_hidden_by_final_summary(metric, field):
+        result = evidence()
+        result['performance_snapshots'][0][metric][field] = 1
+>       assert evaluate_acceptance(result)['verdicts']['board_internal']['status'] == 'failed'
+E       AssertionError: assert 'passed' == 'failed'
+E         
+E         - failed
+E         + passed
+
+tests/test_perf_acceptance.py:250: AssertionError
+____ test_earlier_error_cannot_be_hidden_by_final_summary[tx-encode_failed] ____
+
+metric = 'tx', field = 'encode_failed'
+
+    @pytest.mark.parametrize('metric,field', [('header','invalid_time'), ('queue rx','rejected'), ('tx','encode_failed')])
+    def test_earlier_error_cannot_be_hidden_by_final_summary(metric, field):
+        result = evidence()
+        result['performance_snapshots'][0][metric][field] = 1
+>       assert evaluate_acceptance(result)['verdicts']['board_internal']['status'] == 'failed'
+E       AssertionError: assert 'passed' == 'failed'
+E         
+E         - failed
+E         + passed
+
+tests/test_perf_acceptance.py:250: AssertionError
+________________ test_negative_rtt_diagnostic_cannot_fail_board ________________
+
+    def test_negative_rtt_diagnostic_cannot_fail_board():
+        result = evidence()
+        result['pc_latency_ms']['max'] = -1
+        verdict = evaluate_acceptance(result)
+        assert verdict['verdicts']['host_rtt']['status'] == 'failed'
+>       assert verdict['passed']
+E       assert False
+
+tests/test_perf_acceptance.py:257: AssertionError
+_____________ test_failed_profile_does_not_mislabel_observed_board _____________
+
+    def test_failed_profile_does_not_mislabel_observed_board():
+        result = evidence()
+        result.update(host_skipped_slots=5,load_measurements=495)
+        result['pc_latency_ms']['max'] = 300
+        verdict = evaluate_acceptance(result)
+>       assert verdict['passed'] and not verdict['requested_profile_passed']
+E       assert (False)
+
+tests/test_perf_acceptance.py:264: AssertionError
+_______________ test_body_failure_does_not_mean_recording_failed _______________
+
+tmp_path = PosixPath('/private/var/folders/0w/j6nwjhlx69g1d2gg4bpws_b80000gn/T/pytest-of-yuseungjae/pytest-85/test_body_failure_does_not_mea0')
+
+    def test_body_failure_does_not_mean_recording_failed(tmp_path):
+        with pytest.raises(ValueError, match='board failure'):
+            with AsyncRecorder(tmp_path/'session', Settings(), 'test', tmp_path/'console.log') as writer:
+>               assert not writer.complete
+                           ^^^^^^^^^^^^^^^
+E               AttributeError: 'AsyncRecorder' object has no attribute 'complete'
+
+tests/test_async_recording.py:132: AttributeError
+=========================== short test summary info ============================
+FAILED tests/test_perf_acceptance.py::test_rtt_only_failure_does_not_fail_board
+FAILED tests/test_perf_acceptance.py::test_incomplete_evidence_prevents_qualification[updates3]
+FAILED tests/test_perf_acceptance.py::test_requested_load_separate_from_observed_board
+FAILED tests/test_perf_acceptance.py::test_earlier_latency_violation_cannot_be_hidden_by_final_summary[rx_byte_wait]
+FAILED tests/test_perf_acceptance.py::test_earlier_latency_violation_cannot_be_hidden_by_final_summary[tx_poll]
+FAILED tests/test_perf_acceptance.py::test_earlier_latency_violation_cannot_be_hidden_by_final_summary[parsed_to_tx_poll]
+FAILED tests/test_perf_acceptance.py::test_earlier_error_cannot_be_hidden_by_final_summary[header-invalid_time]
+FAILED tests/test_perf_acceptance.py::test_earlier_error_cannot_be_hidden_by_final_summary[queue rx-rejected]
+FAILED tests/test_perf_acceptance.py::test_earlier_error_cannot_be_hidden_by_final_summary[tx-encode_failed]
+FAILED tests/test_perf_acceptance.py::test_negative_rtt_diagnostic_cannot_fail_board
+FAILED tests/test_perf_acceptance.py::test_failed_profile_does_not_mislabel_observed_board
+FAILED tests/test_async_recording.py::test_body_failure_does_not_mean_recording_failed
+12 failed, 74 passed in 0.42s

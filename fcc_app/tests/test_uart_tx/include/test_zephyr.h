@@ -21,7 +21,7 @@ static const struct device test_device;
 static bool ready;
 #define DT_NODELABEL(x) 0
 #define DEVICE_DT_GET(x) (&test_device)
-static bool device_is_ready(const struct device *p_dev)
+static inline bool device_is_ready(const struct device *p_dev)
 {
     assert(p_dev == &test_device);
     return ready;
@@ -32,12 +32,12 @@ struct k_sem {
 };
 #define K_SEM_DEFINE(name, initial, limit) struct k_sem name = {initial}
 
-static void k_sem_give(struct k_sem *p_sem)
+static inline void k_sem_give(struct k_sem *p_sem)
 {
     p_sem->count = 1;
 }
 
-static int k_sem_take(struct k_sem *p_sem, int timeout)
+static inline int k_sem_take(struct k_sem *p_sem, int timeout)
 {
     assert(timeout == K_FOREVER && p_sem->count == 1);
     p_sem->count = 0;
@@ -61,7 +61,7 @@ static inline uint32_t k_msgq_num_used_get(const struct k_msgq *p_queue)
 
 static jmp_buf worker_exit;
 static unsigned put_calls;
-static int k_msgq_put(struct k_msgq *p_queue, const void *p_data, int timeout)
+static inline int k_msgq_put(struct k_msgq *p_queue, const void *p_data, int timeout)
 {
     assert(timeout == K_NO_WAIT);
     put_calls++;
@@ -75,7 +75,7 @@ static int k_msgq_put(struct k_msgq *p_queue, const void *p_data, int timeout)
     return 0;
 }
 
-static int k_msgq_get(struct k_msgq *p_queue, void *out_data, int timeout)
+static inline int k_msgq_get(struct k_msgq *p_queue, void *out_data, int timeout)
 {
     assert(timeout == K_FOREVER);
     // End the test when the real worker would block waiting for more requests.
@@ -91,14 +91,19 @@ static int k_msgq_get(struct k_msgq *p_queue, void *out_data, int timeout)
 
 static uint8_t sent[512];
 static size_t sent_count;
-static void uart_poll_out(const struct device *p_dev, unsigned char byte)
+static int64_t test_uptime_ms;
+#if defined(CONFIG_RADAR_PERF_MONITOR)
+static inline int64_t k_uptime_get(void) { return test_uptime_ms; }
+#endif
+
+static inline void uart_poll_out(const struct device *p_dev, unsigned char byte)
 {
     assert(p_dev == &test_device && ready && sent_count < sizeof(sent));
     sent[sent_count++] = byte;
 }
 
 static char log_output[256];
-static int printk(const char *p_format, ...)
+static inline int printk(const char *p_format, ...)
 {
     va_list args;
     va_start(args, p_format);
@@ -107,4 +112,8 @@ static int printk(const char *p_format, ...)
     return count;
 }
 
+#endif
+
+#if defined(CONFIG_RADAR_PERF_MONITOR)
+#include <test_perf_mutex.h>
 #endif

@@ -1,0 +1,16 @@
+{
+  "files": [
+    "docs/review-2026-11-23.md",
+    "README.md",
+    "README.ko.md",
+    "CHANGELOG.md",
+    "docs/README.md",
+    "docs/roadmap.md",
+    "docs/test-cases.md",
+    "docs/requirements-traceability.md",
+    "docs/performance-monitoring.md",
+    "docs/stm32-performance-coverage.md",
+    "fcc_app/tests/test_perf_monitor/README.md"
+  ],
+  "missing": []
+}

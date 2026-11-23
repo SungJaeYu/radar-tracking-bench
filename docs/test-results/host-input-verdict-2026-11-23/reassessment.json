@@ -1,0 +1,1700 @@
+{
+  "kind": "offline reassessment, not a new board run",
+  "source_result": "docs/test-results/final-validation-2026-11-23/perf-load/results.json",
+  "source_result_sha256": "8ce6dc12edaef17d41e963c7674a407feb13266f65cefc3ba374f11f0dbd6fcc",
+  "original_acceptance_revision": "2026-11-23-board-only-v2",
+  "original_board_qualification": "failed",
+  "guard_replay": {
+    "reasons": [
+      "host send gap reaches board receive timeout"
+    ],
+    "host_gap_ms": 1159.582250053063,
+    "sensor_interval_ms": 20,
+    "previous_sensor_ms": 1537180,
+    "sensor_ms": 1537200,
+    "previous_write_monotonic_s": 596549.987482458,
+    "write_monotonic_s": 596551.147064708,
+    "receive_timeout_ms": 1000,
+    "sensor_interval_limit_ms": 1000
+  },
+  "correction": "Remove only the independently proven RESET misclassification; preserve all other checks and observations.",
+  "boundary": "New runner would stop earlier. This reassessment retains the actual old capture and does not invent the earlier stop or missing replies.",
+  "snapshots_sha256": {
+    "runner-snapshot.py": "759c81a5bc49556aef3b98c9c59c51b678a5b7c28390837dac49eb7649491a65",
+    "acceptance-snapshot.py": "eb9272a9bcf014d667a74a4441bcdd69944b0b77d4868157fa6f0d24d1b05a26"
+  },
+  "verdicts": {
+    "board_internal": {
+      "status": "inconclusive",
+      "reasons": [
+        "run aborted or final assessment incomplete",
+        "required guard absent: measurement count reconciles",
+        "required guard absent: no submit failures or invalid times",
+        "required guard absent: invalid measurement is counted without submission",
+        "required guard absent: processing successful sample count",
+        "required guard absent: rx_to_submit successful sample count",
+        "required guard absent: queue wait count includes invalid input",
+        "required guard absent: 20ms board latency budget",
+        "required guard absent: no queue rejection",
+        "required guard absent: no TX encoder failures",
+        "required guard absent: all sampled stacks have headroom",
+        "rx_byte_wait: partial snapshot cannot reconcile final traffic",
+        "rx_parser: partial snapshot cannot reconcile final traffic",
+        "parsed_to_tx_poll: partial snapshot cannot reconcile final traffic"
+      ]
+    },
+    "delivery": {
+      "status": "inconclusive",
+      "reasons": [
+        "run aborted or final assessment incomplete",
+        "required guard absent: all measurements matched once",
+        "required guard absent: all STATUS requests answered",
+        "required guard absent: one post-load timeout report",
+        "required guard absent: RX accepted frame count",
+        "required guard absent: TX queued and polling counts match received frames"
+      ]
+    },
+    "evidence": {
+      "status": "inconclusive",
+      "reasons": [
+        "run aborted or final assessment incomplete",
+        "required guard absent: single firmware boot",
+        "required guard absent: performance summaries remain continuous"
+      ]
+    },
+    "host_rtt": {
+      "status": "failed",
+      "reasons": [
+        "run aborted or final assessment incomplete",
+        "PC RTT max exceeds 100ms or is invalid"
+      ]
+    },
+    "requested_load": {
+      "status": "inconclusive",
+      "reasons": [
+        "run aborted or final assessment incomplete",
+        "host input continuity interrupted; steady load not assessed",
+        "full requested load duration not observed"
+      ]
+    }
+  },
+  "board_qualification": {
+    "status": "inconclusive",
+    "reasons": [
+      "run aborted or final assessment incomplete",
+      "required guard absent: measurement count reconciles",
+      "required guard absent: no submit failures or invalid times",
+      "required guard absent: invalid measurement is counted without submission",
+      "required guard absent: processing successful sample count",
+      "required guard absent: rx_to_submit successful sample count",
+      "required guard absent: queue wait count includes invalid input",
+      "required guard absent: 20ms board latency budget",
+      "required guard absent: no queue rejection",
+      "required guard absent: no TX encoder failures",
+      "required guard absent: all sampled stacks have headroom",
+      "rx_byte_wait: partial snapshot cannot reconcile final traffic",
+      "rx_parser: partial snapshot cannot reconcile final traffic",
+      "parsed_to_tx_poll: partial snapshot cannot reconcile final traffic",
+      "run aborted or final assessment incomplete",
+      "required guard absent: all measurements matched once",
+      "required guard absent: all STATUS requests answered",
+      "required guard absent: one post-load timeout report",
+      "required guard absent: RX accepted frame count",
+      "required guard absent: TX queued and polling counts match received frames",
+      "run aborted or final assessment incomplete",
+      "required guard absent: single firmware boot",
+      "required guard absent: performance summaries remain continuous"
+    ]
+  },
+  "requested_profile_qualification": {
+    "status": "inconclusive",
+    "reasons": [
+      "run aborted or final assessment incomplete",
+      "required guard absent: measurement count reconciles",
+      "required guard absent: no submit failures or invalid times",
+      "required guard absent: invalid measurement is counted without submission",
+      "required guard absent: processing successful sample count",
+      "required guard absent: rx_to_submit successful sample count",
+      "required guard absent: queue wait count includes invalid input",
+      "required guard absent: 20ms board latency budget",
+      "required guard absent: no queue rejection",
+      "required guard absent: no TX encoder failures",
+      "required guard absent: all sampled stacks have headroom",
+      "rx_byte_wait: partial snapshot cannot reconcile final traffic",
+      "rx_parser: partial snapshot cannot reconcile final traffic",
+      "parsed_to_tx_poll: partial snapshot cannot reconcile final traffic",
+      "run aborted or final assessment incomplete",
+      "required guard absent: all measurements matched once",
+      "required guard absent: all STATUS requests answered",
+      "required guard absent: one post-load timeout report",
+      "required guard absent: RX accepted frame count",
+      "required guard absent: TX queued and polling counts match received frames",
+      "run aborted or final assessment incomplete",
+      "required guard absent: single firmware boot",
+      "required guard absent: performance summaries remain continuous",
+      "run aborted or final assessment incomplete",
+      "host input continuity interrupted; steady load not assessed",
+      "full requested load duration not observed"
+    ]
+  },
+  "passed": false,
+  "passed_scope": "observed_board_delivery_evidence",
+  "requested_profile_passed": false,
+  "acceptance_revision": "2026-11-23-host-input-v3",
+  "full_coverage": false,
+  "coverage_gaps": [
+    "physical RX arrival to ISR entry is unmeasured",
+    "physical TX last stop bit is unmeasured",
+    "true WCET and execution-time acceptance limits are unestablished",
+    "physical CPU utilization and accurate ISR attribution are unmeasured",
+    "hardware fault campaigns are not performed",
+    "sampled stack headroom is not a stack safety certification"
+  ],
+  "cpu_scheduler_windows": [
+    {
+      "uptime_ms": 10002,
+      "interval_ms": 5001,
+      "non_idle_percent": 19.734601446186712
+    },
+    {
+      "uptime_ms": 15003,
+      "interval_ms": 5001,
+      "non_idle_percent": 24.29900395839487
+    },
+    {
+      "uptime_ms": 20005,
+      "interval_ms": 5002,
+      "non_idle_percent": 25.156515403259935
+    },
+    {
+      "uptime_ms": 25006,
+      "interval_ms": 5001,
+      "non_idle_percent": 25.13139560819706
+    },
+    {
+      "uptime_ms": 30007,
+      "interval_ms": 5001,
+      "non_idle_percent": 25.20660903614181
+    },
+    {
+      "uptime_ms": 35009,
+      "interval_ms": 5002,
+      "non_idle_percent": 24.855163641859537
+    },
+    {
+      "uptime_ms": 40010,
+      "interval_ms": 5001,
+      "non_idle_percent": 25.19692261263038
+    },
+    {
+      "uptime_ms": 45011,
+      "interval_ms": 5001,
+      "non_idle_percent": 25.074914715690213
+    },
+    {
+      "uptime_ms": 50013,
+      "interval_ms": 5002,
+      "non_idle_percent": 25.179148762601272
+    },
+    {
+      "uptime_ms": 55014,
+      "interval_ms": 5001,
+      "non_idle_percent": 25.02672823844525
+    },
+    {
+      "uptime_ms": 60015,
+      "interval_ms": 5001,
+      "non_idle_percent": 25.174110003664865
+    },
+    {
+      "uptime_ms": 65017,
+      "interval_ms": 5002,
+      "non_idle_percent": 25.16766881655025
+    },
+    {
+      "uptime_ms": 70018,
+      "interval_ms": 5001,
+      "non_idle_percent": 25.106445377303384
+    },
+    {
+      "uptime_ms": 75019,
+      "interval_ms": 5001,
+      "non_idle_percent": 25.203105363427028
+    },
+    {
+      "uptime_ms": 80021,
+      "interval_ms": 5002,
+      "non_idle_percent": 25.241481724435882
+    },
+    {
+      "uptime_ms": 85022,
+      "interval_ms": 5001,
+      "non_idle_percent": 25.179367437542627
+    },
+    {
+      "uptime_ms": 90023,
+      "interval_ms": 5001,
+      "non_idle_percent": 24.982542373588526
+    },
+    {
+      "uptime_ms": 95025,
+      "interval_ms": 5002,
+      "non_idle_percent": 25.17535873911442
+    },
+    {
+      "uptime_ms": 100026,
+      "interval_ms": 5001,
+      "non_idle_percent": 25.212798836373143
+    },
+    {
+      "uptime_ms": 105027,
+      "interval_ms": 5001,
+      "non_idle_percent": 25.119312412900847
+    },
+    {
+      "uptime_ms": 110029,
+      "interval_ms": 5002,
+      "non_idle_percent": 25.189055889071945
+    },
+    {
+      "uptime_ms": 115030,
+      "interval_ms": 5001,
+      "non_idle_percent": 25.183997699117818
+    },
+    {
+      "uptime_ms": 120031,
+      "interval_ms": 5001,
+      "non_idle_percent": 25.19289261685208
+    },
+    {
+      "uptime_ms": 125033,
+      "interval_ms": 5002,
+      "non_idle_percent": 25.24334213782646
+    },
+    {
+      "uptime_ms": 130034,
+      "interval_ms": 5001,
+      "non_idle_percent": 25.192748090200507
+    },
+    {
+      "uptime_ms": 135035,
+      "interval_ms": 5001,
+      "non_idle_percent": 25.165945272457556
+    },
+    {
+      "uptime_ms": 140036,
+      "interval_ms": 5001,
+      "non_idle_percent": 25.15942139131427
+    },
+    {
+      "uptime_ms": 145038,
+      "interval_ms": 5002,
+      "non_idle_percent": 25.037517579357434
+    },
+    {
+      "uptime_ms": 150039,
+      "interval_ms": 5001,
+      "non_idle_percent": 25.262786891668224
+    },
+    {
+      "uptime_ms": 155040,
+      "interval_ms": 5001,
+      "non_idle_percent": 25.222249282945352
+    },
+    {
+      "uptime_ms": 160042,
+      "interval_ms": 5002,
+      "non_idle_percent": 25.187439109336292
+    },
+    {
+      "uptime_ms": 165043,
+      "interval_ms": 5001,
+      "non_idle_percent": 24.754693587210312
+    },
+    {
+      "uptime_ms": 170044,
+      "interval_ms": 5001,
+      "non_idle_percent": 24.972349349698774
+    },
+    {
+      "uptime_ms": 175046,
+      "interval_ms": 5002,
+      "non_idle_percent": 21.847617841049267
+    },
+    {
+      "uptime_ms": 180047,
+      "interval_ms": 5001,
+      "non_idle_percent": 25.200285369820026
+    },
+    {
+      "uptime_ms": 185048,
+      "interval_ms": 5001,
+      "non_idle_percent": 25.017949465987073
+    },
+    {
+      "uptime_ms": 190049,
+      "interval_ms": 5001,
+      "non_idle_percent": 25.09157177527247
+    },
+    {
+      "uptime_ms": 195051,
+      "interval_ms": 5002,
+      "non_idle_percent": 25.225029429057187
+    },
+    {
+      "uptime_ms": 200052,
+      "interval_ms": 5001,
+      "non_idle_percent": 24.88211500547204
+    },
+    {
+      "uptime_ms": 205053,
+      "interval_ms": 5001,
+      "non_idle_percent": 24.94326761909485
+    },
+    {
+      "uptime_ms": 210055,
+      "interval_ms": 5002,
+      "non_idle_percent": 25.17930432163132
+    },
+    {
+      "uptime_ms": 215056,
+      "interval_ms": 5001,
+      "non_idle_percent": 24.86765996427514
+    },
+    {
+      "uptime_ms": 220057,
+      "interval_ms": 5001,
+      "non_idle_percent": 25.224876956922568
+    },
+    {
+      "uptime_ms": 225059,
+      "interval_ms": 5002,
+      "non_idle_percent": 25.190218085927178
+    },
+    {
+      "uptime_ms": 230060,
+      "interval_ms": 5001,
+      "non_idle_percent": 25.184358494132155
+    },
+    {
+      "uptime_ms": 235061,
+      "interval_ms": 5001,
+      "non_idle_percent": 24.197991754667342
+    },
+    {
+      "uptime_ms": 240063,
+      "interval_ms": 5002,
+      "non_idle_percent": 25.206347064963307
+    },
+    {
+      "uptime_ms": 245064,
+      "interval_ms": 5001,
+      "non_idle_percent": 25.26938177615739
+    },
+    {
+      "uptime_ms": 250065,
+      "interval_ms": 5001,
+      "non_idle_percent": 25.100942013785396
+    },
+    {
+      "uptime_ms": 255066,
+      "interval_ms": 5001,
+      "non_idle_percent": 24.35640741805296
+    },
+    {
+      "uptime_ms": 260068,
+      "interval_ms": 5002,
+      "non_idle_percent": 25.022253236368975
+    },
+    {
+      "uptime_ms": 265069,
+      "interval_ms": 5001,
+      "non_idle_percent": 22.88146465532741
+    },
+    {
+      "uptime_ms": 270070,
+      "interval_ms": 5001,
+      "non_idle_percent": 25.268401754709483
+    },
+    {
+      "uptime_ms": 275072,
+      "interval_ms": 5002,
+      "non_idle_percent": 25.21801736680771
+    },
+    {
+      "uptime_ms": 280073,
+      "interval_ms": 5001,
+      "non_idle_percent": 24.611941215926635
+    },
+    {
+      "uptime_ms": 285074,
+      "interval_ms": 5001,
+      "non_idle_percent": 24.138395938529854
+    },
+    {
+      "uptime_ms": 290076,
+      "interval_ms": 5002,
+      "non_idle_percent": 24.720634774555176
+    },
+    {
+      "uptime_ms": 295077,
+      "interval_ms": 5001,
+      "non_idle_percent": 24.923694548052282
+    },
+    {
+      "uptime_ms": 300078,
+      "interval_ms": 5001,
+      "non_idle_percent": 25.19295948578801
+    },
+    {
+      "uptime_ms": 305080,
+      "interval_ms": 5002,
+      "non_idle_percent": 24.960405186691755
+    },
+    {
+      "uptime_ms": 310081,
+      "interval_ms": 5001,
+      "non_idle_percent": 25.195769414560417
+    },
+    {
+      "uptime_ms": 315082,
+      "interval_ms": 5001,
+      "non_idle_percent": 25.00379818206332
+    },
+    {
+      "uptime_ms": 320083,
+      "interval_ms": 5001,
+      "non_idle_percent": 24.919669793271083
+    },
+    {
+      "uptime_ms": 325085,
+      "interval_ms": 5002,
+      "non_idle_percent": 25.296389426406588
+    },
+    {
+      "uptime_ms": 330086,
+      "interval_ms": 5001,
+      "non_idle_percent": 24.957607715816927
+    },
+    {
+      "uptime_ms": 335087,
+      "interval_ms": 5001,
+      "non_idle_percent": 24.7620968057753
+    },
+    {
+      "uptime_ms": 340089,
+      "interval_ms": 5002,
+      "non_idle_percent": 25.21839773591305
+    },
+    {
+      "uptime_ms": 345090,
+      "interval_ms": 5001,
+      "non_idle_percent": 25.286777358523604
+    },
+    {
+      "uptime_ms": 350091,
+      "interval_ms": 5001,
+      "non_idle_percent": 24.800279313461555
+    },
+    {
+      "uptime_ms": 355093,
+      "interval_ms": 5002,
+      "non_idle_percent": 24.612660406747562
+    },
+    {
+      "uptime_ms": 360094,
+      "interval_ms": 5001,
+      "non_idle_percent": 25.207370317904754
+    },
+    {
+      "uptime_ms": 365095,
+      "interval_ms": 5001,
+      "non_idle_percent": 25.19854689046611
+    },
+    {
+      "uptime_ms": 370097,
+      "interval_ms": 5002,
+      "non_idle_percent": 25.199312037265223
+    },
+    {
+      "uptime_ms": 375098,
+      "interval_ms": 5001,
+      "non_idle_percent": 25.207629900791485
+    },
+    {
+      "uptime_ms": 380099,
+      "interval_ms": 5001,
+      "non_idle_percent": 24.875294616994637
+    },
+    {
+      "uptime_ms": 385101,
+      "interval_ms": 5002,
+      "non_idle_percent": 25.239766591804973
+    },
+    {
+      "uptime_ms": 390102,
+      "interval_ms": 5001,
+      "non_idle_percent": 25.25430674071211
+    },
+    {
+      "uptime_ms": 395103,
+      "interval_ms": 5001,
+      "non_idle_percent": 24.793738405249904
+    },
+    {
+      "uptime_ms": 400105,
+      "interval_ms": 5002,
+      "non_idle_percent": 25.21207040713083
+    },
+    {
+      "uptime_ms": 405106,
+      "interval_ms": 5001,
+      "non_idle_percent": 25.005824114688494
+    },
+    {
+      "uptime_ms": 410107,
+      "interval_ms": 5001,
+      "non_idle_percent": 25.180606092045682
+    },
+    {
+      "uptime_ms": 415108,
+      "interval_ms": 5001,
+      "non_idle_percent": 24.911284545989446
+    },
+    {
+      "uptime_ms": 420110,
+      "interval_ms": 5002,
+      "non_idle_percent": 25.10594716937074
+    },
+    {
+      "uptime_ms": 425111,
+      "interval_ms": 5001,
+      "non_idle_percent": 25.136043084825044
+    },
+    {
+      "uptime_ms": 430112,
+      "interval_ms": 5001,
+      "non_idle_percent": 24.963889253278033
+    },
+    {
+      "uptime_ms": 435114,
+      "interval_ms": 5002,
+      "non_idle_percent": 25.288655748568704
+    },
+    {
+      "uptime_ms": 440115,
+      "interval_ms": 5001,
+      "non_idle_percent": 24.90687480247857
+    },
+    {
+      "uptime_ms": 445116,
+      "interval_ms": 5001,
+      "non_idle_percent": 25.21064201023855
+    },
+    {
+      "uptime_ms": 450118,
+      "interval_ms": 5002,
+      "non_idle_percent": 24.88689204666499
+    },
+    {
+      "uptime_ms": 455119,
+      "interval_ms": 5001,
+      "non_idle_percent": 25.036180902017023
+    },
+    {
+      "uptime_ms": 460120,
+      "interval_ms": 5001,
+      "non_idle_percent": 24.547494861807706
+    },
+    {
+      "uptime_ms": 465122,
+      "interval_ms": 5002,
+      "non_idle_percent": 25.21607405191337
+    },
+    {
+      "uptime_ms": 470123,
+      "interval_ms": 5001,
+      "non_idle_percent": 25.18815589216665
+    },
+    {
+      "uptime_ms": 475124,
+      "interval_ms": 5001,
+      "non_idle_percent": 24.89019405114857
+    },
+    {
+      "uptime_ms": 480126,
+      "interval_ms": 5002,
+      "non_idle_percent": 24.759650329747846
+    },
+    {
+      "uptime_ms": 485127,
+      "interval_ms": 5001,
+      "non_idle_percent": 24.927818169401085
+    },
+    {
+      "uptime_ms": 490128,
+      "interval_ms": 5001,
+      "non_idle_percent": 25.213582788548884
+    },
+    {
+      "uptime_ms": 495129,
+      "interval_ms": 5001,
+      "non_idle_percent": 24.960510255644667
+    },
+    {
+      "uptime_ms": 500131,
+      "interval_ms": 5002,
+      "non_idle_percent": 25.19346172889741
+    },
+    {
+      "uptime_ms": 505132,
+      "interval_ms": 5001,
+      "non_idle_percent": 24.988153254957002
+    },
+    {
+      "uptime_ms": 510133,
+      "interval_ms": 5001,
+      "non_idle_percent": 25.18514186392835
+    },
+    {
+      "uptime_ms": 515135,
+      "interval_ms": 5002,
+      "non_idle_percent": 25.211098044106702
+    },
+    {
+      "uptime_ms": 520136,
+      "interval_ms": 5001,
+      "non_idle_percent": 25.221019265571165
+    },
+    {
+      "uptime_ms": 525137,
+      "interval_ms": 5001,
+      "non_idle_percent": 25.112942745567167
+    },
+    {
+      "uptime_ms": 530139,
+      "interval_ms": 5002,
+      "non_idle_percent": 24.952505365495963
+    },
+    {
+      "uptime_ms": 535140,
+      "interval_ms": 5001,
+      "non_idle_percent": 25.25056341838272
+    },
+    {
+      "uptime_ms": 540141,
+      "interval_ms": 5001,
+      "non_idle_percent": 24.864740129859598
+    },
+    {
+      "uptime_ms": 545142,
+      "interval_ms": 5001,
+      "non_idle_percent": 24.891601969171365
+    },
+    {
+      "uptime_ms": 550144,
+      "interval_ms": 5002,
+      "non_idle_percent": 25.198294352766034
+    },
+    {
+      "uptime_ms": 555145,
+      "interval_ms": 5001,
+      "non_idle_percent": 25.286056865159352
+    },
+    {
+      "uptime_ms": 560147,
+      "interval_ms": 5002,
+      "non_idle_percent": 24.78826198634815
+    },
+    {
+      "uptime_ms": 565148,
+      "interval_ms": 5001,
+      "non_idle_percent": 24.398684838858788
+    },
+    {
+      "uptime_ms": 570149,
+      "interval_ms": 5001,
+      "non_idle_percent": 25.22616738079935
+    },
+    {
+      "uptime_ms": 575151,
+      "interval_ms": 5002,
+      "non_idle_percent": 25.05946846935815
+    },
+    {
+      "uptime_ms": 580152,
+      "interval_ms": 5001,
+      "non_idle_percent": 25.30217977156242
+    },
+    {
+      "uptime_ms": 585153,
+      "interval_ms": 5001,
+      "non_idle_percent": 25.20720504403951
+    },
+    {
+      "uptime_ms": 590155,
+      "interval_ms": 5002,
+      "non_idle_percent": 25.21401672994645
+    },
+    {
+      "uptime_ms": 595156,
+      "interval_ms": 5001,
+      "non_idle_percent": 25.129494562046624
+    },
+    {
+      "uptime_ms": 600157,
+      "interval_ms": 5001,
+      "non_idle_percent": 25.23021915143547
+    },
+    {
+      "uptime_ms": 605159,
+      "interval_ms": 5002,
+      "non_idle_percent": 25.262034112468555
+    },
+    {
+      "uptime_ms": 610160,
+      "interval_ms": 5001,
+      "non_idle_percent": 25.22137213155905
+    },
+    {
+      "uptime_ms": 615161,
+      "interval_ms": 5001,
+      "non_idle_percent": 25.221564940301143
+    },
+    {
+      "uptime_ms": 620163,
+      "interval_ms": 5002,
+      "non_idle_percent": 25.23508686939378
+    },
+    {
+      "uptime_ms": 625164,
+      "interval_ms": 5001,
+      "non_idle_percent": 25.28186190205429
+    },
+    {
+      "uptime_ms": 630165,
+      "interval_ms": 5001,
+      "non_idle_percent": 25.243227642367835
+    },
+    {
+      "uptime_ms": 635166,
+      "interval_ms": 5001,
+      "non_idle_percent": 25.2079960469137
+    },
+    {
+      "uptime_ms": 640168,
+      "interval_ms": 5002,
+      "non_idle_percent": 25.216158631089368
+    },
+    {
+      "uptime_ms": 645169,
+      "interval_ms": 5001,
+      "non_idle_percent": 25.213866132218854
+    },
+    {
+      "uptime_ms": 650170,
+      "interval_ms": 5001,
+      "non_idle_percent": 25.28303365980648
+    },
+    {
+      "uptime_ms": 655172,
+      "interval_ms": 5002,
+      "non_idle_percent": 25.20655055632176
+    },
+    {
+      "uptime_ms": 660173,
+      "interval_ms": 5001,
+      "non_idle_percent": 25.21045035549148
+    },
+    {
+      "uptime_ms": 665174,
+      "interval_ms": 5001,
+      "non_idle_percent": 25.217531721700233
+    },
+    {
+      "uptime_ms": 670176,
+      "interval_ms": 5002,
+      "non_idle_percent": 25.265650362109586
+    },
+    {
+      "uptime_ms": 675177,
+      "interval_ms": 5001,
+      "non_idle_percent": 25.258037315612434
+    },
+    {
+      "uptime_ms": 680178,
+      "interval_ms": 5001,
+      "non_idle_percent": 25.215647760051063
+    },
+    {
+      "uptime_ms": 685179,
+      "interval_ms": 5001,
+      "non_idle_percent": 25.200998435565463
+    },
+    {
+      "uptime_ms": 690181,
+      "interval_ms": 5002,
+      "non_idle_percent": 25.138220901433442
+    },
+    {
+      "uptime_ms": 695182,
+      "interval_ms": 5001,
+      "non_idle_percent": 25.277600184482484
+    },
+    {
+      "uptime_ms": 700183,
+      "interval_ms": 5001,
+      "non_idle_percent": 25.254321472335082
+    },
+    {
+      "uptime_ms": 705185,
+      "interval_ms": 5002,
+      "non_idle_percent": 25.220384011756302
+    },
+    {
+      "uptime_ms": 710186,
+      "interval_ms": 5001,
+      "non_idle_percent": 25.243974220457282
+    },
+    {
+      "uptime_ms": 715187,
+      "interval_ms": 5001,
+      "non_idle_percent": 25.226604680530173
+    },
+    {
+      "uptime_ms": 720189,
+      "interval_ms": 5002,
+      "non_idle_percent": 25.29772105176433
+    },
+    {
+      "uptime_ms": 725190,
+      "interval_ms": 5001,
+      "non_idle_percent": 25.221851466789634
+    },
+    {
+      "uptime_ms": 730191,
+      "interval_ms": 5001,
+      "non_idle_percent": 25.219364086407587
+    },
+    {
+      "uptime_ms": 735192,
+      "interval_ms": 5001,
+      "non_idle_percent": 25.127527740082282
+    },
+    {
+      "uptime_ms": 740194,
+      "interval_ms": 5002,
+      "non_idle_percent": 25.26380265030091
+    },
+    {
+      "uptime_ms": 745195,
+      "interval_ms": 5001,
+      "non_idle_percent": 25.268538378789
+    },
+    {
+      "uptime_ms": 750196,
+      "interval_ms": 5001,
+      "non_idle_percent": 25.226530821631535
+    },
+    {
+      "uptime_ms": 755198,
+      "interval_ms": 5002,
+      "non_idle_percent": 25.202771385144203
+    },
+    {
+      "uptime_ms": 760199,
+      "interval_ms": 5001,
+      "non_idle_percent": 25.216207161810424
+    },
+    {
+      "uptime_ms": 765200,
+      "interval_ms": 5001,
+      "non_idle_percent": 25.23077207156324
+    },
+    {
+      "uptime_ms": 770202,
+      "interval_ms": 5002,
+      "non_idle_percent": 25.241222834013296
+    },
+    {
+      "uptime_ms": 775203,
+      "interval_ms": 5001,
+      "non_idle_percent": 25.21025169021721
+    },
+    {
+      "uptime_ms": 780204,
+      "interval_ms": 5001,
+      "non_idle_percent": 25.230563469556706
+    },
+    {
+      "uptime_ms": 785206,
+      "interval_ms": 5002,
+      "non_idle_percent": 25.239029129902807
+    },
+    {
+      "uptime_ms": 790207,
+      "interval_ms": 5001,
+      "non_idle_percent": 25.278522796455757
+    },
+    {
+      "uptime_ms": 795208,
+      "interval_ms": 5001,
+      "non_idle_percent": 25.240085914500003
+    },
+    {
+      "uptime_ms": 800210,
+      "interval_ms": 5002,
+      "non_idle_percent": 25.212190895562642
+    },
+    {
+      "uptime_ms": 805211,
+      "interval_ms": 5001,
+      "non_idle_percent": 25.217689459967264
+    },
+    {
+      "uptime_ms": 810212,
+      "interval_ms": 5001,
+      "non_idle_percent": 25.262112048922155
+    },
+    {
+      "uptime_ms": 815213,
+      "interval_ms": 5001,
+      "non_idle_percent": 25.271940098598623
+    },
+    {
+      "uptime_ms": 820215,
+      "interval_ms": 5002,
+      "non_idle_percent": 25.221659259692075
+    },
+    {
+      "uptime_ms": 825216,
+      "interval_ms": 5001,
+      "non_idle_percent": 25.197269872592184
+    },
+    {
+      "uptime_ms": 830217,
+      "interval_ms": 5001,
+      "non_idle_percent": 25.24093643468524
+    },
+    {
+      "uptime_ms": 835219,
+      "interval_ms": 5002,
+      "non_idle_percent": 25.292312156639316
+    },
+    {
+      "uptime_ms": 840220,
+      "interval_ms": 5001,
+      "non_idle_percent": 25.234069108233246
+    },
+    {
+      "uptime_ms": 845221,
+      "interval_ms": 5001,
+      "non_idle_percent": 25.21945703613338
+    },
+    {
+      "uptime_ms": 850223,
+      "interval_ms": 5002,
+      "non_idle_percent": 25.22489323192167
+    },
+    {
+      "uptime_ms": 855224,
+      "interval_ms": 5001,
+      "non_idle_percent": 25.237600950741125
+    },
+    {
+      "uptime_ms": 860225,
+      "interval_ms": 5001,
+      "non_idle_percent": 25.274842245046894
+    },
+    {
+      "uptime_ms": 865227,
+      "interval_ms": 5002,
+      "non_idle_percent": 25.20969209740459
+    },
+    {
+      "uptime_ms": 870228,
+      "interval_ms": 5001,
+      "non_idle_percent": 25.21590466494722
+    },
+    {
+      "uptime_ms": 875229,
+      "interval_ms": 5001,
+      "non_idle_percent": 25.205556711191214
+    },
+    {
+      "uptime_ms": 880231,
+      "interval_ms": 5002,
+      "non_idle_percent": 25.280448871760147
+    },
+    {
+      "uptime_ms": 885232,
+      "interval_ms": 5001,
+      "non_idle_percent": 25.245307698845494
+    },
+    {
+      "uptime_ms": 890233,
+      "interval_ms": 5001,
+      "non_idle_percent": 25.20181821880211
+    },
+    {
+      "uptime_ms": 895235,
+      "interval_ms": 5002,
+      "non_idle_percent": 25.215909006188596
+    },
+    {
+      "uptime_ms": 900236,
+      "interval_ms": 5001,
+      "non_idle_percent": 25.215702013047824
+    },
+    {
+      "uptime_ms": 905237,
+      "interval_ms": 5001,
+      "non_idle_percent": 25.310488965504245
+    },
+    {
+      "uptime_ms": 910238,
+      "interval_ms": 5001,
+      "non_idle_percent": 25.23267069571934
+    },
+    {
+      "uptime_ms": 915240,
+      "interval_ms": 5002,
+      "non_idle_percent": 25.218045631261806
+    },
+    {
+      "uptime_ms": 920241,
+      "interval_ms": 5001,
+      "non_idle_percent": 25.21219239844584
+    },
+    {
+      "uptime_ms": 925242,
+      "interval_ms": 5001,
+      "non_idle_percent": 25.263786912864703
+    },
+    {
+      "uptime_ms": 930244,
+      "interval_ms": 5002,
+      "non_idle_percent": 25.275301035032072
+    },
+    {
+      "uptime_ms": 935245,
+      "interval_ms": 5001,
+      "non_idle_percent": 25.21487068130324
+    },
+    {
+      "uptime_ms": 940246,
+      "interval_ms": 5001,
+      "non_idle_percent": 25.20224508906727
+    },
+    {
+      "uptime_ms": 945248,
+      "interval_ms": 5002,
+      "non_idle_percent": 25.227724144604434
+    },
+    {
+      "uptime_ms": 950249,
+      "interval_ms": 5001,
+      "non_idle_percent": 25.30382310836328
+    },
+    {
+      "uptime_ms": 955250,
+      "interval_ms": 5001,
+      "non_idle_percent": 25.235284528232583
+    },
+    {
+      "uptime_ms": 960252,
+      "interval_ms": 5002,
+      "non_idle_percent": 25.212291835887903
+    },
+    {
+      "uptime_ms": 965253,
+      "interval_ms": 5001,
+      "non_idle_percent": 25.225764051032705
+    },
+    {
+      "uptime_ms": 970254,
+      "interval_ms": 5001,
+      "non_idle_percent": 25.223463582350355
+    },
+    {
+      "uptime_ms": 975255,
+      "interval_ms": 5001,
+      "non_idle_percent": 25.282585548994412
+    },
+    {
+      "uptime_ms": 980257,
+      "interval_ms": 5002,
+      "non_idle_percent": 25.232139703096763
+    },
+    {
+      "uptime_ms": 985258,
+      "interval_ms": 5001,
+      "non_idle_percent": 25.209444135536287
+    },
+    {
+      "uptime_ms": 990259,
+      "interval_ms": 5001,
+      "non_idle_percent": 25.215782008704505
+    },
+    {
+      "uptime_ms": 995261,
+      "interval_ms": 5002,
+      "non_idle_percent": 25.289201091691176
+    },
+    {
+      "uptime_ms": 1000262,
+      "interval_ms": 5001,
+      "non_idle_percent": 25.245027173178553
+    },
+    {
+      "uptime_ms": 1005263,
+      "interval_ms": 5001,
+      "non_idle_percent": 25.217636594480215
+    },
+    {
+      "uptime_ms": 1010265,
+      "interval_ms": 5002,
+      "non_idle_percent": 25.21860846237827
+    },
+    {
+      "uptime_ms": 1015266,
+      "interval_ms": 5001,
+      "non_idle_percent": 25.21441116768119
+    },
+    {
+      "uptime_ms": 1020267,
+      "interval_ms": 5001,
+      "non_idle_percent": 25.295532547588284
+    },
+    {
+      "uptime_ms": 1025268,
+      "interval_ms": 5001,
+      "non_idle_percent": 25.240459562258266
+    },
+    {
+      "uptime_ms": 1030270,
+      "interval_ms": 5002,
+      "non_idle_percent": 25.225783505386058
+    },
+    {
+      "uptime_ms": 1035271,
+      "interval_ms": 5001,
+      "non_idle_percent": 25.159471607945726
+    },
+    {
+      "uptime_ms": 1040272,
+      "interval_ms": 5001,
+      "non_idle_percent": 25.26171110123647
+    },
+    {
+      "uptime_ms": 1045274,
+      "interval_ms": 5002,
+      "non_idle_percent": 25.261931508742617
+    },
+    {
+      "uptime_ms": 1050275,
+      "interval_ms": 5001,
+      "non_idle_percent": 25.205307255411014
+    },
+    {
+      "uptime_ms": 1055276,
+      "interval_ms": 5001,
+      "non_idle_percent": 25.21373953879161
+    },
+    {
+      "uptime_ms": 1060278,
+      "interval_ms": 5002,
+      "non_idle_percent": 25.23427509669579
+    },
+    {
+      "uptime_ms": 1065279,
+      "interval_ms": 5001,
+      "non_idle_percent": 25.04437399596379
+    },
+    {
+      "uptime_ms": 1070280,
+      "interval_ms": 5001,
+      "non_idle_percent": 21.515950826713627
+    },
+    {
+      "uptime_ms": 1075282,
+      "interval_ms": 5002,
+      "non_idle_percent": 24.381344789510024
+    },
+    {
+      "uptime_ms": 1080283,
+      "interval_ms": 5001,
+      "non_idle_percent": 25.191787948406414
+    },
+    {
+      "uptime_ms": 1085284,
+      "interval_ms": 5001,
+      "non_idle_percent": 25.195076796577336
+    },
+    {
+      "uptime_ms": 1090286,
+      "interval_ms": 5002,
+      "non_idle_percent": 25.140627550198534
+    },
+    {
+      "uptime_ms": 1095287,
+      "interval_ms": 5001,
+      "non_idle_percent": 25.243075162861548
+    },
+    {
+      "uptime_ms": 1100288,
+      "interval_ms": 5001,
+      "non_idle_percent": 25.220101161577283
+    },
+    {
+      "uptime_ms": 1105289,
+      "interval_ms": 5001,
+      "non_idle_percent": 25.229239245555554
+    },
+    {
+      "uptime_ms": 1110291,
+      "interval_ms": 5002,
+      "non_idle_percent": 25.08694504955659
+    },
+    {
+      "uptime_ms": 1115292,
+      "interval_ms": 5001,
+      "non_idle_percent": 25.261677902058224
+    },
+    {
+      "uptime_ms": 1120293,
+      "interval_ms": 5001,
+      "non_idle_percent": 25.048157930907223
+    },
+    {
+      "uptime_ms": 1125295,
+      "interval_ms": 5002,
+      "non_idle_percent": 25.215499947275088
+    },
+    {
+      "uptime_ms": 1130296,
+      "interval_ms": 5001,
+      "non_idle_percent": 25.19805328790013
+    },
+    {
+      "uptime_ms": 1135297,
+      "interval_ms": 5001,
+      "non_idle_percent": 22.999206822451175
+    },
+    {
+      "uptime_ms": 1140299,
+      "interval_ms": 5002,
+      "non_idle_percent": 25.169901082713718
+    },
+    {
+      "uptime_ms": 1145300,
+      "interval_ms": 5001,
+      "non_idle_percent": 25.13834761243053
+    },
+    {
+      "uptime_ms": 1150301,
+      "interval_ms": 5001,
+      "non_idle_percent": 24.148064495457636
+    },
+    {
+      "uptime_ms": 1155303,
+      "interval_ms": 5002,
+      "non_idle_percent": 24.8095011751675
+    },
+    {
+      "uptime_ms": 1160304,
+      "interval_ms": 5001,
+      "non_idle_percent": 25.296807436886592
+    },
+    {
+      "uptime_ms": 1165305,
+      "interval_ms": 5001,
+      "non_idle_percent": 24.652409896494234
+    },
+    {
+      "uptime_ms": 1170307,
+      "interval_ms": 5002,
+      "non_idle_percent": 22.052123866167054
+    },
+    {
+      "uptime_ms": 1175308,
+      "interval_ms": 5001,
+      "non_idle_percent": 25.20343390572447
+    },
+    {
+      "uptime_ms": 1180309,
+      "interval_ms": 5001,
+      "non_idle_percent": 23.737459189234446
+    },
+    {
+      "uptime_ms": 1185311,
+      "interval_ms": 5002,
+      "non_idle_percent": 24.82677421378807
+    },
+    {
+      "uptime_ms": 1190312,
+      "interval_ms": 5001,
+      "non_idle_percent": 25.22519361185424
+    },
+    {
+      "uptime_ms": 1195313,
+      "interval_ms": 5001,
+      "non_idle_percent": 25.116804652735567
+    },
+    {
+      "uptime_ms": 1200315,
+      "interval_ms": 5002,
+      "non_idle_percent": 24.985535777949465
+    },
+    {
+      "uptime_ms": 1205316,
+      "interval_ms": 5001,
+      "non_idle_percent": 25.241821035892162
+    },
+    {
+      "uptime_ms": 1210317,
+      "interval_ms": 5001,
+      "non_idle_percent": 25.000824367032713
+    },
+    {
+      "uptime_ms": 1215318,
+      "interval_ms": 5001,
+      "non_idle_percent": 24.748152087499108
+    },
+    {
+      "uptime_ms": 1220320,
+      "interval_ms": 5002,
+      "non_idle_percent": 24.891749634170328
+    },
+    {
+      "uptime_ms": 1225321,
+      "interval_ms": 5001,
+      "non_idle_percent": 24.75876721600166
+    },
+    {
+      "uptime_ms": 1230322,
+      "interval_ms": 5001,
+      "non_idle_percent": 25.259908632090262
+    },
+    {
+      "uptime_ms": 1235324,
+      "interval_ms": 5002,
+      "non_idle_percent": 25.196632316268502
+    },
+    {
+      "uptime_ms": 1240325,
+      "interval_ms": 5001,
+      "non_idle_percent": 25.220807201224876
+    },
+    {
+      "uptime_ms": 1245326,
+      "interval_ms": 5001,
+      "non_idle_percent": 25.212931382280672
+    },
+    {
+      "uptime_ms": 1250328,
+      "interval_ms": 5002,
+      "non_idle_percent": 25.217260541015474
+    },
+    {
+      "uptime_ms": 1255329,
+      "interval_ms": 5001,
+      "non_idle_percent": 25.213881207934193
+    },
+    {
+      "uptime_ms": 1260330,
+      "interval_ms": 5001,
+      "non_idle_percent": 25.150477739862414
+    },
+    {
+      "uptime_ms": 1265331,
+      "interval_ms": 5001,
+      "non_idle_percent": 24.15977559786192
+    },
+    {
+      "uptime_ms": 1270333,
+      "interval_ms": 5002,
+      "non_idle_percent": 24.507956024860878
+    },
+    {
+      "uptime_ms": 1275334,
+      "interval_ms": 5001,
+      "non_idle_percent": 24.88456727052941
+    },
+    {
+      "uptime_ms": 1280335,
+      "interval_ms": 5001,
+      "non_idle_percent": 24.322633804639253
+    },
+    {
+      "uptime_ms": 1285337,
+      "interval_ms": 5002,
+      "non_idle_percent": 24.989034514961965
+    },
+    {
+      "uptime_ms": 1290338,
+      "interval_ms": 5001,
+      "non_idle_percent": 24.7207018915032
+    },
+    {
+      "uptime_ms": 1295339,
+      "interval_ms": 5001,
+      "non_idle_percent": 24.095991192259994
+    },
+    {
+      "uptime_ms": 1300341,
+      "interval_ms": 5002,
+      "non_idle_percent": 25.251893579268287
+    },
+    {
+      "uptime_ms": 1305342,
+      "interval_ms": 5001,
+      "non_idle_percent": 25.161132909472087
+    },
+    {
+      "uptime_ms": 1310343,
+      "interval_ms": 5001,
+      "non_idle_percent": 25.2601874630926
+    },
+    {
+      "uptime_ms": 1315345,
+      "interval_ms": 5002,
+      "non_idle_percent": 25.219765953847897
+    },
+    {
+      "uptime_ms": 1320346,
+      "interval_ms": 5001,
+      "non_idle_percent": 25.2273895182151
+    },
+    {
+      "uptime_ms": 1325347,
+      "interval_ms": 5001,
+      "non_idle_percent": 25.166171290392313
+    },
+    {
+      "uptime_ms": 1330349,
+      "interval_ms": 5002,
+      "non_idle_percent": 25.291445024078428
+    },
+    {
+      "uptime_ms": 1335350,
+      "interval_ms": 5001,
+      "non_idle_percent": 25.222181559460385
+    },
+    {
+      "uptime_ms": 1340351,
+      "interval_ms": 5001,
+      "non_idle_percent": 25.220500463819324
+    },
+    {
+      "uptime_ms": 1345352,
+      "interval_ms": 5001,
+      "non_idle_percent": 23.904450877460377
+    },
+    {
+      "uptime_ms": 1350354,
+      "interval_ms": 5002,
+      "non_idle_percent": 24.435539697788048
+    },
+    {
+      "uptime_ms": 1355355,
+      "interval_ms": 5001,
+      "non_idle_percent": 21.245200552016264
+    },
+    {
+      "uptime_ms": 1360356,
+      "interval_ms": 5001,
+      "non_idle_percent": 25.23398009026244
+    },
+    {
+      "uptime_ms": 1365358,
+      "interval_ms": 5002,
+      "non_idle_percent": 24.98550504998897
+    },
+    {
+      "uptime_ms": 1370359,
+      "interval_ms": 5001,
+      "non_idle_percent": 24.670988017429273
+    },
+    {
+      "uptime_ms": 1375360,
+      "interval_ms": 5001,
+      "non_idle_percent": 25.18917177856044
+    },
+    {
+      "uptime_ms": 1380362,
+      "interval_ms": 5002,
+      "non_idle_percent": 23.978551088904034
+    },
+    {
+      "uptime_ms": 1385363,
+      "interval_ms": 5001,
+      "non_idle_percent": 23.088662824784798
+    },
+    {
+      "uptime_ms": 1390364,
+      "interval_ms": 5001,
+      "non_idle_percent": 24.893310449013995
+    },
+    {
+      "uptime_ms": 1395366,
+      "interval_ms": 5002,
+      "non_idle_percent": 20.881787577154984
+    },
+    {
+      "uptime_ms": 1400367,
+      "interval_ms": 5001,
+      "non_idle_percent": 24.678676936120024
+    },
+    {
+      "uptime_ms": 1405368,
+      "interval_ms": 5001,
+      "non_idle_percent": 24.051890360369256
+    },
+    {
+      "uptime_ms": 1410369,
+      "interval_ms": 5001,
+      "non_idle_percent": 24.74942041848365
+    },
+    {
+      "uptime_ms": 1415371,
+      "interval_ms": 5002,
+      "non_idle_percent": 25.031786870060262
+    },
+    {
+      "uptime_ms": 1420372,
+      "interval_ms": 5001,
+      "non_idle_percent": 24.329898157141336
+    },
+    {
+      "uptime_ms": 1425373,
+      "interval_ms": 5001,
+      "non_idle_percent": 25.238913033870855
+    },
+    {
+      "uptime_ms": 1430375,
+      "interval_ms": 5002,
+      "non_idle_percent": 23.23037842038894
+    },
+    {
+      "uptime_ms": 1435376,
+      "interval_ms": 5001,
+      "non_idle_percent": 24.634718403391567
+    },
+    {
+      "uptime_ms": 1440377,
+      "interval_ms": 5001,
+      "non_idle_percent": 22.36412736718179
+    },
+    {
+      "uptime_ms": 1445379,
+      "interval_ms": 5002,
+      "non_idle_percent": 24.31319251070001
+    },
+    {
+      "uptime_ms": 1450380,
+      "interval_ms": 5001,
+      "non_idle_percent": 25.240084881742913
+    },
+    {
+      "uptime_ms": 1455381,
+      "interval_ms": 5001,
+      "non_idle_percent": 24.715920167808896
+    },
+    {
+      "uptime_ms": 1460382,
+      "interval_ms": 5001,
+      "non_idle_percent": 24.450213822847246
+    },
+    {
+      "uptime_ms": 1465384,
+      "interval_ms": 5002,
+      "non_idle_percent": 25.252395642987864
+    },
+    {
+      "uptime_ms": 1470385,
+      "interval_ms": 5001,
+      "non_idle_percent": 24.992734804253963
+    },
+    {
+      "uptime_ms": 1475386,
+      "interval_ms": 5001,
+      "non_idle_percent": 21.10282567140133
+    },
+    {
+      "uptime_ms": 1480388,
+      "interval_ms": 5002,
+      "non_idle_percent": 25.304123002937658
+    },
+    {
+      "uptime_ms": 1485389,
+      "interval_ms": 5001,
+      "non_idle_percent": 24.368911247499003
+    },
+    {
+      "uptime_ms": 1490390,
+      "interval_ms": 5001,
+      "non_idle_percent": 24.818111099714482
+    },
+    {
+      "uptime_ms": 1495392,
+      "interval_ms": 5002,
+      "non_idle_percent": 24.511764893733684
+    },
+    {
+      "uptime_ms": 1500393,
+      "interval_ms": 5001,
+      "non_idle_percent": 24.2397210094383
+    },
+    {
+      "uptime_ms": 1505394,
+      "interval_ms": 5001,
+      "non_idle_percent": 24.803991880118154
+    },
+    {
+      "uptime_ms": 1510396,
+      "interval_ms": 5002,
+      "non_idle_percent": 25.24352643579269
+    },
+    {
+      "uptime_ms": 1515397,
+      "interval_ms": 5001,
+      "non_idle_percent": 24.664424037306343
+    },
+    {
+      "uptime_ms": 1520398,
+      "interval_ms": 5001,
+      "non_idle_percent": 24.560649868423646
+    },
+    {
+      "uptime_ms": 1525400,
+      "interval_ms": 5002,
+      "non_idle_percent": 25.233617133488064
+    },
+    {
+      "uptime_ms": 1530401,
+      "interval_ms": 5001,
+      "non_idle_percent": 24.794968556535625
+    },
+    {
+      "uptime_ms": 1535402,
+      "interval_ms": 5001,
+      "non_idle_percent": 22.470110782970096
+    },
+    {
+      "uptime_ms": 1540403,
+      "interval_ms": 5001,
+      "non_idle_percent": 23.949361383040976
+    }
+  ],
+  "cpu_scheduler_scope": "non-idle runtime accounting; not physical CPU/ISR utilization or WCET",
+  "cpu_scheduler_non_idle_limit_percent": 80,
+  "sampled_stack_minimum_bytes": {
+    "rx": 256,
+    "tx": 256,
+    "handler": 512,
+    "main": 256
+  },
+  "execution_timing_scope": "observed min/mean/max only; no execution WCET limits",
+  "stack_scope": "sampled 25% reserve only; no stack safety certification"
+}

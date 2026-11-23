@@ -1,0 +1,8 @@
+[0/1] Re-running CMake...
+-- Configuring done (0.1s)
+-- Generating done (0.0s)
+-- Build files have been written to: /tmp/perf-fw-rx-normal
+[1/5] Building C object CMakeFiles/uart_rx_discard_tests.dir/src/main.c.o
+[2/5] Building C object CMakeFiles/uart_rx_tests.dir/src/main.c.o
+[3/5] Linking C executable uart_rx_discard_tests
+[4/5] Linking C executable uart_rx_tests

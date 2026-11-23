@@ -7,9 +7,7 @@
 #include <zephyr/kernel.h>
 #include <zephyr/logging/log.h>
 
-#if defined(CONFIG_RADAR_PERF_MONITOR)
-#include "diagnostics/perf_monitor.h"
-#endif
+#include "diagnostics/perf_hooks.h"
 
 LOG_MODULE_REGISTER(uart_tx, CONFIG_RADAR_UART_TX_LOG_LEVEL);
 
@@ -49,10 +47,14 @@ int uart_tx_submit(const struct tx_frame *p_frame)
         return -EINVAL;
     }
 
-    const int ret = k_msgq_put(&tx_queue, p_frame, K_NO_WAIT);
 #if defined(CONFIG_RADAR_PERF_MONITOR)
-    perf_monitor_record_queue(PERF_QUEUE_TX, ret, k_msgq_num_used_get(&tx_queue));
+    struct tx_frame queued = *p_frame;
+    queued.queued_uptime_ms = k_uptime_get();
+    const int ret = k_msgq_put(&tx_queue, &queued, K_NO_WAIT);
+#else
+    const int ret = k_msgq_put(&tx_queue, p_frame, K_NO_WAIT);
 #endif
+    perf_hook_queue_submit(PERF_QUEUE_TX, ret, &tx_queue);
     return ret;
 }
 
@@ -71,15 +73,14 @@ static void uart_tx_thread(void *p_arg1, void *p_arg2, void *p_arg3)
         const int ret = k_msgq_get(&tx_queue, &request, K_FOREVER);
 
         if (ret == 0) {
+            const int64_t dequeued_ms = perf_hook_uptime_ms();
             // Encode one complete queued request; discard only this request on encoding failure.
             uint8_t buffer[PROTOCOL_MAX_FRAME_SIZE];
 
             const int length = protocol_frame_encode(&request.frame, buffer, sizeof(buffer));
 
             if (length < 0) {
-#if defined(CONFIG_RADAR_PERF_MONITOR)
-                perf_monitor_record_tx(false);
-#endif
+                perf_hook_tx_encode_failed();
                 LOG_ERR("TX encode failed: error=%d", length);
                 continue;
             }
@@ -89,9 +90,7 @@ static void uart_tx_thread(void *p_arg1, void *p_arg2, void *p_arg3)
             for (int i = 0; i < length; ++i) {
                 uart_poll_out(p_uart, buffer[i]);
             }
-#if defined(CONFIG_RADAR_PERF_MONITOR)
-            perf_monitor_record_tx(true);
-#endif
+            perf_hook_tx_completed(&request, dequeued_ms);
         }
     }
 }

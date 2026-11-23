@@ -1,0 +1,32 @@
+[
+  {
+    "build": "build",
+    "flash_bytes": 43124,
+    "ram_bytes": 15696,
+    "elf_sha256": "1fea5e9181ffa8ca4fbbfdbcd9f422170773e8487279290d7faee1724fe24ee4"
+  },
+  {
+    "build": "build_perf",
+    "flash_bytes": 48432,
+    "ram_bytes": 21184,
+    "elf_sha256": "769fddbe9d2d4d22d0c0382ed443373aa6336a3ae5f4051c184ff9b3c20dca13"
+  },
+  {
+    "build": "build_debug",
+    "flash_bytes": 59952,
+    "ram_bytes": 16976,
+    "elf_sha256": "e20e7928f0694b75e622338730cc9611ddf1f1fd75a6cc5d8630d93fe3247780"
+  },
+  {
+    "build": "build_log_stress",
+    "flash_bytes": 60404,
+    "ram_bytes": 18192,
+    "elf_sha256": "51bdd7f3fe5520cabd49adab35ae0800930bd1153780b76ffb79deaaa3594d12"
+  },
+  {
+    "build": "build_transport_stress",
+    "flash_bytes": 43856,
+    "ram_bytes": 16912,
+    "elf_sha256": "791872ae8881d12a6ae669622396fe7de812a2aef7025d7f000e38899ebd718c"
+  }
+]

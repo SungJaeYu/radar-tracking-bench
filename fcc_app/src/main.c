@@ -1,5 +1,8 @@
 #include <zephyr/kernel.h>
 #include <zephyr/logging/log.h>
+#if defined(CONFIG_TIMING_FUNCTIONS)
+#include <zephyr/timing/timing.h>
+#endif
 
 #if defined(CONFIG_RADAR_PERF_MONITOR)
 #include "diagnostics/perf_reporter.h"
@@ -13,6 +16,12 @@ int main(void)
 {
     // Console diagnostics are separate from USART6 protocol frames.
     LOG_INF("FCC boot: status=starting");
+
+#if defined(CONFIG_TIMING_FUNCTIONS)
+    // Initialize once before enabling UART interrupts or releasing queued work.
+    timing_init();
+    timing_start();
+#endif
 
     // Prepare the transmit path before enabling reception.
     // These init APIs return 0 on success and a negative errno on failure.

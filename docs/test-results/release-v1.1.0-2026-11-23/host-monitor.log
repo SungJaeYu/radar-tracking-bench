@@ -1,0 +1,51 @@
+-- The C compiler identification is AppleClang 21.0.0.21000401
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+-- Found Threads: TRUE
+-- Configuring done (2.2s)
+-- Generating done (0.0s)
+-- Build files have been written to: /tmp/radar-v1.1-host/monitor
+[1/10] Building C object CMakeFiles/perf_reporter_tests.dir/src/reporter.c.o
+[2/10] Building C object CMakeFiles/perf_reporter_timing_tests.dir/src/reporter.c.o
+[3/10] Building C object CMakeFiles/perf_reporter_timing_tests.dir/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/src/diagnostics/perf_reporter.c.o
+[4/10] Building C object CMakeFiles/perf_reporter_tests.dir/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/src/diagnostics/perf_reporter.c.o
+[5/10] Building C object CMakeFiles/perf_reporter_tests.dir/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/src/diagnostics/perf_monitor.c.o
+[6/10] Building C object CMakeFiles/perf_reporter_timing_tests.dir/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/src/diagnostics/perf_monitor.c.o
+[7/10] Building C object CMakeFiles/perf_monitor_tests.dir/src/main.c.o
+[8/10] Linking C executable perf_reporter_tests
+[9/10] Linking C executable perf_reporter_timing_tests
+[10/10] Linking C executable perf_monitor_tests
+Test project /tmp/radar-v1.1-host/monitor
+      Start  1: test_execution_aggregation
+ 1/12 Test  #1: test_execution_aggregation .......   Passed    0.45 sec
+      Start  2: test_counter_saturation
+ 2/12 Test  #2: test_counter_saturation ..........   Passed    0.01 sec
+      Start  3: test_timing_boundaries
+ 3/12 Test  #3: test_timing_boundaries ...........   Passed    0.00 sec
+      Start  4: test_failed_and_missing_submit
+ 4/12 Test  #4: test_failed_and_missing_submit ...   Passed    0.00 sec
+      Start  5: test_context_cleanup
+ 5/12 Test  #5: test_context_cleanup .............   Passed    0.00 sec
+      Start  6: test_invalid_timestamps
+ 6/12 Test  #6: test_invalid_timestamps ..........   Passed    0.00 sec
+      Start  7: test_queue_and_tx_counts
+ 7/12 Test  #7: test_queue_and_tx_counts .........   Passed    0.00 sec
+      Start  8: test_snapshot_contract
+ 8/12 Test  #8: test_snapshot_contract ...........   Passed    0.00 sec
+      Start  9: test_concurrent_snapshots
+ 9/12 Test  #9: test_concurrent_snapshots ........   Passed    0.01 sec
+      Start 10: test_summary_and_stack_queries
+10/12 Test #10: test_summary_and_stack_queries ...   Passed    0.54 sec
+      Start 11: test_execution_summary_cycles
+11/12 Test #11: test_execution_summary_cycles ....   Passed    0.00 sec
+      Start 12: test_execution_summary_ns
+12/12 Test #12: test_execution_summary_ns ........   Passed    0.47 sec
+
+100% tests passed, 0 tests failed out of 12
+
+Total Test time (real) =   1.51 sec
