@@ -6,7 +6,9 @@
 
 Previously named `radar-track-fcc-hil`.
 
-**Single-target tracking HIL on STM32 and Zephyr — `v1.1.0`.**
+**Single-target tracking HIL on STM32 and Zephyr. Latest release: `v1.1.0`.**
+
+Current development adds build-time KF/EKF selection, reusable measurement inputs, and CLI/GUI turn-noise evaluation. These additions are on `feat/prepared-input`; the released v1.1.0 board results below remain historical evidence. [Current validation](docs/validation-2026-11-24-estimators.md) · [Estimator setup](docs/estimator-tuning.md).
 
 **Release validation:** the 30-minute run matched all 89,057 delivered measurements and passed board, delivery and evidence checks. The final sender fix also passed a 60-second board check with all 2,993 valid inputs matched and zero board errors. Host RTT and unsent PC slots do not gate this STM32 release; the complete requested 50 Hz profile remains unqualified. [Release scope and evidence](docs/release-v1.1.0.md) · [PC sender improvement planned for v1.1.1](https://github.com/SungJaeYu/radar-tracking-bench/issues/8).
 
@@ -27,7 +29,7 @@ The firmware owns prediction, gating, Kalman updates, and track lifecycle manage
 | Component | Implementation |
 | --- | --- |
 | Firmware | C, Zephyr RTOS, UART ISR and ring buffer, RX/handler/TX threads, bounded copying queues |
-| Tracker | Independent range and azimuth constant-velocity Kalman filters, fixed gates, track acquisition/coasting/loss |
+| Tracker | Build-time choice of polar CV KF or Cartesian CV EKF; shared fixed gates and track acquisition/coasting/loss |
 | Protocol and recovery | CRC-16, length validation, partial-frame and measurement timeouts, overflow recovery, stale-input rejection |
 | PC tools | Python CLI and PySide6/pyqtgraph GUI, synthetic measurements, noise/outlier injection, TRACK/STATUS decoding, CSV recording and evaluation |
 
@@ -66,13 +68,13 @@ For the noise sweep, each of 10 conditions used 10 seeds with firmware tuning fi
 
 ## Additions for v1.1.0
 
-The PC motion generator adds exact constant-turn arcs and a segmented `straight_turn_straight` scenario: eastbound for 10 s, a 90° right turn at 200 m/s and 30° bank (about 55.49 s), then southbound for 10 s. Existing scenarios remain available. The firmware still uses its range/azimuth CV filters; this does not add a CT estimator.
+The PC motion generator adds exact constant-turn arcs and a segmented `straight_turn_straight` scenario: eastbound for 10 s, a 90° right turn at 200 m/s and 30° bank (about 55.49 s), then southbound for 10 s. Existing scenarios remain available. The v1.1.0 firmware used range/azimuth CV filters. The development branch also offers Cartesian CV-EKF; a CT estimator is still pending.
 
 ```bash
 python -m pc_sim simulate --scenario straight_turn_straight --duration 80
 ```
 
-Without `--port`, this prints frames. The scenario ends at about 75.49 s; the default 60 s duration would truncate it. `run_sim` sends measurements but does not collect reports. The GUI and `pc_sim.evaluation.evaluate` retain fixed-azimuth, constant-range-rate generation and do not select these turn scenarios.
+Without `--port`, this prints frames. The scenario ends at about 75.49 s; the default 60 s duration would truncate it. `run_sim` sends measurements but does not collect reports. That v1.1.0 GUI used fixed-azimuth inputs. Current development adds `Tests → Turn + noise` and `python -m pc_sim turn-noise` for saved turn inputs and report collection. The standard `evaluate` command retains fixed-azimuth scenarios.
 
 The November 23 STM32 turn run matched all **755 measurements**, with **757 reports** including two reset events, no rejected measurements or lost tracks. Position RMSE was **4.5134 m overall** and **1.3960 m during the turn**, excluding the first 2 s. These are observations for this run, without an accuracy acceptance threshold. [Conditions and raw evidence](docs/hardware-test-2026-11-23-v1.1.0.md).
 
@@ -131,6 +133,16 @@ python -m pc_sim evaluate run --port /dev/ttyUSB0 --scenario noisy
 
 The evaluator sends measurements and collects board reports for CSV/RMSE evaluation. [Wiring and board setup — Korean](docs/board-bringup.md) · [CLI options and recording — Korean](pc_sim/README.md).
 
+### Select the estimator and run a turn evaluation
+
+The default firmware uses the polar CV KF. Add `-DEXTRA_CONF_FILE=ekf.conf` when configuring a separate `build_ekf` directory to select the Cartesian CV EKF, then flash that build. The GUI cannot switch firmware algorithms at runtime. [Build commands and Q/R/P semantics](docs/estimator-tuning.md).
+
+```bash
+python -m pc_sim turn-noise --port /dev/ttyUSB0 --noise 10 --azimuth-noise 0.01
+```
+
+The noise options are standard deviations in metres and radians. GUI `Tests → Turn + noise` uses the same evaluator. Saved inputs can be reused with `--input`; see [input generation and validation](docs/prepared-input.md).
+
 ### Run host checks
 
 From the repository root, using the PC environment above:
@@ -158,7 +170,7 @@ Python and host C checks are separate from firmware builds and physical-board HI
 
 V1 covers single-target measurement-to-result communication, quantitative tracking evaluation, major error recovery, and timing/resource observations. The [English architecture guide](EXPLAINER.en.md) explains the implemented contracts and their limits.
 
-Multi-target association, CT/IMM/EKF comparisons, BIT/Lock On, and UART hardware-error diagnostics are follow-up work. RF processing, ADC/IQ/FFT, and operational certification are outside this project. [V1 scope and roadmap — Korean](docs/roadmap.md).
+Cartesian CV-EKF is implemented; same-input board comparison, CT/IMM models, multi-target association, BIT/Lock On, and UART hardware-error diagnostics remain follow-up work. RF processing, ADC/IQ/FFT, and operational certification are outside this project. [V1 scope and roadmap — Korean](docs/roadmap.md).
 
 <a id="개발-방식"></a>
 

@@ -1,13 +1,13 @@
 # 요구사항·상세 규격·테스트 추적
 
-기준일: 2026-11-23 (v1.1.0 준비 작업본). 현재 저장소 작업본의 소스·테스트와 기존 보드 기록을 검토한 개발 기준 초안이다.
+기준일: 2026-11-24 (`cd27620`, v1.1.0 이후 개발 브랜치). 현재 저장소 작업본의 소스·테스트와 기존 보드 기록을 검토한 개발 기준 초안이다.
 이미 구현된 동작을 요구사항으로 명문화했으며, 이 문서 작성만으로 모든 설계 선택이 최종 확정되거나
 미검증 동작이 검증된 것으로 바뀌지 않는다. 프로토콜·정책 변경 시 아래 절차로 함께 갱신한다.
 
 ## 현재 기준 요약
 
 기존 기능 이력: TRACK_REPORT·radar_processor/report_sender 분리 `87006b0`, 이름·경로 정리 `fd96c17`, 로그 시험기 판정 `838aca6`. 현재 작업본은 PC 선회·구간 운동, 영어 GUI, 확장 시간·자원 계측, ISR 원시 시각의 스레드 집계와 collector mutex를 포함한다.
-2026-11-23 호스트 입력 중단 판정과 시한 경과 sleep 수정 후 Python 회귀는928개 + subtest9개가 통과했다. C 구성은224회 실행(기본121 + 계측/자원103), CTest 등록204개이며 Tracking 기본21개 함수를 하나의 CTest에서 실행한다. host 실행·펌웨어 빌드·실보드 시험의 결과와 범위는 [릴리스 검증과 실패 분석](release-v1.1.0.md)를 따른다. 날짜별 이전 수치·원시 판정은 보존한다.
+현재 개발 브랜치는 통합 CLI/GUI 평가, 사전 입력 저장·선회 재생, KF/EKF 선택과 Kconfig R을 포함한다. Python 1,058개 + subtest 9개, CTest 244회 + ASSERT 비활성 2회, KF/EKF firmware 빌드를 통과했다. [현재 검증](validation-2026-11-24-estimators.md). 기존 실보드 근거는 [v1.1.0 기록](release-v1.1.0.md)이며 날짜별 이전 수치·원시 판정은 보존한다.
 성능 `passed`는 관측 부하의 `board_qualification`(내부·전송·증거)에 대응한다. 요청 전 기간·50Hz 슬롯 누락0은 `requested_profile_qualification`으로 별도 검증한다. 호스트 RTT는 진단 전용이며 STM32 합격·릴리스 gate가 아니다. 보드20ms·scheduler 비유휴≤80%·앱 스택 여유≥25% 기준은 유지한다.
 
 정상 부하의 호스트 송신 공백/센서 시각 점프가 timeout/예측 한계에 이르면
@@ -166,8 +166,8 @@ INIT/RESET은 트랙과 감시를 지우고 RX 통계는 지우지 않는다. ST
 <a id="spec-track"></a>
 ### SPEC-TRACK — 단일표적 추적
 
-- 거리와 방위각에 각각 상태 `[값, 변화율]`의 CV 필터를 사용한다.
-  `dt = delta_ms / 1000`; 각도 보정은 wrap된 최소 각도 차이를 사용한다.
+- Kconfig에서 거리·방위각 각각 `[값, 변화율]`인 polar CV KF(기본) 또는 Cartesian `[x, y, vx, vy]` CV EKF를 선택한다. 공통 estimator API·출력 단위와 아래 추적 정책을 재사용한다.
+  `dt = delta_ms / 1000`; 방위각 잔차는 wrap된 최소 각도 차이를 사용한다. 초기 P·Q·R의 의미와 EKF 수치 실패 시 보정 생략은 [추정기 계약](estimator-tuning.md)을 따른다.
   Q/R 초기 튜닝값은 [polar_cv_kf.c](../fcc_app/src/tracking/estimators/polar_cv_kf.c)와 [cartesian_cv_ekf.c](../fcc_app/src/tracking/estimators/cartesian_cv_ekf.c)의 단위 주석을 기준으로 하며 센서 교정값으로 간주하지 않는다.
 - 게이트는 `|거리 오차| <= CONFIG_RADAR_RANGE_GATE_M` 그리고 `|wrap 각도 오차| <= CONFIG_RADAR_AZIMUTH_GATE_DEG × π / 180`인 직사각형 게이트다. 기본값은 100 m·10°이고 경계를 포함한다.
 - Kconfig 허용 범위는 1–65535 m·정수 1–180°다. 180°는 모든 정규화 각도 오차를 허용한다. 설정별 검증은 `gating_cases.c`의 `range_boundary`, `angle_boundary`, `both_required`, `wrapped_error`를 5개 조합에서 실행한다.

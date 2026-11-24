@@ -3,9 +3,9 @@
 각 사례의 요구사항·상세 규격 연결과 미검증 항목은 [요구사항 추적표](requirements-traceability.md)를 참고합니다.
 
 현재 테스트 소스를 기준으로 작성한 목록입니다. 테스트를 추가하거나 검증 조건을 바꿀 때 이 문서도 함께 갱신합니다.
-현재 합계는 Python 928개 + subtest 9개, C host 224회 실행입니다. 기본121회(RX45·handler31·TX4·Tracking21·게이트20)와 계측 구성103회(monitor13·RX51·handler32·TX4·자원3)를 포함합니다. CTest 등록 수는204개이며 tracking 한 항목이21개 함수를 실행합니다.
+현재 합계는 Python 1,058개 + subtest 9개입니다. C host는 KF/EKF·계측 구성을 합해 CTest 244회를 실행했고, ASSERT 비활성 EKF 검증 2회를 별도로 실행했습니다. `tracking` 한 등록 항목 안의 22개 함수를 CTest 개수에 다시 더하지 않습니다.
 아래 날짜별 기록의 옛 개수는 당시 결과로 보존합니다.
-케이스 목록과 실제 실행 결과는 구분합니다. 아래 개수는 Python 수집 결과와 C 등록 코드를 기준으로 합니다. 현재 실행 결과·보드 재검증·한계는 [릴리스 검증과 실패 분석](release-v1.1.0.md)를 따릅니다.
+케이스 목록과 실제 실행 결과는 구분합니다. 아래 개수는 Python 수집 결과와 C 등록 코드를 기준으로 합니다. 현재 실행 결과·빌드·한계는 [2026-11-24 검증](validation-2026-11-24-estimators.md), 기존 릴리스의 보드 근거는 [v1.1.0 기록](release-v1.1.0.md)을 따릅니다.
 
 ## 구성과 개수
 
@@ -17,7 +17,7 @@
 | PC TRACK payload | `tests/transport/test_track_report.py` | 35 | Python, 고정 wire·의미 검증 |
 | 프로토콜·단위 변환 | `tests/transport/test_protocol.py` | 310 | Python |
 | 연속 측정 송신기 | `tests/cli/test_radar_sender.py` | 5 + 내부 subtest 9 | Python, serial·sleep 모사 |
-| 시나리오 실행기 | `tests/simulation/test_scenarios.py` | 54 | Python CLI, serial 모사 |
+| 시나리오 실행기 | `tests/simulation/test_scenarios.py` | 52 | Python CLI, serial 모사 |
 | 표적 선회·구간 운동 | `tests/simulation/test_target_motion.py` | 26 | Python, 원호·구간 경계·입력 검증 |
 | 지연 계측 정수 범위 | `tests/firmware/test_perf_latency_guard.py` | 12 | Python + C host, assert 활성/비활성 |
 | GUI 측정·TRACK 표시 모델 | `tests/simulation/test_gui_model.py` | 50 | Python |
@@ -30,19 +30,33 @@
 | CSV·RMSE·평가 CLI 경계 | `tests/storage/test_recording.py` | 13 | Python, 시각/수치 기준값; 실제 UART 없음 |
 | 잡음 행렬·평가 실행기 | `tests/evaluation/test_evaluate.py` | 54 | Python, 시계·UART 모사; 실보드 성능 증거 아님 |
 | 순간 이상치·회복 | `tests/simulation/test_outliers.py` | 61 | Python, 계획·측정 주입·원시 보고 평가·실패 판정 |
-| 내부 assert | `tests/firmware/test_firmware_assertions.py` | 51 | 실제 C host 자식 프로세스의 SIGABRT·메시지 검증 |
+| 내부 assert | `tests/firmware/test_firmware_assertions.py` | 60 | 실제 C host 자식 프로세스의 SIGABRT·메시지 검증 |
+| 통합 명령 | `tests/cli/test_main.py` | 20 | host Python; Qt/serial는 필요한 경우 모사 |
+| 모듈 경로·중복 진입점 | `tests/cli/test_pc_sim_layout.py` | 10 | host Python; Qt/serial는 필요한 경우 모사 |
+| 사전 입력 생성 | `tests/simulation/test_prepared_input.py` | 22 | host Python; Qt/serial는 필요한 경우 모사 |
+| 사전 입력 저장·검증 | `tests/storage/test_prepared_storage.py` | 32 | host Python; Qt/serial는 필요한 경우 모사 |
+| 선회 잡음 입력 | `tests/simulation/test_turn_noise.py` | 1 | host Python; Qt/serial는 필요한 경우 모사 |
+| 선회 재생·보고 평가 | `tests/evaluation/test_turn_noise_runner.py` | 9 | host Python; Qt/serial는 필요한 경우 모사 |
+| GUI 평가 패널 | `tests/ui/test_evaluation_panel.py` | 17 | host Python; Qt/serial는 필요한 경우 모사 |
+| GUI 표시·콘솔 | `tests/ui/test_display_helpers.py` | 3 | host Python; Qt/serial는 필요한 경우 모사 |
+| GUI 포트 제안 | `tests/ui/test_port_selection.py` | 3 | host Python; Qt/serial는 필요한 경우 모사 |
+| GUI 섹션 전환 | `tests/ui/test_section_tabs.py` | 1 | host Python; Qt/serial는 필요한 경우 모사 |
+| GUI 선회 프리셋 | `tests/ui/test_turn_preset.py` | 5 | host Python; Qt/serial는 필요한 경우 모사 |
+| KF R 설정·EKF 연결 | `fcc_app/tests/test_tracking` | 4 + 2 CTest | 설정 반영·공통 출력·상태 값 복사 |
+| EKF 예측·보정 | `fcc_app/tests/test_ekf_cv` | 2 CTest + ASSERT 비활성 2회 | host C 수치 회귀 |
+| 고정 저장 행렬 | `fcc_app/tests/test_matrix` | 1 CTest | host C |
 | 게이팅 설정 행렬 | `fcc_app/tests/test_tracking/src/gating_cases.c` | 20 (5 설정 × 4 사례) | host C |
-| 필터·추적 | `fcc_app/tests/test_tracking` | 21 | host C 또는 Zephyr Ztest |
+| 필터·추적 | `fcc_app/tests/test_tracking` | 22 (하나의 CTest) | host C 또는 Zephyr Ztest |
 | TX 큐·송신 | `fcc_app/tests/test_uart_tx` | 4 | host C, UART·큐·세마포어 모사 |
-| STATUS·TRACK 보고 처리 | `fcc_app/tests/test_frame_handler` | 31 | host C, 통계 조회·TX 제출·로그 캡처·RTOS 모사 |
+| STATUS·TRACK 보고 처리 | `fcc_app/tests/test_frame_handler` | 31 × KF/EKF 두 구성 | host C, 통계 조회·TX 제출·로그 캡처·RTOS 모사 |
 | 성능 계측 | `fcc_app/tests/test_perf_monitor` | 13 | host C, mutex·스택/로그 모사 |
 | scheduler·main 스택 조회 | `fcc_app/tests/test_perf_resources` | 3 | host C, 누적 CPU 값·조회 실패·스택 최소값 모사 |
 | 계측 활성화 회귀 | handler/TX `PERF_TEST_ENABLED=ON` | 32 + 4 | 기존 동작 재실행 및 실제 계측 호출 검증 |
 | RX 계측 활성화 회귀 | RX `PERF_TEST_ENABLED=ON` | 51 (기본45 + 추가6) | DRAIN/DISCARD; ISR 원시 시각 이관·유실·wrap·서비스 공백·복구 정렬 |
 | UART drain·링버퍼 | `fcc_app/tests/test_uart_rx` | 45 (drain 24 + discard 21) | host C, Zephyr API 모사 |
 
-Python은 매개변수 조합을 펼쳐 **928개 항목** (GUI 의존성 설치 시)을 수집합니다. unittest 내부 subtest 9개는 이 수집 항목과 별도로 표시될 수 있습니다.
-Tracking C는 CTest의 `tracking`에서 21개 함수를 실행하며, 게이팅 설정 시험 20개가 별도로 등록됩니다.
+Python은 매개변수 조합을 펼쳐 **1,058개 항목** (GUI 의존성 설치 시)을 수집합니다. unittest 내부 subtest 9개는 이 수집 항목과 별도로 표시될 수 있습니다.
+Tracking C는 CTest의 `tracking`에서 22개 함수를 실행하며, 게이트 20개·KF 설정 4개·EKF 통합 2개를 더해 CTest 27개입니다.
 UART C는 정책별 실행을 CTest에 따로 등록하므로 45개로 표시됩니다. 공통 사례 19개는 두 번 실행합니다.
 `pc_sim/cli/frame_sender.py`는 자동 테스트가 아닌 수동 송신 도구입니다.
 
@@ -50,7 +64,7 @@ UART C는 정책별 실행을 CTest에 따로 등록하므로 45개로 표시됩
 
 선회 기능 추가 당시 `pytest --collect-only -q`에서 Python 820개를 수집했습니다. 이 과거 수집 수는 위 현재 총계와 구분하며 수집은 실행 통과 판정이 아닙니다. `test_target_motion.py` 26개는 직선 호환성, 좌·우 선회 원호, 속력·방향, 작은 선회율, 뱅크/TAS 입력, 구간 경계와 종료를 검사합니다. `test_scenarios.py`에는 모듈·직접 실행 두 방식의 `straight_turn_straight` 종료 검증을 추가했습니다. GUI 영어 표시는 기존 offscreen 회귀에서 확인합니다.
 
-[별도 STM32 선회 시험](hardware-test-2026-11-23-v1.1.0.md)의 측정755개·보고757개 및 RMSE는 host 사례 수에 포함하지 않습니다. GUI·`evaluate`는 선회 입력을 지원하지 않습니다.
+[별도 STM32 선회 시험](hardware-test-2026-11-23-v1.1.0.md)의 측정755개·보고757개 및 RMSE는 host 사례 수에 포함하지 않습니다. 당시 GUI·`evaluate`는 선회 입력을 지원하지 않았습니다. 현재 GUI는 `Turn + noise`에서 선회 전용 실행기를 호출하며 기본 `evaluate`의 모델은 유지합니다.
 
 ## 순간 이상치·복귀 — 2026-11-19 추가
 
@@ -268,7 +282,7 @@ ctest --test-dir /tmp/radar-uart-tests -R '^test_ring_wraparound$' --output-on-f
 /tmp/radar-track-tests/track_tests
 ```
 
-마지막 명령은 Tracking 21개 전체를 실행하며 개별 이름을 출력합니다. 계측 활성화 RX/handler/TX와 collector·자원 suite 실행 명령은 [PERF 테스트 안내](../fcc_app/tests/test_perf_monitor/README.md)를 따릅니다.
+마지막 명령은 Tracking 22개 전체를 실행하며 개별 이름을 출력합니다. 계측 활성화 RX/handler/TX와 collector·자원 suite 실행 명령은 [PERF 테스트 안내](../fcc_app/tests/test_perf_monitor/README.md)를 따릅니다.
 macOS 컴파일러·SDK 지정 방법과 모사 범위는 [UART 안내](../fcc_app/tests/test_uart_rx/README.md),
 Zephyr Ztest 실행법은 [Tracking 안내](../fcc_app/tests/test_tracking/README.md)를 참고합니다.
 

@@ -1,5 +1,24 @@
 # Changelog
 
+## Unreleased
+
+### Added
+
+- Unified `python -m pc_sim` commands and GUI test presets, including configurable straight and turn measurement noise.
+- Saved truth, measurement, sensor timestamp and CRC frames with integrity validation; FIFO replay and segmented position-error evaluation for straight/turn/straight inputs.
+- Build-time polar CV KF / Cartesian CV EKF selection through a shared estimator API, with Kconfig measurement variances and owned fixed-capacity covariance matrices.
+
+### Changed
+
+- Organized simulator and Python tests by responsibility; improved GUI panel sizing, section navigation, position zoom, console ANSI handling and port suggestions.
+- Moved fixed initial covariance to `static const`; aligned filter argument names and extracted input assertions into private helpers omitted when assertions are disabled.
+- Kept conversation, audit and handoff notes in ignored local storage; updated public usage, architecture and verification documents.
+
+### Validation and remaining work
+
+- Python: 1,058 tests and 9 subtests; host C: 244 CTest executions plus 2 assertion-disabled checks. Both STM32 KF and EKF builds pass. [Validation and reproduction](docs/validation-2026-11-24-estimators.md).
+- General lockstep/deferred recording, CT-EKF and full estimator comparisons remain open. The checks above do not constitute a new board run or a v1.2.0 release.
+
 ## v1.1.0 — 2026-11-23
 
 ### Added

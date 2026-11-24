@@ -47,7 +47,7 @@ RX/handler는 입력이 없어도 주기적으로 깨어 timeout을 확인합니
 
 `MotionSegment`와 `SegmentedScenario`는 한 표적의 구간별 선회율·시간을 관리하며 시간 간격이 경계를 넘으면 구간별로 나누어 적분합니다. `straight_turn_straight`는 동쪽10초·우90°선회 약55.49초·남쪽10초로 총 약75.49초입니다. 전체 경로는 `python -m pc_sim simulate --scenario straight_turn_straight --duration 80`으로 출력합니다. 기본60초는 경로를 잘라서 실행합니다.
 
-이 확장은 PC 합성 정답과 측정 입력에만 적용됩니다. 펌웨어 CV 필터·wire payload는 유지하며, GUI와 `pc_sim.evaluation.evaluate`는 고정 방위각·일정 거리 변화율 모델입니다. `run_sim`은 보고 수집기가 아닙니다. 선회 실보드 기록은 [별도 시험과 원시 결과](docs/hardware-test-2026-11-23-v1.1.0.md)에 정리합니다.
+선회 운동은 PC 합성 정답과 측정 입력의 모델입니다. `run_sim`은 측정 송신만 담당하고, `turn-noise`와 GUI `Tests → Turn + noise`는 사전 생성한 선회 프레임과 보드 보고를 함께 기록합니다. 기본 `evaluate`는 고정 방위각·일정 거리 변화율 모델입니다. wire payload는 유지합니다. 선회 실보드 기록은 [별도 시험과 원시 결과](docs/hardware-test-2026-11-23-v1.1.0.md)에 정리합니다.
 
 ### 데스크톱 GUI
 
@@ -116,6 +116,8 @@ ISR에서 `ring_push()`가 실패하면 해당 바이트를 버리고 `rx_overfl
 
 `measurement_message_decode()`와 `measurement_message_validate()`를 통과한 측정은
 보드 uptime 기반 마지막 수신 시각을 갱신합니다. 송신 timestamp와 보드 uptime은 서로 다른 시계입니다.
+
+`track.c`는 공통 `estimator_init/predict/correct/get_output` API를 호출합니다. Kconfig에서 polar CV KF(거리·방위 각각 1D 필터) 또는 Cartesian CV EKF(2D 위치·속도)를 선택하며, CMake가 해당 연결 코드와 계산 파일만 빌드합니다. 상태와 공분산은 구조체가 직접 소유해 값 복사·지역 초기 행렬의 수명에 안전합니다. [구조·단위·초기값·수치 실패 경계](docs/estimator-tuning.md).
 
 - EMPTY이면 `track_start()`로 필터를 초기화하고 TENTATIVE가 됩니다.
 - 기존 트랙이면 송신 timestamp 차이로 예측하고 게이트를 검사합니다.
@@ -198,8 +200,10 @@ fcc_app/src/
     transport/        uart_rx, uart_tx, rx_frame_processor
     protocol/         frame_parser, protocol_frame, measurement_message, status_message, track_message
     application/      frame_handler(큐·분기), radar_processor(추적), report_sender(보고서 구성·제출)
-    tracking/         track, kalman_cv, gating, angle_utils
-    common/           crc16, ring_buffer, math_constants, byte_order
+    tracking/         track, estimator API, gating, angle_utils
+      estimators/     polar_cv_kf, cartesian_cv_ekf, estimator_state
+        filters/      kf_cv_1d, ekf_cv_2d
+    common/           crc16, ring_buffer, math_constants, byte_order, matrix
     diagnostics/      선택적 perf_monitor(집계), perf_reporter(요약·스택 조회)
 fcc_app/tests/
     test_uart_rx/      UART drain·링버퍼·부분 프레임 timeout

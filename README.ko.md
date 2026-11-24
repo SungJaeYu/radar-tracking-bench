@@ -6,7 +6,9 @@
 
 이전 이름: `radar-track-fcc-hil`.
 
-**STM32 · Zephyr 기반 단일표적 레이더 추적 HIL 프로젝트 — `v1.1.0`**
+**STM32 · Zephyr 기반 단일표적 레이더 추적 HIL 프로젝트. 최신 릴리스: `v1.1.0`**
+
+현재 `feat/prepared-input` 개발 브랜치에는 KF/EKF 빌드 선택, 측정 입력 저장·재사용, CLI/GUI 선회 잡음 평가를 추가했습니다. 아래 v1.1.0 실보드 수치는 당시 버전의 근거입니다. [현재 검증](docs/validation-2026-11-24-estimators.md) · [추정기 선택과 설정](docs/estimator-tuning.md).
 
 **릴리스 검증:** 30분 실보드에서 실제 전달한 측정89,057개 모두 응답했고 보드·전송·증거 검사를 통과했습니다. 최종 송신기 수정 후60초 검사도 유효 입력2,993개 모두 대응·보드 오류0입니다. PC 미송신과 RTT는 STM32 릴리스 차단 조건이 아닙니다. 요청50Hz 전체 입력의 검증 한계는 별도로 남깁니다. [완료 범위·검증 근거](docs/release-v1.1.0.md) · [v1.1.1 PC 송신기 개선](https://github.com/SungJaeYu/radar-tracking-bench/issues/8).
 
@@ -25,7 +27,7 @@ PC는 추적 전 센서 측정을 모사합니다. **예측·게이팅·칼만 �
 
 | 구성 | 주요 기능 |
 |---|---|
-| 펌웨어 | UART ISR·링버퍼, RX/처리/TX 스레드, CRC-16, 거리·방위각 CV 칼만 필터, 트랙 생성·유지·소실 |
+| 펌웨어 | UART ISR·링버퍼, RX/처리/TX 스레드, CRC-16, polar CV KF / Cartesian CV EKF 빌드 선택, 트랙 생성·유지·소실 |
 | 오류 처리 | 부분 프레임·무수신 timeout, overflow 복구, 오래된 측정 폐기, 누적 오류 통계 |
 | PC 도구 | GUI·CLI, 측정·잡음·이상치 생성, STATUS/TRACK 수신, CSV 기록·정량 평가 |
 
@@ -56,13 +58,13 @@ PC RTT는 USB·UART·보드·호스트 대기를 포함하는 진단값입니다
 
 ## v1.1.0 추가 기능
 
-PC 표적 운동에 일정 선회율의 원호 운동과 `straight_turn_straight` 구간 시나리오를 추가했습니다. 동쪽 직진10초 → 속도200m/s·뱅크30°의 우90° 선회 약55.49초 → 남쪽 직진10초이며 기존 시나리오도 유지합니다. 펌웨어는 기존 거리·방위각 CV 필터를 사용하며 CT 추정기를 추가한 것은 아닙니다.
+PC 표적 운동에 일정 선회율의 원호 운동과 `straight_turn_straight` 구간 시나리오를 추가했습니다. 동쪽 직진10초 → 속도200m/s·뱅크30°의 우90° 선회 약55.49초 → 남쪽 직진10초이며 기존 시나리오도 유지합니다. v1.1.0 펌웨어는 거리·방위각 CV 필터를 사용했습니다. 현재 개발 브랜치에는 Cartesian CV-EKF도 추가했으며 CT 추정기는 후속입니다.
 
 ```bash
 python -m pc_sim simulate --scenario straight_turn_straight --duration 80
 ```
 
-`--port`를 생략하면 프레임만 출력합니다. 총 길이는 약75.49초이므로 기본60초로 실행하면 마지막 구간까지 진행하지 않습니다. `run_sim`은 측정 송신만 담당합니다. GUI와 `pc_sim.evaluation.evaluate`는 고정 방위각·일정 거리 변화율 모델을 유지하며 선회 시나리오 선택을 지원하지 않습니다.
+`--port`를 생략하면 프레임만 출력합니다. 총 길이는 약75.49초이므로 기본60초로 실행하면 마지막 구간까지 진행하지 않습니다. `run_sim`은 측정 송신만 담당합니다. v1.1.0 GUI는 고정 방위각 입력을 사용했습니다. 현재 GUI `Tests → Turn + noise`와 CLI `turn-noise`는 저장된 선회 입력을 송신하고 보고를 수집합니다. 기본 `evaluate`는 고정 방위각 시나리오를 유지합니다.
 
 11월23일 STM32 선회 시험은 측정 **755개 모두 대응**, 초기·최종 RESET을 포함한 **보고757개**, 측정 거부·트랙 소실0회를 확인했습니다. 첫2초를 제외한 위치 RMSE는 **전체4.5134m · 선회1.3960m**입니다. 정확도 합격 기준을 별도로 정한 결과는 아니며 이 조건의 관측값입니다. [시험 조건·원시 기록](docs/hardware-test-2026-11-23-v1.1.0.md).
 
@@ -83,6 +85,16 @@ python -m pc_sim gui
 - [GUI 사용법](pc_sim/GUI.md): 미리보기, 보드 연결, 측정·추정 그래프, 상태 조회
 - [CLI·평가 도구](pc_sim/README.md): 측정 송신, CSV 수집, 잡음·이상치 시험
 - [자동 테스트](docs/test-cases.md): Python 및 C host 테스트 실행 방법과 범위
+
+## 추정기 선택과 선회 잡음 평가
+
+기본 펌웨어는 polar CV KF이며, 별도 `build_ekf`에 `ekf.conf`를 적용하면 Cartesian CV EKF를 선택합니다. GUI에서 실행 중 필터를 변경하는 방식이 아니므로 빌드 후 해당 이미지를 flash해야 합니다. [빌드 명령·Q/R/초기 P](docs/estimator-tuning.md).
+
+```bash
+python -m pc_sim turn-noise --port PORT --noise 10 --azimuth-noise 0.01
+```
+
+잡음 인자는 각각 거리(m)·방위각(rad)의 표준편차입니다. GUI `Tests → Turn + noise`도 같은 실행기를 사용합니다. `--input`으로 저장 입력을 그대로 재사용할 수 있습니다. [입력 생성·검증](docs/prepared-input.md).
 
 ## V1 범위
 

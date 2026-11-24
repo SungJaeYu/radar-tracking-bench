@@ -22,7 +22,7 @@ The CLI senders `radar_sender` and `run_sim` send measurements only. The GUI and
 
 `MotionSegment` and `SegmentedScenario` define successive durations and turn rates for one target. Steps crossing a boundary are split across the segments. `straight_turn_straight` travels east for 10 s, turns right 90° for about 55.49 s, then travels south for 10 s. Use `python -m pc_sim simulate --scenario straight_turn_straight --duration 80` for the full approximately 75.49 s path; the default 60 s truncates it.
 
-The change adds PC truth and measurement inputs. Firmware range/azimuth CV filters and the wire payload remain unchanged. `run_sim` does not collect board reports. The GUI and `pc_sim.evaluation.evaluate` retain fixed-azimuth, constant-range-rate generation. The GUI controls are now English. [Separate STM32 turn evidence](docs/hardware-test-2026-11-23-v1.1.0.md) records this input against the existing estimator, not a CT estimator implementation.
+The motion model supplies PC truth and measurement inputs; the wire payload is unchanged. `run_sim` sends measurements only. Current `turn-noise` and GUI `Tests → Turn + noise` replay saved turn inputs and collect board reports. The standard `evaluate` command retains fixed-azimuth, constant-range-rate generation. The GUI controls are now English. [Separate STM32 turn evidence](docs/hardware-test-2026-11-23-v1.1.0.md) records this input against the existing estimator, not a CT estimator implementation.
 
 ## Execution contexts and state ownership
 
@@ -79,7 +79,7 @@ STATUS returns eight cumulative uint32 counters: CRC errors, length errors, part
 
 ## Tracking and time domains
 
-Range and azimuth each use a constant-velocity Kalman filter. Angular differences are wrapped to the shortest difference. Fixed, inclusive range and azimuth gates must both pass before correction; defaults are ±100 m and ±10°. They are configured through Kconfig.
+Kconfig selects either independent range/azimuth CV Kalman filters or a Cartesian `[x, y, vx, vy]` CV EKF with polar measurement correction. Both implement the same estimator API and own their state and fixed-capacity covariance storage; CMake links only the selected adapter and filter. [Structure, initialization, units, and numerical limits](docs/estimator-tuning.md). Angular differences are wrapped to the shortest difference. Fixed, inclusive range and azimuth gates must both pass before correction; defaults are ±100 m and ±10°. They are configured through Kconfig.
 
 | Event | Implemented behavior |
 | --- | --- |
@@ -149,7 +149,7 @@ Python tests cover protocol/scenario/evaluation code and, with GUI dependencies,
 | [pc_sim](pc_sim) | GUI/CLI, measurement generation, report capture and evaluation |
 | [fcc_app/tests](fcc_app/tests) / [tests](tests) | Host C / Python verification |
 
-V1 is complete. Multi-target tracking, alternative estimators, additional hardware-error handling and latency optimization are separate follow-up work. [Scope and roadmap — Korean](docs/roadmap.md).
+V1 is complete. Same-input estimator comparison, CT/IMM models, multi-target tracking, additional hardware-error handling and latency optimization are follow-up work. [Scope and roadmap — Korean](docs/roadmap.md).
 
 ## Estimator execution timing (2026-11-22)
 

@@ -18,7 +18,7 @@ V1은 2026-11-19 프로젝트 소유자의 완료 확인을 반영해 종료했�
 
 - PC 도구는 `pc_sim/` 하나. 모든 송신기가 `pc_sim/transport/protocol.py`를 공유합니다.
 - `radar_sender.py`: 거리 변화율 기반 송신. `run_sim.py`: 표적·센서 시나리오. v1.1.0은 `Target.turn_rate_radps`(시계 방향 양수) 원호 운동, `MotionSegment`/`SegmentedScenario`, `straight_turn_straight`를 추가합니다. 동쪽10초·우90°선회 약55.49초·남쪽10초이며 전체 실행은 `--duration 80`을 사용합니다. 기본60초는 중간에서 끝납니다.
-- 선회 확장은 PC 입력 모델이며 펌웨어 CV 추정기를 바꾸지 않습니다. GUI와 `pc_sim.evaluation.evaluate`는 고정 방위각·일정 거리 변화율 모델을 유지합니다. `run_sim`은 TRACK을 수집하지 않습니다. GUI의 사용자 표시·제어 문구는 영어입니다.
+- 선회는 PC 입력 모델입니다. 펌웨어는 Kconfig에서 polar CV KF 또는 Cartesian CV EKF를 빌드 시 선택합니다. GUI `Tests → Turn + noise`와 CLI `turn-noise`는 같은 선회 평가기를 사용하며 기본 `evaluate`는 고정 방위각·일정 거리 변화율 모델을 유지합니다. `run_sim`은 TRACK을 수집하지 않습니다. GUI의 사용자 표시·제어 문구는 영어입니다.
 - `frame_sender.py`: 수동 INIT 등 단일 프레임 송신.
 - `python -m pc_sim gui`: PySide6/pyqtgraph 단일표적 GUI. 설정·측정 생성·시리얼 작업은 `gui_model.py`·`gui_worker.py`로 분리합니다.
 - GUI는 PC 합성 실제값·측정값과 수신한 보드 추정값을 구분합니다. 미리보기에서는 보드 값을 만들지 않습니다. 생성/송신 횟수는 수신 ACK가 아닙니다.
@@ -32,7 +32,7 @@ V1은 2026-11-19 프로젝트 소유자의 완료 확인을 반영해 종료했�
 - RX 링버퍼는 256바이트, 실제 저장 용량은 255바이트입니다. 인덱스는 `uint8_t`이므로 더 큰 버퍼는 타입 변경이 필요합니다.
 - overflow 정책은 `fcc_app/Kconfig` choice와 `prj.conf`에서 선택하며 `uart_rx.c`에서 매핑합니다. 기본값은 DRAIN입니다.
 - overflow 복구 중 새 입력은 버리고 저장된 바이트로 완성 가능한 프레임만 처리한 뒤 링·파서를 초기화합니다.
-- 단일 트랙, CV Kalman, 게이팅, hit/miss 상태 전이, 정상 측정 수신 timeout이 있습니다.
+- 단일 트랙, KF/EKF 공통 estimator API, 직사각형 게이팅, hit/miss 상태 전이, 정상 측정 수신 timeout이 있습니다. 상태는 선택된 필터를 직접 소유합니다. [구조·설정](docs/estimator-tuning.md).
 - TRACK_REPORT(TYPE=7)는 32바이트 payload이며 신선한 유효 측정마다 한 번 TX 제출합니다. PC 해석·GUI의 2초 STALE 정책은 구현했으며 INIT/RESET·무수신 timeout 이벤트 보고도 구현했고 기본 실보드 왕복도 확인했습니다. 상세 계약은 [SPEC-TRACK-REPORT](docs/requirements-traceability.md#spec-track-report)를 따릅니다.
 - 다중표적 데이터 연관·LCD는 현재 실행 경로에 없습니다.
 - 기존 XOR 인코더는 CRC-16/IBM-3740으로 변경했습니다. 과거 구현은 Git 이력에 남아 있습니다.

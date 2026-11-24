@@ -1,10 +1,10 @@
 # 문서 안내
 
-최신 상태: [v1.1.0 완료 범위·검증 기록](release-v1.1.0.md). STM32 판정은 관측 부하의 보드·전송·증거 검사이며 PC 미송신·RTT와 분리한다.
+최신 개발 상태: [KF/EKF·GUI/CLI 검증](validation-2026-11-24-estimators.md). 공개 릴리스 기준은 [v1.1.0 완료 범위·검증 기록](release-v1.1.0.md)이다. STM32 판정은 관측 부하의 보드·전송·증거 검사이며 PC 미송신·RTT와 분리한다.
 
 [송신 시한 경과 sleep 수정·최종60초 검증](test-results/host-pacing-fix-2026-11-23/README.md)과 [30분 실보드 기록](test-results/host-input-retest-2026-11-23/README.md)을 함께 제공한다. 과거 결과는 당시 판정 그대로 보존한다.
 
-[GUI 무음 영상·분석](analysis/2026-11-23/README.md)은 저장된 실보드 세션의 재생, 그래프와 수치 표를 포함한다. [GitHub 작업 목록](github-project.md)에서 v1.1.1 PC 시험기 개선과 3D 확장을 추적한다.
+[GUI 무음 영상·분석](analysis/2026-11-23/README.md)은 저장된 실보드 세션의 재생, 그래프와 수치 표를 포함한다. [GitHub 작업 목록](github-project.md)에서 PC 시험기 개선, v1.2.0 추정기 비교, 3D 확장을 추적한다.
 
 [English overview](../README.md) · [Architecture in English](../EXPLAINER.en.md)
 
@@ -23,7 +23,8 @@
 | 보드 연결·펌웨어 빌드·기본 통신 | [보드 시작 안내](board-bringup.md) |
 | GUI 연결·미리보기·그래프·상태 조회 | [GUI 사용법](../pc_sim/GUI.md) |
 | 측정 송신·CSV·잡음/이상치 평가 | [PC CLI](../pc_sim/README.md) |
-| 동일 시험 입력의 생성·저장·변경 검증 | [사전 생성 입력](prepared-input.md) |
+| 동일 시험 입력의 생성·저장·변경 검증·선회 재생 | [사전 생성 입력](prepared-input.md) |
+| KF/EKF 선택·R 설정·행렬 소유권 | [추정기 구성](estimator-tuning.md) |
 | 로그 레벨·디버그 빌드 | [펌웨어 로그 설정](board-bringup.md#펌웨어-로그-설정) |
 
 ## 설계와 테스트
@@ -31,6 +32,7 @@
 | 목적 | 문서 |
 |---|---|
 | UART 규격·요구사항·구현·테스트 연결 | [요구사항 추적표](requirements-traceability.md) |
+| 현재 개발 브랜치의 host·펌웨어 검증 | [2026-11-24 검증](validation-2026-11-24-estimators.md) |
 | 자동 테스트 실행과 검증 범위 | [영역별 실행](../tests/README.md) · [테스트 목록](test-cases.md) |
 | ISR·인터럽트 차단 구간 점검 | [계측 실행 문맥](performance-monitoring.md#인터럽트와-계측-실행-문맥) |
 | STM32 판정 기준과 미검증 영역 | [성능 검증 범위](stm32-performance-coverage.md) |

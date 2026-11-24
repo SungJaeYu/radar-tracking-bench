@@ -115,3 +115,16 @@ west build -d <repo>/build_r_trial -b stm32f746g_disco <repo>/fcc_app -- -DEXTRA
 - 같은 시드로 선택한 후보의 성능은 탐색 결과다. 새 시드·다른 기동·실제 보드 검증과 구분한다.
 
 실험별 `.conf`, 원시 기록, 집계와 실행 코드 스냅샷은 로컬 `runs/`에 보관한다. 기존 테스트 시나리오를 변경하지 않고 별도 R 설정 테스트로 기본값 보존과 설정 반영을 검사한다.
+
+## VS Code include 경로
+
+KF와 EKF 빌드는 서로 다른 소스만 compile database에 넣는다. 두 빌드에 `-DCMAKE_EXPORT_COMPILE_COMMANDS=ON`을 지정하고, 로컬 `.vscode/c_cpp_properties.json`의 `compileCommands`에 다음 두 경로를 포함한다.
+
+```json
+"compileCommands": [
+  "${workspaceFolder}/build/compile_commands.json",
+  "${workspaceFolder}/build_ekf/compile_commands.json"
+]
+```
+
+기존 PERF/debug database가 있으면 유지한다. Kconfig·소스 경로를 바꾼 뒤 해당 빌드를 갱신해야 생성 헤더와 compiler flags도 반영된다. `.vscode`는 로컬 설정이므로 Git에 올리지 않는다. 이번에는 두 구현의 현재 파일이 각각 올바른 database에 등록되는 것을 확인했으며, VS Code 화면 진단을 직접 확인한 결과는 아니다.
