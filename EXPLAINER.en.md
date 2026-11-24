@@ -14,15 +14,15 @@ The PC generates target motion and sensor errors. Range, azimuth, and sensor tim
 
 The GUI worker owns the data port and uses the same protocol implementation as the CLI. It decodes binary reports, records CSV data, and passes display updates to the GUI. ST-Link carries diagnostic text through a separate port. GUI graphs use TRACK_REPORT data rather than values scraped from console logs.
 
-The CLI senders `radar_sender` and `run_sim` send measurements only. The GUI and `pc_sim.evaluate` also collect results. Preview mode opens no serial port and produces no simulated board estimates. PC multi-target/clutter generation is available for output-only scenarios; the current board path accepts a single target.
+The CLI senders `radar_sender` and `run_sim` send measurements only. The GUI and `pc_sim.evaluation.evaluate` also collect results. Preview mode opens no serial port and produces no simulated board estimates. PC multi-target/clutter generation is available for output-only scenarios; the current board path accepts a single target.
 
 ## PC turn and segmented motion (v1.1.0)
 
 `Target.turn_rate_radps` is clockwise-positive in rad/s. The target integrates an exact constant-turn horizontal arc and rotates velocity; zero retains straight motion. `scenario_single_turn(bank_deg=30, tas_mps=200)` computes the turn rate as `g × tan(bank) / TAS`.
 
-`MotionSegment` and `SegmentedScenario` define successive durations and turn rates for one target. Steps crossing a boundary are split across the segments. `straight_turn_straight` travels east for 10 s, turns right 90° for about 55.49 s, then travels south for 10 s. Use `python -m pc_sim.run_sim --scenario straight_turn_straight --duration 80` for the full approximately 75.49 s path; the default 60 s truncates it.
+`MotionSegment` and `SegmentedScenario` define successive durations and turn rates for one target. Steps crossing a boundary are split across the segments. `straight_turn_straight` travels east for 10 s, turns right 90° for about 55.49 s, then travels south for 10 s. Use `python -m pc_sim simulate --scenario straight_turn_straight --duration 80` for the full approximately 75.49 s path; the default 60 s truncates it.
 
-The change adds PC truth and measurement inputs. Firmware range/azimuth CV filters and the wire payload remain unchanged. `run_sim` does not collect board reports. The GUI and `pc_sim.evaluate` retain fixed-azimuth, constant-range-rate generation. The GUI controls are now English. [Separate STM32 turn evidence](docs/hardware-test-2026-11-23-v1.1.0.md) records this input against the existing estimator, not a CT estimator implementation.
+The change adds PC truth and measurement inputs. Firmware range/azimuth CV filters and the wire payload remain unchanged. `run_sim` does not collect board reports. The GUI and `pc_sim.evaluation.evaluate` retain fixed-azimuth, constant-range-rate generation. The GUI controls are now English. [Separate STM32 turn evidence](docs/hardware-test-2026-11-23-v1.1.0.md) records this input against the existing estimator, not a CT estimator implementation.
 
 ## Execution contexts and state ownership
 

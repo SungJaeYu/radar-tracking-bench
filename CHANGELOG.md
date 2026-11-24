@@ -56,7 +56,7 @@
 - The subsequent 300 s run matched all 14,802 valid measurements with zero board CRC errors
   and passed observed-load board/delivery/evidence checks. Skipped host slots leave requested
   50 Hz qualification inconclusive; earlier CRC events have not recurred after instrumentation corrections; resolution is suspected, but their causal mechanism remains unconfirmed.
-  [Current review, validation and limits](docs/review-2026-11-23.md).
+  [릴리스 검증과 실패 분석](docs/release-v1.1.0.md).
 
 ## v1.0.0 — 2026-11-19
 

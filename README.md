@@ -69,10 +69,10 @@ For the noise sweep, each of 10 conditions used 10 seeds with firmware tuning fi
 The PC motion generator adds exact constant-turn arcs and a segmented `straight_turn_straight` scenario: eastbound for 10 s, a 90° right turn at 200 m/s and 30° bank (about 55.49 s), then southbound for 10 s. Existing scenarios remain available. The firmware still uses its range/azimuth CV filters; this does not add a CT estimator.
 
 ```bash
-python -m pc_sim.run_sim --scenario straight_turn_straight --duration 80
+python -m pc_sim simulate --scenario straight_turn_straight --duration 80
 ```
 
-Without `--port`, this prints frames. The scenario ends at about 75.49 s; the default 60 s duration would truncate it. `run_sim` sends measurements but does not collect reports. The GUI and `pc_sim.evaluate` retain fixed-azimuth, constant-range-rate generation and do not select these turn scenarios.
+Without `--port`, this prints frames. The scenario ends at about 75.49 s; the default 60 s duration would truncate it. `run_sim` sends measurements but does not collect reports. The GUI and `pc_sim.evaluation.evaluate` retain fixed-azimuth, constant-range-rate generation and do not select these turn scenarios.
 
 The November 23 STM32 turn run matched all **755 measurements**, with **757 reports** including two reset events, no rejected measurements or lost tracks. Position RMSE was **4.5134 m overall** and **1.3960 m during the turn**, excluding the first 2 s. These are observations for this run, without an accuracy acceptance threshold. [Conditions and raw evidence](docs/hardware-test-2026-11-23-v1.1.0.md).
 
@@ -88,7 +88,7 @@ From the repository root, on a desktop with Python and a supported Qt environmen
 python3 -m venv .venv
 source .venv/bin/activate
 python -m pip install -r pc_sim/requirements-gui.txt
-python -m pc_sim.gui
+python -m pc_sim gui
 ```
 
 In `Connection`, keep `Preview · no board`, click `Connect preview`, then `Start`. No UART port is opened. [Detailed GUI guide — Korean](pc_sim/GUI.md).
@@ -96,8 +96,8 @@ In `Connection`, keep `Preview · no board`, click `Connect preview`, then `Star
 To inspect the noise and spike plans without a board or output files:
 
 ```bash
-python -m pc_sim.noise_sweep --dry-run
-python -m pc_sim.spike_sweep --dry-run
+python -m pc_sim noise-sweep --dry-run
+python -m pc_sim spike-sweep --dry-run
 ```
 
 ### Run on STM32
@@ -125,8 +125,8 @@ west flash -d /path/to/radar-tracking-bench/build --runner openocd
 Return to the repository root and use the PC environment prepared above. Close the GUI and any other program using the data port before running the CLI. Replace `/dev/ttyUSB0` with the actual adapter port; macOS commonly uses `/dev/cu.usbserial...`.
 
 ```bash
-python -m pc_sim.status_client --port /dev/ttyUSB0 --timeout 2
-python -m pc_sim.evaluate run --port /dev/ttyUSB0 --scenario noisy
+python -m pc_sim status --port /dev/ttyUSB0 --timeout 2
+python -m pc_sim evaluate run --port /dev/ttyUSB0 --scenario noisy
 ```
 
 The evaluator sends measurements and collects board reports for CSV/RMSE evaluation. [Wiring and board setup — Korean](docs/board-bringup.md) · [CLI options and recording — Korean](pc_sim/README.md).

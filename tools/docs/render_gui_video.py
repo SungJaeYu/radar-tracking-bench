@@ -18,9 +18,9 @@ import imageio_ffmpeg
 from PIL import Image, ImageDraw, ImageFont
 from PySide6.QtGui import QImage
 from PySide6.QtWidgets import QApplication
-import pc_sim.gui as gui
-from pc_sim.gui_model import Sample
-from pc_sim.protocol import TrackReport, TrackReportFlag, TrackReportResult, TrackState
+import pc_sim.ui.gui as gui
+from pc_sim.simulation.gui_model import Sample
+from pc_sim.transport.protocol import TrackReport, TrackReportFlag, TrackReportResult, TrackState
 
 OUT = ROOT / 'docs/analysis/2026-11-23'
 SOURCE = ROOT / 'docs/test-results/release-v1.1.0-2026-11-23/gui/session/20261123-141357-7bc50801'
@@ -189,7 +189,7 @@ def main() -> None:
                                    '19-24': 'paused TRACK', '24-28': 'paused STATUS', '28-40': 'scope and source'},
                       'input_sha256': {str((SOURCE / name).relative_to(ROOT)): hashlib.sha256((SOURCE / name).read_bytes()).hexdigest()
                                        for name in ('metadata.json', 'samples.csv', 'reports.csv', 'status.csv')},
-                      'gui_source_sha256': hashlib.sha256((ROOT / 'pc_sim/gui.py').read_bytes()).hexdigest(),
+                      'gui_source_sha256': hashlib.sha256((ROOT / 'pc_sim/ui/gui.py').read_bytes()).hexdigest(),
                       'renderer_sha256': hashlib.sha256(Path(__file__).read_bytes()).hexdigest()}
         (OUT / 'video-provenance.json').write_text(json.dumps(provenance, indent=2) + '\n')
         print(json.dumps({k: v for k, v in provenance.items() if 'sha256' not in k}, indent=2))

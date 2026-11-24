@@ -1,6 +1,6 @@
 # IRQ-safe PERF regression — 2026-11-23
 
-[Changes and context audit](../../interrupt-context-audit.md). The UART ISR now only captures raw timing values; aggregation is deferred to RX thread. Common collector synchronization uses a thread-only mutex. Parser reset is outside the recovery IRQ mask. This does not remove existing kernel synchronization or establish CRC causality.
+[계측 실행 문맥](../../performance-monitoring.md#인터럽트와-계측-실행-문맥). The UART ISR now only captures raw timing values; aggregation is deferred to RX thread. Common collector synchronization uses a thread-only mutex. Parser reset is outside the recovery IRQ mask. This does not remove existing kernel synchronization or establish CRC causality.
 
 - Python:895 passed,9 subtests passed (`python.log`).
 - C host: all nine variants passed,204 registered CTest items/224 internal executions. RX PERF adds four registration entries for both recovery policies. `host-final.json`, `host-*.log`, `host-tx-perf-final.log`, `rx-tests-final.log`. Initial TX mock declaration compile failure is preserved separately; corrected mock and production collector passed.

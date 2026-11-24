@@ -15,7 +15,7 @@ PC는 측정 입력을 만들고, STM32는 추적 계산을 수행해 결과를 
 ![PC 측정 생성부터 보드 추적 결과 수신·기록까지](docs/images/pc-board-flow.png)
 
 데이터와 진단 콘솔은 별도 포트입니다. GUI와 CLI가 같은 포트를 동시에 열지 않습니다.
-CLI 송신기(`radar_sender`, `run_sim`)는 측정 송신만 수행합니다. GUI와 `python -m pc_sim.evaluate`는 TRACK 수집·CSV 저장을 지원합니다.
+CLI 송신기(`radar_sender`, `run_sim`)는 측정 송신만 수행합니다. GUI와 `python -m pc_sim evaluate`는 TRACK 수집·CSV 저장을 지원합니다.
 
 ## 펌웨어 내부 처리 흐름
 
@@ -32,8 +32,8 @@ RX/handler는 입력이 없어도 주기적으로 깨어 timeout을 확인합니
 
 ## 1. PC 측정 생성
 
-`pc_sim/radar_sender.py`는 거리 변화율과 잡음으로 간단한 측정을 생성합니다.
-`pc_sim/run_sim.py`는 `targets.py`의 직교좌표 표적을 움직이고 센서 모델로 측정을 생성합니다.
+`pc_sim/cli/radar_sender.py`는 거리 변화율과 잡음으로 간단한 측정을 생성합니다.
+`pc_sim/cli/run_sim.py`는 `targets.py`의 직교좌표 표적을 움직이고 센서 모델로 측정을 생성합니다.
 두 실행기는 `protocol.py`의 동일한 프레임 생성 함수를 사용합니다.
 
 시나리오의 물리량은 거리 m, 각도 rad입니다. 송신 직전에 거리를 정수 m로 반올림하고
@@ -45,13 +45,13 @@ RX/handler는 입력이 없어도 주기적으로 깨어 timeout을 확인합니
 
 `Target.turn_rate_radps`는 시계 방향을 양수로 하는 rad/s 단위 선회율입니다. 수평 위치는 일정 선회율의 원호를 적분하고 속도 방향도 함께 회전하며, 0이면 기존 직선 운동입니다. `scenario_single_turn(bank_deg=30, tas_mps=200)`은 `g × tan(bank) / TAS`로 선회율을 정합니다.
 
-`MotionSegment`와 `SegmentedScenario`는 한 표적의 구간별 선회율·시간을 관리하며 시간 간격이 경계를 넘으면 구간별로 나누어 적분합니다. `straight_turn_straight`는 동쪽10초·우90°선회 약55.49초·남쪽10초로 총 약75.49초입니다. 전체 경로는 `python -m pc_sim.run_sim --scenario straight_turn_straight --duration 80`으로 출력합니다. 기본60초는 경로를 잘라서 실행합니다.
+`MotionSegment`와 `SegmentedScenario`는 한 표적의 구간별 선회율·시간을 관리하며 시간 간격이 경계를 넘으면 구간별로 나누어 적분합니다. `straight_turn_straight`는 동쪽10초·우90°선회 약55.49초·남쪽10초로 총 약75.49초입니다. 전체 경로는 `python -m pc_sim simulate --scenario straight_turn_straight --duration 80`으로 출력합니다. 기본60초는 경로를 잘라서 실행합니다.
 
-이 확장은 PC 합성 정답과 측정 입력에만 적용됩니다. 펌웨어 CV 필터·wire payload는 유지하며, GUI와 `pc_sim.evaluate`는 고정 방위각·일정 거리 변화율 모델입니다. `run_sim`은 보고 수집기가 아닙니다. 선회 실보드 기록은 [별도 시험과 원시 결과](docs/hardware-test-2026-11-23-v1.1.0.md)에 정리합니다.
+이 확장은 PC 합성 정답과 측정 입력에만 적용됩니다. 펌웨어 CV 필터·wire payload는 유지하며, GUI와 `pc_sim.evaluation.evaluate`는 고정 방위각·일정 거리 변화율 모델입니다. `run_sim`은 보고 수집기가 아닙니다. 선회 실보드 기록은 [별도 시험과 원시 결과](docs/hardware-test-2026-11-23-v1.1.0.md)에 정리합니다.
 
 ### 데스크톱 GUI
 
-`python -m pc_sim.gui`는 영어 UI의 PySide6/pyqtgraph 앱입니다. `Connection` → `Preview · no board` → `Connect preview` → `Start`로 미리보기를 시작합니다.
+`python -m pc_sim gui`는 영어 UI의 PySide6/pyqtgraph 앱입니다. `Connection` → `Preview · no board` → `Connect preview` → `Start`로 미리보기를 시작합니다.
 `gui_model.py`는 단일표적 설정·측정 생성, `gui_worker.py`는 작업 스레드에서 포트 소유·송신·STATUS 수신·콘솔 읽기를 담당합니다.
 `gui.py`는 signal로 전달된 데이터를 화면에 표시합니다. 미리보기는 시리얼 포트를 열지 않습니다.
 송신을 중지해도 콘솔 연결은 유지하며, 재시작할 때 INIT을 먼저 보냅니다.
@@ -185,7 +185,7 @@ INIT/RESET·무수신 timeout은 INPUT_PRESENT=0, ESTIMATE_VALID=0인 RESET 보�
 
 게이트는 Kconfig의 거리/각도 상한을 모두 포함 경계로 검사합니다. π는 `common/math_constants.h`를 공유합니다.
 각도 정규화는 `fmodf`와 범위 보정으로 (-π, π]를 유지하며 비정상 innovation covariance는 보정을 생략합니다.
-내부 유한성 assert는 디버그에서 활성화합니다. [설정](docs/board-bringup.md#주요-설정) · [로깅](docs/logging.md).
+내부 유한성 assert는 디버그에서 활성화합니다. [설정](docs/board-bringup.md#주요-설정) · [펌웨어 로그 설정](docs/board-bringup.md#펌웨어-로그-설정).
 
 날짜·commit별 실보드 결과와 원시 로그는 [검증 이력](docs/verification-history.md)에 모읍니다.
 과거 STATUS·로그 부하 시험이 현재 TRACK_REPORT 경로의 실보드 검증을 대신하지 않습니다.

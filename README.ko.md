@@ -59,10 +59,10 @@ PC RTT는 USB·UART·보드·호스트 대기를 포함하는 진단값입니다
 PC 표적 운동에 일정 선회율의 원호 운동과 `straight_turn_straight` 구간 시나리오를 추가했습니다. 동쪽 직진10초 → 속도200m/s·뱅크30°의 우90° 선회 약55.49초 → 남쪽 직진10초이며 기존 시나리오도 유지합니다. 펌웨어는 기존 거리·방위각 CV 필터를 사용하며 CT 추정기를 추가한 것은 아닙니다.
 
 ```bash
-python -m pc_sim.run_sim --scenario straight_turn_straight --duration 80
+python -m pc_sim simulate --scenario straight_turn_straight --duration 80
 ```
 
-`--port`를 생략하면 프레임만 출력합니다. 총 길이는 약75.49초이므로 기본60초로 실행하면 마지막 구간까지 진행하지 않습니다. `run_sim`은 측정 송신만 담당합니다. GUI와 `pc_sim.evaluate`는 고정 방위각·일정 거리 변화율 모델을 유지하며 선회 시나리오 선택을 지원하지 않습니다.
+`--port`를 생략하면 프레임만 출력합니다. 총 길이는 약75.49초이므로 기본60초로 실행하면 마지막 구간까지 진행하지 않습니다. `run_sim`은 측정 송신만 담당합니다. GUI와 `pc_sim.evaluation.evaluate`는 고정 방위각·일정 거리 변화율 모델을 유지하며 선회 시나리오 선택을 지원하지 않습니다.
 
 11월23일 STM32 선회 시험은 측정 **755개 모두 대응**, 초기·최종 RESET을 포함한 **보고757개**, 측정 거부·트랙 소실0회를 확인했습니다. 첫2초를 제외한 위치 RMSE는 **전체4.5134m · 선회1.3960m**입니다. 정확도 합격 기준을 별도로 정한 결과는 아니며 이 조건의 관측값입니다. [시험 조건·원시 기록](docs/hardware-test-2026-11-23-v1.1.0.md).
 
@@ -77,7 +77,7 @@ GUI의 미리보기 모드는 보드 없이 실행할 수 있습니다.
 ```bash
 source ~/zephyrproject/.venv/bin/activate
 python -m pip install -r pc_sim/requirements-gui.txt
-python -m pc_sim.gui
+python -m pc_sim gui
 ```
 
 - [GUI 사용법](pc_sim/GUI.md): 미리보기, 보드 연결, 측정·추정 그래프, 상태 조회

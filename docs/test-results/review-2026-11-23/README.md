@@ -1,6 +1,6 @@
 # Consistency review evidence — 2026-11-23
 
-[Full report and change information](../../review-2026-11-23.md).
+[릴리스 검증과 실패 분석](../../release-v1.1.0.md).
 
 - `regression-before.log`: new regression failures before corrections (preserved).
 - `python.log`:904 passed,9 subtests passed. Final runner snapshot addition also passed its24 focused tests.

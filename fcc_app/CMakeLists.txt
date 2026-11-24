@@ -12,8 +12,6 @@ target_sources(app PRIVATE
     src/application/radar_processor.c
     src/application/report_sender.c
     src/protocol/measurement_message.c
-    src/tracking/kalman_cv.c
-    src/tracking/estimator.c
     src/tracking/gating.c
     src/tracking/angle_utils.c
     src/tracking/track.c
@@ -24,6 +22,13 @@ target_sources(app PRIVATE
     src/protocol/status_message.c
     src/protocol/track_message.c
 )
+
+include(cmake/estimator.cmake)
+if(CONFIG_RADAR_ESTIMATOR_EKF_CV)
+    radar_target_estimator(app EKF_CV)
+else()
+    radar_target_estimator(app KF_CV)
+endif()
 
 # Resolve module-qualified includes from the application source root.
 target_include_directories(app PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/src)

@@ -1,0 +1,8 @@
+cmake_minimum_required(VERSION 3.20.0)
+project(test_matrix C)
+enable_testing()
+add_executable(matrix_tests src/main.c ../../src/common/matrix.c)
+target_include_directories(matrix_tests PRIVATE ../../src)
+target_compile_features(matrix_tests PRIVATE c_std_99)
+target_compile_options(matrix_tests PRIVATE -Wall -Wextra -Werror -UNDEBUG)
+add_test(NAME matrix COMMAND matrix_tests)

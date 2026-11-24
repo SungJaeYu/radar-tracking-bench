@@ -1,0 +1,187 @@
+"""Serial ownership and simulation pacing live outside the GUI thread."""
+from contextlib import ExitStack
+import codecs
+import queue
+import random
+import time
+from threading import Event
+
+from PySide6.QtCore import QThread, Signal
+import serial
+
+from pc_sim.simulation.gui_model import make_sample
+from pc_sim.storage.recording import SessionRecorder
+from pc_sim.transport.frame_parser import FrameParser
+from pc_sim.transport.protocol import (build_init_frame, encode_frame, decode_status_payload, decode_track_payload,
+                       FRAME_TYPE_STATUS_REQUEST, FRAME_TYPE_STATUS_REPORT, FRAME_TYPE_TRACK_REPORT)
+
+
+class SessionWorker(QThread):
+    # Capture freshness at reception, before queued GUI delivery can be delayed.
+    track_received = Signal(object, float)
+    recording_started = Signal(str)
+    status_received = Signal(object)
+    status_failed = Signal(str)
+    STATUS_TIMEOUT_S = 2.0
+
+    connected = Signal()
+    sample = Signal(object)
+    console = Signal(str)
+    event = Signal(str)
+    error = Signal(str)
+    running_changed = Signal(bool)
+
+    def __init__(self, data_port=None, console_port=None, parent=None, serial_factory=None):
+        super().__init__(parent)
+        self.data_port = data_port
+        self.console_port = console_port
+        self.serial_factory = serial_factory or serial.Serial
+        self.commands = queue.Queue()
+        self.status_pending = Event()
+        self.recorder = None
+
+    def start_simulation(self, settings, recording_path=None):
+        self.commands.put(('start', (settings, recording_path)))
+
+    def stop_simulation(self):
+        self.commands.put(('stop', None))
+
+    def request_status(self):
+        # Called by the GUI thread; all serial I/O stays in run().
+        if not self.data_port or self.status_pending.is_set():
+            return False
+        self.status_pending.set()
+        self.commands.put(('status', None))
+        return True
+
+    def run(self):
+        try:
+            if self.console_port and not self.data_port:
+                raise ValueError('Console connections require board mode.')
+            if self.data_port and self.data_port == self.console_port:
+                raise ValueError('Select different data and console ports.')
+            with ExitStack() as stack:
+                data = (stack.enter_context(self.serial_factory(
+                    self.data_port, 115200, timeout=0, write_timeout=0.5))
+                    if self.data_port else None)
+                console = (stack.enter_context(self.serial_factory(
+                    self.console_port, 115200, timeout=0, write_timeout=0.5))
+                    if self.console_port else None)
+                self.connected.emit()
+                self._loop(data, console)
+        except Exception as error:
+            self.error.emit(str(error))
+        finally:
+            if self.recorder is not None:
+                try:
+                    self.recorder.close()
+                except OSError as error:
+                    self.error.emit(f'CSV close failed: {error}')
+            if self.status_pending.is_set():
+                self.status_pending.clear()
+                self.status_failed.emit('STATUS query cancelled because the connection closed.')
+            self.running_changed.emit(False)
+
+    def _write(self, data, frame):
+        sent_at = time.monotonic()
+        # A successful write is not an acknowledgement from the board.
+        if data is not None and data.write(frame) != len(frame):
+            raise OSError('Could not write the complete UART frame.')
+        if self.recorder is not None:
+            self.recorder.record_wire('tx', frame, sent_at)
+        return sent_at
+
+    def _loop(self, data, console):
+        settings = None
+        parser = FrameParser()
+        status_deadline = None
+        decoder = codecs.getincrementaldecoder('utf-8')(errors='replace')
+        while not self.isInterruptionRequested():
+            try:
+                command, value = self.commands.get_nowait()
+            except queue.Empty:
+                command = None
+            if command == 'status':
+                # STATUS and unsolicited TRACK share one persistent receive stream.
+                status_deadline = time.monotonic() + self.STATUS_TIMEOUT_S
+                self._write(data, encode_frame(FRAME_TYPE_STATUS_REQUEST, b"\x00"))
+            elif command == 'stop':
+                settings = None
+                self.running_changed.emit(False)
+                self.event.emit('Sending stopped · console monitoring remains active.')
+            elif command == 'start':
+                value, recording_path = value
+                value.validate()
+                if self.recorder is not None:
+                    self.recorder.close()
+                    self.recorder = None
+                if recording_path is not None:
+                    self.recorder = SessionRecorder(recording_path, value, 'board' if data else 'preview')
+                    self.recording_started.emit(str(self.recorder.path))
+                self._write(data, build_init_frame())
+                self.event.emit('INIT sent' if data else 'INIT generated (preview)')
+                settings = value
+                rng = random.Random(settings.seed)
+                started = next_sample = time.monotonic()
+                self.running_changed.emit(True)
+
+            # Nonblocking bounded reads keep simulation pacing and stop commands responsive.
+            if data is not None:
+                raw = data.read(min(data.in_waiting, 4096))
+                received_at = time.monotonic()
+                if self.recorder is not None:
+                    self.recorder.record_wire('rx', raw, received_at)
+                if status_deadline is not None and time.monotonic() >= status_deadline:
+                    status_deadline = None
+                    self.status_pending.clear()
+                    self.status_failed.emit('STATUS response timed out')
+                for frame in parser.feed(raw):
+                    if frame.frame_type == FRAME_TYPE_TRACK_REPORT:
+                        try:
+                            report = decode_track_payload(frame.payload)
+                        except ValueError as error:
+                            self.event.emit(f'TRACK discarded: {error}')
+                        else:
+                            if self.recorder is not None:
+                                self.recorder.record_report(report, received_at)
+                            self.track_received.emit(report, received_at)
+                        continue
+                    if status_deadline is None or frame.frame_type != FRAME_TYPE_STATUS_REPORT:
+                        continue
+                    try:
+                        stats = decode_status_payload(frame.payload)
+                    except ValueError:
+                        continue
+                    status_deadline = None
+                    self.status_pending.clear()
+                    if self.recorder is not None:
+                        self.recorder.record_status(stats, received_at)
+                    self.status_received.emit(stats)
+
+            if console is not None:
+                raw = console.read(min(console.in_waiting, 4096))
+                if raw:
+                    self.console.emit(decoder.decode(raw))
+
+            now = time.monotonic()
+            if settings is not None and now >= next_sample:
+                elapsed = now - started
+                if elapsed >= settings.duration_s:
+                    settings = None
+                    self.running_changed.emit(False)
+                    self.event.emit('Run duration complete · console monitoring remains active.')
+                else:
+                    try:
+                        sample = make_sample(settings, round(elapsed * 1000), rng)
+                    except ValueError as error:
+                        settings = None
+                        self.running_changed.emit(False)
+                        self.error.emit(str(error))
+                    else:
+                        sent_at = self._write(data, sample.frame)
+                        if self.recorder is not None:
+                            self.recorder.record_sample(sample, sent_at)
+                        self.sample.emit(sample)
+                        # Never send catch-up bursts after a delayed write/read.
+                        next_sample = time.monotonic() + 1 / settings.sample_rate_hz
+            self.msleep(5)

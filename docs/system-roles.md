@@ -6,7 +6,7 @@ v1의 범위는 **단일표적 CV 추적의 결과 반환·정량 평가·시간
 
 ## v1.1.0 PC 입력 확장
 
-PC는 일정 선회율의 원호 운동과 직진·우90°선회·직진 구간 시나리오를 생성합니다. 이는 펌웨어 CV 추정기의 입력 확장이며 CT 필터 구현이 아닙니다. 전체 약75.49초 경로는 `python -m pc_sim.run_sim --scenario straight_turn_straight --duration 80`으로 실행합니다. GUI는 영어 UI이며 GUI·`evaluate`의 입력 모델은 고정 방위각·일정 거리 변화율을 유지합니다. `run_sim`의 측정 송신과 [별도 실보드 선회 결과 수집](hardware-test-2026-11-23-v1.1.0.md)을 구분합니다.
+PC는 일정 선회율의 원호 운동과 직진·우90°선회·직진 구간 시나리오를 생성합니다. 이는 펌웨어 CV 추정기의 입력 확장이며 CT 필터 구현이 아닙니다. 전체 약75.49초 경로는 `python -m pc_sim simulate --scenario straight_turn_straight --duration 80`으로 실행합니다. GUI는 영어 UI이며 GUI·`evaluate`의 입력 모델은 고정 방위각·일정 거리 변화율을 유지합니다. `run_sim`의 측정 송신과 [별도 실보드 선회 결과 수집](hardware-test-2026-11-23-v1.1.0.md)을 구분합니다.
 
 ## 결정
 

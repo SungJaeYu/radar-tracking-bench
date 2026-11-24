@@ -5,7 +5,7 @@
 
 #include "tracking/angle_utils.h"
 #include "tracking/gating.h"
-#include "tracking/kalman_cv.h"
+#include "tracking/estimators/filters/kf_cv_1d.h"
 #include "protocol/measurement_message.h"
 #include "tracking/track.h"
 
@@ -112,16 +112,20 @@ TEST(test_correction_rejects_invalid_innovation_covariance)
 {
     const float values[] = {0.0f, -1.0f, 1e-7f, 1e-6f, NAN, INFINITY, -INFINITY};
     for (size_t i = 0; i < sizeof(values) / sizeof(values[0]); ++i) {
-        struct kalman_cv_filter filter;
-        kalman_cv_init(&filter, 10, 2, 1, 0, 0, 1, 0, 1);
+        struct kf_cv_1d_filter filter;
+        kf_cv_1d_init(&filter, 10, 2,
+                      &(const struct matrix){.rows = KF_CV_1D_STATE_DIM,
+                                             .columns = KF_CV_1D_STATE_DIM,
+                                             .data = {1, 0, 0, 1}},
+                      0, 1);
         // Inject internal corruption after valid initialization; exercise the release guard.
-        filter.p00 = values[i];
+        matrix_set(&filter.covariance, 0, 0, values[i]);
         filter.measurement_noise_variance = 0.0f;
         unsigned char before[sizeof(filter)];
         memcpy(before, &filter, sizeof(filter));
-        kalman_cv_correct(&filter, 12);
+        kf_cv_1d_correct(&filter, 12);
         CHECK(memcmp(before, &filter, sizeof(filter)) == 0);
-        kalman_cv_correct_angle(&filter, 0.1f);
+        kf_cv_1d_correct_angle(&filter, 0.1f);
         CHECK(memcmp(before, &filter, sizeof(filter)) == 0);
     }
 }
@@ -138,52 +142,100 @@ TEST(test_gate)
 
 TEST(test_cv_prediction_and_covariance)
 {
-    struct kalman_cv_filter k;
-    kalman_cv_init(&k, 10, 2, 4, 0, 0, 9, 4, 1);
-    kalman_cv_predict(&k, 0.5f);
+    struct kf_cv_1d_filter k;
+    kf_cv_1d_init(&k, 10, 2,
+                  &(const struct matrix){.rows = KF_CV_1D_STATE_DIM,
+                                         .columns = KF_CV_1D_STATE_DIM,
+                                         .data = {4, 0, 0, 9}},
+                  4, 1);
+    kf_cv_1d_predict(&k, 0.5f);
     NEAR(k.estimate, 11);
     NEAR(k.rate, 2);
     // Hand-calculated F P F^T + Q for interval_s=0.5, acceleration variance=4.
-    NEAR(k.p00, 6.3125f);
-    NEAR(k.p01, 4.75f);
-    NEAR(k.p10, 4.75f);
-    NEAR(k.p11, 10);
+    NEAR(matrix_get(&k.covariance, 0, 0), 6.3125f);
+    NEAR(matrix_get(&k.covariance, 0, 1), 4.75f);
+    NEAR(matrix_get(&k.covariance, 1, 0), 4.75f);
+    NEAR(matrix_get(&k.covariance, 1, 1), 10);
 }
 
 TEST(test_cv_correction)
 {
-    struct kalman_cv_filter k;
-    kalman_cv_init(&k, 10, 2, 4, 1, 1, 9, 0, 4);
-    kalman_cv_correct(&k, 14);
+    struct kf_cv_1d_filter k;
+    kf_cv_1d_init(&k, 10, 2,
+                  &(const struct matrix){.rows = KF_CV_1D_STATE_DIM,
+                                         .columns = KF_CV_1D_STATE_DIM,
+                                         .data = {4, 1, 1, 9}},
+                  0, 4);
+    kf_cv_1d_correct(&k, 14);
     NEAR(k.estimate, 12);
     NEAR(k.rate, 2.5f);
-    NEAR(k.p00, 2);
-    NEAR(k.p01, 0.5f);
-    NEAR(k.p10, 0.5f);
-    NEAR(k.p11, 8.875f);
+    NEAR(matrix_get(&k.covariance, 0, 0), 2);
+    NEAR(matrix_get(&k.covariance, 0, 1), 0.5f);
+    NEAR(matrix_get(&k.covariance, 1, 0), 0.5f);
+    NEAR(matrix_get(&k.covariance, 1, 1), 8.875f);
 }
 
 TEST(test_angle_prediction_and_correction)
 {
-    struct kalman_cv_filter k;
-    kalman_cv_init(&k, RAD(179), RAD(4), 1, 0, 0, 1, 0, 1);
-    kalman_cv_predict_angle(&k, 1);
+    struct kf_cv_1d_filter k;
+    kf_cv_1d_init(&k, RAD(179), RAD(4),
+                  &(const struct matrix){.rows = KF_CV_1D_STATE_DIM,
+                                         .columns = KF_CV_1D_STATE_DIM,
+                                         .data = {1, 0, 0, 1}},
+                  0, 1);
+    kf_cv_1d_predict_angle(&k, 1);
     NEAR(k.estimate, RAD(-177));
-    kalman_cv_init(&k, RAD(179), 0, 1, 0, 0, 1, 0, 1);
-    kalman_cv_correct_angle(&k, RAD(-177));
+    kf_cv_1d_init(&k, RAD(179), 0,
+                  &(const struct matrix){.rows = KF_CV_1D_STATE_DIM,
+                                         .columns = KF_CV_1D_STATE_DIM,
+                                         .data = {1, 0, 0, 1}},
+                  0, 1);
+    kf_cv_1d_correct_angle(&k, RAD(-177));
     NEAR(k.estimate, RAD(-179));
     NEAR(k.rate, 0);
 }
 
+TEST(test_covariance_owned_copy)
+{
+    struct kf_cv_1d_filter filter;
+    {
+        struct matrix initial = {
+            .rows = KF_CV_1D_STATE_DIM,
+            .columns = KF_CV_1D_STATE_DIM,
+            .data = {4, 1, 1, 9},
+        };
+        kf_cv_1d_init(&filter, 10, 2, &initial, 0, 4);
+        matrix_set(&initial, 0, 0, 999);
+    }
+    // Initial storage is gone; both state and covariance must remain owned.
+    CHECK(filter.covariance.rows == KF_CV_1D_STATE_DIM);
+    CHECK(filter.covariance.columns == KF_CV_1D_STATE_DIM);
+    NEAR(matrix_get(&filter.covariance, 0, 0), 4);
+    NEAR(matrix_get(&filter.covariance, 0, 1), 1);
+    NEAR(matrix_get(&filter.covariance, 1, 0), 1);
+    NEAR(matrix_get(&filter.covariance, 1, 1), 9);
+    struct kf_cv_1d_filter copy = filter;
+    kf_cv_1d_correct(&copy, 14);
+    NEAR(copy.estimate, 12);
+    NEAR(filter.estimate, 10);
+    NEAR(matrix_get(&filter.covariance, 0, 0), 4);
+    NEAR(matrix_get(&copy.covariance, 0, 0), 2);
+}
+
 TEST(test_stationary_convergence)
 {
-    struct kalman_cv_filter k;
-    kalman_cv_init(&k, 990, 0, 25, 0, 0, 100, 1, 4);
+    struct kf_cv_1d_filter k;
+    kf_cv_1d_init(&k, 990, 0,
+                  &(const struct matrix){.rows = KF_CV_1D_STATE_DIM,
+                                         .columns = KF_CV_1D_STATE_DIM,
+                                         .data = {25, 0, 0, 100}},
+                  1, 4);
     for (int i = 0; i < 200; ++i) {
-        kalman_cv_predict(&k, 0.1f);
-        kalman_cv_correct(&k, 1000);
-        CHECK(isfinite(k.estimate) && k.p00 >= 0 && k.p11 >= 0);
-        NEAR(k.p01, k.p10);
+        kf_cv_1d_predict(&k, 0.1f);
+        kf_cv_1d_correct(&k, 1000);
+        CHECK(isfinite(k.estimate) && matrix_get(&k.covariance, 0, 0) >= 0 &&
+              matrix_get(&k.covariance, 1, 1) >= 0);
+        NEAR(matrix_get(&k.covariance, 0, 1), matrix_get(&k.covariance, 1, 0));
     }
     CHECK(fabsf(k.estimate - 1000) < 0.1f);
     CHECK(fabsf(k.rate) < 0.1f);
@@ -219,7 +271,8 @@ TEST(test_decode_semicircle)
 
 TEST(test_prediction_preserves_lifecycle)
 {
-    const TrackState states[] = {TRACK_STATE_TENTATIVE, TRACK_STATE_CONFIRMED, TRACK_STATE_COASTING};
+    const TrackState states[] = {TRACK_STATE_TENTATIVE, TRACK_STATE_CONFIRMED,
+                                 TRACK_STATE_COASTING};
     for (size_t i = 0; i < sizeof states / sizeof states[0]; ++i) {
         struct track current = new_track(100);
         current.state = states[i];
@@ -230,17 +283,17 @@ TEST(test_prediction_preserves_lifecycle)
         CHECK(next.estimate_sensor_ms == 1100);
         NEAR(next.estimator.range_filter.estimate, 1020.0f);
         // Independent one-second CV covariance expectations with the initial tuning.
-        NEAR(next.estimator.range_filter.p00, 10050.0f);
-        NEAR(next.estimator.range_filter.p01, 10050.0f);
-        NEAR(next.estimator.range_filter.p10, 10050.0f);
-        NEAR(next.estimator.range_filter.p11, 10100.0f);
+        NEAR(matrix_get(&next.estimator.range_filter.covariance, 0, 0), 10050.0f);
+        NEAR(matrix_get(&next.estimator.range_filter.covariance, 0, 1), 10050.0f);
+        NEAR(matrix_get(&next.estimator.range_filter.covariance, 1, 0), 10050.0f);
+        NEAR(matrix_get(&next.estimator.range_filter.covariance, 1, 1), 10100.0f);
         CHECK(next.estimator.range_filter.process_noise_variance == 100.0f);
         CHECK(next.estimator.range_filter.measurement_noise_variance == 25.0f);
         NEAR(next.estimator.azimuth_filter.estimate, RAD(30.0f));
-        CHECK(next.estimator.azimuth_filter.p00 > current.estimator.azimuth_filter.p00);
+        CHECK(matrix_get(&next.estimator.azimuth_filter.covariance, 0, 0) >
+              matrix_get(&current.estimator.azimuth_filter.covariance, 0, 0));
     }
 }
-
 
 TEST(test_elapsed_time_and_wraparound)
 {
@@ -271,7 +324,6 @@ TEST(test_track_restart)
     NEAR(restarted.range_rate_mps, 0);
     NEAR(restarted.azimuth_rad, RAD(-30));
 }
-
 
 TEST(test_confirmation_coasting_and_loss)
 {
@@ -328,7 +380,6 @@ TEST(test_lost_inactive_calls_and_restart)
     NEAR(restarted.range_rate_mps, 0);
 }
 
-
 TEST(test_measurement_wire_domain_matrix)
 {
     const uint32_t sensor_timestamps_ms[] = {0, 1, UINT32_MAX - 1, UINT32_MAX};
@@ -339,8 +390,11 @@ TEST(test_measurement_wire_domain_matrix)
             for (size_t ai = 0; ai < sizeof(angles) / sizeof(angles[0]); ++ai) {
                 uint32_t sensor_time_ms = sensor_timestamps_ms[ti], angle = (uint32_t)angles[ai];
                 uint16_t range = ranges[ri];
-                uint8_t payload[] = {sensor_time_ms >> 24, sensor_time_ms >> 16, sensor_time_ms >> 8, sensor_time_ms,
-                    range >> 8, range, angle >> 24, angle >> 16, angle >> 8, angle};
+                uint8_t payload[] = {sensor_time_ms >> 24, sensor_time_ms >> 16,
+                                     sensor_time_ms >> 8,  sensor_time_ms,
+                                     range >> 8,           range,
+                                     angle >> 24,          angle >> 16,
+                                     angle >> 8,           angle};
                 struct radar_measurement measurement;
                 CHECK(measurement_message_decode(payload, sizeof(payload), &measurement));
                 CHECK(measurement.sensor_time_ms == sensor_time_ms);
@@ -360,7 +414,8 @@ TEST(test_measurement_length_domain_preserves_output)
         if (length == 10) {
             continue;
         }
-        struct radar_measurement measurement = {.sensor_time_ms = 123, .range_m = 456, .azimuth_rad = .5f};
+        struct radar_measurement measurement = {
+            .sensor_time_ms = 123, .range_m = 456, .azimuth_rad = .5f};
         unsigned char before[sizeof(measurement)];
         memcpy(before, &measurement, sizeof(measurement));
         CHECK(!measurement_message_decode(payload, (uint8_t)length, &measurement));
@@ -376,18 +431,29 @@ TEST(test_prediction_interval_and_noise_matrix)
     for (size_t i = 0; i < sizeof(intervals) / sizeof(intervals[0]); ++i) {
         for (size_t j = 0; j < sizeof(noises) / sizeof(noises[0]); ++j) {
             for (size_t k = 0; k < sizeof(speeds) / sizeof(speeds[0]); ++k) {
-                struct kalman_cv_filter filter;
-                kalman_cv_init(&filter, 1000, speeds[k], 4, 0, 0, 9, noises[j], 1);
-                kalman_cv_predict(&filter, intervals[i]);
+                struct kf_cv_1d_filter filter;
+                kf_cv_1d_init(&filter, 1000, speeds[k],
+                              &(const struct matrix){.rows = KF_CV_1D_STATE_DIM,
+                                                     .columns = KF_CV_1D_STATE_DIM,
+                                                     .data = {4, 0, 0, 9}},
+                              noises[j], 1);
+                kf_cv_1d_predict(&filter, intervals[i]);
                 // Double-precision diagonal-P reference, independent of in-place update order.
                 double interval_s = intervals[i], q = noises[j];
                 CHECK(fabs(filter.estimate - (1000.0 + speeds[k] * interval_s)) < 1e-4);
                 CHECK(filter.rate == speeds[k]);
-                CHECK(fabs(filter.p00 - (4 + 9 * interval_s * interval_s + q * pow(interval_s, 4) / 4)) < 1e-4);
-                CHECK(fabs(filter.p01 - (9 * interval_s + q * pow(interval_s, 3) / 2)) < 1e-4);
-                CHECK(fabs(filter.p11 - (9 + q * interval_s * interval_s)) < 1e-4);
-                CHECK(filter.p01 == filter.p10);
-                CHECK((double)filter.p00 * filter.p11 - (double)filter.p01 * filter.p10 >= -1e-4);
+                CHECK(fabs(matrix_get(&filter.covariance, 0, 0) -
+                           (4 + 9 * interval_s * interval_s + q * pow(interval_s, 4) / 4)) < 1e-4);
+                CHECK(fabs(matrix_get(&filter.covariance, 0, 1) -
+                           (9 * interval_s + q * pow(interval_s, 3) / 2)) < 1e-4);
+                CHECK(fabs(matrix_get(&filter.covariance, 1, 1) -
+                           (9 + q * interval_s * interval_s)) < 1e-4);
+                CHECK(matrix_get(&filter.covariance, 0, 1) == matrix_get(&filter.covariance, 1, 0));
+                CHECK((double)matrix_get(&filter.covariance, 0, 0) *
+                              matrix_get(&filter.covariance, 1, 1) -
+                          (double)matrix_get(&filter.covariance, 0, 1) *
+                              matrix_get(&filter.covariance, 1, 0) >=
+                      -1e-4);
             }
         }
     }
@@ -399,23 +465,34 @@ TEST(test_correction_noise_and_residual_matrix)
     const float measurements[] = {1, 970, 1000, 1030, 65535};
     for (size_t i = 0; i < sizeof(noises) / sizeof(noises[0]); ++i) {
         for (size_t j = 0; j < sizeof(measurements) / sizeof(measurements[0]); ++j) {
-            struct kalman_cv_filter filter;
-            kalman_cv_init(&filter, 1000, 0, 4, 0, 0, 9, 0, noises[i]);
-            kalman_cv_correct(&filter, measurements[j]);
+            struct kf_cv_1d_filter filter;
+            kf_cv_1d_init(&filter, 1000, 0,
+                          &(const struct matrix){.rows = KF_CV_1D_STATE_DIM,
+                                                 .columns = KF_CV_1D_STATE_DIM,
+                                                 .data = {4, 0, 0, 9}},
+                          0, noises[i]);
+            kf_cv_1d_correct(&filter, measurements[j]);
             double gain = 4.0 / (4.0 + noises[i]);
             double expected = (1 - gain) * 1000 + gain * measurements[j];
             CHECK(fabs(filter.estimate - expected) < .01);
             CHECK(filter.estimate >= fminf(1000, measurements[j]));
             CHECK(filter.estimate <= fmaxf(1000, measurements[j]));
-            CHECK(fabs(filter.p00 - 4 * noises[i] / (4 + noises[i])) < 1e-5);
-            CHECK(filter.rate == 0 && filter.p11 == 9 && filter.p01 == 0 && filter.p10 == 0);
+            CHECK(fabs(matrix_get(&filter.covariance, 0, 0) - 4 * noises[i] / (4 + noises[i])) <
+                  1e-5);
+            CHECK(filter.rate == 0 && matrix_get(&filter.covariance, 1, 1) == 9 &&
+                  matrix_get(&filter.covariance, 0, 1) == 0 &&
+                  matrix_get(&filter.covariance, 1, 0) == 0);
         }
     }
-    struct kalman_cv_filter filter;
-    kalman_cv_init(&filter, 10, 0, nextafterf(1e-6f, INFINITY), 0, 0, 1, 0, 1);
+    struct kf_cv_1d_filter filter;
+    kf_cv_1d_init(&filter, 10, 0,
+                  &(const struct matrix){.rows = KF_CV_1D_STATE_DIM,
+                                         .columns = KF_CV_1D_STATE_DIM,
+                                         .data = {nextafterf(1e-6f, INFINITY), 0, 0, 1}},
+                  0, 1);
     filter.measurement_noise_variance = 0; // Just above the guarded innovation threshold.
-    kalman_cv_correct(&filter, 12);
-    CHECK(filter.estimate == 12 && filter.p00 == 0);
+    kf_cv_1d_correct(&filter, 12);
+    CHECK(filter.estimate == 12 && matrix_get(&filter.covariance, 0, 0) == 0);
 }
 
 #ifdef TRACK_TEST_HOST
@@ -433,6 +510,7 @@ static const struct test_case cases[] = {
     TEST_CASE(test_gate),
     TEST_CASE(test_cv_prediction_and_covariance),
     TEST_CASE(test_cv_correction),
+    TEST_CASE(test_covariance_owned_copy),
     TEST_CASE(test_angle_prediction_and_correction),
     TEST_CASE(test_stationary_convergence),
     TEST_CASE(test_decode_semicircle),

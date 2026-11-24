@@ -4,7 +4,7 @@
 
 ## 수정
 
-`fcc_app/tests/test_perf_monitor/board_check.py`의 `pump_until()`은 수신/파싱이 이미 시한에 도달했어도 `sleep(0)`을 호출했다. 남은 시간이0 이하이면 추가 sleep 없이 복귀하도록 수정했다. `tests/test_perf_monitor.py`는 실제 nested pump를 모사 I/O·시계에 연결해 시한 도달/초과 및 남은0.5ms/1ms 대기를 검증한다. 수정 전2개 실패·2개 통과, 수정 후4개 통과다. 실제 OS 주기 보장을 주장하는 시험은 아니다.
+`fcc_app/tests/test_perf_monitor/board_check.py`의 `pump_until()`은 수신/파싱이 이미 시한에 도달했어도 `sleep(0)`을 호출했다. 남은 시간이0 이하이면 추가 sleep 없이 복귀하도록 수정했다. `tests/firmware/test_perf_monitor.py`는 실제 nested pump를 모사 I/O·시계에 연결해 시한 도달/초과 및 남은0.5ms/1ms 대기를 검증한다. 수정 전2개 실패·2개 통과, 수정 후4개 통과다. 실제 OS 주기 보장을 주장하는 시험은 아니다.
 
 [수정 전 runner](runner-before.py) · [수정 전 회귀](regression-before.log) · [관련134개 회귀](focused-tests.log) · [최종928개+subtest9개](final-python-tests.log).
 

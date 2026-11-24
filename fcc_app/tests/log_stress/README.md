@@ -13,7 +13,7 @@
 
 기존 [2026-11-14 결과](../../../docs/hardware-test-2026-11-14-log-stress.md)는 TRACK_REPORT 추가 전 펌웨어의 증거입니다.
 2026-11-17 `check_wire()`를 수정해 STATUS 개수는 조회 응답만 세고, 함께 수집된 TRACK_REPORT는 CRC·32바이트 길이를 검사합니다. STATUS는 과거 캡처의 28바이트와 현재 32바이트를 허용합니다. 미지원 TYPE·CRC/LEN 오류·불완전 꼬리는 계속 거부합니다.
-[host 회귀 12개](../../../tests/test_log_stress.py)는 혼합/분할 입력·기존 STATUS 전용 기록·오류 거부를 검사합니다.
+[host 회귀 12개](../../../tests/firmware/test_log_stress.py)는 혼합/분할 입력·기존 STATUS 전용 기록·오류 거부를 검사합니다.
 TRACK 수치·상태·순번 연속성·입력 대비 전달률은 검증하지 않습니다. `request_status()`는 조회 전 PC 입력 버퍼를 비우므로 수집하지 못한 TRACK도 있습니다. 이 도구는 무손실 TRACK 수집기가 아닙니다.
 2026-11-23 현재 펌웨어로 producer13개·DEBUG traffic11개 판정을 다시 통과했습니다. [v1.1.0 실보드 기록](../../../docs/hardware-test-2026-11-23-v1.1.0.md)을 참고하세요. 이 결과도 아래에 명시한 STATUS·로그 복귀 범위이며 무손실 TRACK 전달을 증명하지 않습니다.
 

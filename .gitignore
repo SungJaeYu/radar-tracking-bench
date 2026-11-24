@@ -16,3 +16,8 @@ build_*/
 
 # Local GUI/evaluation session recordings
 /runs/
+
+# Local agent plans, conversation notes and handoffs
+/.local-notes/
+/HANDOFF.local.md
+/docs/superpowers/

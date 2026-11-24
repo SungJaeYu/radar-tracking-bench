@@ -2,8 +2,7 @@
 
 PC 도구·테스트의 Python 규칙은 [Python 코딩 스탠다드](python-coding-standard.md)를 따릅니다.
 
-2026-11-08 합의를 바탕으로 유지하는 프로젝트 규칙입니다. 적용 결과와 후속 과제는
-[코딩 규칙 점검표](coding-standard-audit.md)를 따릅니다. 서식 리팩터링에서는 동작·프로토콜 값을 보존합니다.
+펌웨어에 적용하는 프로젝트 규칙입니다. 서식 리팩터링에서는 동작·프로토콜 값을 보존합니다.
 
 ## 이름
 
@@ -28,7 +27,7 @@ PC 도구·테스트의 Python 규칙은 [Python 코딩 스탠다드](python-cod
 외부 센서 시각과 보드 uptime, 측정과 추정, 프레임과 payload를 이름에서 구분합니다.
 시간에는 단위뿐 아니라 기준 시점도 드러냅니다(`estimate_sensor_ms`, `received_uptime_ms`).
 자동 테스트는 `test_...`, 수동 송신 도구는 `..._sender.py`처럼 역할을 표시합니다.
-기존 예외와 변경 영향은 [구조·이름 점검](naming-review.md)에 있으며 이 권장 규칙을 적었다고 기존 코드를 변경한 것은 아닙니다.
+새 코드와 변경하는 코드에 적용하며, 기존 코드를 일괄 변경하는 기준으로 사용하지 않습니다.
 
 ## 시간 이름
 
@@ -269,7 +268,7 @@ if (!measurement_valid) {
 
 ## 적용 상태
 
-파일·함수별 적용 결과는 [코딩 스탠다드 적용 점검](coding-standard-audit.md)에 정리합니다.
+적용 결과와 시험 범위는 [검증 이력](verification-history.md)에서 확인합니다.
 2026-11-10 기준 아래 완료 표시는 `fcc_app/src` 펌웨어에 적용됩니다.
 테스트 fixture와 Python 코드 전체의 스타일 통일을 뜻하지 않습니다.
 
@@ -326,4 +325,4 @@ if (!measurement_valid) {
 - Bounded deferred capture must expose overflow as missing evidence/failure. Never silently overwrite unread timing samples or remove failed samples to obtain a pass.
 - Validate source context, host guards and target object code, then measure actual board behavior. Software timing and a clean short run do not prove interrupt WCET or establish the cause of earlier CRC failures.
 
-See [interrupt-context audit](interrupt-context-audit.md).
+See [계측 실행 문맥](performance-monitoring.md#인터럽트와-계측-실행-문맥).
