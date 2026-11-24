@@ -92,7 +92,7 @@ predict/correct 실행 시간 측정·누적 집계·요약 출력을 구현했�
 `feat/prepared-input`의 `cd27620`에 통합 CLI, GUI 선회 잡음 평가, 사전 생성 입력, KF/EKF 선택과 R 설정을 반영했다. 필터 상태와 공분산은 고정 배열을 직접 소유하며 기존 추적 API·프로토콜을 재사용한다. [host·빌드 검증](validation-2026-11-24-estimators.md).
 
 - #8: 입력 생성·저장·검증 및 선회 전용 FIFO 재생 완료. 공통 재생 정책, lockstep, 시험 후 일괄 저장과 해당 경계 검증은 남아 있다.
-- #10: Cartesian CV-EKF와 선택 구조·host 회귀 완료. 무잡음/기본 잡음 seed42의 동일 입력 실보드4회를 완료했다. [결과·그래프](hardware-test-2026-11-24-kf-ekf.md). 이후 EKF Q 설정과 같은 입력의 host 탐색24회를 기록했다. [Q 비교표](test-results/ekf-q-2026-11-24/README.md). 기본값100을 유지하고 후보10000·30000의 독립 시드·실보드 확인을 다음 단계로 둔다. CT-EKF·확장 기동 비교는 남아 있다.
+- #10: Cartesian CV-EKF와 선택 구조·host 회귀 완료. 무잡음/기본 잡음 seed42의 동일 입력 실보드4회를 완료했다. [결과·그래프](hardware-test-2026-11-24-kf-ekf.md). 이후 EKF Q 설정과 같은 입력의 host 탐색24회를 기록했다. [Q 비교표](test-results/ekf-q-2026-11-24/README.md). 기본값100을 유지하고 후보10000·30000의 독립10시드·거리/방위 잡음 분리·이탈 선회 host336회 및 실보드46회를 완료했다. [후속 결과·원시 자료](test-results/ekf-q-board-2026-11-24/README.md). CT-EKF·확장 기동 비교는 남아 있다.
 - #11: Joseph 구현을 기준으로 Square-root·UD의 수치 안정성·비용 비교는 후속이다.
 - #1·#2는 완료·종료된 이슈이며 진행 중 목록에서 제외한다. 3D #4–#7은 후속 계획을 유지한다.
 

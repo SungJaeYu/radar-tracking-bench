@@ -1,0 +1,30 @@
+{
+  "archive_sha256": "830e32e795a2b88db3227e5b6b087c719dd0d3e76480f491a642801619168b5a",
+  "archive_members_checked": 898,
+  "reanalysed_public_files": {
+    "summary.json": "7334f4157912695ee4698fc0d877e3b6f5b951ac6cfab0c0b441a363d6250ca1",
+    "summary.csv": "c206c96258a9832a30052a892ff04de986479f3dcf762d13f1e2a6a151bedeb9",
+    "board-series.csv.gz": "1de44b60337729e7800b6b2972d63a3b71df2eeb50f9ea1fb1b5b84cfc48b7f3",
+    "host-aggregate.csv": "e2df127ba00eb45fab248f41ef095e90253ce93e1f6bf9cb8eed97aac0defdf3",
+    "paired.csv": "ac6b1f5b49f9a5ea491870f9f8228a8641315b63852dbab27334c8ab66a4a5c3",
+    "diagnostic-summary.json": "c4e148569c9281564d30f93968bdcaad5154349e24f4de72e41394d56814d26b",
+    "diagnostic-summary.csv": "0e8a293a32b1ae2fef87f74aa4855d3ece57d419d3ba05a16a5df66918f4e063",
+    "diagnostic-board-series.csv.gz": "9912a82fc286d78210e2f9b2b3dd2f63d248760dfb765449d28f5d5621982039",
+    "gate-diagnostic.json": "45515b0025bb077c0d08c0379cf331fc651221c335774470672d5c4b8436d11d",
+    "gate-diagnostic.csv": "3700c1134b3f59593547765430de1b62ee5751603c616c4143d7f2ffa4e83b40",
+    "gate-window.csv": "a57ddc2c380c27d7d130690b69c75792324ae6e3135e12e490f0d96f59e3c0cf"
+  },
+  "independent_host_regeneration_files": {
+    "host-summary.json": "26945f58451847e79473c39508e3ba87b31e24062c87cb30fe074f9270edd439",
+    "host-summary.csv": "4c90be0b4bf52e799f3eb777ff286bb43b34c7d77635b692942063f39066d08b",
+    "host-series.csv.gz": "2db0ddbe36f98a65d2be2f7846618fe54aaac4c1672bd9dd98066ad6eebbc3c7",
+    "outbound-host-summary.json": "c8f7163818b116af453dae940f9bce25250e772fb2707e06fa642a815fb280cd",
+    "outbound-host-summary.csv": "f3026bc9dd43ad188e69166e3603985a40a1bba626c746c06c885e09d071f31b",
+    "outbound-host-series.csv.gz": "6e5a4692939470a346c5f6182eff44dd9c25fd3c7f0b232ceee502b242ab3e04"
+  },
+  "matching_current_source_header_count": 42,
+  "primary_board_runs": 44,
+  "posthoc_board_runs": 2,
+  "original_execution_source": "30a99d288fb9148eb35e84e11511ab24abcdfc02",
+  "caveat": "Figure visual review is performed separately; this check does not execute hardware."
+}

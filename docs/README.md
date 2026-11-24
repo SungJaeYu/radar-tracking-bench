@@ -1,6 +1,6 @@
 # 문서 안내
 
-최신 개발 상태: [KF/EKF·GUI/CLI 검증](validation-2026-11-24-estimators.md), [EKF Q 설정·host 탐색](test-results/ekf-q-2026-11-24/README.md). 공개 릴리스 기준은 [v1.1.0 완료 범위·검증 기록](release-v1.1.0.md)이다. STM32 판정은 관측 부하의 보드·전송·증거 검사이며 PC 미송신·RTT와 분리한다.
+최신 개발 상태: [KF/EKF·GUI/CLI 검증](validation-2026-11-24-estimators.md), [EKF Q 설정·host 탐색](test-results/ekf-q-2026-11-24/README.md), [독립 시드·이탈 선회·실보드 Q 비교](test-results/ekf-q-board-2026-11-24/README.md). 공개 릴리스 기준은 [v1.1.0 완료 범위·검증 기록](release-v1.1.0.md)이다. STM32 판정은 관측 부하의 보드·전송·증거 검사이며 PC 미송신·RTT와 분리한다.
 
 [송신 시한 경과 sleep 수정·최종60초 검증](test-results/host-pacing-fix-2026-11-23/README.md)과 [30분 실보드 기록](test-results/host-input-retest-2026-11-23/README.md)을 함께 제공한다. 과거 결과는 당시 판정 그대로 보존한다.
 
@@ -34,6 +34,7 @@
 | UART 규격·요구사항·구현·테스트 연결 | [요구사항 추적표](requirements-traceability.md) |
 | 현재 개발 브랜치의 host·펌웨어 검증 | [2026-11-24 검증](validation-2026-11-24-estimators.md) |
 | EKF Q 12값의 같은 입력 host 비교 | [표·그래프·재현](test-results/ekf-q-2026-11-24/README.md) |
+| 고정 Q 후보·독립 시드·이탈 선회 host336회/보드46회 | [원시 자료·그래프6종·재분석](test-results/ekf-q-board-2026-11-24/README.md) |
 | 자동 테스트 실행과 검증 범위 | [영역별 실행](../tests/README.md) · [테스트 목록](test-cases.md) |
 | ISR·인터럽트 차단 구간 점검 | [계측 실행 문맥](performance-monitoring.md#인터럽트와-계측-실행-문맥) |
 | STM32 판정 기준과 미검증 영역 | [성능 검증 범위](stm32-performance-coverage.md) |

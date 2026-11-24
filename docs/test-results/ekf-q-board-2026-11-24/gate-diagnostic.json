@@ -1,0 +1,62 @@
+[
+  {
+    "origin": "host",
+    "case": "strong10",
+    "timestamp_ms": 31500,
+    "range_noise_m": -35.45317384135706,
+    "azimuth_noise_rad": 0.005728785549500293,
+    "quantized_range_error_m": -35.355172474903156,
+    "predicted_range_error_m": 65.08183924384684,
+    "range_gate_residual_m": -100.43701171875,
+    "azimuth_gate_residual_deg": 0.41825967973800504,
+    "state": 3,
+    "next_state": 2,
+    "next_result": 1,
+    "next_sample_sensor_delay_ms": 100
+  },
+  {
+    "origin": "board",
+    "case": "strong10",
+    "timestamp_ms": 31500,
+    "range_noise_m": -35.45317384135706,
+    "azimuth_noise_rad": 0.005728785549500293,
+    "quantized_range_error_m": -35.355172474903156,
+    "predicted_range_error_m": 65.08183924384684,
+    "range_gate_residual_m": -100.43701171875,
+    "azimuth_gate_residual_deg": 0.41825967973800504,
+    "state": 3,
+    "next_state": 2,
+    "next_result": 1,
+    "next_sample_sensor_delay_ms": 100
+  },
+  {
+    "origin": "host",
+    "case": "outbound-strong10",
+    "timestamp_ms": 31500,
+    "range_noise_m": -35.45317384135706,
+    "azimuth_noise_rad": 0.005728785549500376,
+    "quantized_range_error_m": -35.794962390627916,
+    "predicted_range_error_m": 64.83638526562208,
+    "range_gate_residual_m": -100.63134765625,
+    "azimuth_gate_residual_deg": 0.4478764453386415,
+    "state": 3,
+    "next_state": 2,
+    "next_result": 1,
+    "next_sample_sensor_delay_ms": 100
+  },
+  {
+    "origin": "board",
+    "case": "outbound-strong10",
+    "timestamp_ms": 31500,
+    "range_noise_m": -35.45317384135706,
+    "azimuth_noise_rad": 0.005728785549500376,
+    "quantized_range_error_m": -35.794962390627916,
+    "predicted_range_error_m": 64.83638526562208,
+    "range_gate_residual_m": -100.63134765625,
+    "azimuth_gate_residual_deg": 0.4478738840177028,
+    "state": 3,
+    "next_state": 2,
+    "next_result": 1,
+    "next_sample_sensor_delay_ms": 100
+  }
+]
