@@ -24,7 +24,46 @@ config RADAR_ESTIMATOR_EKF_CV
         Uses the same measurement R settings, gates and track lifecycle.
         Initial velocity is zero; P and Q are initial tuning values.
 
+config RADAR_ESTIMATOR_EKF_CT
+    bool "EKF: Cartesian coordinated turn with polar measurements"
+    help
+        Estimate x, y, vx, vy and clockwise turn rate in rad/s.
+        Use exact constant-turn motion and a Joseph measurement update.
+        Velocity and turn rate initialize at zero with positive uncertainty.
+        Retain the shared measurement R, gates and lifecycle; tune separately.
+
 endchoice
+
+config RADAR_CT_ACCELERATION_VARIANCE_M_SQUARED_PER_S_FOURTH
+    int "CT Cartesian acceleration variance (m^2/s^4)"
+    depends on RADAR_ESTIMATOR_EKF_CT
+    range 0 2147483647
+    default 100
+    help
+        Independent per-step x/y acceleration disturbances, variance not sigma.
+        Add q times dt^4/4, dt^3/2 and dt^2 to each position/velocity block.
+        Does not modify KF/CV Q, measurement R, initial P or gates.
+
+config RADAR_CT_ANGULAR_ACCELERATION_VARIANCE_RAD_SQUARED_PER_S_FOURTH_SCALED_1E9
+    int "CT angular acceleration variance (1e-9 rad^2/s^4)"
+    depends on RADAR_ESTIMATOR_EKF_CT
+    range 0 2147483647
+    default 100000
+    help
+        Divide this integer by 1e9 to obtain angular acceleration variance.
+        The default is 0.0001 rad^2/s^4, sigma 0.01 rad/s^2.
+        Add q_alpha times dt^2 to next-step turn-rate variance. This additive
+        model does not integrate angular acceleration inside the predicted arc.
+
+config RADAR_CT_INITIAL_TURN_RATE_VARIANCE_RAD_SQUARED_PER_S_SQUARED_SCALED_1E9
+    int "CT initial turn-rate variance (1e-9 rad^2/s^2)"
+    depends on RADAR_ESTIMATOR_EKF_CT
+    range 1 2147483647
+    default 10000000
+    help
+        Initial turn rate is zero. Divide this positive integer by 1e9 for
+        its variance: default 0.01 rad^2/s^2, sigma 0.1 rad/s.
+        Other initial position/velocity uncertainties match the CV adapter.
 
 # Cartesian CV process noise; the core applies the interval-dependent Q terms.
 config RADAR_EKF_ACCELERATION_VARIANCE_M_SQUARED_PER_S_FOURTH

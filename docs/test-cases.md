@@ -3,7 +3,8 @@
 각 사례의 요구사항·상세 규격 연결과 미검증 항목은 [요구사항 추적표](requirements-traceability.md)를 참고합니다.
 
 현재 테스트 소스를 기준으로 작성한 목록입니다. 테스트를 추가하거나 검증 조건을 바꿀 때 이 문서도 함께 갱신합니다.
-Python은 1,058개 + subtest 9개입니다. KF/EKF 통합 시 CTest 244회와 ASSERT 비활성 EKF 검증 2회를 실행했습니다. 이후 EKF Q 설정4개를 추가해 동일 구성의 등록 합계는248개이며, 이번 영향 범위95회+ASSERT 비활성2회를 재검증했습니다. [Q 검증](test-results/ekf-q-2026-11-24/README.md). `tracking` 한 등록 항목 안의22개 함수를 CTest 개수에 다시 더하지 않습니다.
+Python은 1,058개 + subtest 9개입니다. KF/EKF 통합 시 CTest 244회와 ASSERT 비활성 EKF 검증 2회를 실행했습니다. 이후 EKF Q 설정4개를 추가해 동일 구성의 등록 합계는248개이며, 해당 변경의 영향 범위95회+ASSERT 비활성2회를 재검증했습니다. [Q 검증](test-results/ekf-q-2026-11-24/README.md). `tracking` 한 등록 항목 안의22개 함수를 CTest 개수에 다시 더하지 않습니다.
+CT-EKF는 별도 CTest 22개(11사례 × ASSERT 활성·비활성)를 추가하며, 위와 같은 구성의 등록 합계는270개입니다. 이번 CT 변경에서는 기존 기본·CV·PERF 조합을 포함한 CTest 280회와 CT 22회, 총302회를 다시 실행했습니다. 등록 구성에 따른 합계와 실제 실행 회수를 구분합니다. CT 수치 reference와 저장 입력 재생은 별도로 기록합니다. [CT 검증](test-results/ct-ekf-2026-11-24/README.md).
 아래 날짜별 기록의 옛 개수는 당시 결과로 보존합니다.
 케이스 목록과 실제 실행 결과는 구분합니다. 아래 개수는 Python 수집 결과와 C 등록 코드를 기준으로 합니다. 현재 실행 결과·빌드·한계는 [2026-11-24 검증](validation-2026-11-24-estimators.md), 기존 릴리스의 보드 근거는 [v1.1.0 기록](release-v1.1.0.md)을 따릅니다.
 
@@ -44,6 +45,8 @@ Python은 1,058개 + subtest 9개입니다. KF/EKF 통합 시 CTest 244회와 AS
 | GUI 선회 프리셋 | `tests/ui/test_turn_preset.py` | 5 | host Python; Qt/serial는 필요한 경우 모사 |
 | KF R 설정·EKF 연결 | `fcc_app/tests/test_tracking` | 4 + 2 CTest | 설정 반영·공통 출력·상태 값 복사 |
 | EKF 예측·보정 | `fcc_app/tests/test_ekf_cv` | 2 CTest + ASSERT 비활성 2회 | host C 수치 회귀 |
+| CT-EKF 수치·연결·lifecycle | `fcc_app/tests/test_ekf_ct` | 22 CTest (11 × ASSERT 0/2) | host C, 기존 시험 수정 없이 추가 |
+| CT 독립 수치 기준 | `docs/test-results/ct-ekf-2026-11-24/numeric_reference.py` | ASSERT별 예측51·보정3·반복10,000단계 | production C ↔ NumPy float64, 중앙차분 Jacobian |
 | 고정 저장 행렬 | `fcc_app/tests/test_matrix` | 1 CTest | host C |
 | 게이팅 설정 행렬 | `fcc_app/tests/test_tracking/src/gating_cases.c` | 20 (5 설정 × 4 사례) | host C |
 | 필터·추적 | `fcc_app/tests/test_tracking` | 22 (하나의 CTest) | host C 또는 Zephyr Ztest |
@@ -59,6 +62,40 @@ Python은 매개변수 조합을 펼쳐 **1,058개 항목** (GUI 의존성 설�
 Tracking C는 CTest의 `tracking`에서22개 함수를 실행하며, 게이트20개·KF 설정4개·EKF 통합2개·EKF Q 설정4개를 더해 CTest31개입니다.
 UART C는 정책별 실행을 CTest에 따로 등록하므로 45개로 표시됩니다. 공통 사례 19개는 두 번 실행합니다.
 `pc_sim/cli/frame_sender.py`는 자동 테스트가 아닌 수동 송신 도구입니다.
+
+## CT-EKF — 2026-11-24
+
+기존 KF/CV 테스트의 본문·기대값은 유지하고 `test_ekf_ct`를 별도로 추가했습니다.
+각 사례를 ASSERT 비활성(`__ASSERT_ON=0`)과 활성(`2`) 두 실행 파일에 등록합니다.
+
+| 사례 | 확인 내용 |
+|---|---|
+| `ownership` | 초기 공분산을 복사하고 호출자 배열·필터 값 복사와 독립적으로 유지 |
+| `quarter_turn` | 좌·우 90도 선회의 위치·속도와 시계방향 부호 |
+| `noise` | Cartesian 가속도·각가속도 Q의 단위 및 dt 전개 |
+| `zero_interval` | dt=0에서 상태·공분산 불변 |
+| `wrapped` | 방위각 ±π 경계의 짧은 잔차 |
+| `numerical_failure` | 원점·풀 수 없는 innovation·overflow·비유한 상태에서 원본 보존 |
+| `malformed_covariance_dimensions` | 잘못된 공분산 행·열에서 원본 보존 |
+| `nonfinite_covariance` | NaN 공분산에서 예측·보정 원본 보존 |
+| `correction_overflow` | 유한 입력의 보정 overflow에서 원본 보존 |
+| `lifecycle` | 공통 획득·확정·coast·회복·LOST·reset 및 값 복사 |
+| `configuration` | CT 선택·5×5 용량·초기 omega 분산·Q 연결 |
+
+```sh
+cmake -G Ninja -S fcc_app/tests/test_ekf_ct -B /tmp/radar-ct-tests
+cmake --build /tmp/radar-ct-tests
+ctest --test-dir /tmp/radar-ct-tests --output-on-failure
+python docs/test-results/ct-ekf-2026-11-24/numeric_reference.py \
+  --build /tmp/radar-ct-reference --output /tmp/radar-ct-reference/results.json
+```
+
+독립 수치 기준은 float64 상태식·중앙차분 Jacobian·Joseph 행렬 계산과 대조합니다.
+0·근접0·양/음 선회율, 방위각 경계, 반복 갱신 공분산의 고유값을 검사합니다.
+이것은 합성 입력 84개 × 세 필터의 호스트 비교252회 및 실보드18회와 다른 검증입니다.
+CT CTest22개·독립 수치 검증·호스트252회와 실보드18회를 완료했습니다. 실보드 입력13,590개가
+모두 대응했고 게이트 거부·LOST·STATUS 오류는0이었으며 일반 KF를 복구했습니다.
+[설정·정확도·불리한 결과와 한계](test-results/ct-ekf-2026-11-24/README.md)를 함께 읽습니다.
 
 ## 선회·구간 시나리오 — 2026-11-23
 

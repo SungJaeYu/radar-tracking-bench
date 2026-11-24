@@ -4,8 +4,14 @@
 #include <stdbool.h>
 #include <stddef.h>
 
+// A target may select a larger fixed capacity for every translation unit.
+// Existing targets retain their original four-by-four storage and ABI.
+#ifndef MATRIX_MAX_ROWS
 #define MATRIX_MAX_ROWS 4U
+#endif
+#ifndef MATRIX_MAX_COLUMNS
 #define MATRIX_MAX_COLUMNS 4U
+#endif
 #define MATRIX_MAX_ELEMENTS (MATRIX_MAX_ROWS * MATRIX_MAX_COLUMNS)
 
 // Owns fixed storage. Active elements are packed in row-major order using columns

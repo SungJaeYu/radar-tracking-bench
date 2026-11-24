@@ -59,7 +59,7 @@ V1은 종료하고 결함 수정·재현성 유지에 집중합니다. 아래 �
 | --- | --- |
 | 지연 최적화 | 추가한 RX/TX 구간 계측·비동기 기록을 바탕으로 동일 조건의 보드 지연과 호스트 RTT 진단을 각각 비교 |
 | 추적 확장 | 다중표적 입력 묶음·스캔 경계·상한, 측정 연관·트랙 테이블·자체 ID·수명 관리, 교차·클러터·재등장 평가 |
-| 모델 비교 | 구현된 polar CV KF·Cartesian CV EKF의 동일 입력 비교, CT-EKF·IMM·adaptive gating, 추가 기동 시나리오 |
+| 모델 비교 | 구현된 polar CV KF·Cartesian CV-EKF·CT-EKF의 동일 입력 비교, IMM·adaptive gating, 추가 기동 시나리오 |
 | 3차원 확장 | 좌표계·단위·측정 모델 설계 → PC 고도·수직속도 시나리오 → 프로토콜·필터 → GUI·오차 평가·실보드 검증. [이슈 #4–#7](github-project.md)에서 선행 조건을 관리하며 설계를 검토한 뒤 단계별로 구현 |
 | 제어·송신 정책 | INIT/RESET 우선 보존·전용 ACK·reset 이전 큐 폐기, TX 포화 시 보고별 우선순위, 이벤트 원인·상시 TX 진단 규격 |
 | 추가 장애 시험 | UART overrun/framing/parity 감지·집계·복구, DISCARD 전체 행렬, 실제 동시 조회·USB 제거·전원 재인가 |
@@ -92,7 +92,7 @@ predict/correct 실행 시간 측정·누적 집계·요약 출력을 구현했�
 `feat/prepared-input`의 `cd27620`에 통합 CLI, GUI 선회 잡음 평가, 사전 생성 입력, KF/EKF 선택과 R 설정을 반영했다. 필터 상태와 공분산은 고정 배열을 직접 소유하며 기존 추적 API·프로토콜을 재사용한다. [host·빌드 검증](validation-2026-11-24-estimators.md).
 
 - #8: 입력 생성·저장·검증 및 선회 전용 FIFO 재생 완료. 공통 재생 정책, lockstep, 시험 후 일괄 저장과 해당 경계 검증은 남아 있다.
-- #10: Cartesian CV-EKF와 선택 구조·host 회귀 완료. 무잡음/기본 잡음 seed42의 동일 입력 실보드4회를 완료했다. [결과·그래프](hardware-test-2026-11-24-kf-ekf.md). 이후 EKF Q 설정과 같은 입력의 host 탐색24회를 기록했다. [Q 비교표](test-results/ekf-q-2026-11-24/README.md). 기본값100을 유지하고 후보10000·30000의 독립10시드·거리/방위 잡음 분리·이탈 선회 host336회 및 실보드46회를 완료했다. [후속 결과·원시 자료](test-results/ekf-q-board-2026-11-24/README.md). CT-EKF·확장 기동 비교는 남아 있다.
+- #10: Cartesian CV-EKF와 선택 구조·host 회귀 완료. 무잡음/기본 잡음 seed42의 동일 입력 실보드4회를 완료했다. [결과·그래프](hardware-test-2026-11-24-kf-ekf.md). 이후 EKF Q 설정과 같은 입력의 host 탐색24회를 기록했다. [Q 비교표](test-results/ekf-q-2026-11-24/README.md). 기본값100을 유지하고 후보10000·30000의 독립10시드·거리/방위 잡음 분리·이탈 선회 host336회 및 실보드46회를 완료했다. [후속 결과·원시 자료](test-results/ekf-q-board-2026-11-24/README.md). 이후 CT-EKF 구현·독립 수치 검증·동일 입력 host252회를 완료했다. seed42로 선택한 후보를 고정한 뒤 독립 시드를 평가했으며, 기본 KF 선택·기존 CV 기본값은 유지한다. CT의 실보드18회도 완료해 입력13,590개가 모두 대응했고 게이트 거부·LOST·STATUS 오류는0이었다. 일반 KF를 복구했다. 확장 기동 비교는 남아 있다. [CT 결과·비용·원시 자료](test-results/ct-ekf-2026-11-24/README.md).
 - #11: Joseph 구현을 기준으로 Square-root·UD의 수치 안정성·비용 비교는 후속이다.
 - #1·#2는 완료·종료된 이슈이며 진행 중 목록에서 제외한다. 3D #4–#7은 후속 계획을 유지한다.
 

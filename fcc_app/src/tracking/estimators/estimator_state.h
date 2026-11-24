@@ -3,11 +3,17 @@
 
 // CMake selects the matching implementation. State is owned inline so that
 // copying a track also copies its filter; no allocation or external storage.
-#if defined(CONFIG_RADAR_ESTIMATOR_EKF_CV) && defined(CONFIG_RADAR_ESTIMATOR_KF_CV)
+#if (defined(CONFIG_RADAR_ESTIMATOR_EKF_CV) + defined(CONFIG_RADAR_ESTIMATOR_KF_CV) + \
+     defined(CONFIG_RADAR_ESTIMATOR_EKF_CT)) > 1
 #error "Select exactly one estimator implementation"
 #endif
 
-#if defined(CONFIG_RADAR_ESTIMATOR_EKF_CV)
+#if defined(CONFIG_RADAR_ESTIMATOR_EKF_CT)
+#include "tracking/estimators/filters/ekf_ct_2d.h"
+struct estimator {
+    struct ekf_ct_2d_filter filter;
+};
+#elif defined(CONFIG_RADAR_ESTIMATOR_EKF_CV)
 #include "tracking/estimators/filters/ekf_cv_2d.h"
 struct estimator {
     struct ekf_cv_2d_filter filter;

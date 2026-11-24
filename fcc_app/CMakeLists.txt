@@ -24,7 +24,9 @@ target_sources(app PRIVATE
 )
 
 include(cmake/estimator.cmake)
-if(CONFIG_RADAR_ESTIMATOR_EKF_CV)
+if(CONFIG_RADAR_ESTIMATOR_EKF_CT)
+    radar_target_estimator(app EKF_CT)
+elseif(CONFIG_RADAR_ESTIMATOR_EKF_CV)
     radar_target_estimator(app EKF_CV)
 else()
     radar_target_estimator(app KF_CV)

@@ -8,11 +8,13 @@ Previously named `radar-track-fcc-hil`.
 
 **Single-target tracking HIL on STM32 and Zephyr. Latest release: `v1.1.0`.**
 
-Current development adds build-time KF/EKF selection, reusable measurement inputs, and CLI/GUI turn-noise evaluation. These additions are on `feat/prepared-input`; the released v1.1.0 board results below remain historical evidence. [Current validation](docs/validation-2026-11-24-estimators.md) · [Estimator setup](docs/estimator-tuning.md).
+Current development adds build-time polar KF / Cartesian CV-EKF / CT-EKF selection, reusable measurement inputs, and CLI/GUI turn-noise evaluation. These additions are on `feat/prepared-input`; the released v1.1.0 board results below remain historical evidence. [Current validation](docs/validation-2026-11-24-estimators.md) · [Estimator setup](docs/estimator-tuning.md).
 
 Initial paired board comparison: all 3,020 inputs matched. With the current tuning, Cartesian CV-EKF had smaller pre-turn straight error but larger turn error than polar CV KF. [Results, raw data, and four figures](docs/hardware-test-2026-11-24-kf-ekf.md).
 
 The follow-up adds configurable EKF acceleration variance and a same-input host Q sweep. Default 100 is preserved. The candidates now have 336 host runs and 46 STM32 runs, including initially receding noisy turns; all 34,730 board inputs matched and normal KF was restored. [Independent-seed and board results](docs/test-results/ekf-q-board-2026-11-24/README.md). [Q comparison table and figures](docs/test-results/ekf-q-2026-11-24/README.md).
+
+CT-EKF is now implemented with a five-state constant-turn model and an owned 5×5 covariance. Its host comparison covers 84 saved inputs × three filters (252 runs); all had full valid coverage, no gate rejections, and no LOST states. CT parameters were selected on seed 42 and frozen before evaluating independent seeds. The 18-run STM32 comparison matched all 13,590 inputs with no gate rejections, LOST states, or STATUS errors; normal KF was restored. [CT model, tuning, and current evidence](docs/test-results/ct-ekf-2026-11-24/README.md).
 
 **Release validation:** the 30-minute run matched all 89,057 delivered measurements and passed board, delivery and evidence checks. The final sender fix also passed a 60-second board check with all 2,993 valid inputs matched and zero board errors. Host RTT and unsent PC slots do not gate this STM32 release; the complete requested 50 Hz profile remains unqualified. [Release scope and evidence](docs/release-v1.1.0.md) · [PC sender improvement planned for v1.1.1](https://github.com/SungJaeYu/radar-tracking-bench/issues/8).
 
@@ -33,7 +35,7 @@ The firmware owns prediction, gating, Kalman updates, and track lifecycle manage
 | Component | Implementation |
 | --- | --- |
 | Firmware | C, Zephyr RTOS, UART ISR and ring buffer, RX/handler/TX threads, bounded copying queues |
-| Tracker | Build-time choice of polar CV KF or Cartesian CV EKF; shared fixed gates and track acquisition/coasting/loss |
+| Tracker | Build-time choice of polar CV KF, Cartesian CV-EKF, or CT-EKF; shared fixed gates and track acquisition/coasting/loss |
 | Protocol and recovery | CRC-16, length validation, partial-frame and measurement timeouts, overflow recovery, stale-input rejection |
 | PC tools | Python CLI and PySide6/pyqtgraph GUI, synthetic measurements, noise/outlier injection, TRACK/STATUS decoding, CSV recording and evaluation |
 
@@ -72,7 +74,7 @@ For the noise sweep, each of 10 conditions used 10 seeds with firmware tuning fi
 
 ## Additions for v1.1.0
 
-The PC motion generator adds exact constant-turn arcs and a segmented `straight_turn_straight` scenario: eastbound for 10 s, a 90° right turn at 200 m/s and 30° bank (about 55.49 s), then southbound for 10 s. Existing scenarios remain available. The v1.1.0 firmware used range/azimuth CV filters. The development branch also offers Cartesian CV-EKF; a CT estimator is still pending.
+The PC motion generator adds exact constant-turn arcs and a segmented `straight_turn_straight` scenario: eastbound for 10 s, a 90° right turn at 200 m/s and 30° bank (about 55.49 s), then southbound for 10 s. Existing scenarios remain available. The v1.1.0 firmware used range/azimuth CV filters. The development branch now offers Cartesian CV-EKF and CT-EKF; their validation is recorded separately from this release.
 
 ```bash
 python -m pc_sim simulate --scenario straight_turn_straight --duration 80
@@ -139,7 +141,7 @@ The evaluator sends measurements and collects board reports for CSV/RMSE evaluat
 
 ### Select the estimator and run a turn evaluation
 
-The default firmware uses the polar CV KF. Add `-DEXTRA_CONF_FILE=ekf.conf` when configuring a separate `build_ekf` directory to select the Cartesian CV EKF, then flash that build. The GUI cannot switch firmware algorithms at runtime. [Build commands and Q/R/P semantics](docs/estimator-tuning.md).
+The default firmware uses the polar CV KF. Add `-DEXTRA_CONF_FILE=ekf.conf` when configuring a separate `build_ekf` directory for Cartesian CV-EKF, or `-DEXTRA_CONF_FILE=ekf_ct.conf` with a separate `build_ct` directory for CT-EKF, then flash that build. The GUI cannot switch firmware algorithms at runtime. [Build commands and Q/R/P semantics](docs/estimator-tuning.md).
 
 ```bash
 python -m pc_sim turn-noise --port /dev/ttyUSB0 --noise 10 --azimuth-noise 0.01
@@ -174,7 +176,7 @@ Python and host C checks are separate from firmware builds and physical-board HI
 
 V1 covers single-target measurement-to-result communication, quantitative tracking evaluation, major error recovery, and timing/resource observations. The [English architecture guide](EXPLAINER.en.md) explains the implemented contracts and their limits.
 
-Cartesian CV-EKF is implemented; broader same-input comparisons, CT/IMM models, multi-target association, BIT/Lock On, and UART hardware-error diagnostics remain follow-up work. RF processing, ADC/IQ/FFT, and operational certification are outside this project. [V1 scope and roadmap — Korean](docs/roadmap.md).
+Cartesian CV-EKF and CT-EKF are implemented. The fixed CT board comparison is complete; expanded maneuver comparisons, IMM, multi-target association, BIT/Lock On, and UART hardware-error diagnostics remain follow-up work. RF processing, ADC/IQ/FFT, and operational certification are outside this project. [V1 scope and roadmap — Korean](docs/roadmap.md).
 
 <a id="개발-방식"></a>
 

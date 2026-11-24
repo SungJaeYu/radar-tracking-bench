@@ -13,6 +13,14 @@ function(radar_target_estimator target backend)
             ${tracking_dir}/estimators/cartesian_cv_ekf.c
             ${tracking_dir}/estimators/filters/ekf_cv_2d.c
             ${tracking_dir}/../common/matrix.c)
+    elseif(backend STREQUAL "EKF_CT")
+        # Capacity is an ABI choice: apply it to the entire app/test target.
+        target_compile_definitions(${target} PRIVATE CONFIG_RADAR_ESTIMATOR_EKF_CT=1
+            MATRIX_MAX_ROWS=5U MATRIX_MAX_COLUMNS=5U)
+        target_sources(${target} PRIVATE
+            ${tracking_dir}/estimators/cartesian_ct_ekf.c
+            ${tracking_dir}/estimators/filters/ekf_ct_2d.c
+            ${tracking_dir}/../common/matrix.c)
     else()
         message(FATAL_ERROR "Unknown estimator backend: ${backend}")
     endif()

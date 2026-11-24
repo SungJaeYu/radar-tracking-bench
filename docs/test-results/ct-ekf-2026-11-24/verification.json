@@ -1,0 +1,14 @@
+{
+  "archive_sha256": "65c12a48e4db6e3c0bb22bd442f2f17b206a762bad7f6fe578e0c21cf87ec3dc",
+  "archive_bytes": 28850290,
+  "files_verified": 514,
+  "byte_identical_reanalysis": [
+    "summary.json",
+    "summary.csv",
+    "host-aggregate.csv",
+    "paired.csv",
+    "board-series.csv.gz"
+  ],
+  "complete": true,
+  "restored": true
+}
