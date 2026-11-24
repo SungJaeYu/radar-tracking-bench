@@ -1,0 +1,452 @@
+{
+  "source_commit": "4a9e6eaad3c3063d99e7821913396e9b53a6da78",
+  "runs": [
+    {
+      "estimator": "kf",
+      "case": "baseline",
+      "position": {
+        "all": {
+          "count": 735,
+          "rmse_m": 4.513412932915052,
+          "max_m": 18.074202673326905
+        },
+        "straight_before": {
+          "count": 80,
+          "rmse_m": 13.071845238156284,
+          "max_m": 18.074202673326905
+        },
+        "turn": {
+          "count": 555,
+          "rmse_m": 1.3959833986191779,
+          "max_m": 6.583385452128316
+        },
+        "straight_after": {
+          "count": 100,
+          "rmse_m": 1.4872477700993258,
+          "max_m": 1.8667947822117854
+        }
+      },
+      "all_valid_position": {
+        "count": 755,
+        "rmse_m": 4.633929067001202,
+        "max_m": 18.074202673326905
+      },
+      "measurement_position": {
+        "count": 735,
+        "rmse_m": 0.2900732107328751,
+        "max_m": 0.49910849064400786
+      },
+      "sent": 755,
+      "reports": 757,
+      "wire_audit": true,
+      "input_sha256": "066508f099dd101d1bb7981286274c2a315c9c2273e0c18874c09a429ff00eda",
+      "gates": 0,
+      "lost": 0,
+      "starts": 1,
+      "eligible_count": 735,
+      "predict": {
+        "n": 754,
+        "min_ns": 28018,
+        "mean_ns": 28259,
+        "max_ns": 29092
+      },
+      "correct": {
+        "n": 754,
+        "min_ns": 33513,
+        "mean_ns": 33708,
+        "max_ns": 35060
+      },
+      "stack_min_unused_bytes": {
+        "rx": 776,
+        "handler": 1104,
+        "tx": 672,
+        "main": 528
+      },
+      "processing": {
+        "n": 755,
+        "total_ms": 146,
+        "p50_bin": 0,
+        "p95_bin": 1,
+        "p99_bin": 1,
+        "max_ms": 1,
+        "over20": 0
+      },
+      "rx_to_submit": {
+        "n": 755,
+        "total_ms": 177,
+        "p50_bin": 0,
+        "p95_bin": 1,
+        "p99_bin": 1,
+        "max_ms": 1,
+        "over20": 0
+      },
+      "pc_roundtrip_ms": {
+        "count": 755,
+        "p50": 5.56575006339699,
+        "p95": 5.816124961711466,
+        "p99": 6.5166669664904475,
+        "max": 24.377333000302315
+      },
+      "status_delta": {
+        "crc_errors": 0,
+        "length_errors": 0,
+        "frame_timeouts": 0,
+        "queue_drops": 0,
+        "ring_overflow_events": 0,
+        "rx_dropped_bytes": 0,
+        "recovery_discarded_bytes": 0,
+        "stale_measurements": 0
+      },
+      "send_gap_ms": {
+        "min": 100.22483300417662,
+        "mean": 103.79533073602403,
+        "max": 113.00499993376434
+      }
+    },
+    {
+      "estimator": "kf",
+      "case": "noisy",
+      "position": {
+        "all": {
+          "count": 735,
+          "rmse_m": 26.816913805490866,
+          "max_m": 95.64530528213842
+        },
+        "straight_before": {
+          "count": 80,
+          "rmse_m": 17.403155903397373,
+          "max_m": 26.47898668268676
+        },
+        "turn": {
+          "count": 555,
+          "rmse_m": 27.76896686827477,
+          "max_m": 95.64530528213842
+        },
+        "straight_after": {
+          "count": 100,
+          "rmse_m": 27.63589072182168,
+          "max_m": 74.197244265956
+        }
+      },
+      "all_valid_position": {
+        "count": 755,
+        "rmse_m": 26.509713542775202,
+        "max_m": 95.64530528213842
+      },
+      "measurement_position": {
+        "count": 735,
+        "rmse_m": 76.58838700790656,
+        "max_m": 350.62814751521364
+      },
+      "sent": 755,
+      "reports": 757,
+      "wire_audit": true,
+      "input_sha256": "312087235885450cbbcca569547d3501a55b91c9c6d11ac47abd83fd1dab2154",
+      "gates": 0,
+      "lost": 0,
+      "starts": 1,
+      "eligible_count": 735,
+      "predict": {
+        "n": 754,
+        "min_ns": 27828,
+        "mean_ns": 28259,
+        "max_ns": 29212
+      },
+      "correct": {
+        "n": 754,
+        "min_ns": 33398,
+        "mean_ns": 33731,
+        "max_ns": 35407
+      },
+      "stack_min_unused_bytes": {
+        "rx": 776,
+        "handler": 1104,
+        "tx": 672,
+        "main": 528
+      },
+      "processing": {
+        "n": 755,
+        "total_ms": 143,
+        "p50_bin": 0,
+        "p95_bin": 1,
+        "p99_bin": 1,
+        "max_ms": 1,
+        "over20": 0
+      },
+      "rx_to_submit": {
+        "n": 755,
+        "total_ms": 184,
+        "p50_bin": 0,
+        "p95_bin": 1,
+        "p99_bin": 1,
+        "max_ms": 1,
+        "over20": 0
+      },
+      "pc_roundtrip_ms": {
+        "count": 755,
+        "p50": 5.565332947298884,
+        "p95": 5.7793749729171395,
+        "p99": 6.612957920879126,
+        "max": 8.687958004884422
+      },
+      "status_delta": {
+        "crc_errors": 0,
+        "length_errors": 0,
+        "frame_timeouts": 0,
+        "queue_drops": 0,
+        "ring_overflow_events": 0,
+        "rx_dropped_bytes": 0,
+        "recovery_discarded_bytes": 0,
+        "stale_measurements": 0
+      },
+      "send_gap_ms": {
+        "min": 100.20495904609561,
+        "mean": 103.70675431035177,
+        "max": 107.98320802859962
+      }
+    },
+    {
+      "estimator": "ekf",
+      "case": "baseline",
+      "position": {
+        "all": {
+          "count": 735,
+          "rmse_m": 115.55715346217437,
+          "max_m": 166.34931690610563
+        },
+        "straight_before": {
+          "count": 80,
+          "rmse_m": 0.13231053152553385,
+          "max_m": 0.46662721604187596
+        },
+        "turn": {
+          "count": 555,
+          "rmse_m": 121.78743078965917,
+          "max_m": 166.21861359218116
+        },
+        "straight_after": {
+          "count": 100,
+          "rmse_m": 125.81452997956946,
+          "max_m": 166.34931690610563
+        }
+      },
+      "all_valid_position": {
+        "count": 755,
+        "rmse_m": 114.02112978042274,
+        "max_m": 166.34931690610563
+      },
+      "measurement_position": {
+        "count": 735,
+        "rmse_m": 0.2900732107328751,
+        "max_m": 0.49910849064400786
+      },
+      "sent": 755,
+      "reports": 757,
+      "wire_audit": true,
+      "input_sha256": "066508f099dd101d1bb7981286274c2a315c9c2273e0c18874c09a429ff00eda",
+      "gates": 0,
+      "lost": 0,
+      "starts": 1,
+      "eligible_count": 735,
+      "predict": {
+        "n": 754,
+        "min_ns": 168324,
+        "mean_ns": 176337,
+        "max_ns": 177643
+      },
+      "correct": {
+        "n": 754,
+        "min_ns": 450986,
+        "mean_ns": 522615,
+        "max_ns": 528597
+      },
+      "stack_min_unused_bytes": {
+        "rx": 776,
+        "handler": 736,
+        "tx": 672,
+        "main": 528
+      },
+      "processing": {
+        "n": 755,
+        "total_ms": 680,
+        "p50_bin": 1,
+        "p95_bin": 1,
+        "p99_bin": 1,
+        "max_ms": 1,
+        "over20": 0
+      },
+      "rx_to_submit": {
+        "n": 755,
+        "total_ms": 714,
+        "p50_bin": 1,
+        "p95_bin": 1,
+        "p99_bin": 1,
+        "max_ms": 1,
+        "over20": 0
+      },
+      "pc_roundtrip_ms": {
+        "count": 755,
+        "p50": 6.263833027333021,
+        "p95": 6.484374986030161,
+        "p99": 6.77079102024436,
+        "max": 7.944958051666617
+      },
+      "status_delta": {
+        "crc_errors": 0,
+        "length_errors": 0,
+        "frame_timeouts": 0,
+        "queue_drops": 0,
+        "ring_overflow_events": 0,
+        "rx_dropped_bytes": 0,
+        "recovery_discarded_bytes": 0,
+        "stale_measurements": 0
+      },
+      "send_gap_ms": {
+        "min": 100.26279196608812,
+        "mean": 103.89263334480887,
+        "max": 108.8392500532791
+      }
+    },
+    {
+      "estimator": "ekf",
+      "case": "noisy",
+      "position": {
+        "all": {
+          "count": 735,
+          "rmse_m": 119.37254306947652,
+          "max_m": 184.47087846929776
+        },
+        "straight_before": {
+          "count": 80,
+          "rmse_m": 8.41542765394835,
+          "max_m": 19.955952209459753
+        },
+        "turn": {
+          "count": 555,
+          "rmse_m": 125.24367897464707,
+          "max_m": 184.47087846929776
+        },
+        "straight_after": {
+          "count": 100,
+          "rmse_m": 132.7487100291951,
+          "max_m": 178.75198160817695
+        }
+      },
+      "all_valid_position": {
+        "count": 755,
+        "rmse_m": 117.80153821179765,
+        "max_m": 184.47087846929776
+      },
+      "measurement_position": {
+        "count": 735,
+        "rmse_m": 76.58838700790656,
+        "max_m": 350.62814751521364
+      },
+      "sent": 755,
+      "reports": 757,
+      "wire_audit": true,
+      "input_sha256": "312087235885450cbbcca569547d3501a55b91c9c6d11ac47abd83fd1dab2154",
+      "gates": 0,
+      "lost": 0,
+      "starts": 1,
+      "eligible_count": 735,
+      "predict": {
+        "n": 754,
+        "min_ns": 172884,
+        "mean_ns": 177782,
+        "max_ns": 1248601
+      },
+      "correct": {
+        "n": 754,
+        "min_ns": 508185,
+        "mean_ns": 522898,
+        "max_ns": 527944
+      },
+      "stack_min_unused_bytes": {
+        "rx": 776,
+        "handler": 736,
+        "tx": 672,
+        "main": 528
+      },
+      "processing": {
+        "n": 755,
+        "total_ms": 691,
+        "p50_bin": 1,
+        "p95_bin": 1,
+        "p99_bin": 1,
+        "max_ms": 2,
+        "over20": 0
+      },
+      "rx_to_submit": {
+        "n": 755,
+        "total_ms": 727,
+        "p50_bin": 1,
+        "p95_bin": 1,
+        "p99_bin": 1,
+        "max_ms": 2,
+        "over20": 0
+      },
+      "pc_roundtrip_ms": {
+        "count": 755,
+        "p50": 6.263499963097274,
+        "p95": 6.467333063483238,
+        "p99": 7.240709033794701,
+        "max": 11.801749933511019
+      },
+      "status_delta": {
+        "crc_errors": 0,
+        "length_errors": 0,
+        "frame_timeouts": 0,
+        "queue_drops": 0,
+        "ring_overflow_events": 0,
+        "rx_dropped_bytes": 0,
+        "recovery_discarded_bytes": 0,
+        "stale_measurements": 0
+      },
+      "send_gap_ms": {
+        "min": 100.21945799235255,
+        "mean": 103.87757150792895,
+        "max": 108.46666595898569
+      }
+    }
+  ],
+  "paired": {
+    "baseline": {
+      "common_count": 735,
+      "kf": {
+        "count": 735,
+        "rmse_m": 4.513412932915052,
+        "max_m": 18.074202673326905
+      },
+      "ekf": {
+        "count": 735,
+        "rmse_m": 115.55715346217437,
+        "max_m": 166.34931690610563
+      }
+    },
+    "noisy": {
+      "common_count": 735,
+      "kf": {
+        "count": 735,
+        "rmse_m": 26.816913805490866,
+        "max_m": 95.64530528213842
+      },
+      "ekf": {
+        "count": 735,
+        "rmse_m": 119.37254306947652,
+        "max_m": 184.47087846929776
+      }
+    }
+  },
+  "restored_normal_kf": true,
+  "restore_status": {
+    "crc_errors": 0,
+    "length_errors": 0,
+    "frame_timeouts": 0,
+    "queue_drops": 0,
+    "ring_overflow_events": 0,
+    "rx_dropped_bytes": 0,
+    "recovery_discarded_bytes": 0,
+    "stale_measurements": 0
+  }
+}

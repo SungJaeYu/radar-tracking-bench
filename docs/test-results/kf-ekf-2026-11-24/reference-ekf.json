@@ -1,0 +1,16 @@
+{
+  "baseline": {
+    "samples": 755,
+    "max_board_position_difference_m": 0.004053328716203844,
+    "rmse_board_position_difference_m": 0.001118949117512546,
+    "reference_position_rmse_after_2s_m": 115.55749626541474,
+    "minimum_reference_covariance_eigenvalue": 1.8565128946307272
+  },
+  "noisy": {
+    "samples": 755,
+    "max_board_position_difference_m": 0.004689621688784674,
+    "rmse_board_position_difference_m": 0.0011136090678227101,
+    "reference_position_rmse_after_2s_m": 119.37310447639194,
+    "minimum_reference_covariance_eigenvalue": 1.8565154145598868
+  }
+}

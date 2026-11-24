@@ -107,6 +107,8 @@ west build -d <repo>/build_r_trial -b stm32f746g_disco <repo>/fcc_app -- -DEXTRA
 
 ## 비교 방법
 
+현재 기본값의 첫 KF/EKF 실보드 비교와 독립 NumPy 대조는 [2026-11-24 결과](hardware-test-2026-11-24-kf-ekf.md)에 있다. 초기 직선에서의 EKF 개선과 선회에서의 오차 증가를 함께 기록했으며, 이 결과에 맞춰 Q/R이나 기존 시험 조건을 변경하지 않았다.
+
 - 같은 저장 입력을 모든 R 조합에 사용하고, 거리·방위 R을 독립적으로 바꾼다.
 - 거리 RMSE(m), 방위 RMSE(rad), 위치 RMSE(m)를 구분한다.
 - 초기 확정 시간, 연속 게이트 거부, LOST, 재시작, 유효 표본 수를 함께 기록한다.

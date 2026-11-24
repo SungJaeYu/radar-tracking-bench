@@ -17,7 +17,8 @@
 ### Validation and remaining work
 
 - Python: 1,058 tests and 9 subtests; host C: 244 CTest executions plus 2 assertion-disabled checks. Both STM32 KF and EKF builds pass. [Validation and reproduction](docs/validation-2026-11-24-estimators.md).
-- General lockstep/deferred recording, CT-EKF and full estimator comparisons remain open. The checks above do not constitute a new board run or a v1.2.0 release.
+- A separate four-run STM32 comparison matched all 3,020 inputs, with zero gate rejections, lost tracks or communication errors; normal KF firmware was restored. Current CV-EKF tuning reduced pre-turn straight error but increased turn error. An independent float64 calculation reproduced the board results. [Data and figures](docs/hardware-test-2026-11-24-kf-ekf.md).
+- General lockstep/deferred recording, CT-EKF and broader multi-seed comparisons remain open. This is not a v1.2.0 release.
 
 ## v1.1.0 — 2026-11-23
 

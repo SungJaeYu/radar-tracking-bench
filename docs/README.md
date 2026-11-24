@@ -45,6 +45,7 @@
 
 | 확인할 내용 | 기록 |
 |---|---|
+| KF/EKF 동일 입력 초기 비교·오차·실행 시간 | [2026-11-24 실보드 결과·그래프](hardware-test-2026-11-24-kf-ekf.md) |
 | v1.1.0 선회·영어 GUI·전체 자동 회귀 | [v1.1.0 검증](hardware-test-2026-11-23-v1.1.0.md) |
 | 전체 검증 현황과 날짜별 이력 | [검증 기록](verification-history.md) |
 | 정상·잡음·누락 추적 평가, GUI·CSV | [고정 시나리오 평가](hardware-test-2026-11-18-evaluation.md) |

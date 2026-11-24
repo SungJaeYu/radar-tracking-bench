@@ -10,6 +10,8 @@ Previously named `radar-track-fcc-hil`.
 
 Current development adds build-time KF/EKF selection, reusable measurement inputs, and CLI/GUI turn-noise evaluation. These additions are on `feat/prepared-input`; the released v1.1.0 board results below remain historical evidence. [Current validation](docs/validation-2026-11-24-estimators.md) · [Estimator setup](docs/estimator-tuning.md).
 
+Initial paired board comparison: all 3,020 inputs matched. With the current tuning, Cartesian CV-EKF had smaller pre-turn straight error but larger turn error than polar CV KF. [Results, raw data, and four figures](docs/hardware-test-2026-11-24-kf-ekf.md).
+
 **Release validation:** the 30-minute run matched all 89,057 delivered measurements and passed board, delivery and evidence checks. The final sender fix also passed a 60-second board check with all 2,993 valid inputs matched and zero board errors. Host RTT and unsent PC slots do not gate this STM32 release; the complete requested 50 Hz profile remains unqualified. [Release scope and evidence](docs/release-v1.1.0.md) · [PC sender improvement planned for v1.1.1](https://github.com/SungJaeYu/radar-tracking-bench/issues/8).
 
 A hardware-in-the-loop testbed for post-detection radar tracking. A PC sends synthetic range and azimuth measurements to an STM32, then compares the returned estimates with known ground truth. It provides a repeatable way to evaluate tracking accuracy, response latency, and recovery from corrupted frames, measurement outliers, and interrupted communication without a physical radar.
@@ -170,7 +172,7 @@ Python and host C checks are separate from firmware builds and physical-board HI
 
 V1 covers single-target measurement-to-result communication, quantitative tracking evaluation, major error recovery, and timing/resource observations. The [English architecture guide](EXPLAINER.en.md) explains the implemented contracts and their limits.
 
-Cartesian CV-EKF is implemented; same-input board comparison, CT/IMM models, multi-target association, BIT/Lock On, and UART hardware-error diagnostics remain follow-up work. RF processing, ADC/IQ/FFT, and operational certification are outside this project. [V1 scope and roadmap — Korean](docs/roadmap.md).
+Cartesian CV-EKF is implemented; broader same-input comparisons, CT/IMM models, multi-target association, BIT/Lock On, and UART hardware-error diagnostics remain follow-up work. RF processing, ADC/IQ/FFT, and operational certification are outside this project. [V1 scope and roadmap — Korean](docs/roadmap.md).
 
 <a id="개발-방식"></a>
 

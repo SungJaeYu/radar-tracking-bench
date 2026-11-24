@@ -10,6 +10,8 @@
 
 현재 `feat/prepared-input` 개발 브랜치에는 KF/EKF 빌드 선택, 측정 입력 저장·재사용, CLI/GUI 선회 잡음 평가를 추가했습니다. 아래 v1.1.0 실보드 수치는 당시 버전의 근거입니다. [현재 검증](docs/validation-2026-11-24-estimators.md) · [추정기 선택과 설정](docs/estimator-tuning.md).
 
+초기 KF/EKF 실보드 비교에서는 입력3,020개가 모두 대응됐습니다. 현재 튜닝에서 EKF는 선회 전 직선 오차가 작았지만 선회 오차는 기존 KF보다 컸습니다. [결과·원시 데이터·그래프4종](docs/hardware-test-2026-11-24-kf-ekf.md).
+
 **릴리스 검증:** 30분 실보드에서 실제 전달한 측정89,057개 모두 응답했고 보드·전송·증거 검사를 통과했습니다. 최종 송신기 수정 후60초 검사도 유효 입력2,993개 모두 대응·보드 오류0입니다. PC 미송신과 RTT는 STM32 릴리스 차단 조건이 아닙니다. 요청50Hz 전체 입력의 검증 한계는 별도로 남깁니다. [완료 범위·검증 근거](docs/release-v1.1.0.md) · [v1.1.1 PC 송신기 개선](https://github.com/SungJaeYu/radar-tracking-bench/issues/8).
 
 PC에서 합성 레이더 측정을 보내고, STM32에서 표적을 추적한 뒤 결과를 PC로 반환합니다.

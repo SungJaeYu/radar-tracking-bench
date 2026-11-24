@@ -77,6 +77,8 @@ west build -d <repo>/build_ekf -b stm32f746g_disco <repo>/fcc_app -- -DEXTRA_CON
 
 ## 검증 경계와 남은 작업
 
+이 host·빌드 검증 이후 별도로 [KF/EKF 실보드4회 비교](hardware-test-2026-11-24-kf-ekf.md)를 수행했다. 두 기록의 대상과 범위를 구분한다.
+
 이 문서의 검증에는 flash나 새로운 실보드 HIL 실행이 포함되지 않는다. 모사 UART·host 수치 검증과 firmware 빌드를 실제 센서 정확도, 보드 실행 시간, 최대 stack 여유의 증거로 사용하지 않는다. 기존 보드 결과는 [v1.1.0 기록](release-v1.1.0.md)의 대상 코드에 한정된다.
 
-#8의 모든 입력용 공통 재생·lockstep·시험 후 일괄 기록, #10의 동일 입력 KF/EKF·CT-EKF 비교와 확장 기동, #11의 Square-root·UD 비교는 별도 완료 조건이다. [진행 중 작업](github-project.md).
+#8의 모든 입력용 공통 재생·lockstep·시험 후 일괄 기록, #10의 다중 seed KF/EKF·CT-EKF 비교와 확장 기동, #11의 Square-root·UD 비교는 별도 완료 조건이다. [진행 중 작업](github-project.md).
