@@ -12,6 +12,8 @@ Current development adds build-time KF/EKF selection, reusable measurement input
 
 Initial paired board comparison: all 3,020 inputs matched. With the current tuning, Cartesian CV-EKF had smaller pre-turn straight error but larger turn error than polar CV KF. [Results, raw data, and four figures](docs/hardware-test-2026-11-24-kf-ekf.md).
 
+The follow-up adds configurable EKF acceleration variance and a same-input host Q sweep. Default 100 is preserved; 10000 and 30000 remain candidates for independent-seed and board validation. [Q comparison table and figures](docs/test-results/ekf-q-2026-11-24/README.md).
+
 **Release validation:** the 30-minute run matched all 89,057 delivered measurements and passed board, delivery and evidence checks. The final sender fix also passed a 60-second board check with all 2,993 valid inputs matched and zero board errors. Host RTT and unsent PC slots do not gate this STM32 release; the complete requested 50 Hz profile remains unqualified. [Release scope and evidence](docs/release-v1.1.0.md) · [PC sender improvement planned for v1.1.1](https://github.com/SungJaeYu/radar-tracking-bench/issues/8).
 
 A hardware-in-the-loop testbed for post-detection radar tracking. A PC sends synthetic range and azimuth measurements to an STM32, then compares the returned estimates with known ground truth. It provides a repeatable way to evaluate tracking accuracy, response latency, and recovery from corrupted frames, measurement outliers, and interrupted communication without a physical radar.

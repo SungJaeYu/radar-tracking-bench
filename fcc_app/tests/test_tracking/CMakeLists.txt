@@ -60,6 +60,7 @@ if(TRACK_TEST_HOST)
         radar_target_estimator(estimator_ekf_${name} EKF_CV)
         target_include_directories(estimator_ekf_${name} PRIVATE ../../src ../common/include)
         target_compile_definitions(estimator_ekf_${name} PRIVATE
+            CONFIG_RADAR_EKF_ACCELERATION_VARIANCE_M_SQUARED_PER_S_FOURTH=100
             CONFIG_RADAR_RANGE_MEASUREMENT_VARIANCE_M_SQUARED=${range_r}
             CONFIG_RADAR_AZIMUTH_MEASUREMENT_VARIANCE_RAD_SQUARED_SCALED_1E9=${angle_scaled}
             EXPECTED_RANGE_R=${range_r}.0f EXPECTED_AZIMUTH_R=${angle_r})
@@ -69,6 +70,26 @@ if(TRACK_TEST_HOST)
     endfunction()
     add_ekf_estimator_tests(default 25 1218470 0.00121847f)
     add_ekf_estimator_tests(strong 900 900000 0.0009f)
+
+    # Check the adapter's Q setting independently through predicted covariance.
+    function(add_ekf_process_noise_tests name acceleration_variance)
+        add_executable(estimator_ekf_q_${name} src/ekf_process_noise_cases.c
+            ../../src/tracking/angle_utils.c)
+        radar_target_estimator(estimator_ekf_q_${name} EKF_CV)
+        target_include_directories(estimator_ekf_q_${name} PRIVATE ../../src ../common/include)
+        target_compile_definitions(estimator_ekf_q_${name} PRIVATE
+            CONFIG_RADAR_EKF_ACCELERATION_VARIANCE_M_SQUARED_PER_S_FOURTH=${acceleration_variance}
+            EXPECTED_ACCELERATION_VARIANCE=${acceleration_variance}
+            CONFIG_RADAR_RANGE_MEASUREMENT_VARIANCE_M_SQUARED=25
+            CONFIG_RADAR_AZIMUTH_MEASUREMENT_VARIANCE_RAD_SQUARED_SCALED_1E9=1218470)
+        target_compile_options(estimator_ekf_q_${name} PRIVATE -Wall -Wextra -Werror -UNDEBUG)
+        target_link_libraries(estimator_ekf_q_${name} PRIVATE m)
+        add_test(NAME estimator_ekf_q_${name} COMMAND estimator_ekf_q_${name})
+    endfunction()
+    add_ekf_process_noise_tests(zero 0)
+    add_ekf_process_noise_tests(default 100)
+    add_ekf_process_noise_tests(changed 10000)
+    add_ekf_process_noise_tests(maximum 2147483647)
 
     add_gate_tests(default 100 10)
     add_gate_tests(minimum 1 1)

@@ -7,7 +7,7 @@
 ## 현재 기준 요약
 
 기존 기능 이력: TRACK_REPORT·radar_processor/report_sender 분리 `87006b0`, 이름·경로 정리 `fd96c17`, 로그 시험기 판정 `838aca6`. 현재 작업본은 PC 선회·구간 운동, 영어 GUI, 확장 시간·자원 계측, ISR 원시 시각의 스레드 집계와 collector mutex를 포함한다.
-현재 개발 브랜치는 통합 CLI/GUI 평가, 사전 입력 저장·선회 재생, KF/EKF 선택과 Kconfig R을 포함한다. Python 1,058개 + subtest 9개, CTest 244회 + ASSERT 비활성 2회, KF/EKF firmware 빌드를 통과했다. [현재 검증](validation-2026-11-24-estimators.md). 새 KF/EKF 실보드 초기 비교는 [2026-11-24 기록](hardware-test-2026-11-24-kf-ekf.md), 기존 릴리스 근거는 [v1.1.0 기록](release-v1.1.0.md)이며 날짜별 이전 수치·원시 판정은 보존한다.
+현재 개발 브랜치는 통합 CLI/GUI 평가, 사전 입력 저장·선회 재생, KF/EKF 선택과 Kconfig R·EKF Q를 포함한다. 통합 시 Python1,058개+subtest9개, CTest244회+ASSERT 비활성2회, KF/EKF firmware 빌드를 통과했다. [통합 검증](validation-2026-11-24-estimators.md). 이후 Q 설정4개를 추가하고 영향 범위95회+ASSERT 비활성2회·Python 전체·firmware3구성을 재검증했다. [Q 탐색](test-results/ekf-q-2026-11-24/README.md). KF/EKF 실보드 초기 비교는 [2026-11-24 기록](hardware-test-2026-11-24-kf-ekf.md), 기존 릴리스 근거는 [v1.1.0 기록](release-v1.1.0.md)이며 날짜별 이전 수치·원시 판정은 보존한다.
 성능 `passed`는 관측 부하의 `board_qualification`(내부·전송·증거)에 대응한다. 요청 전 기간·50Hz 슬롯 누락0은 `requested_profile_qualification`으로 별도 검증한다. 호스트 RTT는 진단 전용이며 STM32 합격·릴리스 gate가 아니다. 보드20ms·scheduler 비유휴≤80%·앱 스택 여유≥25% 기준은 유지한다.
 
 정상 부하의 호스트 송신 공백/센서 시각 점프가 timeout/예측 한계에 이르면

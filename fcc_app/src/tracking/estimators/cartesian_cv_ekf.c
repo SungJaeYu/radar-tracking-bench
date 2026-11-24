@@ -44,7 +44,8 @@ void estimator_init(struct estimator *p_estimator, float initial_range_m, float 
 void estimator_predict(struct estimator *p_estimator, float interval_s)
 {
     // Independent x/y acceleration variance [(m/s^2)^2]; not polar angular Q.
-    ekf_cv_2d_predict(&p_estimator->filter, interval_s, 100.0f);
+    ekf_cv_2d_predict(&p_estimator->filter, interval_s,
+                     (float)CONFIG_RADAR_EKF_ACCELERATION_VARIANCE_M_SQUARED_PER_S_FOURTH);
 }
 
 void estimator_correct(struct estimator *p_estimator, float measured_range_m, float measured_azimuth_rad)

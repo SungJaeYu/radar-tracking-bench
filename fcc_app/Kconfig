@@ -26,6 +26,19 @@ config RADAR_ESTIMATOR_EKF_CV
 
 endchoice
 
+# Cartesian CV process noise; the core applies the interval-dependent Q terms.
+config RADAR_EKF_ACCELERATION_VARIANCE_M_SQUARED_PER_S_FOURTH
+    int "EKF acceleration variance (m^2/s^4)"
+    depends on RADAR_ESTIMATOR_EKF_CV
+    range 0 2147483647
+    default 100
+    help
+        Independent acceleration variance shared by the x and y axes.
+        This is variance, not standard deviation: sigma 10 m/s^2 means 100.
+        The CV filter multiplies it by dt^4/4, dt^3/2 and dt^2 to form Q.
+        Zero disables process noise; it does not reset the covariance.
+        Does not change the polar KF, initial P, measurement R, or gates.
+
 # RX buffer recovery policy.
 choice RADAR_RX_OVERFLOW_POLICY
     prompt "RX overflow recovery policy"

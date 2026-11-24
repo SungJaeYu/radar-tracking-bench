@@ -50,7 +50,7 @@ V1은 2026-11-19 프로젝트 소유자의 완료 확인을 반영해 종료했�
 - [UART host 테스트](fcc_app/tests/test_uart_rx/README.md): drain 24·discard 21, 총 45회 실행으로 링버퍼·부분 프레임 timeout·통계·init 오류를 검증합니다. 모사 IRQ는 실제 동시성을 검증하지 않습니다.
 - [handler host 테스트](fcc_app/tests/test_frame_handler/README.md): STATUS·TRACK·실패 복귀·INIT/RESET·측정 timeout·processor·stale·이상치 복귀 계약 31개 사례. 통계는 모사 snapshot이며 실제 RX 카운터 통합은 별도입니다.
 - [TX host 테스트](fcc_app/tests/test_uart_tx/README.md): 초기화·요청 검증·복사 큐·송신 순서·실패 후 복귀 4개 사례.
-- [Tracking C 테스트](fcc_app/tests/test_tracking/README.md): 필터·게이팅·추적 정책 22개 + 게이트 설정 행렬 20개 + KF 설정 4개 + EKF 통합 2개 사례.
+- [Tracking C 테스트](fcc_app/tests/test_tracking/README.md): 필터·게이팅·추적 정책 22개 + 게이트 설정 행렬 20개 + KF 설정 4개 + EKF 통합 2개 + EKF Q 설정 4개 사례(CTest 31개).
 - 수동 초기화만 필요할 때: `python -m pc_sim send-frame init --type 1 --port PORT`.
 - 송신: `python -m pc_sim send-radar --port PORT --count 20 --noise 0`.
 - 두 연속 송신기는 실행마다 INIT을 한 번 자동 전송하고 timestamp를 0부터 시작합니다.

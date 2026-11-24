@@ -28,6 +28,8 @@ ctest --test-dir /tmp/radar-track-tests --output-on-failure
 호스트 실행은 Zephyr 스레드, UART, 보드 동작을 검증하지 않습니다.
 기존 KF 테스트 본문을 유지하며, 같은 빌드에서 EKF adapter의 기본/변경 R,
 Cartesian 직선 예측, 극좌표 출력·속도 변환, ±π 잔차, 상태 값 복사와 lifecycle을 별도 검사합니다.
+EKF Q 설정은 `0·100·10000·2147483647` 네 실행 파일에서 x/y 공분산 증가를 독립 계산식과
+비교합니다. 기존 테스트 기대값은 유지합니다. 현재 CTest는 총31개입니다.
 선택과 초기 P/Q 계약은 [추정기 설정](../../../docs/estimator-tuning.md)을 참고합니다.
 
 실제 processor·TRACK 보고 회귀를 EKF로도 실행하려면:
@@ -74,7 +76,8 @@ NaN·±Inf 각도 입력의 assert 실패는 `tests/firmware/test_firmware_asser
 
 ## 게이트 설정 행렬
 
-host 모드는 기존 `track_tests` 22개와 아래 20개를 실행합니다. CTest 등록 항목은 총 22개입니다.
+host 모드는 기존 `track_tests` 22개 함수와 아래 게이트20개, KF 설정4개, EKF 통합2개,
+EKF Q 설정4개를 실행합니다. `track_tests`는 한 항목으로 등록하므로 CTest 총31개입니다.
 `gating_cases.c`가 실제 `gating.c`·`angle_utils.c`를 설정별 실행 파일로 빌드합니다.
 Zephyr Ztest는 기존 22개를 기본 설정으로 실행하며 host 전용 행렬은 포함하지 않습니다.
 

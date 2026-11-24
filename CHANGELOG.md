@@ -7,6 +7,7 @@
 - Unified `python -m pc_sim` commands and GUI test presets, including configurable straight and turn measurement noise.
 - Saved truth, measurement, sensor timestamp and CRC frames with integrity validation; FIFO replay and segmented position-error evaluation for straight/turn/straight inputs.
 - Build-time polar CV KF / Cartesian CV EKF selection through a shared estimator API, with Kconfig measurement variances and owned fixed-capacity covariance matrices.
+- EKF acceleration variance in Kconfig (default 100 preserved), four configuration checks and a 24-run production-C host sweep over the prior saved board inputs.
 
 ### Changed
 
@@ -18,6 +19,7 @@
 
 - Python: 1,058 tests and 9 subtests; host C: 244 CTest executions plus 2 assertion-disabled checks. Both STM32 KF and EKF builds pass. [Validation and reproduction](docs/validation-2026-11-24-estimators.md).
 - A separate four-run STM32 comparison matched all 3,020 inputs, with zero gate rejections, lost tracks or communication errors; normal KF firmware was restored. Current CV-EKF tuning reduced pre-turn straight error but increased turn error. An independent float64 calculation reproduced the board results. [Data and figures](docs/hardware-test-2026-11-24-kf-ekf.md).
+- The Q follow-up passes 95 affected CTest executions plus 2 assertion-disabled checks, the same Python suite, and KF/default-EKF/Q=10000 STM32 builds. Host default traces remain byte-identical; 10000 and 30000 are exploratory candidates, with no default retune or new board run. [Q results](docs/test-results/ekf-q-2026-11-24/README.md).
 - General lockstep/deferred recording, CT-EKF and broader multi-seed comparisons remain open. This is not a v1.2.0 release.
 
 ## v1.1.0 — 2026-11-23

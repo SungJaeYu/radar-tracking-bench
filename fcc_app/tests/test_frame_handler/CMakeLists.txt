@@ -26,6 +26,8 @@ target_link_libraries(frame_handler_tests PRIVATE m)
 # Reuse every processor/report regression unchanged with either estimator.
 option(RADAR_TEST_EKF_CV "Exercise the Cartesian EKF tracking path" OFF)
 if(RADAR_TEST_EKF_CV)
+    target_compile_definitions(frame_handler_tests PRIVATE
+        CONFIG_RADAR_EKF_ACCELERATION_VARIANCE_M_SQUARED_PER_S_FOURTH=100)
     radar_target_estimator(frame_handler_tests EKF_CV)
 else()
     radar_target_estimator(frame_handler_tests KF_CV)

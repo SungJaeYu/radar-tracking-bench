@@ -3,7 +3,7 @@
 각 사례의 요구사항·상세 규격 연결과 미검증 항목은 [요구사항 추적표](requirements-traceability.md)를 참고합니다.
 
 현재 테스트 소스를 기준으로 작성한 목록입니다. 테스트를 추가하거나 검증 조건을 바꿀 때 이 문서도 함께 갱신합니다.
-현재 합계는 Python 1,058개 + subtest 9개입니다. C host는 KF/EKF·계측 구성을 합해 CTest 244회를 실행했고, ASSERT 비활성 EKF 검증 2회를 별도로 실행했습니다. `tracking` 한 등록 항목 안의 22개 함수를 CTest 개수에 다시 더하지 않습니다.
+Python은 1,058개 + subtest 9개입니다. KF/EKF 통합 시 CTest 244회와 ASSERT 비활성 EKF 검증 2회를 실행했습니다. 이후 EKF Q 설정4개를 추가해 동일 구성의 등록 합계는248개이며, 이번 영향 범위95회+ASSERT 비활성2회를 재검증했습니다. [Q 검증](test-results/ekf-q-2026-11-24/README.md). `tracking` 한 등록 항목 안의22개 함수를 CTest 개수에 다시 더하지 않습니다.
 아래 날짜별 기록의 옛 개수는 당시 결과로 보존합니다.
 케이스 목록과 실제 실행 결과는 구분합니다. 아래 개수는 Python 수집 결과와 C 등록 코드를 기준으로 합니다. 현재 실행 결과·빌드·한계는 [2026-11-24 검증](validation-2026-11-24-estimators.md), 기존 릴리스의 보드 근거는 [v1.1.0 기록](release-v1.1.0.md)을 따릅니다.
 
@@ -56,7 +56,7 @@
 | UART drain·링버퍼 | `fcc_app/tests/test_uart_rx` | 45 (drain 24 + discard 21) | host C, Zephyr API 모사 |
 
 Python은 매개변수 조합을 펼쳐 **1,058개 항목** (GUI 의존성 설치 시)을 수집합니다. unittest 내부 subtest 9개는 이 수집 항목과 별도로 표시될 수 있습니다.
-Tracking C는 CTest의 `tracking`에서 22개 함수를 실행하며, 게이트 20개·KF 설정 4개·EKF 통합 2개를 더해 CTest 27개입니다.
+Tracking C는 CTest의 `tracking`에서22개 함수를 실행하며, 게이트20개·KF 설정4개·EKF 통합2개·EKF Q 설정4개를 더해 CTest31개입니다.
 UART C는 정책별 실행을 CTest에 따로 등록하므로 45개로 표시됩니다. 공통 사례 19개는 두 번 실행합니다.
 `pc_sim/cli/frame_sender.py`는 자동 테스트가 아닌 수동 송신 도구입니다.
 
