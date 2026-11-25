@@ -6,7 +6,7 @@ import math
 from pathlib import Path
 import struct
 
-from pc_sim.simulation.prepared_input import InputSettings, PreparedInput, PreparedSample, sample_count
+from pc_sim.simulation.prepared_input import InputSettings, PreparedInput, PreparedSample, sample_count, SEGMENTED_SCENARIOS
 from pc_sim.transport.protocol import build_measurement_frame_from_radians
 
 MAX_METADATA_BYTES = 65_536
@@ -39,11 +39,14 @@ def _digest(value: object) -> bool:
 
 def _validate_metadata(metadata: dict) -> InputSettings:
     _mapping(metadata, METADATA_KEYS)
-    if type(metadata['schema_version']) is not int or metadata['schema_version'] != 1:
+    if type(metadata['schema_version']) is not int or metadata['schema_version'] not in (1, 2):
         raise ValueError('Unsupported input schema version')
     _mapping(metadata['settings'], {field.name for field in fields(InputSettings)})
     settings = InputSettings(**metadata['settings'])
     settings.validate()
+    if (settings.scenario in SEGMENTED_SCENARIOS and settings.scenario != 'straight_turn_straight'
+            and metadata['schema_version'] != 2):
+        raise ValueError('Expanded motion scenarios require input schema version 2')
     duration = metadata['effective_duration_s']
     if not _finite(duration) or not 0 < duration <= settings.duration_s:
         raise ValueError('Invalid effective duration')
@@ -51,17 +54,18 @@ def _validate_metadata(metadata: dict) -> InputSettings:
     if type(count) is not int or count != sample_count(duration, settings.dt_s):
         raise ValueError('Sample count does not match sensor grid')
     initial = metadata['initial_target']
-    _mapping(initial, {'target_id', 'x_m', 'y_m', 'vx_mps', 'vy_mps', 'turn_rate_radps'})
+    motion_keys = {'acceleration_mps2', 'angular_acceleration_radps2'} if metadata['schema_version'] == 2 else set()
+    _mapping(initial, {'target_id', 'x_m', 'y_m', 'vx_mps', 'vy_mps', 'turn_rate_radps'} | motion_keys)
     if type(initial['target_id']) is not int or not all(_finite(value) for value in initial.values()):
         raise ValueError('Invalid initial target')
     segments = metadata['segments']
     if not isinstance(segments, list) or len(segments) > 1000:
         raise ValueError('Invalid motion segments')
     for segment in segments:
-        _mapping(segment, {'duration_s', 'turn_rate_radps'})
+        _mapping(segment, {'duration_s', 'turn_rate_radps'} | motion_keys)
         if not all(_finite(value) for value in segment.values()) or segment['duration_s'] <= 0:
             raise ValueError('Invalid motion segment')
-    if bool(segments) != (settings.scenario == 'straight_turn_straight'):
+    if bool(segments) != (settings.scenario in SEGMENTED_SCENARIOS):
         raise ValueError('Scenario and segments disagree')
     expected_duration = (min(settings.duration_s, math.fsum(s['duration_s'] for s in segments))
                          if segments else settings.duration_s)

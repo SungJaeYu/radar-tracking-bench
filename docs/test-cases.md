@@ -705,3 +705,7 @@ GUI worker의 CSV 생성·종료 회귀도 추가했습니다. [고정 시나리
 현재 구성은 위 표의224회 C 실행을 포함한다. RX PERF 두 정책은 ISR/IRQ 잠금 중 collector·uptime 호출 금지, 원시 시각의 스레드 집계, capture 유실과1초 서비스 공백의 sticky 실패, timer wrap과 overflow 복구 후 byte/timestamp 정렬을 검사한다. collector는 pthread mutex로 스레드 갱신·snapshot 일관성을 검사하며 실제 Zephyr IRQ 지연을 증명하지 않는다.
 
 현재 `passed`는 관측 부하의 `board_qualification`(내부·전송·증거)과 같다. 요청50Hz의 전 기간·예정 슬롯 누락0은 `requested_profile_qualification`으로 별도 판정한다. 호스트 RTT p99≤20ms·최대≤100ms는 진단 한도이며 STM32 합격·릴리스 gate가 아니다. 보드20ms·scheduler 비유휴≤80%·앱 스택 여유≥25% 기준은 유지한다. [릴리스 검증과 실패 분석](release-v1.1.0.md).
+
+## 확장 기동 정답 모델 — 2026-11-26
+
+`tests/simulation/test_maneuver_models.py` 33개를 추가하고 전체 Python1,091개가 통과했다. 가속/각가속도 해석해·독립 적분, 구간 경계,20프리셋 저장/읽기, 기존3시나리오 표본 해시 보존을 확인했다. 펌웨어 변경·새 기동 실보드 시험은 없다. [조건·그래프·로그](test-results/maneuver-models-2026-11-25/README.md).

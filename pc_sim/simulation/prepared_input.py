@@ -8,10 +8,11 @@ import struct
 import subprocess
 
 from pc_sim.transport.protocol import build_measurement_frame_from_radians
-from pc_sim.simulation.targets import RadarSensorModel, SCENARIOS, SegmentedScenario
+from pc_sim.simulation.targets import RadarSensorModel, SCENARIOS, SegmentedScenario, MANEUVER_SCENARIOS
 
 MAX_SAMPLES = 180_000
-SINGLE_TARGET_SCENARIOS = ('single_approach', 'single_turn', 'straight_turn_straight')
+SINGLE_TARGET_SCENARIOS = ('single_approach', 'single_turn', 'straight_turn_straight') + tuple(MANEUVER_SCENARIOS)
+SEGMENTED_SCENARIOS = ('straight_turn_straight',) + tuple(MANEUVER_SCENARIOS)
 
 
 @dataclass(frozen=True)
@@ -116,11 +117,18 @@ def generate_input(settings: InputSettings) -> PreparedInput:
     sensor = RadarSensorModel(pd=settings.pd, clutter_rate=0,
                               sigma_range_m=settings.range_noise_std_m,
                               sigma_azimuth_rad=settings.azimuth_noise_std_rad)
+    expanded = settings.scenario in MANEUVER_SCENARIOS
+    initial = asdict(target)
+    segments = [asdict(segment) for segment in scenario.segments] if segmented else []
+    if not expanded:
+        for item in [initial, *segments]:
+            item.pop('acceleration_mps2')
+            item.pop('angular_acceleration_radps2')
     metadata = {
-        'schema_version': 1, 'settings': asdict(settings),
+        'schema_version': 2 if expanded else 1, 'settings': asdict(settings),
         'effective_duration_s': duration_s, 'sample_count': count,
-        'initial_target': asdict(target),
-        'segments': [asdict(segment) for segment in scenario.segments] if segmented else [],
+        'initial_target': initial,
+        'segments': segments,
         'sensor': asdict(sensor), 'source': _source_identity(),
     }
     rng = random.Random(settings.seed)

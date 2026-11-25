@@ -8,6 +8,7 @@ Radar output: polar range_m, azimuth_rad, elevation_rad, and doppler_mps.
 import math
 import random
 from dataclasses import dataclass
+from functools import partial
 from typing import List
 
 STANDARD_GRAVITY_MPS2 = 9.80665
@@ -24,11 +25,20 @@ class Measurement:
     doppler_mps: float
 
 
-# Target motion: straight flight or constant-rate turns.
+# Positive nodes/weights of eight-point Gauss-Legendre quadrature.
+# Used only for varying speed/rate; the legacy exact constant-turn path is retained.
+_MOTION_QUADRATURE = (
+    (.1834346424956498, .3626837833783620),
+    (.5255324099163290, .3137066458778873),
+    (.7966664774136267, .2223810344533745),
+    (.9602898564975363, .1012285362903763),
+)
+
+# Target motion: clockwise turns with optional along-track/angular acceleration.
 
 @dataclass
 class Target:
-    """Advance a target by dt seconds at constant speed and turn rate per step."""
+    """Planar truth motion; accelerations remain constant during each update."""
     target_id: int
     x_m:       float   # East position
     y_m:       float   # North position
@@ -36,7 +46,15 @@ class Target:
     vy_mps:    float   # North velocity
     turn_rate_radps: float = 0.0 # Turn rate [rad/s], clockwise positive
 
+    acceleration_mps2: float = 0.0  # Along velocity direction, not a fixed Cartesian axis
+    angular_acceleration_radps2: float = 0.0  # Clockwise turn-rate derivative
+
     def update(self, dt: float) -> None:
+        if not math.isfinite(dt) or dt < 0:
+            raise ValueError('dt must be finite and nonnegative')
+        if self.acceleration_mps2 != 0 or self.angular_acceleration_radps2 != 0:
+            self._update_accelerated(dt)
+            return
         turn_angle_rad = self.turn_rate_radps * dt
 
         cos_a = math.cos(turn_angle_rad)
@@ -58,6 +76,48 @@ class Target:
 
         self.vx_mps = old_vx * cos_a + old_vy * sin_a
         self.vy_mps = -old_vx * sin_a + old_vy * cos_a
+
+    def _update_accelerated(self, dt: float) -> None:
+        values = (self.x_m, self.y_m, self.vx_mps, self.vy_mps, self.turn_rate_radps,
+                  self.acceleration_mps2, self.angular_acceleration_radps2)
+        if not all(math.isfinite(value) for value in values):
+            raise ValueError('Motion state must be finite')
+        speed = math.hypot(self.vx_mps, self.vy_mps)
+        end_speed = speed + self.acceleration_mps2 * dt
+        end_rate = self.turn_rate_radps + self.angular_acceleration_radps2 * dt
+        if not math.isfinite(end_speed) or not math.isfinite(end_rate) or end_speed < 0:
+            raise ValueError('Motion must retain finite nonnegative speed and finite turn rate')
+        if dt == 0:
+            return
+        if speed == 0:
+            raise ValueError('Accelerated motion requires an initial velocity direction')
+        direction_x, direction_y = self.vx_mps / speed, self.vy_mps / speed
+        angle = self.turn_rate_radps * dt + .5 * self.angular_acceleration_radps2 * dt * dt
+        if not math.isfinite(angle):
+            raise ValueError('Motion angle must be finite')
+        # Bound time and phase per integration panel, independently of sensor dt.
+        panels = max(1, math.ceil(dt),
+                     math.ceil(max(abs(self.turn_rate_radps), abs(end_rate)) * dt / .25))
+        width = dt / panels
+        dx = dy = 0.0
+        for panel in range(panels):
+            midpoint = (panel + .5) * width
+            for node, weight in _MOTION_QUADRATURE:
+                for sign in (-1, 1):
+                    t = midpoint + sign * node * width / 2
+                    phase = self.turn_rate_radps * t + .5 * self.angular_acceleration_radps2 * t * t
+                    cosine, sine = math.cos(phase), math.sin(phase)
+                    distance_weight = (speed + self.acceleration_mps2 * t) * weight * width / 2
+                    dx += distance_weight * (direction_x * cosine + direction_y * sine)
+                    dy += distance_weight * (-direction_x * sine + direction_y * cosine)
+        cosine, sine = math.cos(angle), math.sin(angle)
+        next_state = (self.x_m + dx, self.y_m + dy,
+                      end_speed * (direction_x * cosine + direction_y * sine),
+                      end_speed * (-direction_x * sine + direction_y * cosine))
+        if not all(math.isfinite(value) for value in next_state):
+            raise ValueError('Motion integration produced a nonfinite state')
+        self.x_m, self.y_m, self.vx_mps, self.vy_mps = next_state
+        self.turn_rate_radps = end_rate
 
     @property
     def range_m(self) -> float:
@@ -83,16 +143,19 @@ class Target:
 
 @dataclass(frozen=True)
 class MotionSegment:
-    """Hold a finite turn rate for a positive duration in seconds."""
+    """Set starting turn rate and constant accelerations for a timed segment."""
 
     duration_s: float
     turn_rate_radps: float
+    acceleration_mps2: float = 0.0
+    angular_acceleration_radps2: float = 0.0
 
     def __post_init__(self) -> None:
         if not math.isfinite(self.duration_s) or self.duration_s <= 0:
             raise ValueError('duration_s must be finite and positive')
-        if not math.isfinite(self.turn_rate_radps):
-            raise ValueError('turn_rate_radps must be finite')
+        if not all(math.isfinite(value) for value in (self.turn_rate_radps, self.acceleration_mps2,
+                                                       self.angular_acceleration_radps2)):
+            raise ValueError('Segment rates and accelerations must be finite')
 
 
 class SegmentedScenario:
@@ -109,7 +172,13 @@ class SegmentedScenario:
         self.segments = tuple(segments)
         self.segment_index = 0
         self.segment_elapsed_s = 0.0
-        self.target.turn_rate_radps = self.segments[0].turn_rate_radps
+        self._start_segment()
+
+    def _start_segment(self) -> None:
+        segment = self.segments[self.segment_index]
+        self.target.turn_rate_radps = segment.turn_rate_radps
+        self.target.acceleration_mps2 = segment.acceleration_mps2
+        self.target.angular_acceleration_radps2 = segment.angular_acceleration_radps2
 
     @property
     def duration_s(self) -> float:
@@ -138,7 +207,7 @@ class SegmentedScenario:
                 self.segment_index += 1
                 self.segment_elapsed_s = 0.0
                 if not self.finished:
-                    self.target.turn_rate_radps = self.segments[self.segment_index].turn_rate_radps
+                    self._start_segment()
             else:
                 self.segment_elapsed_s += interval_s
 
@@ -289,3 +358,45 @@ SCENARIOS = {
     "single_turn":     scenario_single_turn,
     "straight_turn_straight": scenario_straight_turn_straight,
 }
+
+
+# Fixed, reviewable presets for the expanded comparison; units remain SI internally.
+MANEUVER_NAMES = ('straight_100', 'straight_200', 'straight_300',
+                  'turn_1deg', 'turn_2deg', 'turn_4deg', 's_turn',
+                  'accel_decel_2', 'accel_decel_5', 'turn_rate_ramp')
+
+
+def scenario_maneuver(name: str, outbound: bool = False) -> SegmentedScenario:
+    """Build one approved truth schedule; outbound changes only initial heading."""
+    speed = 200.0
+    if name in ('straight_100', 'straight_200', 'straight_300'):
+        speed = float(name.split('_')[1])
+        segments = [MotionSegment(60, 0)]
+    elif name in ('turn_1deg', 'turn_2deg', 'turn_4deg'):
+        rate_deg = float(name.split('_')[1].removesuffix('deg'))
+        segments = [MotionSegment(10, 0), MotionSegment(90/rate_deg, math.radians(rate_deg)),
+                    MotionSegment(10, 0)]
+    elif name == 's_turn':
+        rate = math.radians(2)
+        segments = [MotionSegment(10, 0), MotionSegment(20, rate), MotionSegment(40, -rate),
+                    MotionSegment(20, rate), MotionSegment(10, 0)]
+    elif name in ('accel_decel_2', 'accel_decel_5'):
+        acceleration = float(name.rsplit('_', 1)[1])
+        segments = [MotionSegment(10, 0), MotionSegment(20, 0, acceleration),
+                    MotionSegment(10, 0), MotionSegment(20, 0, -acceleration), MotionSegment(10, 0)]
+    elif name == 'turn_rate_ramp':
+        rate = math.radians(4)
+        segments = [MotionSegment(10, 0), MotionSegment(10, 0, angular_acceleration_radps2=rate/10),
+                    MotionSegment(10, rate), MotionSegment(10, rate, angular_acceleration_radps2=-rate/10),
+                    MotionSegment(10, 0)]
+    else:
+        raise ValueError('Unknown maneuver preset: ' + name)
+    target = Target(1, 0, 1000, 0 if outbound else speed, speed if outbound else 0)
+    return SegmentedScenario(target, segments)
+
+
+MANEUVER_SCENARIOS = {
+    prefix + name: partial(scenario_maneuver, name, outbound=bool(prefix))
+    for prefix in ('', 'outbound_') for name in MANEUVER_NAMES
+}
+SCENARIOS.update(MANEUVER_SCENARIOS)

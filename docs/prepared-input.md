@@ -26,7 +26,7 @@ python -m pc_sim input generate runs/inputs/long-turn-42 \
 
 | 옵션 | 의미 |
 |---|---|
-| `--scenario` | `single_approach`, `single_turn`, `straight_turn_straight` |
+| `--scenario` | 기존3종 + [확장 기동20종](test-results/maneuver-models-2026-11-25/README.md): 직선·선회강도·S자·가감속·선회율변화 |
 | `--duration` | 요청한 센서 시간 길이(s). 구간 시나리오는 자체 종료 시각까지 |
 | `--dt` | 센서 샘플 간격(s), 최소0.001s. 기본0.02s |
 | `--noise` | 거리 잡음 표준편차(m), 기본10 |
@@ -111,3 +111,7 @@ python -m pc_sim input verify runs/inputs/turn-noisy-42
 
 이 명령은 입력 생성·검증만 수행하며 UART 송신이나 보드 추정 결과 수집은 하지 않는다.
 보드 실행은 `python -m pc_sim turn-noise --port PORT --input runs/inputs/turn-noisy-42`로 진행한다. GUI Tests의 `Turn + noise`도 같은 실행기를 사용하며 기본 조건의 입력을 생성·보존한다. 위치 오차는 전체·선회 전·선회·선회 후로 평가한다.
+
+## 확장 기동 입력
+
+새 기동은 schema2로 가속도(m/s²)·각가속도(rad/s²)를 기록한다. 기존 입력은 schema1을 유지하며 현재 로더는 둘 다 읽는다. 샘플·wire 형식은 변경하지 않았다. [기동별 설정·CLI·정답 그래프](test-results/maneuver-models-2026-11-25/README.md). 새 기동의 필터 비교·실보드 평가와 GUI 프리셋 연결은 별도 후속 작업이다.
