@@ -1,5 +1,20 @@
 # Changelog
 
+## v1.2.1 — 2026-11-27
+
+Based on the verified optimization commit
+`aee7523440f34c714939b16ea6401dfaa761ce8f`; see the [GitHub release](https://github.com/SungJaeYu/radar-tracking-bench/releases/tag/v1.2.1).
+
+### Changed
+
+- Specialized fixed-size matrix operations in CV-EKF and CT-EKF prediction and correction paths.
+- Documented a paired STM32 before/after comparison using 755 identical measurements per run. Mean MCU prediction plus correction time decreased 47.18% for CV-EKF and 30.66% for CT-EKF; UART responses matched byte-for-byte within each estimator.
+
+### Validation and limits
+
+- Host CV numeric comparison: 100,000 predictions and 100,000 corrections matched. Host CTest: CV 2/2, CT 22/22, tracking 31/31. CV and CT firmware builds succeeded.
+- STM32 A/B: eight runs over two rounds, zero gate rejections or LOST transitions; normal KF firmware restored and STATUS counters zero. Results apply to this saved input and are observed timing, not WCET or a deadline guarantee. See the [release record](docs/release-v1.2.1.md) and [timing evidence](docs/analysis/ekf-timing-20261126/README.md).
+
 ## v1.2.0 — 2026-11-26
 
 Published from merge commit `a14ec2be32c4dd13d9012c8b7e81eb58aa1cdcc6`; see the [GitHub release](https://github.com/SungJaeYu/radar-tracking-bench/releases/tag/v1.2.0).

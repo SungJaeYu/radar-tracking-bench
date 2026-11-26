@@ -6,11 +6,11 @@
 
 이전 이름: `radar-track-fcc-hil`.
 
-**STM32 · Zephyr 기반 단일표적 레이더 추적 HIL 프로젝트. 최신 릴리스: `v1.2.0`**
+**STM32 · Zephyr 기반 단일표적 레이더 추적 HIL 프로젝트. 최신 릴리스: `v1.2.1`**
 
 v1.2.0에는 polar CV KF / Cartesian CV-EKF / CT-EKF 빌드 선택, 측정 입력 저장·재사용, CLI 선회 잡음 평가, 20개 PC 정답 운동 프리셋과 80조건 동일 입력 STM32 비교를 포함합니다. 단일 seed 결과와 펌웨어 출처는 [릴리스 기록](docs/release-v1.2.0.md)에 정리했습니다. [추정기 선택과 설정](docs/estimator-tuning.md) · [기동 모델과 검증](docs/test-results/maneuver-models-2026-11-25/README.md).
 
-v1.2.1 후보를 동일 입력으로 실보드에서 비교한 결과 예측·보정 평균 시간의 합이 CV-EKF에서 47.18%, CT-EKF에서 30.66% 줄었습니다. 각 추정기의 변경 전후 UART 응답은 바이트 단위로 일치했습니다. [실보드 비교 조건과 결과](docs/analysis/ekf-timing-20261126/README.md).
+v1.2.1은 CV-EKF와 CT-EKF의 고정 크기 행렬 연산을 특화합니다. 저장한 동일 입력으로 실보드에서 비교한 결과 예측·보정 평균 시간의 합이 CV-EKF에서 47.18%, CT-EKF에서 30.66% 줄었습니다. 각 추정기의 변경 전후 UART 응답은 바이트 단위로 일치했습니다. [릴리스 기록](docs/release-v1.2.1.md) · [실보드 비교 조건과 결과](docs/analysis/ekf-timing-20261126/README.md).
 
 확장 STM32 비교는 세 추정기에 같은 기동·잡음 입력80개를 적용했습니다(seed6). 이 표본에서는 CV-EKF의 위치 RMSE가 가장 작았고(29.27m), polar KF의 predict/correct 관측 시간이 가장 짧았습니다(합계 약62µs). 가감속에서 CT-EKF의 오차가 크게 증가했습니다. 추정기별 측정55,000개가 모두 대응했고 게이트 거부·LOST는0회였습니다. 단일 seed의 조건부 결과로 일반적인 우열을 뜻하지 않습니다. [조건·그림·펌웨어 출처](docs/analysis/maneuver-grid-20261126/README.md).
 
