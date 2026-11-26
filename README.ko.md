@@ -6,9 +6,9 @@
 
 이전 이름: `radar-track-fcc-hil`.
 
-**STM32 · Zephyr 기반 단일표적 레이더 추적 HIL 프로젝트. 최신 릴리스: `v1.1.0`**
+**STM32 · Zephyr 기반 단일표적 레이더 추적 HIL 프로젝트. 최신 릴리스: `v1.2.0`**
 
-현재 `feat/prepared-input` 개발 브랜치에는 polar CV KF / Cartesian CV-EKF / CT-EKF 빌드 선택, 측정 입력 저장·재사용, CLI 선회 잡음 평가와 20개 PC 정답 운동 프리셋을 추가했습니다. 새 정답 모델은 host 검증을 마쳤으며, 확장 기동의 추정기 비교는 고정 선회 비교와 별도 근거로 다룹니다. 아래 v1.1.0 실보드 수치는 해당 릴리스의 근거입니다. [추정기 선택과 설정](docs/estimator-tuning.md) · [기동 모델과 검증](docs/test-results/maneuver-models-2026-11-25/README.md) · [v1.2.0 릴리스 기록](docs/release-v1.2.0.md).
+v1.2.0에는 polar CV KF / Cartesian CV-EKF / CT-EKF 빌드 선택, 측정 입력 저장·재사용, CLI 선회 잡음 평가, 20개 PC 정답 운동 프리셋과 80조건 동일 입력 STM32 비교를 포함합니다. 단일 seed 결과와 펌웨어 출처는 [릴리스 기록](docs/release-v1.2.0.md)에 정리했습니다. [추정기 선택과 설정](docs/estimator-tuning.md) · [기동 모델과 검증](docs/test-results/maneuver-models-2026-11-25/README.md).
 
 확장 STM32 비교는 세 추정기에 같은 기동·잡음 입력80개를 적용했습니다(seed6). 이 표본에서는 CV-EKF의 위치 RMSE가 가장 작았고(29.27m), polar KF의 predict/correct 관측 시간이 가장 짧았습니다(합계 약62µs). 가감속에서 CT-EKF의 오차가 크게 증가했습니다. 추정기별 측정55,000개가 모두 대응했고 게이트 거부·LOST는0회였습니다. 단일 seed의 조건부 결과로 일반적인 우열을 뜻하지 않습니다. [조건·그림·펌웨어 출처](docs/analysis/maneuver-grid-20261126/README.md).
 
@@ -64,7 +64,11 @@ PC RTT는 USB·UART·보드·호스트 대기를 포함하는 진단값입니다
 
 ## v1.1.0 추가 기능
 
-PC 표적 운동에 일정 선회율 원호, 직진·선회·S자·가감속·선회율 ramp 프리셋을 추가했습니다. 현재 개발 브랜치의 20개 정답 프리셋은 10개 운동 조건을 동쪽/북쪽 두 방향으로 실행합니다. polar CV KF, Cartesian CV-EKF, CT-EKF는 빌드 시 선택할 수 있습니다. 확장 기동은 정답 모델 검증과 추정기 비교를 구분하며, 고정 선회 실보드 결과를 새 프리셋의 결과로 해석하지 않습니다. [기동 모델·검증](docs/test-results/maneuver-models-2026-11-25/README.md) · [추정기 설정](docs/estimator-tuning.md).
+PC 표적 운동에 일정 선회율 원호와 `straight_turn_straight` 구간 시나리오를 추가했습니다. 동쪽 직진10초 → 속도200m/s·뱅크30°의 우90° 선회 약55.49초 → 남쪽 직진10초이며 기존 시나리오도 유지합니다. v1.1.0 펌웨어는 거리·방위각 CV 필터를 사용했습니다. [v1.1.0 선회 결과](docs/hardware-test-2026-11-23-v1.1.0.md).
+
+## v1.2.0 추가 기능
+
+PC에 직선·일정 선회·S자·가감속·선회율 ramp를 포함한 20개 정답 운동 프리셋을 추가했습니다. Polar CV KF, Cartesian CV-EKF, CT-EKF는 빌드 시 선택합니다. 새 STM32 grid는 10개 기동×두 방향×네 잡음 단계, seed6의 단일 수집입니다. CV-EKF pooled 위치 RMSE29.27m, polar KF40.68m, CT-EKF93.50m였으며, 일반적인 우열이나 여러 noise seed의 분포를 입증하지 않습니다. [조건·결과·펌웨어 출처](docs/analysis/maneuver-grid-20261126/README.md) · [릴리스 기록](docs/release-v1.2.0.md).
 
 ```bash
 python -m pc_sim simulate --scenario straight_turn_straight --duration 80
@@ -94,7 +98,7 @@ python -m pc_sim gui
 
 ## 추정기 선택과 선회 잡음 평가
 
-기본 펌웨어는 polar CV KF이며, 별도 `build_ekf`에 `ekf.conf`를 적용하면 Cartesian CV EKF를 선택합니다. GUI에서 실행 중 필터를 변경하는 방식이 아니므로 빌드 후 해당 이미지를 flash해야 합니다. [빌드 명령·Q/R/초기 P](docs/estimator-tuning.md).
+기본 펌웨어는 polar CV KF이며, 별도 빌드 디렉터리에 `ekf.conf`를 적용하면 Cartesian CV-EKF, `ekf_ct.conf`를 적용하면 CT-EKF를 선택합니다. 추정기 선택은 빌드 시 이루어지며 GUI에서 실행 중 플래시된 필터를 변경하지 않습니다. [빌드 명령·Q/R/초기 P](docs/estimator-tuning.md).
 
 ```bash
 python -m pc_sim turn-noise --port PORT --noise 10 --azimuth-noise 0.01

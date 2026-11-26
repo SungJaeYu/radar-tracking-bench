@@ -6,9 +6,9 @@
 
 Previously named `radar-track-fcc-hil`.
 
-**Single-target tracking HIL on STM32 and Zephyr. Latest release: `v1.1.0`.**
+**Single-target tracking HIL on STM32 and Zephyr. Latest release: `v1.2.0`.**
 
-The current `feat/prepared-input` development branch adds build-time polar CV KF / Cartesian CV-EKF / CT-EKF selection, reusable measurement inputs, and 20 PC truth presets covering straight, turning, S-turn, acceleration/deceleration, and turn-rate-ramp motion. The expanded truth model is host-validated; its new maneuver estimator comparisons are documented separately from the completed fixed-turn comparison. These changes are not part of the v1.1.0 release evidence. [Estimator setup](docs/estimator-tuning.md) · [Maneuver model and validation](docs/test-results/maneuver-models-2026-11-25/README.md) · [v1.2.0 release record](docs/release-v1.2.0.md).
+V1.2.0 adds build-time polar CV KF / Cartesian CV-EKF / CT-EKF selection, reusable measurement inputs, and 20 PC truth presets covering straight, turning, S-turn, acceleration/deceleration, and turn-rate-ramp motion. It includes a paired 80-condition STM32 comparison; the single-seed limits and build provenance are in the [release record](docs/release-v1.2.0.md). [Estimator setup](docs/estimator-tuning.md) · [Maneuver model and validation](docs/test-results/maneuver-models-2026-11-25/README.md).
 
 The expanded STM32 grid compares the three estimators on the same 80 maneuver/noise inputs (seed 6). CV-EKF had the lowest pooled position RMSE (29.27 m); polar KF had the lowest observed estimator time (about 62 µs per predict/correct pair); CT-EKF performed poorly on acceleration/deceleration in this grid. All 55,000 measurements per estimator were matched with zero gate rejections or LOST transitions. This single-seed result is conditional, not a general ranking. [Conditions, figures and provenance](docs/analysis/maneuver-grid-20261126/README.md).
 
@@ -74,9 +74,9 @@ Host RTT diagnostic limits remain p99 ≤20 ms and maximum ≤100 ms; exceeding 
 
 For the noise sweep, each of 10 conditions used 10 seeds with firmware tuning fixed. At 8 m range-noise standard deviation, the mean of per-seed RMSE values fell from **8.2528 m to 3.0805 m**. This is an observed accuracy result, not a separate accuracy pass threshold. Across the 100 noise and 49 spike sessions, all **17,880 measurements** had matching responses. These sessions used 10 Hz synthetic sensor time and actual send rates of 9.260–9.626 Hz; they are separate from the 50 Hz load run.
 
-## Additions for v1.1.0
+## v1.1.0 motion scenario
 
-The PC motion generator adds exact constant-turn arcs and a segmented `straight_turn_straight` scenario: eastbound for 10 s, a 90° right turn at 200 m/s and 30° bank (about 55.49 s), then southbound for 10 s. Existing scenarios remain available. The v1.1.0 firmware used range/azimuth CV filters. The development branch now offers Cartesian CV-EKF and CT-EKF; their validation is recorded separately from this release.
+The PC motion generator adds exact constant-turn arcs and a segmented `straight_turn_straight` scenario: eastbound for 10 s, a 90° right turn at 200 m/s and 30° bank (about 55.49 s), then southbound for 10 s. Existing scenarios remain available. The v1.1.0 firmware used range/azimuth CV filters; Cartesian CV-EKF and CT-EKF were added in v1.2.0. Their comparisons are recorded separately in the estimator reports.
 
 ```bash
 python -m pc_sim simulate --scenario straight_turn_straight --duration 80
@@ -178,7 +178,7 @@ Python and host C checks are separate from firmware builds and physical-board HI
 
 V1 covers single-target measurement-to-result communication, quantitative tracking evaluation, major error recovery, and timing/resource observations. The [English architecture guide](EXPLAINER.en.md) explains the implemented contracts and their limits.
 
-Cartesian CV-EKF and CT-EKF are implemented. The fixed CT board comparison is complete; expanded maneuver comparisons, IMM, multi-target association, BIT/Lock On, and UART hardware-error diagnostics remain follow-up work. RF processing, ADC/IQ/FFT, and operational certification are outside this project. [V1 scope and roadmap — Korean](docs/roadmap.md).
+Cartesian CV-EKF and CT-EKF are implemented. The fixed-turn CT comparison and the expanded 80-condition maneuver/noise STM32 comparison are complete; the expanded grid uses one seed, and expanded-scenario GUI evaluation presets remain on issue #10. IMM, multi-target association, BIT/Lock On, and UART hardware-error diagnostics are separate follow-up work. RF processing, ADC/IQ/FFT, and operational certification are outside this project. [Project scope and roadmap — Korean](docs/roadmap.md).
 
 <a id="개발-방식"></a>
 

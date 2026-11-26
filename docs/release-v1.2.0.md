@@ -99,6 +99,8 @@ by issue #8, and 3D work in issues #4–#7, remain separate scope.
 
 ## Release integration
 
-The release commit, main merge, tag, publication date and final remote state are
-recorded after integration. The corresponding v1.1.0 board results and historical
-verdicts remain in [the v1.1.0 record](release-v1.1.0.md).
+PR [#12](https://github.com/SungJaeYu/radar-tracking-bench/pull/12) merged into
+`main` as `a14ec2be32c4dd13d9012c8b7e81eb58aa1cdcc6`. The published `v1.2.0`
+tag points to that merge commit; GitHub published the release on 2026-11-26.
+The corresponding v1.1.0 board results and historical verdicts remain in
+[the v1.1.0 record](release-v1.1.0.md).
