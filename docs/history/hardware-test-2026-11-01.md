@@ -28,16 +28,16 @@ GUI 시험은 실제 PySide6 창과 실제 시리얼 포트를 사용했습니�
 연결·시작·중지·재시작·종료를 자동 조작했고, 화면 캡처도 확인했습니다.
 데이터 포트는 `/dev/cu.usbserial-A5069RR4`, 콘솔은 `/dev/cu.usbmodem1203`입니다.
 
-![실제 보드 연결 중 GUI와 ST-Link 콘솔](images/radar-gui-board.png)
+![실제 보드 연결 중 GUI와 ST-Link 콘솔](../images/radar-gui-board.png)
 
 그래프는 PC 합성값이며 보드 추정값 그래프가 아닙니다.
 
 ## 증거
 
-- [GUI 보드 콘솔](test-results/2026-11-01/gui-console.log)
-- [GUI 검사 결과](test-results/2026-11-01/gui-results.json)
-- [오류·부하 시험 콘솔](test-results/2026-11-01/serial-smoke.log)
-- [오류·부하 시험 결과](test-results/2026-11-01/serial-results.json)
+- [GUI 보드 콘솔](../test-results/2026-11-01/gui-console.log)
+- [GUI 검사 결과](../test-results/2026-11-01/gui-results.json)
+- [오류·부하 시험 콘솔](../test-results/2026-11-01/serial-smoke.log)
+- [오류·부하 시험 결과](../test-results/2026-11-01/serial-results.json)
 
 ## 한계와 후속 시험
 

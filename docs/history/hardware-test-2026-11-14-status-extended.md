@@ -4,7 +4,7 @@
 
 - STM32F746G-DISCO, USART6 PC6 TX / PC7 RX, 115200 8N1.
 - 소스는 `2f164bd` 이후 이 문서와 함께 커밋하는 STATUS 확장 작업본이다.
-  [결과 JSON](test-results/status-extended-2026-11-14/normal/results.json)에 펌웨어 소스별 SHA-256, `.config`와 HEX 해시를 보존했다.
+  [결과 JSON](../test-results/status-extended-2026-11-14/normal/results.json)에 펌웨어 소스별 SHA-256, `.config`와 HEX 해시를 보존했다.
 - 기본 `build`: DRAIN, 부분 프레임·측정 timeout 각각 1000ms, 게이트 100m/10°, assert 비활성.
 - 일반 펌웨어 빌드 및 OpenOCD flash 성공. Flash 30,904 B, RAM 10,384 B.
   초기 Cortex-M 식별 오류 뒤 재탐색으로 Cortex-M7을 확인하고 flash를 완료했다.
@@ -29,14 +29,14 @@
 ring overflow=0, ISR dropped bytes=0, recovery discarded bytes=0이다.
 콘솔 텍스트는 기존 네 통계만 출력하며 일곱 필드 검증은 USART6 응답을 기준으로 한다.
 
-![실보드 일곱 통계와 측정 병행 조회](test-results/status-extended-2026-11-14/normal/gui-status.png)
+![실보드 일곱 통계와 측정 병행 조회](../test-results/status-extended-2026-11-14/normal/gui-status.png)
 
 ## 증거와 재현
 
-- [UART 판정·소스 해시](test-results/status-extended-2026-11-14/normal/results.json), [wire 재파싱](test-results/status-extended-2026-11-14/normal/wire-check.json)
-- [원시 TX/RX 바이트](test-results/status-extended-2026-11-14/normal/traffic.json), [ST-Link 콘솔](test-results/status-extended-2026-11-14/normal/console.log)
-- [CLI 출력](test-results/status-extended-2026-11-14/normal/cli.log), [GUI 판정](test-results/status-extended-2026-11-14/normal/gui-results.json), [GUI 콘솔](test-results/status-extended-2026-11-14/normal/gui-console.log)
-- 실행한 [UART 스크립트](test-results/status-extended-2026-11-14/uart-check.py), [GUI 스크립트](test-results/status-extended-2026-11-14/gui-check.py) 원본을 보존한다.
+- [UART 판정·소스 해시](../test-results/status-extended-2026-11-14/normal/results.json), [wire 재파싱](../test-results/status-extended-2026-11-14/normal/wire-check.json)
+- [원시 TX/RX 바이트](../test-results/status-extended-2026-11-14/normal/traffic.json), [ST-Link 콘솔](../test-results/status-extended-2026-11-14/normal/console.log)
+- [CLI 출력](../test-results/status-extended-2026-11-14/normal/cli.log), [GUI 판정](../test-results/status-extended-2026-11-14/normal/gui-results.json), [GUI 콘솔](../test-results/status-extended-2026-11-14/normal/gui-console.log)
+- 실행한 [UART 스크립트](../test-results/status-extended-2026-11-14/uart-check.py), [GUI 스크립트](../test-results/status-extended-2026-11-14/gui-check.py) 원본을 보존한다.
 
 스크립트는 당시 절대 경로·포트·출력 위치를 고정한 증거용 스냅샷이다. 재현 시 자신의
 경로와 포트 및 새 출력 디렉터리로 수정한다. 보드를 재부팅/플래시하여 통계를 0으로 만든 후

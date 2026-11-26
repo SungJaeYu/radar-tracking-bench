@@ -43,13 +43,13 @@ INIT/RESET 후 누적 통계 보존을 확인했다. 정상 측정 10개에서 �
 
 | 구성 | UART 결과 | UART 콘솔 / wire | 게이트 결과 | 게이트 콘솔 / 송신 | 설정 |
 |---|---|---|---|---|---|
-| 기본값 | [결과](test-results/gating-2026-11-14/normal/results.json) | [콘솔](test-results/gating-2026-11-14/normal/console.log) / [wire](test-results/gating-2026-11-14/normal/traffic.json) | [결과](test-results/gating-2026-11-14/normal/gate-results.json) | [콘솔](test-results/gating-2026-11-14/normal/gate-console.log) / [송신](test-results/gating-2026-11-14/normal/gate-traffic.json) | [설정](test-results/gating-2026-11-14/normal/config.txt) |
-| 변경값 | [결과](test-results/gating-2026-11-14/wide/results.json) | [콘솔](test-results/gating-2026-11-14/wide/console.log) / [wire](test-results/gating-2026-11-14/wide/traffic.json) | [결과](test-results/gating-2026-11-14/wide/gate-results.json) | [콘솔](test-results/gating-2026-11-14/wide/gate-console.log) / [송신](test-results/gating-2026-11-14/wide/gate-traffic.json) | [설정](test-results/gating-2026-11-14/wide/config.txt) |
+| 기본값 | [결과](../test-results/gating-2026-11-14/normal/results.json) | [콘솔](../test-results/gating-2026-11-14/normal/console.log) / [wire](../test-results/gating-2026-11-14/normal/traffic.json) | [결과](../test-results/gating-2026-11-14/normal/gate-results.json) | [콘솔](../test-results/gating-2026-11-14/normal/gate-console.log) / [송신](../test-results/gating-2026-11-14/normal/gate-traffic.json) | [설정](../test-results/gating-2026-11-14/normal/config.txt) |
+| 변경값 | [결과](../test-results/gating-2026-11-14/wide/results.json) | [콘솔](../test-results/gating-2026-11-14/wide/console.log) / [wire](../test-results/gating-2026-11-14/wide/traffic.json) | [결과](../test-results/gating-2026-11-14/wide/gate-results.json) | [콘솔](../test-results/gating-2026-11-14/wide/gate-console.log) / [송신](../test-results/gating-2026-11-14/wide/gate-traffic.json) | [설정](../test-results/gating-2026-11-14/wide/config.txt) |
 
 UART 결과에는 소스 파일별 SHA-256, 전체 `.config` SHA-256 및 HEX SHA-256을 기록했다.
 게이트 결과의 HEX SHA-256과 UART 결과의 값도 일치한다.
-실행에 사용한 [UART 스크립트](test-results/gating-2026-11-14/uart-check.py)와
-[게이트 스크립트](test-results/gating-2026-11-14/gate-check.py)를 당시 경로·포트 그대로 보관한다.
+실행에 사용한 [UART 스크립트](../test-results/gating-2026-11-14/uart-check.py)와
+[게이트 스크립트](../test-results/gating-2026-11-14/gate-check.py)를 당시 경로·포트 그대로 보관한다.
 이 스크립트들은 pytest 자동 테스트가 아니며 실장치에 오류 프레임도 송신한다.
 재현 시 해당 펌웨어를 먼저 플래시하고 모니터를 종료한 뒤, 각 스크립트에 `wide` 또는
 `normal` 인자를 전달한다. 다른 환경에서는 절대경로와 포트를 맞춰야 한다.

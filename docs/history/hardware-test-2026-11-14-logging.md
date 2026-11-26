@@ -12,7 +12,7 @@
 
 ## 시험 방법
 
-각 펌웨어를 OpenOCD로 플래시한 뒤 [UART 시험 스크립트](test-results/logging-2026-11-14/uart-check.py)를
+각 펌웨어를 OpenOCD로 플래시한 뒤 [UART 시험 스크립트](../test-results/logging-2026-11-14/uart-check.py)를
 `normal` 또는 `debug` 인자로 실행했다. 스크립트는 포트·저장소 경로를 고정한 시험 스냅샷이다.
 재사용할 때 환경과 새 출력 경로를 지정해 기존 증거를 덮어쓰지 않는다.
 제품 코드를 바꾸거나 특수 로그 부하용 펌웨어를 사용하지 않았다.
@@ -25,8 +25,8 @@ RESET/INIT 통계 보존, 10Hz 측정 10개와 STATUS 병행, 측정 중단 후 
 
 | 대상 | 판정 | 증거 |
 |---|---|---|
-| 일반 INFO | 30개 조건 통과 | [결과·소스/설정/HEX 해시](test-results/logging-2026-11-14/normal/results.json), [콘솔](test-results/logging-2026-11-14/normal/console.log), [TX/RX](test-results/logging-2026-11-14/normal/traffic.json) |
-| 디버그 DEBUG | 30개 조건 통과 | [결과·소스/설정/HEX 해시](test-results/logging-2026-11-14/debug/results.json), [콘솔](test-results/logging-2026-11-14/debug/console.log), [TX/RX](test-results/logging-2026-11-14/debug/traffic.json) |
+| 일반 INFO | 30개 조건 통과 | [결과·소스/설정/HEX 해시](../test-results/logging-2026-11-14/normal/results.json), [콘솔](../test-results/logging-2026-11-14/normal/console.log), [TX/RX](../test-results/logging-2026-11-14/normal/traffic.json) |
+| 디버그 DEBUG | 30개 조건 통과 | [결과·소스/설정/HEX 해시](../test-results/logging-2026-11-14/debug/results.json), [콘솔](../test-results/logging-2026-11-14/debug/console.log), [TX/RX](../test-results/logging-2026-11-14/debug/traffic.json) |
 
 - 두 설정 모두 STATUS 일곱 통계를 수신했고 CRC +1, LEN +2, 부분 timeout +1을 확인했다.
 - INIT/RESET 후 누적값 보존, 측정 중 조회와 중단 후 timeout 1회, 이후 STATUS 왕복을 확인했다.
@@ -41,9 +41,9 @@ RESET/INIT 통계 보존, 10Hz 측정 10개와 STATUS 병행, 측정 중단 후 
 
 첫 INFO 실행은 기존 즉시 출력 기준으로 timeout 로그를 너무 일찍 판정해 실패했다.
 종료 시 수집된 원시 로그에는 timeout이 한 번 기록돼 있었다.
-[실패 결과](test-results/logging-2026-11-14/normal-initial-timing-failure/results.json),
-[당시 콘솔](test-results/logging-2026-11-14/normal-initial-timing-failure/console.log),
-[최초 스크립트](test-results/logging-2026-11-14/uart-check-initial.py)를 보존한다.
+[실패 결과](../test-results/logging-2026-11-14/normal-initial-timing-failure/results.json),
+[당시 콘솔](../test-results/logging-2026-11-14/normal-initial-timing-failure/console.log),
+[최초 스크립트](../test-results/logging-2026-11-14/uart-check-initial.py)를 보존한다.
 시험 스크립트에 최대 2초의 deferred 콘솔 출력 대기를 추가한 뒤 재플래시·재시험했다.
 펌웨어 timeout 값을 바꾸지 않았다. 이 결과로 엄격한 검출/출력 지연 상한을 입증하지 않는다.
 
@@ -56,8 +56,8 @@ RESET/INIT 통계 보존, 10Hz 측정 10개와 STATUS 병행, 측정 중단 후 
 - GUI 화면은 이번에 재검증하지 않았다. UART STATUS 파서·클라이언트와 실제 콘솔을 사용했다.
 - 시험 후 일반 INFO 펌웨어로 복원하고 STATUS CLI 응답을 확인했다. 포트는 닫았다.
 
-복원 증거: [OpenOCD 로그](test-results/logging-2026-11-14/restore-flash.log),
-[STATUS 일곱 통계 0 응답](test-results/logging-2026-11-14/restored-status.log).
+복원 증거: [OpenOCD 로그](../test-results/logging-2026-11-14/restore-flash.log),
+[STATUS 일곱 통계 0 응답](../test-results/logging-2026-11-14/restored-status.log).
 저장된 RX 바이트를 재파싱하여 일반·디버그 각각 21개 응답의 TYPE=6·payload 28바이트·CRC를 확인했다.
-[일반 wire 검사](test-results/logging-2026-11-14/normal/wire-check.json),
-[디버그 wire 검사](test-results/logging-2026-11-14/debug/wire-check.json).
+[일반 wire 검사](../test-results/logging-2026-11-14/normal/wire-check.json),
+[디버그 wire 검사](../test-results/logging-2026-11-14/debug/wire-check.json).

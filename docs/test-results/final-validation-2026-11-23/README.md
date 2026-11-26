@@ -29,7 +29,7 @@ valid requested-load run is still missing; no commit, push, merge or tag was mad
 | Documents | 918 local file links resolved including this report; anchors were not checked. Existing English GUI captures were visually reviewed, not recaptured |
 
 The earlier 100-run noise sweep and 49-run spike sweep were **not rerun**. Their
-dated evidence remains in the [earlier report](../../hardware-test-2026-11-23-v1.1.0.md).
+dated evidence remains in the [earlier report](../../history/hardware-test-2026-11-23-v1.1.0.md).
 No production code, test criteria or acceptance limits were changed in this turn.
 
 ## Why the sustained test stopped

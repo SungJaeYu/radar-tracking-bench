@@ -19,7 +19,7 @@ returns to the test at the point where the worker would block. No threads are
 scheduled. These tests do not prove semaphore blocking, IRQ behavior, Zephyr
 queue concurrency, UART timing, or physical delivery. STATUS/TRACK submission is covered separately by test_frame_handler. PC STATUS response handling is covered by Python parser/CLI/GUI tests; PC TRACK decoding and recording have separate Python tests.
 Basic physical STATUS delivery was verified on revision 2aa57d9; see
-[board evidence](../../../docs/hardware-test-2026-11-12-status.md). Queue concurrency
+[board evidence](../../../docs/history/hardware-test-2026-11-12-status.md). Queue concurrency
 and saturation on hardware remain outside that verification.
 
 2026-11-08: all four cases passed. Firmware incremental build passed without
@@ -33,7 +33,7 @@ warnings. No board flash or HIL was performed.
 각 성공은 `PASS: test_name`으로 출력하며 잘못된 이름은 종료 코드 2를 반환합니다.
 실행기는 `../common/test_runner.h`를 공유합니다. 모사 환경과 검증 범위는 각 suite가 유지합니다.
 
-최신 로깅 일반·디버그 실보드 회귀는 [별도 시험 기록](../../../docs/hardware-test-2026-11-14-logging.md)을 참고합니다.
+최신 로깅 일반·디버그 실보드 회귀는 [별도 시험 기록](../../../docs/history/hardware-test-2026-11-14-logging.md)을 참고합니다.
 host 테스트의 로그 캡처와 실제 보드의 지연 출력 검증은 구분합니다.
 
 ## Optional performance instrumentation

@@ -22,8 +22,8 @@ heartbeat 중간 삽입을 고려해 판정 문자열에서 알려진 heartbeat�
 
 | 구성 | UART 결과 | 콘솔 | wire 바이트 | 각도 결과 | 각도 콘솔 |
 | --- | --- | --- | --- | --- | --- |
-| 디버그 | [결과](test-results/fmodf-2026-11-14/debug/results.json) | [콘솔](test-results/fmodf-2026-11-14/debug/console.log) | [바이트](test-results/fmodf-2026-11-14/debug/traffic.json) | [각도](test-results/fmodf-2026-11-14/debug/angle-results.json) | [콘솔](test-results/fmodf-2026-11-14/debug/angle-console.log) |
-| 일반 | [결과](test-results/fmodf-2026-11-14/normal/results.json) | [콘솔](test-results/fmodf-2026-11-14/normal/console.log) | [바이트](test-results/fmodf-2026-11-14/normal/traffic.json) | [각도](test-results/fmodf-2026-11-14/normal/angle-results.json) | [콘솔](test-results/fmodf-2026-11-14/normal/angle-console.log) |
+| 디버그 | [결과](../test-results/fmodf-2026-11-14/debug/results.json) | [콘솔](../test-results/fmodf-2026-11-14/debug/console.log) | [바이트](../test-results/fmodf-2026-11-14/debug/traffic.json) | [각도](../test-results/fmodf-2026-11-14/debug/angle-results.json) | [콘솔](../test-results/fmodf-2026-11-14/debug/angle-console.log) |
+| 일반 | [결과](../test-results/fmodf-2026-11-14/normal/results.json) | [콘솔](../test-results/fmodf-2026-11-14/normal/console.log) | [바이트](../test-results/fmodf-2026-11-14/normal/traffic.json) | [각도](../test-results/fmodf-2026-11-14/normal/angle-results.json) | [콘솔](../test-results/fmodf-2026-11-14/normal/angle-console.log) |
 
 큰 유한값·NaN/Inf 각도·비정상 innovation covariance 주입은 host에서만 확인했다.
 보드 fatal 경로·강제 링 overflow·UART 하드웨어 오류·부하·장시간·GUI 실보드 재시험은 수행하지 않았다.

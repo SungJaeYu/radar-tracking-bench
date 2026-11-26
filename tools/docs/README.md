@@ -26,7 +26,7 @@ python tools/docs/capture_gui.py
 `docs/test-results/release-v1.1.0-2026-11-23/gui_check.py`로 별도 실행하며,
 `docs/images/radar-gui-board.png`에 보드 TRACK 화면을 저장한다.
 이 증거용 스크립트의 포트·경로를 확인하고 모든 다른 송신기를 종료한 뒤 실행한다.
-[시험 조건과 실제 결과](../../docs/hardware-test-2026-11-23-v1.1.0.md)를 함께 읽는다.
+[시험 조건과 실제 결과](../../docs/history/hardware-test-2026-11-23-v1.1.0.md)를 함께 읽는다.
 
 ## 저장된 실보드 기록의 분석과 영상
 

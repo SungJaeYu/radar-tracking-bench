@@ -28,7 +28,7 @@ V1은 2026-11-19 프로젝트 소유자의 완료 확인을 반영해 종료했�
 - RX 스레드는 `rx_frame_processor`로 파싱하고 완성 프레임을 큐에 복사합니다.
 - 별도 handler 스레드에서 `frame_handler`는 큐·TYPE 분기, `radar_processor`는 측정·추적·무수신 감시, `report_sender`는 STATUS/TRACK 구성·제출을 담당합니다. 스레드를 추가한 분리가 아닙니다.
 - STATUS는 processor의 네 통계에 UART의 세 통계와 handler의 오래된 측정 폐기를 더한 여덟 값을 32바이트 STATUS_REPORT로 TX 큐에 복사 제출합니다. RX 값은 atomic 조회하고 handler 값은 소유 스레드에서 읽으며 동시 snapshot은 보장하지 않습니다.
-- TX 초기화·복사 큐·워커·인코딩·polling 송신은 구현되어 있습니다. STATUS 제출까지 연결했으며 PC 파서·STATUS CLI·GUI 수동 조회까지 구현했으며 [확장 STATUS 실보드 시험](docs/hardware-test-2026-11-14-status-extended.md)에서 28바이트 응답의 CLI·GUI 왕복도 확인했습니다. 이후 DRAIN 강제 링 overflow·큐 포화 복귀와 30분 지속 부하를 확인했습니다. UART 하드웨어 오류의 전체 시험은 후속 범위입니다.
+- TX 초기화·복사 큐·워커·인코딩·polling 송신은 구현되어 있습니다. STATUS 제출까지 연결했으며 PC 파서·STATUS CLI·GUI 수동 조회까지 구현했으며 [확장 STATUS 실보드 시험](docs/history/hardware-test-2026-11-14-status-extended.md)에서 28바이트 응답의 CLI·GUI 왕복도 확인했습니다. 이후 DRAIN 강제 링 overflow·큐 포화 복귀와 30분 지속 부하를 확인했습니다. UART 하드웨어 오류의 전체 시험은 후속 범위입니다.
 - RX 링버퍼는 256바이트, 실제 저장 용량은 255바이트입니다. 인덱스는 `uint8_t`이므로 더 큰 버퍼는 타입 변경이 필요합니다.
 - overflow 정책은 `fcc_app/Kconfig` choice와 `prj.conf`에서 선택하며 `uart_rx.c`에서 매핑합니다. 기본값은 DRAIN입니다.
 - overflow 복구 중 새 입력은 버리고 저장된 바이트로 완성 가능한 프레임만 처리한 뒤 링·파서를 초기화합니다.
@@ -39,9 +39,9 @@ V1은 2026-11-19 프로젝트 소유자의 완료 확인을 반영해 종료했�
 
 ## 선택적 성능 계측
 
-`perf.conf`는 `diagnostics/perf_monitor.c/.h`의 지연·큐·송신·predict/correct 실행 cycle 집계와 `perf_reporter.c`의 5초 요약·스택 조회를 켭니다. 일반/debug 빌드에는 제외됩니다. [측정 계약](docs/performance-monitoring.md)을 따릅니다. [11월 19일 종료한 30분 기록](docs/hardware-test-2026-11-19-performance.md)은 측정89,990건 모두 대응, PC RTT p99 8.049ms·최대34.894ms, 보드 RX→TX 제출 최대1ms입니다. PC RTT는 USB·UART·호스트 대기도 포함합니다. 기존 호스트 간격137.581ms에 따른 원시 실패 판정은 당시 이력으로 유지하며 현재 보드 판정과 구분합니다. RTT는 진단값이며 STM32 합격이나 릴리스 차단 조건이 아닙니다. `passed`는 관측 부하의 board_qualification과 같고, 요청50Hz 전체 충족 여부는 requested_profile_qualification으로 별도 판정합니다. [릴리스 검증과 실패 분석](docs/release-v1.1.0.md)를 따릅니다.
+`perf.conf`는 `diagnostics/perf_monitor.c/.h`의 지연·큐·송신·predict/correct 실행 cycle 집계와 `perf_reporter.c`의 5초 요약·스택 조회를 켭니다. 일반/debug 빌드에는 제외됩니다. [측정 계약](docs/performance-monitoring.md)을 따릅니다. [11월 19일 종료한 30분 기록](docs/history/hardware-test-2026-11-19-performance.md)은 측정89,990건 모두 대응, PC RTT p99 8.049ms·최대34.894ms, 보드 RX→TX 제출 최대1ms입니다. PC RTT는 USB·UART·호스트 대기도 포함합니다. 기존 호스트 간격137.581ms에 따른 원시 실패 판정은 당시 이력으로 유지하며 현재 보드 판정과 구분합니다. RTT는 진단값이며 STM32 합격이나 릴리스 차단 조건이 아닙니다. `passed`는 관측 부하의 board_qualification과 같고, 요청50Hz 전체 충족 여부는 requested_profile_qualification으로 별도 판정합니다. [릴리스 검증과 실패 분석](docs/release-v1.1.0.md)를 따릅니다.
 
-새 predict/correct 실행 시간 출력은 host/빌드와 2026-11-22 STM32 10초 smoke에서 확인했습니다. 기존 30분 기록과 구분하며 [로그 형식 회귀](docs/hardware-test-2026-11-22-logging.md)를 따릅니다.
+새 predict/correct 실행 시간 출력은 host/빌드와 2026-11-22 STM32 10초 smoke에서 확인했습니다. 기존 30분 기록과 구분하며 [로그 형식 회귀](docs/history/hardware-test-2026-11-22-logging.md)를 따릅니다.
 
 ## 검증
 
@@ -59,7 +59,7 @@ V1은 2026-11-19 프로젝트 소유자의 완료 확인을 반영해 종료했�
 
 잡음별 추가 평가는 `python -m pc_sim noise-sweep --dry-run`으로 계획을 확인하고 `--port PORT`로 실보드에서 실행합니다. 기본100회는 거리/각도 잡음을 한 축씩 바꾸고 seed10개를 반복합니다. host 모사 테스트를 새로운 실보드 정확도 수치로 쓰지 않습니다. 경계값·범위 밖·비유한 입력의 계약별 행렬은 [테스트 목록](docs/test-cases.md)을 따릅니다.
 
-순간 이상치 보드 시험은 `python -m pc_sim spike-sweep --dry-run` / `--port PORT`를 사용합니다. 기본49회이며 정지1000m/0°·기본100m/10° 게이트를 전제로 합니다. 회복은 CONFIRMED·UPDATED·거리2m/각도0.2° 이내3연속의 센서 시간축 관측입니다. 기본49회 STM32 시험이 모두 통과했고 잡음100회도 기록·응답 검사를 완료했습니다. [실측 결과·한계](docs/hardware-test-2026-11-19-noise-spike.md)를 host C48조합 검증과 구분합니다.
+순간 이상치 보드 시험은 `python -m pc_sim spike-sweep --dry-run` / `--port PORT`를 사용합니다. 기본49회이며 정지1000m/0°·기본100m/10° 게이트를 전제로 합니다. 회복은 CONFIRMED·UPDATED·거리2m/각도0.2° 이내3연속의 센서 시간축 관측입니다. 기본49회 STM32 시험이 모두 통과했고 잡음100회도 기록·응답 검사를 완료했습니다. [실측 결과·한계](docs/history/hardware-test-2026-11-19-noise-spike.md)를 host C48조합 검증과 구분합니다.
 
 ## 작업 원칙
 
@@ -86,8 +86,8 @@ V1은 2026-11-19 프로젝트 소유자의 완료 확인을 반영해 종료했�
 - 2026-11-17 파일·API·변수 이름 변경을 적용했습니다. [명명 규칙](docs/coding-standard.md)를 참고합니다.
 - 과거 `docs/test-results/` 스크립트는 당시 revision용입니다. 현재 API로 재사용할 때 호환성을 확인하며 원시 증거를 덮어쓰지 않습니다.
 
-2026-11-18: stale 큐 측정은 MCU 나이가 측정 timeout 이상이면 폐기하고 handler 포화 통계에 집계합니다. CSV·고정 시나리오 실보드 RMSE·실제 UART GUI 확인 범위는 [최신 결과](docs/hardware-test-2026-11-18-evaluation.md)를 따릅니다. 이후 30분 재시험과 판정 변경·V1 완료는 [검증 이력](docs/verification-history.md)을 따릅니다.
+2026-11-18: stale 큐 측정은 MCU 나이가 측정 timeout 이상이면 폐기하고 handler 포화 통계에 집계합니다. CSV·고정 시나리오 실보드 RMSE·실제 UART GUI 확인 범위는 [최신 결과](docs/history/hardware-test-2026-11-18-evaluation.md)를 따릅니다. 이후 30분 재시험과 판정 변경·V1 완료는 [검증 이력](docs/verification-history.md)을 따릅니다.
 
 ## v1.1.0 검증 기록 (2026-11-23)
 
-선회 실보드 run-2는 측정755개·보고757개(RESET2개 포함), 거부·소실 없이 대응했습니다. 첫2초 제외 위치 RMSE는 전체4.5134m·선회1.3960m이며 정확도 합격 기준은 별도 정의하지 않았습니다. [최신 보고서](docs/hardware-test-2026-11-23-v1.1.0.md)를 참고합니다. Python 코딩 규칙·영어 주석은 [Python 표준](docs/python-coding-standard.md)을 따릅니다.
+선회 실보드 run-2는 측정755개·보고757개(RESET2개 포함), 거부·소실 없이 대응했습니다. 첫2초 제외 위치 RMSE는 전체4.5134m·선회1.3960m이며 정확도 합격 기준은 별도 정의하지 않았습니다. [최신 보고서](docs/history/hardware-test-2026-11-23-v1.1.0.md)를 참고합니다. Python 코딩 규칙·영어 주석은 [Python 표준](docs/python-coding-standard.md)을 따릅니다.

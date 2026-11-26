@@ -6,7 +6,7 @@
 Python은 1,058개 + subtest 9개입니다. KF/EKF 통합 시 CTest 244회와 ASSERT 비활성 EKF 검증 2회를 실행했습니다. 이후 EKF Q 설정4개를 추가해 동일 구성의 등록 합계는248개이며, 해당 변경의 영향 범위95회+ASSERT 비활성2회를 재검증했습니다. [Q 검증](test-results/ekf-q-2026-11-24/README.md). `tracking` 한 등록 항목 안의22개 함수를 CTest 개수에 다시 더하지 않습니다.
 CT-EKF는 별도 CTest 22개(11사례 × ASSERT 활성·비활성)를 추가하며, 위와 같은 구성의 등록 합계는270개입니다. 이번 CT 변경에서는 기존 기본·CV·PERF 조합을 포함한 CTest 280회와 CT 22회, 총302회를 다시 실행했습니다. 등록 구성에 따른 합계와 실제 실행 회수를 구분합니다. CT 수치 reference와 저장 입력 재생은 별도로 기록합니다. [CT 검증](test-results/ct-ekf-2026-11-24/README.md).
 아래 날짜별 기록의 옛 개수는 당시 결과로 보존합니다.
-케이스 목록과 실제 실행 결과는 구분합니다. 아래 개수는 Python 수집 결과와 C 등록 코드를 기준으로 합니다. 현재 실행 결과·빌드·한계는 [2026-11-24 검증](validation-2026-11-24-estimators.md), 기존 릴리스의 보드 근거는 [v1.1.0 기록](release-v1.1.0.md)을 따릅니다.
+케이스 목록과 실제 실행 결과는 구분합니다. 아래 개수는 Python 수집 결과와 C 등록 코드를 기준으로 합니다. 현재 실행 결과·빌드·한계는 [2026-11-24 검증](history/validation-2026-11-24-estimators.md), 기존 릴리스의 보드 근거는 [v1.1.0 기록](release-v1.1.0.md)을 따릅니다.
 
 ## 구성과 개수
 
@@ -101,11 +101,11 @@ CT CTest22개·독립 수치 검증·호스트252회와 실보드18회를 완료
 
 선회 기능 추가 당시 `pytest --collect-only -q`에서 Python 820개를 수집했습니다. 이 과거 수집 수는 위 현재 총계와 구분하며 수집은 실행 통과 판정이 아닙니다. `test_target_motion.py` 26개는 직선 호환성, 좌·우 선회 원호, 속력·방향, 작은 선회율, 뱅크/TAS 입력, 구간 경계와 종료를 검사합니다. `test_scenarios.py`에는 모듈·직접 실행 두 방식의 `straight_turn_straight` 종료 검증을 추가했습니다. GUI 영어 표시는 기존 offscreen 회귀에서 확인합니다.
 
-[별도 STM32 선회 시험](hardware-test-2026-11-23-v1.1.0.md)의 측정755개·보고757개 및 RMSE는 host 사례 수에 포함하지 않습니다. 당시 GUI·`evaluate`는 선회 입력을 지원하지 않았습니다. 현재 GUI는 `Turn + noise`에서 선회 전용 실행기를 호출하며 기본 `evaluate`의 모델은 유지합니다.
+[별도 STM32 선회 시험](history/hardware-test-2026-11-23-v1.1.0.md)의 측정755개·보고757개 및 RMSE는 host 사례 수에 포함하지 않습니다. 당시 GUI·`evaluate`는 선회 입력을 지원하지 않았습니다. 현재 GUI는 `Turn + noise`에서 선회 전용 실행기를 호출하며 기본 `evaluate`의 모델은 유지합니다.
 
 ## 순간 이상치·복귀 — 2026-11-19 추가
 
-[실보드 실행법](../pc_sim/README.md#순간-이상치정상-복귀-실보드-시험): 정지 표적 정상 입력40개 이후 거리/각도 오프셋을1개 또는5개 주입하고 정상 입력으로 복귀합니다. 기본49회(대조군1 + 거리12값/각도12값 × 길이2종)를 준비했습니다. 기본49회 실보드 실행도 모두 통과했습니다. [결과·조건·원시 기록](hardware-test-2026-11-19-noise-spike.md).
+[실보드 실행법](../pc_sim/README.md#순간-이상치정상-복귀-실보드-시험): 정지 표적 정상 입력40개 이후 거리/각도 오프셋을1개 또는5개 주입하고 정상 입력으로 복귀합니다. 기본49회(대조군1 + 거리12값/각도12값 × 길이2종)를 준비했습니다. 기본49회 실보드 실행도 모두 통과했습니다. [결과·조건·원시 기록](history/hardware-test-2026-11-19-noise-spike.md).
 
 - Python: truth·시각 보존, 주입 구간 양끝, 거리 wire 최솟값1m/최댓값65535m, ±180° wrap, 불법 offset/길이/회복 허용오차, 포트 접근 전 거부.
 - 회복 판정: 주입 전 정상 추적 확인, 첫 주입의 게이트 결과, 연속3표본 유지, 오차 허용경계 포함, 누락/중복/무효/과거 시각/COASTING/거부/NaN의 연속 횟수 초기화, 재획득 warm-up을 숨기지 않는 평가, 회복 실패·UART 실패 기록 보존.
@@ -130,7 +130,7 @@ CT CTest22개·독립 수치 검증·호스트252회와 실보드18회를 완료
 
 `measurement_message_validate()`는 **wire에서 해석된 non-NULL 측정**이 전제이며 헤더에 finiteness 검사 제외가 명시되어 있습니다. uint16에 표현할 수 없는 음수 거리나 wire에 없는 NaN을 이 함수에 억지로 전달해 외부 입력 거부 계약으로 바꾸지 않습니다. 그런 값은 PC 인코더에서 거부하고, 내부 칼만의 비유한 인자는 디버그 assert 계약으로 시험합니다. 일반 펌웨어의 모든 내부 API가 런타임 검증을 한다는 뜻은 아닙니다.
 
-[잡음 행렬 실행법·지표 해석](../pc_sim/README.md#잡음-크기seed-반복-평가). 기본 잡음100회 실보드 기록·응답 검사를 완료했습니다. [RMSE·한계·원시 기록](hardware-test-2026-11-19-noise-spike.md). 범위 점검은 위 계약을 보강한 것이며 모든 동시성·하드웨어 오류·입력 조합의 전수 검증을 주장하지 않습니다.
+[잡음 행렬 실행법·지표 해석](../pc_sim/README.md#잡음-크기seed-반복-평가). 기본 잡음100회 실보드 기록·응답 검사를 완료했습니다. [RMSE·한계·원시 기록](history/hardware-test-2026-11-19-noise-spike.md). 범위 점검은 위 계약을 보강한 것이며 모든 동시성·하드웨어 오류·입력 조합의 전수 검증을 주장하지 않습니다.
 
 ## Python: 수동 송신기·INIT/RESET
 
@@ -328,7 +328,7 @@ Zephyr Ztest 실행법은 [Tracking 안내](../fcc_app/tests/test_tracking/READM
 2026-11-01 당시 CRC·큐·수신 모듈 분리본의 실제 GUI와 보드 시험을 완료했습니다.
 정상 측정 20개, timeout, CRC·길이 오류 후 정상 복귀, RESET, burst 후 복귀를 확인했습니다.
 GUI 연결·송신·중지·재시작·재연결도 확인했습니다.
-[결과와 검증 한계](hardware-test-2026-11-01.md)를 참고하세요.
+[결과와 검증 한계](history/hardware-test-2026-11-01.md)를 참고하세요.
 
 이후 기본 DRAIN 강제 overflow·손실 집계·정상 복귀, 큐 포화,30분 부하 관측과 선회·잡음·이상치 평가를 추가했습니다. 최신 구성은 별도의30분 관측 부하와 제어된 호스트 중단 시험을 통과했습니다. 요청50Hz 전체 입력은 슬롯943개 누락으로 미확정입니다. [최신 실보드 결과](test-results/host-input-retest-2026-11-23/README.md)는 이전30분 실행과 구분합니다. [릴리스 검증과 실패 분석](release-v1.1.0.md)와 [검증 이력](verification-history.md)을 구분해 읽습니다. 남은 검증 항목은 다음과 같습니다.
 
@@ -517,7 +517,7 @@ handler 17개 모두 통과. INIT/RESET 통계는 모사 snapshot 응답 보존 
 
 `2aa57d9`에서 CLI·GUI STATUS 왕복, CRC/LEN/부분 프레임 timeout 통계 증가,
 INIT/RESET 통계 보존, 추적 중 조회와 무수신 timeout을 확인했습니다.
-[2026-11-12 시험 결과·원시 로그](hardware-test-2026-11-12-status.md)를 참고합니다.
+[2026-11-12 시험 결과·원시 로그](history/hardware-test-2026-11-12-status.md)를 참고합니다.
 이 기록은 이전 STATUS 실보드 미검증/연기 상태를 대체합니다. 강제 링 overflow·UART overrun·부하 시험은 남아 있습니다.
 
 
@@ -533,7 +533,7 @@ flash·실보드 강제 overflow는 수행하지 않았습니다.
 
 후속 실보드 검증: 두 정책을 각각 플래시하고 UART 회귀 16개 조건씩 통과했습니다.
 기본 DRAIN으로 복원 후 STATUS 응답까지 확인했습니다.
-[2026-11-14 결과와 로그](hardware-test-2026-11-14-kconfig.md)를 참고합니다.
+[2026-11-14 결과와 로그](history/hardware-test-2026-11-14-kconfig.md)를 참고합니다.
 강제 링 overflow의 정책별 동작은 실보드 미검증 상태입니다.
 
 
@@ -551,7 +551,7 @@ NDEBUG 정의 상태에서도 host 어댑터가 검사를 유지하는지 검증
 각도 경계·다중 회전·큰 유한값·NaN/Inf assert 및 비정상 s의 무변경 반환을 보강했습니다.
 
 후속 플래시·실보드 시험 완료: 일반·디버그 각각 UART 16개·각도 경계 6개 조건 통과.
-[결과와 원시 로그](hardware-test-2026-11-14-fmodf.md). 이전 문단의 미실시 상태를 대체합니다.
+[결과와 원시 로그](history/hardware-test-2026-11-14-fmodf.md). 이전 문단의 미실시 상태를 대체합니다.
 
 ## 2026-11-14 게이트 설정 회귀
 
@@ -570,14 +570,14 @@ C host 97회, Python 136개 + subtest 9개 통과. 이번 설정 변경은 flash
 `610e01e`: 기본값 100 m/10°와 변경값 250 m/30° 각각 UART 16개·게이트 14개 통과.
 REQ-TRK-002 / SPEC-TRACK의 거리 경계·각도 안팎·AND·wrap 및 설정에 따른 수용/거부 차이를 확인했다.
 보드는 기본값/DRAIN으로 복원했다. 앞선 설정 변경의 실보드 미검증 기록은 이 결과로 보완한다.
-[결과·원시 로그·검증 한계](hardware-test-2026-11-14-gating.md).
+[결과·원시 로그·검증 한계](history/hardware-test-2026-11-14-gating.md).
 
 ## RX/TX 데이터 선 물리 단절·복원
 
 실제 선을 분리·복원한 5단계 시험에서 14개 판정 조건을 통과했다.
 측정 무수신 timeout, STATUS 요청/응답 경로 단절, 재부팅 없는 정상 왕복·추적 복귀를 확인했다.
 수동 분리 시각에 대한 정밀 지연, USB 제거·전원 재인가·오배선·부하 시험은 포함하지 않았다.
-[결과와 원시 로그](hardware-test-2026-11-14-link-loss.md).
+[결과와 원시 로그](history/hardware-test-2026-11-14-link-loss.md).
 
 ## UART overflow 통계 API 회귀
 
@@ -597,7 +597,7 @@ STATUS_REPORT 규격은 기존 16바이트를 유지하며 새 카운터 전송�
 
 C 103회, Python 160개 + subtest 9개, 기본 펌웨어 빌드 통과.
 GUI offscreen 표시·값 갱신과 후속 flash·실보드 UART 18개 조건, CLI·GUI 왕복을 확인했다.
-[확장 STATUS 실보드 결과](hardware-test-2026-11-14-status-extended.md). 강제 overflow 증가 검증은 제외한다.
+[확장 STATUS 실보드 결과](history/hardware-test-2026-11-14-status-extended.md). 강제 overflow 증가 검증은 제외한다.
 
 ## 모듈별 로깅 전환 (2026-11-14)
 
@@ -609,14 +609,14 @@ GUI offscreen 표시·값 갱신과 후속 flash·실보드 UART 18개 조건, C
 
 `67d247b`: 일반 INFO·디버그 DEBUG 각각 30조건 통과. 로그 레벨·측정/상태 전이·경고,
 STATUS/오류/timeout을 확인하고 일반 펌웨어로 복원했다.
-[판정·로그·최초 시험의 지연 출력 대기 수정](hardware-test-2026-11-14-logging.md). 강제 로그 포화·장시간은 제외했다.
+[판정·로그·최초 시험의 지연 출력 대기 수정](history/hardware-test-2026-11-14-logging.md). 강제 로그 포화·장시간은 제외했다.
 
 ## 로그 포화·측정 부하 실보드 시험 (2026-11-14)
 
 [시험 도구](../fcc_app/tests/log_stress/README.md): 20,000개 생성기 + 10Hz 측정,
 일반 DEBUG의 단계별 측정 부하(최고 실측 평균 157.32Hz), 로그 유실·STATUS·복귀·timeout 판정.
 STATUS 총 122개 wire 재검사, RX 통계 0. 기본 INFO 복원.
-[결과와 제한](hardware-test-2026-11-14-log-stress.md). 기존 host 사례 개수에는 포함하지 않는다.
+[결과와 제한](history/hardware-test-2026-11-14-log-stress.md). 기존 host 사례 개수에는 포함하지 않는다.
 
 ## TRACK_REPORT 측정 경로 host 회귀 (2026-11-16)
 
@@ -671,15 +671,15 @@ handler가 초기화·로그·보고를 담당하며 INIT/RESET 및 timeout 보�
 | `test_evaluation_cli_rejects_invalid_warmup_before_opening_port` | 잘못된 평가 옵션은 UART 접근/파일 생성 전에 거부 |
 
 프로토콜 시험은 STATUS의 추가 필드0/1/UINT32_MAX,16/28바이트 호환·미지원 표시를 확인하고 C golden/CRC를 32바이트로 갱신했습니다.
-GUI worker의 CSV 생성·종료 회귀도 추가했습니다. [고정 시나리오와 실제 UART GUI 증거](hardware-test-2026-11-18-evaluation.md)는 host 개수와 별도로 기록합니다.
+GUI worker의 CSV 생성·종료 회귀도 추가했습니다. [고정 시나리오와 실제 UART GUI 증거](history/hardware-test-2026-11-18-evaluation.md)는 host 개수와 별도로 기록합니다.
 
 ## 소비 스레드 정지 기반 포화 검증 — 2026-11-18
 
-기본 DRAIN 실보드에서 강제 링 overflow·RX 큐 포화/stale 폐기·STATUS TX 큐 포화와 각 단계 정상 추적 복귀를 확인했습니다. 일반 이미지로 복원했습니다. [결과·실패 이력·제한](hardware-test-2026-11-18-transport-stress.md). TRACK TX 포화·제어 유실/순서·지속 부하/자원 시험은 남았습니다.
+기본 DRAIN 실보드에서 강제 링 overflow·RX 큐 포화/stale 폐기·STATUS TX 큐 포화와 각 단계 정상 추적 복귀를 확인했습니다. 일반 이미지로 복원했습니다. [결과·실패 이력·제한](history/hardware-test-2026-11-18-transport-stress.md). TRACK TX 포화·제어 유실/순서·지속 부하/자원 시험은 남았습니다.
 
 ## TRACK 포화·제어 순서 후속 검증 — 2026-11-18
 
-실보드112개 확인 항목 통과: RX 큐 포화 시 INIT/RESET 유실, 접수된 제어/측정 FIFO 순서, TRACK TX 포화 후 순번 공백과 정상 추적 복귀를 확인했습니다. 일반 이미지 복원 완료. [결과·원시 증거·계약](hardware-test-2026-11-18-track-controls.md). 제어 우선 보존 정책은 추가하지 않았으며 다음은30분 부하·MCU 내부 지연·큐/스택 계측입니다.
+실보드112개 확인 항목 통과: RX 큐 포화 시 INIT/RESET 유실, 접수된 제어/측정 FIFO 순서, TRACK TX 포화 후 순번 공백과 정상 추적 복귀를 확인했습니다. 일반 이미지 복원 완료. [결과·원시 증거·계약](history/hardware-test-2026-11-18-track-controls.md). 제어 우선 보존 정책은 추가하지 않았으며 다음은30분 부하·MCU 내부 지연·큐/스택 계측입니다.
 
 ## 성능 계측 — 2026-11-18
 

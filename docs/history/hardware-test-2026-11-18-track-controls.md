@@ -1,11 +1,11 @@
 # TRACK TX 포화·INIT/RESET 유실 및 순서 — 2026-11-18
 
 기준 `f42cc50` 이후 시험 실행기에 `--track-controls`만 추가한 작업본입니다. 제품 펌웨어와4초 정지 fixture는 변경하지 않았습니다. STM32F746G-DISCO, USART6 115200/8N1, 기본 DRAIN·timeout1000ms·INFO입니다.
-[소스·설정·HEX 식별](test-results/track-controls-2026-11-18/metadata.json).
+[소스·설정·HEX 식별](../test-results/track-controls-2026-11-18/metadata.json).
 
 ## 방법과 결과
 
-[기존 포화 시험 도구](../fcc_app/tests/transport_stress/README.md)의 명령에 `--track-controls`를 추가합니다. 별도 시험 이미지를 flash하고 RX·handler·TX 소비 스레드 정지 중 실제 UART로 입력합니다. IRQ 수신은 유지합니다. 종료 시 일반 이미지를 다시 flash하고 STATUS0을 확인합니다.
+[기존 포화 시험 도구](../../fcc_app/tests/transport_stress/README.md)의 명령에 `--track-controls`를 추가합니다. 별도 시험 이미지를 flash하고 RX·handler·TX 소비 스레드 정지 중 실제 UART로 입력합니다. IRQ 수신은 유지합니다. 종료 시 일반 이미지를 다시 flash하고 STATUS0을 확인합니다.
 
 **112개 assertion 확인 항목 통과**입니다. write 확인을 포함한 개수이며 독립 시나리오112개가 아닙니다.
 
@@ -31,9 +31,9 @@ wire에 제어 요청 ID나 세션 ID가 없어 지연된 RESET 보고의 원인
 
 ## 증거·검증 범위
 
-- [판정](test-results/track-controls-2026-11-18/results.json), [콘솔](test-results/track-controls-2026-11-18/console.log), [원시 TX/RX](test-results/track-controls-2026-11-18/wire.json).
-- [TRACK 필드](test-results/track-controls-2026-11-18/reports.json), [STATUS](test-results/track-controls-2026-11-18/status.json).
-- [시험 flash](test-results/track-controls-2026-11-18/bench-flash.log), [일반 복원 flash](test-results/track-controls-2026-11-18/restore-flash.log).
+- [판정](../test-results/track-controls-2026-11-18/results.json), [콘솔](../test-results/track-controls-2026-11-18/console.log), [원시 TX/RX](../test-results/track-controls-2026-11-18/wire.json).
+- [TRACK 필드](../test-results/track-controls-2026-11-18/reports.json), [STATUS](../test-results/track-controls-2026-11-18/status.json).
+- [시험 flash](../test-results/track-controls-2026-11-18/bench-flash.log), [일반 복원 flash](../test-results/track-controls-2026-11-18/restore-flash.log).
 - Python231개+subtest9 재실행 통과, 실행기 문법 검사 통과. 펌웨어 소스·이미지 변경이 없어 기존 host116회·일반/시험 이미지 빌드 증거를 재사용했습니다. 이번에는 두 이미지를 실제 flash했습니다.
 - 소비 스레드 정지는 인위적인 고장 주입입니다. 최대 처리율·30분 안정성·MCU 내부 지연·스택·모든 IRQ 경쟁 조건을 증명하지 않습니다. DISCARD/물리 단선/USB 제거는 이번에 수행하지 않았습니다.
 - 기존 STATUS TX 포화 모드는 유지합니다. 이 실행에서는 TRACK TX 모드만 재시험했습니다. UI 조작 시험은 포함하지 않았습니다.

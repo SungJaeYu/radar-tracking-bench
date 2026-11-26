@@ -40,9 +40,9 @@ PYTHONPATH=. python docs/test-results/track-2026-11-18/uart-check.py
 
 ## 증거와 한계
 
-- [실행 스크립트](test-results/track-2026-11-18/uart-check.py)
-- [판정·TRACK 디코딩 결과](test-results/track-2026-11-18/results.json)
-- [송수신 원시 바이트와 PC monotonic 경과 시간](test-results/track-2026-11-18/wire.json)
-- [ST-Link 콘솔](test-results/track-2026-11-18/console.log)
+- [실행 스크립트](../test-results/track-2026-11-18/uart-check.py)
+- [판정·TRACK 디코딩 결과](../test-results/track-2026-11-18/results.json)
+- [송수신 원시 바이트와 PC monotonic 경과 시간](../test-results/track-2026-11-18/wire.json)
+- [ST-Link 콘솔](../test-results/track-2026-11-18/console.log)
 
 이번 시험은 일반 펌웨어의 실제 UART와 PC 공통 디코더를 검증했습니다. GUI 화면/worker, 디버그 빌드, 강제 큐·링 포화, 물리 단선, 장시간 부하, 지연 상한·RMSE는 시험하지 않았습니다. 1.2초 수신 창은 timeout 보고 존재/중복 확인용이며 정확한 스케줄링 지연 측정값이 아닙니다.

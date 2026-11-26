@@ -21,8 +21,8 @@ Published from merge commit `a14ec2be32c4dd13d9012c8b7e81eb58aa1cdcc6`; see the 
 
 ### Validation and remaining work
 
-- Python: 1,058 tests and 9 subtests; host C: 244 CTest executions plus 2 assertion-disabled checks. Both STM32 KF and EKF builds pass. [Validation and reproduction](docs/validation-2026-11-24-estimators.md).
-- A separate four-run STM32 comparison matched all 3,020 inputs, with zero gate rejections, lost tracks or communication errors; normal KF firmware was restored. Current CV-EKF tuning reduced pre-turn straight error but increased turn error. An independent float64 calculation reproduced the board results. [Data and figures](docs/hardware-test-2026-11-24-kf-ekf.md).
+- Python: 1,058 tests and 9 subtests; host C: 244 CTest executions plus 2 assertion-disabled checks. Both STM32 KF and EKF builds pass. [Validation and reproduction](docs/history/validation-2026-11-24-estimators.md).
+- A separate four-run STM32 comparison matched all 3,020 inputs, with zero gate rejections, lost tracks or communication errors; normal KF firmware was restored. Current CV-EKF tuning reduced pre-turn straight error but increased turn error. An independent float64 calculation reproduced the board results. [Data and figures](docs/history/hardware-test-2026-11-24-kf-ekf.md).
 - The Q follow-up passes 95 affected CTest executions plus 2 assertion-disabled checks, the same Python suite, and KF/default-EKF/Q=10000 STM32 builds. Host default traces remain byte-identical; 10000 and 30000 are exploratory candidates, with no default retune; that initial sweep did not include a new board run. [Q results](docs/test-results/ekf-q-2026-11-24/README.md).
 - Fixed Q candidates now have 336 independent-seed/control host runs and 44 primary plus 2 post-hoc STM32 runs, including initially receding noisy turns. All 34,730 board measurements matched; normal KF was restored after both campaigns. Raw UART replay, six figures and the two single gate-rejection diagnostics are preserved. [Results and reproduction](docs/test-results/ekf-q-board-2026-11-24/README.md).
 - Release-candidate host regression: 1,091 Python tests; host C tracking 31/31, CT-EKF 22/22 and matrix 1/1 CTest entries. These are host checks, not firmware builds or board qualification.
@@ -79,7 +79,7 @@ Published from merge commit `a14ec2be32c4dd13d9012c8b7e81eb58aa1cdcc6`; see the 
   the GUI and standard evaluator still use fixed azimuth and constant range rate.
 - The turn test recorded 755 matched measurements on STM32. Accuracy is observational,
   without a new accuracy acceptance threshold.
-- The [dated v1.1.0 report](docs/hardware-test-2026-11-23-v1.1.0.md) preserves the original
+- The [dated v1.1.0 report](docs/history/hardware-test-2026-11-23-v1.1.0.md) preserves the original
   30-minute result and its then-current RTT-based verdict. Current policy does not use RTT
   to block release; its diagnostic limits remain p99 ≤20 ms and maximum ≤100 ms.
 - The subsequent 300 s run matched all 14,802 valid measurements with zero board CRC errors

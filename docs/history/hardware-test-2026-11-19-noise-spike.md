@@ -6,7 +6,7 @@
 
 - `470eb4d` → `eb15fb1`: PC RTT 예산·평가 기준 변경, V1 문서 정리, 잡음/seed 행렬, 이상치 주입·지속 복귀 평가, Python/C 경계 테스트 추가. 펌웨어 `fcc_app/src` 변경은 없다.
 - STM32F746G-DISCO / Zephyr4.2, USART6 115200/8N1. 일반 펌웨어, DRAIN, 거리 게이트100m·각도 게이트10°, 측정 timeout1,000ms. 실행 전 빌드 설정에서 확인했다.
-- 데이터 `/dev/cu.usbserial-A5069RR4`, 콘솔 `/dev/cu.usbmodem1203`. source commit·소스/ELF SHA-256·UTC 시작 시각은 [metadata](test-results/post-pull-sweeps-2026-11-19/metadata.json)에 남겼다.
+- 데이터 `/dev/cu.usbserial-A5069RR4`, 콘솔 `/dev/cu.usbmodem1203`. source commit·소스/ELF SHA-256·UTC 시작 시각은 [metadata](../test-results/post-pull-sweeps-2026-11-19/metadata.json)에 남겼다.
 - 일반/perf 빌드 최신성을 확인했다. 짧은 회귀에서 perf를 플래시한 뒤 일반 이미지로 복원했고, 이어지는149회에는 일반 이미지를 사용했다. 펌웨어·튜닝·제품 코드는 수정하지 않았다.
 - `board_capture.py`는 기존 기본 `spike_sweep.run_suite`와 `noise_sweep.run_sweep`를 호출하고 별도 포트의 콘솔·최초/최종 STATUS·provenance를 기록한다. 잡음 실행기의 진행 출력만 감싸며 측정·판정 코드는 바꾸지 않는다.
 - 이상치: 정지1000m/0°, 잡음0. 잡음: 초기1000m·거리 변화율−5m/s·고정15°, 한 축씩 잡음을 변경. 두 시험 모두120표본·합성 센서 시간 간격100ms다.
@@ -16,13 +16,13 @@
 
 - Python **765개 + subtest9개 통과**, Qt offscreen 포함.
 - 변경 영향을 받는 C 테스트: tracking CTest21개(내부 tracking21함수+게이트20사례), handler31개, perf-handler32개. 총 **CTest84개 등록 항목 / 논리 사례104회 실행 통과**. 이 실행에서 변경 없는 RX/TX/collector 전체를 다시 실행한 것으로 표시하지 않는다.
-- [10초 RTT 회귀](test-results/post-pull-rtt-smoke-2026-11-19/results.json): **27개 판정 통과**. 부하 측정498개, 실제49.8Hz, 추가 복귀 측정3개 포함 정상501개 모두 응답. 무효 거리1개는별도 집계, STATUS11개·TRACK506개·TX517개 일치.
+- [10초 RTT 회귀](../test-results/post-pull-rtt-smoke-2026-11-19/results.json): **27개 판정 통과**. 부하 측정498개, 실제49.8Hz, 추가 복귀 측정3개 포함 정상501개 모두 응답. 무효 거리1개는별도 집계, STATUS11개·TRACK506개·TX517개 일치.
 - 부하 RTT p50 **5.566ms**, p95 **6.811ms**, p99 **10.745ms**, 최대 **25.378ms**. 사전 기본 기준 p99≤20ms·최대≤100ms 충족. 보드 RX 완료→TX 제출 최대1ms, 예산 초과0.
 - 일반 이미지 복원 후 STATUS 여덟 통계0. 호스트 슬롯 건너뜀2개·최대 송신 간격60.702ms는 현재 계약에 따라 참고값이다. 짧은 회귀와149회 추적 평가는 서로 다른 부하와 측정 범위다.
 
 ## 순간 이상치49회
 
-[계획과 각 사례 판정](test-results/post-pull-sweeps-2026-11-19/spike/20261119-213625-72479947/spikes.json)은 대조군1 + 거리12값/각도12값 × 단발/5연속이다. 정상40표본 뒤 측정값만 변경한다. wire 거리 끝값1m/65535m와 각도±180°를 포함하며 정답·센서 시각은 유지한다.
+[계획과 각 사례 판정](../test-results/post-pull-sweeps-2026-11-19/spike/20261119-213625-72479947/spikes.json)은 대조군1 + 거리12값/각도12값 × 단발/5연속이다. 정상40표본 뒤 측정값만 변경한다. wire 거리 끝값1m/65535m와 각도±180°를 포함하며 정답·센서 시각은 유지한다.
 
 | 확인 항목 | 관측 결과 |
 |---|---|
@@ -36,7 +36,7 @@
 
 ## 잡음100회
 
-[계획·seed별 결과·조건별 평균/최소/최대](test-results/post-pull-sweeps-2026-11-19/noise/20261119-214824-1b6d6cad/sweep.json). 거리 σ={0,2,5,8,15,30}m, 각도 σ={0,0.1,0.5,1,3}°, 한 축씩 변경하고 중복 무잡음 조건을 제거했다. 총10조건×seed0..9이며, 매 실행 초기2초를 RMSE에서 제외한다. 거리와 각도에 동시에 잡음을 넣는 전수 조합이나 dropout100회는 이번 범위가 아니다.
+[계획·seed별 결과·조건별 평균/최소/최대](../test-results/post-pull-sweeps-2026-11-19/noise/20261119-214824-1b6d6cad/sweep.json). 거리 σ={0,2,5,8,15,30}m, 각도 σ={0,0.1,0.5,1,3}°, 한 축씩 변경하고 중복 무잡음 조건을 제거했다. 총10조건×seed0..9이며, 매 실행 초기2초를 RMSE에서 제외한다. 거리와 각도에 동시에 잡음을 넣는 전수 조합이나 dropout100회는 이번 범위가 아니다.
 
 다음은 **각 seed의 RMSE를 동일 가중치로 평균**한 값이다. 전체 표본을 합친 RMSE나 신뢰구간이 아니다. 각도는 원시 rad 값을 표에서 degree로 변환했다.
 
@@ -57,7 +57,7 @@
 
 ## 전체 대응·복원·한계
 
-[실시간 실행 요약](test-results/post-pull-sweeps-2026-11-19/results.json), [원시 wire/CSV 재검증](test-results/post-pull-sweeps-2026-11-19/offline-audit.json).
+[실시간 실행 요약](../test-results/post-pull-sweeps-2026-11-19/results.json), [원시 wire/CSV 재검증](../test-results/post-pull-sweeps-2026-11-19/offline-audit.json).
 
 - 149개 세션, 측정17,880개 모두 대응. TRACK18,327개 = 측정17,880 + INIT149 + 무수신 timeout149 + RESET149. 세션 STATUS298개 모두0.
 - 전체 wire를 다시 파싱해 CRC·LEN 오류0·부분 프레임 잔여0, 송신/수신 TYPE별 개수 일치를 확인했다. CSV를 다시 평가한 모든 지표가 저장된 `evaluation.json`과 동일했다.
@@ -68,7 +68,7 @@
 
 ## 원시 기록과 재평가
 
-세션 CSV·metadata·evaluation은 두 archive에 원래 상대경로로 보존했다. 압축 전후894개 파일의 바이트 일치를 확인하고 [manifest](test-results/post-pull-sweeps-2026-11-19/archive-manifest.json)에 파일별 SHA-256을 기록했다. 상위 `spikes.json`·`sweep.json`은 그대로 열어 볼 수 있다. console은 gzip으로 보존했다.
+세션 CSV·metadata·evaluation은 두 archive에 원래 상대경로로 보존했다. 압축 전후894개 파일의 바이트 일치를 확인하고 [manifest](../test-results/post-pull-sweeps-2026-11-19/archive-manifest.json)에 파일별 SHA-256을 기록했다. 상위 `spikes.json`·`sweep.json`은 그대로 열어 볼 수 있다. console은 gzip으로 보존했다.
 
 저장소 루트에서 새 작업 디렉터리로 복사·해제한 후 재평가한다. `spikes.json`/`sweep.json`의 session 경로는 해제한 디렉터리를 기준으로 읽는다.
 
@@ -81,4 +81,4 @@ tar -xzf "$capture/noise-sessions.tar.gz" -C "$replay"
 python "$capture/audit_capture.py" "$replay"
 ```
 
-실보드 재실행은 [CLI 안내](../pc_sim/README.md#잡음-크기seed-반복-평가)의 명령과 새로운 출력 경로를 사용한다. 기록용 `board_capture.py`에는 당시 로컬 포트·경로가 포함되므로 고정 출력 폴더를 재사용하지 않는다. 원시 기록은 덮어쓰지 않는다.
+실보드 재실행은 [CLI 안내](../../pc_sim/README.md#잡음-크기seed-반복-평가)의 명령과 새로운 출력 경로를 사용한다. 기록용 `board_capture.py`에는 당시 로컬 포트·경로가 포함되므로 고정 출력 폴더를 재사용하지 않는다. 원시 기록은 덮어쓰지 않는다.

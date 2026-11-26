@@ -32,11 +32,11 @@ OpenOCD 초기 CPU 식별 경고 후 Cortex-M7 인식·32768바이트 쓰기·�
 
 ## 증거
 
-- [조건별 결과·HEX 해시](test-results/status-2aa57d9/results.json)
-- [실제 USART6 TX/RX 바이트](test-results/status-2aa57d9/traffic.json)
-- [ST-Link 콘솔](test-results/status-2aa57d9/console.log)
-- [GUI 결과](test-results/status-2aa57d9/gui-results.json)
-- [GUI 실제 화면](test-results/status-2aa57d9/gui-status.png)
+- [조건별 결과·HEX 해시](../test-results/status-2aa57d9/results.json)
+- [실제 USART6 TX/RX 바이트](../test-results/status-2aa57d9/traffic.json)
+- [ST-Link 콘솔](../test-results/status-2aa57d9/console.log)
+- [GUI 결과](../test-results/status-2aa57d9/gui-results.json)
+- [GUI 실제 화면](../test-results/status-2aa57d9/gui-status.png)
 
 GUI는 실제 PySide6 창과 실제 포트를 사용하며 버튼 호출을 자동화했다. 그래프는 PC 합성값이다.
 

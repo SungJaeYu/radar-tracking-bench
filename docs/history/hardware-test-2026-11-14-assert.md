@@ -25,8 +25,8 @@ host 어댑터는 NDEBUG와 무관하게 활성화되며 Zephyr 펌웨어 includ
 
 ## 증거와 한계
 
-- [디버그 결과](test-results/assert-2026-11-14/debug/results.json), [UART](test-results/assert-2026-11-14/debug/traffic.json), [콘솔](test-results/assert-2026-11-14/debug/console.log)
-- [일반 결과](test-results/assert-2026-11-14/normal/results.json), [UART](test-results/assert-2026-11-14/normal/traffic.json), [콘솔](test-results/assert-2026-11-14/normal/console.log)
+- [디버그 결과](../test-results/assert-2026-11-14/debug/results.json), [UART](../test-results/assert-2026-11-14/debug/traffic.json), [콘솔](../test-results/assert-2026-11-14/debug/console.log)
+- [일반 결과](../test-results/assert-2026-11-14/normal/results.json), [UART](../test-results/assert-2026-11-14/normal/traffic.json), [콘솔](../test-results/assert-2026-11-14/normal/console.log)
 
 이 보드 시험은 정상 입력·통신 오류가 내부 assert를 잘못 유발하지 않는지 확인한다.
 보드 내부 상태를 의도적으로 손상시켜 fatal/assert 실패 경로를 발생시키지는 않았다.
@@ -35,7 +35,7 @@ host 어댑터는 NDEBUG와 무관하게 활성화되며 Zephyr 펌웨어 includ
 
 일반 빌드의 한 실행에서 `Measurement amain alive\r\nccepted`처럼 heartbeat가
 측정 로그 중간에 삽입되어 문자열 계수 검사가 실패했다.
-[실패 원시 로그](test-results/assert-2026-11-14/normal-log-interleaving/console.log)와
-[실패 판정](test-results/assert-2026-11-14/normal-log-interleaving/results.json)을 보존했다.
+[실패 원시 로그](../test-results/assert-2026-11-14/normal-log-interleaving/console.log)와
+[실패 판정](../test-results/assert-2026-11-14/normal-log-interleaving/results.json)을 보존했다.
 재시험에서는 판정용 문자열에서 알려진 `main alive` heartbeat만 제거하고 원시 로그는 그대로 저장했다.
 스레드 간 콘솔 출력의 원자성은 보장되지 않으며, 로그 직렬화는 별도 후속 작업이다.

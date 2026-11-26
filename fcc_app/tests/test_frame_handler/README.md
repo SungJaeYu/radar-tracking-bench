@@ -77,7 +77,7 @@ real counter increments are tested separately by the UART suite.
 기존 트랙의 정상 갱신은 입력·예측·결과 3줄과 TRACK 큐 접수 1줄을 확인한다. 상태 변화 시 이름을 기록하고 상태가 같으면 전이 로그를 내지 않는다.
 host 모사는 DEBUG도 캡처하므로 실제 필터링·deferred 출력 검증은 별도다.
 
-최신 로깅 일반·디버그 실보드 회귀는 [별도 시험 기록](../../../docs/hardware-test-2026-11-14-logging.md)을 참고합니다.
+최신 로깅 일반·디버그 실보드 회귀는 [별도 시험 기록](../../../docs/history/hardware-test-2026-11-14-logging.md)을 참고합니다.
 host 테스트의 로그 캡처와 실제 보드의 지연 출력 검증은 구분합니다.
 
 ## TRACK_REPORT host coverage (2026-11-16)

@@ -222,7 +222,7 @@ Frame timeouts, Queue drops와 링 overflow·ISR 폐기 바이트·복구 폐기
 - 성공은 종료 코드 0, 응답 timeout·시리얼 오류는 1, 인자 오류는 2입니다.
 - 포트는 종료 시 닫습니다. 프로토콜에 요청 ID가 없어 늦게 도착한 이전 응답과 완전한 구분은 불가능합니다.
 - parser 자체에는 바이트 간 timeout이 없습니다. 이 CLI는 거래 전체 timeout으로 대기를 종료합니다.
-- STATUS는 오류 통계이며 실제 BIT 결과는 아닙니다. [실보드 CLI·GUI 왕복](../docs/hardware-test-2026-11-12-status.md)을 확인했습니다.
+- STATUS는 오류 통계이며 실제 BIT 결과는 아닙니다. [실보드 CLI·GUI 왕복](../docs/history/hardware-test-2026-11-12-status.md)을 확인했습니다.
 
 기존 `python -m pc_sim send-frame status --type 3 --port PORT`는 요청만 보내는 도구입니다.
 GUI의 STATUS 탭에서도 수동 조회할 수 있습니다. 연결 중에는 CLI가 같은 포트를 열지 않도록 합니다.
@@ -286,15 +286,15 @@ C의 `STATUS_REPORT_FIELD_COUNT`도 갱신합니다. payload 길이는 필드 �
 이 검사는 필드 순서나 인코더의 기록 누락을 보장하지 않으므로 고정 바이트열 테스트를 유지합니다.
 C endian 쓰기는 `common/byte_order.h`를 재사용합니다. 생성기는 사용하지 않습니다. 현재 STATUS가 최대 payload 32바이트를 모두 사용하므로 다음 필드 추가는 프레임 용량/버전 정책부터 검토해야 합니다.
 고정 기대 바이트열·C→Python 상호운용·길이 오류·구형 응답·CLI/GUI 테스트도 함께 갱신합니다.
-28바이트 응답의 [실보드 UART·CLI·GUI 왕복](../docs/hardware-test-2026-11-14-status-extended.md)을 확인했습니다.
+28바이트 응답의 [실보드 UART·CLI·GUI 왕복](../docs/history/hardware-test-2026-11-14-status-extended.md)을 확인했습니다.
 강제 overflow에 의한 새 카운터 증가 시험은 남아 있습니다.
 
 ## 로깅 전환 후 보드 사용
 
 일반 INFO 빌드는 측정 상세를 출력하지 않습니다. 상세 관측에는 `debug.conf`를 적용합니다.
 STATUS는 두 설정 모두 여덟 통계를 이진 응답으로 반환합니다.
-[일반·디버그 실보드 회귀](../docs/hardware-test-2026-11-14-logging.md)는 각 30조건 통과했습니다.
-GUI 화면은 해당 로깅 회귀에 포함하지 않았습니다. 이후 [로그 포화·측정 부하 시험](../docs/hardware-test-2026-11-14-log-stress.md)에서 STATUS 유지·유실 알림·복귀를 확인했으며 장시간 검증은 남아 있습니다.
+[일반·디버그 실보드 회귀](../docs/history/hardware-test-2026-11-14-logging.md)는 각 30조건 통과했습니다.
+GUI 화면은 해당 로깅 회귀에 포함하지 않았습니다. 이후 [로그 포화·측정 부하 시험](../docs/history/hardware-test-2026-11-14-log-stress.md)에서 STATUS 유지·유실 알림·복귀를 확인했으며 장시간 검증은 남아 있습니다.
 
 ## CSV 수집과 정량 평가
 
@@ -327,7 +327,7 @@ normal 거리 잡음0, noisy/dropout 표준편차8m이고, dropout은 [4000,5500
 평가는 유효하고 송신 sample과 **추정 시각이 일치하는** 보고만 비교합니다. 중복 추정 시각·무효·대응 불가 보고는 별도 집계하며 STARTED 후 2초를 매번 제외합니다. 같은 시각의 측정값이 baseline입니다. 각도 오차는 최단 wrap 차이입니다.
 미리보기는 보드 성능 평가에서 거부합니다. `closed=true`는 파일을 닫았다는 뜻이며 시험 합격을 뜻하지 않습니다. 예외 종료·빈 기록은 실행 오류와 수집 개수를 함께 확인합니다.
 PC 왕복 시간에는 USB·OS·read polling·CSV flush 비용이 포함됩니다. MCU 내부 지연·WCET·50Hz 지속 처리 보장이 아닙니다. 세션 ID가 없어 이전 실행의 지연 보고를 완벽히 구분하지 못합니다.
-[실보드 수치·GUI 캡처·제한](../docs/hardware-test-2026-11-18-evaluation.md).
+[실보드 수치·GUI 캡처·제한](../docs/history/hardware-test-2026-11-18-evaluation.md).
 
 
 ## 잡음 크기·seed 반복 평가
@@ -370,7 +370,7 @@ python -m pc_sim evaluate run --port PORT --range-noise 8 --azimuth-noise-deg 1 
 - 조건별 평균은 완료된 정상 기록의 **seed별 지표를 동일 가중치**로 평균한 값입니다. 표본 전체를 합친 RMSE나 신뢰구간이 아닙니다. 누락 구간에 가상의 추정값을 채우지 않습니다.
 - UART 오류·응답 없음·생성 범위 오류가 발생하면 중단하고 부분 기록을 남깁니다. 입력을 경계값으로 잘라서 계속 실행하지 않습니다.
 
-실행기·계산·판정의 host 테스트와 별도로, 기본 잡음100회 실보드 기록을 확보했습니다. [조건별 RMSE·게이트 거부·원시 CSV](../docs/hardware-test-2026-11-19-noise-spike.md). dropout100회는 별도 미실시 범위이며 기존 [V1 수치](../docs/hardware-test-2026-11-18-evaluation.md)는 그대로 보존합니다.
+실행기·계산·판정의 host 테스트와 별도로, 기본 잡음100회 실보드 기록을 확보했습니다. [조건별 RMSE·게이트 거부·원시 CSV](../docs/history/hardware-test-2026-11-19-noise-spike.md). dropout100회는 별도 미실시 범위이며 기존 [V1 수치](../docs/history/hardware-test-2026-11-18-evaluation.md)는 그대로 보존합니다.
 
 ## 순간 이상치·정상 복귀 실보드 시험
 
@@ -411,7 +411,7 @@ python -m pc_sim spike-sweep --port PORT --range-offsets 500 --angle-offsets-deg
 - 시간은 합성 **센서 시간축** 기준입니다. 벽시계 복구시간이나 MCU 처리지연이 아닙니다. 고정한 길이의 실행 내 회복 여부이며 다른 부하·기동의 보장은 아닙니다.
 - 응답 대응·순번·시각 검사, 주입 전 정상 추적, 명백한 안/밖 첫 게이트 판정, 회복 기준을 만족해야 해당 실행이 통과합니다. 회복 실패는 기록 후 다음 조건을 계속 시험하고 최종 종료 코드는1입니다. UART 오류는 부분 기록을 보존하고 중단합니다.
 
-**준비·검증 상태:** 실제 C handler/필터의48개 조합을 host에서 실행했고 모사 UART로 주입·기록·재평가·실패 보존을 검증했습니다. 기본49회 STM32 시험도 모두 통과했습니다. [센서 시간축 복귀·경계 판정·원시 기록](../docs/hardware-test-2026-11-19-noise-spike.md). 기본 잡음100회도 별도로 기록했으며 누락100회는 이번 범위에 포함하지 않았습니다.
+**준비·검증 상태:** 실제 C handler/필터의48개 조합을 host에서 실행했고 모사 UART로 주입·기록·재평가·실패 보존을 검증했습니다. 기본49회 STM32 시험도 모두 통과했습니다. [센서 시간축 복귀·경계 판정·원시 기록](../docs/history/hardware-test-2026-11-19-noise-spike.md). 기본 잡음100회도 별도로 기록했으며 누락100회는 이번 범위에 포함하지 않았습니다.
 
 콘솔 본문은 `항목: key=value` 형식이며 단위는 키에 표시합니다. GUI 콘솔은 원문을 표시하고, 보드 추정값·STATUS는 이진 프레임을 해석하므로 로그 문자열에 의존하지 않습니다. [펌웨어 로그 설정](../docs/board-bringup.md#펌웨어-로그-설정)을 참고하세요.
 

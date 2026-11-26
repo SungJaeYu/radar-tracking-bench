@@ -2,7 +2,7 @@
 
 후속 [진행 집계 수정 후 재시험](hardware-test-2026-11-19-performance.md)을 별도로 기록했다. 이 문서의 이전 시험 판정은 변경하지 않는다.
 
-대상 펌웨어는 `25c8bb9`의 STM32F746G-DISCO `perf.conf` 구성이다. 펌웨어 수정 없이 계측 이미지로 시험하고 일반 이미지를 복원한다. 시험 스크립트는 [board_check.py](../fcc_app/tests/test_perf_monitor/board_check.py)이며 세션별 metadata에 실제 ELF·스크립트 SHA-256을 기록한다.
+대상 펌웨어는 `25c8bb9`의 STM32F746G-DISCO `perf.conf` 구성이다. 펌웨어 수정 없이 계측 이미지로 시험하고 일반 이미지를 복원한다. 시험 스크립트는 [board_check.py](../../fcc_app/tests/test_perf_monitor/board_check.py)이며 세션별 metadata에 실제 ELF·스크립트 SHA-256을 기록한다.
 
 ## 고정 조건과 수용 기준
 
@@ -15,7 +15,7 @@
 
 ## 짧은 실보드 확인
 
-[원시 결과와 26개 판정](test-results/perf-smoke-2026-11-18/results.json), [콘솔](test-results/perf-smoke-2026-11-18/console.log.gz), [계측 요약](test-results/perf-smoke-2026-11-18/performance.json).
+[원시 결과와 26개 판정](../test-results/perf-smoke-2026-11-18/results.json), [콘솔](../test-results/perf-smoke-2026-11-18/console.log.gz), [계측 요약](../test-results/perf-smoke-2026-11-18/performance.json).
 
 10초 동안 정확히 500개를 50Hz로 송신했다. 무효 입력·RESET 이후 복귀 측정 3개까지 정상 측정 총503개가 모두 응답했다. 거리 0의 무효 측정 1개는 `without_submit=1`로 분리됐다. STATUS 요청/응답11개, TRACK508개(측정503 + 제어/timeout5), 총 송신 완료519개가 일치했다.
 
@@ -27,7 +27,7 @@
 
 ## 중단된 첫 장시간 실행
 
-[실패 결과](test-results/perf-load-2026-11-18/results.json)와 [USB 장치 제거/재등록 로그 발췌](test-results/perf-load-2026-11-18/usb-events.txt)를 보존한다. 부하 약145초, 측정 write7,230회에서 `SerialException: write failed: [Errno 6] Device not configured`로 종료됐다. PC에서 측정 응답7,229개와 초기 INIT 보고1개를 수신했고 마지막 측정 한 개는 응답하지 않았다. 마지막 write 간격176.343ms는 기준100ms를 초과했다.
+[실패 결과](../test-results/perf-load-2026-11-18/results.json)와 [USB 장치 제거/재등록 로그 발췌](../test-results/perf-load-2026-11-18/usb-events.txt)를 보존한다. 부하 약145초, 측정 write7,230회에서 `SerialException: write failed: [Errno 6] Device not configured`로 종료됐다. PC에서 측정 응답7,229개와 초기 INIT 보고1개를 수신했고 마지막 측정 한 개는 응답하지 않았다. 마지막 write 간격176.343ms는 기준100ms를 초과했다.
 
 macOS에서 22:43:55 USB-UART 제거, 22:43:56 재등록, 22:44:03 제거/재등록을 확인했다. 작업자가 컴퓨터를 옮기며 연결이 끊겼을 가능성을 알렸다. 따라서 USB 연결 중단 실행으로 분류하며 정상 지속 부하 통과로 인정하지 않는다. 보드 내부 지연 초과나 큐 오류가 관측된 것은 아니지만 이 사실이 연결 실패를 취소하지 않는다. 일반 이미지 복원·STATUS0 확인은 성공했다.
 
@@ -35,7 +35,7 @@ macOS에서 22:43:55 USB-UART 제거, 22:43:56 재등록, 22:44:03 제거/재등
 
 새 부팅·새 기록 디렉터리에서 같은 조건과 기준으로 1,800초 수집했다. **보드 처리·통신 대응 검사는 통과했지만 호스트 송신 간격 기준이 미달하여 전체 시험은 실패로 유지한다. V1-4를 완료 처리하지 않는다.**
 
-[실시간 시험 판정](test-results/perf-load-2026-11-18-retry/results.json), [독립 wire/CSV 재검증](test-results/perf-load-2026-11-18-retry/offline-audit.json), [콘솔 원문](test-results/perf-load-2026-11-18-retry/console.log.gz), [362개 누적 요약](test-results/perf-load-2026-11-18-retry/performance.json.gz), [압축 파일 해시](test-results/perf-load-2026-11-18-retry/archive-manifest.json).
+[실시간 시험 판정](../test-results/perf-load-2026-11-18-retry/results.json), [독립 wire/CSV 재검증](../test-results/perf-load-2026-11-18-retry/offline-audit.json), [콘솔 원문](../test-results/perf-load-2026-11-18-retry/console.log.gz), [362개 누적 요약](../test-results/perf-load-2026-11-18-retry/performance.json.gz), [압축 파일 해시](../test-results/perf-load-2026-11-18-retry/archive-manifest.json).
 
 | 항목 | 관측 결과 |
 |---|---|
@@ -62,7 +62,7 @@ PC write→TRACK 수신 지연은 p50 **6.391ms**, p95 **6.641ms**, p99 **8.041m
 
 관측 큐 점유 최대는 RX0/TX1, 스택 미사용 최솟값은 RX784/handler1,472/TX736바이트였다. 마지막 세 값은 짧은 시험과 동일하다. main·로깅 스레드·ISR 스택은 이번 조회 대상이 아니다. 일반 이미지 복원과 STATUS0 응답을 확인했다.
 
-![30분 계측 결과: 호스트 간격 기준 미달을 포함한 관측값](test-results/perf-load-2026-11-18-retry/performance-summary.png)
+![30분 계측 결과: 호스트 간격 기준 미달을 포함한 관측값](../test-results/perf-load-2026-11-18-retry/performance-summary.png)
 
 그래프의 보드 값은 누적 통계, PC 곡선은 분별 p50/p99다. PC 최대164.128ms는 p99 곡선에 표시되지 않는 별도 극값이다. 그래프는 합격 증명이 아니라 기록 요약이다.
 
@@ -83,4 +83,4 @@ QT_QPA_PLATFORM=offscreen python docs/test-results/perf-load-2026-11-18-retry/pl
 
 ## 재현과 해석 한계
 
-명령과 복원 절차는 [시험기 안내](../fcc_app/tests/test_perf_monitor/README.md#real-board-check), 측정 구간과 백분위 구간 의미는 [계측 계약](performance-monitoring.md)을 따른다. 모든 5초 요약은 부팅 이후 누적 통계이며 구간별 최대나 WCET가 아니다. 계측 비용을 포함한다. 큐 점유율·스택 사용량은 관측값이며 물리 마지막 비트 완료·상대 ACK·모든 하드웨어 오류를 보장하지 않는다. 이 정지 표적 조건은 기동/잡음·과부하 성능을 대표하지 않는다.
+명령과 복원 절차는 [시험기 안내](../../fcc_app/tests/test_perf_monitor/README.md#real-board-check), 측정 구간과 백분위 구간 의미는 [계측 계약](../performance-monitoring.md)을 따른다. 모든 5초 요약은 부팅 이후 누적 통계이며 구간별 최대나 WCET가 아니다. 계측 비용을 포함한다. 큐 점유율·스택 사용량은 관측값이며 물리 마지막 비트 완료·상대 ACK·모든 하드웨어 오류를 보장하지 않는다. 이 정지 표적 조건은 기동/잡음·과부하 성능을 대표하지 않는다.

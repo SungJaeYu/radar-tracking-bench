@@ -15,11 +15,11 @@ V1은 단일표적 HIL의 기준 버전입니다. 단일표적 측정 입력부�
 
 | 항목 | 완료한 범위 | 근거 |
 | --- | --- | --- |
-| V1-1 결과 왕복 | MEAS 입력, TRACK 추정값·상태·시각·유효성 반환, GUI 비교·CSV 기록 | [실보드 평가·GUI](hardware-test-2026-11-18-evaluation.md) |
-| V1-2 추적 평가 | 고정 seed 정상·거리 잡음·연속 누락 RMSE, 시간 정렬·warm-up·상태 복귀 | [시나리오별 결과](hardware-test-2026-11-18-evaluation.md#고정-시나리오-결과) |
-| V1-3 오류 복구 | CRC·부분 프레임, RX/TX 단선·복원, DRAIN 강제 링 overflow, RX/TX 큐 포화와 제어 유실·순서·정상 복귀 | [전송 오류 시험](hardware-test-2026-11-18-transport-stress.md) · [TRACK·제어 시험](hardware-test-2026-11-18-track-controls.md) |
-| V1-4 시간·자원 | 30분 송수신 대응·지연·스택 관측, PC RTT 예산과 보드 내부 예산 구분 | [30분 기록](hardware-test-2026-11-19-performance.md) · [현재 판정 기준](performance-monitoring.md) |
-| V1-5 재현·설명 | 빌드·실행 명령, 대상 소스·설정, 원시 로그·그래프, 구조·소유권·한계 정리 | [보드 안내](board-bringup.md) · [구현 흐름](../EXPLAINER.md) · [검증 이력](verification-history.md) |
+| V1-1 결과 왕복 | MEAS 입력, TRACK 추정값·상태·시각·유효성 반환, GUI 비교·CSV 기록 | [실보드 평가·GUI](history/hardware-test-2026-11-18-evaluation.md) |
+| V1-2 추적 평가 | 고정 seed 정상·거리 잡음·연속 누락 RMSE, 시간 정렬·warm-up·상태 복귀 | [시나리오별 결과](history/hardware-test-2026-11-18-evaluation.md#고정-시나리오-결과) |
+| V1-3 오류 복구 | CRC·부분 프레임, RX/TX 단선·복원, DRAIN 강제 링 overflow, RX/TX 큐 포화와 제어 유실·순서·정상 복귀 | [전송 오류 시험](history/hardware-test-2026-11-18-transport-stress.md) · [TRACK·제어 시험](history/hardware-test-2026-11-18-track-controls.md) |
+| V1-4 시간·자원 | 30분 송수신 대응·지연·스택 관측, PC RTT 예산과 보드 내부 예산 구분 | [30분 기록](history/hardware-test-2026-11-19-performance.md) · [현재 판정 기준](performance-monitoring.md) |
+| V1-5 재현·설명 | 빌드·실행 명령, 대상 소스·설정, 원시 로그·그래프, 구조·소유권·한계 정리 | [보드 안내](board-bringup.md) · [구현 흐름](../README.ko.md#시스템-구성) · [검증 이력](verification-history.md) |
 
 기존 계획의 별도 2~3분 시연 영상과 추가 최적화 전후 비교는 후속 설명·개선 자료로 남깁니다. 11월 23일에는 별도로 [40초 무음 GUI 기록 재생과 분석 그래프](analysis/2026-11-23/README.md)를 작성했습니다. V1 완료 범위는 위 기록을 기준으로 하며, 과거 구현 체크리스트는 Git 이력과 요구사항 추적표로 확인할 수 있습니다.
 
@@ -49,7 +49,7 @@ TRACK에는 측정 응답 외 INIT·무수신 timeout 이벤트 2건이 포함�
 - 11월 19일 원본 실행은 당시 호스트 송신 간격137.581ms 때문에 실패했습니다. 11월 18일 RTT 최대164.128ms를 포함해 과거 값과 원본 판정은 보존하며 새 정책으로 원시 기록을 덮어쓰지 않습니다. 과거30분 시험에는 현재의 모든 확장 계측이 없으므로 새 요구의 통과 증거로 승격하지 않습니다.
 - 고정 방위각·각도 잡음 0에서의 평가입니다. 각도 기동·잡음, 실제 센서, 최대 지속 부하, WCET·실운용 성능을 증명한 것은 아닙니다. 정상 부하와 의도적인 오류 주입의 결과는 각각의 기록 범위로 읽습니다.
 
-위 V1 기준선과 별도로, 후속 [잡음100회·순간 이상치49회 실보드 평가](hardware-test-2026-11-19-noise-spike.md)를 완료했습니다. 고정 방위각의 각도 잡음과 주입 후 복귀를 확인했으며 각도 기동·동시 양축 잡음은 추가 범위입니다.
+위 V1 기준선과 별도로, 후속 [잡음100회·순간 이상치49회 실보드 평가](history/hardware-test-2026-11-19-noise-spike.md)를 완료했습니다. 고정 방위각의 각도 잡음과 주입 후 복귀를 확인했으며 각도 기동·동시 양축 잡음은 추가 범위입니다.
 
 ## 다음 구현 순서
 
@@ -81,7 +81,7 @@ predict/correct 실행 시간 측정·누적 집계·요약 출력을 구현했�
 - 직진10초 → 우선회90도 → 직진10초, 구간 경계에서 dt 분할·종료 처리.
 - 잡음 없는10Hz 선회 입력755개 모두 STM32 응답과 대응. 위치 RMSE 전체4.5134m/선회1.3960m는 관측값이며 정확도 합격 기준은 별도다.
 - GUI는 영어 인터페이스이며 기존 고정 방위각·거리 변화율 입력을 유지한다. 선회 선택·JSBSim·대체 추정기는 후속 범위다.
-- 자동 실보드 시험과 영어 GUI 캡처를 완료했다. 30분 최대 PC RTT220.246ms와 당시 RTT 기반 실패 판정은 [날짜별 보고서](hardware-test-2026-11-23-v1.1.0.md)에 보존한다. 현재 정책에서 호스트 RTT는 STM32 합격·릴리스 차단 기준이 아니다.
+- 자동 실보드 시험과 영어 GUI 캡처를 완료했다. 30분 최대 PC RTT220.246ms와 당시 RTT 기반 실패 판정은 [날짜별 보고서](history/hardware-test-2026-11-23-v1.1.0.md)에 보존한다. 현재 정책에서 호스트 RTT는 STM32 합격·릴리스 차단 기준이 아니다.
 - ISR 집계를 RX 스레드로 옮기고 collector에 스레드 전용 mutex를 적용한 뒤300초 실행에서 유효 측정14,802개 모두 대응·보드 CRC0·관측 부하의 내부/전송/증거 통과를 확인했다. 호스트 슬롯201개 누락으로 요청50Hz 전체 검증은 미확정이다. 이 결과로 이전 CRC 오류의 원인이나 새 구성의30분 성능을 확정하지 않는다.
 - PR #9로 main 병합과 v1.1.0 태그·릴리스 공개를 완료했다. 현재 정책·검증 결과·남은 범위는 [릴리스 검증과 실패 분석](release-v1.1.0.md)를 따른다.
 
@@ -89,10 +89,10 @@ predict/correct 실행 시간 측정·누적 집계·요약 출력을 구현했�
 
 ## v1.2.0 개발·검증 이력 — 2026-11-26
 
-`feat/prepared-input`의 `cd27620`에 통합 CLI, GUI 선회 잡음 평가, 사전 생성 입력, KF/EKF 선택과 R 설정을 반영했다. 필터 상태와 공분산은 고정 배열을 직접 소유하며 기존 추적 API·프로토콜을 재사용한다. [host·빌드 검증](validation-2026-11-24-estimators.md).
+`feat/prepared-input`의 `cd27620`에 통합 CLI, GUI 선회 잡음 평가, 사전 생성 입력, KF/EKF 선택과 R 설정을 반영했다. 필터 상태와 공분산은 고정 배열을 직접 소유하며 기존 추적 API·프로토콜을 재사용한다. [host·빌드 검증](history/validation-2026-11-24-estimators.md).
 
 - #8: 입력 생성·저장·검증 및 선회 전용 FIFO 재생 완료. 공통 재생 정책, lockstep, 시험 후 일괄 저장과 해당 경계 검증은 남아 있다.
-- #10: Polar CV KF·Cartesian CV-EKF·CT-EKF의 빌드 선택 구조와 고정 선회 동일 입력 비교를 완료했다. 무잡음/기본 잡음 seed42의 초기 KF/CV 실보드4회는 [초기 결과](hardware-test-2026-11-24-kf-ekf.md)에 있다. Q 후보는 기본값100을 유지한 채 독립10시드·거리/방위 잡음 분리·이탈 선회 host336회 및 실보드46회를 완료했다. [후속 결과](test-results/ekf-q-board-2026-11-24/README.md). CT-EKF는 독립 수치 검증·동일 입력 host252회와 STM32 18회를 완료했다. STM32 입력13,590개가 모두 대응했고 게이트 거부·LOST·STATUS 오류는0이었다. [CT 결과와 조건](test-results/ct-ekf-2026-11-24/README.md). 확장 기동 정답 모델 20개 프리셋과 schema2 저장을 구현했다. 이어 10개 기동×두 방향×네 잡음 단계의 동일 입력 STM32 비교80조건을 완료했다. 새 비교에서 CV-EKF가 pooled position RMSE 29.27m, KF40.68m, CT93.50m였고 새 grid는 seed6 하나다. Python1,091개와 host C 54 CTest 항목도 통과했다. 평가 조건 GUI 프리셋·대외 게시 자료는 남아 있다. [확장 기동 분석](analysis/maneuver-grid-20261126/README.md) · [정답 모델 검증](test-results/maneuver-models-2026-11-25/README.md) · [v1.2.0 릴리스 기록](release-v1.2.0.md).
+- #10: Polar CV KF·Cartesian CV-EKF·CT-EKF의 빌드 선택 구조와 고정 선회 동일 입력 비교를 완료했다. 무잡음/기본 잡음 seed42의 초기 KF/CV 실보드4회는 [초기 결과](history/hardware-test-2026-11-24-kf-ekf.md)에 있다. Q 후보는 기본값100을 유지한 채 독립10시드·거리/방위 잡음 분리·이탈 선회 host336회 및 실보드46회를 완료했다. [후속 결과](test-results/ekf-q-board-2026-11-24/README.md). CT-EKF는 독립 수치 검증·동일 입력 host252회와 STM32 18회를 완료했다. STM32 입력13,590개가 모두 대응했고 게이트 거부·LOST·STATUS 오류는0이었다. [CT 결과와 조건](test-results/ct-ekf-2026-11-24/README.md). 확장 기동 정답 모델 20개 프리셋과 schema2 저장을 구현했다. 이어 10개 기동×두 방향×네 잡음 단계의 동일 입력 STM32 비교80조건을 완료했다. 새 비교에서 CV-EKF가 pooled position RMSE 29.27m, KF40.68m, CT93.50m였고 새 grid는 seed6 하나다. Python1,091개와 host C 54 CTest 항목도 통과했다. 평가 조건 GUI 프리셋·대외 게시 자료는 남아 있다. [확장 기동 분석](analysis/maneuver-grid-20261126/README.md) · [정답 모델 검증](test-results/maneuver-models-2026-11-25/README.md) · [v1.2.0 릴리스 기록](release-v1.2.0.md).
 - #11: Joseph 구현을 기준으로 Square-root·UD의 수치 안정성·비용 비교는 후속이다.
 - #1·#2는 완료·종료된 이슈이며 진행 중 목록에서 제외한다. 3D #4–#7은 후속 계획을 유지한다.
 

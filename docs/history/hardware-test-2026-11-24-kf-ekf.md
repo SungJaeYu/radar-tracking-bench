@@ -2,7 +2,7 @@
 
 **4회 실행, 측정 3,020개 모두 대응. 통신 오류·게이트 거부·추적 소실 0회.** 현재 기본 튜닝에서는 EKF의 선회 전 직선 오차가 작았고, 선회·선회 종료 오차는 기존 polar KF보다 컸다. 정확도 합격 기준을 정한 시험은 아니며 모델·튜닝을 포함한 현재 구현 두 개의 비교다.
 
-기능 소스는 `cd27620`, 실행 당시 저장소는 [`4a9e6ea`](https://github.com/SungJaeYu/radar-tracking-bench/commit/4a9e6eaad3c3063d99e7821913396e9b53a6da78)이다. host·빌드 검증은 [별도 기록](validation-2026-11-24-estimators.md), 원시 자료와 재현 명령은 [데이터 묶음](test-results/kf-ekf-2026-11-24/README.md)에 있다. 시험 종료 후 **일반 KF 이미지를 복원하고 STATUS 8개 항목 0**을 확인했다.
+기능 소스는 `cd27620`, 실행 당시 저장소는 [`4a9e6ea`](https://github.com/SungJaeYu/radar-tracking-bench/commit/4a9e6eaad3c3063d99e7821913396e9b53a6da78)이다. host·빌드 검증은 [별도 기록](validation-2026-11-24-estimators.md), 원시 자료와 재현 명령은 [데이터 묶음](../test-results/kf-ekf-2026-11-24/README.md)에 있다. 시험 종료 후 **일반 KF 이미지를 복원하고 STATUS 8개 항목 0**을 확인했다.
 
 ## 조건과 비교 기준
 
@@ -11,8 +11,8 @@
 - 동쪽 직진 10초 → 200m/s·뱅크30°의 우90° 선회 약55.487초 → 남쪽 직진10초. 센서 시각 0.0–75.4초, dt0.1초, 755개 입력이다.
 - 무잡음과 거리 σ10m·방위 σ0.01rad(약0.573°), seed42의 입력을 먼저 저장했다. 각 조건에서 KF/EKF가 보낸 순서·sensor timestamp·프레임 바이트가 모두 같음을 사후 검증했다.
 - 송신 후 dt 동안 수신하는 FIFO 방식이다. 실제 평균 write 간격은 103.707–103.893ms이며 정밀10Hz/50Hz 부하 인증이나 lockstep 시험이 아니다.
-- 거리 R=25m², 방위 R=0.00121847rad², 초기 속도0과 기존 초기 P를 유지했다. EKF 초기 P는 첫 측정 위치에서 좌표 변환한다. **Q는 좌표계에 따라 의미가 다르다**: KF는 거리 가속도 분산100·각가속도 분산0.00761544, EKF는 x/y 가속도 분산100을 사용한다. [단위·초기값](estimator-tuning.md).
-- 모든 실행에서 STARTED는1회다. 처음2초를 제외한 같은735개 시각(선회 전80, 선회555, 선회 후100)으로 비교했다. 초기 구간을 포함한 값과 표본별 상태도 [summary.json](test-results/kf-ekf-2026-11-24/summary.json)·[series.csv](test-results/kf-ekf-2026-11-24/series.csv)에 남겼다.
+- 거리 R=25m², 방위 R=0.00121847rad², 초기 속도0과 기존 초기 P를 유지했다. EKF 초기 P는 첫 측정 위치에서 좌표 변환한다. **Q는 좌표계에 따라 의미가 다르다**: KF는 거리 가속도 분산100·각가속도 분산0.00761544, EKF는 x/y 가속도 분산100을 사용한다. [단위·초기값](../estimator-tuning.md).
+- 모든 실행에서 STARTED는1회다. 처음2초를 제외한 같은735개 시각(선회 전80, 선회555, 선회 후100)으로 비교했다. 초기 구간을 포함한 값과 표본별 상태도 [summary.json](../test-results/kf-ekf-2026-11-24/summary.json)·[series.csv](../test-results/kf-ekf-2026-11-24/series.csv)에 남겼다.
 
 ## 위치 오차
 
@@ -30,17 +30,17 @@
 | 거리 σ10m · 방위 σ0.01rad | KF | 17.403 | 27.769 | 27.636 |
 | 거리 σ10m · 방위 σ0.01rad | EKF | 8.415 | 125.244 | 132.749 |
 
-![동일 궤적의 측정과 실제 STM32 추정값](test-results/kf-ekf-2026-11-24/trajectories.png)
+![동일 궤적의 측정과 실제 STM32 추정값](../test-results/kf-ekf-2026-11-24/trajectories.png)
 
-![위치 오차 시계열; 녹색은 선회 구간](test-results/kf-ekf-2026-11-24/position-errors.png)
+![위치 오차 시계열; 녹색은 선회 구간](../test-results/kf-ekf-2026-11-24/position-errors.png)
 
-![구간별 위치 RMSE](test-results/kf-ekf-2026-11-24/segment-rmse.png)
+![구간별 위치 RMSE](../test-results/kf-ekf-2026-11-24/segment-rmse.png)
 
 ### 해석과 독립 계산
 
 확인된 현상은 선회 시작 이후 EKF 오차가 증가하고 직선으로 돌아온 뒤에도 수렴 시간이 남는다는 것이다. 게이트는 거리·방위 잔차 각각의 고정 경계이므로 위치 오차가100m를 넘는다는 이유만으로 반드시 거부되는 구조는 아니다. 이번에는 두 필터 모두 게이트 거부와 LOST가0이었다.
 
-독립적인 NumPy float64 계산으로 같은 Cartesian CV 상태전이·극좌표 측정 Jacobian·Joseph 공분산 식을 다시 실행했다. 보드 출력과의 최대 위치 차이는 무잡음 **4.053mm**, 잡음 **4.690mm**였다. reference의 전체 RMSE도 각각 115.557m / 119.373m로 재현됐다. [독립 계산·결과](test-results/kf-ekf-2026-11-24/reference-ekf.json).
+독립적인 NumPy float64 계산으로 같은 Cartesian CV 상태전이·극좌표 측정 Jacobian·Joseph 공분산 식을 다시 실행했다. 보드 출력과의 최대 위치 차이는 무잡음 **4.053mm**, 잡음 **4.690mm**였다. reference의 전체 RMSE도 각각 115.557m / 119.373m로 재현됐다. [독립 계산·결과](../test-results/kf-ekf-2026-11-24/reference-ekf.json).
 
 따라서 이 입력에서100m 규모의 차이가 생긴 원인을 큰 수치 구현 불일치로 보기는 어렵다. **현재 Cartesian CV 운동 모델과 Q/R 설정의 선회 응답에 따른 차이로 해석할 근거가 있다.** EKF는 비선형 측정 모델을 다루지만, 현재 상태전이는 일정 속도이며 선회율 상태를 추가한 CT 모델이 아니다. 다만 모델과 튜닝의 기여를 각각 분리한 실험은 아직 하지 않았다.
 
@@ -57,7 +57,7 @@ Q/R을 바꾸지 않고 이번 결과를 기준선으로 보존한다. 향후 Q/
 | 거리 σ10m · 방위 σ0.01rad | KF | 28.259 / 29.212 | 33.731 / 35.407 |
 | 거리 σ10m · 방위 σ0.01rad | EKF | 177.782 / 1248.601 | 522.898 / 527.944 |
 
-![보드 실행 시간의 평균과 관측 최소·최대](test-results/kf-ekf-2026-11-24/execution-time.png)
+![보드 실행 시간의 평균과 관측 최소·최대](../test-results/kf-ekf-2026-11-24/execution-time.png)
 
 잡음 EKF predict에서 **1,248.601µs** 최대가 관측됐다. 계측은 함수 호출 전후 timer cycle 구간이며 인터럽트·선점 시간을 완전히 분리한 CPU 명령 비용이 아니다. 누적 요약만으로 이 최대의 원인을 특정할 수 없다. 평균은 약178µs이며 이 짧은 시험의 최대를 WCET로 주장하지 않는다. PC RTT도 별도 지표다.
 

@@ -15,7 +15,7 @@ TRACK 탭: 미리보기에서는 보드 추정값을 생성하지 않으므로 �
 
 ![현재 TRACK 탭의 보드 수신 대기와 미리보기 프레임 로그](../docs/images/radar-gui-track-preview.png)
 
-[캡처·다이어그램 갱신 방법](../tools/docs/README.md). 실제 보드 추정값은 [v1.1.0 실보드 검증](../docs/hardware-test-2026-11-23-v1.1.0.md)에서 실제 UART 수신 화면과 검증 결과를 확인할 수 있습니다.
+[캡처·다이어그램 갱신 방법](../tools/docs/README.md). 실제 보드 추정값은 [v1.1.0 실보드 검증](../docs/history/hardware-test-2026-11-23-v1.1.0.md)에서 실제 UART 수신 화면과 검증 결과를 확인할 수 있습니다.
 
 ![영어 TRACK 화면의 실제 STM32 추정값](../docs/images/radar-gui-board.png)
 
@@ -155,10 +155,10 @@ Qt 실행 흐름은 [공식 QThread 문서](https://doc.qt.io/qtforpython-6/PySi
 ## 실제 보드 검증
 
 2026-11-01 최신 펌웨어로 GUI 연결·송신·중지 후 timeout·재시작·재연결·종료를 확인했습니다.
-[실제 화면과 결과](../docs/hardware-test-2026-11-01.md)를 참고하세요.
+[실제 화면과 결과](../docs/history/hardware-test-2026-11-01.md)를 참고하세요.
 
 펌웨어 STATUS는 USART6 STATUS_REPORT 제출까지 구현되어 있습니다. ST-Link DEBUG 로그는 큐 접수만 표시하며 여덟 통계값은 wire 응답으로 조회합니다.
-GUI의 STATUS 탭에서 수동 조회와 USART6 응답 디코딩을 제공합니다. [2026-11-12 실보드 시험](../docs/hardware-test-2026-11-12-status.md)에서 통계 표시·측정 병행·송신 중지 후 조회를 확인했습니다.
+GUI의 STATUS 탭에서 수동 조회와 USART6 응답 디코딩을 제공합니다. [2026-11-12 실보드 시험](../docs/history/hardware-test-2026-11-12-status.md)에서 통계 표시·측정 병행·송신 중지 후 조회를 확인했습니다.
 
 측정 생성은 `FRAME_TYPE_MEAS_REPORT`(0x02)를 사용합니다. `FRAME_TYPE_STATUS_REPORT`(0x06)는 펌웨어에서 송신하며 GUI에서 응답 통계를 표시합니다.
 
@@ -179,7 +179,7 @@ STATUS payload는 건너뜁니다. 연결 해제/통신 오류로 종료하면 �
 프로토콜에 요청 ID가 없어 이전 요청의 늦은 응답과 새 응답의 완전한 구분은 보장하지 않습니다.
 자동 주기 조회는 없습니다. 보드 TX(PC6)와 어댑터 RXD 연결이 필요합니다.
 
-28바이트 응답의 [실보드 시험·실제 캡처](../docs/hardware-test-2026-11-14-status-extended.md)에서 일곱 통계 표시와 측정 병행 조회를 확인했습니다.
+28바이트 응답의 [실보드 시험·실제 캡처](../docs/history/hardware-test-2026-11-14-status-extended.md)에서 일곱 통계 표시와 측정 병행 조회를 확인했습니다.
 
 일반 펌웨어는 INFO 이상만 출력하므로 측정·예측·보정 상세 텍스트는 보이지 않습니다.
 상세 콘솔 관측에는 debug.conf 빌드를 사용합니다. STATUS 조회는 두 빌드 모두 동일합니다.
@@ -200,7 +200,7 @@ Settings 탭의 `Record CSV (folder per run)`를 체크하고 `Choose output fol
 
 ![실제 보드 추정값·STATUS 연결 GUI](../docs/test-results/evaluation-2026-11-18/gui-track.png)
 
-[결과·작은 창·STALE 캡처](../docs/hardware-test-2026-11-18-evaluation.md).
+[결과·작은 창·STALE 캡처](../docs/history/hardware-test-2026-11-18-evaluation.md).
 
 콘솔 본문은 `항목: key=value` 형식이며 단위는 키에 표시합니다. GUI 콘솔은 원문을 표시하고, 보드 추정값·STATUS는 이진 프레임을 해석하므로 로그 문자열에 의존하지 않습니다. [펌웨어 로그 설정](../docs/board-bringup.md#펌웨어-로그-설정)을 참고하세요.
 

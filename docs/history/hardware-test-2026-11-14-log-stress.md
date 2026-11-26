@@ -2,7 +2,7 @@
 
 기준 소스 `0b284c6` + 이 커밋의 시험 fixture. STM32F746G-DISCO, USART6 데이터와
 ST-Link 콘솔 각각 115200 baud. 기본 DRAIN, 로그 버퍼 4096바이트, deferred/nonblocking/drop-new.
-소스·설정·HEX 식별자는 [metadata](test-results/log-stress-2026-11-14/metadata.json)에 기록했습니다.
+소스·설정·HEX 식별자는 [metadata](../test-results/log-stress-2026-11-14/metadata.json)에 기록했습니다.
 
 ## 결과
 
@@ -23,13 +23,13 @@ PC STATUS 호출 경과에는 최대 50ms read 대기·USB/OS 지연이 포함�
 
 ## 증거와 실행 이력
 
-- [생성기 판정](test-results/log-stress-2026-11-14/producer-retry/results.json), [콘솔](test-results/log-stress-2026-11-14/producer-retry/console.log), [wire](test-results/log-stress-2026-11-14/producer-retry/traffic.json), [wire 재검사](test-results/log-stress-2026-11-14/producer-retry/wire-check.json)
-- [측정 부하 판정](test-results/log-stress-2026-11-14/traffic/results.json), [콘솔](test-results/log-stress-2026-11-14/traffic/console.log), [wire](test-results/log-stress-2026-11-14/traffic/traffic.json), [wire 재검사](test-results/log-stress-2026-11-14/traffic/wire-check.json)
-- 최초 producer 실행은 west workspace 미지정으로 플래시 전에 실패했습니다. [실패 기록](test-results/log-stress-2026-11-14/producer/flash.log)을 보존하고 `--zephyr-workspace` 추가 후 재실행했습니다. 펌웨어 실패가 아닙니다.
+- [생성기 판정](../test-results/log-stress-2026-11-14/producer-retry/results.json), [콘솔](../test-results/log-stress-2026-11-14/producer-retry/console.log), [wire](../test-results/log-stress-2026-11-14/producer-retry/traffic.json), [wire 재검사](../test-results/log-stress-2026-11-14/producer-retry/wire-check.json)
+- [측정 부하 판정](../test-results/log-stress-2026-11-14/traffic/results.json), [콘솔](../test-results/log-stress-2026-11-14/traffic/console.log), [wire](../test-results/log-stress-2026-11-14/traffic/traffic.json), [wire 재검사](../test-results/log-stress-2026-11-14/traffic/wire-check.json)
+- 최초 producer 실행은 west workspace 미지정으로 플래시 전에 실패했습니다. [실패 기록](../test-results/log-stress-2026-11-14/producer/flash.log)을 보존하고 `--zephyr-workspace` 추가 후 재실행했습니다. 펌웨어 실패가 아닙니다.
 - 후속 wire 전체 검사 함수는 저장된 두 캡처를 재생해 검증했습니다. hardware 재실행과 구분합니다.
 - 일반 INFO/일반 DEBUG/시험 이미지 빌드 통과. 기본·일반 DEBUG 이미지에는 시험 소스가 포함되지 않음을 확인했습니다.
 - Python 160개 + subtest 9개, RX 45개·handler 17개·TX 4개·tracking 17개와 게이트 조합 20개 통과.
-- [기본 INFO 복원 flash](test-results/log-stress-2026-11-14/restore-flash.log), [복원 후 STATUS](test-results/log-stress-2026-11-14/restored-status.log): 7개 모두 0.
+- [기본 INFO 복원 flash](../test-results/log-stress-2026-11-14/restore-flash.log), [복원 후 STATUS](../test-results/log-stress-2026-11-14/restored-status.log): 7개 모두 0.
 
 ## 결론과 남은 범위
 
@@ -37,4 +37,4 @@ PC STATUS 호출 경과에는 최대 50ms read 대기·USB/OS 지연이 포함�
 RX 통계 0은 하드웨어 overrun 부재나 모든 측정 처리 완료를 증명하지 않습니다.
 반복 WARN 제한, IRQ 경쟁, 최대 지속 처리율, TX 큐 포화, 스택·CPU 측정, 장시간 시험,
 전체 측정의 추정 결과 검증은 남습니다. GUI 재시험은 수행하지 않았습니다.
-재현 방법은 [시험 안내](../fcc_app/tests/log_stress/README.md)를 참고합니다.
+재현 방법은 [시험 안내](../../fcc_app/tests/log_stress/README.md)를 참고합니다.

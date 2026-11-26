@@ -12,7 +12,7 @@ v1.2.0에는 polar CV KF / Cartesian CV-EKF / CT-EKF 빌드 선택, 측정 입�
 
 확장 STM32 비교는 세 추정기에 같은 기동·잡음 입력80개를 적용했습니다(seed6). 이 표본에서는 CV-EKF의 위치 RMSE가 가장 작았고(29.27m), polar KF의 predict/correct 관측 시간이 가장 짧았습니다(합계 약62µs). 가감속에서 CT-EKF의 오차가 크게 증가했습니다. 추정기별 측정55,000개가 모두 대응했고 게이트 거부·LOST는0회였습니다. 단일 seed의 조건부 결과로 일반적인 우열을 뜻하지 않습니다. [조건·그림·펌웨어 출처](docs/analysis/maneuver-grid-20261126/README.md).
 
-초기 KF/EKF 실보드 비교에서는 입력3,020개가 모두 대응됐습니다. 현재 튜닝에서 EKF는 선회 전 직선 오차가 작았지만 선회 오차는 기존 KF보다 컸습니다. [결과·원시 데이터·그래프4종](docs/hardware-test-2026-11-24-kf-ekf.md).
+초기 KF/EKF 실보드 비교에서는 입력3,020개가 모두 대응됐습니다. 현재 튜닝에서 EKF는 선회 전 직선 오차가 작았지만 선회 오차는 기존 KF보다 컸습니다. [결과·원시 데이터·그래프4종](docs/history/hardware-test-2026-11-24-kf-ekf.md).
 
 후속으로 EKF 가속도 분산을 Kconfig로 분리하고 같은 입력의 host Q 탐색을 수행했습니다. 기본값100을 유지한 채 후보10000·30000의 host336회·실보드46회를 완료했습니다. 처음부터 멀어지는 잡음 선회를 포함해 보드 입력34,730개 모두 대응했고 일반 KF를 복원했습니다. [독립 시드·실보드 결과](docs/test-results/ekf-q-board-2026-11-24/README.md). [Q 비교표·그래프](docs/test-results/ekf-q-2026-11-24/README.md).
 
@@ -21,7 +21,7 @@ v1.2.0에는 polar CV KF / Cartesian CV-EKF / CT-EKF 빌드 선택, 측정 입�
 PC에서 합성 레이더 측정을 보내고, STM32에서 표적을 추적한 뒤 결과를 PC로 반환합니다.
 정답·측정값·추정값을 비교하고, 통신 오류와 입력 이상치 이후의 복귀를 실보드에서 검증합니다.
 
-[시작하기](#시작하기) · [구현 구조](EXPLAINER.md) · [검증 결과](#검증-결과) · [문서 목차](docs/README.md)
+[시작하기](#시작하기) · [시스템 구성](#시스템-구성) · [검증 결과](#검증-결과) · [문서 목차](docs/README.md)
 
 [프로젝트 보드](https://github.com/users/SungJaeYu/projects/1) · [할 일 이슈](https://github.com/SungJaeYu/radar-tracking-bench/issues) · [GUI 무음 시연·분석](docs/analysis/2026-11-23/README.md)
 
@@ -33,18 +33,24 @@ PC는 추적 전 센서 측정을 모사합니다. **예측·게이팅·칼만 �
 
 | 구성 | 주요 기능 |
 |---|---|
-| 펌웨어 | UART ISR·링버퍼, RX/처리/TX 스레드, CRC-16, polar CV KF / Cartesian CV EKF 빌드 선택, 트랙 생성·유지·소실 |
+| 펌웨어 | UART ISR·링버퍼, RX/처리/TX 스레드, CRC-16, polar CV KF / Cartesian CV-EKF / CT-EKF 빌드 선택, 트랙 생성·유지·소실 |
 | 오류 처리 | 부분 프레임·무수신 timeout, overflow 복구, 오래된 측정 폐기, 누적 오류 통계 |
 | PC 도구 | GUI·CLI, 측정·잡음·이상치 생성, STATUS/TRACK 수신, CSV 기록·정량 평가 |
 
-ISR·큐·스레드의 연결과 데이터 소유권은 [구현 흐름](EXPLAINER.md), PC와 보드의 책임은 [시스템 역할](docs/system-roles.md)에 정리했습니다.
+![PC 측정 생성부터 보드 추적 결과 수신·기록까지](docs/images/pc-board-flow.png)
+
+![UART ISR·링버퍼·RX·처리·TX 스레드의 연결](docs/images/firmware-flow.png)
+
+UART ISR은 바이트를 링버퍼에 저장하고 RX 스레드를 깨웁니다. RX 스레드는 프레임을 검증하고 보드 수신 완료 시각과 함께 처리 큐에 복사합니다. 처리 스레드는 트랙·무수신 감시·보고 순번을 관리하고, 보고를 TX 큐에 복사합니다. 별도 TX 스레드가 UART로 송신합니다.
+
+[스레드·큐 규격](docs/requirements-traceability.md#spec-exec) · [PC와 보드의 책임](docs/system-roles.md) · [측정 시간 기준](docs/performance-monitoring.md)
 
 ## GUI 미리보기
 
 ![현재 GUI의 설정 탭·표적 위치·거리 이력·실행 로그](docs/images/radar-gui-preview.png)
 
 영어 UI의 **보드 없는 미리보기 모드**입니다. 합성 정답과 측정값을 표시하며 보드 추정값은 생성하지 않습니다.
-[GUI 사용법·TRACK 화면](pc_sim/GUI.md) · [최신 실보드 추정값 캡처와 시험 기록](docs/hardware-test-2026-11-23-v1.1.0.md)
+[GUI 사용법·TRACK 화면](pc_sim/GUI.md) · [최신 실보드 추정값 캡처와 시험 기록](docs/history/hardware-test-2026-11-23-v1.1.0.md)
 
 ![영어 GUI에서 표시한 STM32 실제 TRACK 추정값](docs/images/radar-gui-board.png)
 
@@ -54,17 +60,17 @@ ISR·큐·스레드의 연결과 데이터 소유권은 [구현 흐름](EXPLAINE
 
 | 시험 | 확인한 결과 | 상세 |
 |---|---|---|
-| 30분 송수신 | 목표50Hz, 실제49.994Hz. 측정 **89,990개 모두 대응** | [성능 기록](docs/hardware-test-2026-11-19-performance.md) |
+| 30분 송수신 | 목표50Hz, 실제49.994Hz. 측정 **89,990개 모두 대응** | [성능 기록](docs/history/hardware-test-2026-11-19-performance.md) |
 | 왕복 지연 | 위 부하에서 PC RTT **p99 8.049ms · 최대34.894ms** | [측정 경계·기준](docs/performance-monitoring.md) |
-| 이상치·복귀 | 단발·5연속 거리/각도 이상치 **49/49회 통과** | [실보드 평가](docs/hardware-test-2026-11-19-noise-spike.md) |
-| 잡음·정확도 | **100회** 잡음/seed 평가, 측정·추정 RMSE와 게이트 거부율 기록 | [조건별 결과](docs/hardware-test-2026-11-19-noise-spike.md#잡음100회) |
+| 이상치·복귀 | 단발·5연속 거리/각도 이상치 **49/49회 통과** | [실보드 평가](docs/history/hardware-test-2026-11-19-noise-spike.md) |
+| 잡음·정확도 | **100회** 잡음/seed 평가, 측정·추정 RMSE와 게이트 거부율 기록 | [조건별 결과](docs/history/hardware-test-2026-11-19-noise-spike.md#잡음100회) |
 | 오류 복구 | CRC·부분 프레임, 데이터 선 단절·복원, 링버퍼·큐 포화 후 복귀 | [검증 이력](docs/verification-history.md) |
 
 PC RTT는 USB·UART·보드·호스트 대기를 포함하는 진단값입니다. p99≤20ms·최대≤100ms 한도는 유지하며 초과만으로 STM32 불합격이나 릴리스 차단을 판정하지 않습니다. 현재 `passed`는 관측 부하의 보드 내부·전송·증거 합격을 뜻하며, 전 기간·슬롯 누락 없는50Hz 요청 부하 검증은 별도입니다. 당시 호스트 송신 간격 기준에 따른 실패 판정은 이력에 보존했습니다. 조건·판정 변경과 적용 범위는 [완료 기준](docs/roadmap.md#v1-acceptance)을 따릅니다.
 
 ## v1.1.0 추가 기능
 
-PC 표적 운동에 일정 선회율 원호와 `straight_turn_straight` 구간 시나리오를 추가했습니다. 동쪽 직진10초 → 속도200m/s·뱅크30°의 우90° 선회 약55.49초 → 남쪽 직진10초이며 기존 시나리오도 유지합니다. v1.1.0 펌웨어는 거리·방위각 CV 필터를 사용했습니다. [v1.1.0 선회 결과](docs/hardware-test-2026-11-23-v1.1.0.md).
+PC 표적 운동에 일정 선회율 원호와 `straight_turn_straight` 구간 시나리오를 추가했습니다. 동쪽 직진10초 → 속도200m/s·뱅크30°의 우90° 선회 약55.49초 → 남쪽 직진10초이며 기존 시나리오도 유지합니다. v1.1.0 펌웨어는 거리·방위각 CV 필터를 사용했습니다. [v1.1.0 선회 결과](docs/history/hardware-test-2026-11-23-v1.1.0.md).
 
 ## v1.2.0 추가 기능
 
@@ -76,7 +82,7 @@ python -m pc_sim simulate --scenario straight_turn_straight --duration 80
 
 `--port`를 생략하면 프레임만 출력합니다. 총 길이는 약75.49초이므로 기본60초로 실행하면 마지막 구간까지 진행하지 않습니다. `run_sim`은 측정 송신만 담당합니다. v1.1.0 GUI는 고정 방위각 입력을 사용했습니다. 현재 GUI `Tests → Turn + noise`와 CLI `turn-noise`는 저장된 선회 입력을 송신하고 보고를 수집합니다. 기본 `evaluate`는 고정 방위각 시나리오를 유지합니다.
 
-11월23일 STM32 선회 시험은 측정 **755개 모두 대응**, 초기·최종 RESET을 포함한 **보고757개**, 측정 거부·트랙 소실0회를 확인했습니다. 첫2초를 제외한 위치 RMSE는 **전체4.5134m · 선회1.3960m**입니다. 정확도 합격 기준을 별도로 정한 결과는 아니며 이 조건의 관측값입니다. [시험 조건·원시 기록](docs/hardware-test-2026-11-23-v1.1.0.md).
+11월23일 STM32 선회 시험은 측정 **755개 모두 대응**, 초기·최종 RESET을 포함한 **보고757개**, 측정 거부·트랙 소실0회를 확인했습니다. 첫2초를 제외한 위치 RMSE는 **전체4.5134m · 선회1.3960m**입니다. 정확도 합격 기준을 별도로 정한 결과는 아니며 이 조건의 관측값입니다. [시험 조건·원시 기록](docs/history/hardware-test-2026-11-23-v1.1.0.md).
 
 ## 시작하기
 
@@ -127,4 +133,4 @@ PC 시뮬레이터와 GUI 구현에는 AI 코딩 에이전트를 활용했습니
 
 `perf.conf`에서 predict/correct의 실행 cycle을 별도로 누적하고 5초 요약에 표본 수와 최소·평균·최대 ns를 출력합니다. 표본이 없으면 `status=no_samples`를 출력합니다. host/빌드와 STM32 10초 smoke에서 새 출력을 확인했습니다. WCET나 장시간 성능 보장은 아닙니다. [계측 범위·단위·한계](docs/performance-monitoring.md)를 따릅니다.
 
-[2026-11-22 로그 형식·GUI/PC 실보드 회귀](docs/hardware-test-2026-11-22-logging.md)를 참고하세요.
+[2026-11-22 로그 형식·GUI/PC 실보드 회귀](docs/history/hardware-test-2026-11-22-logging.md)를 참고하세요.

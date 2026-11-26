@@ -1,6 +1,6 @@
 # KF/EKF 실보드 비교 데이터
 
-[결과와 그래프](../../hardware-test-2026-11-24-kf-ekf.md) · [집계 CSV](summary.csv) · [집계 JSON](summary.json) · [표본별 데이터](series.csv).
+[결과와 그래프](../../history/hardware-test-2026-11-24-kf-ekf.md) · [집계 CSV](summary.csv) · [집계 JSON](summary.json) · [표본별 데이터](series.csv).
 
 실행 소스: `4a9e6eaad3c3063d99e7821913396e9b53a6da78`. 두 PERF 구성과 일반 KF 복원 이미지의 해시·최종 STATUS를 원시 manifest에 기록했다. `evidence.tar.gz`는 입력·송수신 wire/CSV·console·flash/build 로그·전체 설정·실행 스크립트를 담는다. firmware HEX/ELF 자체는 포함하지 않으며 원래 로컬 기록에 보존한다. 모든 측정은 합성 입력이고 추정 결과는 실제 STM32 출력이다.
 

@@ -16,8 +16,8 @@
 
 완료된 #1(v1.1.0 릴리스)·#2(GUI 영상·분석)는 이미 closed/completed이며 진행 중 목록에서 제외했다. 근거는 [릴리스 기록](release-v1.1.0.md)과 [영상·분석](analysis/2026-11-23/README.md)에 남긴다.
 
-초기 KF/EKF 실보드4회·3,020개 입력 대응과 결과 그래프는 [실보드 비교](hardware-test-2026-11-24-kf-ekf.md)에 보존한다. 후속 [Q 후보·독립 시드·이탈 선회 비교](test-results/ekf-q-board-2026-11-24/README.md)도 완료했으며, #10 전체 완료 조건인 CT-EKF·확장 기동 비교는 남아 있다.
+초기 KF/EKF 실보드4회·3,020개 입력 대응과 결과 그래프는 [실보드 비교](history/hardware-test-2026-11-24-kf-ekf.md)에 보존한다. 후속 [Q 후보·독립 시드·이탈 선회 비교](test-results/ekf-q-board-2026-11-24/README.md)도 완료했으며, #10 전체 완료 조건인 CT-EKF·확장 기동 비교는 남아 있다.
 
-현재 코드와 host/빌드 근거는 [2026-11-24 검증](validation-2026-11-24-estimators.md), 사용법은 [사전 입력](prepared-input.md)·[추정기 설정](estimator-tuning.md)을 따른다. PC 미송신과 RTT는 STM32 불합격이나 기존 v1.1.0 릴리스 차단 조건이 아니다.
+현재 코드와 host/빌드 근거는 [2026-11-24 검증](history/validation-2026-11-24-estimators.md), 사용법은 [사전 입력](prepared-input.md)·[추정기 설정](estimator-tuning.md)을 따른다. PC 미송신과 RTT는 STM32 불합격이나 기존 v1.1.0 릴리스 차단 조건이 아니다.
 
 과거 CRC 2건은 조치 후 비재현·해결 추정/원인 미확정 이력으로 [릴리스 검증과 실패 분석](release-v1.1.0.md)에 보존한다. 3D·JSBSim·공분산 방식 비교는 기존 릴리스의 필수 조건으로 추가하지 않는다.

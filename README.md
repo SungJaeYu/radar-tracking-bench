@@ -12,7 +12,7 @@ V1.2.0 adds build-time polar CV KF / Cartesian CV-EKF / CT-EKF selection, reusab
 
 The expanded STM32 grid compares the three estimators on the same 80 maneuver/noise inputs (seed 6). CV-EKF had the lowest pooled position RMSE (29.27 m); polar KF had the lowest observed estimator time (about 62 µs per predict/correct pair); CT-EKF performed poorly on acceleration/deceleration in this grid. All 55,000 measurements per estimator were matched with zero gate rejections or LOST transitions. This single-seed result is conditional, not a general ranking. [Conditions, figures and provenance](docs/analysis/maneuver-grid-20261126/README.md).
 
-Initial paired board comparison: all 3,020 inputs matched. With the current tuning, Cartesian CV-EKF had smaller pre-turn straight error but larger turn error than polar CV KF. [Results, raw data, and four figures](docs/hardware-test-2026-11-24-kf-ekf.md).
+Initial paired board comparison: all 3,020 inputs matched. With the current tuning, Cartesian CV-EKF had smaller pre-turn straight error but larger turn error than polar CV KF. [Results, raw data, and four figures](docs/history/hardware-test-2026-11-24-kf-ekf.md).
 
 The follow-up adds configurable EKF acceleration variance and a same-input host Q sweep. Default 100 is preserved. The candidates now have 336 host runs and 46 STM32 runs, including initially receding noisy turns; all 34,730 board inputs matched and normal KF was restored. [Independent-seed and board results](docs/test-results/ekf-q-board-2026-11-24/README.md). [Q comparison table and figures](docs/test-results/ekf-q-2026-11-24/README.md).
 
@@ -22,7 +22,7 @@ CT-EKF is implemented with a five-state constant-turn model and an owned 5×5 co
 
 A hardware-in-the-loop testbed for post-detection radar tracking. A PC sends synthetic range and azimuth measurements to an STM32, then compares the returned estimates with known ground truth. It provides a repeatable way to evaluate tracking accuracy, response latency, and recovery from corrupted frames, measurement outliers, and interrupted communication without a physical radar.
 
-[Architecture](EXPLAINER.en.md) · [Board results](#board-results) · [Quick start](#quick-start) · [Scope](#scope-and-follow-up-work)
+[System overview](#system-overview) · [Board results](#board-results) · [Quick start](#quick-start) · [Scope](#scope-and-follow-up-work)
 
 [Project board](https://github.com/users/SungJaeYu/projects/1) · [Open issues](https://github.com/SungJaeYu/radar-tracking-bench/issues) · [Silent GUI replay and analysis](docs/analysis/2026-11-23/README.md)
 
@@ -41,7 +41,13 @@ The firmware owns prediction, gating, Kalman updates, and track lifecycle manage
 | Protocol and recovery | CRC-16, length validation, partial-frame and measurement timeouts, overflow recovery, stale-input rejection |
 | PC tools | Python CLI and PySide6/pyqtgraph GUI, synthetic measurements, noise/outlier injection, TRACK/STATUS decoding, CSV recording and evaluation |
 
-See the [architecture and ownership guide](EXPLAINER.en.md) for thread boundaries, queue behavior, and timing definitions.
+![PC measurement generation, UART exchange, board tracking, report decoding, and CSV evaluation](docs/images/pc-board-flow.en.png)
+
+![Firmware flow through the UART ISR, RX thread, handler, and TX thread](docs/images/firmware-flow.en.png)
+
+The UART ISR stores bytes in the RX ring and signals the RX thread. The RX thread validates frames and copies them into the handler queue together with their board receive time. The handler owns tracking state, the measurement watchdog, and report sequencing. It copies reports into the TX queue for a separate thread to send over UART.
+
+Sensor time drives filter prediction and aligns estimates with ground truth. Board uptime drives queue age and the measurement watchdog. The PC monotonic clock measures round-trip latency. [Thread and queue contract (Korean)](docs/requirements-traceability.md#spec-exec) · [Wire format (Korean)](docs/requirements-traceability.md#spec-wire) · [Timing contract (Korean)](docs/performance-monitoring.md).
 
 <a id="gui-미리보기"></a>
 
@@ -49,7 +55,7 @@ See the [architecture and ownership guide](EXPLAINER.en.md) for thread boundarie
 
 ![GUI comparing synthetic truth and measurements with TRACK estimates returned by the STM32](docs/images/radar-gui-board.png)
 
-The GUI now uses English controls and compares PC ground truth and measurements with estimates decoded from the board's binary TRACK_REPORT. The separate no-board preview mode generates truth and measurements only; it does not simulate board estimates. [Current board evidence](docs/hardware-test-2026-11-23-v1.1.0.md) · [GUI guide — Korean](pc_sim/GUI.md).
+The GUI now uses English controls and compares PC ground truth and measurements with estimates decoded from the board's binary TRACK_REPORT. The separate no-board preview mode generates truth and measurements only; it does not simulate board estimates. [Current board evidence](docs/history/hardware-test-2026-11-23-v1.1.0.md) · [GUI guide — Korean](pc_sim/GUI.md).
 
 ![English GUI in preview mode without a board](docs/images/radar-gui-preview.png)
 
@@ -61,11 +67,11 @@ V1 was completed on **November 19, 2026**. These are recorded observations from 
 
 | Test | Recorded result | Evidence |
 | --- | --- | --- |
-| 30-minute load | Target 50 Hz measurements + 1 Hz STATUS; actual 49.994 Hz. **89,990 measurements, all matched with responses** | [Load run](docs/hardware-test-2026-11-19-performance.md) |
+| 30-minute load | Target 50 Hz measurements + 1 Hz STATUS; actual 49.994 Hz. **89,990 measurements, all matched with responses** | [Load run](docs/history/hardware-test-2026-11-19-performance.md) |
 | PC round-trip latency | **p99 8.049 ms; maximum 34.894 ms** in that load run | [Timing definitions](docs/performance-monitoring.md) |
-| Board processing interval | RX frame completion to TX queue submission: observed maximum **1 ms**, zero over the 20 ms budget | [Load run](docs/hardware-test-2026-11-19-performance.md) |
-| Noise sweep | **100 runs** across noise levels and seeds, with response-integrity checks and RMSE/gate-rejection measurements | [Noise and spike results](docs/hardware-test-2026-11-19-noise-spike.md) |
-| Spike recovery | **49/49 cases passed**, covering single and five-consecutive range/angle spikes | [Noise and spike results](docs/hardware-test-2026-11-19-noise-spike.md) |
+| Board processing interval | RX frame completion to TX queue submission: observed maximum **1 ms**, zero over the 20 ms budget | [Load run](docs/history/hardware-test-2026-11-19-performance.md) |
+| Noise sweep | **100 runs** across noise levels and seeds, with response-integrity checks and RMSE/gate-rejection measurements | [Noise and spike results](docs/history/hardware-test-2026-11-19-noise-spike.md) |
+| Spike recovery | **49/49 cases passed**, covering single and five-consecutive range/angle spikes | [Noise and spike results](docs/history/hardware-test-2026-11-19-noise-spike.md) |
 | Error recovery | CRC/partial frames, RX/TX wire disconnection, forced DRAIN ring overflow, and RX/TX queue saturation | [Verification history](docs/verification-history.md) |
 
 The load run used a stationary target, zero noise, `perf.conf` with DRAIN recovery, and USART6 at 115200 baud/8N1. PC round-trip timing includes USB, UART, board processing, and host waiting. The board interval ends at TX queue submission, before UART transmission completes.
@@ -84,7 +90,7 @@ python -m pc_sim simulate --scenario straight_turn_straight --duration 80
 
 Without `--port`, this prints frames. The scenario ends at about 75.49 s; the default 60 s duration would truncate it. `run_sim` sends measurements but does not collect reports. That v1.1.0 GUI used fixed-azimuth inputs. Current development adds `Tests → Turn + noise` and `python -m pc_sim turn-noise` for saved turn inputs and report collection. The standard `evaluate` command retains fixed-azimuth scenarios.
 
-The November 23 STM32 turn run matched all **755 measurements**, with **757 reports** including two reset events, no rejected measurements or lost tracks. Position RMSE was **4.5134 m overall** and **1.3960 m during the turn**, excluding the first 2 s. These are observations for this run, without an accuracy acceptance threshold. [Conditions and raw evidence](docs/hardware-test-2026-11-23-v1.1.0.md).
+The November 23 STM32 turn run matched all **755 measurements**, with **757 reports** including two reset events, no rejected measurements or lost tracks. Position RMSE was **4.5134 m overall** and **1.3960 m during the turn**, excluding the first 2 s. These are observations for this run, without an accuracy acceptance threshold. [Conditions and raw evidence](docs/history/hardware-test-2026-11-23-v1.1.0.md).
 
 <a id="시작하기"></a>
 
@@ -176,7 +182,7 @@ Python and host C checks are separate from firmware builds and physical-board HI
 
 ## Scope and follow-up work
 
-V1 covers single-target measurement-to-result communication, quantitative tracking evaluation, major error recovery, and timing/resource observations. The [English architecture guide](EXPLAINER.en.md) explains the implemented contracts and their limits.
+V1 covers single-target measurement-to-result communication, quantitative tracking evaluation, major error recovery, and timing/resource observations. [V1 scope and verification (Korean)](docs/roadmap.md#v1-acceptance).
 
 Cartesian CV-EKF and CT-EKF are implemented. The fixed-turn CT comparison and the expanded 80-condition maneuver/noise STM32 comparison are complete; the expanded grid uses one seed, and expanded-scenario GUI evaluation presets remain on issue #10. IMM, multi-target association, BIT/Lock On, and UART hardware-error diagnostics are separate follow-up work. RF processing, ADC/IQ/FFT, and operational certification are outside this project. [Project scope and roadmap — Korean](docs/roadmap.md).
 
@@ -186,10 +192,10 @@ Cartesian CV-EKF and CT-EKF are implemented. The fixed-turn CT comparison and th
 
 I defined the problem, architecture, and validation criteria, and wrote the STM32/Zephyr firmware. I used AI coding tools for the PC simulator, GUI, and test-support implementation. All measurements are synthetic; no operational military data or internal system information is used.
 
-[English architecture](EXPLAINER.en.md) · [한국어 README](README.ko.md) · [Full documentation index — Korean](docs/README.md)
+[한국어 README](README.ko.md) · [Full documentation index — Korean](docs/README.md)
 
 ## Estimator execution timing (2026-11-22)
 
 The `perf.conf` build aggregates predict/correct timer cycles separately and reports sample count and minimum/mean/maximum nanoseconds every five seconds. Aggregates are cumulative since boot; empty aggregates report `status=no_samples`. Host tests, firmware builds, and a 10-second STM32 smoke run validate the output path; these are not WCET or long-duration performance guarantees. See the [measurement contract](docs/performance-monitoring.md) for boundaries and limitations.
 
-The [2026-11-22 log-format regression](docs/hardware-test-2026-11-22-logging.md) covers structured console logs and GUI/PC compatibility.
+The [2026-11-22 log-format regression](docs/history/hardware-test-2026-11-22-logging.md) covers structured console logs and GUI/PC compatibility.

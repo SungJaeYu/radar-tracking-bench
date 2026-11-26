@@ -27,13 +27,13 @@ STM32F746G-DISCO, USART6 PC7(RX)/PC6(TX), FT232R USB-UART, 115200 8N1.
 
 | 단계 | 판정 | 콘솔 원문 | PC wire 기록 |
 |---|---|---|---|
-| `rx_disconnected` | [JSON](test-results/link-loss-2026-11-14/rx_disconnected-results.json) | [로그](test-results/link-loss-2026-11-14/rx_disconnected-console.log) | [TX/RX](test-results/link-loss-2026-11-14/rx_disconnected-traffic.json) |
-| `rx_restored` | [JSON](test-results/link-loss-2026-11-14/rx_restored-results.json) | [로그](test-results/link-loss-2026-11-14/rx_restored-console.log) | [TX/RX](test-results/link-loss-2026-11-14/rx_restored-traffic.json) |
-| `tracking_cut` | [JSON](test-results/link-loss-2026-11-14/tracking_cut-results.json) | [로그](test-results/link-loss-2026-11-14/tracking_cut-console.log) | [TX/RX](test-results/link-loss-2026-11-14/tracking_cut-traffic.json) |
-| `tx_disconnected` | [JSON](test-results/link-loss-2026-11-14/tx_disconnected-results.json) | [로그](test-results/link-loss-2026-11-14/tx_disconnected-console.log) | [TX/RX](test-results/link-loss-2026-11-14/tx_disconnected-traffic.json) |
-| `tx_restored` | [JSON](test-results/link-loss-2026-11-14/tx_restored-results.json) | [로그](test-results/link-loss-2026-11-14/tx_restored-console.log) | [TX/RX](test-results/link-loss-2026-11-14/tx_restored-traffic.json) |
+| `rx_disconnected` | [JSON](../test-results/link-loss-2026-11-14/rx_disconnected-results.json) | [로그](../test-results/link-loss-2026-11-14/rx_disconnected-console.log) | [TX/RX](../test-results/link-loss-2026-11-14/rx_disconnected-traffic.json) |
+| `rx_restored` | [JSON](../test-results/link-loss-2026-11-14/rx_restored-results.json) | [로그](../test-results/link-loss-2026-11-14/rx_restored-console.log) | [TX/RX](../test-results/link-loss-2026-11-14/rx_restored-traffic.json) |
+| `tracking_cut` | [JSON](../test-results/link-loss-2026-11-14/tracking_cut-results.json) | [로그](../test-results/link-loss-2026-11-14/tracking_cut-console.log) | [TX/RX](../test-results/link-loss-2026-11-14/tracking_cut-traffic.json) |
+| `tx_disconnected` | [JSON](../test-results/link-loss-2026-11-14/tx_disconnected-results.json) | [로그](../test-results/link-loss-2026-11-14/tx_disconnected-console.log) | [TX/RX](../test-results/link-loss-2026-11-14/tx_disconnected-traffic.json) |
+| `tx_restored` | [JSON](../test-results/link-loss-2026-11-14/tx_restored-results.json) | [로그](../test-results/link-loss-2026-11-14/tx_restored-console.log) | [TX/RX](../test-results/link-loss-2026-11-14/tx_restored-traffic.json) |
 
-[실행 스크립트](test-results/link-loss-2026-11-14/runner.py)는 당시 절대경로·포트를 보존했다.
+[실행 스크립트](../test-results/link-loss-2026-11-14/runner.py)는 당시 절대경로·포트를 보존했다.
 위 단계명을 인자로 전달하며, 단계마다 표에 지정한 배선 상태를 먼저 맞춘다.
 `tracking_cut`은 `CUT_NOW` 출력 후 RX 선을 분리한다. 최대 120초 동안 송신한다.
 콘솔 원문은 보존하고 판정에서는 알려진 `main alive` heartbeat만 제외했다.

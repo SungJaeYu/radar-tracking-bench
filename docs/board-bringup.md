@@ -73,11 +73,11 @@ python -m pc_sim simulate --port /dev/ttyUSB0 --duration 10 --noise 0 --azimuth-
 재실행 시 INIT이 자동 전송되므로 보드를 재부팅하거나 별도로 수동 INIT을 보낼 필요가 없습니다.
 이진 응답 수집·RMSE는 `python -m pc_sim evaluate run --port /dev/ttyUSB0 --scenario noisy`를 사용합니다. run_sim은 송신 전용입니다.
 
-선회 입력은 `python -m pc_sim simulate --port /dev/ttyUSB0 --scenario straight_turn_straight --duration 80`으로 송신합니다. 약75.49초의 동쪽 직진·우90°선회·남쪽 직진 경로이며 기본60초로는 전체를 실행하지 못합니다. GUI와 `evaluate`는 이 선회 시나리오를 지원하지 않습니다. 영어 GUI의 연결·시작은 `Connection`, `Connect board`, `Start`를 사용합니다. [v1.1.0 선회·GUI 실보드 기록](hardware-test-2026-11-23-v1.1.0.md)은 별도 조건과 결과를 따릅니다.
+선회 입력은 `python -m pc_sim simulate --port /dev/ttyUSB0 --scenario straight_turn_straight --duration 80`으로 송신합니다. 약75.49초의 동쪽 직진·우90°선회·남쪽 직진 경로이며 기본60초로는 전체를 실행하지 못합니다. GUI와 `evaluate`는 이 선회 시나리오를 지원하지 않습니다. 영어 GUI의 연결·시작은 `Connection`, `Connect board`, `Start`를 사용합니다. [v1.1.0 선회·GUI 실보드 기록](history/hardware-test-2026-11-23-v1.1.0.md)은 별도 조건과 결과를 따릅니다.
 
 ## 5. Overflow 복구 재현
 
-기본 DRAIN의 강제 overflow와 정상 복귀는 [전송 오류 시험](hardware-test-2026-11-18-transport-stress.md)에서 확인했습니다. 아래는 재현 시 확인할 항목입니다.
+기본 DRAIN의 강제 overflow와 정상 복귀는 [전송 오류 시험](history/hardware-test-2026-11-18-transport-stress.md)에서 확인했습니다. 아래는 재현 시 확인할 항목입니다.
 
 현재 소프트웨어 RX 버퍼는 256바이트(저장 용량 255바이트), 복구 정책은 drain입니다.
 [UART host 테스트](../fcc_app/tests/test_uart_rx/README.md)는 보드 없이 수행하며,
@@ -101,7 +101,7 @@ STATUS의 overflow 횟수·ISR 폐기 바이트·복구 폐기 바이트를 시�
 Python 테스트, UART/Tracking host C 테스트, 펌웨어 빌드, flash, 실제 보드 로그를 별도 결과로 남깁니다.
 통합 도구의 테스트 통과만으로 새 보드 HIL까지 통과했다고 기록하지 않습니다.
 
-STATUS 왕복 결과: [확장 STATUS 실보드 결과](hardware-test-2026-11-14-status-extended.md). 이후 로그 부하 시험과 최신 host/build 결과는 [검증 기록](verification-history.md)을 따릅니다. [TRACK 실보드](hardware-test-2026-11-18-track.md)와 [CSV·평가·GUI](hardware-test-2026-11-18-evaluation.md)를 확인했습니다. 이전 측정·GUI 기록은 [2026-11-01 검증](hardware-test-2026-11-01.md)에 보존합니다.
+STATUS 왕복 결과: [확장 STATUS 실보드 결과](history/hardware-test-2026-11-14-status-extended.md). 이후 로그 부하 시험과 최신 host/build 결과는 [검증 기록](verification-history.md)을 따릅니다. [TRACK 실보드](history/hardware-test-2026-11-18-track.md)와 [CSV·평가·GUI](history/hardware-test-2026-11-18-evaluation.md)를 확인했습니다. 이전 측정·GUI 기록은 [2026-11-01 검증](history/hardware-test-2026-11-01.md)에 보존합니다.
 
 ### STATUS 통계 확인 (기본 왕복 검증 완료, 재현 절차)
 

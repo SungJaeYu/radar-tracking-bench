@@ -24,12 +24,12 @@
 
 ## 원시 증거
 
-- [DRAIN 결과와 HEX SHA-256](test-results/overflow-kconfig-1e956c5/drain/results.json)
-- [DRAIN UART 바이트](test-results/overflow-kconfig-1e956c5/drain/traffic.json)
-- [DRAIN 콘솔](test-results/overflow-kconfig-1e956c5/drain/console.log)
-- [DISCARD 결과와 HEX SHA-256](test-results/overflow-kconfig-1e956c5/discard/results.json)
-- [DISCARD UART 바이트](test-results/overflow-kconfig-1e956c5/discard/traffic.json)
-- [DISCARD 콘솔](test-results/overflow-kconfig-1e956c5/discard/console.log)
+- [DRAIN 결과와 HEX SHA-256](../test-results/overflow-kconfig-1e956c5/drain/results.json)
+- [DRAIN UART 바이트](../test-results/overflow-kconfig-1e956c5/drain/traffic.json)
+- [DRAIN 콘솔](../test-results/overflow-kconfig-1e956c5/drain/console.log)
+- [DISCARD 결과와 HEX SHA-256](../test-results/overflow-kconfig-1e956c5/discard/results.json)
+- [DISCARD UART 바이트](../test-results/overflow-kconfig-1e956c5/discard/traffic.json)
+- [DISCARD 콘솔](../test-results/overflow-kconfig-1e956c5/discard/console.log)
 
 ## 검증 범위
 
