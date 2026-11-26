@@ -34,8 +34,7 @@ PC의 `time.monotonic()` 송신 시각과 패킷 안의 센서 시각은 서로 
 `Normal stationary measurement rejected`라는 `board_internal` 실패로 기록했다.
 이 분류가 이번에 수정한 문제다.
 
-사용자가 설명한 PC의 동시 작업 부하는 호스트 실행 지연과 부합한다. 다만 당시
-스케줄러 추적이나 각 함수의 진입/복귀 시각은 저장하지 않았다. 따라서 특정 앱,
+당시 스케줄러 추적이나 각 함수의 진입/복귀 시각은 저장하지 않았다. 따라서 특정 앱,
 OS 스케줄링, Python 실행 구간 중 무엇이 정지를 유발했는지까지 확정할 수 없다.
 확인된 것은 **PC write 기록의 공백, 센서 시각 점프, 그에 부합하는 보드 RESET**이다.
 PC write 기록은 물리 UART 선로의 도착 시각도 아니다.
@@ -88,6 +87,6 @@ RESET을 무조건 허용하거나 중단된 30분 시험을 합격시키는 변
 · [전체 Python 결과](python-tests.log) · [수정 전 회귀 결과](regression-before.log).
 
 수정 파일: `fcc_app/tests/test_perf_monitor/board_check.py`, `pc_sim/perf_acceptance.py`,
-`tests/test_perf_monitor.py`, `tests/test_perf_acceptance.py`와 관련 판정/시험 문서.
+`tests/firmware/test_perf_monitor.py`, `tests/evaluation/test_perf_acceptance.py`와 관련 판정/시험 문서.
 펌웨어 빌드·플래시·새 실보드 실행·커밋·푸시·main 병합·태그는 이번 수정에서 하지 않았다.
 v1.1.0의 요청한 연속 부하 검증은 계속 미완료다.

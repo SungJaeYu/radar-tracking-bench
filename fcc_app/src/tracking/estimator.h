@@ -1,13 +1,8 @@
 #ifndef ESTIMATOR_H
 #define ESTIMATOR_H
 
-#include "tracking/kalman_cv.h"
-
-// Independent Kalman filter states for range and azimuth.
-struct estimator {
-    struct kalman_cv_filter range_filter;
-    struct kalman_cv_filter azimuth_filter;
-};
+// Callers use the API below and must not depend on backend-specific members.
+#include "tracking/estimators/estimator_state.h"
 
 // Common estimate returned to callers.
 struct estimator_output {

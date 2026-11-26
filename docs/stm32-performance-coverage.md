@@ -19,7 +19,7 @@
 각 분류는 `passed/failed/inconclusive`다. 누락·빈 표본·중단은 통과가 아니다.
 호스트 RTT 초과와 PC 미송신 슬롯만으로 보드 합격이나 v1.1.0 릴리스를 차단하지 않는다. 요청 프로파일 미충족은 입력원 검증 한계이며 [v1.1.1 PC 시험기 개선](https://github.com/SungJaeYu/radar-tracking-bench/issues/8)으로 관리한다. `passed=true`여도 요청 부하 검증이 미확정일 수 있으므로 `requested_profile_qualification`을 함께 읽는다.
 이전 원시 결과를 새 정책으로 덮어쓰지 않는다. RTT 옵션도20/100ms보다 느슨하게 설정할 수 없다.
-[현재 정책 정정과 종합 검토](review-2026-11-23.md).
+[릴리스 검증과 실패 분석](release-v1.1.0.md).
 
 예정 슬롯 전부 송신과 하드 실시간 주기 정확성은 다르다. 실제 송신률·최대 공백·건너뛴 슬롯도 보고한다.
 호스트가 입력을 덜 제공하면 관측 부하의 보드 결과만 해석할 수 있으며, 요청한 부하 전체의 증거는 미확정이다.
@@ -67,7 +67,7 @@ RX 링 대기는 DWT cycle 차이를 스레드에서 ms로 올림 변환하며 �
 새 자원 정책은 측정 전에 정했으며, 기존 검사 제거 대신 여유 조건을 추가했다.
 ISR·파서·필터 실행 분포를 얻었다고 WCET 요구를 만족한 것으로 판정하지 않는다.
 일반/DEBUG 펌웨어에는 PERF 수집기가 없으며 별도로 빌드한다.
-PERF RX 시각 배열은1KiB, ISR 원시 계측 배열은2KiB를 사용한다. 스케줄러 계측·로그에도 비용이 있다. ISR은 유한 버퍼에 DWT 원시 값을 게시하고 RX 스레드가 집계한다. 공용 collector는 스레드 전용 mutex로 보호하며 히스토그램 계산·snapshot 복사 중 애플리케이션 IRQ 잠금은 사용하지 않는다. 커널 mutex 내부의 짧은 임계구역까지 없어진 것은 아니다. [인터럽트 경로 점검](interrupt-context-audit.md).
+PERF RX 시각 배열은1KiB, ISR 원시 계측 배열은2KiB를 사용한다. 스케줄러 계측·로그에도 비용이 있다. ISR은 유한 버퍼에 DWT 원시 값을 게시하고 RX 스레드가 집계한다. 공용 collector는 스레드 전용 mutex로 보호하며 히스토그램 계산·snapshot 복사 중 애플리케이션 IRQ 잠금은 사용하지 않는다. 커널 mutex 내부의 짧은 임계구역까지 없어진 것은 아니다. [계측 실행 문맥](performance-monitoring.md#인터럽트와-계측-실행-문맥).
 
 모든 요약에 확장 필드가 있어야 하며 idle에서만0표본을 허용한다. 마지막 누적값만 보고 중간 로그 누락을 통과시키지 않는다.
 ISR 계측 버퍼 유실 또는1초 이상 서비스 공백은 `rx_capture_lost`로 실패 처리한다. 모든 요약에 해당 필드가 필요하다.
@@ -91,6 +91,6 @@ ISR 계측 버퍼 유실 또는1초 이상 서비스 공백은 `rx_capture_lost`
 따라서 이 변경은 **계측한 소프트웨어 경로를 더 엄격히 검증하는 설정**이다.
 모든 STM32 성능을 빠짐없이 검증 완료했다는 선언이 아니다.
 
-구현: [runner](../fcc_app/tests/test_perf_monitor/board_check.py), [분류 판정](../pc_sim/perf_acceptance.py).
+구현: [runner](../fcc_app/tests/test_perf_monitor/board_check.py), [분류 판정](../pc_sim/evaluation/perf_acceptance.py).
 실행 증거: [초기 확장 시험과 CRC 중단](test-results/extended-perf-2026-11-23/) · [IRQ 보완 후300초 기록](test-results/irq-safe-perf-2026-11-23/README.md).
-300초 실행은 관측 부하에서 보드 내부·전송·증거를 통과했으며, 예정 슬롯201개 누락으로 요청50Hz 검증은 미확정이다. 원시 기록의 이전 aggregate 판정은 보존하고 [현재 해석](review-2026-11-23.md)을 별도로 따른다. CRC0인 후속 실행은 이전 CRC 오류의 원인을 확정하지 않는다.
+300초 실행은 관측 부하에서 보드 내부·전송·증거를 통과했으며, 예정 슬롯201개 누락으로 요청50Hz 검증은 미확정이다. 원시 기록의 이전 aggregate 판정은 보존하고 [릴리스 검증과 실패 분석](release-v1.1.0.md)을 별도로 따른다. CRC0인 후속 실행은 이전 CRC 오류의 원인을 확정하지 않는다.

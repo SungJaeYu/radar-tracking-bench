@@ -1,0 +1,14 @@
+{
+  "python_tests_passed": 1091,
+  "new_motion_tests": 33,
+  "preset_count": 20,
+  "cli_saved_input_samples": 500,
+  "legacy_sample_hash_checks": 3,
+  "board_test_performed": false,
+  "source_sha256": {
+    "pc_sim/simulation/targets.py": "7089e48deb8fdc3c882c8efb7df25b5abe23eae9a5e17842b38f9e3a54eb2d47",
+    "pc_sim/simulation/prepared_input.py": "de7b4f119efdabc381fe37fb6a4c7b4083e0b91836338b465f6700347e9356f0",
+    "pc_sim/storage/prepared_storage.py": "54d00cf3df8d7e8085b0f93632161f996ba9636ccb931437f4a88715fcc0edf6",
+    "tests/simulation/test_maneuver_models.py": "a57b2f60b912d9212f5c0df66a01e352aa87c7902e4fd7fc24fb14f054bcc0a5"
+  }
+}

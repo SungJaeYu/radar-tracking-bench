@@ -3,54 +3,105 @@
 각 사례의 요구사항·상세 규격 연결과 미검증 항목은 [요구사항 추적표](requirements-traceability.md)를 참고합니다.
 
 현재 테스트 소스를 기준으로 작성한 목록입니다. 테스트를 추가하거나 검증 조건을 바꿀 때 이 문서도 함께 갱신합니다.
-현재 합계는 Python 928개 + subtest 9개, C host 224회 실행입니다. 기본121회(RX45·handler31·TX4·Tracking21·게이트20)와 계측 구성103회(monitor13·RX51·handler32·TX4·자원3)를 포함합니다. CTest 등록 수는204개이며 tracking 한 항목이21개 함수를 실행합니다.
+Python은 1,058개 + subtest 9개입니다. KF/EKF 통합 시 CTest 244회와 ASSERT 비활성 EKF 검증 2회를 실행했습니다. 이후 EKF Q 설정4개를 추가해 동일 구성의 등록 합계는248개이며, 해당 변경의 영향 범위95회+ASSERT 비활성2회를 재검증했습니다. [Q 검증](test-results/ekf-q-2026-11-24/README.md). `tracking` 한 등록 항목 안의22개 함수를 CTest 개수에 다시 더하지 않습니다.
+CT-EKF는 별도 CTest 22개(11사례 × ASSERT 활성·비활성)를 추가하며, 위와 같은 구성의 등록 합계는270개입니다. 이번 CT 변경에서는 기존 기본·CV·PERF 조합을 포함한 CTest 280회와 CT 22회, 총302회를 다시 실행했습니다. 등록 구성에 따른 합계와 실제 실행 회수를 구분합니다. CT 수치 reference와 저장 입력 재생은 별도로 기록합니다. [CT 검증](test-results/ct-ekf-2026-11-24/README.md).
 아래 날짜별 기록의 옛 개수는 당시 결과로 보존합니다.
-케이스 목록과 실제 실행 결과는 구분합니다. 아래 개수는 Python 수집 결과와 C 등록 코드를 기준으로 합니다. 현재 실행 결과·보드 재검증·한계는 [종합 검토](review-2026-11-23.md)를 따릅니다.
+케이스 목록과 실제 실행 결과는 구분합니다. 아래 개수는 Python 수집 결과와 C 등록 코드를 기준으로 합니다. 현재 실행 결과·빌드·한계는 [2026-11-24 검증](validation-2026-11-24-estimators.md), 기존 릴리스의 보드 근거는 [v1.1.0 기록](release-v1.1.0.md)을 따릅니다.
 
 ## 구성과 개수
 
 | 구분 | 위치 | 케이스 수 | 실행 환경 |
 |---|---|---:|---|
-| 수동 송신기·INIT/RESET | `tests/test_frame_sender.py` | 6 | Python, serial 모사 |
-| PC STATUS CLI | `tests/test_status_client.py` | 23 | Python, serial·monotonic clock 모사 |
-| PC 수신 프레임 파서 | `tests/test_frame_parser.py` | 16 | Python, serial I/O 없음 |
-| PC TRACK payload | `tests/test_track_report.py` | 35 | Python, 고정 wire·의미 검증 |
-| 프로토콜·단위 변환 | `tests/test_protocol.py` | 310 | Python |
-| 연속 측정 송신기 | `tests/test_radar_sender.py` | 5 + 내부 subtest 9 | Python, serial·sleep 모사 |
-| 시나리오 실행기 | `tests/test_scenarios.py` | 54 | Python CLI, serial 모사 |
-| 표적 선회·구간 운동 | `tests/test_target_motion.py` | 26 | Python, 원호·구간 경계·입력 검증 |
-| 지연 계측 정수 범위 | `tests/test_perf_latency_guard.py` | 12 | Python + C host, assert 활성/비활성 |
-| GUI 측정·TRACK 표시 모델 | `tests/test_gui_model.py` | 50 | Python |
-| GUI 화면·통신 작업부 | `tests/test_gui.py` | 17 | offscreen Qt, serial 모사 |
-| CRC·인코더·펌웨어 상호운용 | `tests/test_crc_interop.py` | 49 | Python + 실제 C 파서 host 컴파일 |
-| 성능 시험 콘솔·입력 판정 | `tests/test_perf_monitor.py` | 39 | Python, 기록 파싱·입력 불연속·오류 감지; flash/serial 없음 |
-| 성능 분류·증거·부하 판정 | `tests/test_perf_acceptance.py` | 86 | Python, 보드/전송/증거/호스트/요청 부하 분리; 실제 보드 성능 증거 아님 |
-| 로그 부하 wire 판정 | `tests/test_log_stress.py` | 12 | Python, 기록 바이트열만 검사; flash/serial 없음 |
-| 비동기 기록 소유·순서·포화·오류·종료 | `tests/test_async_recording.py` | 9 | Python, 느린 저장·오류 주입; UART 없음 |
-| CSV·RMSE·평가 CLI 경계 | `tests/test_recording.py` | 13 | Python, 시각/수치 기준값; 실제 UART 없음 |
-| 잡음 행렬·평가 실행기 | `tests/test_evaluate.py` | 54 | Python, 시계·UART 모사; 실보드 성능 증거 아님 |
-| 순간 이상치·회복 | `tests/test_outliers.py` | 61 | Python, 계획·측정 주입·원시 보고 평가·실패 판정 |
-| 내부 assert | `tests/test_firmware_assertions.py` | 51 | 실제 C host 자식 프로세스의 SIGABRT·메시지 검증 |
+| 수동 송신기·INIT/RESET | `tests/cli/test_frame_sender.py` | 6 | Python, serial 모사 |
+| PC STATUS CLI | `tests/cli/test_status_client.py` | 23 | Python, serial·monotonic clock 모사 |
+| PC 수신 프레임 파서 | `tests/transport/test_frame_parser.py` | 16 | Python, serial I/O 없음 |
+| PC TRACK payload | `tests/transport/test_track_report.py` | 35 | Python, 고정 wire·의미 검증 |
+| 프로토콜·단위 변환 | `tests/transport/test_protocol.py` | 310 | Python |
+| 연속 측정 송신기 | `tests/cli/test_radar_sender.py` | 5 + 내부 subtest 9 | Python, serial·sleep 모사 |
+| 시나리오 실행기 | `tests/simulation/test_scenarios.py` | 52 | Python CLI, serial 모사 |
+| 표적 선회·구간 운동 | `tests/simulation/test_target_motion.py` | 26 | Python, 원호·구간 경계·입력 검증 |
+| 지연 계측 정수 범위 | `tests/firmware/test_perf_latency_guard.py` | 12 | Python + C host, assert 활성/비활성 |
+| GUI 측정·TRACK 표시 모델 | `tests/simulation/test_gui_model.py` | 50 | Python |
+| GUI 화면·통신 작업부 | `tests/ui/test_gui.py` | 17 | offscreen Qt, serial 모사 |
+| CRC·인코더·펌웨어 상호운용 | `tests/transport/test_crc_interop.py` | 49 | Python + 실제 C 파서 host 컴파일 |
+| 성능 시험 콘솔·입력 판정 | `tests/firmware/test_perf_monitor.py` | 39 | Python, 기록 파싱·입력 불연속·오류 감지; flash/serial 없음 |
+| 성능 분류·증거·부하 판정 | `tests/evaluation/test_perf_acceptance.py` | 86 | Python, 보드/전송/증거/호스트/요청 부하 분리; 실제 보드 성능 증거 아님 |
+| 로그 부하 wire 판정 | `tests/firmware/test_log_stress.py` | 12 | Python, 기록 바이트열만 검사; flash/serial 없음 |
+| 비동기 기록 소유·순서·포화·오류·종료 | `tests/storage/test_async_recording.py` | 9 | Python, 느린 저장·오류 주입; UART 없음 |
+| CSV·RMSE·평가 CLI 경계 | `tests/storage/test_recording.py` | 13 | Python, 시각/수치 기준값; 실제 UART 없음 |
+| 잡음 행렬·평가 실행기 | `tests/evaluation/test_evaluate.py` | 54 | Python, 시계·UART 모사; 실보드 성능 증거 아님 |
+| 순간 이상치·회복 | `tests/simulation/test_outliers.py` | 61 | Python, 계획·측정 주입·원시 보고 평가·실패 판정 |
+| 내부 assert | `tests/firmware/test_firmware_assertions.py` | 60 | 실제 C host 자식 프로세스의 SIGABRT·메시지 검증 |
+| 통합 명령 | `tests/cli/test_main.py` | 20 | host Python; Qt/serial는 필요한 경우 모사 |
+| 모듈 경로·중복 진입점 | `tests/cli/test_pc_sim_layout.py` | 10 | host Python; Qt/serial는 필요한 경우 모사 |
+| 사전 입력 생성 | `tests/simulation/test_prepared_input.py` | 22 | host Python; Qt/serial는 필요한 경우 모사 |
+| 사전 입력 저장·검증 | `tests/storage/test_prepared_storage.py` | 32 | host Python; Qt/serial는 필요한 경우 모사 |
+| 선회 잡음 입력 | `tests/simulation/test_turn_noise.py` | 1 | host Python; Qt/serial는 필요한 경우 모사 |
+| 선회 재생·보고 평가 | `tests/evaluation/test_turn_noise_runner.py` | 9 | host Python; Qt/serial는 필요한 경우 모사 |
+| GUI 평가 패널 | `tests/ui/test_evaluation_panel.py` | 17 | host Python; Qt/serial는 필요한 경우 모사 |
+| GUI 표시·콘솔 | `tests/ui/test_display_helpers.py` | 3 | host Python; Qt/serial는 필요한 경우 모사 |
+| GUI 포트 제안 | `tests/ui/test_port_selection.py` | 3 | host Python; Qt/serial는 필요한 경우 모사 |
+| GUI 섹션 전환 | `tests/ui/test_section_tabs.py` | 1 | host Python; Qt/serial는 필요한 경우 모사 |
+| GUI 선회 프리셋 | `tests/ui/test_turn_preset.py` | 5 | host Python; Qt/serial는 필요한 경우 모사 |
+| KF R 설정·EKF 연결 | `fcc_app/tests/test_tracking` | 4 + 2 CTest | 설정 반영·공통 출력·상태 값 복사 |
+| EKF 예측·보정 | `fcc_app/tests/test_ekf_cv` | 2 CTest + ASSERT 비활성 2회 | host C 수치 회귀 |
+| CT-EKF 수치·연결·lifecycle | `fcc_app/tests/test_ekf_ct` | 22 CTest (11 × ASSERT 0/2) | host C, 기존 시험 수정 없이 추가 |
+| CT 독립 수치 기준 | `docs/test-results/ct-ekf-2026-11-24/numeric_reference.py` | ASSERT별 예측51·보정3·반복10,000단계 | production C ↔ NumPy float64, 중앙차분 Jacobian |
+| 고정 저장 행렬 | `fcc_app/tests/test_matrix` | 1 CTest | host C |
 | 게이팅 설정 행렬 | `fcc_app/tests/test_tracking/src/gating_cases.c` | 20 (5 설정 × 4 사례) | host C |
-| 필터·추적 | `fcc_app/tests/test_tracking` | 21 | host C 또는 Zephyr Ztest |
+| 필터·추적 | `fcc_app/tests/test_tracking` | 22 (하나의 CTest) | host C 또는 Zephyr Ztest |
 | TX 큐·송신 | `fcc_app/tests/test_uart_tx` | 4 | host C, UART·큐·세마포어 모사 |
-| STATUS·TRACK 보고 처리 | `fcc_app/tests/test_frame_handler` | 31 | host C, 통계 조회·TX 제출·로그 캡처·RTOS 모사 |
+| STATUS·TRACK 보고 처리 | `fcc_app/tests/test_frame_handler` | 31 × KF/EKF 두 구성 | host C, 통계 조회·TX 제출·로그 캡처·RTOS 모사 |
 | 성능 계측 | `fcc_app/tests/test_perf_monitor` | 13 | host C, mutex·스택/로그 모사 |
 | scheduler·main 스택 조회 | `fcc_app/tests/test_perf_resources` | 3 | host C, 누적 CPU 값·조회 실패·스택 최소값 모사 |
 | 계측 활성화 회귀 | handler/TX `PERF_TEST_ENABLED=ON` | 32 + 4 | 기존 동작 재실행 및 실제 계측 호출 검증 |
 | RX 계측 활성화 회귀 | RX `PERF_TEST_ENABLED=ON` | 51 (기본45 + 추가6) | DRAIN/DISCARD; ISR 원시 시각 이관·유실·wrap·서비스 공백·복구 정렬 |
 | UART drain·링버퍼 | `fcc_app/tests/test_uart_rx` | 45 (drain 24 + discard 21) | host C, Zephyr API 모사 |
 
-Python은 매개변수 조합을 펼쳐 **928개 항목** (GUI 의존성 설치 시)을 수집합니다. unittest 내부 subtest 9개는 이 수집 항목과 별도로 표시될 수 있습니다.
-Tracking C는 CTest의 `tracking`에서 21개 함수를 실행하며, 게이팅 설정 시험 20개가 별도로 등록됩니다.
+Python은 매개변수 조합을 펼쳐 **1,058개 항목** (GUI 의존성 설치 시)을 수집합니다. unittest 내부 subtest 9개는 이 수집 항목과 별도로 표시될 수 있습니다.
+Tracking C는 CTest의 `tracking`에서22개 함수를 실행하며, 게이트20개·KF 설정4개·EKF 통합2개·EKF Q 설정4개를 더해 CTest31개입니다.
 UART C는 정책별 실행을 CTest에 따로 등록하므로 45개로 표시됩니다. 공통 사례 19개는 두 번 실행합니다.
-`pc_sim/frame_sender.py`는 자동 테스트가 아닌 수동 송신 도구입니다.
+`pc_sim/cli/frame_sender.py`는 자동 테스트가 아닌 수동 송신 도구입니다.
+
+## CT-EKF — 2026-11-24
+
+기존 KF/CV 테스트의 본문·기대값은 유지하고 `test_ekf_ct`를 별도로 추가했습니다.
+각 사례를 ASSERT 비활성(`__ASSERT_ON=0`)과 활성(`2`) 두 실행 파일에 등록합니다.
+
+| 사례 | 확인 내용 |
+|---|---|
+| `ownership` | 초기 공분산을 복사하고 호출자 배열·필터 값 복사와 독립적으로 유지 |
+| `quarter_turn` | 좌·우 90도 선회의 위치·속도와 시계방향 부호 |
+| `noise` | Cartesian 가속도·각가속도 Q의 단위 및 dt 전개 |
+| `zero_interval` | dt=0에서 상태·공분산 불변 |
+| `wrapped` | 방위각 ±π 경계의 짧은 잔차 |
+| `numerical_failure` | 원점·풀 수 없는 innovation·overflow·비유한 상태에서 원본 보존 |
+| `malformed_covariance_dimensions` | 잘못된 공분산 행·열에서 원본 보존 |
+| `nonfinite_covariance` | NaN 공분산에서 예측·보정 원본 보존 |
+| `correction_overflow` | 유한 입력의 보정 overflow에서 원본 보존 |
+| `lifecycle` | 공통 획득·확정·coast·회복·LOST·reset 및 값 복사 |
+| `configuration` | CT 선택·5×5 용량·초기 omega 분산·Q 연결 |
+
+```sh
+cmake -G Ninja -S fcc_app/tests/test_ekf_ct -B /tmp/radar-ct-tests
+cmake --build /tmp/radar-ct-tests
+ctest --test-dir /tmp/radar-ct-tests --output-on-failure
+python docs/test-results/ct-ekf-2026-11-24/numeric_reference.py \
+  --build /tmp/radar-ct-reference --output /tmp/radar-ct-reference/results.json
+```
+
+독립 수치 기준은 float64 상태식·중앙차분 Jacobian·Joseph 행렬 계산과 대조합니다.
+0·근접0·양/음 선회율, 방위각 경계, 반복 갱신 공분산의 고유값을 검사합니다.
+이것은 합성 입력 84개 × 세 필터의 호스트 비교252회 및 실보드18회와 다른 검증입니다.
+CT CTest22개·독립 수치 검증·호스트252회와 실보드18회를 완료했습니다. 실보드 입력13,590개가
+모두 대응했고 게이트 거부·LOST·STATUS 오류는0이었으며 일반 KF를 복구했습니다.
+[설정·정확도·불리한 결과와 한계](test-results/ct-ekf-2026-11-24/README.md)를 함께 읽습니다.
 
 ## 선회·구간 시나리오 — 2026-11-23
 
 선회 기능 추가 당시 `pytest --collect-only -q`에서 Python 820개를 수집했습니다. 이 과거 수집 수는 위 현재 총계와 구분하며 수집은 실행 통과 판정이 아닙니다. `test_target_motion.py` 26개는 직선 호환성, 좌·우 선회 원호, 속력·방향, 작은 선회율, 뱅크/TAS 입력, 구간 경계와 종료를 검사합니다. `test_scenarios.py`에는 모듈·직접 실행 두 방식의 `straight_turn_straight` 종료 검증을 추가했습니다. GUI 영어 표시는 기존 offscreen 회귀에서 확인합니다.
 
-[별도 STM32 선회 시험](hardware-test-2026-11-23-v1.1.0.md)의 측정755개·보고757개 및 RMSE는 host 사례 수에 포함하지 않습니다. GUI·`evaluate`는 선회 입력을 지원하지 않습니다.
+[별도 STM32 선회 시험](hardware-test-2026-11-23-v1.1.0.md)의 측정755개·보고757개 및 RMSE는 host 사례 수에 포함하지 않습니다. 당시 GUI·`evaluate`는 선회 입력을 지원하지 않았습니다. 현재 GUI는 `Turn + noise`에서 선회 전용 실행기를 호출하며 기본 `evaluate`의 모델은 유지합니다.
 
 ## 순간 이상치·복귀 — 2026-11-19 추가
 
@@ -83,7 +134,7 @@ UART C는 정책별 실행을 CTest에 따로 등록하므로 45개로 표시됩
 
 ## Python: 수동 송신기·INIT/RESET
 
-소스: [test_frame_sender.py](../tests/test_frame_sender.py)
+소스: [test_frame_sender.py](../tests/cli/test_frame_sender.py)
 
 | 테스트 함수 | 수 | 입력·검증 내용 |
 |---|---:|---|
@@ -94,7 +145,7 @@ UART C는 정책별 실행을 CTest에 따로 등록하므로 45개로 표시됩
 
 ## Python: 프로토콜·단위 변환
 
-소스: [test_protocol.py](../tests/test_protocol.py)
+소스: [test_protocol.py](../tests/transport/test_protocol.py)
 
 | 테스트 함수 | 수 | 입력·검증 내용 |
 |---|---:|---|
@@ -107,7 +158,7 @@ UART C는 정책별 실행을 CTest에 따로 등록하므로 45개로 표시됩
 
 ## Python: 연속 측정 송신기
 
-소스: [test_radar_sender.py](../tests/test_radar_sender.py), 클래스 `RadarSenderTest`
+소스: [test_radar_sender.py](../tests/cli/test_radar_sender.py), 클래스 `RadarSenderTest`
 
 | 테스트 함수 | 입력·검증 내용 |
 |---|---|
@@ -121,7 +172,7 @@ sleep 호출 검사는 실제 운영체제의 송신 주기 정확도를 보장�
 
 ## Python: 시나리오 실행기
 
-소스: [test_scenarios.py](../tests/test_scenarios.py)
+소스: [test_scenarios.py](../tests/simulation/test_scenarios.py)
 
 | 테스트 함수 | 수 | 입력·검증 내용 |
 |---|---:|---|
@@ -207,7 +258,7 @@ GUI 의존성 설치·실행법은 [GUI 안내](../pc_sim/GUI.md)를 참고합�
 
 ## CRC와 실제 펌웨어 파서 상호운용
 
-소스: [test_crc_interop.py](../tests/test_crc_interop.py). 실제 `frame_parser.c`를 임시 공유 라이브러리로 컴파일합니다.
+소스: [test_crc_interop.py](../tests/transport/test_crc_interop.py). 실제 `frame_parser.c`를 임시 공유 라이브러리로 컴파일합니다.
 호스트 C 컴파일러가 없으면 C 상호운용 사례는 skip됩니다. 컴파일 오류는 실패로 보고합니다.
 
 | 함수 | 수 | 검증 내용 |
@@ -223,7 +274,7 @@ GUI 의존성 설치·실행법은 [GUI 안내](../pc_sim/GUI.md)를 참고합�
 
 ## Python: 로그 부하 기록 판정
 
-소스: [test_log_stress.py](../tests/test_log_stress.py). 실제 [board_check.check_wire](../fcc_app/tests/log_stress/board_check.py)를 실행한다.
+소스: [test_log_stress.py](../tests/firmware/test_log_stress.py). 실제 [board_check.check_wire](../fcc_app/tests/log_stress/board_check.py)를 실행한다.
 
 | 테스트 함수 | 수 | 검증 내용 |
 | --- | ---: | --- |
@@ -263,12 +314,12 @@ ctest --test-dir /tmp/radar-tx-tests --output-on-failure
 개별 실행 예시:
 
 ```sh
-python -m pytest tests/test_protocol.py -q
+python -m pytest tests/transport/test_protocol.py -q
 ctest --test-dir /tmp/radar-uart-tests -R '^test_ring_wraparound$' --output-on-failure
 /tmp/radar-track-tests/track_tests
 ```
 
-마지막 명령은 Tracking 21개 전체를 실행하며 개별 이름을 출력합니다. 계측 활성화 RX/handler/TX와 collector·자원 suite 실행 명령은 [PERF 테스트 안내](../fcc_app/tests/test_perf_monitor/README.md)를 따릅니다.
+마지막 명령은 Tracking 22개 전체를 실행하며 개별 이름을 출력합니다. 계측 활성화 RX/handler/TX와 collector·자원 suite 실행 명령은 [PERF 테스트 안내](../fcc_app/tests/test_perf_monitor/README.md)를 따릅니다.
 macOS 컴파일러·SDK 지정 방법과 모사 범위는 [UART 안내](../fcc_app/tests/test_uart_rx/README.md),
 Zephyr Ztest 실행법은 [Tracking 안내](../fcc_app/tests/test_tracking/README.md)를 참고합니다.
 
@@ -279,7 +330,7 @@ Zephyr Ztest 실행법은 [Tracking 안내](../fcc_app/tests/test_tracking/READM
 GUI 연결·송신·중지·재시작·재연결도 확인했습니다.
 [결과와 검증 한계](hardware-test-2026-11-01.md)를 참고하세요.
 
-이후 기본 DRAIN 강제 overflow·손실 집계·정상 복귀, 큐 포화,30분 부하 관측과 선회·잡음·이상치 평가를 추가했습니다. 최신 구성은 별도의30분 관측 부하와 제어된 호스트 중단 시험을 통과했습니다. 요청50Hz 전체 입력은 슬롯943개 누락으로 미확정입니다. [최신 실보드 결과](test-results/host-input-retest-2026-11-23/README.md)는 이전30분 실행과 구분합니다. [현재 검토](review-2026-11-23.md)와 [검증 이력](verification-history.md)을 구분해 읽습니다. 남은 검증 항목은 다음과 같습니다.
+이후 기본 DRAIN 강제 overflow·손실 집계·정상 복귀, 큐 포화,30분 부하 관측과 선회·잡음·이상치 평가를 추가했습니다. 최신 구성은 별도의30분 관측 부하와 제어된 호스트 중단 시험을 통과했습니다. 요청50Hz 전체 입력은 슬롯943개 누락으로 미확정입니다. [최신 실보드 결과](test-results/host-input-retest-2026-11-23/README.md)는 이전30분 실행과 구분합니다. [릴리스 검증과 실패 분석](release-v1.1.0.md)와 [검증 이력](verification-history.md)을 구분해 읽습니다. 남은 검증 항목은 다음과 같습니다.
 
 - DISCARD 정책의 전체 강제 overflow/프레임 경계 행렬과 물리 IRQ 지연.
 - 실제 RX 스레드 스케줄링의 최악 조건과 UART 하드웨어 overrun/framing/parity.
@@ -396,7 +447,7 @@ STATUS host 10개와 펌웨어 빌드 통과. 펌웨어 수정 없이 테스트 
 
 ## Python: PC 수신 프레임 파서
 
-소스: [test_frame_parser.py](../tests/test_frame_parser.py).
+소스: [test_frame_parser.py](../tests/transport/test_frame_parser.py).
 요구사항: FUT-001의 PC 수신 조립 부분, SPEC-WIRE의 프레임·CRC 규격.
 
 | 테스트 함수 | 사례 수 | 검증 내용 |
@@ -418,7 +469,7 @@ STATUS host 10개와 펌웨어 빌드 통과. 펌웨어 수정 없이 테스트 
 
 ## Python: STATUS 요청·응답 CLI
 
-소스: [test_status_client.py](../tests/test_status_client.py). FUT-001의 CLI 수신에 연결한다.
+소스: [test_status_client.py](../tests/cli/test_status_client.py). FUT-001의 CLI 수신에 연결한다.
 
 | 함수 | 사례 수 | 검증 |
 | --- | --- | --- |
@@ -437,7 +488,7 @@ STATUS host 10개와 펌웨어 빌드 통과. 펌웨어 수정 없이 테스트 
 
 ## GUI STATUS 조회 회귀
 
-[tests/test_gui.py](../tests/test_gui.py)에 다음 네 사례를 추가했습니다.
+[tests/ui/test_gui.py](../tests/ui/test_gui.py)에 다음 네 사례를 추가했습니다.
 
 - `test_gui_status_success_timeout_and_retry_during_measurements`: 분할 응답·값/시각 표시, 중복 클릭 방지, timeout 후 이전 값 유지·재조회, 측정 송신 지속.
 - `test_gui_disconnect_cancels_status`: 조회 중 연결 해제, 대기 상태 해제·버튼 비활성화·포트 정리.
@@ -475,7 +526,7 @@ INIT/RESET 통계 보존, 추적 중 조회와 무수신 timeout을 확인했습
 RX drain 21개·discard 18개 모두 통과. 기존 공통 16개는 양쪽 정책으로 컴파일해 실행합니다.
 신규 discard 사례 `test_discard_drops_complete_frame_and_recovers`,
 `test_discard_drops_completable_partial_frame`는 정상/부분 프레임 폐기·통계 보존·수신 복귀를 확인합니다.
-사용자가 작성한 펌웨어 Kconfig는 수정하지 않고 테스트 설정과 문서를 변경했습니다.
+펌웨어 Kconfig를 유지하고 테스트 설정과 문서를 변경했습니다.
 STM32F746G-DISCO 펌웨어도 DRAIN(`build`)·DISCARD(`build_discard`) 각각 빌드에 성공했고,
 각 빌드의 `.config`에서 선택한 정책만 활성화된 것을 확인했습니다.
 flash·실보드 강제 overflow는 수행하지 않았습니다.
@@ -488,7 +539,7 @@ flash·실보드 강제 overflow는 수행하지 않았습니다.
 
 ## 내부 assert host 검증
 
-`tests/test_firmware_assertions.py`의 6개 사례는 NULL 링버퍼, 잘못된 parser 상태,
+`tests/firmware/test_firmware_assertions.py`의 6개 사례는 NULL 링버퍼, 잘못된 parser 상태,
 무한대 process noise와 NaN/±Inf 각도를 별도 프로세스에서 주입합니다. SIGABRT와 오류 문구를 확인하며
 NDEBUG 정의 상태에서도 host 어댑터가 검사를 유지하는지 검증합니다.
 공통 헤더는 `fcc_app/tests/common/include/zephyr/sys/__assert.h`이고 host target에만 연결합니다.
@@ -550,7 +601,7 @@ GUI offscreen 표시·값 갱신과 후속 flash·실보드 UART 18개 조건, C
 
 ## 모듈별 로깅 전환 (2026-11-14)
 
-[설정·레벨·검증 경계](logging.md). C host 103회, Python 160개 + subtest 9개와
+[펌웨어 로그 설정](board-bringup.md#펌웨어-로그-설정). C host 103회, Python 160개 + subtest 9개와
 일반/디버그 펌웨어 빌드 검증. host는 로그 텍스트를 동기 캡처하며 실제 로깅 스레드·포화를 모사하지 않는다.
 이번 전환의 flash·실보드 출력·부하 검증은 수행하지 않았다.
 
@@ -593,7 +644,7 @@ handler가 초기화·로그·보고를 담당하며 INIT/RESET 및 timeout 보�
 
 | 테스트 | 추가 사례 | 확인 범위 |
 | --- | ---: | --- |
-| [test_track_report.py](../tests/test_track_report.py) | 35 | 고정 BE/float wire, 32바이트 제한, 알려진 state/result/flags, reserved, NaN/Inf, 플래그·상태 일치, 무효 추정 0, timestamp 0과 signed zero |
+| [test_track_report.py](../tests/transport/test_track_report.py) | 35 | 고정 BE/float wire, 32바이트 제한, 알려진 state/result/flags, reserved, NaN/Inf, 플래그·상태 일치, 무효 추정 0, timestamp 0과 signed zero |
 | `test_firmware_track_decodes_in_python` | 5 | 실제 C 인코더·프레임 CRC → PC 파서/디코더, C/Python 상태·결과 enum 값과 필드 순서 |
 | `test_track_monitor_freshness_duplicates_wrap_and_discontinuity` | 1 | 2초 경계, 중복은 신선도 미갱신, uint32 순번 순환/공백·역행 불연속 |
 | `test_track_history_uses_estimate_time_and_breaks_on_invalid_report` | 1 | 입력/추정 시각 분리, 해당 PC 실행 시각에 없는 추정 제외, 무효 결과 곡선 단절 |
@@ -638,7 +689,7 @@ GUI worker의 CSV 생성·종료 회귀도 추가했습니다. [고정 시나리
 
 ## 실보드 성능 계측 시험기
 
-`tests/test_perf_monitor.py`는 콘솔 chunk 분할, 미완성 요약 폐기, 스택 조회 실패 보존, ASSERT/FAULT/로그 유실 감지, 부팅 횟수와 percentile 순위, 구형/확장 로그 호환을 검사한다. `tests/test_perf_acceptance.py`는 보드·전송·증거·호스트 RTT·요청 부하를 분리하고 누락·불일치·한도 경계를 검사한다. 실제 포트 접근은 하지 않는다. 현재 사례 수는 위 표를 따르며 [실보드 실행과 한계](performance-monitoring.md)는 별도 증거다.
+`tests/firmware/test_perf_monitor.py`는 콘솔 chunk 분할, 미완성 요약 폐기, 스택 조회 실패 보존, ASSERT/FAULT/로그 유실 감지, 부팅 횟수와 percentile 순위, 구형/확장 로그 호환을 검사한다. `tests/evaluation/test_perf_acceptance.py`는 보드·전송·증거·호스트 RTT·요청 부하를 분리하고 누락·불일치·한도 경계를 검사한다. 실제 포트 접근은 하지 않는다. 현재 사례 수는 위 표를 따르며 [실보드 실행과 한계](performance-monitoring.md)는 별도 증거다.
 
 호스트 입력 중단 회귀는 write 간격999/1,000ms, 센서 간격1,000/1,001ms,
 설정 timeout, 최초 입력·uint32 wrap, 저장된 실제 불연속, 중단 시 복원 경로를
@@ -647,10 +698,14 @@ GUI worker의 CSV 생성·종료 회귀도 추가했습니다. [고정 시나리
 
 ## 2026-11-22 실행 시간 계측 회귀
 
-[성능 계측 host suite](../fcc_app/tests/test_perf_monitor/README.md)는 collector/reporter 12개, PERF handler 32개, PERF TX 4개를 검증한다. 실행 시간 집계의 0·최댓값·포화, predict/correct 분리, 무표본 출력, 평균 절삭, cycle/ns 출력이 포함된다. `tests/test_perf_latency_guard.py` 12개는 assert 활성/비활성에서 음수 및 정수 범위를 검증하며, `tests/test_perf_monitor.py` 18개는 새 로그가 기존 보드 요약 파싱을 깨뜨리지 않는지도 확인한다. 실보드 실행 시간 정확도를 보증하는 테스트는 아니다.
+[성능 계측 host suite](../fcc_app/tests/test_perf_monitor/README.md)는 collector/reporter 12개, PERF handler 32개, PERF TX 4개를 검증한다. 실행 시간 집계의 0·최댓값·포화, predict/correct 분리, 무표본 출력, 평균 절삭, cycle/ns 출력이 포함된다. `tests/firmware/test_perf_latency_guard.py` 12개는 assert 활성/비활성에서 음수 및 정수 범위를 검증하며, `tests/firmware/test_perf_monitor.py` 18개는 새 로그가 기존 보드 요약 파싱을 깨뜨리지 않는지도 확인한다. 실보드 실행 시간 정확도를 보증하는 테스트는 아니다.
 
 ## 2026-11-23 확장 계측·판정 정정
 
 현재 구성은 위 표의224회 C 실행을 포함한다. RX PERF 두 정책은 ISR/IRQ 잠금 중 collector·uptime 호출 금지, 원시 시각의 스레드 집계, capture 유실과1초 서비스 공백의 sticky 실패, timer wrap과 overflow 복구 후 byte/timestamp 정렬을 검사한다. collector는 pthread mutex로 스레드 갱신·snapshot 일관성을 검사하며 실제 Zephyr IRQ 지연을 증명하지 않는다.
 
-현재 `passed`는 관측 부하의 `board_qualification`(내부·전송·증거)과 같다. 요청50Hz의 전 기간·예정 슬롯 누락0은 `requested_profile_qualification`으로 별도 판정한다. 호스트 RTT p99≤20ms·최대≤100ms는 진단 한도이며 STM32 합격·릴리스 gate가 아니다. 보드20ms·scheduler 비유휴≤80%·앱 스택 여유≥25% 기준은 유지한다. [최종 실행 결과와 변경 내용](review-2026-11-23.md).
+현재 `passed`는 관측 부하의 `board_qualification`(내부·전송·증거)과 같다. 요청50Hz의 전 기간·예정 슬롯 누락0은 `requested_profile_qualification`으로 별도 판정한다. 호스트 RTT p99≤20ms·최대≤100ms는 진단 한도이며 STM32 합격·릴리스 gate가 아니다. 보드20ms·scheduler 비유휴≤80%·앱 스택 여유≥25% 기준은 유지한다. [릴리스 검증과 실패 분석](release-v1.1.0.md).
+
+## 확장 기동 정답 모델 — 2026-11-26
+
+`tests/simulation/test_maneuver_models.py` 33개를 추가하고 전체 Python1,091개가 통과했다. 가속/각가속도 해석해·독립 적분, 구간 경계,20프리셋 저장/읽기, 기존3시나리오 표본 해시 보존을 확인했다. 펌웨어 변경·새 기동 실보드 시험은 없다. [조건·그래프·로그](test-results/maneuver-models-2026-11-25/README.md).

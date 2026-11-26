@@ -14,10 +14,10 @@ import serial
 
 ROOT = Path(__file__).resolve().parents[3]
 sys.path.insert(0, str(ROOT))
-from pc_sim.frame_parser import FrameParser, ParserState
-from pc_sim.protocol import (FRAME_TYPE_STATUS_REPORT, FRAME_TYPE_TRACK_REPORT,
+from pc_sim.transport.frame_parser import FrameParser, ParserState
+from pc_sim.transport.protocol import (FRAME_TYPE_STATUS_REPORT, FRAME_TYPE_TRACK_REPORT,
                              build_init_frame, build_measurement_frame, decode_status_payload)
-from pc_sim.status_client import request_status
+from pc_sim.cli.status_client import request_status
 
 
 def check_wire(records, expected_responses):

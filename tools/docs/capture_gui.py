@@ -10,7 +10,7 @@ ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT))
 
 from PySide6.QtWidgets import QApplication
-from pc_sim.gui import MainWindow
+from pc_sim.ui.gui import MainWindow
 
 
 def wait_for(app, predicate, timeout=20):

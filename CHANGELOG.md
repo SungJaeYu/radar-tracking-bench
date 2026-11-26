@@ -1,5 +1,32 @@
 # Changelog
 
+## v1.2.0 — 2026-11-26
+
+### Added
+
+- Unified `python -m pc_sim` commands and GUI test presets, including configurable straight and turn measurement noise.
+- Saved truth, measurement, sensor timestamp and CRC frames with integrity validation; FIFO replay and segmented position-error evaluation for straight/turn/straight inputs.
+- Build-time polar CV KF / Cartesian CV EKF selection through a shared estimator API, with Kconfig measurement variances and owned fixed-capacity covariance matrices.
+- EKF acceleration variance in Kconfig (default 100 preserved), four configuration checks and a 24-run production-C host sweep over the prior saved board inputs.
+- Cartesian CT-EKF with a five-state constant-turn model, a shared estimator API, and build-time Kconfig selection.
+- Expanded PC truth motion with along-track acceleration and turn-rate acceleration, 20 named presets, and schema-2 storage while retaining schema-1 input support.
+
+### Changed
+
+- Organized simulator and Python tests by responsibility; improved GUI panel sizing, section navigation, position zoom, console ANSI handling and port suggestions.
+- Moved fixed initial covariance to `static const`; aligned filter argument names and extracted input assertions into private helpers omitted when assertions are disabled.
+- Kept conversation, audit and handoff notes in ignored local storage; updated public usage, architecture and verification documents.
+
+### Validation and remaining work
+
+- Python: 1,058 tests and 9 subtests; host C: 244 CTest executions plus 2 assertion-disabled checks. Both STM32 KF and EKF builds pass. [Validation and reproduction](docs/validation-2026-11-24-estimators.md).
+- A separate four-run STM32 comparison matched all 3,020 inputs, with zero gate rejections, lost tracks or communication errors; normal KF firmware was restored. Current CV-EKF tuning reduced pre-turn straight error but increased turn error. An independent float64 calculation reproduced the board results. [Data and figures](docs/hardware-test-2026-11-24-kf-ekf.md).
+- The Q follow-up passes 95 affected CTest executions plus 2 assertion-disabled checks, the same Python suite, and KF/default-EKF/Q=10000 STM32 builds. Host default traces remain byte-identical; 10000 and 30000 are exploratory candidates, with no default retune; that initial sweep did not include a new board run. [Q results](docs/test-results/ekf-q-2026-11-24/README.md).
+- Fixed Q candidates now have 336 independent-seed/control host runs and 44 primary plus 2 post-hoc STM32 runs, including initially receding noisy turns. All 34,730 board measurements matched; normal KF was restored after both campaigns. Raw UART replay, six figures and the two single gate-rejection diagnostics are preserved. [Results and reproduction](docs/test-results/ekf-q-board-2026-11-24/README.md).
+- Current release-candidate regression: 1,091 Python tests; host C tracking 31/31, CT-EKF 22/22 and matrix 1/1 CTest entries. These are host checks, not firmware builds or board qualification.
+- The fixed-turn CT comparison and expanded 80-case STM32 maneuver/noise comparison are separate evidence sets. The expanded grid uses one noise seed and is not a general ranking or WCET result. See [conditions, results and firmware provenance](docs/release-v1.2.0.md).
+- GUI evaluation presets for expanded scenarios and the results-based LinkedIn post/video/images remain open in issue #10. Issue #8's general lockstep/deferred-recording requirements are separate follow-up work.
+
 ## v1.1.0 — 2026-11-23
 
 ### Added
@@ -56,7 +83,7 @@
 - The subsequent 300 s run matched all 14,802 valid measurements with zero board CRC errors
   and passed observed-load board/delivery/evidence checks. Skipped host slots leave requested
   50 Hz qualification inconclusive; earlier CRC events have not recurred after instrumentation corrections; resolution is suspected, but their causal mechanism remains unconfirmed.
-  [Current review, validation and limits](docs/review-2026-11-23.md).
+  [릴리스 검증과 실패 분석](docs/release-v1.1.0.md).
 
 ## v1.0.0 — 2026-11-19
 

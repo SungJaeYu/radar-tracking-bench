@@ -40,7 +40,7 @@ ring overflow=0, ISR dropped bytes=0, recovery discarded bytes=0이다.
 
 스크립트는 당시 절대 경로·포트·출력 위치를 고정한 증거용 스냅샷이다. 재현 시 자신의
 경로와 포트 및 새 출력 디렉터리로 수정한다. 보드를 재부팅/플래시하여 통계를 0으로 만든 후
-UART 스크립트(`normal` 인자), `python -m pc_sim.status_client --port PORT --timeout 2`,
+UART 스크립트(`normal` 인자), `python -m pc_sim status --port PORT --timeout 2`,
 GUI 스크립트 순으로 실행한다. GUI 스크립트는 앞선 오류 주입 결과 1/2/1/0/0/0/0을 기대한다.
 기존 증거 파일을 덮어쓰지 않는다.
 

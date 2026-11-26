@@ -15,22 +15,76 @@ PC에서 추적을 완료한 트랙이나 안정적인 표적 ID를 보드에 �
 ## 데스크톱 GUI
 
 `python -m pip install -r pc_sim/requirements-gui.txt`로 선택 의존성을 설치하고,
-저장소 루트에서 `python -m pc_sim.gui`로 실행합니다.
+저장소 루트에서 `python -m pc_sim gui`로 실행합니다.
 포트 선택·시작/중지·실시간 그래프·보드 콘솔 사용법은 [GUI 안내](GUI.md)를 참고하세요.
 기존 CLI와 펌웨어는 그대로 사용할 수 있습니다.
 
-## 파일 역할
+## 폴더 구조
 
-- `frame_sender.py`: 문자열을 담은 프레임 하나 송신. 기본 TYPE=1로 필터 초기화에 사용. TYPE=5 RESET도 지원.
-- `radar_sender.py`: 거리·방위각 측정값을 생성하고 연속 송신. `--port` 생략 시 출력만 수행.
-- `protocol.py`: 공통 프레임 생성·CRC-16·라디안 변환·STATUS payload 해석.
-- `frame_parser.py`: 수신 프레임 조립과 LEN/CRC 검증.
-- `status_client.py`: STATUS 요청·응답 CLI.
-- `recording.py`: 세션별 CSV 기록과 시각 정렬 평가.
-- `evaluate.py`: 정상·잡음·연속 누락 실보드 수집 및 오프라인 RMSE CLI.
-- `gui.py`, `gui_model.py`, `gui_worker.py`: 화면·측정 생성·포트 소유 및 STATUS 수신.
-- `targets.py`: 등속 표적, 잡음, 미탐지, 클러터 모델.
-- `run_sim.py`: 표적 시나리오를 현재 규격으로 송신하거나 프레임만 출력.
+```text
+pc_sim/
+├── transport/                 # wire 규격과 파서
+│   ├── protocol.py
+│   └── frame_parser.py
+├── simulation/                # Qt 없는 정답·측정·입력 모델
+│   ├── targets.py
+│   ├── gui_model.py            # 고정 방위각 샘플·표시 정책; GUI/evaluate 공용
+│   ├── outliers.py
+│   └── prepared_input.py
+├── storage/                   # 기록과 파일 검증
+│   ├── recording.py
+│   ├── async_recording.py
+│   └── prepared_storage.py
+├── evaluation/                # 평가와 판정
+│   ├── evaluate.py
+│   ├── noise_sweep.py
+│   ├── spike_sweep.py
+│   └── perf_acceptance.py
+├── ui/                        # Qt 화면과 시리얼 작업자
+│   ├── gui.py
+│   ├── gui_worker.py
+│   └── evaluation_panel.py    # 기존 CLI 시험 실행·중단·결과 로그
+├── cli/                       # 명령행 구현
+│   ├── frame_sender.py
+│   ├── radar_sender.py
+│   ├── status_client.py
+│   ├── run_sim.py
+│   └── prepare_input.py
+├── __main__.py                # 통합 명령 선택; 선택한 구현만 불러옴
+└── __init__.py
+```
+
+실행은 `python -m pc_sim COMMAND`로 통일한다. `__main__.py`는 명령을 선택하고
+나머지 인자를 해당 구현에 전달한다. 계산·송신·평가 로직은 하위 폴더에 있다.
+`python -m pc_sim --help`는 명령 목록, `python -m pc_sim COMMAND --help`는 해당 옵션을 표시한다.
+
+| 명령 | 구현 | 역할 |
+|---|---|---|
+| `gui` | `ui/gui.py` | 수동 실행·시각화·CSV 기록·기존 시험 선택 |
+| `simulate` | `cli/run_sim.py` | 직선·선회 시나리오 생성/송신 |
+| `evaluate` | `evaluation/evaluate.py` | 시험 실행 또는 저장 세션 평가 |
+| `noise-sweep`, `spike-sweep` | `evaluation/` | 잡음/이상치 조건별 반복 평가 |
+| `input` | `cli/prepare_input.py` | 사전 생성 입력의 생성/검증 |
+| `status` | `cli/status_client.py` | 보드 상태 조회 |
+| `send-frame`, `send-radar` | `cli/` | 단일 프레임/거리 변화율 측정 송신 |
+
+선택한 구현만 import하므로 기본 도움말·입력 생성에는 Qt나 pyserial이 필요 없다.
+보드 통신은 pyserial, GUI는 GUI 선택 의존성이 필요하다.
+하위 모듈의 직접 실행도 가능하지만 안내 명령은 통합 진입점을 기준으로 한다.
+
+Python import는 역할별 경로를 사용한다.
+
+```python
+from pc_sim.transport.protocol import build_measurement_frame_from_radians
+from pc_sim.simulation.prepared_input import InputSettings, generate_input
+from pc_sim.storage.prepared_storage import load_input, save_input
+```
+
+기존 평면 라이브러리 import(예: `pc_sim.protocol`, `pc_sim.gui_model`)는 새 경로로 변경한다.
+저장소의 유지보수 대상 테스트·보드 시험기·문서 도구는 새 경로를 사용한다.
+과거 `docs/test-results/` 스냅샷은 당시 코드 버전의 증거이므로 수정하지 않는다.
+
+사전 생성 입력의 사용법과 파일 계약은 [입력 안내](../docs/prepared-input.md)를 참고한다.
 
 프레임: `7E | payload 길이 | TYPE | payload | CRC_H | CRC_L`.
 레이더 TYPE은 `2`, payload는 big-endian `uint32 timestamp_ms + uint16 range_m + int32 azimuth_sc`의 10바이트(`struct.pack(">IHi", ...)`)입니다.
@@ -46,13 +100,13 @@ PC에서 추적을 완료한 트랙이나 안정적인 표적 ID를 보드에 �
 source ~/zephyrproject/.venv/bin/activate
 
 # 수동 초기화만 할 때 (아래 연속 송신기는 시작 시 자동 INIT)
-python pc_sim/frame_sender.py init --type 1 --port /dev/cu.usbserial-A5069RR4
+python -m pc_sim send-frame init --type 1 --port /dev/cu.usbserial-A5069RR4
 
 # 잡음 없이 1000m부터 초당 20m씩 접근, 10Hz로 20개 송신
-python pc_sim/radar_sender.py --port /dev/cu.usbserial-A5069RR4 --hz 10 --count 20 --noise 0
+python -m pc_sim send-radar --port /dev/cu.usbserial-A5069RR4 --hz 10 --count 20 --noise 0
 
 # 보드 없이 프레임 출력 확인
-python pc_sim/radar_sender.py --count 3 --noise 0
+python -m pc_sim send-radar --count 3 --noise 0
 ```
 
 포트 이름은 연결 환경에 맞게 바꾸세요. 송신 스크립트는 실행마다 timestamp를 0부터 시작하므로,
@@ -65,7 +119,8 @@ python pc_sim/radar_sender.py --count 3 --noise 0
 python -m pytest
 ```
 
-`tests/`만 실행하며 보드 연결이나 flash를 수행하지 않습니다.
+`tests/` 아래 역할별 폴더를 실행하며 보드 연결이나 flash를 수행하지 않습니다.
+[테스트 폴더와 영역별 실행](../tests/README.md)을 참고하세요.
 펌웨어의 [UART 복구](../fcc_app/tests/test_uart_rx/README.md)와
 [Tracking C 테스트](../fcc_app/tests/test_tracking/README.md)는 별도 CMake/CTest 명령으로 실행합니다.
 
@@ -75,22 +130,22 @@ Python 코드 작성 규칙은 [Python 코딩 스탠다드](../docs/python-codin
 
 ```bash
 # 보드 없이 단일 표적 측정 출력 (실시간 대기 없음)
-python -m pc_sim.run_sim --duration 1 --noise 0 --azimuth-noise 0
+python -m pc_sim simulate --duration 1 --noise 0 --azimuth-noise 0
 
 # 시작 시 INIT을 자동 전송한 뒤 시나리오 실행
-python -m pc_sim.run_sim --port /dev/cu.usbserial-A5069RR4 --duration 10
+python -m pc_sim simulate --port /dev/cu.usbserial-A5069RR4 --duration 10
 
 # 다중표적·클러터는 PC 출력 전용
-python -m pc_sim.run_sim --scenario two_crossing --clutter 0.5 --duration 1
+python -m pc_sim simulate --scenario two_crossing --clutter 0.5 --duration 1
 
 # 미탐지 모델: 각 표적을 스캔마다 80% 확률로 탐지
-python -m pc_sim.run_sim --pd 0.8 --duration 1
+python -m pc_sim simulate --pd 0.8 --duration 1
 
 # 일정 선회: TAS 200 m/s, 오른쪽 뱅크 30도, 동쪽으로 출발 (보드 없이 출력)
-python -m pc_sim.run_sim --scenario single_turn --duration 1 --noise 0 --azimuth-noise 0
+python -m pc_sim simulate --scenario single_turn --duration 1 --noise 0 --azimuth-noise 0
 
 # 직진 10초 → 오른쪽 90도 선회 → 직진 10초 (약 75.49초에서 자동 종료)
-python -m pc_sim.run_sim --scenario straight_turn_straight --duration 80 --noise 0 --azimuth-noise 0
+python -m pc_sim simulate --scenario straight_turn_straight --duration 80 --noise 0 --azimuth-noise 0
 ```
 
 - `--port` 생략은 출력 전용이며, 보드 동작을 모사하는 mock 추적기가 아닙니다.
@@ -152,7 +207,7 @@ STATUS_REPORT로 overflow 횟수와 소프트웨어 폐기 바이트를 조회�
 보드 TX(PC6) → USB-UART RXD 연결도 필요합니다.
 
 ```sh
-python -m pc_sim.status_client --port PORT --timeout 2
+python -m pc_sim status --port PORT --timeout 2
 ```
 
 기본 baud는 115200이며 `--baud`로 지정할 수 있습니다. 요청 payload는 `00`입니다.
@@ -169,7 +224,7 @@ Frame timeouts, Queue drops와 링 overflow·ISR 폐기 바이트·복구 폐기
 - parser 자체에는 바이트 간 timeout이 없습니다. 이 CLI는 거래 전체 timeout으로 대기를 종료합니다.
 - STATUS는 오류 통계이며 실제 BIT 결과는 아닙니다. [실보드 CLI·GUI 왕복](../docs/hardware-test-2026-11-12-status.md)을 확인했습니다.
 
-기존 `python pc_sim/frame_sender.py status --type 3 --port PORT`는 요청만 보내는 도구입니다.
+기존 `python -m pc_sim send-frame status --type 3 --port PORT`는 요청만 보내는 도구입니다.
 GUI의 STATUS 탭에서도 수동 조회할 수 있습니다. 연결 중에는 CLI가 같은 포트를 열지 않도록 합니다.
 
 ## TYPE 요청·보고 구분
@@ -246,10 +301,10 @@ GUI 화면은 해당 로깅 회귀에 포함하지 않았습니다. 이후 [로�
 GUI를 닫아 UART를 단독 사용한 뒤 저장소 루트에서 실행합니다. `PORT`를 실제 어댑터 경로로 바꿉니다.
 
 ```sh
-python -m pc_sim.evaluate run --port PORT --scenario normal --output runs
-python -m pc_sim.evaluate run --port PORT --scenario noisy --output runs
-python -m pc_sim.evaluate run --port PORT --scenario dropout --output runs
-python -m pc_sim.evaluate report runs/SESSION --warmup-ms 2000
+python -m pc_sim evaluate run --port PORT --scenario normal --output runs
+python -m pc_sim evaluate run --port PORT --scenario noisy --output runs
+python -m pc_sim evaluate run --port PORT --scenario dropout --output runs
+python -m pc_sim evaluate report runs/SESSION --warmup-ms 2000
 ```
 
 기본값은 seed42·센서 시간축 10Hz·120개, 초기 1000m·-5m/s·고정 방위각15도입니다.
@@ -289,19 +344,19 @@ PC 왕복 시간에는 USB·OS·read polling·CSV flush 비용이 포함됩니�
 
 ```sh
 # UART·파일 생성 없이 모든 설정과 생성 표본을 검증하고 계획 출력
-python -m pc_sim.noise_sweep --dry-run
+python -m pc_sim noise-sweep --dry-run
 
 # GUI/다른 CLI의 데이터 포트를 닫고 실행
-python -m pc_sim.noise_sweep --port PORT --output runs
+python -m pc_sim noise-sweep --port PORT --output runs
 
 # 같은 잡음 행렬에 1.5초 연속 누락 추가
-python -m pc_sim.noise_sweep --port PORT --scenario dropout --output runs
+python -m pc_sim noise-sweep --port PORT --scenario dropout --output runs
 
 # 조건을 줄인 실행 예
-python -m pc_sim.noise_sweep --port PORT --range-noise 0 8 30 --azimuth-noise-deg 0 1 3 --seeds 0 1 2
+python -m pc_sim noise-sweep --port PORT --range-noise 0 8 30 --azimuth-noise-deg 0 1 3 --seeds 0 1 2
 
 # 거리·각도 잡음을 동시에 주는 개별 실행
-python -m pc_sim.evaluate run --port PORT --range-noise 8 --azimuth-noise-deg 1 --seed 7
+python -m pc_sim evaluate run --port PORT --range-noise 8 --azimuth-noise-deg 1 --seed 7
 ```
 
 100회 기본 행렬은 센서 구간만 합쳐20분이고 초기화·마지막 수집·호스트 I/O 시간을 더하면 더 오래 걸립니다. 누락 시험은 별도100회입니다. 동일 seed·조건은 같은 측정열을 생성하며, 각도 잡음0에서는 기존 seed42 거리 측정열을 유지합니다. 단위가 `run_sim --azimuth-noise`(rad)와 다르므로 이 명령의 `--azimuth-noise-deg`는 도 단위를 사용합니다.
@@ -334,20 +389,20 @@ python -m pc_sim.evaluate run --port PORT --range-noise 8 --azimuth-noise-deg 1 
 
 ```sh
 # 보드·파일 접근 없이49회 계획과 wire 범위를 검사
-python -m pc_sim.spike_sweep --dry-run
+python -m pc_sim spike-sweep --dry-run
 
 # 전체 실보드 실행: PORT를 데이터 USB-UART 포트로 변경
-python -m pc_sim.spike_sweep --port PORT --output runs
+python -m pc_sim spike-sweep --port PORT --output runs
 
 # 짧은 확인: 대조군 + 거리500m + 각도45°, 각각 단발성 = 3회
-python -m pc_sim.spike_sweep --port PORT --range-offsets 500 --angle-offsets-deg 45 --lengths 1
+python -m pc_sim spike-sweep --port PORT --range-offsets 500 --angle-offsets-deg 45 --lengths 1
 ```
 
 49회는 측정 구간만9분48초이며 초기화·마지막 수집·호스트 I/O 시간이 추가됩니다. GUI 등 다른 프로그램이 같은 데이터 포트를 열지 않도록 합니다. 펌웨어 알고리즘·Q/R 설정 변경은 없습니다.
 
 **회복 기준:** 기본값은 CONFIRMED·UPDATED·현재 입력 시각과 일치하는 유효 추정이 거리 오차2m 이하·각도 최단 오차0.2° 이하로3표본 연속 나오는 것입니다. 프로젝트 시험용 기준이며 외부 요구사항이나 기존 실측에서 보장된 값이 아닙니다. `--recovery-range-m`, `--recovery-angle-deg`, `--recovery-hold`로 실행 전에 바꾸고 metadata에 남깁니다. 최초 주입 직전3표본도 이 오차 범위에서 정상 추적 중인지 확인합니다.
 
-`sweep.json`을 사용하는 잡음 시험과 달리, 이 실행은 상위 폴더에 **`spikes.json`**을 저장합니다. 각 하위 세션은 같은 CSV·metadata·`evaluation.json` 형식을 사용합니다. 개별 세션을 `python -m pc_sim.evaluate report runs/SESSION`으로 다시 평가하면 spike 항목도 재계산합니다.
+`sweep.json`을 사용하는 잡음 시험과 달리, 이 실행은 상위 폴더에 **`spikes.json`**을 저장합니다. 각 하위 세션은 같은 CSV·metadata·`evaluation.json` 형식을 사용합니다. 개별 세션을 `python -m pc_sim evaluate report runs/SESSION`으로 다시 평가하면 spike 항목도 재계산합니다.
 
 - 첫 주입 처리 결과, 주입 구간 게이트 거부 개수, 일반 평가의 전체 트랙 시작/LOST 횟수·응답 대응·순번을 기록합니다.
 - 주입 시작부터 실행 끝까지의 최대 거리/각도 추정 오차와 추정 불가 표본 수를 남깁니다. 무효·누락·중복 응답이나 오래된 추정은 회복 연속 횟수를 끊습니다.
@@ -358,4 +413,26 @@ python -m pc_sim.spike_sweep --port PORT --range-offsets 500 --angle-offsets-deg
 
 **준비·검증 상태:** 실제 C handler/필터의48개 조합을 host에서 실행했고 모사 UART로 주입·기록·재평가·실패 보존을 검증했습니다. 기본49회 STM32 시험도 모두 통과했습니다. [센서 시간축 복귀·경계 판정·원시 기록](../docs/hardware-test-2026-11-19-noise-spike.md). 기본 잡음100회도 별도로 기록했으며 누락100회는 이번 범위에 포함하지 않았습니다.
 
-콘솔 본문은 `항목: key=value` 형식이며 단위는 키에 표시합니다. GUI 콘솔은 원문을 표시하고, 보드 추정값·STATUS는 이진 프레임을 해석하므로 로그 문자열에 의존하지 않습니다. [로그 형식](../docs/logging.md)을 참고하세요.
+콘솔 본문은 `항목: key=value` 형식이며 단위는 키에 표시합니다. GUI 콘솔은 원문을 표시하고, 보드 추정값·STATUS는 이진 프레임을 해석하므로 로그 문자열에 의존하지 않습니다. [펌웨어 로그 설정](../docs/board-bringup.md#펌웨어-로그-설정)을 참고하세요.
+
+### 선회 잡음 보드 평가
+
+```sh
+python -m pc_sim turn-noise --port PORT --input runs/inputs/turn-noisy-42 --output runs/turn-noise-board
+```
+
+`--input`을 생략하면 직진10초→우90°선회→직진10초, 거리 잡음 σ10 m,
+방위각 잡음 σ0.01 rad, 10 Hz, seed42의 전체 입력755개를 생성한다.
+`--noise 3 --azimuth-noise 0.002`처럼 거리(m)·방위각(rad) 표준편차를 바꿀 수 있다. 입력 파일을 지정하면 저장된 CRC 프레임을 그대로 송신하며, 잡음 옵션을 동시에 지정하면 오류로 거부한다. 저장한 입력을 송신 중 다시 변형하지 않는다.
+각 실행 폴더의 `input/`에 사용한 정답·측정값·프레임을 보존한다.
+
+송신 후 dt 동안 수신하는 FIFO 정책으로 입력을 생략하거나 밀린 입력을 몰아서 보내지 않는다.
+센서 시각은 저장값이며 실제 벽시계 실행은 I/O 비용과 호스트 지연만큼 늘어날 수 있다.
+이는 정밀한 10 Hz 부하 인증이나 lockstep 구현이 아니다. 한 데이터 포트만 사용하며,
+다른 GUI/CLI 연결은 먼저 해제한다. 현재 보드 펌웨어를 사용하고 자동 flash하지 않는다.
+
+`evaluation.json`은 기존 거리/각도 평가와 미터 단위 위치 RMSE·최대오차를
+전체·선회 전·선회·선회 후로 출력한다. STARTED 이후2초는 워밍업으로 제외한다.
+`integrity_ok`는 입력/보고 대응·PC 파서·STATUS 증가량 등의 무결성 검사이며
+정확도 합격 판정은 아니다. 정확도 기준은 아직 정의하지 않았다.
+중단·예외 시 `metadata.json`의 `complete=false`와 부분 CSV를 유지한다.

@@ -1,0 +1,8 @@
+{
+  "acceleration_variance": 100,
+  "angular_acceleration_variance_scaled_1e9": 10000000,
+  "initial_turn_rate_variance_scaled_1e9": 10000000,
+  "selection_case": "nominal42",
+  "selection_rmse_m": 14.858613477494233,
+  "rule": "minimum nominal42 position RMSE after 2s; full coverage and no LOST on baseline42 and nominal42"
+}

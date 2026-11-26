@@ -15,13 +15,13 @@ import serial
 
 ROOT = Path(__file__).resolve().parents[3]
 sys.path.insert(0, str(ROOT))
-from pc_sim.frame_parser import FrameParser
-from pc_sim.gui_model import Settings, make_sample
-from pc_sim.protocol import (build_init_frame, build_measurement_frame, encode_frame,
+from pc_sim.transport.frame_parser import FrameParser
+from pc_sim.simulation.gui_model import Settings, make_sample
+from pc_sim.transport.protocol import (build_init_frame, build_measurement_frame, encode_frame,
                              decode_status_payload, decode_track_payload)
-from pc_sim.async_recording import AsyncRecorder
-from pc_sim.perf_acceptance import evaluate_acceptance, STACK_ALLOCATED, STACK_MARGINS, ACCEPTANCE_REVISION
-from pc_sim.status_client import request_status
+from pc_sim.storage.async_recording import AsyncRecorder
+from pc_sim.evaluation.perf_acceptance import evaluate_acceptance, STACK_ALLOCATED, STACK_MARGINS, ACCEPTANCE_REVISION
+from pc_sim.cli.status_client import request_status
 
 # Match radar_processor.c: a larger forward sensor interval clears the track.
 MAX_SENSOR_INTERVAL_MS = 1000
@@ -182,18 +182,18 @@ def run(args):
                 'host_input_interruption_policy': 'stop inconclusive before steady-input response checks',
                 'board_receive_timeout_ms': receive_timeout_ms,
                 'sensor_prediction_interval_limit_ms': MAX_SENSOR_INTERVAL_MS,
-                'acceptance_sha256': hashlib.sha256((ROOT / 'pc_sim/perf_acceptance.py').read_bytes()).hexdigest(),
+                'acceptance_sha256': hashlib.sha256((ROOT / 'pc_sim/evaluation/perf_acceptance.py').read_bytes()).hexdigest(),
                 'pc_rtt_limits_ms': {'p99': args.pc_rtt_p99_ms, 'max': args.pc_rtt_max_ms},
                 'source_commit': subprocess.check_output([args.git, 'rev-parse', 'HEAD'], cwd=ROOT, text=True).strip(),
                 'script_sha256': hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
                 'recording_mode': 'bounded-worker', 'recording_queue_capacity': 1024,
-                'recording_sha256': hashlib.sha256((ROOT / 'pc_sim/async_recording.py').read_bytes()).hexdigest(),
+                'recording_sha256': hashlib.sha256((ROOT / 'pc_sim/storage/async_recording.py').read_bytes()).hexdigest(),
                 'data_port': args.data_port, 'console_port': args.console_port}
     for build in ('build_perf', 'build'):
         metadata[build + '_elf_sha256'] = hashlib.sha256((ROOT / build / 'zephyr/zephyr.elf').read_bytes()).hexdigest()
         (args.output / (build + '.config')).write_text((ROOT / build / 'zephyr/.config').read_text())
     (args.output / 'metadata.json').write_text(json.dumps(metadata, indent=2) + '\n')
-    (args.output / 'acceptance-snapshot.py').write_bytes((ROOT / 'pc_sim/perf_acceptance.py').read_bytes())
+    (args.output / 'acceptance-snapshot.py').write_bytes((ROOT / 'pc_sim/evaluation/perf_acceptance.py').read_bytes())
     (args.output / 'runner-snapshot.py').write_bytes(Path(__file__).read_bytes())
     checks, reports, statuses, sent_at, latencies, send_times = [], [], [], {}, [], []
     snapshot_parser = PerfConsole()

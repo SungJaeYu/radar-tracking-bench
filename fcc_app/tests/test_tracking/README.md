@@ -1,11 +1,12 @@
 # Tracking C regression tests
 
-현재 `kalman_cv`, `estimator`, `angle_utils`, `gating`, `track`, `measurement_message` 구현을 직접
+현재 `kf_cv_1d`, `estimator`, `angle_utils`, `gating`, `track`, `measurement_message` 구현을 직접
 컴파일합니다. 예전 Cartesian `kalman_state` 테스트를 대체합니다.
 
 검증 범위:
 - semicircle 수신 변환, radian wrap 및 gating
 - CV 예측·보정, 공분산 계산, 정지 표적 수렴
+- 2×2 KF 공분산의 초기 행렬 복사·지역 변수 수명·필터 값 복사 독립성
 - 예측 함수의 원본·수명주기 보존, 반환 공분산·timestamp 및 uint32 순환
 - TENTATIVE / CONFIRMED / COASTING / LOST 전환
 - 명시적 초기화·재시작과 EMPTY/LOST에서 hit/miss 호출 보존
@@ -23,8 +24,23 @@ cmake --build /tmp/radar-track-tests
 ctest --test-dir /tmp/radar-track-tests --output-on-failure
 ```
 
-실행 파일 `track_tests`를 직접 실행하면 21개 개별 테스트 이름을 볼 수 있습니다.
+실행 파일 `track_tests`를 직접 실행하면 22개 개별 테스트 이름을 볼 수 있습니다.
 호스트 실행은 Zephyr 스레드, UART, 보드 동작을 검증하지 않습니다.
+기존 KF 테스트 본문을 유지하며, 같은 빌드에서 EKF adapter의 기본/변경 R,
+Cartesian 직선 예측, 극좌표 출력·속도 변환, ±π 잔차, 상태 값 복사와 lifecycle을 별도 검사합니다.
+EKF Q 설정은 `0·100·10000·2147483647` 네 실행 파일에서 x/y 공분산 증가를 독립 계산식과
+비교합니다. 기존 테스트 기대값은 유지합니다. 현재 CTest는 총31개입니다.
+선택과 초기 P/Q 계약은 [추정기 설정](../../../docs/estimator-tuning.md)을 참고합니다.
+
+실제 processor·TRACK 보고 회귀를 EKF로도 실행하려면:
+
+```sh
+cmake -G Ninja -S fcc_app/tests/test_frame_handler -B /tmp/radar-handler-ekf-tests -DRADAR_TEST_EKF_CV=ON
+cmake --build /tmp/radar-handler-ekf-tests
+ctest --test-dir /tmp/radar-handler-ekf-tests --output-on-failure
+```
+
+기본 OFF에서는 기존 KF를 검사합니다. 이 옵션은 host 테스트용이며 펌웨어는 Kconfig로 선택합니다.
 링버퍼 크기·overflow drain 복구는 별도의 [UART host 테스트](../test_uart_rx/README.md)에서 검증합니다.
 해당 테스트 역시 실제 보드 IRQ 타이밍이나 하드웨어 수신 성공을 보장하지 않습니다.
 
@@ -56,13 +72,14 @@ Zephyr native_sim 또는 STM32 보드 실행 결과는 별도로 구분해야 �
 - `test_correction_rejects_invalid_innovation_covariance`: s=0, 음수, 임계값 이하, NaN, ±Inf에서 선형·각도 보정이 필터를 변경하지 않음.
 
 CTest에 10초 제한을 두어 반복문으로 되돌아갈 때 무한 대기를 검출합니다.
-NaN·±Inf 각도 입력의 assert 실패는 `tests/test_firmware_assertions.py`에서 자식 프로세스로 검증합니다.
+NaN·±Inf 각도 입력의 assert 실패는 `tests/firmware/test_firmware_assertions.py`에서 자식 프로세스로 검증합니다.
 
 ## 게이트 설정 행렬
 
-host 모드는 기존 `track_tests` 21개와 아래 20개를 실행합니다. CTest 등록 항목은 총 21개입니다.
+host 모드는 기존 `track_tests` 22개 함수와 아래 게이트20개, KF 설정4개, EKF 통합2개,
+EKF Q 설정4개를 실행합니다. `track_tests`는 한 항목으로 등록하므로 CTest 총31개입니다.
 `gating_cases.c`가 실제 `gating.c`·`angle_utils.c`를 설정별 실행 파일로 빌드합니다.
-Zephyr Ztest는 기존 21개를 기본 설정으로 실행하며 host 전용 행렬은 포함하지 않습니다.
+Zephyr Ztest는 기존 22개를 기본 설정으로 실행하며 host 전용 행렬은 포함하지 않습니다.
 
 | 실행 파일 | 거리 half-width (m) | 각도 half-width (°) |
 |---|---:|---:|
@@ -106,4 +123,4 @@ the intermediate prediction result enum was removed.
 - `test_prediction_interval_and_noise_matrix`: dt5값 × Q4값 × 속도3값, 총60조합. double 기준값·공분산 대칭/양의 준정부호를 확인합니다.
 - `test_correction_noise_and_residual_matrix`: R5값 × 측정5값, 총25조합. 양·음·0 innovation과 보정 후 값·공분산을 검증하고 innovation covariance 하한 바로 위도 확인합니다.
 
-NaN·±Inf·분산 음수·R=0·dt<0은 [내부 assert 시험](../../../tests/test_firmware_assertions.py)에서 자식 프로세스로 실행합니다. host assert 어댑터의 검증이며 일반 펌웨어의 assert 활성 여부와 구분합니다.
+NaN·±Inf·분산 음수·R=0·dt<0은 [내부 assert 시험](../../../tests/firmware/test_firmware_assertions.py)에서 자식 프로세스로 실행합니다. host assert 어댑터의 검증이며 일반 펌웨어의 assert 활성 여부와 구분합니다.

@@ -1,0 +1,1413 @@
+{
+  "builds": [
+    {
+      "command": [
+        "/usr/bin/clang",
+        "-shared",
+        "-fPIC",
+        "-O0",
+        "-ffp-contract=off",
+        "-std=c11",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-I/Users/yuseungjae/Desktop/radar-track-fcc-hil/docs/test-results/ekf-q-2026-11-24/include",
+        "-I/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/tests/common/include",
+        "-I/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/src",
+        "-D__ASSERT_ON=0",
+        "-DCONFIG_RADAR_MEASUREMENT_TIMEOUT_MS=1000",
+        "-DCONFIG_RADAR_RANGE_GATE_M=100",
+        "-DCONFIG_RADAR_AZIMUTH_GATE_DEG=10",
+        "-DCONFIG_RADAR_RANGE_MEASUREMENT_VARIANCE_M_SQUARED=25",
+        "-DCONFIG_RADAR_AZIMUTH_MEASUREMENT_VARIANCE_RAD_SQUARED_SCALED_1E9=1218470",
+        "-DCONFIG_RADAR_ESTIMATOR_EKF_CT=1",
+        "-DMATRIX_MAX_ROWS=5U",
+        "-DMATRIX_MAX_COLUMNS=5U",
+        "-DCONFIG_RADAR_CT_ACCELERATION_VARIANCE_M_SQUARED_PER_S_FOURTH=10",
+        "-DCONFIG_RADAR_CT_ANGULAR_ACCELERATION_VARIANCE_RAD_SQUARED_PER_S_FOURTH_SCALED_1E9=1000",
+        "-DCONFIG_RADAR_CT_INITIAL_TURN_RATE_VARIANCE_RAD_SQUARED_PER_S_SQUARED_SCALED_1E9=10000000",
+        "/Users/yuseungjae/Desktop/radar-track-fcc-hil/docs/test-results/ekf-q-2026-11-24/replay.c",
+        "/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/src/application/radar_processor.c",
+        "/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/src/tracking/estimators/cartesian_ct_ekf.c",
+        "/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/src/tracking/estimators/filters/ekf_ct_2d.c",
+        "/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/src/tracking/angle_utils.c",
+        "/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/src/tracking/gating.c",
+        "/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/src/tracking/track.c",
+        "/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/src/common/matrix.c",
+        "/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/src/protocol/measurement_message.c",
+        "-lm",
+        "-o",
+        "/Users/yuseungjae/Desktop/radar-track-fcc-hil/runs/ct-ekf-final-20261124/host-build/ct-10-1000/replay.dylib"
+      ],
+      "library_sha256": "04a98c6df79b979a27d7e69056162d335ee6eaca5f889921ccb971426bd3c709",
+      "sources": {
+        "docs/test-results/ekf-q-2026-11-24/replay.c": "72262a5c519e63dd714e7a016ff154a56e104fe522b51ae8e5c029c856bf23a0",
+        "fcc_app/src/application/radar_processor.c": "850f89e4d4f9c1edc9059c501a4f409e7de86564911e2d32112707de59091830",
+        "fcc_app/src/tracking/estimators/cartesian_ct_ekf.c": "79169f4cc4bc768a0b7755a83046d544d4c7824fafe7a3d8bfb6303cc3351e94",
+        "fcc_app/src/tracking/estimators/filters/ekf_ct_2d.c": "7ff9cc7e4fffac1676104643c33958a4a845eeeacc4d0e2a6054814eb655cd9b",
+        "fcc_app/src/tracking/angle_utils.c": "a982efca95d49ce703810b0ed6231595f9262a28df94c035da2783d7dd17bceb",
+        "fcc_app/src/tracking/gating.c": "ecc6edf5a79bdab7cd5836a98a4ccb40affc6332bf94fbdb0e2b18f805e83dbd",
+        "fcc_app/src/tracking/track.c": "2f4e037c6bd8a792590829ea683e57a07b4191f40a1152d9afc206cb2914048a",
+        "fcc_app/src/common/matrix.c": "25385cb51001a6b42810cdda292a57d94733b2e1835074e2db2e5171387f5f9c",
+        "fcc_app/src/protocol/measurement_message.c": "4cc5916615f4116f8f0c37f74cc4afd245cc321d493ce040d1ec1f4fc610518b"
+      }
+    },
+    {
+      "command": [
+        "/usr/bin/clang",
+        "-shared",
+        "-fPIC",
+        "-O0",
+        "-ffp-contract=off",
+        "-std=c11",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-I/Users/yuseungjae/Desktop/radar-track-fcc-hil/docs/test-results/ekf-q-2026-11-24/include",
+        "-I/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/tests/common/include",
+        "-I/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/src",
+        "-D__ASSERT_ON=0",
+        "-DCONFIG_RADAR_MEASUREMENT_TIMEOUT_MS=1000",
+        "-DCONFIG_RADAR_RANGE_GATE_M=100",
+        "-DCONFIG_RADAR_AZIMUTH_GATE_DEG=10",
+        "-DCONFIG_RADAR_RANGE_MEASUREMENT_VARIANCE_M_SQUARED=25",
+        "-DCONFIG_RADAR_AZIMUTH_MEASUREMENT_VARIANCE_RAD_SQUARED_SCALED_1E9=1218470",
+        "-DCONFIG_RADAR_ESTIMATOR_EKF_CT=1",
+        "-DMATRIX_MAX_ROWS=5U",
+        "-DMATRIX_MAX_COLUMNS=5U",
+        "-DCONFIG_RADAR_CT_ACCELERATION_VARIANCE_M_SQUARED_PER_S_FOURTH=10",
+        "-DCONFIG_RADAR_CT_ANGULAR_ACCELERATION_VARIANCE_RAD_SQUARED_PER_S_FOURTH_SCALED_1E9=100000",
+        "-DCONFIG_RADAR_CT_INITIAL_TURN_RATE_VARIANCE_RAD_SQUARED_PER_S_SQUARED_SCALED_1E9=10000000",
+        "/Users/yuseungjae/Desktop/radar-track-fcc-hil/docs/test-results/ekf-q-2026-11-24/replay.c",
+        "/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/src/application/radar_processor.c",
+        "/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/src/tracking/estimators/cartesian_ct_ekf.c",
+        "/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/src/tracking/estimators/filters/ekf_ct_2d.c",
+        "/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/src/tracking/angle_utils.c",
+        "/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/src/tracking/gating.c",
+        "/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/src/tracking/track.c",
+        "/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/src/common/matrix.c",
+        "/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/src/protocol/measurement_message.c",
+        "-lm",
+        "-o",
+        "/Users/yuseungjae/Desktop/radar-track-fcc-hil/runs/ct-ekf-final-20261124/host-build/ct-10-100000/replay.dylib"
+      ],
+      "library_sha256": "0aebb96ce4ffe702a0a1258b033807d80f5381accc9bf30e78136ae772e2c954",
+      "sources": {
+        "docs/test-results/ekf-q-2026-11-24/replay.c": "72262a5c519e63dd714e7a016ff154a56e104fe522b51ae8e5c029c856bf23a0",
+        "fcc_app/src/application/radar_processor.c": "850f89e4d4f9c1edc9059c501a4f409e7de86564911e2d32112707de59091830",
+        "fcc_app/src/tracking/estimators/cartesian_ct_ekf.c": "79169f4cc4bc768a0b7755a83046d544d4c7824fafe7a3d8bfb6303cc3351e94",
+        "fcc_app/src/tracking/estimators/filters/ekf_ct_2d.c": "7ff9cc7e4fffac1676104643c33958a4a845eeeacc4d0e2a6054814eb655cd9b",
+        "fcc_app/src/tracking/angle_utils.c": "a982efca95d49ce703810b0ed6231595f9262a28df94c035da2783d7dd17bceb",
+        "fcc_app/src/tracking/gating.c": "ecc6edf5a79bdab7cd5836a98a4ccb40affc6332bf94fbdb0e2b18f805e83dbd",
+        "fcc_app/src/tracking/track.c": "2f4e037c6bd8a792590829ea683e57a07b4191f40a1152d9afc206cb2914048a",
+        "fcc_app/src/common/matrix.c": "25385cb51001a6b42810cdda292a57d94733b2e1835074e2db2e5171387f5f9c",
+        "fcc_app/src/protocol/measurement_message.c": "4cc5916615f4116f8f0c37f74cc4afd245cc321d493ce040d1ec1f4fc610518b"
+      }
+    },
+    {
+      "command": [
+        "/usr/bin/clang",
+        "-shared",
+        "-fPIC",
+        "-O0",
+        "-ffp-contract=off",
+        "-std=c11",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-I/Users/yuseungjae/Desktop/radar-track-fcc-hil/docs/test-results/ekf-q-2026-11-24/include",
+        "-I/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/tests/common/include",
+        "-I/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/src",
+        "-D__ASSERT_ON=0",
+        "-DCONFIG_RADAR_MEASUREMENT_TIMEOUT_MS=1000",
+        "-DCONFIG_RADAR_RANGE_GATE_M=100",
+        "-DCONFIG_RADAR_AZIMUTH_GATE_DEG=10",
+        "-DCONFIG_RADAR_RANGE_MEASUREMENT_VARIANCE_M_SQUARED=25",
+        "-DCONFIG_RADAR_AZIMUTH_MEASUREMENT_VARIANCE_RAD_SQUARED_SCALED_1E9=1218470",
+        "-DCONFIG_RADAR_ESTIMATOR_EKF_CT=1",
+        "-DMATRIX_MAX_ROWS=5U",
+        "-DMATRIX_MAX_COLUMNS=5U",
+        "-DCONFIG_RADAR_CT_ACCELERATION_VARIANCE_M_SQUARED_PER_S_FOURTH=10",
+        "-DCONFIG_RADAR_CT_ANGULAR_ACCELERATION_VARIANCE_RAD_SQUARED_PER_S_FOURTH_SCALED_1E9=10000000",
+        "-DCONFIG_RADAR_CT_INITIAL_TURN_RATE_VARIANCE_RAD_SQUARED_PER_S_SQUARED_SCALED_1E9=10000000",
+        "/Users/yuseungjae/Desktop/radar-track-fcc-hil/docs/test-results/ekf-q-2026-11-24/replay.c",
+        "/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/src/application/radar_processor.c",
+        "/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/src/tracking/estimators/cartesian_ct_ekf.c",
+        "/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/src/tracking/estimators/filters/ekf_ct_2d.c",
+        "/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/src/tracking/angle_utils.c",
+        "/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/src/tracking/gating.c",
+        "/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/src/tracking/track.c",
+        "/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/src/common/matrix.c",
+        "/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/src/protocol/measurement_message.c",
+        "-lm",
+        "-o",
+        "/Users/yuseungjae/Desktop/radar-track-fcc-hil/runs/ct-ekf-final-20261124/host-build/ct-10-10000000/replay.dylib"
+      ],
+      "library_sha256": "f332067ad15c7898284a8e2456b101aba37d81870d9095ea5f536d99cf171502",
+      "sources": {
+        "docs/test-results/ekf-q-2026-11-24/replay.c": "72262a5c519e63dd714e7a016ff154a56e104fe522b51ae8e5c029c856bf23a0",
+        "fcc_app/src/application/radar_processor.c": "850f89e4d4f9c1edc9059c501a4f409e7de86564911e2d32112707de59091830",
+        "fcc_app/src/tracking/estimators/cartesian_ct_ekf.c": "79169f4cc4bc768a0b7755a83046d544d4c7824fafe7a3d8bfb6303cc3351e94",
+        "fcc_app/src/tracking/estimators/filters/ekf_ct_2d.c": "7ff9cc7e4fffac1676104643c33958a4a845eeeacc4d0e2a6054814eb655cd9b",
+        "fcc_app/src/tracking/angle_utils.c": "a982efca95d49ce703810b0ed6231595f9262a28df94c035da2783d7dd17bceb",
+        "fcc_app/src/tracking/gating.c": "ecc6edf5a79bdab7cd5836a98a4ccb40affc6332bf94fbdb0e2b18f805e83dbd",
+        "fcc_app/src/tracking/track.c": "2f4e037c6bd8a792590829ea683e57a07b4191f40a1152d9afc206cb2914048a",
+        "fcc_app/src/common/matrix.c": "25385cb51001a6b42810cdda292a57d94733b2e1835074e2db2e5171387f5f9c",
+        "fcc_app/src/protocol/measurement_message.c": "4cc5916615f4116f8f0c37f74cc4afd245cc321d493ce040d1ec1f4fc610518b"
+      }
+    },
+    {
+      "command": [
+        "/usr/bin/clang",
+        "-shared",
+        "-fPIC",
+        "-O0",
+        "-ffp-contract=off",
+        "-std=c11",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-I/Users/yuseungjae/Desktop/radar-track-fcc-hil/docs/test-results/ekf-q-2026-11-24/include",
+        "-I/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/tests/common/include",
+        "-I/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/src",
+        "-D__ASSERT_ON=0",
+        "-DCONFIG_RADAR_MEASUREMENT_TIMEOUT_MS=1000",
+        "-DCONFIG_RADAR_RANGE_GATE_M=100",
+        "-DCONFIG_RADAR_AZIMUTH_GATE_DEG=10",
+        "-DCONFIG_RADAR_RANGE_MEASUREMENT_VARIANCE_M_SQUARED=25",
+        "-DCONFIG_RADAR_AZIMUTH_MEASUREMENT_VARIANCE_RAD_SQUARED_SCALED_1E9=1218470",
+        "-DCONFIG_RADAR_ESTIMATOR_EKF_CT=1",
+        "-DMATRIX_MAX_ROWS=5U",
+        "-DMATRIX_MAX_COLUMNS=5U",
+        "-DCONFIG_RADAR_CT_ACCELERATION_VARIANCE_M_SQUARED_PER_S_FOURTH=100",
+        "-DCONFIG_RADAR_CT_ANGULAR_ACCELERATION_VARIANCE_RAD_SQUARED_PER_S_FOURTH_SCALED_1E9=1000",
+        "-DCONFIG_RADAR_CT_INITIAL_TURN_RATE_VARIANCE_RAD_SQUARED_PER_S_SQUARED_SCALED_1E9=10000000",
+        "/Users/yuseungjae/Desktop/radar-track-fcc-hil/docs/test-results/ekf-q-2026-11-24/replay.c",
+        "/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/src/application/radar_processor.c",
+        "/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/src/tracking/estimators/cartesian_ct_ekf.c",
+        "/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/src/tracking/estimators/filters/ekf_ct_2d.c",
+        "/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/src/tracking/angle_utils.c",
+        "/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/src/tracking/gating.c",
+        "/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/src/tracking/track.c",
+        "/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/src/common/matrix.c",
+        "/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/src/protocol/measurement_message.c",
+        "-lm",
+        "-o",
+        "/Users/yuseungjae/Desktop/radar-track-fcc-hil/runs/ct-ekf-final-20261124/host-build/ct-100-1000/replay.dylib"
+      ],
+      "library_sha256": "6fd923c9c05c278080d373fb10f9f68676c8b0134557c7d3338dd7f6de4fef9e",
+      "sources": {
+        "docs/test-results/ekf-q-2026-11-24/replay.c": "72262a5c519e63dd714e7a016ff154a56e104fe522b51ae8e5c029c856bf23a0",
+        "fcc_app/src/application/radar_processor.c": "850f89e4d4f9c1edc9059c501a4f409e7de86564911e2d32112707de59091830",
+        "fcc_app/src/tracking/estimators/cartesian_ct_ekf.c": "79169f4cc4bc768a0b7755a83046d544d4c7824fafe7a3d8bfb6303cc3351e94",
+        "fcc_app/src/tracking/estimators/filters/ekf_ct_2d.c": "7ff9cc7e4fffac1676104643c33958a4a845eeeacc4d0e2a6054814eb655cd9b",
+        "fcc_app/src/tracking/angle_utils.c": "a982efca95d49ce703810b0ed6231595f9262a28df94c035da2783d7dd17bceb",
+        "fcc_app/src/tracking/gating.c": "ecc6edf5a79bdab7cd5836a98a4ccb40affc6332bf94fbdb0e2b18f805e83dbd",
+        "fcc_app/src/tracking/track.c": "2f4e037c6bd8a792590829ea683e57a07b4191f40a1152d9afc206cb2914048a",
+        "fcc_app/src/common/matrix.c": "25385cb51001a6b42810cdda292a57d94733b2e1835074e2db2e5171387f5f9c",
+        "fcc_app/src/protocol/measurement_message.c": "4cc5916615f4116f8f0c37f74cc4afd245cc321d493ce040d1ec1f4fc610518b"
+      }
+    },
+    {
+      "command": [
+        "/usr/bin/clang",
+        "-shared",
+        "-fPIC",
+        "-O0",
+        "-ffp-contract=off",
+        "-std=c11",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-I/Users/yuseungjae/Desktop/radar-track-fcc-hil/docs/test-results/ekf-q-2026-11-24/include",
+        "-I/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/tests/common/include",
+        "-I/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/src",
+        "-D__ASSERT_ON=0",
+        "-DCONFIG_RADAR_MEASUREMENT_TIMEOUT_MS=1000",
+        "-DCONFIG_RADAR_RANGE_GATE_M=100",
+        "-DCONFIG_RADAR_AZIMUTH_GATE_DEG=10",
+        "-DCONFIG_RADAR_RANGE_MEASUREMENT_VARIANCE_M_SQUARED=25",
+        "-DCONFIG_RADAR_AZIMUTH_MEASUREMENT_VARIANCE_RAD_SQUARED_SCALED_1E9=1218470",
+        "-DCONFIG_RADAR_ESTIMATOR_EKF_CT=1",
+        "-DMATRIX_MAX_ROWS=5U",
+        "-DMATRIX_MAX_COLUMNS=5U",
+        "-DCONFIG_RADAR_CT_ACCELERATION_VARIANCE_M_SQUARED_PER_S_FOURTH=100",
+        "-DCONFIG_RADAR_CT_ANGULAR_ACCELERATION_VARIANCE_RAD_SQUARED_PER_S_FOURTH_SCALED_1E9=100000",
+        "-DCONFIG_RADAR_CT_INITIAL_TURN_RATE_VARIANCE_RAD_SQUARED_PER_S_SQUARED_SCALED_1E9=10000000",
+        "/Users/yuseungjae/Desktop/radar-track-fcc-hil/docs/test-results/ekf-q-2026-11-24/replay.c",
+        "/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/src/application/radar_processor.c",
+        "/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/src/tracking/estimators/cartesian_ct_ekf.c",
+        "/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/src/tracking/estimators/filters/ekf_ct_2d.c",
+        "/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/src/tracking/angle_utils.c",
+        "/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/src/tracking/gating.c",
+        "/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/src/tracking/track.c",
+        "/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/src/common/matrix.c",
+        "/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/src/protocol/measurement_message.c",
+        "-lm",
+        "-o",
+        "/Users/yuseungjae/Desktop/radar-track-fcc-hil/runs/ct-ekf-final-20261124/host-build/ct-100-100000/replay.dylib"
+      ],
+      "library_sha256": "cd11a2a2c74815f8bd18de5582d35ea9512e1c2fba45cf0351cf166ca2105493",
+      "sources": {
+        "docs/test-results/ekf-q-2026-11-24/replay.c": "72262a5c519e63dd714e7a016ff154a56e104fe522b51ae8e5c029c856bf23a0",
+        "fcc_app/src/application/radar_processor.c": "850f89e4d4f9c1edc9059c501a4f409e7de86564911e2d32112707de59091830",
+        "fcc_app/src/tracking/estimators/cartesian_ct_ekf.c": "79169f4cc4bc768a0b7755a83046d544d4c7824fafe7a3d8bfb6303cc3351e94",
+        "fcc_app/src/tracking/estimators/filters/ekf_ct_2d.c": "7ff9cc7e4fffac1676104643c33958a4a845eeeacc4d0e2a6054814eb655cd9b",
+        "fcc_app/src/tracking/angle_utils.c": "a982efca95d49ce703810b0ed6231595f9262a28df94c035da2783d7dd17bceb",
+        "fcc_app/src/tracking/gating.c": "ecc6edf5a79bdab7cd5836a98a4ccb40affc6332bf94fbdb0e2b18f805e83dbd",
+        "fcc_app/src/tracking/track.c": "2f4e037c6bd8a792590829ea683e57a07b4191f40a1152d9afc206cb2914048a",
+        "fcc_app/src/common/matrix.c": "25385cb51001a6b42810cdda292a57d94733b2e1835074e2db2e5171387f5f9c",
+        "fcc_app/src/protocol/measurement_message.c": "4cc5916615f4116f8f0c37f74cc4afd245cc321d493ce040d1ec1f4fc610518b"
+      }
+    },
+    {
+      "command": [
+        "/usr/bin/clang",
+        "-shared",
+        "-fPIC",
+        "-O0",
+        "-ffp-contract=off",
+        "-std=c11",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-I/Users/yuseungjae/Desktop/radar-track-fcc-hil/docs/test-results/ekf-q-2026-11-24/include",
+        "-I/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/tests/common/include",
+        "-I/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/src",
+        "-D__ASSERT_ON=0",
+        "-DCONFIG_RADAR_MEASUREMENT_TIMEOUT_MS=1000",
+        "-DCONFIG_RADAR_RANGE_GATE_M=100",
+        "-DCONFIG_RADAR_AZIMUTH_GATE_DEG=10",
+        "-DCONFIG_RADAR_RANGE_MEASUREMENT_VARIANCE_M_SQUARED=25",
+        "-DCONFIG_RADAR_AZIMUTH_MEASUREMENT_VARIANCE_RAD_SQUARED_SCALED_1E9=1218470",
+        "-DCONFIG_RADAR_ESTIMATOR_EKF_CT=1",
+        "-DMATRIX_MAX_ROWS=5U",
+        "-DMATRIX_MAX_COLUMNS=5U",
+        "-DCONFIG_RADAR_CT_ACCELERATION_VARIANCE_M_SQUARED_PER_S_FOURTH=100",
+        "-DCONFIG_RADAR_CT_ANGULAR_ACCELERATION_VARIANCE_RAD_SQUARED_PER_S_FOURTH_SCALED_1E9=10000000",
+        "-DCONFIG_RADAR_CT_INITIAL_TURN_RATE_VARIANCE_RAD_SQUARED_PER_S_SQUARED_SCALED_1E9=10000000",
+        "/Users/yuseungjae/Desktop/radar-track-fcc-hil/docs/test-results/ekf-q-2026-11-24/replay.c",
+        "/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/src/application/radar_processor.c",
+        "/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/src/tracking/estimators/cartesian_ct_ekf.c",
+        "/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/src/tracking/estimators/filters/ekf_ct_2d.c",
+        "/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/src/tracking/angle_utils.c",
+        "/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/src/tracking/gating.c",
+        "/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/src/tracking/track.c",
+        "/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/src/common/matrix.c",
+        "/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/src/protocol/measurement_message.c",
+        "-lm",
+        "-o",
+        "/Users/yuseungjae/Desktop/radar-track-fcc-hil/runs/ct-ekf-final-20261124/host-build/ct-100-10000000/replay.dylib"
+      ],
+      "library_sha256": "132dac4ca77c24de069438e4eb597fb4be3a4615c8944e8fb8ae551066b34f22",
+      "sources": {
+        "docs/test-results/ekf-q-2026-11-24/replay.c": "72262a5c519e63dd714e7a016ff154a56e104fe522b51ae8e5c029c856bf23a0",
+        "fcc_app/src/application/radar_processor.c": "850f89e4d4f9c1edc9059c501a4f409e7de86564911e2d32112707de59091830",
+        "fcc_app/src/tracking/estimators/cartesian_ct_ekf.c": "79169f4cc4bc768a0b7755a83046d544d4c7824fafe7a3d8bfb6303cc3351e94",
+        "fcc_app/src/tracking/estimators/filters/ekf_ct_2d.c": "7ff9cc7e4fffac1676104643c33958a4a845eeeacc4d0e2a6054814eb655cd9b",
+        "fcc_app/src/tracking/angle_utils.c": "a982efca95d49ce703810b0ed6231595f9262a28df94c035da2783d7dd17bceb",
+        "fcc_app/src/tracking/gating.c": "ecc6edf5a79bdab7cd5836a98a4ccb40affc6332bf94fbdb0e2b18f805e83dbd",
+        "fcc_app/src/tracking/track.c": "2f4e037c6bd8a792590829ea683e57a07b4191f40a1152d9afc206cb2914048a",
+        "fcc_app/src/common/matrix.c": "25385cb51001a6b42810cdda292a57d94733b2e1835074e2db2e5171387f5f9c",
+        "fcc_app/src/protocol/measurement_message.c": "4cc5916615f4116f8f0c37f74cc4afd245cc321d493ce040d1ec1f4fc610518b"
+      }
+    },
+    {
+      "command": [
+        "/usr/bin/clang",
+        "-shared",
+        "-fPIC",
+        "-O0",
+        "-ffp-contract=off",
+        "-std=c11",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-I/Users/yuseungjae/Desktop/radar-track-fcc-hil/docs/test-results/ekf-q-2026-11-24/include",
+        "-I/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/tests/common/include",
+        "-I/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/src",
+        "-D__ASSERT_ON=0",
+        "-DCONFIG_RADAR_MEASUREMENT_TIMEOUT_MS=1000",
+        "-DCONFIG_RADAR_RANGE_GATE_M=100",
+        "-DCONFIG_RADAR_AZIMUTH_GATE_DEG=10",
+        "-DCONFIG_RADAR_RANGE_MEASUREMENT_VARIANCE_M_SQUARED=25",
+        "-DCONFIG_RADAR_AZIMUTH_MEASUREMENT_VARIANCE_RAD_SQUARED_SCALED_1E9=1218470",
+        "-DCONFIG_RADAR_ESTIMATOR_EKF_CT=1",
+        "-DMATRIX_MAX_ROWS=5U",
+        "-DMATRIX_MAX_COLUMNS=5U",
+        "-DCONFIG_RADAR_CT_ACCELERATION_VARIANCE_M_SQUARED_PER_S_FOURTH=1000",
+        "-DCONFIG_RADAR_CT_ANGULAR_ACCELERATION_VARIANCE_RAD_SQUARED_PER_S_FOURTH_SCALED_1E9=1000",
+        "-DCONFIG_RADAR_CT_INITIAL_TURN_RATE_VARIANCE_RAD_SQUARED_PER_S_SQUARED_SCALED_1E9=10000000",
+        "/Users/yuseungjae/Desktop/radar-track-fcc-hil/docs/test-results/ekf-q-2026-11-24/replay.c",
+        "/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/src/application/radar_processor.c",
+        "/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/src/tracking/estimators/cartesian_ct_ekf.c",
+        "/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/src/tracking/estimators/filters/ekf_ct_2d.c",
+        "/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/src/tracking/angle_utils.c",
+        "/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/src/tracking/gating.c",
+        "/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/src/tracking/track.c",
+        "/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/src/common/matrix.c",
+        "/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/src/protocol/measurement_message.c",
+        "-lm",
+        "-o",
+        "/Users/yuseungjae/Desktop/radar-track-fcc-hil/runs/ct-ekf-final-20261124/host-build/ct-1000-1000/replay.dylib"
+      ],
+      "library_sha256": "0b81cb092ae4176ff8fed97dc075e73ea58a26b0cbec1fb3cf1e846d7fb455a3",
+      "sources": {
+        "docs/test-results/ekf-q-2026-11-24/replay.c": "72262a5c519e63dd714e7a016ff154a56e104fe522b51ae8e5c029c856bf23a0",
+        "fcc_app/src/application/radar_processor.c": "850f89e4d4f9c1edc9059c501a4f409e7de86564911e2d32112707de59091830",
+        "fcc_app/src/tracking/estimators/cartesian_ct_ekf.c": "79169f4cc4bc768a0b7755a83046d544d4c7824fafe7a3d8bfb6303cc3351e94",
+        "fcc_app/src/tracking/estimators/filters/ekf_ct_2d.c": "7ff9cc7e4fffac1676104643c33958a4a845eeeacc4d0e2a6054814eb655cd9b",
+        "fcc_app/src/tracking/angle_utils.c": "a982efca95d49ce703810b0ed6231595f9262a28df94c035da2783d7dd17bceb",
+        "fcc_app/src/tracking/gating.c": "ecc6edf5a79bdab7cd5836a98a4ccb40affc6332bf94fbdb0e2b18f805e83dbd",
+        "fcc_app/src/tracking/track.c": "2f4e037c6bd8a792590829ea683e57a07b4191f40a1152d9afc206cb2914048a",
+        "fcc_app/src/common/matrix.c": "25385cb51001a6b42810cdda292a57d94733b2e1835074e2db2e5171387f5f9c",
+        "fcc_app/src/protocol/measurement_message.c": "4cc5916615f4116f8f0c37f74cc4afd245cc321d493ce040d1ec1f4fc610518b"
+      }
+    },
+    {
+      "command": [
+        "/usr/bin/clang",
+        "-shared",
+        "-fPIC",
+        "-O0",
+        "-ffp-contract=off",
+        "-std=c11",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-I/Users/yuseungjae/Desktop/radar-track-fcc-hil/docs/test-results/ekf-q-2026-11-24/include",
+        "-I/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/tests/common/include",
+        "-I/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/src",
+        "-D__ASSERT_ON=0",
+        "-DCONFIG_RADAR_MEASUREMENT_TIMEOUT_MS=1000",
+        "-DCONFIG_RADAR_RANGE_GATE_M=100",
+        "-DCONFIG_RADAR_AZIMUTH_GATE_DEG=10",
+        "-DCONFIG_RADAR_RANGE_MEASUREMENT_VARIANCE_M_SQUARED=25",
+        "-DCONFIG_RADAR_AZIMUTH_MEASUREMENT_VARIANCE_RAD_SQUARED_SCALED_1E9=1218470",
+        "-DCONFIG_RADAR_ESTIMATOR_EKF_CT=1",
+        "-DMATRIX_MAX_ROWS=5U",
+        "-DMATRIX_MAX_COLUMNS=5U",
+        "-DCONFIG_RADAR_CT_ACCELERATION_VARIANCE_M_SQUARED_PER_S_FOURTH=1000",
+        "-DCONFIG_RADAR_CT_ANGULAR_ACCELERATION_VARIANCE_RAD_SQUARED_PER_S_FOURTH_SCALED_1E9=100000",
+        "-DCONFIG_RADAR_CT_INITIAL_TURN_RATE_VARIANCE_RAD_SQUARED_PER_S_SQUARED_SCALED_1E9=10000000",
+        "/Users/yuseungjae/Desktop/radar-track-fcc-hil/docs/test-results/ekf-q-2026-11-24/replay.c",
+        "/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/src/application/radar_processor.c",
+        "/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/src/tracking/estimators/cartesian_ct_ekf.c",
+        "/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/src/tracking/estimators/filters/ekf_ct_2d.c",
+        "/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/src/tracking/angle_utils.c",
+        "/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/src/tracking/gating.c",
+        "/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/src/tracking/track.c",
+        "/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/src/common/matrix.c",
+        "/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/src/protocol/measurement_message.c",
+        "-lm",
+        "-o",
+        "/Users/yuseungjae/Desktop/radar-track-fcc-hil/runs/ct-ekf-final-20261124/host-build/ct-1000-100000/replay.dylib"
+      ],
+      "library_sha256": "fa2b49b1064a040fc52700e2814d5a52e599a414ff42ab624e94e04502528317",
+      "sources": {
+        "docs/test-results/ekf-q-2026-11-24/replay.c": "72262a5c519e63dd714e7a016ff154a56e104fe522b51ae8e5c029c856bf23a0",
+        "fcc_app/src/application/radar_processor.c": "850f89e4d4f9c1edc9059c501a4f409e7de86564911e2d32112707de59091830",
+        "fcc_app/src/tracking/estimators/cartesian_ct_ekf.c": "79169f4cc4bc768a0b7755a83046d544d4c7824fafe7a3d8bfb6303cc3351e94",
+        "fcc_app/src/tracking/estimators/filters/ekf_ct_2d.c": "7ff9cc7e4fffac1676104643c33958a4a845eeeacc4d0e2a6054814eb655cd9b",
+        "fcc_app/src/tracking/angle_utils.c": "a982efca95d49ce703810b0ed6231595f9262a28df94c035da2783d7dd17bceb",
+        "fcc_app/src/tracking/gating.c": "ecc6edf5a79bdab7cd5836a98a4ccb40affc6332bf94fbdb0e2b18f805e83dbd",
+        "fcc_app/src/tracking/track.c": "2f4e037c6bd8a792590829ea683e57a07b4191f40a1152d9afc206cb2914048a",
+        "fcc_app/src/common/matrix.c": "25385cb51001a6b42810cdda292a57d94733b2e1835074e2db2e5171387f5f9c",
+        "fcc_app/src/protocol/measurement_message.c": "4cc5916615f4116f8f0c37f74cc4afd245cc321d493ce040d1ec1f4fc610518b"
+      }
+    },
+    {
+      "command": [
+        "/usr/bin/clang",
+        "-shared",
+        "-fPIC",
+        "-O0",
+        "-ffp-contract=off",
+        "-std=c11",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-I/Users/yuseungjae/Desktop/radar-track-fcc-hil/docs/test-results/ekf-q-2026-11-24/include",
+        "-I/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/tests/common/include",
+        "-I/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/src",
+        "-D__ASSERT_ON=0",
+        "-DCONFIG_RADAR_MEASUREMENT_TIMEOUT_MS=1000",
+        "-DCONFIG_RADAR_RANGE_GATE_M=100",
+        "-DCONFIG_RADAR_AZIMUTH_GATE_DEG=10",
+        "-DCONFIG_RADAR_RANGE_MEASUREMENT_VARIANCE_M_SQUARED=25",
+        "-DCONFIG_RADAR_AZIMUTH_MEASUREMENT_VARIANCE_RAD_SQUARED_SCALED_1E9=1218470",
+        "-DCONFIG_RADAR_ESTIMATOR_EKF_CT=1",
+        "-DMATRIX_MAX_ROWS=5U",
+        "-DMATRIX_MAX_COLUMNS=5U",
+        "-DCONFIG_RADAR_CT_ACCELERATION_VARIANCE_M_SQUARED_PER_S_FOURTH=1000",
+        "-DCONFIG_RADAR_CT_ANGULAR_ACCELERATION_VARIANCE_RAD_SQUARED_PER_S_FOURTH_SCALED_1E9=10000000",
+        "-DCONFIG_RADAR_CT_INITIAL_TURN_RATE_VARIANCE_RAD_SQUARED_PER_S_SQUARED_SCALED_1E9=10000000",
+        "/Users/yuseungjae/Desktop/radar-track-fcc-hil/docs/test-results/ekf-q-2026-11-24/replay.c",
+        "/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/src/application/radar_processor.c",
+        "/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/src/tracking/estimators/cartesian_ct_ekf.c",
+        "/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/src/tracking/estimators/filters/ekf_ct_2d.c",
+        "/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/src/tracking/angle_utils.c",
+        "/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/src/tracking/gating.c",
+        "/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/src/tracking/track.c",
+        "/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/src/common/matrix.c",
+        "/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/src/protocol/measurement_message.c",
+        "-lm",
+        "-o",
+        "/Users/yuseungjae/Desktop/radar-track-fcc-hil/runs/ct-ekf-final-20261124/host-build/ct-1000-10000000/replay.dylib"
+      ],
+      "library_sha256": "97b655bafbc2d4364f3a23f4baffa9af0f0b933a219fdc2ec4608aeb77b794b6",
+      "sources": {
+        "docs/test-results/ekf-q-2026-11-24/replay.c": "72262a5c519e63dd714e7a016ff154a56e104fe522b51ae8e5c029c856bf23a0",
+        "fcc_app/src/application/radar_processor.c": "850f89e4d4f9c1edc9059c501a4f409e7de86564911e2d32112707de59091830",
+        "fcc_app/src/tracking/estimators/cartesian_ct_ekf.c": "79169f4cc4bc768a0b7755a83046d544d4c7824fafe7a3d8bfb6303cc3351e94",
+        "fcc_app/src/tracking/estimators/filters/ekf_ct_2d.c": "7ff9cc7e4fffac1676104643c33958a4a845eeeacc4d0e2a6054814eb655cd9b",
+        "fcc_app/src/tracking/angle_utils.c": "a982efca95d49ce703810b0ed6231595f9262a28df94c035da2783d7dd17bceb",
+        "fcc_app/src/tracking/gating.c": "ecc6edf5a79bdab7cd5836a98a4ccb40affc6332bf94fbdb0e2b18f805e83dbd",
+        "fcc_app/src/tracking/track.c": "2f4e037c6bd8a792590829ea683e57a07b4191f40a1152d9afc206cb2914048a",
+        "fcc_app/src/common/matrix.c": "25385cb51001a6b42810cdda292a57d94733b2e1835074e2db2e5171387f5f9c",
+        "fcc_app/src/protocol/measurement_message.c": "4cc5916615f4116f8f0c37f74cc4afd245cc321d493ce040d1ec1f4fc610518b"
+      }
+    },
+    {
+      "name": "kf",
+      "q": null,
+      "command": [
+        "/usr/bin/clang",
+        "-shared",
+        "-fPIC",
+        "-O0",
+        "-ffp-contract=off",
+        "-std=c11",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-I/Users/yuseungjae/Desktop/radar-track-fcc-hil/docs/test-results/ekf-q-2026-11-24/include",
+        "-I/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/tests/common/include",
+        "-I/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/src",
+        "-D__ASSERT_ON=0",
+        "-DCONFIG_RADAR_MEASUREMENT_TIMEOUT_MS=1000",
+        "-DCONFIG_RADAR_RANGE_GATE_M=100",
+        "-DCONFIG_RADAR_AZIMUTH_GATE_DEG=10",
+        "-DCONFIG_RADAR_RANGE_MEASUREMENT_VARIANCE_M_SQUARED=25",
+        "-DCONFIG_RADAR_AZIMUTH_MEASUREMENT_VARIANCE_RAD_SQUARED_SCALED_1E9=1218470",
+        "-DCONFIG_RADAR_ESTIMATOR_KF_CV=1",
+        "/Users/yuseungjae/Desktop/radar-track-fcc-hil/docs/test-results/ekf-q-2026-11-24/replay.c",
+        "/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/src/application/radar_processor.c",
+        "/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/src/tracking/estimators/polar_cv_kf.c",
+        "/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/src/tracking/estimators/filters/kf_cv_1d.c",
+        "/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/src/tracking/angle_utils.c",
+        "/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/src/tracking/gating.c",
+        "/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/src/tracking/track.c",
+        "/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/src/common/matrix.c",
+        "/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/src/protocol/measurement_message.c",
+        "-lm",
+        "-o",
+        "/Users/yuseungjae/Desktop/radar-track-fcc-hil/runs/ct-ekf-final-20261124/host-build/kf/replay.dylib"
+      ],
+      "library_sha256": "98b8acd39e57e249535e52ac8ce13f22b55f0304437261d4dc01565c2e1c72d1",
+      "sources": {
+        "docs/test-results/ekf-q-2026-11-24/replay.c": "72262a5c519e63dd714e7a016ff154a56e104fe522b51ae8e5c029c856bf23a0",
+        "fcc_app/src/application/radar_processor.c": "850f89e4d4f9c1edc9059c501a4f409e7de86564911e2d32112707de59091830",
+        "fcc_app/src/tracking/estimators/polar_cv_kf.c": "4a2c4cb81138dec79ad2050caf9d0ea747a260a6dce32b99c6a9d3150e5901f1",
+        "fcc_app/src/tracking/estimators/filters/kf_cv_1d.c": "6043b195763d27a1a163c9b4a980c1a70fb97849855445e3412d5e56b6e8b544",
+        "fcc_app/src/tracking/angle_utils.c": "a982efca95d49ce703810b0ed6231595f9262a28df94c035da2783d7dd17bceb",
+        "fcc_app/src/tracking/gating.c": "ecc6edf5a79bdab7cd5836a98a4ccb40affc6332bf94fbdb0e2b18f805e83dbd",
+        "fcc_app/src/tracking/track.c": "2f4e037c6bd8a792590829ea683e57a07b4191f40a1152d9afc206cb2914048a",
+        "fcc_app/src/common/matrix.c": "25385cb51001a6b42810cdda292a57d94733b2e1835074e2db2e5171387f5f9c",
+        "fcc_app/src/protocol/measurement_message.c": "4cc5916615f4116f8f0c37f74cc4afd245cc321d493ce040d1ec1f4fc610518b"
+      }
+    },
+    {
+      "name": "ekf10000",
+      "q": 10000,
+      "command": [
+        "/usr/bin/clang",
+        "-shared",
+        "-fPIC",
+        "-O0",
+        "-ffp-contract=off",
+        "-std=c11",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-I/Users/yuseungjae/Desktop/radar-track-fcc-hil/docs/test-results/ekf-q-2026-11-24/include",
+        "-I/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/tests/common/include",
+        "-I/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/src",
+        "-D__ASSERT_ON=0",
+        "-DCONFIG_RADAR_MEASUREMENT_TIMEOUT_MS=1000",
+        "-DCONFIG_RADAR_RANGE_GATE_M=100",
+        "-DCONFIG_RADAR_AZIMUTH_GATE_DEG=10",
+        "-DCONFIG_RADAR_RANGE_MEASUREMENT_VARIANCE_M_SQUARED=25",
+        "-DCONFIG_RADAR_AZIMUTH_MEASUREMENT_VARIANCE_RAD_SQUARED_SCALED_1E9=1218470",
+        "-DCONFIG_RADAR_ESTIMATOR_EKF_CV=1",
+        "-DCONFIG_RADAR_EKF_ACCELERATION_VARIANCE_M_SQUARED_PER_S_FOURTH=10000",
+        "/Users/yuseungjae/Desktop/radar-track-fcc-hil/docs/test-results/ekf-q-2026-11-24/replay.c",
+        "/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/src/application/radar_processor.c",
+        "/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/src/tracking/estimators/cartesian_cv_ekf.c",
+        "/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/src/tracking/estimators/filters/ekf_cv_2d.c",
+        "/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/src/tracking/angle_utils.c",
+        "/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/src/tracking/gating.c",
+        "/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/src/tracking/track.c",
+        "/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/src/common/matrix.c",
+        "/Users/yuseungjae/Desktop/radar-track-fcc-hil/fcc_app/src/protocol/measurement_message.c",
+        "-lm",
+        "-o",
+        "/Users/yuseungjae/Desktop/radar-track-fcc-hil/runs/ct-ekf-final-20261124/host-build/ekf10000/replay.dylib"
+      ],
+      "library_sha256": "ea605c6e42a04497d396c4777fb80c589eb0088bfebbddc0cbe167e797b5b105",
+      "sources": {
+        "docs/test-results/ekf-q-2026-11-24/replay.c": "72262a5c519e63dd714e7a016ff154a56e104fe522b51ae8e5c029c856bf23a0",
+        "fcc_app/src/application/radar_processor.c": "850f89e4d4f9c1edc9059c501a4f409e7de86564911e2d32112707de59091830",
+        "fcc_app/src/tracking/estimators/cartesian_cv_ekf.c": "5f3f8f88c0d5b8b17c4398835819b8afa8ad1937937c36b1687b19cc67732ada",
+        "fcc_app/src/tracking/estimators/filters/ekf_cv_2d.c": "df1f199b0cbf8b0b300c37dbdf2593aa31a30eb9dd241a2bf7f40e8a43fc6990",
+        "fcc_app/src/tracking/angle_utils.c": "a982efca95d49ce703810b0ed6231595f9262a28df94c035da2783d7dd17bceb",
+        "fcc_app/src/tracking/gating.c": "ecc6edf5a79bdab7cd5836a98a4ccb40affc6332bf94fbdb0e2b18f805e83dbd",
+        "fcc_app/src/tracking/track.c": "2f4e037c6bd8a792590829ea683e57a07b4191f40a1152d9afc206cb2914048a",
+        "fcc_app/src/common/matrix.c": "25385cb51001a6b42810cdda292a57d94733b2e1835074e2db2e5171387f5f9c",
+        "fcc_app/src/protocol/measurement_message.c": "4cc5916615f4116f8f0c37f74cc4afd245cc321d493ce040d1ec1f4fc610518b"
+      }
+    }
+  ],
+  "old_filter_checks": [
+    {
+      "variant": "kf",
+      "case": "baseline42",
+      "byte_identical": true
+    },
+    {
+      "variant": "kf",
+      "case": "nominal42",
+      "byte_identical": true
+    },
+    {
+      "variant": "kf",
+      "case": "range1",
+      "byte_identical": true
+    },
+    {
+      "variant": "kf",
+      "case": "angle1",
+      "byte_identical": true
+    },
+    {
+      "variant": "kf",
+      "case": "nominal1",
+      "byte_identical": true
+    },
+    {
+      "variant": "kf",
+      "case": "strong1",
+      "byte_identical": true
+    },
+    {
+      "variant": "kf",
+      "case": "range2",
+      "byte_identical": true
+    },
+    {
+      "variant": "kf",
+      "case": "angle2",
+      "byte_identical": true
+    },
+    {
+      "variant": "kf",
+      "case": "nominal2",
+      "byte_identical": true
+    },
+    {
+      "variant": "kf",
+      "case": "strong2",
+      "byte_identical": true
+    },
+    {
+      "variant": "kf",
+      "case": "range3",
+      "byte_identical": true
+    },
+    {
+      "variant": "kf",
+      "case": "angle3",
+      "byte_identical": true
+    },
+    {
+      "variant": "kf",
+      "case": "nominal3",
+      "byte_identical": true
+    },
+    {
+      "variant": "kf",
+      "case": "strong3",
+      "byte_identical": true
+    },
+    {
+      "variant": "kf",
+      "case": "range4",
+      "byte_identical": true
+    },
+    {
+      "variant": "kf",
+      "case": "angle4",
+      "byte_identical": true
+    },
+    {
+      "variant": "kf",
+      "case": "nominal4",
+      "byte_identical": true
+    },
+    {
+      "variant": "kf",
+      "case": "strong4",
+      "byte_identical": true
+    },
+    {
+      "variant": "kf",
+      "case": "range5",
+      "byte_identical": true
+    },
+    {
+      "variant": "kf",
+      "case": "angle5",
+      "byte_identical": true
+    },
+    {
+      "variant": "kf",
+      "case": "nominal5",
+      "byte_identical": true
+    },
+    {
+      "variant": "kf",
+      "case": "strong5",
+      "byte_identical": true
+    },
+    {
+      "variant": "kf",
+      "case": "range6",
+      "byte_identical": true
+    },
+    {
+      "variant": "kf",
+      "case": "angle6",
+      "byte_identical": true
+    },
+    {
+      "variant": "kf",
+      "case": "nominal6",
+      "byte_identical": true
+    },
+    {
+      "variant": "kf",
+      "case": "strong6",
+      "byte_identical": true
+    },
+    {
+      "variant": "kf",
+      "case": "range7",
+      "byte_identical": true
+    },
+    {
+      "variant": "kf",
+      "case": "angle7",
+      "byte_identical": true
+    },
+    {
+      "variant": "kf",
+      "case": "nominal7",
+      "byte_identical": true
+    },
+    {
+      "variant": "kf",
+      "case": "strong7",
+      "byte_identical": true
+    },
+    {
+      "variant": "kf",
+      "case": "range8",
+      "byte_identical": true
+    },
+    {
+      "variant": "kf",
+      "case": "angle8",
+      "byte_identical": true
+    },
+    {
+      "variant": "kf",
+      "case": "nominal8",
+      "byte_identical": true
+    },
+    {
+      "variant": "kf",
+      "case": "strong8",
+      "byte_identical": true
+    },
+    {
+      "variant": "kf",
+      "case": "range9",
+      "byte_identical": true
+    },
+    {
+      "variant": "kf",
+      "case": "angle9",
+      "byte_identical": true
+    },
+    {
+      "variant": "kf",
+      "case": "nominal9",
+      "byte_identical": true
+    },
+    {
+      "variant": "kf",
+      "case": "strong9",
+      "byte_identical": true
+    },
+    {
+      "variant": "kf",
+      "case": "range10",
+      "byte_identical": true
+    },
+    {
+      "variant": "kf",
+      "case": "angle10",
+      "byte_identical": true
+    },
+    {
+      "variant": "kf",
+      "case": "nominal10",
+      "byte_identical": true
+    },
+    {
+      "variant": "kf",
+      "case": "strong10",
+      "byte_identical": true
+    },
+    {
+      "variant": "kf",
+      "case": "outbound-baseline42",
+      "byte_identical": true
+    },
+    {
+      "variant": "kf",
+      "case": "outbound-nominal42",
+      "byte_identical": true
+    },
+    {
+      "variant": "kf",
+      "case": "outbound-range1",
+      "byte_identical": true
+    },
+    {
+      "variant": "kf",
+      "case": "outbound-angle1",
+      "byte_identical": true
+    },
+    {
+      "variant": "kf",
+      "case": "outbound-nominal1",
+      "byte_identical": true
+    },
+    {
+      "variant": "kf",
+      "case": "outbound-strong1",
+      "byte_identical": true
+    },
+    {
+      "variant": "kf",
+      "case": "outbound-range2",
+      "byte_identical": true
+    },
+    {
+      "variant": "kf",
+      "case": "outbound-angle2",
+      "byte_identical": true
+    },
+    {
+      "variant": "kf",
+      "case": "outbound-nominal2",
+      "byte_identical": true
+    },
+    {
+      "variant": "kf",
+      "case": "outbound-strong2",
+      "byte_identical": true
+    },
+    {
+      "variant": "kf",
+      "case": "outbound-range3",
+      "byte_identical": true
+    },
+    {
+      "variant": "kf",
+      "case": "outbound-angle3",
+      "byte_identical": true
+    },
+    {
+      "variant": "kf",
+      "case": "outbound-nominal3",
+      "byte_identical": true
+    },
+    {
+      "variant": "kf",
+      "case": "outbound-strong3",
+      "byte_identical": true
+    },
+    {
+      "variant": "kf",
+      "case": "outbound-range4",
+      "byte_identical": true
+    },
+    {
+      "variant": "kf",
+      "case": "outbound-angle4",
+      "byte_identical": true
+    },
+    {
+      "variant": "kf",
+      "case": "outbound-nominal4",
+      "byte_identical": true
+    },
+    {
+      "variant": "kf",
+      "case": "outbound-strong4",
+      "byte_identical": true
+    },
+    {
+      "variant": "kf",
+      "case": "outbound-range5",
+      "byte_identical": true
+    },
+    {
+      "variant": "kf",
+      "case": "outbound-angle5",
+      "byte_identical": true
+    },
+    {
+      "variant": "kf",
+      "case": "outbound-nominal5",
+      "byte_identical": true
+    },
+    {
+      "variant": "kf",
+      "case": "outbound-strong5",
+      "byte_identical": true
+    },
+    {
+      "variant": "kf",
+      "case": "outbound-range6",
+      "byte_identical": true
+    },
+    {
+      "variant": "kf",
+      "case": "outbound-angle6",
+      "byte_identical": true
+    },
+    {
+      "variant": "kf",
+      "case": "outbound-nominal6",
+      "byte_identical": true
+    },
+    {
+      "variant": "kf",
+      "case": "outbound-strong6",
+      "byte_identical": true
+    },
+    {
+      "variant": "kf",
+      "case": "outbound-range7",
+      "byte_identical": true
+    },
+    {
+      "variant": "kf",
+      "case": "outbound-angle7",
+      "byte_identical": true
+    },
+    {
+      "variant": "kf",
+      "case": "outbound-nominal7",
+      "byte_identical": true
+    },
+    {
+      "variant": "kf",
+      "case": "outbound-strong7",
+      "byte_identical": true
+    },
+    {
+      "variant": "kf",
+      "case": "outbound-range8",
+      "byte_identical": true
+    },
+    {
+      "variant": "kf",
+      "case": "outbound-angle8",
+      "byte_identical": true
+    },
+    {
+      "variant": "kf",
+      "case": "outbound-nominal8",
+      "byte_identical": true
+    },
+    {
+      "variant": "kf",
+      "case": "outbound-strong8",
+      "byte_identical": true
+    },
+    {
+      "variant": "kf",
+      "case": "outbound-range9",
+      "byte_identical": true
+    },
+    {
+      "variant": "kf",
+      "case": "outbound-angle9",
+      "byte_identical": true
+    },
+    {
+      "variant": "kf",
+      "case": "outbound-nominal9",
+      "byte_identical": true
+    },
+    {
+      "variant": "kf",
+      "case": "outbound-strong9",
+      "byte_identical": true
+    },
+    {
+      "variant": "kf",
+      "case": "outbound-range10",
+      "byte_identical": true
+    },
+    {
+      "variant": "kf",
+      "case": "outbound-angle10",
+      "byte_identical": true
+    },
+    {
+      "variant": "kf",
+      "case": "outbound-nominal10",
+      "byte_identical": true
+    },
+    {
+      "variant": "kf",
+      "case": "outbound-strong10",
+      "byte_identical": true
+    },
+    {
+      "variant": "ekf10000",
+      "case": "baseline42",
+      "byte_identical": true
+    },
+    {
+      "variant": "ekf10000",
+      "case": "nominal42",
+      "byte_identical": true
+    },
+    {
+      "variant": "ekf10000",
+      "case": "range1",
+      "byte_identical": true
+    },
+    {
+      "variant": "ekf10000",
+      "case": "angle1",
+      "byte_identical": true
+    },
+    {
+      "variant": "ekf10000",
+      "case": "nominal1",
+      "byte_identical": true
+    },
+    {
+      "variant": "ekf10000",
+      "case": "strong1",
+      "byte_identical": true
+    },
+    {
+      "variant": "ekf10000",
+      "case": "range2",
+      "byte_identical": true
+    },
+    {
+      "variant": "ekf10000",
+      "case": "angle2",
+      "byte_identical": true
+    },
+    {
+      "variant": "ekf10000",
+      "case": "nominal2",
+      "byte_identical": true
+    },
+    {
+      "variant": "ekf10000",
+      "case": "strong2",
+      "byte_identical": true
+    },
+    {
+      "variant": "ekf10000",
+      "case": "range3",
+      "byte_identical": true
+    },
+    {
+      "variant": "ekf10000",
+      "case": "angle3",
+      "byte_identical": true
+    },
+    {
+      "variant": "ekf10000",
+      "case": "nominal3",
+      "byte_identical": true
+    },
+    {
+      "variant": "ekf10000",
+      "case": "strong3",
+      "byte_identical": true
+    },
+    {
+      "variant": "ekf10000",
+      "case": "range4",
+      "byte_identical": true
+    },
+    {
+      "variant": "ekf10000",
+      "case": "angle4",
+      "byte_identical": true
+    },
+    {
+      "variant": "ekf10000",
+      "case": "nominal4",
+      "byte_identical": true
+    },
+    {
+      "variant": "ekf10000",
+      "case": "strong4",
+      "byte_identical": true
+    },
+    {
+      "variant": "ekf10000",
+      "case": "range5",
+      "byte_identical": true
+    },
+    {
+      "variant": "ekf10000",
+      "case": "angle5",
+      "byte_identical": true
+    },
+    {
+      "variant": "ekf10000",
+      "case": "nominal5",
+      "byte_identical": true
+    },
+    {
+      "variant": "ekf10000",
+      "case": "strong5",
+      "byte_identical": true
+    },
+    {
+      "variant": "ekf10000",
+      "case": "range6",
+      "byte_identical": true
+    },
+    {
+      "variant": "ekf10000",
+      "case": "angle6",
+      "byte_identical": true
+    },
+    {
+      "variant": "ekf10000",
+      "case": "nominal6",
+      "byte_identical": true
+    },
+    {
+      "variant": "ekf10000",
+      "case": "strong6",
+      "byte_identical": true
+    },
+    {
+      "variant": "ekf10000",
+      "case": "range7",
+      "byte_identical": true
+    },
+    {
+      "variant": "ekf10000",
+      "case": "angle7",
+      "byte_identical": true
+    },
+    {
+      "variant": "ekf10000",
+      "case": "nominal7",
+      "byte_identical": true
+    },
+    {
+      "variant": "ekf10000",
+      "case": "strong7",
+      "byte_identical": true
+    },
+    {
+      "variant": "ekf10000",
+      "case": "range8",
+      "byte_identical": true
+    },
+    {
+      "variant": "ekf10000",
+      "case": "angle8",
+      "byte_identical": true
+    },
+    {
+      "variant": "ekf10000",
+      "case": "nominal8",
+      "byte_identical": true
+    },
+    {
+      "variant": "ekf10000",
+      "case": "strong8",
+      "byte_identical": true
+    },
+    {
+      "variant": "ekf10000",
+      "case": "range9",
+      "byte_identical": true
+    },
+    {
+      "variant": "ekf10000",
+      "case": "angle9",
+      "byte_identical": true
+    },
+    {
+      "variant": "ekf10000",
+      "case": "nominal9",
+      "byte_identical": true
+    },
+    {
+      "variant": "ekf10000",
+      "case": "strong9",
+      "byte_identical": true
+    },
+    {
+      "variant": "ekf10000",
+      "case": "range10",
+      "byte_identical": true
+    },
+    {
+      "variant": "ekf10000",
+      "case": "angle10",
+      "byte_identical": true
+    },
+    {
+      "variant": "ekf10000",
+      "case": "nominal10",
+      "byte_identical": true
+    },
+    {
+      "variant": "ekf10000",
+      "case": "strong10",
+      "byte_identical": true
+    },
+    {
+      "variant": "ekf10000",
+      "case": "outbound-baseline42",
+      "byte_identical": true
+    },
+    {
+      "variant": "ekf10000",
+      "case": "outbound-nominal42",
+      "byte_identical": true
+    },
+    {
+      "variant": "ekf10000",
+      "case": "outbound-range1",
+      "byte_identical": true
+    },
+    {
+      "variant": "ekf10000",
+      "case": "outbound-angle1",
+      "byte_identical": true
+    },
+    {
+      "variant": "ekf10000",
+      "case": "outbound-nominal1",
+      "byte_identical": true
+    },
+    {
+      "variant": "ekf10000",
+      "case": "outbound-strong1",
+      "byte_identical": true
+    },
+    {
+      "variant": "ekf10000",
+      "case": "outbound-range2",
+      "byte_identical": true
+    },
+    {
+      "variant": "ekf10000",
+      "case": "outbound-angle2",
+      "byte_identical": true
+    },
+    {
+      "variant": "ekf10000",
+      "case": "outbound-nominal2",
+      "byte_identical": true
+    },
+    {
+      "variant": "ekf10000",
+      "case": "outbound-strong2",
+      "byte_identical": true
+    },
+    {
+      "variant": "ekf10000",
+      "case": "outbound-range3",
+      "byte_identical": true
+    },
+    {
+      "variant": "ekf10000",
+      "case": "outbound-angle3",
+      "byte_identical": true
+    },
+    {
+      "variant": "ekf10000",
+      "case": "outbound-nominal3",
+      "byte_identical": true
+    },
+    {
+      "variant": "ekf10000",
+      "case": "outbound-strong3",
+      "byte_identical": true
+    },
+    {
+      "variant": "ekf10000",
+      "case": "outbound-range4",
+      "byte_identical": true
+    },
+    {
+      "variant": "ekf10000",
+      "case": "outbound-angle4",
+      "byte_identical": true
+    },
+    {
+      "variant": "ekf10000",
+      "case": "outbound-nominal4",
+      "byte_identical": true
+    },
+    {
+      "variant": "ekf10000",
+      "case": "outbound-strong4",
+      "byte_identical": true
+    },
+    {
+      "variant": "ekf10000",
+      "case": "outbound-range5",
+      "byte_identical": true
+    },
+    {
+      "variant": "ekf10000",
+      "case": "outbound-angle5",
+      "byte_identical": true
+    },
+    {
+      "variant": "ekf10000",
+      "case": "outbound-nominal5",
+      "byte_identical": true
+    },
+    {
+      "variant": "ekf10000",
+      "case": "outbound-strong5",
+      "byte_identical": true
+    },
+    {
+      "variant": "ekf10000",
+      "case": "outbound-range6",
+      "byte_identical": true
+    },
+    {
+      "variant": "ekf10000",
+      "case": "outbound-angle6",
+      "byte_identical": true
+    },
+    {
+      "variant": "ekf10000",
+      "case": "outbound-nominal6",
+      "byte_identical": true
+    },
+    {
+      "variant": "ekf10000",
+      "case": "outbound-strong6",
+      "byte_identical": true
+    },
+    {
+      "variant": "ekf10000",
+      "case": "outbound-range7",
+      "byte_identical": true
+    },
+    {
+      "variant": "ekf10000",
+      "case": "outbound-angle7",
+      "byte_identical": true
+    },
+    {
+      "variant": "ekf10000",
+      "case": "outbound-nominal7",
+      "byte_identical": true
+    },
+    {
+      "variant": "ekf10000",
+      "case": "outbound-strong7",
+      "byte_identical": true
+    },
+    {
+      "variant": "ekf10000",
+      "case": "outbound-range8",
+      "byte_identical": true
+    },
+    {
+      "variant": "ekf10000",
+      "case": "outbound-angle8",
+      "byte_identical": true
+    },
+    {
+      "variant": "ekf10000",
+      "case": "outbound-nominal8",
+      "byte_identical": true
+    },
+    {
+      "variant": "ekf10000",
+      "case": "outbound-strong8",
+      "byte_identical": true
+    },
+    {
+      "variant": "ekf10000",
+      "case": "outbound-range9",
+      "byte_identical": true
+    },
+    {
+      "variant": "ekf10000",
+      "case": "outbound-angle9",
+      "byte_identical": true
+    },
+    {
+      "variant": "ekf10000",
+      "case": "outbound-nominal9",
+      "byte_identical": true
+    },
+    {
+      "variant": "ekf10000",
+      "case": "outbound-strong9",
+      "byte_identical": true
+    },
+    {
+      "variant": "ekf10000",
+      "case": "outbound-range10",
+      "byte_identical": true
+    },
+    {
+      "variant": "ekf10000",
+      "case": "outbound-angle10",
+      "byte_identical": true
+    },
+    {
+      "variant": "ekf10000",
+      "case": "outbound-nominal10",
+      "byte_identical": true
+    },
+    {
+      "variant": "ekf10000",
+      "case": "outbound-strong10",
+      "byte_identical": true
+    }
+  ]
+}

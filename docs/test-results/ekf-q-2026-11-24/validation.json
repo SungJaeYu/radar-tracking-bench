@@ -1,0 +1,88 @@
+{
+  "date": "2026-11-24",
+  "base_commit": "cee58d7390139317179dc70d372a88e9992ebeb2",
+  "tests": [
+    {
+      "name": "tracking",
+      "ctest_entries": 31,
+      "passed": 31,
+      "exit_code": 0
+    },
+    {
+      "name": "handler_kf",
+      "ctest_entries": 31,
+      "passed": 31,
+      "exit_code": 0
+    },
+    {
+      "name": "handler_ekf",
+      "ctest_entries": 31,
+      "passed": 31,
+      "exit_code": 0
+    },
+    {
+      "name": "ekf_core",
+      "ctest_entries": 2,
+      "passed": 2,
+      "exit_code": 0
+    },
+    {
+      "name": "ekf_core_assertions_disabled",
+      "ctest_entries": 2,
+      "passed": 2,
+      "exit_code": 0
+    }
+  ],
+  "python": {
+    "command": "QT_QPA_PLATFORM=offscreen python -m pytest -q",
+    "passed": 1058,
+    "subtests_passed": 9,
+    "exit_code": 0
+  },
+  "initial_q_test_result": {
+    "default_passed": true,
+    "zero_changed_maximum_failed": true
+  },
+  "firmware": [
+    {
+      "name": "kf",
+      "directory": "build",
+      "config": "firmware/kf.config",
+      "config_sha256": "b7e5048d5014adfa8fde2afdd91e794de38e8eab31affa832d208eefd54b36d0",
+      "hex_sha256": "f0572f1b699d0ffb044b25a332eace3f15013c52efedd2fa2ffa55b86cf03b26",
+      "flash_bytes": 43348,
+      "ram_bytes": 15696,
+      "exit_code": 0
+    },
+    {
+      "name": "ekf-100",
+      "directory": "build_ekf",
+      "config": "firmware/ekf-100.config",
+      "config_sha256": "a897b4baac62f7207960b92920ad2baffadd59d210d1edc8a9e25c46ec633863",
+      "hex_sha256": "46223480f88bedf6a799df8aad5ed58225419d1ca5f69049050efd65cbdba021",
+      "flash_bytes": 50972,
+      "ram_bytes": 15696,
+      "exit_code": 0
+    },
+    {
+      "name": "ekf-10000",
+      "directory": "build_ekf_q10000",
+      "config": "firmware/ekf-10000.config",
+      "config_sha256": "4687b83aff4d70289e69dad96f7adc702aa4b756117a41139eaefbb06d68b3f4",
+      "hex_sha256": "5fa68c651647a275c741a672487f6cc59ca1d321090876a8028a5bcfe6821e82",
+      "flash_bytes": 50972,
+      "ram_bytes": 15696,
+      "exit_code": 0
+    }
+  ],
+  "ekf_config_difference": {
+    "only_default": [
+      "CONFIG_RADAR_EKF_ACCELERATION_VARIANCE_M_SQUARED_PER_S_FOURTH=100"
+    ],
+    "only_changed": [
+      "CONFIG_RADAR_EKF_ACCELERATION_VARIANCE_M_SQUARED_PER_S_FOURTH=10000"
+    ]
+  },
+  "new_flash": false,
+  "new_board_run": false
+}

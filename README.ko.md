@@ -6,7 +6,15 @@
 
 이전 이름: `radar-track-fcc-hil`.
 
-**STM32 · Zephyr 기반 단일표적 레이더 추적 HIL 프로젝트 — `v1.1.0`**
+**STM32 · Zephyr 기반 단일표적 레이더 추적 HIL 프로젝트. 최신 릴리스: `v1.1.0`**
+
+현재 `feat/prepared-input` 개발 브랜치에는 polar CV KF / Cartesian CV-EKF / CT-EKF 빌드 선택, 측정 입력 저장·재사용, CLI 선회 잡음 평가와 20개 PC 정답 운동 프리셋을 추가했습니다. 새 정답 모델은 host 검증을 마쳤으며, 확장 기동의 추정기 비교는 고정 선회 비교와 별도 근거로 다룹니다. 아래 v1.1.0 실보드 수치는 해당 릴리스의 근거입니다. [추정기 선택과 설정](docs/estimator-tuning.md) · [기동 모델과 검증](docs/test-results/maneuver-models-2026-11-25/README.md) · [v1.2.0 릴리스 기록](docs/release-v1.2.0.md).
+
+확장 STM32 비교는 세 추정기에 같은 기동·잡음 입력80개를 적용했습니다(seed6). 이 표본에서는 CV-EKF의 위치 RMSE가 가장 작았고(29.27m), polar KF의 predict/correct 관측 시간이 가장 짧았습니다(합계 약62µs). 가감속에서 CT-EKF의 오차가 크게 증가했습니다. 추정기별 측정55,000개가 모두 대응했고 게이트 거부·LOST는0회였습니다. 단일 seed의 조건부 결과로 일반적인 우열을 뜻하지 않습니다. [조건·그림·펌웨어 출처](docs/analysis/maneuver-grid-20261126/README.md).
+
+초기 KF/EKF 실보드 비교에서는 입력3,020개가 모두 대응됐습니다. 현재 튜닝에서 EKF는 선회 전 직선 오차가 작았지만 선회 오차는 기존 KF보다 컸습니다. [결과·원시 데이터·그래프4종](docs/hardware-test-2026-11-24-kf-ekf.md).
+
+후속으로 EKF 가속도 분산을 Kconfig로 분리하고 같은 입력의 host Q 탐색을 수행했습니다. 기본값100을 유지한 채 후보10000·30000의 host336회·실보드46회를 완료했습니다. 처음부터 멀어지는 잡음 선회를 포함해 보드 입력34,730개 모두 대응했고 일반 KF를 복원했습니다. [독립 시드·실보드 결과](docs/test-results/ekf-q-board-2026-11-24/README.md). [Q 비교표·그래프](docs/test-results/ekf-q-2026-11-24/README.md).
 
 **릴리스 검증:** 30분 실보드에서 실제 전달한 측정89,057개 모두 응답했고 보드·전송·증거 검사를 통과했습니다. 최종 송신기 수정 후60초 검사도 유효 입력2,993개 모두 대응·보드 오류0입니다. PC 미송신과 RTT는 STM32 릴리스 차단 조건이 아닙니다. 요청50Hz 전체 입력의 검증 한계는 별도로 남깁니다. [완료 범위·검증 근거](docs/release-v1.1.0.md) · [v1.1.1 PC 송신기 개선](https://github.com/SungJaeYu/radar-tracking-bench/issues/8).
 
@@ -25,7 +33,7 @@ PC는 추적 전 센서 측정을 모사합니다. **예측·게이팅·칼만 �
 
 | 구성 | 주요 기능 |
 |---|---|
-| 펌웨어 | UART ISR·링버퍼, RX/처리/TX 스레드, CRC-16, 거리·방위각 CV 칼만 필터, 트랙 생성·유지·소실 |
+| 펌웨어 | UART ISR·링버퍼, RX/처리/TX 스레드, CRC-16, polar CV KF / Cartesian CV EKF 빌드 선택, 트랙 생성·유지·소실 |
 | 오류 처리 | 부분 프레임·무수신 timeout, overflow 복구, 오래된 측정 폐기, 누적 오류 통계 |
 | PC 도구 | GUI·CLI, 측정·잡음·이상치 생성, STATUS/TRACK 수신, CSV 기록·정량 평가 |
 
@@ -56,13 +64,13 @@ PC RTT는 USB·UART·보드·호스트 대기를 포함하는 진단값입니다
 
 ## v1.1.0 추가 기능
 
-PC 표적 운동에 일정 선회율의 원호 운동과 `straight_turn_straight` 구간 시나리오를 추가했습니다. 동쪽 직진10초 → 속도200m/s·뱅크30°의 우90° 선회 약55.49초 → 남쪽 직진10초이며 기존 시나리오도 유지합니다. 펌웨어는 기존 거리·방위각 CV 필터를 사용하며 CT 추정기를 추가한 것은 아닙니다.
+PC 표적 운동에 일정 선회율 원호, 직진·선회·S자·가감속·선회율 ramp 프리셋을 추가했습니다. 현재 개발 브랜치의 20개 정답 프리셋은 10개 운동 조건을 동쪽/북쪽 두 방향으로 실행합니다. polar CV KF, Cartesian CV-EKF, CT-EKF는 빌드 시 선택할 수 있습니다. 확장 기동은 정답 모델 검증과 추정기 비교를 구분하며, 고정 선회 실보드 결과를 새 프리셋의 결과로 해석하지 않습니다. [기동 모델·검증](docs/test-results/maneuver-models-2026-11-25/README.md) · [추정기 설정](docs/estimator-tuning.md).
 
 ```bash
-python -m pc_sim.run_sim --scenario straight_turn_straight --duration 80
+python -m pc_sim simulate --scenario straight_turn_straight --duration 80
 ```
 
-`--port`를 생략하면 프레임만 출력합니다. 총 길이는 약75.49초이므로 기본60초로 실행하면 마지막 구간까지 진행하지 않습니다. `run_sim`은 측정 송신만 담당합니다. GUI와 `pc_sim.evaluate`는 고정 방위각·일정 거리 변화율 모델을 유지하며 선회 시나리오 선택을 지원하지 않습니다.
+`--port`를 생략하면 프레임만 출력합니다. 총 길이는 약75.49초이므로 기본60초로 실행하면 마지막 구간까지 진행하지 않습니다. `run_sim`은 측정 송신만 담당합니다. v1.1.0 GUI는 고정 방위각 입력을 사용했습니다. 현재 GUI `Tests → Turn + noise`와 CLI `turn-noise`는 저장된 선회 입력을 송신하고 보고를 수집합니다. 기본 `evaluate`는 고정 방위각 시나리오를 유지합니다.
 
 11월23일 STM32 선회 시험은 측정 **755개 모두 대응**, 초기·최종 RESET을 포함한 **보고757개**, 측정 거부·트랙 소실0회를 확인했습니다. 첫2초를 제외한 위치 RMSE는 **전체4.5134m · 선회1.3960m**입니다. 정확도 합격 기준을 별도로 정한 결과는 아니며 이 조건의 관측값입니다. [시험 조건·원시 기록](docs/hardware-test-2026-11-23-v1.1.0.md).
 
@@ -77,12 +85,22 @@ GUI의 미리보기 모드는 보드 없이 실행할 수 있습니다.
 ```bash
 source ~/zephyrproject/.venv/bin/activate
 python -m pip install -r pc_sim/requirements-gui.txt
-python -m pc_sim.gui
+python -m pc_sim gui
 ```
 
 - [GUI 사용법](pc_sim/GUI.md): 미리보기, 보드 연결, 측정·추정 그래프, 상태 조회
 - [CLI·평가 도구](pc_sim/README.md): 측정 송신, CSV 수집, 잡음·이상치 시험
 - [자동 테스트](docs/test-cases.md): Python 및 C host 테스트 실행 방법과 범위
+
+## 추정기 선택과 선회 잡음 평가
+
+기본 펌웨어는 polar CV KF이며, 별도 `build_ekf`에 `ekf.conf`를 적용하면 Cartesian CV EKF를 선택합니다. GUI에서 실행 중 필터를 변경하는 방식이 아니므로 빌드 후 해당 이미지를 flash해야 합니다. [빌드 명령·Q/R/초기 P](docs/estimator-tuning.md).
+
+```bash
+python -m pc_sim turn-noise --port PORT --noise 10 --azimuth-noise 0.01
+```
+
+잡음 인자는 각각 거리(m)·방위각(rad)의 표준편차입니다. GUI `Tests → Turn + noise`도 같은 실행기를 사용합니다. `--input`으로 저장 입력을 그대로 재사용할 수 있습니다. [입력 생성·검증](docs/prepared-input.md).
 
 ## V1 범위
 

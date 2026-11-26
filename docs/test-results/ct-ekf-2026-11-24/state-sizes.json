@@ -1,0 +1,17 @@
+{
+  "kf": {
+    "size_estimator": 176,
+    "size_matrix": 72,
+    "size_track": 192
+  },
+  "cv": {
+    "size_estimator": 88,
+    "size_matrix": 72,
+    "size_track": 104
+  },
+  "ct": {
+    "size_estimator": 128,
+    "size_matrix": 108,
+    "size_track": 144
+  }
+}

@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="980" height="515" viewBox="0 0 980 515" role="img" aria-labelledby="title description">
+<title id="title">Position error by noise profile</title>
+<desc id="description">Pooled Cartesian RMSE over shared valid sensor timestamps from 2.0 s onward.</desc>
+<style>text{font-family:system-ui,sans-serif;fill:#172235}</style>
+<rect x="0" y="0" width="980" height="515" fill="#ffffff"/>
+<text x="30" y="40" font-size="24" font-weight="700" text-anchor="start">Position error by noise profile</text>
+<text x="30" y="66" font-size="13" font-weight="400" text-anchor="start">Pooled Cartesian RMSE over shared valid sensor timestamps from 2.0 s onward.</text>
+<rect x="86" y="402.0" width="852" height="1" fill="#dce4eb"/>
+<text x="74" y="406.0" font-size="13" font-weight="400" text-anchor="end">0</text>
+<rect x="86" y="342.8" width="852" height="1" fill="#dce4eb"/>
+<text x="74" y="346.8" font-size="13" font-weight="400" text-anchor="end">40</text>
+<rect x="86" y="283.6" width="852" height="1" fill="#dce4eb"/>
+<text x="74" y="287.6" font-size="13" font-weight="400" text-anchor="end">80</text>
+<rect x="86" y="224.4" width="852" height="1" fill="#dce4eb"/>
+<text x="74" y="228.4" font-size="13" font-weight="400" text-anchor="end">120</text>
+<rect x="86" y="165.2" width="852" height="1" fill="#dce4eb"/>
+<text x="74" y="169.2" font-size="13" font-weight="400" text-anchor="end">160</text>
+<rect x="86" y="106.0" width="852" height="1" fill="#dce4eb"/>
+<text x="74" y="110.0" font-size="13" font-weight="400" text-anchor="end">200</text>
+<text x="30" y="88" font-size="12" font-weight="400" text-anchor="start">RMSE (m)</text>
+<rect x="102" y="396.34583706161334" width="42" height="5.654162938386635" fill="#14757b"/>
+<text x="123" y="387.34583706161334" font-size="11" font-weight="400" text-anchor="middle">3.8</text>
+<rect x="149" y="386.0196116235508" width="42" height="15.98038837644916" fill="#b04c2d"/>
+<text x="170" y="377.0196116235508" font-size="11" font-weight="400" text-anchor="middle">10.8</text>
+<rect x="196" y="322.62420782151867" width="42" height="79.3757921784813" fill="#6646b0"/>
+<text x="217" y="313.62420782151867" font-size="11" font-weight="400" text-anchor="middle">53.6</text>
+<rect x="243" y="401.6238771391762" width="42" height="0.3761228608237644" fill="#586474"/>
+<text x="264" y="392.6238771391762" font-size="11" font-weight="400" text-anchor="middle">0.3</text>
+<text x="193" y="427" font-size="14" font-weight="650" text-anchor="middle">noiseless</text>
+<rect x="312" y="375.2528712678171" width="42" height="26.747128732182883" fill="#14757b"/>
+<text x="333" y="366.2528712678171" font-size="11" font-weight="400" text-anchor="middle">18.1</text>
+<rect x="359" y="379.54574466261244" width="42" height="22.454255337387547" fill="#b04c2d"/>
+<text x="380" y="370.54574466261244" font-size="11" font-weight="400" text-anchor="middle">15.2</text>
+<rect x="406" y="282.6174805628316" width="42" height="119.38251943716841" fill="#6646b0"/>
+<text x="427" y="273.6174805628316" font-size="11" font-weight="400" text-anchor="middle">80.7</text>
+<rect x="453" y="331.5240852403799" width="42" height="70.47591475962005" fill="#586474"/>
+<text x="474" y="322.5240852403799" font-size="11" font-weight="400" text-anchor="middle">47.6</text>
+<text x="403" y="427" font-size="14" font-weight="650" text-anchor="middle">weak</text>
+<rect x="522" y="349.3806430096112" width="42" height="52.61935699038879" fill="#14757b"/>
+<text x="543" y="340.3806430096112" font-size="11" font-weight="400" text-anchor="middle">35.6</text>
+<rect x="569" y="366.94647546172996" width="42" height="35.05352453827005" fill="#b04c2d"/>
+<text x="590" y="357.94647546172996" font-size="11" font-weight="400" text-anchor="middle">23.7</text>
+<rect x="616" y="271.42631998027974" width="42" height="130.57368001972026" fill="#6646b0"/>
+<text x="637" y="262.42631998027974" font-size="11" font-weight="400" text-anchor="middle">88.2</text>
+<rect x="663" y="261.046191002055" width="42" height="140.95380899794495" fill="#586474"/>
+<text x="684" y="252.04619100205505" font-size="11" font-weight="400" text-anchor="middle">95.2</text>
+<text x="613" y="427" font-size="14" font-weight="650" text-anchor="middle">medium</text>
+<rect x="732" y="297.1885689804428" width="42" height="104.8114310195572" fill="#14757b"/>
+<text x="753" y="288.1885689804428" font-size="11" font-weight="400" text-anchor="middle">70.8</text>
+<rect x="779" y="327.7165379656107" width="42" height="74.2834620343893" fill="#b04c2d"/>
+<text x="800" y="318.7165379656107" font-size="11" font-weight="400" text-anchor="middle">50.2</text>
+<rect x="826" y="204.52331035330533" width="42" height="197.47668964669467" fill="#6646b0"/>
+<text x="847" y="195.52331035330533" font-size="11" font-weight="400" text-anchor="middle">133.4</text>
+<rect x="873" y="120.089839320495" width="42" height="281.910160679505" fill="#586474"/>
+<text x="894" y="111.089839320495" font-size="11" font-weight="400" text-anchor="middle">190.5</text>
+<text x="823" y="427" font-size="14" font-weight="650" text-anchor="middle">strong</text>
+<rect x="108" y="465" width="14" height="14" fill="#14757b"/>
+<text x="129" y="477" font-size="13" font-weight="400" text-anchor="start">KF</text>
+<rect x="314" y="465" width="14" height="14" fill="#b04c2d"/>
+<text x="335" y="477" font-size="13" font-weight="400" text-anchor="start">CV-EKF</text>
+<rect x="520" y="465" width="14" height="14" fill="#6646b0"/>
+<text x="541" y="477" font-size="13" font-weight="400" text-anchor="start">CT-EKF</text>
+<rect x="726" y="465" width="14" height="14" fill="#586474"/>
+<text x="747" y="477" font-size="13" font-weight="400" text-anchor="start">Measured baseline</text>
+</svg>

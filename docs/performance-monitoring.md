@@ -7,7 +7,7 @@
 보드 내부, 전송 무결성, 증거 완전성, 호스트 RTT, 요청 부하 충족을 독립 판정한다.
 `passed`는 `board_qualification`의 통과 여부로, 보드 내부·전송·증거가 모두 통과해야 참이다. 적용 범위는 **관측 부하**다.
 `requested_profile_qualification`은 여기에 요청 부하 충족까지 요구한다. 호스트 RTT와 PC 미송신은 STM32 합격·릴리스 차단 기준에 포함하지 않는다. 실제 제공한 입력의 전달·응답·보드 지연·오류 기준은 유지한다. PC 송신기 개선은 [v1.1.1 #8](https://github.com/SungJaeYu/radar-tracking-bench/issues/8) 범위다.
-필수 관측 누락은 `inconclusive`이며 통과가 아니다. [정책 정정·전체 검토](review-2026-11-23.md).
+필수 관측 누락은 `inconclusive`이며 통과가 아니다. [릴리스 검증과 실패 분석](release-v1.1.0.md).
 정확한 필드·한계·미검증 영역은 [STM32 성능 검증 범위](stm32-performance-coverage.md)를 따른다.
 
 기존 보드 지연20ms와 호스트 RTT 진단 한도 p99≤20ms·최대≤100ms를 유지한다. RTT 옵션으로 진단 한도를 더 엄격하게 설정할 수 있지만 늘릴 수 없다.
@@ -47,13 +47,13 @@ PC RTT는 write 직전→TRACK을 담은 read 직후로 USB·UART·호스트 대
 
 확장 계측 후 장시간 재시험과 짧은 재시험 모두 보드 수신 CRC 오류로 중단됐다. 이 오류를 호스트 영향으로 단정하지 않는다. [추가 증거와 판정 보완](test-results/extended-perf-2026-11-23/README.md).
 
-IRQ 경로 보완 후300초 실행은 유효 측정14,802개 모두 대응·보드 CRC0으로 관측 부하의 보드 내부·전송·증거 검사를 통과했다. 요청15,000슬롯 중201개를 건너뛰어 요청50Hz 검증은 미확정이다. PC RTT p99 14.727ms·최대328.516ms는 별도 호스트 진단 결과다. 이 실행은30분 새 확장 계측 검증이나 이전 CRC 오류의 원인 확정을 뜻하지 않는다. [수정 당시 원시 기록](test-results/irq-safe-perf-2026-11-23/README.md)과 [현재 판정 해석](review-2026-11-23.md)을 구분한다.
+IRQ 경로 보완 후300초 실행은 유효 측정14,802개 모두 대응·보드 CRC0으로 관측 부하의 보드 내부·전송·증거 검사를 통과했다. 요청15,000슬롯 중201개를 건너뛰어 요청50Hz 검증은 미확정이다. PC RTT p99 14.727ms·최대328.516ms는 별도 호스트 진단 결과다. 이 실행은30분 새 확장 계측 검증이나 이전 CRC 오류의 원인 확정을 뜻하지 않는다. [수정 당시 원시 기록](test-results/irq-safe-perf-2026-11-23/README.md)과 [릴리스 검증과 실패 분석](release-v1.1.0.md)을 구분한다.
 
-현재 정책으로 실행한60초 확인은 유효 측정2,981개 모두 대응·CRC/STATUS 오류0으로 보드 내부·전송·증거를 통과했다. 최대 PC RTT117.529ms의 진단 초과는 보드 합격에 영향을 주지 않으며, 예정 슬롯22개 누락은 요청 부하 검증을 미확정으로 남긴다. [현재 검토·새 실행 원본](review-2026-11-23.md).
+현재 정책으로 실행한60초 확인은 유효 측정2,981개 모두 대응·CRC/STATUS 오류0으로 보드 내부·전송·증거를 통과했다. 최대 PC RTT117.529ms의 진단 초과는 보드 합격에 영향을 주지 않으며, 예정 슬롯22개 누락은 요청 부하 검증을 미확정으로 남긴다. [릴리스 검증과 실패 분석](release-v1.1.0.md).
 
 ## ISR·임계구역 보완
 
-확장 계측의 ISR 집계와 IRQ 차단 중 시각 조회·통계 갱신을 제거했다. ISR은 DWT 원시 값을 유한 버퍼에 게시하고 RX 스레드가 집계한다. 공용 collector의 spinlock도 thread-only mutex로 바꿔 히스토그램 계산과 전체 통계 복사 동안 애플리케이션이 IRQ를 잠그지 않는다. mutex 취득·해제 내부의 짧은 커널 임계구역까지 없앴다는 뜻은 아니다. 계측 저장 공간 유실 또는1초 이상 서비스 공백은 sticky 실패이며 보드 기준·호스트 진단 한도는 유지한다. [전체 점검 결과](interrupt-context-audit.md). 수정 전 CRC 기록은 원인 확정 증거가 아니며 보존한다.
+확장 계측의 ISR 집계와 IRQ 차단 중 시각 조회·통계 갱신을 제거했다. ISR은 DWT 원시 값을 유한 버퍼에 게시하고 RX 스레드가 집계한다. 공용 collector의 spinlock도 thread-only mutex로 바꿔 히스토그램 계산과 전체 통계 복사 동안 애플리케이션이 IRQ를 잠그지 않는다. mutex 취득·해제 내부의 짧은 커널 임계구역까지 없앴다는 뜻은 아니다. 계측 저장 공간 유실 또는1초 이상 서비스 공백은 sticky 실패이며 보드 기준·호스트 진단 한도는 유지한다. [계측 실행 문맥](performance-monitoring.md#인터럽트와-계측-실행-문맥). 수정 전 CRC 기록은 원인 확정 증거가 아니며 보존한다.
 
 ## 빌드와 원복
 
@@ -101,7 +101,7 @@ received_uptime_ms (t0)       k_uptime_get() (t1)              k_uptime_get() (t
 C의 시간 통계 타입은 `perf_latency_stats`이며, `sample_count`는 표본 수,
 `histogram_counts`는 구간별 빈도, `over_budget_count`는 기준 초과 횟수다.
 큐 통계는 `accepted_count`, `rejected_count`, `max_observed_depth`로 저장한다.
-콘솔 필드 형식은 [로그 규칙](logging.md)을 따른다. 보드 검증 parser는 이전 로그도 읽고 JSON의 기존 키를 유지한다.
+콘솔 필드 형식은 [펌웨어 로그 설정](board-bringup.md#펌웨어-로그-설정)을 따른다. 보드 검증 parser는 이전 로그도 읽고 JSON의 기존 키를 유지한다.
 
 각 시간 통계는 `n`, `total_ms`, `max_ms`, `over_budget_count`, 히스토그램을 유지한다. 평균은 `total_ms / n`으로 계산하며 n=0이면 표본이 없다. 부팅 이후 누적값이고 5초 구간별 통계가 아니다.
 
@@ -165,3 +165,14 @@ host 사례와 실행 명령은 [성능 계측 테스트](../fcc_app/tests/test_
 6. 일반 이미지를 복원하고 기본 왕복을 확인한다.
 
 계측 구현·host/빌드·실보드 관측은 확보했으며, 최신 구성의30분 관측 부하와 호스트 중단 분류도 실보드에서 확인했다. 요청50Hz 전체 입력은 슬롯943개 누락으로 미확정이다. 추가 보드 시험은 필요한 기간·부하·오류 조건을 명시하며 PC RTT 진단 초과나 PC 미송신만으로 STM32 재시험이나 릴리스 보류를 요구하지 않는다. [최신 실행과 남은 범위](test-results/host-input-retest-2026-11-23/README.md)를 따른다.
+
+## 인터럽트와 계측 실행 문맥
+
+- UART ISR은 DWT 원시 카운터 쌍을 유한 SPSC 버퍼에 보관한다. 256슬롯 중255개를 사용하며 집계·변환·로그·collector mutex는 RX 스레드에서 처리한다.
+- byte-pop IRQ 보호 구간에서는 바이트와 대응32비트 시각을 복사한다. 카운터 조회·변환·집계는 IRQ 복원 뒤에 수행한다. overflow 복구의 parser reset도 IRQ 차단 밖에서 실행한다.
+- 공통 collector는 스레드 전용 mutex를 사용한다. snapshot·히스토그램 집계 동안 애플리케이션이 IRQ를 차단하지 않는다. 커널 내부 동기화와 UART 드라이버의 짧은 IRQ 보호는 별개로 남는다.
+- RX 체류 시간은 DWT 차이를 RX 스레드에서 ms로 올림 변환한다. 끝점은 IRQ 복원 뒤이므로 그 사이 선점 시간이 포함될 수 있다.
+- 216MHz의32비트 DWT는 약19.9초마다 순환한다. 단일 순환은 unsigned 차분으로 처리하고,1초 이상 서비스 공백은 계측 증거 손실로 표시한다. 캡처 버퍼 포화도 sticky `rx_capture_lost`로 기록하며 합격으로 처리하지 않는다.
+- `perf_rx_capture`는 RX 원시 캡처, `perf_hooks.h`는 스레드 계측 호출을 담당한다. 일반 빌드에서 hook은 no-op이며 PERF 상태를 연결하지 않는다.
+
+이 실행 문맥은 물리 인터럽트 지연이나 WCET 보증이 아니다. [IRQ 계측 시험 증거](test-results/irq-safe-perf-2026-11-23/README.md), [RX 모듈 검증](test-results/rx-refactor-2026-11-23/README.md), [최종 릴리스 검증](release-v1.1.0.md)을 구분해 확인한다.

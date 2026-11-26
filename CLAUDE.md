@@ -16,11 +16,11 @@ V1은 2026-11-19 프로젝트 소유자의 완료 확인을 반영해 종료했�
 
 ## 현재 구조와 규격
 
-- PC 도구는 `pc_sim/` 하나. 모든 송신기가 `pc_sim/protocol.py`를 공유합니다.
+- PC 도구는 `pc_sim/` 하나. 모든 송신기가 `pc_sim/transport/protocol.py`를 공유합니다.
 - `radar_sender.py`: 거리 변화율 기반 송신. `run_sim.py`: 표적·센서 시나리오. v1.1.0은 `Target.turn_rate_radps`(시계 방향 양수) 원호 운동, `MotionSegment`/`SegmentedScenario`, `straight_turn_straight`를 추가합니다. 동쪽10초·우90°선회 약55.49초·남쪽10초이며 전체 실행은 `--duration 80`을 사용합니다. 기본60초는 중간에서 끝납니다.
-- 선회 확장은 PC 입력 모델이며 펌웨어 CV 추정기를 바꾸지 않습니다. GUI와 `pc_sim.evaluate`는 고정 방위각·일정 거리 변화율 모델을 유지합니다. `run_sim`은 TRACK을 수집하지 않습니다. GUI의 사용자 표시·제어 문구는 영어입니다.
+- 선회는 PC 입력 모델입니다. 펌웨어는 Kconfig에서 polar CV KF 또는 Cartesian CV EKF를 빌드 시 선택합니다. GUI `Tests → Turn + noise`와 CLI `turn-noise`는 같은 선회 평가기를 사용하며 기본 `evaluate`는 고정 방위각·일정 거리 변화율 모델을 유지합니다. `run_sim`은 TRACK을 수집하지 않습니다. GUI의 사용자 표시·제어 문구는 영어입니다.
 - `frame_sender.py`: 수동 INIT 등 단일 프레임 송신.
-- `python -m pc_sim.gui`: PySide6/pyqtgraph 단일표적 GUI. 설정·측정 생성·시리얼 작업은 `gui_model.py`·`gui_worker.py`로 분리합니다.
+- `python -m pc_sim gui`: PySide6/pyqtgraph 단일표적 GUI. 설정·측정 생성·시리얼 작업은 `gui_model.py`·`gui_worker.py`로 분리합니다.
 - GUI는 PC 합성 실제값·측정값과 수신한 보드 추정값을 구분합니다. 미리보기에서는 보드 값을 만들지 않습니다. 생성/송신 횟수는 수신 ACK가 아닙니다.
 - 프레임: `7E | LEN | TYPE | PAYLOAD | CRC_H | CRC_L`.
 - 측정 TYPE=2, payload `>IHi` 10바이트: uint32 ms, uint16 m, int32 semicircle.
@@ -32,36 +32,38 @@ V1은 2026-11-19 프로젝트 소유자의 완료 확인을 반영해 종료했�
 - RX 링버퍼는 256바이트, 실제 저장 용량은 255바이트입니다. 인덱스는 `uint8_t`이므로 더 큰 버퍼는 타입 변경이 필요합니다.
 - overflow 정책은 `fcc_app/Kconfig` choice와 `prj.conf`에서 선택하며 `uart_rx.c`에서 매핑합니다. 기본값은 DRAIN입니다.
 - overflow 복구 중 새 입력은 버리고 저장된 바이트로 완성 가능한 프레임만 처리한 뒤 링·파서를 초기화합니다.
-- 단일 트랙, CV Kalman, 게이팅, hit/miss 상태 전이, 정상 측정 수신 timeout이 있습니다.
+- 단일 트랙, KF/EKF 공통 estimator API, 직사각형 게이팅, hit/miss 상태 전이, 정상 측정 수신 timeout이 있습니다. 상태는 선택된 필터를 직접 소유합니다. [구조·설정](docs/estimator-tuning.md).
 - TRACK_REPORT(TYPE=7)는 32바이트 payload이며 신선한 유효 측정마다 한 번 TX 제출합니다. PC 해석·GUI의 2초 STALE 정책은 구현했으며 INIT/RESET·무수신 timeout 이벤트 보고도 구현했고 기본 실보드 왕복도 확인했습니다. 상세 계약은 [SPEC-TRACK-REPORT](docs/requirements-traceability.md#spec-track-report)를 따릅니다.
 - 다중표적 데이터 연관·LCD는 현재 실행 경로에 없습니다.
 - 기존 XOR 인코더는 CRC-16/IBM-3740으로 변경했습니다. 과거 구현은 Git 이력에 남아 있습니다.
 
 ## 선택적 성능 계측
 
-`perf.conf`는 `diagnostics/perf_monitor.c/.h`의 지연·큐·송신·predict/correct 실행 cycle 집계와 `perf_reporter.c`의 5초 요약·스택 조회를 켭니다. 일반/debug 빌드에는 제외됩니다. [측정 계약](docs/performance-monitoring.md)을 따릅니다. [11월 19일 종료한 30분 기록](docs/hardware-test-2026-11-19-performance.md)은 측정89,990건 모두 대응, PC RTT p99 8.049ms·최대34.894ms, 보드 RX→TX 제출 최대1ms입니다. PC RTT는 USB·UART·호스트 대기도 포함합니다. 기존 호스트 간격137.581ms에 따른 원시 실패 판정은 당시 이력으로 유지하며 현재 보드 판정과 구분합니다. RTT는 진단값이며 STM32 합격이나 릴리스 차단 조건이 아닙니다. `passed`는 관측 부하의 board_qualification과 같고, 요청50Hz 전체 충족 여부는 requested_profile_qualification으로 별도 판정합니다. [최신 종합 검토](docs/review-2026-11-23.md)를 따릅니다.
+`perf.conf`는 `diagnostics/perf_monitor.c/.h`의 지연·큐·송신·predict/correct 실행 cycle 집계와 `perf_reporter.c`의 5초 요약·스택 조회를 켭니다. 일반/debug 빌드에는 제외됩니다. [측정 계약](docs/performance-monitoring.md)을 따릅니다. [11월 19일 종료한 30분 기록](docs/hardware-test-2026-11-19-performance.md)은 측정89,990건 모두 대응, PC RTT p99 8.049ms·최대34.894ms, 보드 RX→TX 제출 최대1ms입니다. PC RTT는 USB·UART·호스트 대기도 포함합니다. 기존 호스트 간격137.581ms에 따른 원시 실패 판정은 당시 이력으로 유지하며 현재 보드 판정과 구분합니다. RTT는 진단값이며 STM32 합격이나 릴리스 차단 조건이 아닙니다. `passed`는 관측 부하의 board_qualification과 같고, 요청50Hz 전체 충족 여부는 requested_profile_qualification으로 별도 판정합니다. [릴리스 검증과 실패 분석](docs/release-v1.1.0.md)를 따릅니다.
 
 새 predict/correct 실행 시간 출력은 host/빌드와 2026-11-22 STM32 10초 smoke에서 확인했습니다. 기존 30분 기록과 구분하며 [로그 형식 회귀](docs/hardware-test-2026-11-22-logging.md)를 따릅니다.
 
 ## 검증
 
 - [성능 계측 host 테스트](fcc_app/tests/test_perf_monitor/README.md): collector/reporter 12 + 계측 활성화 handler 32/TX 4회. 이번 계측 관련 검증은 총 48개 CTest입니다.
-- `python -m pytest`: GUI 의존성 설치 시 928개 검증 + 별도 subtest 9개. 미설치 시 Qt 테스트는 skip됩니다. 실제 보드와 별도입니다.
+- `python -m pytest`: GUI 의존성 설치 시 1,058개 검증 + 별도 subtest 9개. 미설치 시 Qt 테스트는 skip됩니다. 실제 보드와 별도입니다.
 - [UART host 테스트](fcc_app/tests/test_uart_rx/README.md): drain 24·discard 21, 총 45회 실행으로 링버퍼·부분 프레임 timeout·통계·init 오류를 검증합니다. 모사 IRQ는 실제 동시성을 검증하지 않습니다.
 - [handler host 테스트](fcc_app/tests/test_frame_handler/README.md): STATUS·TRACK·실패 복귀·INIT/RESET·측정 timeout·processor·stale·이상치 복귀 계약 31개 사례. 통계는 모사 snapshot이며 실제 RX 카운터 통합은 별도입니다.
 - [TX host 테스트](fcc_app/tests/test_uart_tx/README.md): 초기화·요청 검증·복사 큐·송신 순서·실패 후 복귀 4개 사례.
-- [Tracking C 테스트](fcc_app/tests/test_tracking/README.md): 필터·게이팅·추적 정책 21개 + 게이트 설정 행렬 20개 사례.
-- 수동 초기화만 필요할 때: `python pc_sim/frame_sender.py init --type 1 --port PORT`.
-- 송신: `python pc_sim/radar_sender.py --port PORT --count 20 --noise 0`.
+- [Tracking C 테스트](fcc_app/tests/test_tracking/README.md): 필터·게이팅·추적 정책 22개 + 게이트 설정 행렬 20개 + KF 설정 4개 + EKF 통합 2개 + EKF Q 설정 4개 사례(CTest 31개).
+- 수동 초기화만 필요할 때: `python -m pc_sim send-frame init --type 1 --port PORT`.
+- 송신: `python -m pc_sim send-radar --port PORT --count 20 --noise 0`.
 - 두 연속 송신기는 실행마다 INIT을 한 번 자동 전송하고 timestamp를 0부터 시작합니다.
 - 보드 수신·추적 결과는 ST-Link 콘솔에서 확인합니다.
 - Python/host 테스트, 펌웨어 빌드, flash, 실제 보드 HIL을 구분해서 보고합니다.
 
-잡음별 추가 평가는 `python -m pc_sim.noise_sweep --dry-run`으로 계획을 확인하고 `--port PORT`로 실보드에서 실행합니다. 기본100회는 거리/각도 잡음을 한 축씩 바꾸고 seed10개를 반복합니다. host 모사 테스트를 새로운 실보드 정확도 수치로 쓰지 않습니다. 경계값·범위 밖·비유한 입력의 계약별 행렬은 [테스트 목록](docs/test-cases.md)을 따릅니다.
+잡음별 추가 평가는 `python -m pc_sim noise-sweep --dry-run`으로 계획을 확인하고 `--port PORT`로 실보드에서 실행합니다. 기본100회는 거리/각도 잡음을 한 축씩 바꾸고 seed10개를 반복합니다. host 모사 테스트를 새로운 실보드 정확도 수치로 쓰지 않습니다. 경계값·범위 밖·비유한 입력의 계약별 행렬은 [테스트 목록](docs/test-cases.md)을 따릅니다.
 
-순간 이상치 보드 시험은 `python -m pc_sim.spike_sweep --dry-run` / `--port PORT`를 사용합니다. 기본49회이며 정지1000m/0°·기본100m/10° 게이트를 전제로 합니다. 회복은 CONFIRMED·UPDATED·거리2m/각도0.2° 이내3연속의 센서 시간축 관측입니다. 기본49회 STM32 시험이 모두 통과했고 잡음100회도 기록·응답 검사를 완료했습니다. [실측 결과·한계](docs/hardware-test-2026-11-19-noise-spike.md)를 host C48조합 검증과 구분합니다.
+순간 이상치 보드 시험은 `python -m pc_sim spike-sweep --dry-run` / `--port PORT`를 사용합니다. 기본49회이며 정지1000m/0°·기본100m/10° 게이트를 전제로 합니다. 회복은 CONFIRMED·UPDATED·거리2m/각도0.2° 이내3연속의 센서 시간축 관측입니다. 기본49회 STM32 시험이 모두 통과했고 잡음100회도 기록·응답 검사를 완료했습니다. [실측 결과·한계](docs/hardware-test-2026-11-19-noise-spike.md)를 host C48조합 검증과 구분합니다.
 
 ## 작업 원칙
+
+- 대화·승인 기록, 에이전트 실행 계획, 개인 작업 인계는 Git 제외 경로 `.local-notes/`에만 저장합니다. 공개 문서에는 사용법·설계 계약·검증 결과와 근거를 남깁니다.
 
 - 공개 문서는 프로젝트의 문제·구조·구현 상태·검증 결과·한계를 중심으로 작성합니다. 개인의 구직 계획이나 다음 프로젝트로 이동하는 일정은 공개 기술 문서에 포함하지 않습니다.
 
@@ -80,8 +82,8 @@ V1은 2026-11-19 프로젝트 소유자의 완료 확인을 반영해 종료했�
 - 현재 규격·테스트 연결: [요구사항 추적표](docs/requirements-traceability.md).
 - 과거 빌드·실보드 결과: [검증 이력](docs/verification-history.md). 대상 commit과 범위를 함께 읽습니다.
 - 2026-11-16 `87006b0`: TRACK_REPORT·processor 분리 host 29개, 일반/디버그 빌드 확인. 당시에는 새 결과 경로의 flash·PC 왕복이 미검증이었으며 이후 11월 18~19일 기록에서 확인했습니다.
-- 게이트/timeout/overflow는 `fcc_app/Kconfig`·`prj.conf`, 로그/디버그는 [로깅 안내](docs/logging.md)를 따릅니다. π는 `common/math_constants.h`의 상수입니다.
-- 2026-11-17 파일·API·변수 이름 변경을 적용했습니다. [변경 전후와 남은 설계 과제](docs/naming-review.md)를 참고합니다.
+- 게이트/timeout/overflow는 `fcc_app/Kconfig`·`prj.conf`, 로그/디버그는 [펌웨어 로그 설정](docs/board-bringup.md#펌웨어-로그-설정)를 따릅니다. π는 `common/math_constants.h`의 상수입니다.
+- 2026-11-17 파일·API·변수 이름 변경을 적용했습니다. [명명 규칙](docs/coding-standard.md)를 참고합니다.
 - 과거 `docs/test-results/` 스크립트는 당시 revision용입니다. 현재 API로 재사용할 때 호환성을 확인하며 원시 증거를 덮어쓰지 않습니다.
 
 2026-11-18: stale 큐 측정은 MCU 나이가 측정 timeout 이상이면 폐기하고 handler 포화 통계에 집계합니다. CSV·고정 시나리오 실보드 RMSE·실제 UART GUI 확인 범위는 [최신 결과](docs/hardware-test-2026-11-18-evaluation.md)를 따릅니다. 이후 30분 재시험과 판정 변경·V1 완료는 [검증 이력](docs/verification-history.md)을 따릅니다.

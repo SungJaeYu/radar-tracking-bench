@@ -1,14 +1,14 @@
 cmake_minimum_required(VERSION 3.20.0)
 project(test_frame_handler C)
 enable_testing()
+include(../../cmake/estimator.cmake)
 
 # Host tests do not run Kconfig; allow independent timeout boundary testing.
 set(RADAR_MEASUREMENT_TIMEOUT_MS 1000 CACHE STRING "Timeout under test in milliseconds")
 
 add_executable(frame_handler_tests src/main.c
     ../../src/application/radar_processor.c
-    ../../src/tracking/estimator.c
-    ../../src/tracking/track.c ../../src/tracking/kalman_cv.c ../../src/tracking/angle_utils.c
+    ../../src/tracking/track.c ../../src/tracking/angle_utils.c
     ../../src/tracking/gating.c ../../src/protocol/measurement_message.c
     ../../src/protocol/protocol_frame.c ../../src/common/crc16.c
     ../../src/protocol/status_message.c ../../src/protocol/track_message.c
@@ -16,10 +16,22 @@ add_executable(frame_handler_tests src/main.c
 target_include_directories(frame_handler_tests PRIVATE include ../common/include ../../src)
 target_compile_definitions(frame_handler_tests PRIVATE
     CONFIG_RADAR_MEASUREMENT_TIMEOUT_MS=${RADAR_MEASUREMENT_TIMEOUT_MS}
-    CONFIG_RADAR_RANGE_GATE_M=100 CONFIG_RADAR_AZIMUTH_GATE_DEG=10)
+    CONFIG_RADAR_RANGE_GATE_M=100 CONFIG_RADAR_AZIMUTH_GATE_DEG=10
+        CONFIG_RADAR_RANGE_MEASUREMENT_VARIANCE_M_SQUARED=25
+        CONFIG_RADAR_AZIMUTH_MEASUREMENT_VARIANCE_RAD_SQUARED_SCALED_1E9=1218470)
 target_compile_features(frame_handler_tests PRIVATE c_std_11)
 target_compile_options(frame_handler_tests PRIVATE -Wall -Wextra -Werror -UNDEBUG)
 target_link_libraries(frame_handler_tests PRIVATE m)
+
+# Reuse every processor/report regression unchanged with either estimator.
+option(RADAR_TEST_EKF_CV "Exercise the Cartesian EKF tracking path" OFF)
+if(RADAR_TEST_EKF_CV)
+    target_compile_definitions(frame_handler_tests PRIVATE
+        CONFIG_RADAR_EKF_ACCELERATION_VARIANCE_M_SQUARED_PER_S_FOURTH=100)
+    radar_target_estimator(frame_handler_tests EKF_CV)
+else()
+    radar_target_estimator(frame_handler_tests KF_CV)
+endif()
 
 foreach(test_name IN ITEMS
         test_stale_measurement_boundary_and_stats

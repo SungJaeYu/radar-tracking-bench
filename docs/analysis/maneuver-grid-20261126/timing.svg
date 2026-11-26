@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="456" viewBox="0 0 960 456" role="img" aria-labelledby="title description">
+<title id="title">Board execution time and PC round trip</title>
+<desc id="description">Stage means use attributable sample counts. RTT percentiles pool all matched input replies.</desc>
+<style>text{font-family:system-ui,sans-serif;fill:#172235}</style>
+<rect x="0" y="0" width="960" height="456" fill="#ffffff"/>
+<text x="30" y="40" font-size="24" font-weight="700" text-anchor="start">Board execution time and PC round trip</text>
+<text x="30" y="66" font-size="13" font-weight="400" text-anchor="start">Stage means use attributable sample counts. RTT percentiles pool all matched input replies.</text>
+<text x="35" y="106" font-size="17" font-weight="700" text-anchor="start">MCU estimator stage (µs)</text>
+<text x="505" y="106" font-size="17" font-weight="700" text-anchor="start">PC UART round trip (ms)</text>
+<text x="35" y="158" font-size="13" font-weight="650" text-anchor="start">KF</text>
+<rect x="117" y="140" width="9.885288057673622" height="15" fill="#14757b"/>
+<text x="134.88528805767362" y="152" font-size="12" font-weight="400" text-anchor="start">28.29</text>
+<rect x="117" y="162" width="11.79099521070999" height="15" fill="#a2adba"/>
+<text x="136.79099521070998" y="174" font-size="12" font-weight="400" text-anchor="start">33.74</text>
+<text x="35" y="236" font-size="13" font-weight="650" text-anchor="start">CV-EKF</text>
+<rect x="117" y="218" width="61.69089226335464" height="15" fill="#b04c2d"/>
+<text x="186.69089226335464" y="230" font-size="12" font-weight="400" text-anchor="start">176.56</text>
+<rect x="117" y="240" width="180.50477990490725" height="15" fill="#a2adba"/>
+<text x="305.50477990490725" y="252" font-size="12" font-weight="400" text-anchor="start">516.59</text>
+<text x="35" y="314" font-size="13" font-weight="650" text-anchor="start">CT-EKF</text>
+<rect x="117" y="296" width="182.05303593627949" height="15" fill="#6646b0"/>
+<text x="307.05303593627946" y="308" font-size="12" font-weight="400" text-anchor="start">521.02</text>
+<rect x="117" y="318" width="242.0" height="15" fill="#a2adba"/>
+<text x="367.0" y="330" font-size="12" font-weight="400" text-anchor="start">692.59</text>
+<text x="35" y="382" font-size="13" font-weight="400" text-anchor="start">Predict (upper bar)  ·  Correct (lower bar)</text>
+<text x="505" y="158" font-size="13" font-weight="650" text-anchor="start">KF</text>
+<rect x="587" y="140" width="189.6922185251812" height="15" fill="#14757b"/>
+<text x="784.6922185251813" y="152" font-size="12" font-weight="400" text-anchor="start">5.56</text>
+<rect x="587" y="162" width="209.50001995515265" height="15" fill="#a2adba"/>
+<text x="804.5000199551527" y="174" font-size="12" font-weight="400" text-anchor="start">6.14</text>
+<text x="505" y="236" font-size="13" font-weight="650" text-anchor="start">CV-EKF</text>
+<rect x="587" y="218" width="212.85730252651942" height="15" fill="#b04c2d"/>
+<text x="807.8573025265194" y="230" font-size="12" font-weight="400" text-anchor="start">6.23</text>
+<rect x="587" y="240" width="223.88647397051534" height="15" fill="#a2adba"/>
+<text x="818.8864739705153" y="252" font-size="12" font-weight="400" text-anchor="start">6.56</text>
+<text x="505" y="314" font-size="13" font-weight="650" text-anchor="start">CT-EKF</text>
+<rect x="587" y="296" width="229.84132089642816" height="15" fill="#6646b0"/>
+<text x="824.8413208964282" y="308" font-size="12" font-weight="400" text-anchor="start">6.73</text>
+<rect x="587" y="318" width="242.0" height="15" fill="#a2adba"/>
+<text x="837.0" y="330" font-size="12" font-weight="400" text-anchor="start">7.09</text>
+<text x="505" y="382" font-size="13" font-weight="400" text-anchor="start">P50 RTT (upper bar)  ·  P95 RTT (lower bar)</text>
+<text x="35" y="428" font-size="13" font-weight="400" text-anchor="start">MCU means are estimated from cumulative PERF snapshots. RTT includes host and UART effects.</text>
+</svg>
