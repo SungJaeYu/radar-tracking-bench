@@ -1,6 +1,6 @@
 # 문서 안내
 
-최신 개발 상태: [KF/EKF·GUI/CLI 검증](validation-2026-11-24-estimators.md), [EKF Q 설정·host 탐색](test-results/ekf-q-2026-11-24/README.md), [독립 시드·이탈 선회·실보드 Q 비교](test-results/ekf-q-board-2026-11-24/README.md). 공개 릴리스 기준은 [v1.1.0 완료 범위·검증 기록](release-v1.1.0.md)이다. STM32 판정은 관측 부하의 보드·전송·증거 검사이며 PC 미송신·RTT와 분리한다.
+최신 개발 상태: [확장 기동 STM32 분석](analysis/maneuver-grid-20261126/README.md), [CT-EKF 고정 선회 비교](test-results/ct-ekf-2026-11-24/README.md), [확장 기동 정답 모델](test-results/maneuver-models-2026-11-25/README.md), [v1.2.0 릴리스 범위·검증·보드 증거 출처](release-v1.2.0.md). 이전 KF/EKF 비교는 [Q 설정·host 탐색](test-results/ekf-q-2026-11-24/README.md)과 [독립 시드·이탈 선회·실보드 비교](test-results/ekf-q-board-2026-11-24/README.md)에 있다. STM32 판정은 해당 시험의 관측 부하·펌웨어 근거 범위에서 읽고 PC 미송신·RTT와 분리한다.
 
 [송신 시한 경과 sleep 수정·최종60초 검증](test-results/host-pacing-fix-2026-11-23/README.md)과 [30분 실보드 기록](test-results/host-input-retest-2026-11-23/README.md)을 함께 제공한다. 과거 결과는 당시 판정 그대로 보존한다.
 
@@ -43,10 +43,11 @@
 
 ## 실보드 검증 결과
 
-현재 기준·수정 파일·실패 분석은 [릴리스 검증과 실패 분석](release-v1.1.0.md)를 먼저 확인하세요.
+v1.2.0 비교와 이 후보에서 실행한 host 검증은 [v1.2.0 릴리스 기록](release-v1.2.0.md)을 확인하세요. v1.1.0의 별도 보드 부하·실패 이력은 [v1.1.0 검증과 실패 분석](release-v1.1.0.md)에 보존합니다.
 
 | 확인할 내용 | 기록 |
 |---|---|
+| 세 추정기의 확장 기동·잡음 동일 입력 STM32 비교 | [80조건 분석·재현·펌웨어 출처](analysis/maneuver-grid-20261126/README.md) |
 | KF/EKF 동일 입력 초기 비교·오차·실행 시간 | [2026-11-24 실보드 결과·그래프](hardware-test-2026-11-24-kf-ekf.md) |
 | v1.1.0 선회·영어 GUI·전체 자동 회귀 | [v1.1.0 검증](hardware-test-2026-11-23-v1.1.0.md) |
 | 전체 검증 현황과 날짜별 이력 | [검증 기록](verification-history.md) |

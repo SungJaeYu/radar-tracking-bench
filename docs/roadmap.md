@@ -59,7 +59,7 @@ V1은 종료하고 결함 수정·재현성 유지에 집중합니다. 아래 �
 | --- | --- |
 | 지연 최적화 | 추가한 RX/TX 구간 계측·비동기 기록을 바탕으로 동일 조건의 보드 지연과 호스트 RTT 진단을 각각 비교 |
 | 추적 확장 | 다중표적 입력 묶음·스캔 경계·상한, 측정 연관·트랙 테이블·자체 ID·수명 관리, 교차·클러터·재등장 평가 |
-| 모델 비교 | 구현된 polar CV KF·Cartesian CV-EKF·CT-EKF의 동일 입력 비교, IMM·adaptive gating, 추가 기동 시나리오 |
+| 모델 비교 | polar CV KF·Cartesian CV-EKF·CT-EKF의 고정 선회 비교와 확장 기동 80조건 STM32 비교를 기록했다. 새 grid는 seed6 한 번의 관측이며 다중 seed 일반화는 하지 않는다. GUI 평가 프리셋과 게시 자료는 [v1.2.0 이슈 #10](https://github.com/SungJaeYu/radar-tracking-bench/issues/10)에 남아 있다. IMM·adaptive gating은 별도 후속 후보다. |
 | 3차원 확장 | 좌표계·단위·측정 모델 설계 → PC 고도·수직속도 시나리오 → 프로토콜·필터 → GUI·오차 평가·실보드 검증. [이슈 #4–#7](github-project.md)에서 선행 조건을 관리하며 설계를 검토한 뒤 단계별로 구현 |
 | 제어·송신 정책 | INIT/RESET 우선 보존·전용 ACK·reset 이전 큐 폐기, TX 포화 시 보고별 우선순위, 이벤트 원인·상시 TX 진단 규격 |
 | 추가 장애 시험 | UART overrun/framing/parity 감지·집계·복구, DISCARD 전체 행렬, 실제 동시 조회·USB 제거·전원 재인가 |
@@ -87,12 +87,12 @@ predict/correct 실행 시간 측정·누적 집계·요약 출력을 구현했�
 
 다음 학습 단계는 같은 선회 측정열에서 현재 거리/방위각 CV 필터의 구간별 오차를 해석하고, 필요에 따라 비교 알고리즘을 정하는 것이다. JSBSim 연동은 현재 릴리스의 필수 조건이 아니다.
 
-## 현재 개발 상태 — 2026-11-24
+## v1.2.0 개발·검증 상태 — 2026-11-26
 
 `feat/prepared-input`의 `cd27620`에 통합 CLI, GUI 선회 잡음 평가, 사전 생성 입력, KF/EKF 선택과 R 설정을 반영했다. 필터 상태와 공분산은 고정 배열을 직접 소유하며 기존 추적 API·프로토콜을 재사용한다. [host·빌드 검증](validation-2026-11-24-estimators.md).
 
 - #8: 입력 생성·저장·검증 및 선회 전용 FIFO 재생 완료. 공통 재생 정책, lockstep, 시험 후 일괄 저장과 해당 경계 검증은 남아 있다.
-- #10: Cartesian CV-EKF와 선택 구조·host 회귀 완료. 무잡음/기본 잡음 seed42의 동일 입력 실보드4회를 완료했다. [결과·그래프](hardware-test-2026-11-24-kf-ekf.md). 이후 EKF Q 설정과 같은 입력의 host 탐색24회를 기록했다. [Q 비교표](test-results/ekf-q-2026-11-24/README.md). 기본값100을 유지하고 후보10000·30000의 독립10시드·거리/방위 잡음 분리·이탈 선회 host336회 및 실보드46회를 완료했다. [후속 결과·원시 자료](test-results/ekf-q-board-2026-11-24/README.md). 이후 CT-EKF 구현·독립 수치 검증·동일 입력 host252회를 완료했다. seed42로 선택한 후보를 고정한 뒤 독립 시드를 평가했으며, 기본 KF 선택·기존 CV 기본값은 유지한다. CT의 실보드18회도 완료해 입력13,590개가 모두 대응했고 게이트 거부·LOST·STATUS 오류는0이었다. 일반 KF를 복구했다. 확장 기동 비교는 남아 있다. [CT 결과·비용·원시 자료](test-results/ct-ekf-2026-11-24/README.md).
+- #10: Polar CV KF·Cartesian CV-EKF·CT-EKF의 빌드 선택 구조와 고정 선회 동일 입력 비교를 완료했다. 무잡음/기본 잡음 seed42의 초기 KF/CV 실보드4회는 [초기 결과](hardware-test-2026-11-24-kf-ekf.md)에 있다. Q 후보는 기본값100을 유지한 채 독립10시드·거리/방위 잡음 분리·이탈 선회 host336회 및 실보드46회를 완료했다. [후속 결과](test-results/ekf-q-board-2026-11-24/README.md). CT-EKF는 독립 수치 검증·동일 입력 host252회와 STM32 18회를 완료했다. STM32 입력13,590개가 모두 대응했고 게이트 거부·LOST·STATUS 오류는0이었다. [CT 결과와 조건](test-results/ct-ekf-2026-11-24/README.md). 확장 기동 정답 모델 20개 프리셋과 schema2 저장을 구현했다. 이어 10개 기동×두 방향×네 잡음 단계의 동일 입력 STM32 비교80조건을 완료했다. 새 비교에서 CV-EKF가 pooled position RMSE 29.27m, KF40.68m, CT93.50m였고 새 grid는 seed6 하나다. Python1,091개와 host C 54 CTest 항목도 통과했다. 평가 조건 GUI 프리셋·대외 게시 자료는 남아 있다. [확장 기동 분석](analysis/maneuver-grid-20261126/README.md) · [정답 모델 검증](test-results/maneuver-models-2026-11-25/README.md) · [v1.2.0 릴리스 기록](release-v1.2.0.md).
 - #11: Joseph 구현을 기준으로 Square-root·UD의 수치 안정성·비용 비교는 후속이다.
 - #1·#2는 완료·종료된 이슈이며 진행 중 목록에서 제외한다. 3D #4–#7은 후속 계획을 유지한다.
 
@@ -112,4 +112,4 @@ STM32 적용은 실제 실행 시간·메모리 예산을 확인한 뒤 결정�
 
 ## 확장 기동 입력 구현 — 2026-11-26
 
-직선 속도3종·선회강도3종·S자·가감속2종·선회율 ramp를 두 출발 방향으로 제공한다. Target의 진행방향 가속도·각가속도와 schema2 저장을 구현했고 기존 입력·필터는 유지한다. Python1,091개 통과. 이 단계는 정답 모델 검증이며 새 기동의 KF/CV/CT host·실보드 비교와 GUI 평가 연결은 아직 남아 있다. [기동 정의와 정답 그래프](test-results/maneuver-models-2026-11-25/README.md).
+직선 속도3종·선회강도3종·S자·가감속2종·선회율 ramp를 두 출발 방향으로 제공한다. Target의 진행방향 가속도·각가속도와 schema2 저장을 구현했고 기존 schema1 입력도 읽는다. Python1,091개 통과. 별도 STM32 비교는 10개 기동×두 방향×네 잡음 단계의80개 입력을 seed6·100ms 주기로 세 추정기에 재생했다. 공통53,400시각에서 위치 RMSE는 KF40.68m/CV-EKF29.27m/CT-EKF93.50m였고, 입력55,000개씩 모두 대응·게이트 거부0·LOST0이었다. CV-EKF가 이 grid의 pooled 오차가 가장 작았고 KF가 가장 빨랐으며, CT-EKF는 가감속 오차가 컸다. 한 seed 결과이므로 noise-seed 변동성과 일반적 우열을 말하지 않는다. [분석·그림·재현자료·펌웨어 출처](analysis/maneuver-grid-20261126/README.md). Issue #10에는 확장 기동 GUI 평가 프리셋과 검증 결과 기반 LinkedIn 게시물·영상·이미지가 남아 있다. [v1.2.0 범위와 기준](release-v1.2.0.md).

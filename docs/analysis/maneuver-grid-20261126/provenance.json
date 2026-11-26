@@ -1,0 +1,87 @@
+{
+  "manifest_sha256": "7ee187a16af618aba1c0a26fae60ced59ff1078355ebda34ce2ef2d3a70d477e",
+  "source_commit": "b3a092162a96846d2d18c4a60a486c82cdc2b83f",
+  "board": "stm32f746g_disco",
+  "baud": 115200,
+  "seed": 6,
+  "dt_s": 0.1,
+  "noise_profiles": [
+    {
+      "azimuth_sigma_rad": 0.0,
+      "name": "noiseless",
+      "range_sigma_m": 0.0
+    },
+    {
+      "azimuth_sigma_rad": 0.005,
+      "name": "weak",
+      "range_sigma_m": 5.0
+    },
+    {
+      "azimuth_sigma_rad": 0.01,
+      "name": "medium",
+      "range_sigma_m": 10.0
+    },
+    {
+      "azimuth_sigma_rad": 0.02,
+      "name": "strong",
+      "range_sigma_m": 20.0
+    }
+  ],
+  "builds": {
+    "ct_ekf": {
+      "config_sha256": "105044fb85b59660f3b595f8ab221648863d0695bdbe97cc84ad255b456d4d99",
+      "directory": "build_ct_perf",
+      "elf_sha256": "c1551eac8c0ea77d81b89be06964e88fe1ece7c2c2cb7c462792760b29b5d2f0",
+      "hex_sha256": "a9d0dad32bd5f2567ef8796471318856537a1b0118e17c895cff5076497f8c01",
+      "archive_hash_matches": {
+        "config": true,
+        "hex": true,
+        "local_elf_matches": true
+      }
+    },
+    "cv_ekf": {
+      "config_sha256": "5c70a11e613451b8cc538983562510287132d7b60528f8eaa265db44e32d4cb6",
+      "directory": "build_ct_cv",
+      "elf_sha256": "d1a5885b258d8da802db24261a84213413d8adc5823cf31a54b05a8ff2950195",
+      "hex_sha256": "78d2485059562774dd967a909d05cdb483ca0b7ac1c987b393afe7479a8c8f9e",
+      "archive_hash_matches": {
+        "config": true,
+        "hex": true,
+        "local_elf_matches": true
+      }
+    },
+    "kf": {
+      "config_sha256": "5ef5f7d3bfa7ca9e08f60ef7b75e768f259737ed5bb3518efe9578ac047e880e",
+      "directory": "build_ct_kf",
+      "elf_sha256": "e7e0e85c8580a2d84446cd7e47abaf35a849172bddaf2628ee7273bf246522f4",
+      "hex_sha256": "85e558d08862a9ecc0c1d9fc886974f981bd31c8371bd15cf338b564035cf702",
+      "archive_hash_matches": {
+        "config": true,
+        "hex": true,
+        "local_elf_matches": true
+      }
+    },
+    "restore": {
+      "config_sha256": "0de595926d16e234aa38a6ef2b1f2ad805de6adda81dcf293dbc352a41b48174",
+      "directory": "build",
+      "elf_sha256": "10cf648be38ed28f2883e4147151d35c46077167e03e01a09f4f5066aae9c285",
+      "hex_sha256": "f0572f1b699d0ffb044b25a332eace3f15013c52efedd2fa2ffa55b86cf03b26",
+      "archive_hash_matches": {
+        "config": true,
+        "hex": true,
+        "local_elf_matches": true
+      }
+    }
+  },
+  "restored": true,
+  "restore_status": {
+    "crc_errors": 0,
+    "frame_timeouts": 0,
+    "length_errors": 0,
+    "queue_drops": 0,
+    "recovery_discarded_bytes": 0,
+    "ring_overflow_events": 0,
+    "rx_dropped_bytes": 0,
+    "stale_measurements": 0
+  }
+}
