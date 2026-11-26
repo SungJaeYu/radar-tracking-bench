@@ -10,6 +10,8 @@ Previously named `radar-track-fcc-hil`.
 
 V1.2.0 adds build-time polar CV KF / Cartesian CV-EKF / CT-EKF selection, reusable measurement inputs, and 20 PC truth presets covering straight, turning, S-turn, acceleration/deceleration, and turn-rate-ramp motion. It includes a paired 80-condition STM32 comparison; the single-seed limits and build provenance are in the [release record](docs/release-v1.2.0.md). [Estimator setup](docs/estimator-tuning.md) · [Maneuver model and validation](docs/test-results/maneuver-models-2026-11-25/README.md).
 
+The v1.2.1 candidate reduced mean MCU prediction plus correction time by 47.18% for CV-EKF and 30.66% for CT-EKF on one saved input. Each estimator returned identical UART bytes before and after the change. [Paired STM32 timing report](docs/analysis/ekf-timing-20261126/README.md).
+
 The expanded STM32 grid compares the three estimators on the same 80 maneuver/noise inputs (seed 6). CV-EKF had the lowest pooled position RMSE (29.27 m); polar KF had the lowest observed estimator time (about 62 µs per predict/correct pair); CT-EKF performed poorly on acceleration/deceleration in this grid. All 55,000 measurements per estimator were matched with zero gate rejections or LOST transitions. This single-seed result is conditional, not a general ranking. [Conditions, figures and provenance](docs/analysis/maneuver-grid-20261126/README.md).
 
 Initial paired board comparison: all 3,020 inputs matched. With the current tuning, Cartesian CV-EKF had smaller pre-turn straight error but larger turn error than polar CV KF. [Results, raw data, and four figures](docs/history/hardware-test-2026-11-24-kf-ekf.md).

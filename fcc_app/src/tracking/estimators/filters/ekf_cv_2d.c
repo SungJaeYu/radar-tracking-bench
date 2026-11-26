@@ -62,29 +62,33 @@ void ekf_cv_2d_predict(
         return;
     }
 
-    // State order: [x, y, vx, vy]. F advances position using constant velocity.
-    struct matrix transition = {
-        .rows = EKF_CV_2D_STATE_DIM,
-        .columns = EKF_CV_2D_STATE_DIM,
-        .data = {
-            1.0f, 0.0f, interval_s, 0.0f,
-            0.0f, 1.0f, 0.0f, interval_s,
-            0.0f, 0.0f, 1.0f, 0.0f,
-            0.0f, 0.0f, 0.0f, 1.0f,
-        },
-    };
-    struct matrix transition_transposed = {.rows = EKF_CV_2D_STATE_DIM, .columns = EKF_CV_2D_STATE_DIM};
-    struct matrix product = {.rows = EKF_CV_2D_STATE_DIM, .columns = EKF_CV_2D_STATE_DIM};
-    struct matrix predicted_covariance = {.rows = EKF_CV_2D_STATE_DIM, .columns = EKF_CV_2D_STATE_DIM};
-
-    // P_next = F * P * F^T. Calls must execute even when assertions are disabled.
-    const bool prediction_computed =
-        matrix_transpose(&transition, &transition_transposed) &&
-        matrix_multiply(&transition, &p_filter->covariance, &product) &&
-        matrix_multiply(&product, &transition_transposed, &predicted_covariance);
-    __ASSERT(prediction_computed, "Invalid prediction matrix dimensions or storage");
-    if (!prediction_computed) {
+    const struct matrix *covariance = &p_filter->covariance;
+    const bool dimensions_valid = covariance->rows == EKF_CV_2D_STATE_DIM &&
+                                  covariance->columns == EKF_CV_2D_STATE_DIM;
+    __ASSERT(dimensions_valid, "Invalid prediction matrix dimensions");
+    if (!dimensions_valid) {
         return;
+    }
+
+    // State order: [x, y, vx, vy]. F adds dt times each velocity row to its position row.
+    // F^T makes the same additions to columns. Keep the two products in that order.
+    const float *prior = covariance->data;
+    float product[EKF_CV_2D_STATE_DIM * EKF_CV_2D_STATE_DIM];
+    for (size_t column = 0; column < EKF_CV_2D_STATE_DIM; ++column) {
+        product[column] = prior[column] + interval_s * prior[8 + column];
+        product[4 + column] = prior[4 + column] + interval_s * prior[12 + column];
+        product[8 + column] = prior[8 + column];
+        product[12 + column] = prior[12 + column];
+    }
+
+    struct matrix predicted_covariance = {.rows = EKF_CV_2D_STATE_DIM, .columns = EKF_CV_2D_STATE_DIM};
+    for (size_t row = 0; row < EKF_CV_2D_STATE_DIM; ++row) {
+        const float *product_row = &product[row * EKF_CV_2D_STATE_DIM];
+        float *predicted_row = &predicted_covariance.data[row * EKF_CV_2D_STATE_DIM];
+        predicted_row[0] = product_row[0] + product_row[2] * interval_s;
+        predicted_row[1] = product_row[1] + product_row[3] * interval_s;
+        predicted_row[2] = product_row[2];
+        predicted_row[3] = product_row[3];
     }
 
     // Q: independent x/y accelerations with equal variance, constant over dt.
@@ -142,25 +146,31 @@ void ekf_cv_2d_correct(
     const float range_residual_m = measured_range_m - predicted_range_m;
     const float azimuth_residual_rad = angle_diff_rad(measured_azimuth_rad,
                                                 atan2f(p_filter->x_m, p_filter->y_m));
-    struct matrix jacobian = {
-        .rows = 2, .columns = EKF_CV_2D_STATE_DIM,
-        .data = {
-            direction_x, direction_y, 0.0f, 0.0f,
-            direction_y / predicted_range_m, -direction_x / predicted_range_m, 0.0f, 0.0f,
-        },
+    // H has two position columns. Both velocity columns are zero.
+    const float jacobian[2][2] = {
+        {direction_x, direction_y},
+        {direction_y / predicted_range_m, -direction_x / predicted_range_m},
     };
-    struct matrix jacobian_transposed = {.rows = EKF_CV_2D_STATE_DIM, .columns = 2};
+    const struct matrix *prior = &p_filter->covariance;
     struct matrix covariance_measurement = {.rows = EKF_CV_2D_STATE_DIM, .columns = 2};
     struct matrix innovation_covariance = {.rows = 2, .columns = 2};
     struct matrix gain = {.rows = EKF_CV_2D_STATE_DIM, .columns = 2};
 
     // S = H P H^T + R, with independent range/azimuth measurement noise.
-    const bool innovation_computed =
-        matrix_transpose(&jacobian, &jacobian_transposed) &&
-        matrix_multiply(&p_filter->covariance, &jacobian_transposed, &covariance_measurement) &&
-        matrix_multiply(&jacobian, &covariance_measurement, &innovation_covariance);
-    if (!innovation_computed) {
-        return;
+    for (size_t row = 0; row < EKF_CV_2D_STATE_DIM; ++row) {
+        const float covariance_x = matrix_get(prior, row, 0);
+        const float covariance_y = matrix_get(prior, row, 1);
+        for (size_t measurement = 0; measurement < 2; ++measurement) {
+            matrix_set(&covariance_measurement, row, measurement,
+                       covariance_x * jacobian[measurement][0] + covariance_y * jacobian[measurement][1]);
+        }
+    }
+    for (size_t row = 0; row < 2; ++row) {
+        for (size_t column = 0; column < 2; ++column) {
+            matrix_set(&innovation_covariance, row, column,
+                       jacobian[row][0] * matrix_get(&covariance_measurement, 0, column) +
+                       jacobian[row][1] * matrix_get(&covariance_measurement, 1, column));
+        }
     }
     matrix_set(&innovation_covariance, 0, 0, matrix_get(&innovation_covariance, 0, 0) + range_measurement_noise_variance);
     matrix_set(&innovation_covariance, 1, 1, matrix_get(&innovation_covariance, 1, 1) + azimuth_measurement_noise_variance);
@@ -182,32 +192,37 @@ void ekf_cv_2d_correct(
     }
 
     // Joseph covariance update: P+ = A P A^T + K R K^T, A = I - K H.
-    struct matrix attenuation = {.rows = EKF_CV_2D_STATE_DIM, .columns = EKF_CV_2D_STATE_DIM};
-    struct matrix attenuation_transposed = {.rows = EKF_CV_2D_STATE_DIM, .columns = EKF_CV_2D_STATE_DIM};
-    struct matrix product = {.rows = EKF_CV_2D_STATE_DIM, .columns = EKF_CV_2D_STATE_DIM};
-    const bool attenuation_computed = matrix_multiply(&gain, &jacobian, &attenuation);
-    if (!attenuation_computed) {
-        return;
-    }
+    // A's velocity columns remain the corresponding identity columns.
+    float attenuation[EKF_CV_2D_STATE_DIM][2];
+    float product[EKF_CV_2D_STATE_DIM][EKF_CV_2D_STATE_DIM];
     for (size_t row = 0; row < EKF_CV_2D_STATE_DIM; ++row) {
-        for (size_t column = 0; column < EKF_CV_2D_STATE_DIM; ++column) {
+        const float range_gain = matrix_get(&gain, row, 0);
+        const float azimuth_gain = matrix_get(&gain, row, 1);
+        for (size_t column = 0; column < 2; ++column) {
             const float identity = row == column ? 1.0f : 0.0f;
-            matrix_set(&attenuation, row, column, identity - matrix_get(&attenuation, row, column));
+            const float gain_jacobian = range_gain * jacobian[0][column] + azimuth_gain * jacobian[1][column];
+            attenuation[row][column] = identity - gain_jacobian;
+        }
+        for (size_t column = 0; column < EKF_CV_2D_STATE_DIM; ++column) {
+            float value = attenuation[row][0] * matrix_get(prior, 0, column) +
+                          attenuation[row][1] * matrix_get(prior, 1, column);
+            if (row >= 2) {
+                value += matrix_get(prior, row, column);
+            }
+            product[row][column] = value;
         }
     }
-    const bool covariance_computed =
-        matrix_transpose(&attenuation, &attenuation_transposed) &&
-        matrix_multiply(&attenuation, &p_filter->covariance, &product) &&
-        matrix_multiply(&product, &attenuation_transposed, &corrected.covariance);
-    if (!covariance_computed) {
-        return;
-    }
     for (size_t row = 0; row < EKF_CV_2D_STATE_DIM; ++row) {
         for (size_t column = 0; column < EKF_CV_2D_STATE_DIM; ++column) {
+            float covariance = product[row][0] * attenuation[column][0] +
+                               product[row][1] * attenuation[column][1];
+            if (column >= 2) {
+                covariance += product[row][column];
+            }
             // Diagonal R makes K R K^T a sum of two weighted outer products.
             const float noise = matrix_get(&gain, row, 0) * range_measurement_noise_variance * matrix_get(&gain, column, 0) +
                                 matrix_get(&gain, row, 1) * azimuth_measurement_noise_variance * matrix_get(&gain, column, 1);
-            const float value = matrix_get(&corrected.covariance, row, column) + noise;
+            const float value = covariance + noise;
             const bool entry_valid = isfinite(value) && (row != column || value >= 0.0f);
             if (!entry_valid) {
                 return;

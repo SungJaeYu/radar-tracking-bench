@@ -1,5 +1,7 @@
 # 추정기 선택과 R·EKF Q 설정
 
+CV·CT의 예측·보정 연산 변경 전후 시간과 동일 입력에 대한 출력 검증은 [v1.2.1 후보 실보드 비교](analysis/ekf-timing-20261126/README.md)에 있다.
+
 ## 빌드 시 KF / CV-EKF / CT-EKF 선택
 
 `Radar application settings → Tracking estimator`의 Kconfig choice로 하나를 선택한다.

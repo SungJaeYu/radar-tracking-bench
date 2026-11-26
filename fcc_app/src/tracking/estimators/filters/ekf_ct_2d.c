@@ -8,6 +8,7 @@
 #include "tracking/angle_utils.h"
 
 #define CT_MEASUREMENT_DIM 2U
+#define CT_VELOCITY_INDEX 2U
 #define CT_TURN_INDEX 4U
 #define CT_SERIES_ANGLE_RAD 0.05f
 
@@ -15,7 +16,8 @@ static bool covariance_valid(const struct matrix *p_covariance);
 static bool filter_valid(const struct ekf_ct_2d_filter *p_filter);
 static bool finish_covariance(struct matrix *p_covariance);
 static void motion_jacobian(const struct ekf_ct_2d_filter *p_filter, float interval_s,
-                            struct ekf_ct_2d_filter *out_predicted, struct matrix *out_transition);
+                            struct ekf_ct_2d_filter *out_predicted,
+                            float out_transition[CT_TURN_INDEX][3]);
 static bool calculate_gain(const struct matrix *p_covariance, const float p_observation[CT_MEASUREMENT_DIM][2],
                             float range_variance, float azimuth_variance,
                             float out_gain[EKF_CT_2D_STATE_DIM][CT_MEASUREMENT_DIM]);
@@ -70,22 +72,30 @@ void ekf_ct_2d_predict(struct ekf_ct_2d_filter *p_filter, float interval_s,
         return;
     }
     struct ekf_ct_2d_filter predicted = *p_filter;
-    struct matrix transition = {.rows = EKF_CT_2D_STATE_DIM, .columns = EKF_CT_2D_STATE_DIM};
-    struct matrix product = {.rows = EKF_CT_2D_STATE_DIM, .columns = EKF_CT_2D_STATE_DIM};
-    motion_jacobian(p_filter, interval_s, &predicted, &transition);
-    const bool product_calculated = matrix_multiply(&transition, &p_filter->covariance, &product);
-    if (!product_calculated) {
-        return;
+    float transition[CT_TURN_INDEX][3];
+    float product[EKF_CT_2D_STATE_DIM][EKF_CT_2D_STATE_DIM];
+    motion_jacobian(p_filter, interval_s, &predicted, transition);
+    // F has identity position columns and an identity turn-rate row.
+    for (size_t column = 0; column < EKF_CT_2D_STATE_DIM; ++column) {
+        for (size_t row = 0; row < CT_TURN_INDEX; ++row) {
+            float value = row < CT_VELOCITY_INDEX ? matrix_get(&p_filter->covariance, row, column) : 0.0f;
+            for (size_t k = CT_VELOCITY_INDEX; k < EKF_CT_2D_STATE_DIM; ++k) {
+                value += transition[row][k - CT_VELOCITY_INDEX] * matrix_get(&p_filter->covariance, k, column);
+            }
+            product[row][column] = value;
+        }
+        product[CT_TURN_INDEX][column] = matrix_get(&p_filter->covariance, CT_TURN_INDEX, column);
     }
-    // Multiply by F^T directly, avoiding another full matrix on the MCU stack.
+    // Multiply by F^T using the same nonzero entries of each row of F.
     for (size_t row = 0; row < EKF_CT_2D_STATE_DIM; ++row) {
-        for (size_t column = 0; column < EKF_CT_2D_STATE_DIM; ++column) {
-            float value = 0.0f;
-            for (size_t k = 0; k < EKF_CT_2D_STATE_DIM; ++k) {
-                value += matrix_get(&product, row, k) * matrix_get(&transition, column, k);
+        for (size_t column = 0; column < CT_TURN_INDEX; ++column) {
+            float value = column < CT_VELOCITY_INDEX ? product[row][column] : 0.0f;
+            for (size_t k = CT_VELOCITY_INDEX; k < EKF_CT_2D_STATE_DIM; ++k) {
+                value += product[row][k] * transition[column][k - CT_VELOCITY_INDEX];
             }
             matrix_set(&predicted.covariance, row, column, value);
         }
+        matrix_set(&predicted.covariance, row, CT_TURN_INDEX, product[row][CT_TURN_INDEX]);
     }
     // G=[(.5dt^2,0,dt,0,0), (0,.5dt^2,0,dt,0), (0,0,0,0,dt)].
     // Angular acceleration perturbs next-step omega; it is not integrated within this arc.
@@ -158,7 +168,8 @@ void ekf_ct_2d_correct(struct ekf_ct_2d_filter *p_filter, float measured_range_m
 }
 
 static void motion_jacobian(const struct ekf_ct_2d_filter *p_filter, float interval_s,
-                            struct ekf_ct_2d_filter *out_predicted, struct matrix *out_transition)
+                            struct ekf_ct_2d_filter *out_predicted,
+                            float out_transition[CT_TURN_INDEX][3])
 {
     const float angle = p_filter->turn_rate_radps * interval_s;
     const float sine = sinf(angle);
@@ -190,21 +201,19 @@ static void motion_jacobian(const struct ekf_ct_2d_filter *p_filter, float inter
     out_predicted->y_m += -b * vx + a * vy;
     out_predicted->vx_mps = cosine * vx + sine * vy;
     out_predicted->vy_mps = -sine * vx + cosine * vy;
-    for (size_t index = 0; index < EKF_CT_2D_STATE_DIM; ++index) {
-        matrix_set(out_transition, index, index, 1.0f);
-    }
-    matrix_set(out_transition, 0, 2, a);
-    matrix_set(out_transition, 0, 3, b);
-    matrix_set(out_transition, 1, 2, -b);
-    matrix_set(out_transition, 1, 3, a);
-    matrix_set(out_transition, 0, CT_TURN_INDEX, da * vx + db * vy);
-    matrix_set(out_transition, 1, CT_TURN_INDEX, -db * vx + da * vy);
-    matrix_set(out_transition, 2, 2, cosine);
-    matrix_set(out_transition, 2, 3, sine);
-    matrix_set(out_transition, 3, 2, -sine);
-    matrix_set(out_transition, 3, 3, cosine);
-    matrix_set(out_transition, 2, CT_TURN_INDEX, interval_s * (-sine * vx + cosine * vy));
-    matrix_set(out_transition, 3, CT_TURN_INDEX, interval_s * (-cosine * vx - sine * vy));
+    // Store only the vx, vy and turn-rate columns for the four nontrivial rows.
+    out_transition[0][0] = a;
+    out_transition[0][1] = b;
+    out_transition[0][2] = da * vx + db * vy;
+    out_transition[1][0] = -b;
+    out_transition[1][1] = a;
+    out_transition[1][2] = -db * vx + da * vy;
+    out_transition[2][0] = cosine;
+    out_transition[2][1] = sine;
+    out_transition[2][2] = interval_s * (-sine * vx + cosine * vy);
+    out_transition[3][0] = -sine;
+    out_transition[3][1] = cosine;
+    out_transition[3][2] = interval_s * (-cosine * vx - sine * vy);
 }
 
 static bool calculate_gain(const struct matrix *p_covariance, const float p_observation[CT_MEASUREMENT_DIM][2],
@@ -253,24 +262,33 @@ static bool correct_covariance(const struct matrix *p_prior, const float p_obser
                                 const float p_gain[EKF_CT_2D_STATE_DIM][CT_MEASUREMENT_DIM],
                                 float range_variance, float azimuth_variance, struct matrix *out_covariance)
 {
-    struct matrix attenuation = {.rows = EKF_CT_2D_STATE_DIM, .columns = EKF_CT_2D_STATE_DIM};
-    struct matrix product = {.rows = EKF_CT_2D_STATE_DIM, .columns = EKF_CT_2D_STATE_DIM};
+    // H observes position only, so the remaining columns of I-KH are identity columns.
+    float attenuation[EKF_CT_2D_STATE_DIM][2];
+    float product[EKF_CT_2D_STATE_DIM][EKF_CT_2D_STATE_DIM];
     for (size_t row = 0; row < EKF_CT_2D_STATE_DIM; ++row) {
-        matrix_set(&attenuation, row, row, 1.0f);
-        for (size_t column = 0; column < 2; ++column) {
-            matrix_set(&attenuation, row, column, (row == column ? 1.0f : 0.0f) -
-                        p_gain[row][0] * p_observation[0][column] - p_gain[row][1] * p_observation[1][column]);
+        for (size_t k = 0; k < 2; ++k) {
+            attenuation[row][k] = (row == k ? 1.0f : 0.0f) -
+                                  p_gain[row][0] * p_observation[0][k] - p_gain[row][1] * p_observation[1][k];
         }
-    }
-    const bool product_calculated = matrix_multiply(&attenuation, p_prior, &product);
-    if (!product_calculated) {
-        return false;
+        for (size_t column = 0; column < EKF_CT_2D_STATE_DIM; ++column) {
+            float value = 0.0f;
+            for (size_t k = 0; k < 2; ++k) {
+                value += attenuation[row][k] * matrix_get(p_prior, k, column);
+            }
+            if (row >= CT_VELOCITY_INDEX) {
+                value += matrix_get(p_prior, row, column);
+            }
+            product[row][column] = value;
+        }
     }
     for (size_t row = 0; row < EKF_CT_2D_STATE_DIM; ++row) {
         for (size_t column = 0; column < EKF_CT_2D_STATE_DIM; ++column) {
             float value = 0.0f;
-            for (size_t k = 0; k < EKF_CT_2D_STATE_DIM; ++k) {
-                value += matrix_get(&product, row, k) * matrix_get(&attenuation, column, k);
+            for (size_t k = 0; k < 2; ++k) {
+                value += product[row][k] * attenuation[column][k];
+            }
+            if (column >= CT_VELOCITY_INDEX) {
+                value += product[row][column];
             }
             value += p_gain[row][0] * range_variance * p_gain[column][0] +
                       p_gain[row][1] * azimuth_variance * p_gain[column][1];
