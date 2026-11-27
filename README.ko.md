@@ -6,22 +6,13 @@
 
 이전 이름: `radar-track-fcc-hil`.
 
-**STM32 · Zephyr 기반 단일표적 레이더 추적 HIL 프로젝트. 최신 릴리스: `v1.2.1`**
+**STM32 · Zephyr 기반 단일표적 레이더 추적 · [최신 릴리스 v1.2.1](https://github.com/SungJaeYu/radar-tracking-bench/releases/tag/v1.2.1)**
 
-v1.2.0에는 polar CV KF / Cartesian CV-EKF / CT-EKF 빌드 선택, 측정 입력 저장·재사용, CLI 선회 잡음 평가, 20개 PC 정답 운동 프리셋과 80조건 동일 입력 STM32 비교를 포함합니다. 단일 seed 결과와 펌웨어 출처는 [릴리스 기록](docs/release-v1.2.0.md)에 정리했습니다. [추정기 선택과 설정](docs/estimator-tuning.md) · [기동 모델과 검증](docs/test-results/maneuver-models-2026-11-25/README.md).
+실보드 연동 시험(HIL) 환경에서 동작하는 C 펌웨어를 직접 설계·구현했습니다. PC는 합성 거리·방위각 측정값을 UART로 보내고, STM32는 표적 위치를 추정해 PC로 반환합니다. PC는 그 결과를 정답 궤적과 비교합니다. 펌웨어는 인터럽트 기반 수신, 프레임 검증, 표적 추적, 통신 오류 복구를 담당합니다.
 
-v1.2.1은 CV-EKF와 CT-EKF의 고정 크기 행렬 연산을 특화합니다. 저장한 동일 입력으로 실보드에서 비교한 결과 예측·보정 평균 시간의 합이 CV-EKF에서 47.18%, CT-EKF에서 30.66% 줄었습니다. 각 추정기의 변경 전후 UART 응답은 바이트 단위로 일치했습니다. [릴리스 기록](docs/release-v1.2.1.md) · [실보드 비교 조건과 결과](docs/analysis/ekf-timing-20261126/README.md).
+**v1.2.1 실보드 결과.** STM32F746G-DISCO에서 동일한 측정값 755개로 8회 비교했습니다. 고정 크기 행렬 연산을 최적화해 MCU 예측·보정 평균 시간을 **CV-EKF 47.18%**(701 → 370 µs), **CT-EKF 30.66%**(1,225 → 849 µs) 줄였습니다. 각 추정기의 변경 전후 UART 응답은 바이트 단위로 일치했습니다. [실보드 비교 조건과 결과](docs/analysis/ekf-timing-20261126/README.md)
 
-확장 STM32 비교는 세 추정기에 같은 기동·잡음 입력80개를 적용했습니다(seed6). 이 표본에서는 CV-EKF의 위치 RMSE가 가장 작았고(29.27m), polar KF의 predict/correct 관측 시간이 가장 짧았습니다(합계 약62µs). 가감속에서 CT-EKF의 오차가 크게 증가했습니다. 추정기별 측정55,000개가 모두 대응했고 게이트 거부·LOST는0회였습니다. 단일 seed의 조건부 결과로 일반적인 우열을 뜻하지 않습니다. [조건·그림·펌웨어 출처](docs/analysis/maneuver-grid-20261126/README.md).
-
-초기 KF/EKF 실보드 비교에서는 입력3,020개가 모두 대응됐습니다. 현재 튜닝에서 EKF는 선회 전 직선 오차가 작았지만 선회 오차는 기존 KF보다 컸습니다. [결과·원시 데이터·그래프4종](docs/history/hardware-test-2026-11-24-kf-ekf.md).
-
-후속으로 EKF 가속도 분산을 Kconfig로 분리하고 같은 입력의 host Q 탐색을 수행했습니다. 기본값100을 유지한 채 후보10000·30000의 host336회·실보드46회를 완료했습니다. 처음부터 멀어지는 잡음 선회를 포함해 보드 입력34,730개 모두 대응했고 일반 KF를 복원했습니다. [독립 시드·실보드 결과](docs/test-results/ekf-q-board-2026-11-24/README.md). [Q 비교표·그래프](docs/test-results/ekf-q-2026-11-24/README.md).
-
-**릴리스 검증:** 30분 실보드에서 실제 전달한 측정89,057개 모두 응답했고 보드·전송·증거 검사를 통과했습니다. 최종 송신기 수정 후60초 검사도 유효 입력2,993개 모두 대응·보드 오류0입니다. PC 미송신과 RTT는 STM32 릴리스 차단 조건이 아닙니다. 요청50Hz 전체 입력의 검증 한계는 별도로 남깁니다. [완료 범위·검증 근거](docs/release-v1.1.0.md) · [v1.1.1 PC 송신기 개선](https://github.com/SungJaeYu/radar-tracking-bench/issues/8).
-
-PC에서 합성 레이더 측정을 보내고, STM32에서 표적을 추적한 뒤 결과를 PC로 반환합니다.
-정답·측정값·추정값을 비교하고, 통신 오류와 입력 이상치 이후의 복귀를 실보드에서 검증합니다.
+![합성 정답·측정값과 STM32에서 반환한 추정 위치를 표시하는 PC GUI](docs/images/radar-gui-board.png)
 
 [시작하기](#시작하기) · [시스템 구성](#시스템-구성) · [검증 결과](#검증-결과) · [문서 목차](docs/README.md)
 
@@ -53,8 +44,6 @@ UART ISR은 바이트를 링버퍼에 저장하고 RX 스레드를 깨웁니다.
 
 영어 UI의 **보드 없는 미리보기 모드**입니다. 합성 정답과 측정값을 표시하며 보드 추정값은 생성하지 않습니다.
 [GUI 사용법·TRACK 화면](pc_sim/GUI.md) · [최신 실보드 추정값 캡처와 시험 기록](docs/history/hardware-test-2026-11-23-v1.1.0.md)
-
-![영어 GUI에서 표시한 STM32 실제 TRACK 추정값](docs/images/radar-gui-board.png)
 
 ## 검증 결과
 
@@ -117,6 +106,18 @@ python -m pc_sim turn-noise --port PORT --noise 10 --azimuth-noise 0.01
 ## V1 범위
 
 <a id="portfolio-v1"></a>
+## 이전 릴리스와 실보드 비교
+
+v1.2.0에는 polar CV KF / Cartesian CV-EKF / CT-EKF 빌드 선택, 측정 입력 저장·재사용, CLI 선회 잡음 평가, 20개 PC 정답 운동 프리셋과 80조건 동일 입력 STM32 비교를 포함합니다. 단일 seed 결과와 펌웨어 출처는 [릴리스 기록](docs/release-v1.2.0.md)에 정리했습니다. [추정기 선택과 설정](docs/estimator-tuning.md) · [기동 모델과 검증](docs/test-results/maneuver-models-2026-11-25/README.md).
+
+확장 STM32 비교는 세 추정기에 같은 기동·잡음 입력80개를 적용했습니다(seed6). 이 표본에서는 CV-EKF의 위치 RMSE가 가장 작았고(29.27m), polar KF의 predict/correct 관측 시간이 가장 짧았습니다(합계 약62µs). 가감속에서 CT-EKF의 오차가 크게 증가했습니다. 추정기별 측정55,000개가 모두 대응했고 게이트 거부·LOST는0회였습니다. 단일 seed의 조건부 결과로 일반적인 우열을 뜻하지 않습니다. [조건·그림·펌웨어 출처](docs/analysis/maneuver-grid-20261126/README.md).
+
+초기 KF/EKF 실보드 비교에서는 입력3,020개가 모두 대응됐습니다. 현재 튜닝에서 EKF는 선회 전 직선 오차가 작았지만 선회 오차는 기존 KF보다 컸습니다. [결과·원시 데이터·그래프4종](docs/history/hardware-test-2026-11-24-kf-ekf.md).
+
+후속으로 EKF 가속도 분산을 Kconfig로 분리하고 같은 입력의 host Q 탐색을 수행했습니다. 기본값100을 유지한 채 후보10000·30000의 host336회·실보드46회를 완료했습니다. 처음부터 멀어지는 잡음 선회를 포함해 보드 입력34,730개 모두 대응했고 일반 KF를 복원했습니다. [독립 시드·실보드 결과](docs/test-results/ekf-q-board-2026-11-24/README.md). [Q 비교표·그래프](docs/test-results/ekf-q-2026-11-24/README.md).
+
+**릴리스 검증:** 30분 실보드에서 실제 전달한 측정89,057개 모두 응답했고 보드·전송·증거 검사를 통과했습니다. 최종 송신기 수정 후60초 검사도 유효 입력2,993개 모두 대응·보드 오류0입니다. PC 미송신과 RTT는 STM32 릴리스 차단 조건이 아닙니다. 요청50Hz 전체 입력의 검증 한계는 별도로 남깁니다. [완료 범위·검증 근거](docs/release-v1.1.0.md) · [PC 송신기 후속 이슈](https://github.com/SungJaeYu/radar-tracking-bench/issues/8).
+
 <a id="v1-acceptance"></a>
 
 **단일표적 결과 왕복·정량 평가·주요 오류 복구·시간/자원 관측까지 완료했습니다.**
