@@ -12,7 +12,9 @@ I designed and wrote the C firmware for this hardware-in-the-loop (HIL) testbed.
 
 **v1.2.1 board result.** In eight runs on an STM32F746G-DISCO using the same 755 measurements, fixed-size matrix operations reduced mean MCU prediction plus correction time by **47.18% for CV-EKF** (701 → 370 µs) and **30.66% for CT-EKF** (1,225 → 849 µs). Within each estimator, the UART responses matched byte for byte before and after the change. [Timing report and test conditions](docs/analysis/ekf-timing-20261126/README.md)
 
-![PC GUI showing synthetic ground truth, measurements, and estimates returned by the STM32](docs/images/radar-gui-board.png)
+![Radar Tracking Bench v1.2.1 GUI showing synthetic ground truth and measurements](docs/images/radar-v121-gui-preview.png)
+
+*v1.2.1 GUI in no-board preview mode.*
 
 [System overview](#system-overview) · [Board results](#board-results) · [Quick start](#quick-start) · [Scope](#scope-and-follow-up-work)
 
@@ -45,9 +47,11 @@ Sensor time drives filter prediction and aligns estimates with ground truth. Boa
 
 ## English GUI
 
-The GUI now uses English controls and compares PC ground truth and measurements with estimates decoded from the board's binary TRACK_REPORT. The separate no-board preview mode generates truth and measurements only; it does not simulate board estimates. [Current board evidence](docs/history/hardware-test-2026-11-23-v1.1.0.md) · [GUI guide — Korean](pc_sim/GUI.md).
+The GUI now uses English controls and compares PC ground truth and measurements with estimates decoded from the board's binary TRACK_REPORT. The separate no-board preview mode generates truth and measurements only; it does not simulate board estimates. [v1.1.0 board test record](docs/history/hardware-test-2026-11-23-v1.1.0.md) · [GUI guide — Korean](pc_sim/GUI.md).
 
-![English GUI in preview mode without a board](docs/images/radar-gui-preview.png)
+![v1.1.0 GUI showing tracking estimates returned by the STM32](docs/images/radar-gui-board.png)
+
+*v1.1.0 GUI during an STM32 board test.*
 
 <a id="검증-결과"></a>
 

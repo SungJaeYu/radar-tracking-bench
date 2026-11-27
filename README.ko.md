@@ -12,7 +12,9 @@
 
 **v1.2.1 실보드 결과.** STM32F746G-DISCO에서 동일한 측정값 755개로 8회 비교했습니다. 고정 크기 행렬 연산을 최적화해 MCU 예측·보정 평균 시간을 **CV-EKF 47.18%**(701 → 370 µs), **CT-EKF 30.66%**(1,225 → 849 µs) 줄였습니다. 각 추정기의 변경 전후 UART 응답은 바이트 단위로 일치했습니다. [실보드 비교 조건과 결과](docs/analysis/ekf-timing-20261126/README.md)
 
-![합성 정답·측정값과 STM32에서 반환한 추정 위치를 표시하는 PC GUI](docs/images/radar-gui-board.png)
+![합성 정답과 측정값을 표시하는 Radar Tracking Bench v1.2.1 GUI](docs/images/radar-v121-gui-preview.png)
+
+*v1.2.1 GUI의 보드 없는 미리보기 화면입니다.*
 
 [시작하기](#시작하기) · [시스템 구성](#시스템-구성) · [검증 결과](#검증-결과) · [문서 목차](docs/README.md)
 
@@ -38,12 +40,12 @@ UART ISR은 바이트를 링버퍼에 저장하고 RX 스레드를 깨웁니다.
 
 [스레드·큐 규격](docs/requirements-traceability.md#spec-exec) · [PC와 보드의 책임](docs/system-roles.md) · [측정 시간 기준](docs/performance-monitoring.md)
 
-## GUI 미리보기
+<a id="gui-미리보기"></a>
 
-![현재 GUI의 설정 탭·표적 위치·거리 이력·실행 로그](docs/images/radar-gui-preview.png)
+## GUI 사용 모드
 
-영어 UI의 **보드 없는 미리보기 모드**입니다. 합성 정답과 측정값을 표시하며 보드 추정값은 생성하지 않습니다.
-[GUI 사용법·TRACK 화면](pc_sim/GUI.md) · [최신 실보드 추정값 캡처와 시험 기록](docs/history/hardware-test-2026-11-23-v1.1.0.md)
+상단의 **보드 없는 미리보기 모드**는 합성 정답과 측정값을 표시합니다. 아래는 v1.1.0 실보드 시험에서 STM32 추정값을 표시한 화면입니다.
+[GUI 사용법·TRACK 화면](pc_sim/GUI.md) · [v1.1.0 실보드 시험 기록](docs/history/hardware-test-2026-11-23-v1.1.0.md)
 
 ## 검증 결과
 
